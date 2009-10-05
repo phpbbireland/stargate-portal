@@ -1,0 +1,20 @@
+<!-- IDTAG start block_style_status.html 17 March 2008 copyright phpbbireland.com 2007 -->
+
+<div class="block_data">
+<!-- BEGIN styles_status_row -->
+	<div class="style_status">
+		<div style="text-align:center; padding-top:5px; padding-bottom:2px;">&bull; <a rel="external" href="{styles_status_row.U_STYLE_LINK}"><span class="red">{styles_status_row.STYLE_NAME}</span></a> &bull; </div>
+		<div style="text-align:center; padding:3px;">{L_VERSION}: {styles_status_row.STYLE_VERSION}</div>
+		<div style="text-align:center">{L_STATUS}: {styles_status_row.STYLE_COMPETED}<br /></div>
+		<div style="text-align:center">{styles_status_row.STYLE_INFO}<br /></div>
+		<div style="text-align:center; padding:3px;">{L_LAST_UPDATED}:<br />{styles_status_row.STYLE_UPDATED}</div>
+		<div style="text-align:center"><br />{L_DESIGNED_BY}: <a rel="external" href="{styles_status_row.U_STYLE_LINK}">{styles_status_row.STYLE_AUTHOR}</a></div>
+		<!-- IF styles_status_row.STYLE_AUTHOR_2 --><div style="text-align:center"><br />{L_PORTED_BY}: <a rel="external" href="{styles_status_row.STYLE_LINK_2}">{styles_status_row.STYLE_AUTHOR_2}</a></div><!-- ENDIF -->
+		<!-- IF styles_status_row.U_STYLE_TEST_IT --><div style="text-align:center"><a rel="rel" href="{styles_status_row.U_STYLE_TEST_IT}">{TEST_IT_IMG}</a></div><!-- ENDIF -->
+		<!-- IF styles_status_row.STYLE_THIS < STYLE_COUNT --><div class="hr"><hr /></div><!-- ENDIF -->
+	</div>
+<!-- END styles_status_row -->
+<!-- IF DEBUG_QUERIES -->{SS_PORTAL_DEBUG}<!-- ENDIF -->
+</div>
+
+<!-- IDTAG ends block_style_status.html -->

@@ -1,0 +1,8 @@
+.stylewidth {
+	width: 98%;
+	min-width: 900px; /*mike*/
+	margin: 0;
+	margin-left: auto;
+	margin-right: auto;
+	clear:both;
+}

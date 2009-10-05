@@ -1,0 +1,5 @@
+.showhide {
+	float: right; margin-top: 0px; margin-right: 1px;
+}
+
+.show_in_ie { display:none; }

@@ -1,0 +1,30 @@
+<!-- IDTAG starts block_forum_categories.html 17 March 2008 copyright phpbbireland.com 2007 -->
+
+<span class="block_data">
+	<!-- BEGIN iforumrow -->
+		<!-- IF iforumrow.S_IS_CAT -->
+		<div class="smallimage"><img src="{iforumrow.FORUM_IMAGE_SRC}" class="smallimage" /></div>
+		<div class="category"><b><a href="{iforumrow.U_VIEWFORUM}">{iforumrow.FORUM_NAME}</a></b></div>
+		<div class="category"><span class="gensmall">{iforumrow.FORUM_DESC}</span></div>
+		<div class="category"><span class="gensmall"><b>{L_TOPICS}:</b> {iforumrow.FORUM_TOPICS}  <b>{L_POSTS}:</b> {iforumrow.FORUM_POSTS}</span></div>
+		<!-- IF iforumrow.S_CAT_COUNT < S_TOTAL_CATS --><hr /><!-- ENDIF -->
+	<!-- ELSEIF iforumrow.S_IS_LINK -->
+		<div class="category2">
+			<div class="smallimage"><img src="{iforumrow.FORUM_IMAGE_SRC}" style="width:20px; height:20px; float:left; margin-right:5px; margin-bottom:20px;" ></div>
+			<div class="category"><b><a href="{iforumrow.U_VIEWFORUM}">{iforumrow.FORUM_NAME}</a></b></div>
+		</div>
+		<!-- IF iforumrow.CLICKS -->
+		<div  class="category2"><span class="gensmall">{L_REDIRECTS}: {iforumrow.CLICKS}</span></div>
+		<!-- ENDIF -->
+	<!-- ENDIF -->
+	<!-- BEGINELSE -->
+	<div  align="center"><p class="gensmall">{L_NO_FORUMS}</p></div>
+	<!-- END iforumrow -->
+</span>
+
+<!-- IDTAG ends block_forum_categories.html -->
+
+<!-- if ie 5 or 6 -->
+<!--[if lte IE 6]>
+<br />
+<![endif]-->

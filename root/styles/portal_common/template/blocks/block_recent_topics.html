@@ -1,0 +1,28 @@
+<!-- IDTAG starts block_recent_topics.html 30th June 2008 copyright 2007 phpbbireland.com -->
+<div class="block_data">
+	<!-- IF S_COUNT -->
+	<div style="width:100%; overflow:visible;">
+		<!-- BEGIN scroll -->
+		    <!-- BEGIN recent_topic_row -->
+				<strong>{staticwide.recent_topic_row.ORI_LAST_POST_IMG} <a href="{scrollwide.recent_topic_row.U_TITLE}" > {scrollwide.recent_topic_row.S_TITLE}</a></strong>
+				<br /> by: {scrollwide.recent_topic_row.S_POSTER}  <br />
+				<span class="tiny">{scrollwide.recent_topic_row.S_POSTTIME}</span><br />
+				<!--<a href="{scrollwide.recent_topic_row.U_TITLE}" >{L_RECENT_REPLY}{scrollwide.recent_topic_row.ORI_LAST_POST_IMG}</a><br /><br />-->
+			<!-- END recent_topic_row -->
+		<!-- END scroll -->
+		<!-- BEGIN static -->
+			<!-- BEGIN recent_topic_row -->
+				<strong>{staticwide.recent_topic_row.ORI_LAST_POST_IMG} <a href="{staticwide.recent_topic_row.U_TITLE}" > {staticwide.recent_topic_row.S_TITLE}</a></strong>
+				<br /> by: {staticwide.recent_topic_row.S_POSTER}  <br />
+				<span class="tiny">{staticwide.recent_topic_row.S_POSTTIME}</span> <br />
+				<a href="{staticwide.recent_topic_row.U_TITLE}" >{L_RECENT_REPLY}{staticwide.recent_topic_row.ORI_LAST_POST_IMG}</a><br /><br />
+			<!-- END recent_topic_row -->
+		<!-- END static -->
+	</div>
+	<!-- ELSE -->
+	<div><center><span class="genmed"><strong>{L_NO_RECENT_TOPICS}</strong></span></center></div>
+	<!-- ENDIF -->
+
+	<!-- IF DEBUG_QUERIES -->{RT1_PORTAL_DEBUG}<!-- ENDIF -->
+</div>
+<!-- IDTAG ends block_recent_topics -->

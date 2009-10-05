@@ -1,0 +1,162 @@
+/* Header block with images */
+body div.header {
+	background-repeat: no-repeat;
+	width: 930px;
+	height: 129px;
+	float: left;
+	margin-top: 10px;
+	margin-left:15px;
+	}
+body div.header h1 {
+	margin: 0;
+	}
+body div.header h1 a {
+	display: block;
+	width: 930px;
+	height: 129px;
+	text-indent: -5000px;
+	text-decoration: none;
+	margin: 0;
+	}
+html>body div.header h1 a {
+	background: url("images/logo2.png") 25px 15px no-repeat;
+	}
+
+* html div.header h1 a {
+	background: url("images/logo_phpbb.gif") 25px 15px no-repeat;
+	}
+
+
+
+html>body div.header2 h1 a {
+	background: url("images/logo2.png") 25px 15px no-repeat;
+	}
+* html div.header2 h1 a {
+	background: url("images/logo2.gif") 25px 15px no-repeat;
+	}
+
+
+
+/* Section header images */
+body div.header {
+	background-image: url("headers/header_misc.jpg");
+	}
+body.home div.header {
+	background-image: url("headers/header_olympus.jpg");
+	}
+body.about div.header {
+	background-image: url("headers/header_about.jpg");
+	}
+body.welcome div.header {
+	background-image: url("headers/header_welcome2.jpg");
+	}
+body.features div.header {
+	background-image: url("headers/header_features.jpg");
+	}
+body.team div.header {
+	background-image: url("headers/header_team.jpg");
+	}
+body.history div.header {
+	background-image: url("headers/header_history.jpg");
+	}
+
+
+body.downloads div.header {
+	background-image: url("headers/header_downloads.jpg");
+	}
+body.changelog div.header {
+	background-image: url("headers/header_changelog.jpg");
+	}
+
+
+body.support div.header {
+	background-image: url("headers/header_support.jpg");
+	}
+body.documentation div.header {
+	background-image: url("headers/header_documentation.jpg");
+	}
+body.intl div.header {
+	background-image: url("headers/header_intl.jpg");
+	}
+body.incidents div.header {
+	background-image: url("headers/header_incidents.jpg");
+	}
+body.security div.header {
+	background-image: url("headers/header_security.jpg");
+	}
+body.customise div.header {
+	background-image: url("headers/header_customise.jpg");
+	}
+body.community div.header {
+	background-image: url("headers/header_community.jpg");
+	}
+body.mods div.header {
+	background-image: url("headers/header_mods.jpg");
+	}
+body.modx div.header {
+	background-image: url("headers/header_modx.jpg");
+	}
+body.styles div.header {
+	background-image: url("headers/header_styles.jpg");
+	}
+body.languages div.header {
+	background-image: url("headers/header_languages.jpg");
+	}
+body.bugs div.header {
+	background-image: url("headers/header_bugs.jpg");
+	}
+body.development div.header {
+	background-image: url("headers/header_eiffel.jpg");
+	}
+body.search div.header {
+	background-image: url("headers/header_search.jpg");
+	}
+body.kb div.header {
+	background-image: url("headers/header_kb.jpg");
+	}
+body.errordocs div.header {
+	background-image: url("headers/header_error.jpg");
+	}
+body.mailinglist div.header {
+	background-image: url("headers/header_lighttower.jpg");
+}
+body.prosilver div.header {
+	background-image: url("headers/header_prosilver.jpg");
+}
+body.home #navbar {
+	margin-bottom: 20px;
+	}
+
+
+
+/* Corners and sides */
+span.side-left, span.side-right {
+	display: block;
+	width: 20px;
+	height: 150px;
+	background: url("images/sides_top.gif") no-repeat;
+	}
+span.side-left {
+	background-position: 0 0;
+	float: left;
+	margin-right: 10px;
+	}
+span.side-right {
+	background-position: 100% 0;
+	float: right;
+	}
+span.fcorners-bottom, span.fcorners-bottom span {
+	font-size: 1px;
+	line-height: 1px;
+	display: block;
+	height: 20px;
+	background-repeat: no-repeat;
+	background-image: url("images/corners_bottom.gif");
+	margin: 0;
+	}
+span.fcorners-bottom {
+	background-position: 0 0;
+	}
+span.fcorners-bottom span {
+	background-position: 100% -20px;
+	}

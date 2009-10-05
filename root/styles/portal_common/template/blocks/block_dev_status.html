@@ -1,0 +1,29 @@
+<!-- IDTAG start block_dev_status.html 28 January 2009 copyright phpbbireland.com 2009 -->
+
+<!-- IF BLOCK_COUNT >= 0 -->
+<div class="block_data">
+	<div class="style_status">
+		<!-- IF BLOCK_COUNT -->
+		<!-- BEGIN block_status_row -->
+			<div style="text-align:center; padding-top:5px; padding-bottom:2px;">&bull; <span class="red"> {block_status_row.BLOCK_NAME}</span> &bull; </div>
+			<div style="text-align:center">{L_STATUS}: {block_status_row.BLOCK_COMPETED}<br /></div>
+			<div style="text-align:center">{block_status_row.BLOCK_INFO}</div>
+			<div style="text-align:center; padding:3px;">{L_LAST_UPDATED}:<br />{block_status_row.BLOCK_UPDATED}</div>
+			<div style="text-align:center; padding:3px;">{L_VERSION}: {block_status_row.BLOCK_VERSION}</div>
+			<div style="text-align:center; padding:3px;">{L_DESIGNED_BY}: <a rel="external" href="{styles_status_row.U_BLOCK_LINK}"><strong>{block_status_row.BLOCK_AUTHOR}</strong></a></div>
+			<!-- IF block_status_row.BLOCK_AUTHOR_CO -->
+				<div style="text-align:center">{L_PORTED_BY}: <a rel="external" href="{block_status_row.U_BLOCK_SUPPORT}"><strong>{block_status_row.BLOCK_AUTHOR_CO}</strong></a></div>
+			<!-- ENDIF -->
+			<!-- IF block_status_row.U_BLOCK_SUPPORT --><div style="text-align:center"><a rel="external" href="{block_status_row.U_BLOCK_SUPPORT}">{BLOCK_DOWNLOAD_IMG}</a></div><!-- ENDIF -->
+			<div style="text-align:center">{block_status_row.BLOCK_DOWNLOAD_COUNT}</div>
+			<!-- IF block_status_row.BLOCK_THIS + 1 < BLOCK_COUNT --><div class="hr"><hr /></div><!-- ENDIF -->
+		<!-- END block_status_row -->
+		<!-- ELSE -->
+		<div style="text-align:center">{L_NO_BLOCKD_IN_DEVEOPMENT}</div>
+		<!-- ENDIF -->
+		<!-- IF DEBUG_QUERIES -->{SS_PORTAL_DEBUG}<!-- ENDIF -->
+	</div>
+</div>
+<!-- ENDIF -->
+
+<!-- IDTAG ends block_dev_status.html -->

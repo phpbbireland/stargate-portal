@@ -1,0 +1,119 @@
+###############################################################################
+# phpBB 3.0.6 Quick reply with frills mod (version 1.0.0) (prosilver style)
+# copyright phpbbireland.com (Taken from Stargate Portal 1.0.3)
+###############################################################################
+
+Open: styles/prosilver/template/quickreply_editor.html
+
+###############################################################################
+
+Find: (Careful this find appears twice, the second is an exact match!)
+
+<form method="post" action="{U_QR_ACTION}">
+
+Replace-with:
+
+<form method="post" action="{U_QR_ACTION}" name="postform">
+
+###############################################################################
+
+Find:
+				<h2>{L_QUICKREPLY}</h2>
+				<fieldset class="fields1">
+
+After-add:
+					<!-- INCLUDE quickreply_buttons.html -->
+
+###############################################################################
+
+Find:
+					<dl style="clear: left;">
+						<dt><label for="subject">{L_SUBJECT}:</label></dt>
+						<dd><input type="text" name="subject" id="subject" size="45" maxlength="64" tabindex="2" value="{SUBJECT}" class="inputbox autowidth" /></dd>
+					</dl>
+
+After-add:
+					<!-- INCLUDE quickreply_smilies.html -->
+				</div>
+
+###############################################################################
+
+Find:
+				<div id="message-box">
+					<textarea style="height: 9em;" name="message" rows="7" cols="76" tabindex="3" class="inputbox"></textarea>
+				</div>
+
+After-add:
+				<!-- INCLUDE quickreply_options.html -->
+
+###############################################################################
+
+Find:
+</form>
+
+After-add:
+
+<script type="text/javascript">
+// <![CDATA[
+	var form_name = 'postform';
+	var text_name = <!-- IF $SIG_EDIT -->'signature'<!-- ELSE -->'message'<!-- ENDIF -->;
+	var load_draft = false;
+	var upload = false;
+
+	// Define the bbCode tags
+	var bbcode = new Array();
+	var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->);
+	var imageTag = false;
+
+	// Helpline messages
+	var help_line = {
+		b: '{LA_BBCODE_B_HELP}',
+		i: '{LA_BBCODE_I_HELP}',
+		u: '{LA_BBCODE_U_HELP}',
+		q: '{LA_BBCODE_Q_HELP}',
+		c: '{LA_BBCODE_C_HELP}',
+		l: '{LA_BBCODE_L_HELP}',
+		o: '{LA_BBCODE_O_HELP}',
+		p: '{LA_BBCODE_P_HELP}',
+		w: '{LA_BBCODE_W_HELP}',
+		a: '{LA_BBCODE_A_HELP}',
+		s: '{LA_BBCODE_S_HELP}',
+		f: '{LA_BBCODE_F_HELP}',
+		e: '{LA_BBCODE_E_HELP}',
+		d: '{LA_BBCODE_D_HELP}'
+		<!-- BEGIN custom_tags -->
+			,cb_{custom_tags.BBCODE_ID}: '{custom_tags.A_BBCODE_HELPLINE}'
+		<!-- END custom_tags -->
+	}
+
+	function checkForm()
+	{
+		if (document.getElementById(text_name).value.length < 2 && load_draft == false)
+		{
+			if (!upload)
+			{
+				alert('{L_EMPTY_MESSAGE}');
+				return false;
+			}
+			upload = false;
+			return true;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	var panels = new Array('options-panel', 'attach-panel', 'poll-panel');
+	var show_panel = 'options-panel';
+// ]]>
+</script>
+<script type="text/javascript" src="{ROOT_PATH}styles/js/editor.js"></script>
+
+###############################################################################
+# End of edits
+###############################################################################
+
+Save edits and test...
+Refresh prosilver cache...
+EOM

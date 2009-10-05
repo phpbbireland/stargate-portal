@@ -1,0 +1,169 @@
+/*  
+    --------------------------------------------------------------
+	PlusXL 4.0 Portal related css adds by DaMysterious
+    --------------------------------------------------------------
+*/
+
+/* ie fixes Michaelo */
+
+ul, ol, dl {
+	position: relative;  
+}
+
+
+
+h5 {
+	/* Forum and topic list titles */
+	font-family: "Trebuchet MS", Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 1.2em;
+	color: #115098;
+}
+
+div#random_banner{
+	text-align: center;
+	padding: 5px 5px 5px 5px;	
+	border: 0px solid #ccc;
+	display: block;			
+}
+
+
+/*  	
+--------------------------------------------------------------
+html, body tag copy from colours.css inhere
+-------------------------------------------------------------- */
+html, body {
+	color: #68696D;
+	background-color: #aca8a1;
+    background: url("images/body_bg2.gif") fixed; 
+	background-position: center center;
+}
+
+/*  	
+--------------------------------------------------------------
+#wrap tag copy from common.css inhere
+-------------------------------------------------------------- */
+/*
+#wrap {  
+   padding: 0 20px;  
+   min-width: 650px;  
+   width: 900px;  
+   margin: 0 auto;  
+}  
+*/
+#wrap {
+	width: 930px;
+	text-align: left;
+	padding: 0 auto;
+	margin-top: 0;
+	margin-left: 0px;
+
+}
+
+/*  \*/
+* wrap {
+	width: 1000px;
+}
+/*  */
+
+/* ie works with 930 and 15px */
+
+/* additional proSilver Markup Styles outside rouded
+----------------------------------------------------------- */
+.top-left, .top-right, .bottom-left, .bottom-right { 
+   height: 20px;       /* CHANGE: replace by the height of one of your corners (= 1/2 height of the image) */
+
+   font-size: 2px;    /* DNC: correction IE for height of the <div>'s */
+   }
+   
+.top-left { 
+   background-image: url("images/corners_top.gif"); background-repeat:no-repeat; /* CHANGE: path and name of your image */
+   background-position: 0 -20px; /* CHANGE: replace second number by negative height of one of your corners */
+   margin-left: 1px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: 0px;  /* CHANGE: replace by the height of one of your corners */
+   margin-right: 9px; /* CHANGE: replace by the width of one of your corners */
+   }
+.top-right { 
+   background-image: url("images/corners_top.gif"); background-repeat:no-repeat; /* CHANGE: path and name of your image */
+   background-position: 100% 0;    /* DNC: position right corner at right side, no vertical changes */
+   margin-left: 0px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: -9px;  /* CHANGE: replace by the height of one of your corners */
+   margin-right: 1px; /* CHANGE: replace by the width of one of your corners */   
+   }
+.top-center { 
+   background-image: url("images/bg_headers.gif"); /* CHANGE: path and name of your image */
+   background-position: 0 0px; /* CHANGE: replace second number by negative height of one of your corners */
+   height: 20px;       /* CHANGE: replace by the height of one of your corners (= 1/2 height of the image) */
+
+   font-size: 2px;    /* DNC: correction IE for height of the <div>'s */
+   margin-left: 20px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: -20px;  /* CHANGE: replace by the height of one of your corners */
+   margin-right: 20px; /* CHANGE: replace by the width of one of your corners */ 
+   margin-bottom: -20px; /* CHANGE: replace by the width of one of your corners */ 
+   }
+   
+.bottom-left  { 
+   background-image: url("images/corners_bottom.gif"); background-repeat:no-repeat; /* CHANGE: path and name of your image */
+   background-position: 0 0px; /* CHANGE: replace second number by negative height of one of your corners */
+   margin-right: 0px; /* CHANGE: replace by the width of one of your corners */
+   margin-left: 1px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: 0px;  /* CHANGE: replace by the height of one of your corners */
+   }
+.bottom-right { 
+   background-image: url("images/corners_bottom.gif"); background-repeat:no-repeat; /* CHANGE: path and name of your image */
+   background-position: 100% -20px; /* CHANGE: replace second number by negative height of one of your corners */
+   margin-right: 1px; /* CHANGE: replace by the width of one of your corners */
+   margin-left: 0px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: -20px;  /* CHANGE: replace by the height of one of your corners */
+   }
+.bottom-center { 
+   background-image: url("images/bg_footers.gif"); /* CHANGE: path and name of your image */
+   background-position: 0 0px; /* CHANGE: replace second number by negative height of one of your corners */
+   height: 20px;       /* CHANGE: replace by the height of one of your corners (= 1/2 height of the image) */
+
+   font-size: 2px;    /* DNC: correction IE for height of the <div>'s */
+   margin-left: 20px;  /* CHANGE: replace by the width of one of your corners */
+   margin-top: -20px;  /* CHANGE: replace by the height of one of your corners */
+   margin-right: 20px; /* CHANGE: replace by the width of one of your corners */ 
+   margin-bottom: -20px; /* CHANGE: replace by the width of one of your corners */ 
+   }
+
+.inside {
+	/*
+   border-left: 0px solid #000000; 
+   border-right: 0px solid #000000;
+   background: #FFFFFF;
+   */
+   margin:0px;
+   color: #000000;
+   padding-left: 0px;              
+   padding-right: 0px;
+
+   /* IE Fix for repeatig image we don't want */
+   background-image: url("images/bg_body.gif"); 
+   background-repeat:repeat-y;
+
+}
+   
+.notopgap    { margin-top: 0; }    /* DNC: to avoid splitting of the box */
+.nobottomgap { margin-bottom: 0; } /* DNC: to avoid splitting of the box */
+
+.outside {
+   margin: 0 auto;
+   width : 970px;
+}
+
+.inside {
+   	<!--[if IE]>
+   overflow:hidden;
+	<![endif]-->
+}
+/* ie works with 1000px */
+
+
+
+
+
+
+
+
+            

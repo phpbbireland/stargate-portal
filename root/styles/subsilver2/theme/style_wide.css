@@ -1,0 +1,15 @@
+.stylewidth {
+	width: 100%;
+	min-width: 900px;
+	margin: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* code with lines Mike */
+.codebox {
+	width:auto;
+}
+.code {
+	width:auto;
+}

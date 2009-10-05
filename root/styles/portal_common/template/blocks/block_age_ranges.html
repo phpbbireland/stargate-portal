@@ -1,0 +1,41 @@
+<!-- IDTAG starts block_age_ranges.html 12 November 2008 copyright phpbbireland.com 2008 -->
+<div class="block_data">
+	<!-- IF S_AGE -->
+		<div style="clear:both">
+			<span style="position: relative; float:left; text-align:left; width:50%;"><b>{L_AGE_RANGE}</b></span>
+			<span style="position: relative; float:right; text-align:right; width:50%;"><b>{L_COUNT}&nbsp;&#47;&nbsp;&#37;</b></span>
+		</div>
+		<div style="clear:both; padding-bottom: 3px;"><hr /></div>
+		<div class="top_poster" style="clear:both;">
+			<!-- BEGIN age_row -->
+				<span class="bg2" style="position: relative; float:left; text-align:left; width:100%;<!-- IF age_row.IS_MAX--> font-weight:bold;<!-- ENDIF -->">
+					<!-- IF age_row.IS_MINE -->
+						&gt;&nbsp;<i>{age_row.AGE_RANGE}</i>&nbsp;&lt;
+					<!-- ELSE -->
+						&bull;&nbsp;{age_row.AGE_RANGE}
+					<!-- ENDIF -->
+				</span>
+				<span class="bg3" style="position: relative; float:right; text-align:right; width:100%;<!-- IF age_row.IS_MAX--> font-weight:bold;<!-- ENDIF -->">
+					{age_row.COUNT}&nbsp;&#47;&nbsp;{age_row.PCT}&#37;
+				</span>
+				<br />
+			<!-- END age_row -->
+			<div class="hr" style="clear:both;"><span style="position: relative; float:left; width:99%; padding-bottom:3px;"></span></div>
+			<div style="text-align: center; font-size: 10px;">
+				<br />{L_TOTAL_AGE_COUNTS}:&nbsp;<strong>{TOTAL_AGE_COUNTS}</strong>
+				<br />{L_TOTAL_AGE}:&nbsp;<strong>{TOTAL_AGE}</strong>&nbsp;{L_YEARS}
+				<br />{L_AVERAGE_AGE}:&nbsp;<strong>{AVERAGE_AGE}</strong>&nbsp;{L_YEARS}
+			</div>
+			<br />
+		</div>
+	<!-- ELSE -->
+	<div>
+		<center>
+			<p>{L_NONE}</p>
+		</center>
+		<br />
+	</div>
+	<!-- ENDIF -->
+	<!-- IF DEBUG_QUERIES -->{AR_PORTAL_DEBUG}<!-- ENDIF -->
+</div>
+<!-- IDTAG ends block_age_ranges.html -->

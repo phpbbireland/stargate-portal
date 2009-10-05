@@ -1,0 +1,20 @@
+<div class="block_data">
+	<!-- IF S_USER_LOGGED_IN and not S_IS_BOT -->
+	<![if !IE]>
+		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="100%" height="180" id="mp3player" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0">
+		<param name="movie" value="{PATH}/mp3/mp3player.swf?config={PATH}/mp3/prosilver/prosilver &file=mp3/get_mp3_files.php" />
+		<param name="wmode" value="transparent" />
+		<param name="config" value="mp3/prosilver/config.xml">
+		<embed src="mp3/mp3player.swf?config=mp3/prosilver/config.xml &file=mp3/get_mp3_files.php" wmode="transparent" width="100%" height="190" name="mp3player" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+		</object>
+		<br />
+	<![endif]>
+	<div class="my_buttons" style="text-align:center; width:100%;">
+		<div class="mp3_popup-icon">
+			<a href="./blocks/block_mp3s_popup_player.php" onClick="window.open('','popup','toolbar=0,resizable=1,location=0,status=0,menubar=0,scrollbars=0,width=180,height=196,left=210,screenX=210,top=60,screenY=60')" Target="popup" title="{L_MP3_POPUP}"><span></span>{L_MP3_POPUP}</a>
+		</div>
+	</div>
+	<!-- ELSE -->
+	<p style="text-align:center;" class="gensmall">{L_DONT_HAVE_ACCOUNT}<a href="ucp.php?cid=&amp;mode=register">{L_REGISTRATION}</a></p>
+<!-- ENDIF -->
+</div>

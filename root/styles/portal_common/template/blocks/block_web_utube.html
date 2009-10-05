@@ -1,0 +1,48 @@
+<!-- IDTAG block_web_utube starts 23 August 2008 -->
+
+{YT_HEADER}
+<body id="phpBB" class="welcome ltr" >
+<div class="block_data">
+	<div style="text-align:center;">
+		<div class="outside">
+			<div class="top-left"></div><div class="top-center"></div><div class="top-right"></div>
+			<div class="inside">
+				<div id="wrap">
+					<div class="header"><h1><a href="/">phpBB &bull; Creating Communities Worldwide</a></h1></div>
+					<a name="start_here"></a>
+					<div id="page-body" style="padding-top:5px;">
+						<ul class="linklist navlinks">
+							<li><a href="portal.php">Portal</a> <strong>&#8249;</strong> <a rel="external" href="http://www.youtube.com/">YouTube</a></li>
+						</ul>
+						<div id="main2">
+							<object width="425" height="344">
+							<param name="movie" value="http://www.youtube.com/v/{VIDEO}&hl=en&fs=1"></param>
+							<param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
+							<embed src="http://www.youtube.com/v/{MY_VIDEO}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed>
+							</object>
+						<div><br />Stargate-Portal's youtube web-pages (in development)</div>
+						<div style="float: left; margin-top: 5px;"><strong>Categories:</strong> <!-- BEGIN video_loop_row_cats -->{video_loop_row_cats.CATS}, <!-- END video_loop_row_cats --></div>
+					</div>
+					<div id="extras2">
+						<div class="mini-panel sections" style="width: 420px;">
+							<div class="inner">
+								<span class="corners-top"><span></span></span>
+								<h3><a href="web?mode=about">Stargate Web Pages: youtube video links</a></h3>
+									<ul class="menu">
+									<!-- BEGIN video_loop_row -->
+									<li>
+									<div style="width:100%;">
+									<div>Title: <strong><a href="web_page_utube.php?video={video_loop_row.VIDEO_LINK}">{video_loop_row.VIDEO_TITLE}</a></strong></div>
+									<div>Performed by: <strong>{video_loop_row.VIDEO_WHO}</strong></div>
+									<div>Rating: <strong>{video_loop_row.VIDEO_RATING}</strong></div>
+									<div>Category: <strong>{video_loop_row.VIDEO_CAT}</strong></div>
+									</li>
+									<!-- END video_loop_row -->
+									</ul>
+								<span class="corners-bottom"><span></span></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+{YT_FOOTER}

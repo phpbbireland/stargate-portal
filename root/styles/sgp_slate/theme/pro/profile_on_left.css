@@ -1,0 +1,97 @@
+
+
+/* content.css */
+.postbody_left {
+   padding: 0;
+   line-height: 1.48em;
+   color: #333333;
+   width: 76%;
+   float: right;
+}
+.postbody_left .ignore { 
+   font-size: 1.1em;
+}
+.postbody_left h3.first {
+   /* The first post on the page uses this */
+   font-size: 1.7em;
+}
+.postbody_left h3 {
+   /* Postbody requires a different h3 format - so change it here */
+   font-size: 1.5em;
+   padding: 0 0 0 2px;
+   margin: 0 0 0.3em 0 !important;
+   text-transform: none;
+   border: none;
+   font-family: "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
+   line-height: 125%;
+}
+.postbody_left h3 img {
+   /* Also see tweaks.css */
+   vertical-align: bottom;
+}
+.postbody_left .content {
+   font-size: 1.3em;
+}
+.search .postbody_left {
+   width: 68%
+}
+
+
+.postprofile_left {
+   /* Also see tweaks.css */
+   padding-left:10px;
+   margin: 5px 0 10px 0;
+   min-height: 80px;
+   color: #666666;
+   border-right: 1px solid #FFFFFF;
+   width: 22%;
+   float: left;
+   display: inline;
+}
+.pm .postprofile_left {
+   border-right: 1px solid #DDDDDD;
+}
+
+.postprofile_left dd, .postprofile_left dt {
+   line-height: 1.2em;
+   margin-right: 28px;
+}
+
+.avatar_left {
+   border: none;
+   margin-bottom: 3px;
+}
+
+.online_left {
+   background-image: none;
+   background-position: 0 0;
+   background-repeat: no-repeat;
+}
+
+
+/* buttons.css */
+/* Positioning of moderator icons */
+.postbody_left ul.profile-icons {
+	float: right;
+	width: auto;
+	padding: 0;
+}
+.postbody_left ul.profile-icons li {
+	margin: 0 3px;
+}
+
+
+/* colours.css */
+.postbody_left {
+   color: #333333;
+}
+
+.pm .postprofile_left {
+   border-right-color: #DDDDDD;
+}
+.postprofile_left strong {
+   color: #000000;
+}
+.online_left {
+   background-image: url("{T_IMAGESET_LANG_PATH}/icon_user_online_left.gif");
+}

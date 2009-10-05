@@ -1,0 +1,172 @@
+<!-- IDTAG starts block_poll.html 10 November 2008 copyright phpbbireland.com 2008 -->
+<div class="block_data">
+	<!-- IF BS_POLL_POSITION == 'centre' -->
+	<div class="101" style="width:90%; margin: 0 auto; text-align: center;"><!-- ELSE --><br /><div style="width: 90%; margin: 0 auto; text-align: center;">
+	<!-- ENDIF -->
+		<!-- IF BS_HAS_POLL -->
+		<form method="post" action="{BS_POLL_ACTION}">
+			<!-- IF S_FULL -->
+			<div style="clear:both">
+				<div style="text-align:center; padding-bottom:8px;">{BPOLL_QUESTION}</div>
+				<div style="text-align:center; padding-bottom:5px;"><hr />{BL_POLL_LENGTH}</div>
+				<div style="text-align:center; padding-bottom:8px;"><!-- IF BS_CAN_VOTE -->{BL_MAX_VOTES}<!-- ENDIF --></div>
+				<hr />
+				<!-- BEGIN b_poll_option -->
+				<div style="padding:0; padding-top:5px; clear:both">
+					<span class="<!-- IF b_poll_option.POLL_OPTION_VOTED -->voted<!-- ENDIF -->" <!-- IF b_poll_option.POLL_OPTION_VOTED --> title="{L_POLL_VOTED_OPTION}"<!-- ENDIF -->> </span>
+					<span class="11" style="float:left; text-align:left; width:100%; padding-bottom:2px; padding-top:2px;">
+						<!-- IF BS_CAN_VOTE -->
+							<!-- IF BS_IS_MULTI_CHOICE -->
+								<input type="checkbox" name="vote_id[]" id="vote_{b_poll_option.POLL_OPTION_ID}" value="{b_poll_option.POLL_OPTION_ID}"<!-- IF b_poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF -->/>
+							<!-- ELSE -->
+								<input type="radio" name="vote_id[]" id="vote_{b_poll_option.POLL_OPTION_ID}" value="{b_poll_option.POLL_OPTION_ID}"<!-- IF b_poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> />
+							<!-- ENDIF -->
+							<label for="vote_{b_poll_option.POLL_OPTION_ID}">{b_poll_option.POLL_OPTION_CAPTION}</label>
+						<!-- ELSE -->
+							{b_poll_option.POLL_OPTION_CAPTION}
+						<!-- ENDIF -->
+					</span>
+					<!-- IF BS_DISPLAY_RESULTS -->
+						<span class="22" style="float:left; text-align:left; width:50%;">
+							{BPOLL_LEFT_CAP_IMG}{b_poll_option.POLL_OPTION_IMG}{BPOLL_RIGHT_CAP_IMG}
+						</span>
+					<!-- ENDIF -->
+					<!-- IF BS_DISPLAY_RESULTS -->
+						<span style="float:right; text-align:right; width:50%;" class="gensmall" >
+							<!-- IF b_poll_option.POLL_OPTION_RESULT == 0 -->
+								{L_NO_VOTES}
+							<!-- ELSE -->
+								[{b_poll_option.POLL_OPTION_RESULT}] {b_poll_option.POLL_OPTION_PERCENT}
+							<!-- ENDIF -->
+							<!-- IF b_poll_option.POLL_OPTION_VOTED -->
+								<b title="{L_POLL_VOTED_OPTION}">x</b>
+							<!-- ENDIF -->
+						</span>
+					<!-- ENDIF -->
+				</div>
+				<!-- END b_poll_option -->
+				<!-- IF BS_DISPLAY_RESULTS --><br />
+				<div class="100" style="padding-top:7px; padding-bottom:10px; clear:both;">
+					<span style="text-align:center;">[ {L_TOTAL_VOTES}: {BTOTAL_VOTES} ]</span>
+				</div>
+				<div style="text-align:center; padding-bottom:5px;">
+					<a href="{BU_VIEW_RESULTS}">
+						<input type="submit" name="view" value="{L_VIEW_RESULTS}" class="button2" />
+					</a>
+				</div>
+				<!-- ENDIF -->
+					<!-- IF BS_CAN_VOTE -->
+				<div class="124" style="text-align:center; padding:0;">
+					<input type="submit" name="update" value="{L_SUBMIT_VOTE}" class="button1" />
+				</div>
+				<!-- ENDIF -->
+					<!-- IF not BS_DISPLAY_RESULTS -->
+				<div>
+					<a href="{BU_VIEW_RESULTS}">{L_VIEW_RESULTS}</a>
+				</div>
+				<!-- ENDIF -->
+			</div>
+			<!-- ELSEIF S_MEDIUM -->
+			<div>
+				<div style="text-align:center; padding-bottom:8px;">{BPOLL_QUESTION}</div>
+				<div style="text-align:center; padding-bottom:5px;"><hr />{BL_POLL_LENGTH}</div>
+				<div style="text-align:center; padding-bottom:8px;"><!-- IF BS_CAN_VOTE -->{BL_MAX_VOTES}<!-- ENDIF --></div>
+				<hr />
+				<!-- BEGIN b_poll_option -->
+				<div style="padding:0; padding-top:5px;">
+					<div style="float:left; padding-left:2px;">
+						<span class="<!-- IF b_poll_option.POLL_OPTION_VOTED -->voted<!-- ENDIF -->" <!-- IF b_poll_option.POLL_OPTION_VOTED --> title="{L_POLL_VOTED_OPTION}"<!-- ENDIF -->> </span>
+						<span style="float:left; width:auto;">
+							<!-- IF BS_CAN_VOTE -->
+								<!-- IF BS_IS_MULTI_CHOICE -->
+									<input type="checkbox" name="vote_id[]" id="vote_{b_poll_option.POLL_OPTION_ID}" value="{b_poll_option.POLL_OPTION_ID}"<!-- IF b_poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF -->/><!-- ELSE --><input type="radio" name="vote_id[]" id="vote_{b_poll_option.POLL_OPTION_ID}" value="{b_poll_option.POLL_OPTION_ID}"<!-- IF b_poll_option.POLL_OPTION_VOTED --> checked="checked"<!-- ENDIF --> />
+								<!-- ENDIF -->
+								<label for="vote_{b_poll_option.POLL_OPTION_ID}">{b_poll_option.POLL_OPTION_CAPTION}</label>
+							<!-- ELSE -->
+								{b_poll_option.POLL_OPTION_CAPTION}
+							<!-- ENDIF -->
+						</span>
+						<span style="float:right; padding-right:3px;">
+							<!-- IF BS_DISPLAY_RESULTS -->
+								<!-- IF b_poll_option.POLL_OPTION_RESULT == 0 -->
+									{L_NO_VOTES}
+								<!-- ELSE -->
+									{b_poll_option.POLL_OPTION_PERCENT}
+								<!-- ENDIF -->
+								&bull; {b_poll_option.POLL_OPTION_RESULT}
+							<!-- ENDIF -->
+						</span>
+					</div>
+				</div>
+				<!-- END b_poll_option -->
+				<!-- IF BS_DISPLAY_RESULTS --><br clear="all">
+				<div class="100" style="padding-top:7px; padding-bottom:7px;">
+					<span class="gen">{L_TOTAL_VOTES} : {BTOTAL_VOTES}</span>
+				</div>
+				<div style="text-align:center; padding-bottom:5px;">
+					<a href="{BU_VIEW_RESULTS}">
+						<input type="submit" name="view" value="{L_VIEW_RESULTS}" class="button1" />
+					</a>
+				</div>
+				<!-- ENDIF -->
+				<!-- IF BS_CAN_VOTE -->
+				<div class="124" style="text-align:center; padding:0;">
+					<input type="submit" name="update" value="{L_SUBMIT_VOTE}" class="button1" />
+				</div>
+				<!-- ENDIF -->
+				<!-- IF not BS_DISPLAY_RESULTS -->
+				<div>
+					<a href="{BU_VIEW_RESULTS}">{L_VIEW_RESULTS}</a>
+				</div>
+				<!-- ENDIF -->
+			</div>
+			<!-- ELSEIF S_SIMPLE -->
+			<div>
+				<div style="text-align:center; padding-bottom:8px;">{BPOLL_QUESTION}</div>
+				<div style="text-align:center; padding-bottom:5px;"><hr />{BL_POLL_LENGTH}</div>
+				<div style="text-align:center; padding-bottom:8px;"><!-- IF BS_CAN_VOTE -->{BL_MAX_VOTES}<!-- ENDIF --></div>
+				<hr />
+				<!-- BEGIN b_poll_option -->
+				<div style="padding:0; padding-top:5px;">
+					<div style="float:left; padding-left:2px;">
+						<span class="<!-- IF b_poll_option.POLL_OPTION_VOTED -->voted<!-- ENDIF -->" <!-- IF b_poll_option.POLL_OPTION_VOTED --> title="{L_POLL_VOTED_OPTION}"<!-- ENDIF -->> </span>
+						<span style="float:left; width:auto;">
+							<!-- IF BS_CAN_VOTE -->
+								<!-- IF BS_IS_MULTI_CHOICE -->
+								<!-- ENDIF -->
+								<label for="vote_{b_poll_option.POLL_OPTION_ID}">{b_poll_option.POLL_OPTION_CAPTION}</label>
+							<!-- ELSE -->
+								{b_poll_option.POLL_OPTION_CAPTION}
+							<!-- ENDIF -->
+						</span>
+						<span style="float:right; padding-right:3px;">
+							<!-- IF BS_DISPLAY_RESULTS -->
+								<!-- IF b_poll_option.POLL_OPTION_RESULT == 0 -->
+									{L_NO_VOTES}
+								<!-- ELSE -->
+									{b_poll_option.POLL_OPTION_PERCENT}
+								<!-- ENDIF -->
+								&bull; {b_poll_option.POLL_OPTION_RESULT}
+							<!-- ENDIF -->
+						</span>
+					</div>
+				</div>
+				<!-- END b_poll_option -->
+				<!-- IF BS_DISPLAY_RESULTS -->
+					<br clear="all"><hr />
+					<div class="100" style="padding-top:5px; padding-bottom:8px;">
+						<span style="width:100%; text-align:center;">[ {L_TOTAL_VOTES}: {BTOTAL_VOTES} ]</span>
+					</div>
+					<div style="text-align:center; padding-bottom:5px;">&bull; <a href="{BU_VIEW_RESULTS}">{L_VIEW_RESULTS}</a> &bull;</div>
+				<!-- ENDIF -->
+			</div>
+			<!-- ENDIF -->
+			{S_FORM_TOKEN}
+			{S_HIDDEN_FIELDS}
+		</form>
+		<!-- ELSE -->
+		<center><p>{L_NONE}</p></center><br />
+	<!-- ENDIF -->
+	</div>
+</div>
+<!-- IDTAG ends block_poll.html -->

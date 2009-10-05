@@ -1,0 +1,504 @@
+<!-- INCLUDE overall_header.html -->
+<script>
+// Not very elegant but it works Mike //
+function set_data(data)
+{
+	var i = 0;
+	var id = '';
+	var name = '';
+	var copy = '';
+	var mydata = data;
+
+	while(data[i] != ';')
+	{
+		id = id + data[i++];
+	}
+	i++;
+	while(data[i] != ';')
+	{
+		name = name + data[i++];
+	}
+	i++;
+	while(data[i])
+	{
+		copy = copy + data[i++];
+	}
+
+    document.getElementById("mod_link_id").value = id;
+	document.getElementById("mod_name").value = name;
+    document.getElementById("mod_copyright").value = copy;
+}
+</script>
+
+<a name="maincontent"></a>
+
+<h1>{L_TITLE}</h1>
+<p>{L_TITLE_EXPLAIN}</p>
+
+<!-- IF  S_OPTION == 'new' -->
+<form id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="module" value="{S_MOD_ID}" />
+<fieldset>
+	<legend>{L_MODULES_TYPE}</legend>
+	<dl>
+		<dt><label for="available">{L_AVAILABLE_TYPES}:</label><br />{L_AVAILABLE_TYPES_EXPLAIN}</dt>
+		<dd><label>
+			<select name="available" id="available" class="post">
+			<!-- BEGIN available -->
+			<option value="{available.S_AVAILABLE_TYPES}">{available.S_AVAILABLE_TYPES}</option>
+			<!-- END available -->
+			</select>
+			</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="new_type">{L_NEW_TYPE}:</label><br /><span>{L_NEW_TYPE_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="29" maxlength="30" name="new_type" value="{edit.S_NEW_TYPE}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_name">{L_BMS_NAME}:</label><br /><span>{L_BMS_NAME_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="50" name="mod_name" value="{edit.S_MOD_NAME}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_version">{L_MOD_VERSION}:</label><br /><span>{L_MOD_VERSION_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="8" maxlength="10" name="mod_version" value="{edit.S_MOD_VERSION}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_author">{L_AUTHOR}:</label><br /><span>{L_AUTHOR_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_author" value="{edit.S_MOD_AUTHOR}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_origin">{L_MOD_ORIGIN}:</label><br /><span>{L_MOD_ORIGIN_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="mod_origin" name="mod_origin" value="1" <!-- IF edit.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="mod_origin" value="0" <!-- IF not edit.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_copyright">{L_COPYRIGHT}:</label><br /><span>{L_COPYRIGHT_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" id="mod_copyright" name="mod_copyright" value="{edit.S_MOD_COPYRIGHT}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_author_co">{L_AUTHOR_CO}:</label><br /><span>{L_AUTHOR_CO_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_author_co" value="{edit.S_MOD_AUTHOR_CO}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_link">{L_AUTHOR_LINK}:</label><br /><span>{L_AUTHOR_LINK_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_link" value="{edit.S_MOD_LINK}" type="text"></dd>
+	</dl>
+
+	<dl>
+		<dt><label for="mod_support_link">{L_AUTHOR_LINK_2}:</label><br /><span>{L_AUTHOR_LINK_2_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_support_link" value="{edit.S_MOD_SUPPORT_LINK}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_image">{L_IMAGE}:</label><br /><span>{L_IMAGE_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_image" value="{edit.S_MOD_IMAGE}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_status">{L_STATUS}:</label><br /><span>{L_STATUS_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3" maxlength="3" name="mod_status" value="{edit.S_MOD_STATUS}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_download_count">{L_DOWNLOADED}:</label><br /><span>{L_DOWNLOADED_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3" maxlength="5" name="mod_download_count" value="{edit.S_MOD_DOWNLOAD_COUNT}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_last_updated">{L_LAST_UPDATED}:</label><br /><span>{L_LAST_UPDATED_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="17" maxlength="17" name="mod_last_updated" value="{edit.S_MOD_LAST_UPDATED}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_details">{L_INFO}:</label><br /><span>{L_INFO_EXPLAIN}</span></dt>
+		<dd><textarea id="mod_details" name="mod_details" rows="8" cols="200">{S_MOD_DETAILS}</textarea></dd>
+	</dl>
+</fieldset>
+<!-- ENDIF -->
+
+
+<!-- BEGIN edit -->
+<!-- IF S_OPTION == 'edit' -->
+<form id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="module" value="{S_MOD_ID}" />
+<fieldset>
+	<legend>{S_MOD_NAME}</legend>{S_MOD_TYPE}{S_MOD_TYPE}
+	<dl>
+		<dt><label for="mod_id">{L_ID}:</label><br /><span>{L_ID_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3"  maxlength="3" name="mod_id" value="{edit.S_MOD_ID}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_link_id">{L_ID_TO_USE}:</label><br /><span>{L_ID_TO_USE_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3" maxlength="5" id="mod_link_id" name="mod_link_id" value="{edit.S_MOD_LINK_ID}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_type">{L_TYPE}:</label><br /><span>{L_TYPE_EXPLAIN}<!-- IF edit.S_MOD_ID == 1 --> <b>Do not change this module name!</b><!-- ENDIF --></span></dt>
+		<dd><br /><input class="post" size="30"  maxlength="30" name="mod_type" value="{edit.S_MOD_TYPE}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_name">{L_BMS_NAME}:</label><br /><span>{L_BMS_NAME_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="50" name="mod_name" value="{edit.S_MOD_NAME}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_version">{L_MOD_VERSION}:</label><br /><span>{L_MOD_VERSION_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="8" maxlength="10" name="mod_version" value="{edit.S_MOD_VERSION}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_author">{L_AUTHOR}:</label><br /><span>{L_AUTHOR_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_author" value="{edit.S_MOD_AUTHOR}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_origin">{L_MOD_ORIGIN}:</label><br /><span>{L_MOD_ORIGIN_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="mod_origin" name="mod_origin" value="1" <!-- IF edit.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="mod_origin" value="0" <!-- IF not edit.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_copyright">{L_COPYRIGHT}:</label><br /><span>{L_COPYRIGHT_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" id="mod_copyright" name="mod_copyright" value="{edit.S_MOD_COPYRIGHT}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_author_co">{L_AUTHOR_CO}:</label><br /><span>{L_AUTHOR_CO_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_author_co" value="{edit.S_MOD_AUTHOR_CO}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_link">{L_AUTHOR_LINK}:</label><br /><span>{L_AUTHOR_LINK_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_link" value="{edit.S_MOD_LINK}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_support_link">{L_AUTHOR_LINK_2}:</label><br /><span>{L_AUTHOR_LINK_2_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_support_link" value="{edit.S_MOD_SUPPORT_LINK}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_image">{L_IMAGE}:</label><br /><span>{L_IMAGE_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_image" value="{edit.S_MOD_IMAGE}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_status">{L_STATUS}:</label><br /><span>{L_STATUS_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3" maxlength="3" name="mod_status" value="{edit.S_MOD_STATUS}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_download_count">{L_DOWNLOADED}:</label><br /><span>{L_DOWNLOADED_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3" maxlength="5" name="mod_download_count" value="{edit.S_MOD_DOWNLOAD_COUNT}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_last_updated">{L_LAST_UPDATED}:</label><br /><span>{L_LAST_UPDATED_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="17" maxlength="17" name="mod_last_updated" value="{edit.S_MOD_LAST_UPDATED}" type="text"></dd>
+	</dl>
+
+	<!-- IF edit.S_MOD_TYPE == 'web_page' -->
+	<dl>
+		<dt><label for="mod_details">{L_INFO}:</label><br /><span>{L_INFO_EXPLAIN}</span></dt>
+		<dd></dd>
+	</dl>
+	<div><textarea style="width:99%;" id="mod_details" name="mod_details" rows="25" cols="600">{edit.S_MOD_DETAILS}</textarea></div>
+	<!-- ELSE -->
+	<dl>
+		<dt><label for="mod_details">{L_INFO}:</label><br /><span>{L_INFO_EXPLAIN}</span></dt>
+		<dd><textarea id="mod_details" name="mod_details" rows="3" cols="200">{edit.S_MOD_DETAILS}</textarea></dd>
+	</dl>
+	<!-- ENDIF -->
+</fieldset>
+<!-- ENDIF -->
+<!-- END edit -->
+
+
+<!-- IF S_OPTION == 'welcome' -->
+<form id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="module" value="{S_MOD_ID}" />
+	<table cellspacing="1" cellspacing="0" border="0">
+	<thead>
+		<tr><th colspan="13">{L_MOD_HEADER_ADMIN}</th></tr>
+		<th>{L_ID}</th>
+		<th>{L_MOD_TYPE}</th>
+		<th>{L_MOD_NAME}</th>
+		<th>{L_MOD_INFO}</th>
+		<th style="text-align:center;">{L_OPTIONS}</th>
+	</thead>
+	<tbody>
+		<!-- BEGIN welcome -->
+		<tr>
+			<td class="row1" width="auto"><div align="right">{welcome.S_MOD_ID}</div></td>
+			<td class="row1" width="140px;"><div align="left">{welcome.S_MOD_TYPE}</div></td>
+			<td class="row1" width="150px;"><div align="left">{welcome.S_MOD_NAME}</div></td>
+			<td class="row1" width="auto"><div align="left">{welcome.S_MOD_DETAILS}</div></td>
+			<td class="row1" width="30px" colspan="2">
+				<div align="center">
+					<img src="images/icon_delete_disabled.gif" title="You can't delete the welcome message" border="0" alt="{L_DELETE}">
+					<a href="{U_EDIT}{welcome.S_MOD_ID}"><img src="images/icon_edit.gif" title="Edit Welcome Message" border="0" alt="{L_EDIT}"></a>
+				</div>
+			</td>
+		</tr>
+		<!-- END welcome -->
+	</tbody>
+</table>
+<!-- ENDIF -->
+
+<!-- BEGIN welcome -->
+<!-- IF S_OPTION == 'edit' -->
+<form id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="module" value="{S_MOD_ID}" />
+<fieldset>
+	<legend>{S_MOD_NAME}</legend>
+	<dl>
+		<dt><label for="mod_id">{L_ID}:</label><br /><span>{L_ID_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3"  maxlength="3" name="mod_id" value="{welcome.S_MOD_ID}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_link_id">{L_ID_TO_USE}:</label><br /><span>{L_ID_TO_USE_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3" maxlength="5" id="mod_link_id" name="mod_link_id" value="welcome.{S_MOD_LINK_ID}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_type">{L_TYPE}:</label><br /><span>{L_TYPE_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="30"  maxlength="30" name="mod_type" value="{welcome.S_MOD_TYPE}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_name">{L_BMS_NAME}:</label><br /><span>{L_BMS_NAME_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="50" name="mod_name" value="{welcome.S_MOD_NAME}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_version">{L_MOD_VERSION}:</label><br /><span>{L_MOD_VERSION_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="8" maxlength="10" name="mod_version" value="{edit.S_MOD_VERSION}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_author">{L_AUTHOR}:</label><br /><span>{L_AUTHOR_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_author" value="{welcome.S_MOD_AUTHOR}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_origin">{L_MOD_ORIGIN}:</label><br /><span>{L_MOD_ORIGIN_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="mod_origin" name="mod_origin" value="1" <!-- IF welcom.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="mod_origin" value="0" <!-- IF not welcome.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_copyright">{L_COPYRIGHT}:</label><br /><span>{L_COPYRIGHT_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" id="mod_copyright" name="mod_copyright" value="{welcome.S_MOD_COPYRIGHT}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_author_co">{L_AUTHOR_CO}:</label><br /><span>{L_AUTHOR_CO_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_author_co" value="{welcome.S_MOD_AUTHOR_CO}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_link">{L_AUTHOR_LINK}:</label><br /><span>{L_AUTHOR_LINK_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_link" value="{welcome.S_MOD_LINK}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_support_link">{L_AUTHOR_LINK_2}:</label><br /><span>{L_AUTHOR_LINK_2_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_support_link" value="{welcome.S_MOD_SUPPORT_LINK}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_image">{L_IMAGE}:</label><br /><span>{L_IMAGE_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_image" value="{welcome.S_MOD_IMAGE}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_status">{L_STATUS}:</label><br /><span>{L_STATUS_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3" maxlength="3" name="mod_status" value="{welcome.S_MOD_STATUS}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_download_count">{L_DOWNLOADED}:</label><br /><span>{L_DOWNLOADED_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3" maxlength="5" name="mod_download_count" value="{welcome.S_MOD_DOWNLOAD_COUNT}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_last_updated">{L_LAST_UPDATED}:</label><br /><span>{L_LAST_UPDATED_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="17" maxlength="17" name="mod_last_updated" value="{welcome.S_MOD_LAST_UPDATED}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_details">{L_INFO}:</label><br /><span>{L_INFO_EXPLAIN}</span></dt>
+		<dd><textarea id="mod_details" name="mod_details" rows="3" cols="200">{welcome.S_MOD_DETAILS}</textarea></dd>
+	</dl>
+</fieldset>
+<!-- ENDIF -->
+<!-- END welcome -->
+
+
+<!-- IF  S_OPTION == 'add_style' -->
+<form id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="style" value="{S_MOD_ID}" />
+<fieldset>
+	<legend>{L_MODULES_TYPE}</legend>
+	<dl>
+		<dt><label for="active_styles">{L_ACTIVE_STYLES}:</label><br />{L_ACTIVE_STYLES_EXPLAIN}</dt>
+		<dd><label>
+			<select name="active_styles" id="active_styles" class="post" onchange="set_data(this.options[this.selectedIndex].value); ">
+			<!-- BEGIN active_styles -->
+			 <option value="{active_styles.STYLE_ID};{active_styles.STYLE_NAME};{active_styles.STYLE_COPYRIGHT}">{active_styles.STYLE_NAME}</option>
+			<!-- END active_styles -->
+			</select>
+			</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_link_id">{L_ID_TO_USE}:</label><br /><span>{L_ID_TO_USE_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3" maxlength="5" id="mod_link_id" name="mod_link_id" value="{S_MOD_LINK_ID}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_name">{L_BMS_NAME}:</label><br /><span>{L_BMS_NAME_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="50" id="mod_name" name="mod_name" value="{S_MOD_NAME}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_version">{L_MOD_VERSION}:</label><br /><span>{L_MOD_VERSION_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="8" maxlength="10" name="mod_version" value="{edit.S_MOD_VERSION}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_copyright">{L_COPYRIGHT}:</label><br /><span>{L_COPYRIGHT_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" id="mod_copyright" name="mod_copyright" value="{S_MOD_COPYRIGHT}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_type">{L_TYPE}:</label><br /><span>{L_TYPE_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="30"  maxlength="30" name="mod_type" value="style" type="text"></dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="mod_author">{L_AUTHOR}:</label><br /><span>{L_AUTHOR_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" id="mod_author" name="mod_author" value="{S_MOD_AUTHOR}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_origin">{L_MOD_ORIGIN}:</label><br /><span>{L_MOD_ORIGIN_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="mod_origin" name="mod_origin" value="1" <!-- IF S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="mod_origin" value="0" <!-- IF not S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="mod_author_co">{L_AUTHOR_CO}:</label><br /><span>{L_AUTHOR_CO_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_author_co" value="{S_MOD_AUTHOR_CO}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_link">{L_AUTHOR_LINK}:</label><br /><span>{L_AUTHOR_LINK_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_link" value="{S_MOD_LINK}" type="text"></dd>
+	</dl>
+
+	<dl>
+		<dt><label for="mod_support_link">{L_AUTHOR_LINK_2}:</label><br /><span>{L_AUTHOR_LINK_2_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_support_link" value="{S_MOD_SUPPORT_LINK}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_image">{L_IMAGE}:</label><br /><span>{L_IMAGE_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="255" name="mod_image" value="{S_MOD_IMAGE}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_status">{L_STATUS}:</label><br /><span>{L_STATUS_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3" maxlength="3" name="mod_status" value="{S_MOD_STATUS}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_download_count">{L_DOWNLOADED}:</label><br /><span>{L_DOWNLOADED_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="3" maxlength="5" name="mod_download_count" value="{S_MOD_DOWNLOAD_COUNT}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_last_updated">{L_LAST_UPDATED}:</label><br /><span>{L_LAST_UPDATED_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="17" maxlength="17" name="mod_last_updated" value="{S_MOD_LAST_UPDATED}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_details">{L_INFO}:</label><br /><span>{L_INFO_EXPLAIN}</span></dt>
+		<dd><textarea id="mod_details" name="mod_details" rows="8" cols="200">{S_MOD_DETAILS}</textarea></dd>
+	</dl>
+</fieldset>
+<!-- ENDIF -->
+
+ <!-- IF S_OPTION == 'all' or S_OPTION == 'style' or S_OPTION == 'block' or S_OPTION == 'mod' -->
+<form id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="style" value="{S_MOD_ID}" />
+	<table cellspacing="1" cellspacing="0" border="0">
+	<thead>
+		<tr><th colspan="13">{L_MOD_HEADER_ADMIN}</th></tr>
+		<th> {L_ID}</th>
+		<th>{L_MOD_TYPE}</th>
+		<th>{L_MOD_NAME}</th>
+		<th>{L_MOD_INFO}</th>
+		<th style="text-align:center;">{L_OPTIONS}</th>
+	</thead>
+	<tbody>
+		<!-- BEGIN all -->
+		<tr>
+			<td class="row1" width="auto"><div align="right">{all.S_MOD_ID}</div></td>
+			<td class="row1" width="100px;"><div align="left">{all.S_MOD_TYPE}</div></td>
+			<td class="row1" width="auto;"><div align="left">{all.S_MOD_NAME}</div></td>
+			<td class="row1" width="auto"><div align="left"><!-- IF all.S_MOD_TYPE == 'web_page' -->{L_SELECT_EDIT_TO_VIEW}<!-- ELSE -->{all.S_MOD_DETAILS}<!-- ENDIF --></div></td>
+			<td class="row1" width="30px" colspan="2">
+				<div align="center">
+				<!-- IF all.S_MOD_TYPE == 'welcome' -->
+					<img src="images/icon_delete_disabled.gif" border="0" alt="{L_DELETE}">
+				<!-- ELSE -->
+					<a href="{U_DELETE}{all.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}"></a>
+				<!-- ENDIF -->
+					<a href="{U_EDIT}{all.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}"></a>
+				</div>
+			</td>
+		</tr>
+		<!-- END all -->
+		<!-- BEGIN block -->
+		<tr>
+			<td class="row1" width="auto"><div align="right">{block.S_MOD_ID}</div></td>
+			<td class="row1" width="100px;"><div align="left">{block.S_MOD_TYPE}</div></td>
+			<td class="row1" width="auto;"><div align="left">{block.S_MOD_NAME}</div></td>
+			<td class="row1" width="auto"><div align="left">{block.S_MOD_DETAILS}</div></td>
+			<td class="row1" width="30px" colspan="2">
+				<div align="center">
+					<a href="{U_DELETE}{block.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}"></a>
+					<a href="{U_EDIT}{block.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}"></a>
+				</div>
+			</td>
+		</tr>
+		<!-- END block -->
+		<!-- BEGIN mod -->
+		<tr>
+			<td class="row1" width="auto"><div align="right">{mod.S_MOD_ID}</div></td>
+			<td class="row1" width="100px;"><div align="left">{mod.S_MOD_TYPE}</div></td>
+			<td class="row1" width="auto;"><div align="left">{mod.S_MOD_NAME}</div></td>
+			<td class="row1" width="auto"><div align="left">{mod.S_MOD_DETAILS}</div></td>
+			<td class="row1" width="30px" colspan="2">
+				<div align="center">
+					<a href="{U_DELETE}{mod.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}"></a>
+					<a href="{U_EDIT}{mod.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}"></a>
+				</div>
+			</td>
+		</tr>
+		<!-- END block -->
+
+		<!-- BEGIN style -->
+		<tr>
+			<td class="row1" width="auto"><div align="right">{style.S_MOD_ID}</div></td>
+			<td class="row1" width="100px;"><div align="left">{style.S_MOD_TYPE}</div></td>
+			<td class="row1" width="auto;"><div align="left">{style.S_MOD_NAME}</div></td>
+			<td class="row1" width="auto"><div align="left"><!-- IF style.S_MOD_TYPE == 'web_page' -->{L_SELECT_EDIT_TO_VIEW}<!-- ELSE -->{style.S_MOD_DETAILS}<!-- ENDIF --></div></td>
+			<td class="row1" width="30px" colspan="2">
+				<div align="center">
+				<!-- IF all.S_MOD_TYPE == 'welcome' -->
+					<img src="images/icon_delete_disabled.gif" border="0" alt="{L_DELETE}">
+				<!-- ELSE -->
+					<a href="{U_DELETE}{style.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}"></a>
+				<!-- ENDIF -->
+					<a href="{U_EDIT}{style.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}"></a>
+				</div>
+			</td>
+		</tr>
+		<!-- END style -->
+
+
+	</tbody>
+</table>
+
+<!-- IF S_OPTION == 'style' -->
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="add_style" name="add_style" value="{L_ADD}" />
+</fieldset>
+<!-- ENDIF -->
+
+<!-- ENDIF -->
+
+
+<!-- IF  S_OPTION == '' -->
+<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+<!-- ENDIF -->
+
+<!-- IF MESSAGE or SEARCH_MESSAGE -->
+<dl><legend><div style="float:right;"><br />&nbsp;<!-- IF MESSAGE --><b>{MESSAGE}</b><br /><!-- ENDIF --></div><div style="float:left;"><br />&nbsp;{SEARCH_MESSAGE}</div></legend></dl>
+<dl><br /></dl>
+<!-- ENDIF -->
+
+<!-- prevent someone pressing submit while data is being saved -->
+<!-- IF S_OPTION == 'add' || S_OPTION == 'new' || S_OPTION == 'edit' || S_OPTION == 'add_style' -->
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+</fieldset>
+<!-- ENDIF -->
+
+{S_FORM_TOKEN}
+</form>
+<!-- INCLUDE overall_footer.html -->

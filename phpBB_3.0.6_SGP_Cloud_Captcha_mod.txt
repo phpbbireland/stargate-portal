@@ -1,0 +1,73 @@
+###############################################################################
+# phpBB 3.0.6 Cloud Captcha Mod(version 1.0.0)
+# copyright phpbbireland.com (Taken from Stargate Portal 1.0.3)
+###############################################################################
+
+<open src="styles/prosilver/template/ucp_register.html">
+<edit>
+<find>
+<!-- IF CAPTCHA_TEMPLATE -->
+	<!-- DEFINE $CAPTCHA_TAB_INDEX = 8 -->
+	<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+<!-- ENDIF -->
+
+<action type="before-add">
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	<center>
+	<h3>{L_CLOUD_CAPTCHA_PASSWORD}</h3>
+	<p>{CLOUD_CAPTCHA_EXPLAINS}</p>
+	<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/swfobject/ -->
+	<script type="text/javascript" src="{ROOT_PATH}styles/js/swfobject.js"></script>
+
+	<!--
+		As the portal loads browser dependant css file to fix various css problems we can also use a
+		little bit of clever stuff to hide something from IE but show in all other browsers...
+		Two classes are set in each fix_ie.css, fix_opera.css, fix_mac.css and fix_ff.css files (hide_ff and hide_ie)
+		In effect you have browser dependant tags to use... Mike
+	-->
+
+	<!-- This works for all browsers except IE -->
+	<div id="cumuluscontent">
+		<p>{CUMULUS}</p>
+		<script type="text/javascript">
+		//<![CDATA[
+			var rnumber = Math.floor(Math.random()*9999999);
+			var so = new SWFObject("{T_THEME_PATH}/images/cloud/{CLOUD_MOVIE}?r="+rnumber, "cumuluscontent", '200', '200', "9", "272829");
+			so.addParam("wmode", "transparent");
+			so.addParam("allowScriptAccess", "always");
+			so.addVariable("tcolor", '0x000000');
+			so.addVariable("tcolor2", '0x000000');
+			so.addVariable("hicolor", '0x000000');
+			so.addVariable("tspeed", 150);
+			so.addVariable("distr", "true");
+			so.addVariable("mode", "both");
+			so.addVariable({FLASHTAG});
+			so.write("cumuluscontent");
+		//]]>
+		</script>
+	</div>
+	</center>
+	<div style="text-align:center">
+		<label for="magic"><strong>{L_CLOUD_CAPTCHA_PASS}</label></strong>
+		<input type="magic" tabindex="6" name="magic" id="magic" size="10" value="{MAGIC}" class="inputbox autowidth" title="{L_CLOUD_CAPTCHA_PASS}" />
+	</div>
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+</edit>
+
+###############################################################################
+
+<edit>
+<find>
+		<input type="submit" tabindex="9" name="submit" id="submit" value="{L_SUBMIT}" class="button1 default-submit-action" />
+
+<action type="after-add">
+
+		<input type="hidden" value="{RAND_NUM}" name="randnum" id="randnum" />
+</edit>
+</open>
+
+###############################################################################
+# End of edits
+###############################################################################

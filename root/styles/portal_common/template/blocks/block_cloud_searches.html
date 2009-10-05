@@ -1,0 +1,32 @@
+<!-- IDTAG block_cloud.html 27 March 2009 copyright phpbbireland.com 2009 -->
+
+<div class="block_data">
+	<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/swfobject/ -->
+	<script type="text/javascript" src="{ROOT_PATH}styles/js/swfobject.js"></script>
+
+	<!-- for all browsers except IE -->
+	<div id="scumuluscontent">
+		<p style="display:none;">{CUMULUS}</p>
+		<script type="text/javascript">
+		//<![CDATA[
+			var rnumber = Math.floor(Math.random()*9999999);
+			var so = new SWFObject("{T_THEME_PATH}/images/cloud/s{CLOUD_MOVIE}?r="+rnumber, "tagcloudflash", {SCLOUD_WIDTH}, {SCLOUD_HEIGHT}, "9", {SCLOUD_BG_COLOUR});
+			so.addParam("wmode", {SCLOUD_WMODE});
+			so.addParam("allowScriptAccess", "always");
+			so.addVariable("tcolor", {SCLOUD_TCOLOUR});
+			so.addVariable("tcolor2", {SCLOUD_TCOLOUR2});
+			so.addVariable("hicolor", {SCLOUD_HICOLOR});
+			so.addVariable("tspeed", {SCLOUD_SPEED});
+			so.addVariable("distr", {SCLOUD_DISTR});
+			so.addVariable("mode", {SCLOUD_MODE});
+			so.addVariable({SFLASHTAG});
+			so.addVariable({SCATEGORIES});
+			so.write("scumuluscontent");
+		//]]>
+		</script>
+	</div>
+
+	<!-- IF DEBUG_QUERIES -->{B_PORTAL_DEBUG}<!-- ENDIF -->
+</div>
+
+<!-- IDTAG ends block_books -->

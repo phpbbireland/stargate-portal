@@ -1,0 +1,36 @@
+<!-- IDTAG starts block_the_team.html copyright phpbbireland.com 2007 -->
+
+<div class="block_data">
+	<div><span style="position: relative; float:left; width:100%;"><b>{L_ADMINISTRATORS}</b></span></div>
+	<div><span style="position: relative; float:left; width:100%; padding-bottom:3px;"></span></div>
+	<div style="clear:both; padding-bottom: 3px;"><hr /></div>
+	<!-- BEGIN admin -->
+	<div style="text-align:center; clear:both;">
+		<span style="position: relative; float:left; "><img src="{T_THEME_PATH}/images/admins.png" alt="" /> <strong>{admin.USERNAME_FULL}</strong></span>
+		<span style="position: relative; float:right; padding-top: 4px; ">{admin.COUNTRY_FLAG_IMG} IMG</span>
+	</div>
+	<!-- BEGINELSE -->
+	<div style="text-align:center; clear:both;">
+		<span style="position: relative; float:left;">{L_NO_ADMINS}</span>
+		<span style="position: relative; float:right;">{admin.COUNTRY_FLAG_IMG}</span>
+	</div>
+	<!-- END admin -->
+
+	<div><span style="float:left; width:100%; padding-top: 3px;"><b>{L_MODERATORS}</b></span></div>
+	<div><span style="position: relative; float:left; width:100%; padding-bottom:3px;"></span></div>
+	<div style="clear:both;  padding-bottom: 3px;"><hr /></div>
+	<!-- BEGIN mod -->
+	<div style="text-align:center; clear:both;">
+		<span style="position: relative; float:left;  "><img src="{T_THEME_PATH}/images/mods.png" alt="" /> <strong>{mod.USERNAME_FULL}</strong></span>
+		<span style="position: relative; float:right; padding-top: 4px; ">{mod.COUNTRY_FLAG_IMG} IMG</span>
+	</div>
+	<!-- BEGINELSE -->
+	<div style="text-align:center; clear:both;">
+		<span style="position: relative; float:left;">{L_NO_MODS}</span>
+	</div>
+	<!-- END mod -->
+	<!-- IF DEBUG_QUERIES -->{T_PORTAL_DEBUG}<!-- ENDIF -->
+	<br />
+</div>
+
+<!-- IDTAG ends block_the_team.html -->

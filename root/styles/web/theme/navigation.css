@@ -1,0 +1,80 @@
+/* Navbar */
+#navbar {
+	height: 30px;
+	clear: both;
+	margin: 1px 30px 0 30px;
+	background: url("images/bg_navbar.gif") repeat-x 0 0;
+	}
+#navbar ul {
+	list-style: none;
+	display: block;
+	}
+#navbar li {
+	float: left;
+	}
+
+/* Rollover state */
+#navbar li span {
+	height: 30px;
+	margin: 0;
+	background-position: 0 -33px;
+	display: block;
+	}
+
+/* Rolloff state */
+#navbar li span a, #navbar li span a:link {
+	display: block;
+	width: 100%;
+	height: 30px;
+	background-position: 0 -1px;
+	}
+
+/* Hide <a> text and hide off-state image when rolling over (prevents flicker in IE) */
+#navbar li span a strong { display:none; }
+#navbar li span a:hover { background-image: none; }
+
+/* Button images */
+li.but-about span,
+li.but-about span a {
+	background: url("images/but_about.gif") 0 0 no-repeat;
+	}
+li.but-development span,
+li.but-development span a {
+	background: url("images/but_dev.gif") 0 0 no-repeat;
+	}	
+li.but-downloads span,
+li.but-downloads span a {
+	background: url("images/but_downloads.gif") 0 0 no-repeat;
+	}
+li.but-community span,
+li.but-community span a {
+	background: url("images/but_community.gif") 0 0 no-repeat;
+	}
+li.but-support span,
+li.but-support span a {
+	background: url("images/but_support.gif") 0 0 no-repeat;
+	}
+li.but-customise span,
+li.but-customise span a {
+	background: url("images/but_customise.gif") 0 0 no-repeat;
+	}
+li.but-about span	{ width: 76px; }
+li.but-development span	{ width: 120px; }
+li.but-downloads span	{ width: 106px; }
+li.but-community span	{ width: 109px; }
+li.but-support span 	{ width: 87px; }
+li.but-customise span	{ width: 101px; }
+
+
+/* Always active states */
+body.about #navbar li.but-about span a,
+body.development #navbar li.but-development span a,
+body.downloads #navbar li.but-downloads span a,
+body.languages #navbar li.but-downloads span a,
+body.customise #navbar li.but-customise span a,
+body.mods #navbar li.but-customise span a,
+body.styles #navbar li.but-customise span a,
+body.support #navbar li.but-support span a,
+body.community #navbar li.but-community span a {
+	background-position: 0 -64px;
+}

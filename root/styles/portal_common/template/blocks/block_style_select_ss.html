@@ -1,0 +1,50 @@
+<!-- IDTAG starts block_style_select.html 12 November 2008 copyright phpbbireland.com 2007 -->
+<span class="block_data">
+	<div style="text-align:center; font-size:10px; padding-top:5px;"><img src="images/theme_thumbs.gif" style="padding-bottom:6px;" width="120" height="84" alt="" /><br /> {L_SELECT_STYLE_EXPLAINED}</div>
+	<div style="text-align:center; font-size:11px; padding:5px; padding-top:7px;"><!-- IF S_SELECT_ALLOW -->{L_USERS_STYLE}<!-- ELSE -->{L_STYLE_SELECT_DISABLED}<!-- ENDIF --></div>
+	<div style="text-align:center; font-size:10px; padding:2px;">
+	<!-- IF not S_USER_LOGGED_IN -->
+		<!-- IF S_SELECT_ALLOW -->
+			<div><p>{S_CURRENT_STYLE}<br />{S_CUR_COPYRIGHT}</p></div>
+			<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
+				<strong>{L_STYLEREG}</strong>
+				<br /><br />
+				<input type="submit" class="button2" name="{L_LOGIN}" value="{L_LOGIN}" />
+				<br /><br />
+				<p>{L_DONT_HAVE_ACCOUNT}</p>
+				<a href="ucp.php?cid=&amp;mode=register">{L_REGISTRATION}</a>
+			</form>
+		<!-- ENDIF -->
+	<!-- ENDIF -->
+	<!-- IF S_USER_LOGGED_IN and S_SELECT_ALLOW -->
+		<script type="text/JavaScript">
+			<!--
+			//Mootools
+			function MM_jumpMenu(targ,selObj,restore)
+			{ //v3.0
+				eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+				if (restore) selObj.selectedIndex=0;
+			}
+		//-->
+		</script>
+		<form method="get" action="{S_SELECT_ACTION}" onsubmit="if(document.jumpbox.f.value == -1){return false;}">
+			<div>{S_SELECT_STYLE}</div>
+			<div><strong>{S_CUR_COPYRIGHT}</strong></div>
+			<!-- IF U_PORTED_BY --><div style="padding:5px;">{L_PORTED_BY} {U_PORTED_BY}</div><!-- ENDIF -->
+			{L_DOWNLOADS}:&nbsp;<strong>{DL_TIMES}</strong><br />{S_STYLE_COUNT}
+			<div style="padding:5px;">{L_TOTAL_STYLES}:&nbsp;<strong>{S_TOTAL_STYLES}</strong></div>
+			<div class="hr"><hr /></div>
+			<div>{L_MAKE_PERMANENT}</div>
+		</form>
+		<form method="post" action="{U_CUR_PAGE}">
+			<input type="radio" class="radio" id="permanent" onclick="this.form.submit();" name="permanent" value="1" /> {L_YES}</input>
+		</form>
+		<form method="post" id="style_download" action="{U_DOWN_PAGE}">
+			<div class="hr"><hr /></div>
+			<input type="button" class="button1" style="text-align:center;" onclick="this.form.submit(); window.open('{U_STYLE_DOWN}');" value="{L_DOWNLOAD}" /></input>
+			<input type="hidden" id="download" name="download" value="1" /></input>
+		</form>
+	<!-- ENDIF -->
+	</div>
+</span>
+<!-- IDTAG ends block_style_select -->

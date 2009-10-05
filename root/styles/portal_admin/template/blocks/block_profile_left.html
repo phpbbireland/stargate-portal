@@ -1,0 +1,45 @@
+<!-- Profile on left mod by Michaelo copyright phpbbireland -->
+<dl class="postprofile_left" id="profile{postrow.POST_ID}">
+	<dt>
+		<!-- IF postrow.POSTER_AVATAR -->
+			<!-- IF postrow.U_POST_AUTHOR --><a href="{postrow.U_POST_AUTHOR}">{postrow.POSTER_AVATAR}</a><!-- ELSE -->{postrow.POSTER_AVATAR}<!-- ENDIF --><br />
+		<!-- ENDIF -->
+		<!-- IF not postrow.U_POST_AUTHOR --><strong>{postrow.POST_AUTHOR_FULL}</strong><!-- ELSE -->{postrow.POST_AUTHOR_FULL}<!-- ENDIF -->
+	</dt>
+
+	<!-- IF postrow.RANK_TITLE or postrow.RANK_IMG --><div align="center"><dd>{postrow.RANK_TITLE}<!-- IF postrow.RANK_TITLE and postrow.RANK_IMG --><br /><!-- ENDIF -->{postrow.RANK_IMG}</dd></div><!-- ENDIF -->
+
+	<dd>&nbsp;</dd>
+
+	<!-- IF postrow.POSTER_POSTS != '' --><dd><strong>{L_POSTS}:</strong> {postrow.POSTER_POSTS}</dd><!-- ENDIF -->
+	<!-- IF postrow.POSTER_JOINED --><dd><strong>{L_JOINED}:</strong> {postrow.POSTER_JOINED}</dd><!-- ENDIF -->
+	<!-- IF postrow.POSTER_FROM --><dd><strong>{L_LOCATION}:</strong> {postrow.POSTER_FROM}</dd><!-- ENDIF -->
+
+	<!-- IF postrow.S_PROFILE_FIELD1 -->
+		<!-- Use a construct like this to include admin defined profile fields. Replace FIELD1 with the name of your field. -->
+		<dd><strong>{postrow.PROFILE_FIELD1_NAME}:</strong> {postrow.PROFILE_FIELD1_VALUE}</dd>
+	<!-- ENDIF -->
+
+	<!-- BEGIN custom_fields -->
+		<dd><strong>{postrow.custom_fields.PROFILE_FIELD_NAME}:</strong> {postrow.custom_fields.PROFILE_FIELD_VALUE}</dd>
+	<!-- END custom_fields -->
+
+	<!-- IF not S_IS_BOT -->
+	<!-- IF postrow.U_PM or postrow.U_EMAIL or postrow.U_WWW or postrow.U_MSN or postrow.U_ICQ or postrow.U_YIM or postrow.U_AIM -->
+		<dd>
+			<ul class="profile-icons">
+				<!-- IF postrow.U_PM --><li class="pm-icon"><a href="{postrow.U_PM}" title="{L_PRIVATE_MESSAGE}"><span>{L_PRIVATE_MESSAGE}</span></a></li><!-- ENDIF -->
+				<!-- IF postrow.U_EMAIL --><li class="email-icon"><a href="{postrow.U_EMAIL}" title="{L_EMAIL}"><span>{L_EMAIL}</span></a></li><!-- ENDIF -->
+				<!-- IF postrow.U_WWW --><li class="web-icon"><a href="{postrow.U_WWW}" title="{L_VISIT_WEBSITE}: {postrow.U_WWW}"><span>{L_WEBSITE}</span></a></li><!-- ENDIF -->
+				<!-- IF postrow.U_MSN --><li class="msnm-icon"><a href="{postrow.U_MSN}" title="{L_MSNM}"><span>{L_MSNM}</span></a></li><!-- ENDIF -->
+				<!-- IF postrow.U_ICQ --><li class="icq-icon"><a href="{postrow.U_ICQ}" title="{L_ICQ}"><span>{L_ICQ}</span></a></li><!-- ENDIF -->
+				<!-- IF postrow.U_YIM --><li class="yahoo-icon"><a href="{postrow.U_YIM}" title="{L_YIM}"><span>{L_YIM}</span></a></li><!-- ENDIF -->
+				<!-- IF postrow.U_AIM --><li class="aim-icon"><a href="{postrow.U_AIM}" title="{L_AIM}"><span>{L_AIM}</span></a></li><!-- ENDIF -->
+				<!-- IF postrow.U_JABBER --><li class="jabber-icon"><a href="{postrow.U_JABBER}" title="{L_JABBER}"><span>{L_JABBER}</span></a></li><!-- ENDIF -->
+				<!-- IF postrow.POSTER_FLAG --><li class="poster_flag" style="padding-top:3px"><a href="http://maps.google.com/maps?q={postrow.POSTER_FROM}" target="_blank">{postrow.POSTER_FLAG}</a></li><!-- ENDIF -->
+
+			</ul>
+		</dd>
+	<!-- ENDIF -->
+	<!-- ENDIF -->
+</dl>

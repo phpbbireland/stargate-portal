@@ -1,0 +1,68 @@
+<!-- IDTAG block_news_advanced.html 27 November 2008 copyright phpbbireland.com -->
+
+<div class="news">
+		<a id="astart" name="top" accesskey="t"></a>
+		<!-- IF S_NEWS_COUNT_RETURNED == 0 -->
+		<center><span class="genmed"><strong>{L_NO_NEWS}</strong></span></center>
+		<!-- ELSE -->
+		<!-- BEGIN news_row -->
+			<!-- IF news_row.S_TOPIC_TYPE != 3 -->
+			<div class="mynews <!-- IF news_row.S_ROW_COUNT is even -->bg1a<!-- ELSE -->bg2a<!-- ENDIF -->">
+			<!-- ELSE -->
+			<div class="mynews bg3a">
+			<!-- ENDIF -->
+				<div class="inner" style="min-height:90px;">
+					<span class="corners-top-news"><span></span></span>
+
+					<!-- IF news_row.CAT -->
+						<!-- IF news_row.S_TOPIC_TYPE == 4 -->
+							<div class="newscat" style="margin-bottom:10px;"><span class="orange">{L_NEWS_FLASH_LOCAL} {news_row.CAT}</span><span class="newscatimg"></span></div>
+						<!-- ELSE -->
+							<div class="newscat2" style="margin-bottom:10px;"><span class="red">{L_NEWS_FLASH_GLOBAL} {news_row.CAT}</span><span class="newscatimg2"></span></div>
+						<!-- ENDIF -->
+					<!-- ENDIF -->
+
+					<div class="news_header" style="width:100%;">
+						<span class="news_title"> {news_row.TITLE}</span>
+						<span class="news_poll">  </span>
+						<span class="news_time">  {news_row.TIME}</span>
+					</div>
+					<div class="news_body">
+						<div class="news" style="width:100%;">
+							<div class="news_box"><img src="{T_IMAGESET_LANG_PATH}/news/generalnews.png" alt="" /></div>
+							{news_row.MESSAGE}
+							<!-- IF news_row.S_HAS_ATTACHMENTS -->
+							<div class="highslide-gallery">
+								<dl class="attachbox">
+									<dt>{L_ATTACHMENTS}</dt>
+									<!-- BEGIN attachment -->
+										<dd>{news_row.attachment.DISPLAY_ATTACHMENT}</dd>
+									<!-- END attachment -->
+								</dl>
+							</div>
+							<!-- ENDIF -->
+							<!-- IF news_row.S_DISPLAY_NOTICE --><div class="rules">{L_DOWNLOAD_NOTICE}</div><!-- ENDIF -->
+						</div>
+					</div>
+					<div class="news_footer" style="width:100%;">
+						<span class="news_poster" style="width:50%;"> {L_POSTED_BY}: {news_row.U_POSTER}</span>
+						<span class="news_reply" style="width:50%;">
+							<a href="{news_row.U_VIEW}"> {news_row.U_VIEW_IMG}</a>
+							<a href="{news_row.U_PRINT}"> {news_row.U_PRINT_IMG}</a>
+							<!-- IF news_row.ALLOW_POST -->
+								<a href="{news_row.U_REPLY}"> {news_row.U_REPLY_IMG}</a>
+							<!-- ENDIF -->
+							<a href="#astart" title="Top"><img src="{T_IMAGESET_PATH}/icon_back_top.gif" width="14" height="14" alt="Top" /></a>
+						</span>
+					</div>
+					<span class="corners-bottom-news"><span></span></span>
+				</div>
+			</div>
+			<!-- IF news_row.S_NOT_LAST --><br /><!-- ENDIF -->
+		<!-- END news_row -->
+
+		<!-- ENDIF -->
+		<!-- IF DEBUG_QUERIES -->{N_PORTAL_DEBUG}<!-- ENDIF -->
+</div>
+
+<!-- IDTAG ends block_news_advanced.html -->

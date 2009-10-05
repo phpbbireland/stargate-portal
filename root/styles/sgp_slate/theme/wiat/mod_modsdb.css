@@ -1,0 +1,87 @@
+ /* modsdb.css
+----------------------------------------*/
+.download-icon, .download-icon a	{ background-image: url("{IMG_ICON_DOWNLOAD_SRC}"); }
+
+/* Specific column styles */
+
+table.table1 .mod_title		{ text-align: center; width: 25%;}
+table.table1 .mod_version	{ text-align: center !important; width: 7%; }
+table.table1 .mod_desc		{ text-align: center;}
+table.table1 .mod_author	{ text-align: center; width: 10%; }
+table.table1 .mod_url		{ text-align: center; width: 8%; }
+
+/* Poster moddb icons
+----------------------------------------*/
+ul.moddb-icons1 {
+	padding-top: 	0px;
+	padding-left: 	4px;
+	list-style: none;
+}
+
+
+/* Rollover state */
+ul.moddb-icons1 li {
+	float: left;
+	margin: 0 6px 3px 0;
+	background-position: 0 100%;
+}
+
+/* Rolloff state */
+ul.moddb-icons1 li a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-position: 0 0;
+}
+
+ul.moddb-icons1 li.no-icon	{ width: 20px; height: 20px; }
+
+/* Hide <a> text and hide off-state image when rolling over (prevents flicker in IE) */
+ul.moddb-icons1 li span { display:none; }
+ul.moddb-icons1 li a:hover { background: none; }
+ul.moddb-icons1 li.web-icon	{ width: {IMG_ICON_CONTACT_WWW_WIDTH}px; height: {IMG_ICON_CONTACT_WWW_HEIGHT}px; }
+ul.moddb-icons1 li.download-icon	{ width: {IMG_ICON_DOWNLOAD_WIDTH}px; height: {IMG_ICON_DOWNLOAD_HEIGHT}px; }
+
+
+/* Poster moddb icons
+----------------------------------------*/
+ul.moddb-icons2 {
+	padding-top: 0px;
+	list-style: none;
+}
+
+/* Rollover state */
+ul.moddb-icons2 li {
+	float: left;
+	margin: 0 0px 0px 0;
+	background-position: 0 100%;
+}
+
+/* Rolloff state */
+ul.moddb-icons2 li a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-position: 0 0;
+}
+
+/* Hide <a> text and hide off-state image when rolling over (prevents flicker in IE) */
+ul.moddb-icons2 li span { display:none; }
+ul.moddb-icons2 li a:hover { background: none; }
+ul.moddb-icons2 li.web-icon	{ width: {IMG_ICON_CONTACT_WWW_WIDTH}px; height: {IMG_ICON_CONTACT_WWW_HEIGHT}px; }
+ul.moddb-icons2 li.download-icon	{ width: {IMG_ICON_DOWNLOAD_WIDTH}px; height: {IMG_ICON_DOWNLOAD_HEIGHT}px; }
+
+ul.moddb-icons2 li.no-icon	{ width: 20px; height: 20px; }
+
+/* General classes for placing floating blocks */
+.left-box1 {
+	float: left;
+	width: auto;
+	text-align: left;
+}
+
+.right-box1 {
+	float: right;
+	width: auto;
+	text-align: right;
+}

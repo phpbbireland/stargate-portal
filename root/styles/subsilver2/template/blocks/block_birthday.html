@@ -1,0 +1,14 @@
+<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+
+<!-- INCLUDE blocks/blocks_header_left.html -->{L_BIRTHDAYS} <img src="{T_THEME_PATH}/images/mini_birthday.gif" height="12" width="14" alt="{L_BIRTHDAYS}" /><!-- INCLUDE blocks/blocks_header_right.html -->
+
+<div class="box" style="text-align:left; padding:0;">
+	<span style="float:left; width:auto; height:auto; padding:5px; padding-top:7px; padding-bottom:3px;"><img src="{T_THEME_PATH}/images/birthday.gif" alt="{L_BIRTHDAYS}" /></span>
+	<div style="margin-left:40px; border-left: solid 1px #B7B7B6; " >
+		<div class="row1" style="padding: 5px; min-height:35px;">
+			<br /><!-- IF BIRTHDAY_LIST -->{L_CONGRATULATIONS}: <b>{BIRTHDAY_LIST}</b><!-- ELSE -->{L_NO_BIRTHDAYS} <!-- ENDIF -->
+		</div>
+	</div>
+</div>
+<!-- INCLUDE blocks/blocks_footer.html -->
+<!-- ENDIF -->

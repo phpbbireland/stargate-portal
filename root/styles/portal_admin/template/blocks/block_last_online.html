@@ -1,0 +1,50 @@
+<!-- IDTAG starts block_last_online.html 17 October 2008 copyright phpbbireland.com 2008 -->
+<span class="block_data">
+	<div>
+		<table width="100%" cellpadding="4" cellspacing="1" border="0" class="inner" style="border:none;">
+		<!-- IF VIEWONLINE -->
+			<tr>
+				<td class="bg1" align="left"><span class="gen"><b>{L_USERNAME}</b></a></span></td>
+				<td class="bg1" align="right"><span class="gen"><b>{L_ONLINE}</b></span></td>
+			</tr>
+		</table>
+		<table width="100%" cellpadding="4" cellspacing="1" border="0" class="inner" style="border:none;">
+			<tr><td class="bg1"><hr></td><td class="bg1"><hr></td></tr>
+			<!-- BEGIN last_online -->
+			<tr>
+				<td class="bg2" align="left" ><span class="gen">
+				<!-- IF last_online.USER_AVATAR_IMG -->
+					{last_online.USER_AVATAR_IMG}
+				<!-- ELSE -->
+					<img src="{T_THEME_PATH}/images/no_avatar.gif" width="16" height="16" alt="" />
+				<!-- ENDIF -->
+				{last_online.USERNAME_FULL}
+				</span></td>
+			</tr>
+			<tr>
+				<td class="bg3" align="right"><span class="gen">{last_online.ONLINE_TIME}</span></td>
+			</tr>
+			<!-- END last_online -->
+		<!-- ENDIF -->
+		<!-- IF NO_VIEWONLINE_R -->
+		<tr>
+            <td class="bg1" align="middle"><span class="gen"><strong>{L_NO_VIEW_USERS_R}</strong></span></td>
+		</tr>
+		<!-- ENDIF -->
+		<!-- IF NO_VIEWONLINE_A -->
+		<tr>
+            <td class="bg1" align="middle"><span class="gen">
+			<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
+			<strong>{L_NO_VIEW_USERS_A}</strong>
+			<br /><br />
+			<input type="submit" class="button2" name="{L_LOGIN}" value="{L_LOGIN}" />
+			<br /><br />
+			<p>{L_DONT_HAVE_ACCOUNT}</p>
+			<a href="ucp.php?cid=&amp;mode=register">{L_REGISTRATION}</a>
+			</form></span></td>
+		</tr>
+		<!-- ENDIF -->
+		</table>
+	</div>
+</span>
+<!-- IDTAG ends block_last_online.html -->

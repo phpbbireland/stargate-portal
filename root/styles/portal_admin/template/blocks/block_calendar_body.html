@@ -1,0 +1,109 @@
+<table width="100%" cellpadding="1" cellspacing="1" border="0">
+	<tr width="100%">
+		<td align="left"><a href="{U_PREV_MONTH}" class="gen"><img src="{T_IMAGESET_PATH}/arrowleftmonth.gif"></a></td>
+		<td align="center">{L_CALENDAR_MONTH}</td>
+		<td align="right"><a href="{U_NEXT_MONTH}" class="gen"><img src="{T_IMAGESET_PATH}/arrowrightmonth.gif"></a></td>
+	</tr>
+	<tr>
+		<td align="center" colspan="3">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr class="xcalendar">
+					<td class="xrow1" align="center" width="14%"><b>{L_SUN}</b></td>
+					<td class="xrow1" align="center" width="14%"><b>{L_MON}</b></td>
+					<td class="xrow1" align="center" width="14%"><b>{L_TUE}</b></td>
+					<td class="xrow1" align="center" width="14%"><b>{L_WED}</b></td>
+					<td class="xrow1" align="center" width="14%"><b>{L_THU}</b></td>
+					<td class="xrow1" align="center" width="14%"><b>{L_FRI}</b></td>
+					<td class="xrow1" align="center" width="14%"><b>{L_SAT}</b></td>
+				</tr>
+
+			<!-- BEGIN calendar_week -->
+				<tr>
+					<td class="row1" align="center">
+						<table class="calendar" border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+								<td height="15" class="row3" align="right">
+									<!-- IF calendar_week.DAY0 == THIS_DAY --><span class="cal_today"><!-- ENDIF -->
+									{calendar_week.DAY0}&nbsp;
+									<!-- IF calendar_week.DAY0 == THIS_DAY --></span><!-- ENDIF -->
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td class="row1" align="center">
+						<table class="calendar" border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td height="15" class="row3" align="right">
+									<!-- IF calendar_week.DAY1 == THIS_DAY --><span class="cal_today"><!-- ENDIF -->
+									{calendar_week.DAY1}&nbsp;
+									<!-- IF calendar_week.DAY1 == THIS_DAY --></span><!-- ENDIF -->
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td class="row1" align="center">
+						<table class="calendar" border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td height="15" class="row3" align="right">
+									<!-- IF calendar_week.DAY2 == THIS_DAY --><span class="cal_today"><!-- ENDIF -->
+									{calendar_week.DAY2}&nbsp;
+									<!-- IF calendar_week.DAY2 == THIS_DAY --></span><!-- ENDIF -->
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td class="row1" align="center">
+						<table  class="calendar" border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td height="15" class="row3" align="right">
+									<!-- IF calendar_week.DAY3 == THIS_DAY --><span class="cal_today"><!-- ENDIF -->
+									{calendar_week.DAY3}&nbsp;
+									<!-- IF calendar_week.DAY3 == THIS_DAY --></span><!-- ENDIF -->
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td class="row1" align="center">
+						<table class="calendar" border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td height="15" class="row3" align="right">
+									<!-- IF calendar_week.DAY4 == THIS_DAY --><span class="cal_today"><!-- ENDIF -->
+									{calendar_week.DAY4}&nbsp;
+									<!-- IF calendar_week.DAY4 == THIS_DAY --></span><!-- ENDIF -->
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td class="row1" align="center">
+						<table class="calendar" border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td height="15" class="row3" align="right">
+									<!-- IF calendar_week.DAY5 == THIS_DAY --><span class="cal_today"><!-- ENDIF -->
+									{calendar_week.DAY5}&nbsp;
+									<!-- IF calendar_week.DAY5 == THIS_DAY --></span><!-- ENDIF -->
+								</td>
+							</tr>
+
+						</table>
+					</td>															
+					<td class="row1" align="center">
+						<table  class="calendar" border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tr>
+							<td height="15" class="row3" align="right">
+									<!-- IF calendar_week.DAY6 == THIS_DAY --><span class="cal_today"><!-- ENDIF -->
+									{calendar_week.DAY6}&nbsp;
+									<!-- IF calendar_week.DAY6 == THIS_DAY --></span><!-- ENDIF -->
+								</td>
+							</tr>
+						</table>
+					</td>					
+				</tr>
+			<!-- END calendar_week -->
+			</table>
+		</td>
+</table>
+<table width="100%" cellpadding="1" cellspacing="1" border="0">
+	<!-- IF S_NEW_EVENT -->
+	<tr><td><div class="buttons"><div class="block_button"><div class="k_button_event_new-icon"><a href="calendar_post.php"><span>{L_calendar_add_event}</span></a></div></div></div></td></tr>
+	<!-- ENDIF -->
+</table>

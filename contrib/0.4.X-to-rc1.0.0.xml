@@ -1,0 +1,1510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.2.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		<title lang="en">Stargate Portal Update script 0.4.0 to RC1.0.0</title>
+		<description lang="en">This file will assist in updating you site to RC1 of Stargate Portal</description>
+		<author-notes lang="en">Not test yet! Please report problems to: http://www.stargate-portal.com</author-notes>
+
+
+    <author-group>
+      <author>
+        <realname>Michael O'Toole</realname>
+        <email>o2l@eircom.net</email>
+        <username>michaelo</username>
+        <homepage>http://www.phpbbireland.com</homepage>
+        <contributions />
+      </author>
+	  </author-group>
+
+
+		<mod-version>1.0.0</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>200</time>
+			<target-version>3.0.4</target-version>
+		</installation>
+		<history/>
+	</header>
+	<action-group>
+
+<open src="common.php">
+<edit>
+			<find><![CDATA[// Grab global variables, re-cache if necessary
+$config = $cache->obtain_config();]]></find>
+			<action type="after-add"><![CDATA[@define('STARGATE', ($config['portal_enabled']));
+@define('DEBUG_QUERIES', false);
+if(STARGATE)
+{
+	$k_config = $cache->obtain_k_config();		//  1 query
+	$k_blocks = $cache->obtain_block_data();	//	1 query
+}
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[/* Stargate functions start... copyright phpbbireland.com 2005 */
+/*
+**	This function returns a random image preprocessed with html tags and an option link...
+**	The link is based on the image name... example www.phpbb.com.png
+**	or even: sourceforge.net+project+project_donations.php@group_id=156802.gif
+*/
+function get_random_image($dir_path, $add_link = false)
+{
+	// initialise vars
+	$rand_banners = '';
+	$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+	$imglist = "";
+
+	mt_srand((double)microtime()*1000001);
+
+	$handle = opendir($dir_path);
+
+	// quick report because people forget to add the image directory //
+	if (!$handle) trigger_error('Debug report: #244, Check to see if you added the image directory!' . $dir_path);
+
+	while (($file = readdir($handle)) !== false)
+	{
+		if (eregi("gif", $file) || eregi("jpg", $file) || eregi("png", $file))
+		{
+			$imglist .= "$file ";
+		}
+	}
+	closedir($handle);
+
+	$imglist = explode(" ", $imglist);
+	$a = sizeof($imglist)-2;
+	$random = mt_rand(0, $a);
+	$image = $imglist[$random];
+
+	if($add_link)
+	{
+		if(strstr($image, 'gif'))
+			$lnk = explode(".gif", $image);
+		else
+		if(strstr($image, 'png'))
+			$lnk = explode(".png", $image);
+		else
+		if(strstr($image, 'jpg'))
+			$lnk = explode(".jpg", $image);
+
+		$lnk[0] = str_replace('+','/', $lnk[0]);
+		$lnk[0] = str_replace('@','?', $lnk[0]);
+
+		$rand_banners = "<a href=\"http://$lnk[0]\"><img src=\"$dir_path/$image\" alt=\"$lnk[0]\" /></a>";
+	}
+	else
+		$rand_banners .= "<img src=\"$dir_path/$image\" alt=\"\" />";
+
+	$imgs = '';
+
+	return($rand_banners);
+}
+
+// Get the user style using user id
+function get_user_style($id)
+{
+	global $user, $db;
+
+	$sql = "SELECT theme_id, theme_path FROM " . STYLES_THEME_TABLE . " WHERE theme_id = " . $user->data['user_style'];
+
+	$result = $db->sql_query($sql);
+
+	while( $row = $db->sql_fetchrow($result) )
+	{
+		$style = $row['theme_path'];
+	}
+
+	if(!isset($style))
+	{
+		trigger_error("Cannot retrieve style data for user, please ensure all style ID's are the same fot current style. User ID = " . $id);
+	}
+
+	return($style);
+}
+/* Stargate functions ends */]]></find>
+				<action type="replace-with"><![CDATA[/* Stargate functions start... copyright phpbbireland.com 2005 */
+/*
+**	This function returns a random image preprocessed with html tags and an option link...
+**	The link is based on the image name... example www.phpbb.com.png
+**	or even: sourceforge.net+project+project_donations.php@group_id=156802.gif
+**  A token can be sent to filter images, for example all images containing menu_
+*/
+function get_random_image($dir_path, $add_link = false, $token = '', $raw = false)
+{
+	if(defined('IN_ADMIN'))
+		return;
+
+	// The $token can be used to filter image types...
+	// initialise vars
+	//$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+
+	$rand_banners = '';
+	$imglist = "";
+
+	mt_srand((double)microtime()*1000001);
+
+	$handle = @opendir($dir_path);
+
+	// 01 January 2009 Just return for now as this can cause an error report if uses is Admin as the path will be incorrect //
+	// quick report because people forget to add the image directory //
+
+	if (!$handle)
+		return;
+
+	if(!$token) $token = '.';
+
+	while (($file = readdir($handle)) !== false)
+	{
+		if (eregi("gif", $file) || eregi("jpg", $file) || eregi("png", $file) && eregi($token, $file))
+		{
+			$imglist .= "$file ";
+		}
+	}
+	closedir($handle);
+
+	$imglist = explode(" ", $imglist);
+	$a = sizeof($imglist)-2;
+	$random = mt_rand(0, $a);
+	$image = $imglist[$random];
+
+	if(strpos($image, 'www') || strpos($image, 'http'))
+		$add_link = true;
+
+	if($add_link)
+	{
+		if(strstr($image, 'gif'))
+			$lnk = explode(".gif", $image);
+		else
+		if(strstr($image, 'png'))
+			$lnk = explode(".png", $image);
+		else
+		if(strstr($image, 'jpg'))
+			$lnk = explode(".jpg", $image);
+
+		$lnk[0] = str_replace('+','/', $lnk[0]);
+		$lnk[0] = str_replace('@','?', $lnk[0]);
+
+		$rand_banners = "<a href=\"http://$lnk[0]\"><img src=\"$dir_path/$image\" alt=\"$lnk[0]\" /></a>";
+	}
+	else
+	if(!$raw)
+		$rand_banners .= "<img src=\"$dir_path/$image\" alt=\"\" />";
+	else
+		$rand_banners .= "$dir_path/$image";
+
+	$imgs = '';
+
+	return($rand_banners);
+}
+
+
+/**
+* Get user avatar Note! To avoid conflict copied and renamed for porta use
+*
+* @param string $avatar Users assigned avatar name
+* @param int $avatar_type Type of avatar
+* @param string $avatar_width Width of users avatar
+* @param string $avatar_height Height of users avatar
+* @param string $alt Optional language string for alt tag within image, can be a language key or text
+*
+* @return string Avatar image
+*/
+function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width, $avatar_height, $alt = 'USER_AVATAR')
+{
+	global $user, $config, $phpbb_root_path, $phpEx;
+
+	if (empty($avatar) || !$avatar_type)
+	{
+		if(!STARGATE)
+			return '';
+
+		$poster_avatar = get_random_image($phpbb_root_path . 'images/avatars/no_avitar', true, '');
+
+		// do we wish to resize? //
+		if($avatar_width)
+			$poster_avatar = str_replace('>', '" height="' . $avatar_height . '" width="' . $avatar_width . '" />', $poster_avatar);
+
+		return($poster_avatar);
+	}
+
+	$avatar_img = '';
+
+	switch ($avatar_type)
+	{
+		case AVATAR_UPLOAD:
+			$avatar_img = $phpbb_root_path . "download/file.$phpEx?avatar=";
+		break;
+
+		case AVATAR_GALLERY:
+			$avatar_img = $phpbb_root_path . $config['avatar_gallery_path'] . '/';
+		break;
+	}
+
+	$avatar_img .= $avatar;
+	return '<img src="' . (str_replace(' ', '%20', $avatar_img)) . '" width="' . $avatar_width . '" height="' . $avatar_height . '" alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
+}
+
+/* Stargate functions ends */]]></action>
+			<comment lang="en">If the Find does not exist... move on to next edit...</comment>
+			</edit>
+
+
+
+
+
+
+
+			<edit>
+				<find><![CDATA[/* Stargate functions starts */
+// returns a random image used in serveral mods
+function get_random_image($dir_path)
+{
+	// initialise vars
+	$rand_banners = '';
+	$phpbb_root_path = './';
+	$imglist = "";
+
+	mt_srand((double)microtime()*1000001);
+
+	$handle = opendir($dir_path);
+
+	// quick report because people forget to add the image directory //
+	if (!$handle) echo 'Check to see if you added the image directory!';
+
+	while (($file = readdir($handle)) !== false)
+	{
+		if (eregi("gif", $file) || eregi("jpg", $file) || eregi("png", $file))
+		{
+			$imglist .= "$file ";
+		}
+	}
+	closedir($handle);
+
+	$imglist = explode(" ", $imglist);
+	$a = sizeof($imglist)-2;
+	$random = mt_rand(0, $a);
+	$image = $imglist[$random];
+
+	$rand_banners .= "<img src=\"$dir_path/$image\" alt=\"\" />";
+	$imgs = '';
+
+	return($rand_banners);
+}
+/* Stargate functions ends */]]></find>
+				<action type="replace-with"><![CDATA[/* Stargate functions start... copyright phpbbireland.com 2005 */
+/*
+**	This function returns a random image preprocessed with html tags and an option link...
+**	The link is based on the image name... example www.phpbb.com.png
+**	or even: sourceforge.net+project+project_donations.php@group_id=156802.gif
+**  A token can be sent to filter images, for example all images containing menu_
+*/
+function get_random_image($dir_path, $add_link = false, $token = '', $raw = false)
+{
+	if(defined('IN_ADMIN'))
+		return;
+
+	// The $token can be used to filter image types...
+	// initialise vars
+	//$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+
+	$rand_banners = '';
+	$imglist = "";
+
+	mt_srand((double)microtime()*1000001);
+
+	$handle = @opendir($dir_path);
+
+	// 01 January 2009 Just return for now as this can cause an error report if uses is Admin as the path will be incorrect //
+	// quick report because people forget to add the image directory //
+
+	if (!$handle)
+		return;
+
+	if(!$token) $token = '.';
+
+	while (($file = readdir($handle)) !== false)
+	{
+		if (eregi("gif", $file) || eregi("jpg", $file) || eregi("png", $file) && eregi($token, $file))
+		{
+			$imglist .= "$file ";
+		}
+	}
+	closedir($handle);
+
+	$imglist = explode(" ", $imglist);
+	$a = sizeof($imglist)-2;
+	$random = mt_rand(0, $a);
+	$image = $imglist[$random];
+
+	if(strpos($image, 'www') || strpos($image, 'http'))
+		$add_link = true;
+
+	if($add_link)
+	{
+		if(strstr($image, 'gif'))
+			$lnk = explode(".gif", $image);
+		else
+		if(strstr($image, 'png'))
+			$lnk = explode(".png", $image);
+		else
+		if(strstr($image, 'jpg'))
+			$lnk = explode(".jpg", $image);
+
+		$lnk[0] = str_replace('+','/', $lnk[0]);
+		$lnk[0] = str_replace('@','?', $lnk[0]);
+
+		$rand_banners = "<a href=\"http://$lnk[0]\"><img src=\"$dir_path/$image\" alt=\"$lnk[0]\" /></a>";
+	}
+	else
+	if(!$raw)
+		$rand_banners .= "<img src=\"$dir_path/$image\" alt=\"\" />";
+	else
+		$rand_banners .= "$dir_path/$image";
+
+	$imgs = '';
+
+	return($rand_banners);
+}
+
+
+/**
+* Get user avatar Note! To avoid conflict copied and renamed for porta use
+*
+* @param string $avatar Users assigned avatar name
+* @param int $avatar_type Type of avatar
+* @param string $avatar_width Width of users avatar
+* @param string $avatar_height Height of users avatar
+* @param string $alt Optional language string for alt tag within image, can be a language key or text
+*
+* @return string Avatar image
+*/
+function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width, $avatar_height, $alt = 'USER_AVATAR')
+{
+	global $user, $config, $phpbb_root_path, $phpEx;
+
+	if (empty($avatar) || !$avatar_type)
+	{
+		if(!STARGATE)
+			return '';
+
+		$poster_avatar = get_random_image($phpbb_root_path . 'images/avatars/no_avitar', true, '');
+
+		// do we wish to resize? //
+		if($avatar_width)
+			$poster_avatar = str_replace('>', '" height="' . $avatar_height . '" width="' . $avatar_width . '" />', $poster_avatar);
+
+		return($poster_avatar);
+	}
+
+	$avatar_img = '';
+
+	switch ($avatar_type)
+	{
+		case AVATAR_UPLOAD:
+			$avatar_img = $phpbb_root_path . "download/file.$phpEx?avatar=";
+		break;
+
+		case AVATAR_GALLERY:
+			$avatar_img = $phpbb_root_path . $config['avatar_gallery_path'] . '/';
+		break;
+	}
+
+	$avatar_img .= $avatar;
+	return '<img src="' . (str_replace(' ', '%20', $avatar_img)) . '" width="' . $avatar_width . '" height="' . $avatar_height . '" alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
+}
+
+/* Stargate functions ends */]]></action>
+
+				<comment lang="en">If previous edit was not found, else skip</comment>
+			</edit>
+		</open>
+
+
+
+<open src="faq.php">
+	<edit>
+		<find><![CDATA[// Stargate Portal
+if(STARGATE)
+{
+	global $k_config;
+	
+	$user->setup('portal/portal');
+	$user->add_lang('portal/portal');
+
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+	include_once($phpbb_root_path . 'includes/functions_display.'. $phpEx );
+	
+	k_config_init($k_config);
+	
+	if($k_config['display_blocks_global'])
+	{
+		include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+	}
+}
+// Stargate Portal]]></find>
+		<action type="replace-with"><![CDATA[// Stargate Portal
+if(STARGATE)
+{
+	global $k_config, $k_blocks;
+
+	$user->setup('portal/portal');
+	$user->add_lang('portal/portal');
+
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+	include_once($phpbb_root_path . 'includes/functions_display.'. $phpEx );
+
+	if($k_config['display_blocks_global'])
+	{
+		include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+	}
+}
+// Stargate Portal]]></action>
+<comment lang="en">If edit not found skip to next edit.</comment>
+	</edit>
+
+
+	<edit>
+		<find><![CDATA[// Start session management
+$user->session_begin();
+$auth->acl($user->data);
+$user->setup();]]></find>
+		<action type="after-add"><![CDATA[// Stargate Portal
+if(STARGATE)
+{
+	global $k_config, $k_blocks;
+
+	$user->setup('portal/portal');
+	$user->add_lang('portal/portal');
+
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+	include_once($phpbb_root_path . 'includes/functions_display.'. $phpEx );
+
+	if($k_config['display_blocks_global'])
+	{
+		include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+	}
+}
+// Stargate Portal]]></action>
+		<comment lang="en">If previous edit not found.</comment>
+	</edit>
+</open>
+
+<open src="index.php">
+	<edit>
+		<find><![CDATA[// Stargate Portal
+if(STARGATE)
+{
+	$user->add_lang('portal/portal');
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+	k_config_init($k_config);
+	include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+}
+// Stargate Portal]]></find>
+		<action type="replace-with"><![CDATA[// Stargate Portal
+if(STARGATE)
+{
+	$user->add_lang('portal/portal');
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+	include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+}
+// Stargate Portal]]></action>
+		<comment lang="en"></comment>
+	</edit>
+</open>
+
+<open src="mcp.php">
+	<edit>
+		<find>		'make_global'	=&gt; 'f_announce',
+		'make_news'		=&gt; 'f_announce',
+		'make_news_global'	=&gt; 'f_announce',</find>
+				<action type="replace-with"><![CDATA[		'make_global'	=> 'f_announce',]]></action>
+					<comment lang="en">May not exist in all versions... if not found ignore edit...</comment>
+			</edit>
+			<edit>
+				<find>		case 'make_normal':
+		case 'make_news':
+		case 'make_news_global':</find>
+	<action type="replace-with"><![CDATA[		case 'make_normal':]]></action>
+	<comment lang="en">May not exist in all versions... if not found ignore edit...</comment>
+	</edit>
+	<edit>
+		<find><![CDATA[$user->setup('mcp');]]></find>
+		<action type="after-add"><![CDATA[/*
+// Stargate Portal
+if(STARGATE)
+{
+	$user->add_lang('portal/portal');
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+	include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+}
+// Stargate Portal
+*/]]></action>
+		<comment lang="en">Currently disabled.</comment>
+	</edit>
+	<edit>
+		<find><![CDATA[AND topic_type NOT IN (" . POST_ANNOUNCE . ', ' . POST_GLOBAL . ")]]></find>
+        <inline-edit>
+          <inline-find>. POST_GLOBAL .</inline-find>
+          <inline-action type="after-add"><![CDATA[ ' , ' . POST_NEWS . ' , ' . POST_NEWS_GLOBAL . ]]></inline-action>
+        </inline-edit>
+		<comment lang="en"></comment>
+	</edit>
+</open>
+
+<open src="memberlist.php">
+	<edit>
+		<find><![CDATA[$user->setup(array('memberlist', 'groups'));]]></find>
+        <action type="after-add"><![CDATA[// Stargate Portal
+if(STARGATE)
+{
+	if(request_var('mode', '') != 'leaders')// this break as function are called twice so we dont process. fix later //
+	{
+		$user->add_lang('portal/portal');
+		include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+		include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+	}
+}
+// Stargate Portal]]></action>
+		<comment lang="en">This edit may have been done already...</comment>
+	</edit>
+</open>
+
+
+<open src="search.php">
+      <edit>
+        <find><![CDATA[include($phpbb_root_path . 'common.' . $phpEx);]]></find>
+        <action type="after-add"><![CDATA[// Stargate Portal
+if(STARGATE)
+{
+	global $k_config, $k_blocks;
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+}
+// Stargate Portal]]></action>
+      <comment lang="en"></comment>
+</edit>
+
+      <edit>
+        <find><![CDATA[					$sql_select .= ', tt.mark_time, ft.mark_time as f_mark_time';
+				}
+			}]]></find>
+        <action type="after-add"><![CDATA[			if(STARGATE)
+			{
+				// move to databse in next revision //
+				$k_config['tooltips_active'] = true;
+				$k_config['tooltips_first'] = false;
+				$k_config['tooltips_last'] = true;
+
+				// Improved sql thanks to Rich McGirr and his Topic Text Hover Mod //
+				if ($k_config['tooltips_active'])
+				{
+					if($k_config['tooltips_first'])
+					{
+						$sql_from .= ' LEFT JOIN ' . POSTS_TABLE . ' p ON (p.post_id = t.topic_first_post_id)';
+			   			$sql_select .= ', p.post_text AS first_message_tooltip';
+					}
+					if($k_config['tooltips_last'])
+					{
+						$sql_from .= ' LEFT JOIN ' . POSTS_TABLE . ' pt ON (pt.post_id = t.topic_last_post_id)';
+						$sql_select .= ', pt.post_text AS last_message_tooltip';
+					}
+				}
+			}]]></action>
+      <comment lang="en"></comment>
+</edit>
+
+      <edit>
+        <find><![CDATA[				$tpl_ary = array(]]></find>
+        <action type="after-add"><![CDATA[					'TOOLTIP'					=> (STARGATE) ? sgp_truncate_message(bbcode_strip(($row['last_message_tooltip'])), 500) : '',]]></action>
+      <comment lang="en"></comment>
+</edit>
+</open>
+
+
+<open src="ucp.php">
+      <edit>
+        <find>$user->setup('ucp');</find>
+        <action type="after-add"><![CDATA[// Stargate Portal
+if(STARGATE)
+{
+	$user->add_lang('portal/portal');
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+	include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+}
+// Stargate Portal]]></action>
+      <comment lang="en"></comment>
+</edit>
+</open>
+
+
+
+<open src="viewforum.php">
+<edit>
+			<find><![CDATA[	global $k_config;]]></find>
+			<action type="replace-with"><![CDATA[	global $k_config, $k_blocks;]]></action>
+</edit>
+<edit>
+			<find><![CDATA[	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+
+	k_config_init($k_config);]]></find>
+			<action type="replace-with"><![CDATA[	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );]]></action>
+			</edit>
+			<edit>
+			<find><![CDATA[		if ($s_display_active && sizeof($active_forum_ary))
+		{
+			$sql_array['LEFT_JOIN'][] = array('FROM' => array(FORUMS_TRACK_TABLE => 'ft'), 'ON' => 'ft.forum_id = t.forum_id AND ft.user_id = ' . $user->data['user_id']);
+			$sql_array['SELECT'] .= ', ft.mark_time AS forum_mark_time';
+		}
+	}
+}]]></find>
+			<action type="after-add"><![CDATA[if(STARGATE)
+{
+	// move to databse in next revision //
+	$k_config['tooltips_active'] = true;
+	$k_config['tooltips_first'] = false;
+	$k_config['tooltips_last'] = true;
+
+	// Improved sql thank to Rich McGirr and his Topic Text Hover Mod //
+	if ($k_config['tooltips_active'])
+	{
+		if($k_config['tooltips_first'])
+		{
+			$sql_array['LEFT_JOIN'][] = array('FROM' => array(POSTS_TABLE => 'pt'), 'ON' => 'pt.post_id = t.topic_first_post_id');
+			$sql_array['SELECT'] .= ', pt.post_text AS first_message_tooltips';
+		}
+		if($k_config['tooltips_last'])
+		{
+			$sql_array['LEFT_JOIN'][] = array('FROM' => array(POSTS_TABLE => 'ptl'), 'ON' => 'ptl.post_id = t.topic_last_post_id');
+			$sql_array['SELECT'] .= ', ptl.post_text AS last_message_tooltips';
+		}
+	}
+}]]></action>
+</edit>
+ <comment lang="en">2nd edit</comment>
+<edit>
+			<find><![CDATA[			'FORUM_ID'					=> $forum_id,]]></find>
+			<action type="after-add"><![CDATA[			'TOOLTIP'					=> (STARGATE) ? sgp_truncate_message(bbcode_strip(($row['last_message_tooltips'])), 500) : '',]]></action>
+</edit>
+<edit>
+			<find><![CDATA[			'TOPIC_ICON_IMG_HEIGHT'	=> (!empty($icons[$row['icon_id']])) ? $icons[$row['icon_id']]['height'] : '',]]></find>
+			<action type="after-add"><![CDATA[			'TOPIC_ICON_IMG_GROUP'	=> (!empty($icons[$row['icon_id']])) ? $icons[$row['icon_id']]['group'] : '',]]></action>
+</edit>
+</open>
+
+
+<open src="viewtopic.php">
+	<edit>
+		<find><![CDATA[if(STARGATE)
+{
+	global $k_config, $k_blocks;
+	
+	$user->setup('portal/portal');
+	$user->add_lang('portal/portal');
+	
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+	
+	k_config_init($k_config);
+	
+	if($k_config['display_blocks_global'])
+	{
+		include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+	}
+}
+// Stargate Portal]]></find>
+        <action type="replace-with"><![CDATA[// Stargate Portal
+if(STARGATE)
+{
+	global $k_config, $k_blocks;
+
+	$user->setup('portal/portal');
+	$user->add_lang('portal/portal');
+
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+
+	if($k_config['display_blocks_global'])
+	{
+		include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+	}
+}
+// Stargate Portal]]></action>
+      <comment lang="en">If not found skip to next edit...</comment>
+</edit>
+
+	<edit>
+		<find><![CDATA[// Stargate Portal
+if(STARGATE)
+{
+	global $k_config;
+
+	$user->setup('portal/portal');
+	$user->add_lang('portal/portal');
+
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+
+	k_config_init($k_config);
+
+	if($k_config['display_blocks_global'])
+	{
+		include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+	}
+}
+// Stargate Portal]]></find>
+        <action type="replace-with"><![CDATA[// Stargate Portal
+if(STARGATE)
+{
+	global $k_config, $k_blocks;
+
+	$user->setup('portal/portal');
+	$user->add_lang('portal/portal');
+
+	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+
+	if($k_config['display_blocks_global'])
+	{
+		include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+	}
+}
+// Stargate Portal]]></action>
+      <comment lang="en"></comment>
+</edit>
+
+
+
+
+
+	<edit>
+		<find><![CDATA[$topic_mod .= ($allow_change_type && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_NEWS) ? '<option value="make_news">' . $user->lang['MAKE_NEWS'] . '</option>' : '';
+$topic_mod .= ($allow_change_type && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_NEWS_GLOBAL) ? '<option value="make_news_global">' . $user->lang['MAKE_NEWS_GLOBAL'] . '</option>' : '';]]></find>
+		<action type="replace-with"><![CDATA[if(STARGATE)
+{
+	$topic_mod .= ($allow_change_type && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_NEWS) ? '<option value="make_news">' . $user->lang['MAKE_NEWS'] . '</option>' : '';
+	$topic_mod .= ($allow_change_type && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_NEWS_GLOBAL) ? '<option value="make_news_global">' . $user->lang['MAKE_NEWS_GLOBAL'] . '</option>' : '';
+}]]></action>
+	</edit>
+	<edit>
+		<find><![CDATA[	$message = acronym_pass($message);]]></find>
+		<action type="replace-with"><![CDATA[	if(STARGATE)
+		$message = acronym_pass($message);]]></action>
+		<comment lang="en">If not found skip to next edit</comment>
+	</edit>
+	<edit>
+		<find><![CDATA[	// Parse the message and subject
+	$message = censor_text($row['post_text']);]]></find>
+		<action type="after-add"><![CDATA[	if(STARGATE)
+		$message = acronym_pass($message);]]></action>
+	</edit>
+	<edit>
+		<find><![CDATA[	if (!$first_unread && $post_unread)
+	{
+		$s_first_unread = $first_unread = true;
+	}]]></find>
+		<action type="after-add"><![CDATA[	if(STARGATE)
+		$message = sgp_local_acronyms($message);]]></action>
+	</edit>
+</open>
+
+
+<open src="includes/cache.php">
+	<edit>
+		<find>	/**
+	* Obtain list of naughty words and build preg style replacement arrays for use by the
+	* calling script
+	*/</find>
+        <action type="before-add"><![CDATA[	function obtain_k_config()
+	{
+		global $db;
+
+		if (($k_config = $this->get('k_config')) !== false)
+		{
+			$sql = 'SELECT config_name, config_value
+				FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . '
+				WHERE is_dynamic = 1';
+			$result = $db->sql_query($sql);
+
+			while ($row = $db->sql_fetchrow($result))
+			{
+				$k_config[$row['config_name']] = $row['config_value'];
+			}
+			$db->sql_freeresult($result);
+		}
+		else
+		{
+			$k_config = $k_cached_config = array();
+
+			$sql = 'SELECT config_name, config_value, is_dynamic
+				FROM ' . K_BLOCKS_CONFIG_VAR_TABLE;
+			$result = $db->sql_query($sql);
+
+			while ($row = $db->sql_fetchrow($result))
+			{
+				if (!$row['is_dynamic'])
+				{
+					$k_cached_config[$row['config_name']] = $row['config_value'];
+				}
+				$k_config[$row['config_name']] = $row['config_value'];
+			}
+			$db->sql_freeresult($result);
+
+			$this->put('k_config', $k_cached_config);
+		}
+
+		return $k_config;
+	}
+
+	function obtain_block_data()
+	{
+		global $db;
+
+		if (($k_blocks = $this->get('k_blocks')) !== false)
+		{
+			$sql = 'SELECT *
+				FROM ' . K_BLOCKS_TABLE . '
+				WHERE active = 1 AND is_static = 0 ORDER BY ndx ASC';
+			$result = $db->sql_query($sql);
+
+			while ($row = $db->sql_fetchrow($result))
+			{
+				if (!$row['is_static'])
+				{
+					$k_blocks[$row['id']]['id']				= $row['id'];
+					$k_blocks[$row['id']]['ndx']			= $row['ndx'];
+					$k_blocks[$row['id']]['title']			= $row['title'];
+					$k_blocks[$row['id']]['type']			= $row['type'];
+					$k_blocks[$row['id']]['view_by']		= $row['view_by'];
+					$k_blocks[$row['id']]['scroll']			= $row['scroll'];
+					$k_blocks[$row['id']]['block_height']	= $row['block_height'];
+					$k_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
+					$k_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
+					$k_blocks[$row['id']]['img_file_name']	= $row['img_file_name'];
+				}
+			}
+			$db->sql_freeresult($result);
+		}
+		else
+		{
+			$k_blocks = $k_cached_blocks = array();
+
+			$sql = 'SELECT *
+				FROM ' . K_BLOCKS_TABLE . '
+				WHERE active = 1 ORDER BY ndx ASC';
+			$result = $db->sql_query($sql);
+
+			while ($row = $db->sql_fetchrow($result))
+			{
+				if ($row['is_static'])
+				{
+					$k_cached_blocks[$row['id']]['id']				= $row['id'];
+					$k_cached_blocks[$row['id']]['ndx']				= $row['ndx'];
+					$k_cached_blocks[$row['id']]['title']			= $row['title'];
+					$k_cached_blocks[$row['id']]['position']		= $row['position'];
+					$k_cached_blocks[$row['id']]['active']			= $row['active'];
+					$k_cached_blocks[$row['id']]['type']			= $row['type'];
+					$k_cached_blocks[$row['id']]['view_by']			= $row['view_by'];
+					$k_cached_blocks[$row['id']]['scroll']			= $row['scroll'];
+					$k_cached_blocks[$row['id']]['block_height']	= $row['block_height'];
+					$k_cached_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
+					$k_cached_blocks[$row['id']]['img_file_name']	= $row['img_file_name'];
+				}
+				$k_blocks[$row['id']]['id']				= $row['id'];
+				$k_blocks[$row['id']]['ndx']			= $row['ndx'];
+				$k_blocks[$row['id']]['title']			= $row['title'];
+				$k_blocks[$row['id']]['type']			= $row['type'];
+				$k_blocks[$row['id']]['view_by']		= $row['view_by'];
+				$k_blocks[$row['id']]['scroll']			= $row['scroll'];
+				$k_blocks[$row['id']]['block_height']	= $row['block_height'];
+				$k_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
+				$k_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
+				$k_blocks[$row['id']]['img_file_name']	= $row['img_file_name'];
+			}
+			$db->sql_freeresult($result);
+
+			$this->put('k_blocks', $k_cached_blocks);
+		}
+
+		return $k_blocks;
+	}
+
+	//
+	// get all group names/id's (used to avoid problems with group ID's changing)
+	//
+	function obtain_k_groups()
+	{
+		global $db, $template, $k_groups, $k_group_id, $k_group_name_id;
+
+		if(($k_groups = $this->get('k_groups')) !== false)
+		{
+			// Get us all the groups
+			$sql = 'SELECT group_id, group_name
+				FROM ' . GROUPS_TABLE . '
+				ORDER BY group_id ASC, group_name';
+			$result = $db->sql_query($sql);
+
+			while ($row = $db->sql_fetchrow($result))
+			{
+				$k_groups[$row['group_id']] = $row['group_id'];
+				$k_groups[$row['group_name']] = $row['group_name'];
+			}
+			$db->sql_freeresult($result);
+		}
+		else
+		{
+			$k_groups = $k_groups_cache = array();
+
+			// Get us all the groups
+			$sql = 'SELECT group_id, group_name
+				FROM ' . GROUPS_TABLE . '
+				ORDER BY group_id ASC, group_name';
+			$result = $db->sql_query($sql);
+
+			while ($row = $db->sql_fetchrow($result))
+			{
+				$k_cahced_groups[$row['group_id']] = $row['group_id'];
+				$k_cached_groups[$row['group_name']] = $row['group_name'];
+			}
+			$db->sql_freeresult($result);
+
+			$this->put('k_groups', $k_cached_groups);
+		}
+		return $k_groups;
+	}]]></action>
+      <comment lang="en"></comment>
+	</edit>
+	<edit>
+		<find>				$icons[$row['icons_id']]['display'] = (bool) $row['display_on_posting'];</find>
+        <action type="after-add">				$icons[$row['icons_id']]['group'] = (bool) $row['icons_group'];</action>
+      <comment lang="en"></comment>
+	</edit>
+</open>
+
+<open src="includes/constants.php">
+	<edit>
+		<find><![CDATA[// Stargate Portal Tables
+define('K_FLAGS_TABLE',				$table_prefix . 'k_flags');
+define('K_MENUS_TABLE',				$table_prefix . 'k_menus');
+define('K_BLOCKS_TABLE',			$table_prefix . 'k_blocks');
+define('K_MODULES_TABLE',			$table_prefix . 'k_modules');
+define('K_PLUGINS_TABLE',			$table_prefix . 'k_plugins');
+define('K_BLOCKS_CONFIG_TABLE',		$table_prefix . 'k_blocks_config');
+define('K_BLOCKS_CONFIG_VAR_TABLE',	$table_prefix . 'k_blocks_config_vars');
+define('K_ACRONYMS_TABLE',			$table_prefix . 'k_acronyms');
+define('K_QUOTES_TABLE',			$table_prefix . 'k_cyber_quotes');
+define('K_NEWSFEEDS_TABLE',			$table_prefix . 'k_newsfeeds');
+define('K_USERS_TABLE',				$table_prefix . 'k_users');
+define('K_STYLES_STATUS',			$table_prefix . 'k_styles_status');
+define('K_ACRONYM_TABLE',			$table_prefix . 'k_acronyms');
+
+define('BUG_CATS_TABLE',			$table_prefix . 'bug_categories');
+define('BUG_POSTS_TABLE',			$table_prefix . 'bug_posts');
+define('BUG_REPORTS_TABLE',			$table_prefix . 'bug_reports');
+define('BUG_STATUS_TABLE',			$table_prefix . 'bug_status');
+define('BUG_TRACKING_TABLE',		$table_prefix . 'bug_tracking');
+
+//lefty74  modsdatabase
+define('MODS_DATABASE_TABLE',		$table_prefix . 'mods_database'); 
+define('SHOW_MEMBERS', 0);
+define('SHOW_MODS', 1);
+define('SHOW_ADMINS', 2);]]></find>
+		<action type="replace-with"><![CDATA[// Stargate Portal Tables
+define('WELCOME_MESSAGE', 1);
+define('K_FLAGS_TABLE',				$table_prefix . 'k_flags');
+define('K_CLOUD_TABLE',				$table_prefix . 'k_cloud');
+define('K_MENUS_TABLE',				$table_prefix . 'k_menus');
+define('K_BLOCKS_TABLE',			$table_prefix . 'k_blocks');
+define('K_MODULES_TABLE',			$table_prefix . 'k_modules');
+define('K_WEB_PAGES_TABLE',			$table_prefix . 'k_web_pages');
+define('K_PLUGINS_TABLE',			$table_prefix . 'k_plugins');
+define('K_BLOCKS_CONFIG_TABLE',		$table_prefix . 'k_blocks_config');
+define('K_BLOCKS_CONFIG_VAR_TABLE',	$table_prefix . 'k_blocks_config_vars');
+define('K_ACRONYMS_TABLE',			$table_prefix . 'k_acronyms');
+define('K_QUOTES_TABLE',			$table_prefix . 'k_cyber_quotes');
+define('K_NEWSFEEDS_TABLE',			$table_prefix . 'k_newsfeeds');
+define('K_USERS_TABLE',				$table_prefix . 'k_users');
+define('K_STYLES_STATUS_TABLE',		$table_prefix . 'k_styles_status');
+define('K_REFERER_TABLE',			$table_prefix . 'k_referer');]]></action>
+	</edit>
+	<comment lang="en">If not found, move to next search... </comment>
+
+<edit>
+		<find><![CDATA[// Stargate Portal Tables
+define('K_FLAGS_TABLE',				$table_prefix . 'k_flags');
+define('K_MENUS_TABLE',				$table_prefix . 'k_menus');
+define('K_BLOCKS_TABLE',			$table_prefix . 'k_blocks');
+define('K_MODULES_TABLE',			$table_prefix . 'k_modules');
+define('K_PLUGINS_TABLE',			$table_prefix . 'k_plugins');
+define('K_BLOCKS_CONFIG_TABLE',		$table_prefix . 'k_blocks_config');
+define('K_BLOCKS_CONFIG_VAR_TABLE',	$table_prefix . 'k_blocks_config_vars');
+define('K_ACRONYMS_TABLE',			$table_prefix . 'k_acronyms');
+define('K_QUOTES_TABLE',			$table_prefix . 'k_cyber_quotes');
+define('K_NEWSFEEDS_TABLE',			$table_prefix . 'k_newsfeeds');
+define('K_USERS_TABLE',				$table_prefix . 'k_users');
+
+define('BUG_CATS_TABLE',			$table_prefix . 'bug_categories');
+define('BUG_POSTS_TABLE',			$table_prefix . 'bug_posts');
+define('BUG_REPORTS_TABLE',			$table_prefix . 'bug_reports');
+define('BUG_STATUS_TABLE',			$table_prefix . 'bug_status');
+define('BUG_TRACKING_TABLE',		$table_prefix . 'bug_tracking');
+]]></find>
+		<action type="replace-with"><![CDATA[// Stargate Portal Tables
+define('WELCOME_MESSAGE', 1);
+define('K_FLAGS_TABLE',				$table_prefix . 'k_flags');
+define('K_CLOUD_TABLE',				$table_prefix . 'k_cloud');
+define('K_MENUS_TABLE',				$table_prefix . 'k_menus');
+define('K_BLOCKS_TABLE',			$table_prefix . 'k_blocks');
+define('K_MODULES_TABLE',			$table_prefix . 'k_modules');
+define('K_WEB_PAGES_TABLE',			$table_prefix . 'k_web_pages');
+define('K_PLUGINS_TABLE',			$table_prefix . 'k_plugins');
+define('K_BLOCKS_CONFIG_TABLE',		$table_prefix . 'k_blocks_config');
+define('K_BLOCKS_CONFIG_VAR_TABLE',	$table_prefix . 'k_blocks_config_vars');
+define('K_ACRONYMS_TABLE',			$table_prefix . 'k_acronyms');
+define('K_QUOTES_TABLE',			$table_prefix . 'k_cyber_quotes');
+define('K_NEWSFEEDS_TABLE',			$table_prefix . 'k_newsfeeds');
+define('K_USERS_TABLE',				$table_prefix . 'k_users');
+define('K_STYLES_STATUS_TABLE',		$table_prefix . 'k_styles_status');
+define('K_REFERER_TABLE',			$table_prefix . 'k_referer');]]></action>
+	</edit>
+	<comment lang="en"></comment>
+
+
+</open>
+
+<open src="inlcudes/functions.php">
+	<edit>
+		<find><![CDATA[		'A_COOKIE_SETTINGS'		=> addslashes('; path=' . $config['cookie_path'] . ((!$config['cookie_domain'] || $config['cookie_domain'] == 'localhost' || $config['cookie_domain'] == '127.0.0.1') ? '' : '; domain=' . $config['cookie_domain']) . ((!$config['cookie_secure']) ? '' : '; secure')),
+	));
+
+	// Stargate Portal
+	// add extra css for portal mods, set image sizes based on browser window size //
+	$template->assign_vars(array(
+		'T_STYLESHEET_PORTAL'	=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal.css',
+		'T_STYLESHEET_SMALL'	=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/_size_0.css',
+		'T_STYLESHEET_MEDIUM'	=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/_size_1.css',
+		'T_STYLESHEET_LARGE'	=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/_size_2.css',
+		'T_STYLESHEET_HUGE'		=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/_size_3.css',
+	));
+
+	// some mods may change the root path so look in one deeper //
+	if(file_exists($phpbb_root_path . 'includes/sgp_functions.' . $phpEx))
+	{
+		include_once($phpbb_root_path . 'includes/sgp_functions.' . $phpEx);
+	}
+	else
+	{
+		include_once('./../' . 'includes/sgp_functions.' . $phpEx);
+	}
+	stargate_init();
+	// Stargate Portal]]></find>
+		<action type="replace-with"><![CDATA[		'SITE_LOGO_IMG'			=> $user->img('site_logo'),
+
+		'A_COOKIE_SETTINGS'		=> addslashes('; path=' . $config['cookie_path'] . ((!$config['cookie_domain'] || $config['cookie_domain'] == 'localhost' || $config['cookie_domain'] == '127.0.0.1') ? '' : '; domain=' . $config['cookie_domain']) . ((!$config['cookie_secure']) ? '' : '; secure')),
+
+		'AVATAR_SMALL_IMG'		=> sgp_get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], '35', '35'),
+		'USERNAME'				=> $user->data['username'],
+		'USERNAME_FULL'			=> get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
+
+	));
+
+
+
+		$set_time = time() + 31536000;
+		$reset_time = time() - 31536000;
+		$cookie_name = $cookie_value = $css = '';
+		$cookie_name = $config['cookie_name'] . '_css';
+
+		if (isset($_COOKIE[$cookie_name]))
+		{
+			$cookie_value = (int)$_COOKIE[$cookie_name];
+		}
+		$css = (int)request_var('css', '');
+
+		if($css) // set css //
+		{
+				$user->set_cookie('css', $css, $set_time);
+		}
+		else
+		if($cookie_value) // cookie set so use it //
+		{
+			$css = $cookie_value;
+		}
+
+		$template->assign_vars(array(
+			'T_STYLESHEET_PORTAL'	=> ($css) ? "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal_' . $css . '.css' : "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal.css',
+		));
+
+	if(STARGATE)
+	{
+		// some mods may change the root path so look in one deeper //
+		if(file_exists($phpbb_root_path . 'includes/sgp_functions.' . $phpEx))
+		{
+			include_once($phpbb_root_path . 'includes/sgp_functions.' . $phpEx);
+		}
+		else
+		{
+			include_once('./../' . 'includes/sgp_functions.' . $phpEx);
+		}
+		stargate_init();
+
+		// new random background image 10 January 2009 Mike //
+		$rand_image = get_random_image('images/rand_backgrounds', false, '', true);
+		$rand_color = basename($rand_image, ".jpg");
+		$template->assign_vars(array(
+			'RANDOM_BACK' => $rand_image,
+			'RANDOM_BACK_COLOR' => $rand_color,
+		));
+		// random images ends //
+
+	}
+	// Stargate Portal]]></action>
+	</edit>
+
+
+
+	<edit>
+		<find><![CDATA[		'A_COOKIE_SETTINGS'		=> addslashes('; path=' . $config['cookie_path'] . ((!$config['cookie_domain'] || $config['cookie_domain'] == 'localhost' || $config['cookie_domain'] == '127.0.0.1') ? '' : '; domain=' . $config['cookie_domain']) . ((!$config['cookie_secure']) ? '' : '; secure')),
+	));
+
+	// Stargate Portal
+	// add extra css for portal mods, set image sizes based on browser window size and add IE fix css //
+	$template->assign_vars(array(
+		'T_STYLESHEET_PORTAL'	=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal.css',
+		'T_STYLESHEET_IEFIXES'	=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/iefixes.css',
+		'T_STYLESHEET_SMALL'	=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/small.css',
+		'T_STYLESHEET_MEDIUM'	=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/medium.css',
+		'T_STYLESHEET_LARGE'	=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/large.css',
+		'T_STYLESHEET_HUGE'	=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/huge.css',
+	));
+
+	// some mods may change the root path so look in one deeper //
+	if(file_exists($phpbb_root_path . 'includes/sgp_functions.' . $phpEx))
+	{
+		include_once($phpbb_root_path . 'includes/sgp_functions.' . $phpEx);
+	}
+	else
+	{
+		include_once('./../' . 'includes/sgp_functions.' . $phpEx);
+	}
+	stargate_init();
+	// Stargate Portal]]></find>
+		<action type="replace-with"><![CDATA[		'SITE_LOGO_IMG'			=> $user->img('site_logo'),
+
+		'A_COOKIE_SETTINGS'		=> addslashes('; path=' . $config['cookie_path'] . ((!$config['cookie_domain'] || $config['cookie_domain'] == 'localhost' || $config['cookie_domain'] == '127.0.0.1') ? '' : '; domain=' . $config['cookie_domain']) . ((!$config['cookie_secure']) ? '' : '; secure')),
+
+		'AVATAR_SMALL_IMG'		=> sgp_get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], '35', '35'),
+		'USERNAME'				=> $user->data['username'],
+		'USERNAME_FULL'			=> get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
+
+	));
+
+
+
+		$set_time = time() + 31536000;
+		$reset_time = time() - 31536000;
+		$cookie_name = $cookie_value = $css = '';
+		$cookie_name = $config['cookie_name'] . '_css';
+
+		if (isset($_COOKIE[$cookie_name]))
+		{
+			$cookie_value = (int)$_COOKIE[$cookie_name];
+		}
+		$css = (int)request_var('css', '');
+
+		if($css) // set css //
+		{
+				$user->set_cookie('css', $css, $set_time);
+		}
+		else
+		if($cookie_value) // cookie set so use it //
+		{
+			$css = $cookie_value;
+		}
+
+		$template->assign_vars(array(
+			'T_STYLESHEET_PORTAL'	=> ($css) ? "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal_' . $css . '.css' : "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal.css',
+		));
+
+	if(STARGATE)
+	{
+		// some mods may change the root path so look in one deeper //
+		if(file_exists($phpbb_root_path . 'includes/sgp_functions.' . $phpEx))
+		{
+			include_once($phpbb_root_path . 'includes/sgp_functions.' . $phpEx);
+		}
+		else
+		{
+			include_once('./../' . 'includes/sgp_functions.' . $phpEx);
+		}
+		stargate_init();
+
+		// new random background image 10 January 2009 Mike //
+		$rand_image = get_random_image('images/rand_backgrounds', false, '', true);
+		$rand_color = basename($rand_image, ".jpg");
+		$template->assign_vars(array(
+			'RANDOM_BACK' => $rand_image,
+			'RANDOM_BACK_COLOR' => $rand_color,
+		));
+		// random images ends //
+
+	}
+	// Stargate Portal]]></action>
+	</edit>
+
+	<edit>
+		<find><![CDATA[			return $phpbb_hook->hook_return_result(__FUNCTION__);
+		}
+	}
+
+	return;
+}]]></find>
+		<action type="after-add"><![CDATA[/* From topic_text_hover mod by Rich McGirr copyright 2008 */
+if(!function_exists('bbcode_strip'))
+{
+	function bbcode_strip($text)
+	{
+			static $RegEx = array();
+			static $bbcode_strip = 'flash';
+			// html is pretty but it may break the layout of the tooltip...let's
+			// remove some common ones from the tip
+			$text_html = array('&quot;','&amp;','&#039;','&lt;','&gt;');
+			$text = str_replace($text_html,'',$text);
+			if (empty($RegEx))
+			{
+				$RegEx = array('`<[^>]*>(.*<[^>]*>)?`Usi', // HTML code
+					'`\[(' . $bbcode_strip . ')[^\[\]]+\].*\[/(' . $bbcode_strip . ')[^\[\]]+\]`Usi', // bbcode to strip
+					'`\[/?[^\[\]]+\]`mi', // Strip all bbcode tags
+					'`[\s]+`' // Multiple spaces
+				);
+			}
+		return preg_replace($RegEx, ' ', $text );
+	}
+}]]></action>
+	</edit>
+</open>
+
+<open src="inlcudes/functions_display.php">
+	<edit>
+		<find><![CDATA[			case POST_NEWS:
+				$topic_type = $user->lang['VIEW_TOPIC_NEWS'];
+				$folder = 'news_read';
+				$folder_new = 'news_unread';
+			break;
+
+			case POST_NEWS_GLOBAL:
+				$topic_type = $user->lang['VIEW_TOPIC_NEWS'];
+				$folder = 'news_read';
+				$folder_new = 'news_unread';
+			break;]]></find>
+		<action type="replace-with"><![CDATA[			case POST_NEWS:
+				if(STARGATE)
+				{
+					$topic_type = $user->lang['VIEW_TOPIC_NEWS'];
+					$folder = 'news_read';
+					$folder_new = 'news_unread';
+				}
+			break;
+
+			case POST_NEWS_GLOBAL:
+				if(STARGATE)
+				{
+					$topic_type = $user->lang['VIEW_TOPIC_NEWS'];
+					$folder = 'news_read';
+					$folder_new = 'news_unread';
+				}
+			break;]]></action>
+	</edit>
+	<edit>
+		<find><![CDATA[		//return '';
+
+		$poster_avatar = get_random_image('images/avatars/no_avitar', true);
+
+		// do we wish to resize? //
+		if($avatar_width)
+			$poster_avatar = str_replace('>', '" height="' . $avatar_height . '" width="' . $avatar_width . '" />', $poster_avatar);
+
+		return($poster_avatar);]]></find>
+		<action type="replace-with"><![CDATA[		return '';]]></action>
+	</edit>
+</open>
+<open src="includes/functions_posting.php">
+	<edit>
+		<find><![CDATA[		$auth_key = ($auth_key == 'news') ? 'announce' : $auth_key;
+		$auth_key = ($auth_key == 'news_global') ? 'announce' : $auth_key;]]></find>
+		<action type="after-add"><![CDATA[		if(STARGATE)
+		{
+			$auth_key = ($auth_key == 'news') ? 'announce' : $auth_key;
+			$auth_key = ($auth_key == 'news_global') ? 'announce' : $auth_key;
+		}]]></action>
+	</edit>
+
+	<edit>
+		<find><![CDATA[				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE) ? ($data['topic_time_limit'] * 86400) : 0,]]></find>
+		<action type="after-add"><![CDATA[				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE || $topic_type == POST_NEWS || $topic_type == POST_NEWS_GLOBAL) ? ($data['topic_time_limit'] * 86400) : 0,]]></action>
+	</edit>
+</open>
+
+
+
+<open src="includes/function_template.php">
+	<edit>
+		<find><![CDATA[		global $user;
+		// set some vars //
+		$copy_file_name = $style_folder = $style_dir = '';
+
+
+
+		// Try and open template for read
+		if (!file_exists($this->template->files[$handle]))
+		{
+			trigger_error("template->_tpl_load_file(): File {$this->template->files[$handle]} does not exist or is empty", E_USER_ERROR);
+		}
+
+
+		/*
+		// Start: One Copy Mod copyright phpbbireland.com 2007 Michaelo //
+		// This modification allows the styles engine to search for files in the users template folder and if they are not found there, we search our common folders...
+		// For more on this mod and the Stargate Portal visit phpbbireland.com
+
+		if (!file_exists($this->template->files[$handle]))
+		{
+			// make a copy to work with
+			$copy_file_name = $this->template->files[$handle];
+
+			$style_folder = $user->theme['template_path'];
+
+			if(file_exists('./' . 'styles/' . $style_folder . '/template/breadcrumbs.html') || file_exists('./../' . 'styles/' . $style_folder . '/template/breadcrumbs.html'))
+			{
+				$style_dir = str_replace($style_folder, 'subsilver2', $copy_file_name);
+			}
+			else
+			{
+				$style_dir = str_replace($style_folder, 'prosilver', $copy_file_name);
+			}
+
+			// set the new file //
+			$this->template->files[$handle] = $style_dir;
+
+			if(!file_exists($style_dir))
+			{
+				// original error code //	trigger_error("template->_tpl_load_file(): File {$this->template->files[$handle]} does not exist or is empty", E_USER_ERROR);
+				trigger_error("Please note, you may receive an error when 'Recompile stale style components' is checked in the ACP and you delete the cache... Just refresh the page once...<br />template->_tpl_load_file(): <br /><br />The file  ( " . $style_dir . " )  does not exist<br />The file  ( " . $copy_file_name . " )  does not exist", E_USER_ERROR);
+			}
+		}
+		// End: One Copy Mod... Mike
+
+		*/]]></find>
+		<action type="replace-with"><![CDATA[		// Try and open template for read
+		if (!file_exists($this->template->files[$handle]))
+		{
+			//trigger_error("template->_tpl_load_file(): File {$this->template->files[$handle]} does not exist or is empty", E_USER_ERROR);
+
+			// Temporary mod while we wait for phpBB new inheritance code Mike //
+			global $user;
+			$path_depth = './';
+
+			$missing_file = $this->template->files[$handle];
+			$missing_filename = basename($missing_file);
+			$style_folder = $user->theme['template_path'];
+
+			// check path depth, may be different for some blocks //
+			if($missing_file[2] == '.') $path_depth = './../';
+
+			$alt_filenpath = $path_depth . 'styles/portal_common/template/blocks/' . $missing_filename;
+
+			$this->template->files[$handle] = $alt_filenpath;
+
+			if(!file_exists($alt_filenpath))
+			{
+				trigger_error("template->_tpl_load_file() error:<br />File {$missing_file} or <br />File {$this->template->files[$handle]} does not exist or is empty", E_USER_ERROR);
+			}
+			// End of temporary mod while we wait for phpBB new inheritance code Mike //
+		}]]></action>
+	</edit>
+<edit>
+		<find><![CDATA[		/*
+		// Try and open template for read
+		if (!file_exists($this->template->files[$handle]))
+		{
+			trigger_error("template->_tpl_load_file(): File {$this->template->files[$handle]} does not exist or is empty", E_USER_ERROR);
+		}
+		*/
+
+		// Start: One Copy Mod copyright phpbbireland.com 2007 Michaelo //
+		// As all of the portal html file are identical for every style it makes no sense having a copy in each style folder...
+		// This mod searches for files in the users theme folder but if they are not found we search the styles/portal folder...
+		// You can still place the portal files in each style folder should you feel the need... if so they will be used...
+
+		if (!file_exists($this->template->files[$handle]))
+		{
+
+			// deal with mods //
+			$store_flename = $this->template->files[$handle];
+
+			if(strstr($store_flename, './../'))
+				$store_flename = str_replace("./../", "./",$this->template->files[$handle]);
+			else
+			if(strstr($store_flename, '../'))
+				$store_flename = str_replace("../", "./",$this->template->files[$handle]);
+
+			// Get the style type (subsilver2 or prosilver or a mod) //
+			preg_match('@^(?:./styles/)?([^/]+)@i', $store_flename, $matches);
+			$style_dir = $matches[1];
+
+			if($style_dir == 'subsilver2' || $style_dir[0] == '_')
+				$style_dir = str_replace($style_dir, 'common_subsilver', $this->template->files[$handle]);
+			else
+				$style_dir = str_replace($style_dir, 'common_prosilver', $this->template->files[$handle]);
+
+			$this->template->files[$handle] = $style_dir;
+
+			if(!file_exists($style_dir))
+			{
+				//original code//trigger_error("template->_tpl_load_file(): File {$this->template->files[$handle]} does not exist or is empty", E_USER_ERROR);
+				trigger_error("template->_tpl_load_file(): <br />The file <b>{$store_flename}</b> does not exist in:<br /><b>template/common_subsilver/,<br /> template/common_prosilver/ or {$style_dir} folders</b><br />Called in: ", E_USER_ERROR);
+			}
+		}
+		// In theory, you could replace all html file with a single copy in the new common/template folder...
+		// Of course all html file would need to be the same for prosilver and subsilver based styles...
+		//End: One Copy Mod... Mike]]></find>
+		<action type="replace-with"><![CDATA[		// Try and open template for read
+		if (!file_exists($this->template->files[$handle]))
+		{
+			//trigger_error("template->_tpl_load_file(): File {$this->template->files[$handle]} does not exist or is empty", E_USER_ERROR);
+
+			// Temporary mod while we wait for phpBB new inheritance code Mike //
+			global $user;
+			$path_depth = './';
+
+			$missing_file = $this->template->files[$handle];
+			$missing_filename = basename($missing_file);
+			$style_folder = $user->theme['template_path'];
+
+			// check path depth, may be different for some blocks //
+			if($missing_file[2] == '.') $path_depth = './../';
+
+			$alt_filenpath = $path_depth . 'styles/portal_common/template/blocks/' . $missing_filename;
+
+			$this->template->files[$handle] = $alt_filenpath;
+
+			if(!file_exists($alt_filenpath))
+			{
+				trigger_error("template->_tpl_load_file() error:<br />File {$missing_file} or <br />File {$this->template->files[$handle]} does not exist or is empty", E_USER_ERROR);
+			}
+			// End of temporary mod while we wait for phpBB new inheritance code Mike //
+		}]]></action>
+	</edit>
+
+</open>
+<open src="includes/session.php">
+	<edit>
+		<find><![CDATA[		if (!empty($_GET['style']) && $auth->acl_get('a_styles'))]]></find>
+		<action type="replace-with"><![CDATA[		global $user;
+		//if (!empty($_GET['style']) && $auth->acl_get('a_styles'))
+		if (!empty($_GET['style']) && $auth->acl_get('a_styles') || !empty($_GET['style']) && $user->data['user_id'] != ANONYMOUS && !$config['override_user_style'])]]></action>
+	</edit>
+</open>
+
+
+<diy-instructions lang="en-gb">
+Remember to update all styles files...
+</diy-instructions>
+</action-group>
+</mod>

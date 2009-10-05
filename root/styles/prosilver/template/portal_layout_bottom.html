@@ -1,0 +1,82 @@
+<!-- IDTAG portal_layout_bottom September 15, 2007 starts -->
+  </tr>
+</table>
+
+<!-- IDTAG portal_layout_bottom ends -->
+
+
+
+<!--
+	Comment: We donnot process the block move/arrange unless user select this option...
+	This prevents js reports and ensures the scroll work correctly...
+	Added: 09 March 2008 Mike.
+-->
+
+<!-- IF S_IS_PORTAL and S_ARRANGE -->
+<script type="text/javascript">
+var _left;
+var _right;
+var _center;
+
+$_left = GetCookie('sgp_im3_LB');
+$_center = GetCookie('sgp_im3_CB');
+$_right = GetCookie('sgp_im3_RB');
+
+
+
+ // <![CDATA[
+	Sortable.create("left",
+		{tag:'div',dropOnEmpty:true,handle:'handle',containment:["left","center","right"],constraint:false,
+		onChange:
+			function()
+			{
+				$_left = $('leftdebug').innerHTML = Sortable.serialize('left');
+				$_center = $('centerdebug').innerHTML = Sortable.serialize('center');
+				$_right =$('rightdebug').innerHTML = Sortable.serialize('right');
+				SetCookie('sgp_im3_LB', $_left);
+				SetCookie('sgp_im3_CB', $_center);
+				SetCookie('sgp_im3_RB', $_right);
+			}
+		});
+	Sortable.create("center",
+		{tag:'div',dropOnEmpty:true,handle:'handle',containment:["left","center","right"],constraint:false,
+		onChange:
+			function()
+			{
+				$_left = $('leftdebug').innerHTML = Sortable.serialize('left');
+				$_center = $('centerdebug').innerHTML = Sortable.serialize('center');
+				$_right =$('rightdebug').innerHTML = Sortable.serialize('right');
+				SetCookie('sgp_im3_LB', $_left);
+				SetCookie('sgp_im3_CB', $_center);
+				SetCookie('sgp_im3_RB', $_right);
+			}
+		});
+	Sortable.create("right",
+		{tag:'div',dropOnEmpty:true,handle:'handle',containment:["left","center","right"],constraint:false,
+		onChange:
+			function()
+			{
+				$_left = $('leftdebug').innerHTML = Sortable.serialize('left');
+				$_center = $('centerdebug').innerHTML = Sortable.serialize('center');
+				$_right =$('rightdebug').innerHTML = Sortable.serialize('right');
+				SetCookie('sgp_im3_LB', $_left);
+				SetCookie('sgp_im3_CB', $_center);
+				SetCookie('sgp_im3_RB', $_right);
+			}
+		});
+ // ]]>
+
+// window.location.href = "portal.php?left=" + $_left + "&centre=" + $_center + "&right" + $_right;
+//document.write($_left);
+</script>
+<!-- DO NOT DELETE THIS CODE -->
+<div style="display:none;">
+<pre id="leftdebug"></pre>
+<pre id="centerdebug"></pre>
+<pre id="rightdebug"></pre>
+</div>
+<!-- ELSE -->
+<!--<style type="text/css">
+.handle{cursor: default;}
+</style>-->
+<!-- ENDIF -->

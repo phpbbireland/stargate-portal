@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http
+://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/
+@version $Id: stargate_041.xml 315 2009-01-10 05:43:06Z nexur $ -->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.2.xsd">
+
+
+<header>
+	<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+	<title lang="en">Stargate Portal Styles update script 0.4.1, 0.4.2 to RC1.0.0</title>
+	<description lang="en">This file will assist in updating your styles</description>
+	<author-notes lang="en">Not test yet! Please report problems to: http://www.stargate-portal.com</author-notes>
+
+	<author-group>
+		<author>
+		<realname>Michael O'Toole</realname>
+		<email>o2l@eircom.net</email>
+		<username>michaelo</username>
+		<homepage>http://www.phpbbireland.com</homepage>
+		<contributions />
+		</author>
+	</author-group>
+
+	<mod-version>1.0.0</mod-version>
+	<installation>
+			<level>easy</level>
+			<time>200</time>
+			<target-version>3.0.4</target-version>
+	</installation>
+	<history/>
+</header>
+
+<action-group>
+
+
+
+<open src="styles/prosilver/template/attachments.html">
+	<edit>
+        <find><![CDATA[		<!-- IF _file.S_THUMBNAIL -->
+		<dl class="thumbnail">
+			<dt><a href="{_file.U_DOWNLOAD_LINK}"><img src="{_file.THUMB_IMAGE}" alt="{_file.DOWNLOAD_NAME}" title="{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}" /></a></dt>
+			<!-- IF _file.COMMENT --><dd> {_file.COMMENT}</dd><!-- ENDIF -->
+		</dl>
+		<!-- ENDIF -->
+
+
+		<!-- IF _file.S_IMAGE -->
+		<dl class="file">
+			<dt class="attach-image"><img src="{_file.U_INLINE_LINK}" alt="{_file.DOWNLOAD_NAME}" onclick="viewableArea(this);" /></dt>
+			<!-- IF _file.COMMENT --><dd><em>{_file.COMMENT}</em></dd><!-- ENDIF -->
+			<dd>{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}</dd>
+		</dl>
+		<!-- ENDIF -->
+
+		<!-- IF _file.S_FILE -->
+		<dl class="file">
+			<dt><!-- IF _file.UPLOAD_ICON -->{_file.UPLOAD_ICON} <!-- ENDIF --><a class="postlink" href="{_file.U_DOWNLOAD_LINK}">{_file.DOWNLOAD_NAME}</a></dt>
+			<!-- IF _file.COMMENT --><dd><em>{_file.COMMENT}</em></dd><!-- ENDIF -->
+			<dd>({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}</dd>
+		</dl>
+		<!-- ENDIF -->]]></find>
+        <action type="replace-with"><![CDATA[<!-- BEGIN _file -->
+	<!-- IF _file.S_DENIED -->
+	<p>[{_file.DENIED_MESSAGE}]</p>
+	<!-- ELSE -->
+
+		<!-- IF _file.COMMENT -->
+			<span class="gensmall"><b>{L_FILE_COMMENT}:</b> {_file.COMMENT}</span><br />
+		<!-- ENDIF -->
+
+		<!-- IF _file.S_THUMBNAIL -->
+		<div class="highslide-gallery">
+		<dl class="thumbnail">
+			<dt>
+				<a href="{_file.U_DOWNLOAD_LINK}/{_file.DOWNLOAD_NAME}" class="highslide" onclick="return hs.expand(this)"><img src="{_file.THUMB_IMAGE}" alt="{_file.DOWNLOAD_NAME}" title="Click to enlarge" /></a>
+				<div class="highslide-caption">{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) [ {_file.L_DOWNLOAD_COUNT} ]</div>
+				<br />{_file.L_DOWNLOAD_COUNT}
+			</dt>
+			<!-- IF _file.COMMENT --><dd> {_file.COMMENT}</dd><!-- ENDIF -->
+		</dl>
+		</div>
+		<!-- ELSE -->
+		<dl class="thumbnail">
+			<dt><a href="{_file.U_DOWNLOAD_LINK}"></a></dt>
+			<!-- IF _file.COMMENT --><dd> {_file.COMMENT}</dd><!-- ENDIF -->
+		</dl>
+		<!-- ENDIF -->
+
+		<!-- IF _file.S_IMAGE -->
+			<img src="{_file.U_INLINE_LINK}" alt="{_file.DOWNLOAD_NAME}" /><br />
+			<span class="gensmall">{_file.DOWNLOAD_NAME} [ {_file.FILESIZE} {_file.SIZE_LANG} | {_file.L_DOWNLOAD_COUNT} ]</span>
+		<!-- ENDIF -->
+
+		<!-- IF _file.S_FILE -->
+		<dl class="file">
+			<dt><!-- IF _file.UPLOAD_ICON -->{_file.UPLOAD_ICON} <!-- ENDIF --><a class="postlink" href="{_file.U_DOWNLOAD_LINK}">{_file.DOWNLOAD_NAME}</a></dt>
+			<!-- IF _file.COMMENT --><dd><em>{_file.COMMENT}</em></dd><!-- ENDIF -->
+			<dd>({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}</dd>
+		</dl>
+		<!-- ENDIF -->]]></action>
+			<comment lang="en"></comment>
+	</edit>
+</open>
+
+
+
+
+
+
+
+
+<open src="styles/prosilver/template/faq_body.html">
+	<edit>
+        <find><![CDATA[<!-- INCLUDE overall_header.html -->
+
+<!-- IF STARGATE -->
+	<br />
+	<!-- INCLUDE portal_layout_top.html -->
+	<!-- IF S_SHOW_BLOCKS_ON_INDEX_L -->
+		<!-- INCLUDE portal_layout_left.html -->
+	<!-- ENDIF -->
+		<td valign="top">
+<!-- ENDIF -->
+]]></find>
+        <action type="replace-with"><![CDATA[<!-- INCLUDE overall_header.html -->]]></action>
+			<comment lang="en">If not exits skip edit</comment>
+	</edit>
+	<edit>
+        <find><![CDATA[<!-- INCLUDE jumpbox.html -->
+
+<!-- IF STARGATE -->
+		</td>
+	<!-- IF S_SHOW_BLOCKS_ON_INDEX_R -->
+		<!-- INCLUDE portal_layout_right.html -->
+	<!-- ENDIF -->
+	<!-- INCLUDE portal_layout_bottom.html -->
+<!-- ENDIF -->]]></find>
+        <action type="replace-with"><![CDATA[<!-- INCLUDE jumpbox.html -->]]></action>
+			<comment lang="en"></comment>
+	</edit>
+</open>
+
+<open src="styles/prosilver/template/index_body.html">
+	<edit>
+        <find><![CDATA[<!-- INCLUDE forumlist_body.html -->
+
+<!-- IF STARGATE -->
+	<!-- IF S_DISPLAY_ONLINE_LIST -->
+		<!-- INCLUDE blocks/block_whos_on_line.html -->
+	<!-- ENDIF -->
+	<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+		<!-- INCLUDE blocks/block_birthday.html -->
+	<!-- ENDIF -->
+	<!-- IF S_DISPLAY_BIRTHDAY_LIST and BIRTHDAY_LIST -->
+		<!-- INCLUDE blocks/block_stats.html -->
+	<!-- ENDIF -->
+<!-- ENDIF -->]]></find>
+        <action type="replace-with"><![CDATA[<!-- INCLUDE forumlist_body.html -->]]></action>
+			<comment lang="en"></comment>
+	</edit>
+</open>
+
+<open src="styles/prosilver/template/overall_footer.html">
+	<edit>
+        <find><![CDATA[	</div>
+
+<div id="page-footer">]]></find>
+        <action type="before-add"><![CDATA[	<!-- INCLUDE portal_tail.html -->]]></action>
+			<comment lang="en"></comment>
+	</edit>
+</open>
+
+<open src="styles/prosilver/template/overall_header.html">
+	<edit>
+        <find><![CDATA[		<!-- IF RAND_BANNER_POSITION == 1 or RAND_BANNER_POSITION == 3 --><div align="center">{RAND_BANNER}</div><!-- ENDIF -->]]></find>
+        <action type="after-add"><![CDATA[		<!-- INCLUDE portal_head.html -->]]></action>
+			<comment lang="en"></comment>
+	</edit>
+</open>
+
+<open src="styles/prosilver/template/viewforum_body.html">
+	<edit>
+        <find><![CDATA[				<dt<!-- IF topicrow.TOPIC_ICON_IMG and S_TOPIC_ICONS --> style="background-image: url({T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}); background-repeat: no-repeat;"<!-- ENDIF --> title="{topicrow.TOPIC_FOLDER_IMG_ALT}"><!-- IF topicrow.S_UNREAD_TOPIC --><a href="{topicrow.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF --><a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a>]]></find>
+        <action type="replace-with"><![CDATA[				<dt<!-- IF topicrow.TOPIC_ICON_IMG and S_TOPIC_ICONS --> style="background-image: url({T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}); background-repeat: no-repeat;"<!-- ENDIF --> title="{topicrow.TOPIC_FOLDER_IMG_ALT}"><!-- IF topicrow.S_UNREAD_TOPIC --><a href="{topicrow.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF --><a href="{topicrow.U_VIEW_TOPIC}" title="{topicrow.TOOLTIP}" class="topictitle">{topicrow.TOPIC_TITLE}</a>]]></action>
+			<comment lang="en"></comment>
+	</edit>
+</open>
+
+<diy-instructions lang="en-gb">
+Refresh styles...
+Remove any remaining portal lines from config.php
+Update language files</diy-instructions>
+  </action-group>
+</mod>

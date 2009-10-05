@@ -1,0 +1,17 @@
+<!-- quick post mod mod by Michaelo copyright phpbbireland -->
+
+<!-- IF not S_IS_BOT -->
+	<!-- IF U_POST_REPLY_TOPIC or S_IS_POSTABLE -->
+	<div style="display:" id="show">
+		<div class="k_quick_reply_yes-icon">
+		<a href="#" onclick="ShowHide('side'); ShowHide('hide'); ShowHide('show'); return(false);"><span>{L_QUICK_REPLY}</span></a>
+		</div>
+	</div>
+	<div style="display:none" id="hide">
+		<div class="k_quick_reply_no-icon">			
+			<a href="#" onclick="ShowHide('side'); ShowHide('show'); ShowHide('hide'); return(false);"><span>{L_QUICK_REPLY}</span></a>
+		</div>
+	</div>
+	<!-- IF S_IS_LOCKED -->{L_VIEW_TOPIC_LOCKED}<!-- ENDIF -->
+	<!-- ENDIF -->
+<!-- ENDIF -->

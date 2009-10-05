@@ -1,0 +1,107 @@
+<!-- INCLUDE overall_header.html -->
+
+<script type="text/javascript">
+	function null_fields(id)
+	{
+		 switch(id)
+		 {
+			 case 'poll_topic_id':
+				  document.getElementById('poll_forum_id').value = '0';
+				  document.getElementById('poll_post_id').value = '0';
+			 break;
+			 case 'poll_forum_id':
+				  document.getElementById('poll_topic_id').value = '0';
+				  document.getElementById('poll_post_id').value = '0';
+			 break;
+			 case 'poll_post_id':
+				  document.getElementById('poll_topic_id').value = '0';
+				  document.getElementById('poll_forum_id').value = '0';
+			 break;
+		 }
+	}
+</script>
+
+<a name="maincontent"></a>
+<div><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></div>
+
+<h1>{L_TITLE}</h1>
+<p>{L_TITLE_EXPLAIN}</p>
+
+<!-- IF S_EDIT_POLL -->
+<form id="acp_k_poll" method="post" action="{U_ACTION_COLUMN}">
+	<fieldset>
+		<legend>{L_BLOCK_POLL_SETTINGS}</legend>
+		<table cellspacing="1">
+			<tr>
+				<th colspan="2">{L_BLOCK_POLL_SETTINGS}</th>
+			</tr>
+			<tr>
+				<th colspan="12"><div align="center"><font color="#FFFF33"></th></font></div></th>
+			</tr>
+			<tr>
+				<td class="row1" style="font-size:11px;" valign="top"><strong>{L_POLL_TOPIC_ID}:</strong><br /><span>{L_POLL_TOPIC_ID_EXPLAIN}</span></td>
+				<td class="row2" style="font-size:11px;" valign="top" width="50%"><input name="poll_topic_id" type="text" id="poll_topic_id" value="{POLL_TOPIC_ID}" size="10" onkeypress="null_fields(this.id)"/></td>
+			</tr>
+			<tr>
+				<td class="row1" style="font-size:11px;" valign="top"><strong>{L_POLL_FORUM_ID}:</strong><br /><span>{L_POLL_FORUM_ID_EXPLAIN}</span></td>
+				<td class="row2" style="font-size:11px;" valign="top" width="50%"><input name="poll_forum_id" type="text" id="poll_forum_id" value="{POLL_FORUM_ID}" size="10" onkeypress="null_fields(this.id)"/></td>
+			</tr>
+			<tr>
+				<td class="row1" style="font-size:11px;" valign="top"><strong>{L_POLL_POST_ID}:</strong><br /><span>{L_POLL_POST_ID_EXPLAIN}</span></td>
+				<td class="row2" style="font-size:11px;" valign="top" width="50%">
+					<input name="poll_post_id" type="text" id="poll_post_id" value="{POLL_POST_ID}" size="10" onkeypress="null_fields(this.id)"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="row1" style="font-size:11px;" valign="top"><strong>{L_POLL_POSITION}:</strong><br /><span>{L_POLL_POSITION_EXPLAIN}</span></td>
+				<td class="row2" style="font-size:11px;" valign="top" width="50%">
+					<input name="poll_position" type="radio" id="poll_position" value="left" <!-- IF POLL_POSITION == 'left' -->checked<!-- ENDIF --> /> {L_POLL_LEFT}
+					<input name="poll_position" type="radio" id="poll_position" value="centre" <!-- IF POLL_POSITION == 'centre' -->checked<!-- ENDIF --> /> {L_POLL_CENTRE}
+					<input name="poll_position" type="radio" id="poll_position" value="right" <!-- IF POLL_POSITION == 'right' -->checked<!-- ENDIF --> /> {L_POLL_RIGHT}
+				</td>
+			</tr>
+			<tr>
+				<td class="row1" style="font-size:11px;" valign="top"><strong>{L_POLL_VIEW}:</strong><br /><span>{L_POLL_VIEW_EXPLAIN}</span></td>
+				<td class="row2" style="font-size:11px;" valign="top" width="50%">
+					<input name="poll_view" type="radio" id="view" value="simple" <!-- IF POLL_TYPE == 'simple' -->checked<!-- ENDIF --> />{L_POLL_SIMPLE}
+					<input name="poll_view" type="radio" id="poll_view" value="medium" <!-- IF POLL_TYPE == 'medium' -->checked<!-- ENDIF --> />{L_POLL_MEDIUM}
+					<input name="poll_view" type="radio" id="poll_view" value="full" <!-- IF POLL_TYPE == 'full' -->checked<!-- ENDIF --> />{L_POLL_FULL}</td>
+			</tr>
+			<tr>
+				<td class="row2" style="font-size:11px;" colspan="2">
+					<input type="hidden" name="action" value="savepoll" /><center>
+					<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+					<input class="button2" type="reset" id="reset" name="reset" value="{L_CANCEL}" /></center>
+				</td>
+			</tr>
+		</table>
+	</form>
+</fieldset>
+<!-- ENDIF -->
+
+<!-- IF not S_EDIT_POLL  -->
+<fieldset>
+	<legend>{L_BLOCK_POLL_SETTINGS}</legend>
+	<table cellspacing="1">
+		<tr>
+			<th><center>{L_POLL_TOPIC_ID}</center></th>
+			<th><center>{L_POLL_FORUM_ID}</center></th>
+			<th><center>{L_POLL_POST_ID}</center></th>
+			<th><center>{L_POLL_VIEW}</center></th>
+			<th><center>{L_POLL_POSITION}</center></th>
+			<th><center>{L_ACTION}</center></th>
+		</tr>
+		<!-- BEGIN poll_column -->
+		<tr>
+			<td style="text-align: center;">{poll_column.POLL_TOPIC_ID} </td>
+			<td style="text-align: center;">{poll_column.POLL_FORUM_ID} </td>
+			<td style="text-align: center;">{poll_column.POLL_POST_ID} </td>
+			<td style="text-align: center;">{poll_column.POLL_VIEW} </td>
+			<td style="text-align: center;">{poll_column.POLL_POSITION} </td>
+			<td style="text-align: center;"><a href="{poll_column.U_EDIT_POLL}">{ICON_EDIT}</a></td>
+		</tr>
+		<!-- END poll_column -->
+	</table>
+</fieldset>
+<!-- ENDIF -->
+<!-- INCLUDE overall_footer.html -->

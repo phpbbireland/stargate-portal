@@ -1,0 +1,53 @@
+<!-- IDTAG starts block_recent_topics.html 30th June 2008 copyright 2007 phpbbireland.com -->
+<span class="block_data">
+<!-- IF S_COUNT_RECENT -->
+	<div style="width:100%; overflow:visible;">
+		<table width="100%" cellpadding="1" cellspacing="1">
+			<!-- BEGIN scrollwide -->
+			<!-- BEGIN recent_topic_row -->
+				<!-- IF scrollwide.recent_topic_row.S_ROW_COUNT == 0 -->
+				<tr>
+					<td width="auto"><b>{L_TITLE}</b></td>
+					<td width="auto"><b>{L_POSTER}</b></td>
+					<td align="right" width="auto"><b>{L_POSTED}/{L_EDITED}</b></td>
+				</tr>
+				<tr><td colspan="3"><hr class="hr_dashed" /></td></tr>
+				<!-- ENDIF -->
+				<!-- IF scrollwide.recent_topic_row.S_UNIQUE -->
+					<tr class="bg3"><td colspan="3" width="auto" style="text-align:left;"><strong><a href="{scrollwide.recent_topic_row.U_FORUM}">{scrollwide.recent_topic_row.S_FORUM}</a></strong></td><!--<td style="text-align:right;">{L_FORUM}</td>--></tr>
+				<!-- ENDIF -->
+				<!-- IF scrollwide.recent_topic_row.S_ROW_COUNT is even --><tr class="bg2"><!-- ELSE --><tr class="bg1"><!-- ENDIF -->
+				<td width="auto">{scrollwide.recent_topic_row.LAST_POST_IMG} <a href="{scrollwide.recent_topic_row.U_TITLE}" >{scrollwide.recent_topic_row.S_TITLE}</a>: </td>
+				<td width="auto">{scrollwide.recent_topic_row.S_POSTER} </td>
+				<td align="right" width="auto">{scrollwide.recent_topic_row.S_POSTTIME}</td>
+			</tr>
+			<!-- END recent_topic_row -->
+			<!-- END scrollwide -->
+
+			<!-- BEGIN staticwide -->
+			<!-- BEGIN recent_topic_row -->
+				<!-- IF staticwide.recent_topic_row.S_ROW_COUNT == 0 -->
+				<tr>
+					<td width="auto"><b>{L_TITLE}</b></td>
+					<td width="auto"><b>{L_POSTER}</b></td>
+					<td align="right" width="auto"><b>{L_POSTED}/{L_EDITED}</b></td>
+				</tr>
+				<tr><td colspan="3"><hr class="hr_dashed" /></td></tr>
+				<!-- ENDIF -->
+				<!-- IF staticwide.recent_topic_row.S_UNIQUE -->
+					<tr class="bg3"><td colspan="3" width="auto" style="text-align:left;"><strong><a href="{staticwide.recent_topic_row.U_FORUM}">{staticwide.recent_topic_row.S_FORUM}</a></strong></td><!--<td style="text-align:right;">{L_FORUM}</td>--></tr>
+				<!-- ENDIF -->
+				<!-- IF staticwide.recent_topic_row.S_ROW_COUNT is even --><tr class="bg2"><!-- ELSE --><tr class="bg1"><!-- ENDIF -->
+				<td width="auto">{staticwide.recent_topic_row.LAST_POST_IMG} <a href="{staticwide.recent_topic_row.U_TITLE}" >{staticwide.recent_topic_row.S_TITLE}</a>: </td>
+				<td width="auto">{staticwide.recent_topic_row.S_POSTER} </td>
+				<td align="right" width="auto">{staticwide.recent_topic_row.S_POSTTIME}</td>
+			</tr>
+			<!-- END recent_topic_row -->
+			<!-- END staticwide -->
+		</table>
+	</div>
+<!-- ELSE -->
+<div><center><span class="genmed"><strong>{L_NO_RECENT_TOPICS}</strong></span></center></div>
+<!-- ENDIF -->
+</span>
+<!-- IDTAG ends block_recent_topics -->

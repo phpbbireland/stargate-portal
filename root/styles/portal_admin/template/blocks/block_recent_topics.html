@@ -1,0 +1,43 @@
+<!-- IDTAG starts block_recent_topics.html 17 March 2008 copyright 2007 phpbbireland.com -->
+
+<!-- BEGIN scroll -->
+<div style="width:100%">
+    <!-- BEGIN recent_topic_row -->
+		<!-- IF recent_topic_row.S_DISPLAY_CENTRE == 'C' -->
+        <tr>
+			<td width="30%"><a href="{static.recent_topic_row.U_TITLE}" >{static.recent_topic_row.LAST_POST_IMG} {static.recent_topic_row.S_TITLE}</a>: </td>
+			<td width="25%"><strong><a href="{static.recent_topic_row.U_FORUM}">{static.recent_topic_row.S_FORUM}</a></strong></td>
+			<td width="">{static.recent_topic_row.S_POSTER} </td>
+			<td width="170px">{static.recent_topic_row.S_POSTTIME}</td>
+		</tr>
+		<!-- ELSE -->
+		<strong><a href="{scroll.recent_topic_row.U_TITLE}" > {static.recent_topic_row.S_TITLE}</a></strong>
+		<br /> by: {static.recent_topic_row.S_POSTER}  <br />
+		{static.recent_topic_row.S_POSTTIME} <br />
+		<a href="{static.recent_topic_row.U_LAST_POST}" >{L_RECENT_REPLY}{static.recent_topic_row.LAST_POST_IMG}</a><br /><br />
+		<!-- ENDIF -->
+	<!-- END recent_topic_row -->
+</div>
+<!-- END scroll -->
+
+<!-- BEGIN static -->
+<div style="width:100%">
+	<!-- BEGIN recent_topic_row -->
+		<!-- IF recent_topic_row.S_DISPLAY_CENTRE == 'C' -->
+		<tr>
+			<td width="30%"><a href="{static.recent_topic_row.U_TITLE}" >{static.recent_topic_row.LAST_POST_IMG} {static.recent_topic_row.S_TITLE}</a>: </td>
+			<td width="25%"><strong><a href="{static.recent_topic_row.U_FORUM}">{static.recent_topic_row.S_FORUM}</a></strong></td>
+			<td width="">{static.recent_topic_row.S_POSTER} </td>
+			<td width="170px">{static.recent_topic_row.S_POSTTIME}</td>
+		</tr>
+		<!-- ELSE -->
+		<strong><a href="{scroll.recent_topic_row.U_TITLE}" > {static.recent_topic_row.S_TITLE}</a></strong>
+		<br /> by: {static.recent_topic_row.S_POSTER}  <br />
+		{static.recent_topic_row.S_POSTTIME} <br />
+		<a href="{static.recent_topic_row.U_LAST_POST}" >{L_RECENT_REPLY}{static.recent_topic_row.LAST_POST_IMG}</a><br /><br />
+		<!-- ENDIF -->
+	<!-- END recent_topic_row -->
+</div>
+<!-- END static -->
+
+<!-- IDTAG ends block_recent_topics -->

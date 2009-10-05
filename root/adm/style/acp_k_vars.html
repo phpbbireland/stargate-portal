@@ -1,0 +1,541 @@
+<!-- INCLUDE overall_header.html -->
+<a name="maincontent"></a>
+
+<form id="acp_k_vars" method="post" action="{U_ACTION}">
+
+<!-- IF S_OPT  == "Configure" -->
+<h1>{L_VARS_FOUND}: {S_SWITCH}</h1>
+<p>{L_TITLE_EXPLAIN_BLOCK}</p>
+
+
+<div style="display:<!-- IF S_SWITCH == 'ACRONYM' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_ACRONYMS}</legend>
+	<dl>
+		<dt><label for="allow_acronyms">{L_ALLOW_ACRONYMS}:</label><br /><span>{L_ALLOW_ACRONYMS_EXPLAIN}</span></dt>
+		<dd>
+		<label><input type="radio" class="radio" id="allow_acronyms" name="allow_acronyms" value="1"<!-- IF S_ALLOW_ACRONMYS --> checked="checked" <!-- ENDIF --> />{L_YES}</label>
+		<label><input type="radio" class="radio" id="allow_acronyms" name="allow_acronyms" value="0"<!-- IF not S_ALLOW_ACRONMYS --> checked="checked" <!-- ENDIF --> />{L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'CLOUD_9' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_ACP_CLOUD}</legend>
+	<dl>
+		<dt><label for="cloud_max_tags">{L_CLOUD_MAX_TAGS}:</label><br /><span>{L_CLOUD_MAX_TAGS_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="3" name="cloud_max_tags" value="{S_CLOUD_MAX_TAGS}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_movie">{L_CLOUD_MOVIE}:</label><br /><span>{L_CLOUD_MOVIE_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="20" maxlength="40" name="cloud_movie" value="{S_CLOUD_MOVIE}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_width">{L_CLOUD_WIDTH}:</label><br /><span>{L_CLOUD_WIDTH_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="4" maxlength="4" name="cloud_width" value="{S_CLOUD_WIDTH}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_height">{L_CLOUD_HEIGHT}:</label><br /><span>{L_CLOUD_HEIGHT_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="4" maxlength="4" name="cloud_height" value="{S_CLOUD_HEIGHT}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_tcolour">{L_CLOUD_TCOLOUR}:</label><br /><span>{L_CLOUD_TCOLOUR_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="15" name="cloud_tcolour" value="{S_CLOUD_TCOLOUR}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_tcolour2">{L_CLOUD_TCOLOUR2}:</label><br /><span>{L_CLOUD_TCOLOUR2_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="15" name="cloud_tcolour2" value="{S_CLOUD_TCOLOUR2}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_hicolour">{L_CLOUD_HICOLOUR}:</label><br /><span>{L_CLOUD_HICOLOUR_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="15" name="cloud_hicolour" value="{S_CLOUD_HICOLOUR}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_bg_colour">{L_CLOUD_BG_COLOUR}:</label><br /><span>{L_CLOUD_BG_COLOUR_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="6" name="cloud_bg_colour" value="{S_CLOUD_BG_COLOUR}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_speed">{L_CLOUD_SPEED}:</label><br /><span>{L_CLOUD_SPEED_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="5" maxlength="3" name="cloud_speed" value="{S_CLOUD_SPEED}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_mode">{L_CLOUD_MODE}:</label><br /><span>{L_CLOUD_MODE_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="15" name="cloud_mode" value="{S_CLOUD_MODE}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_wmode">{L_CLOUD_WMODE}:</label><br /><span>{L_CLOUD_WMODE_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="15" name="cloud_wmode" value="{S_CLOUD_WMODE}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_distr">{L_CLOUD_DISTR}:</label><br /><span>{L_CLOUD_DISTR_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="cloud_distr" name="cloud_distr" value="1" <!-- IF S_CLOUD_DISTR --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" id="cloud_distr" name="cloud_distr" value="0" <!-- IF not S_CLOUD_DISTR --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'ANNOUNCEMENTS' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_ANNOUNCE_SETTINGS}</legend>
+	<dl>
+		<dt><label for="number_of_announce_items_to_display">{L_NUMBER_OF_ANNOUNCE_ITEMS_TO_DISPLAY}:</label><br /><span>{L_NUMBER_OF_ANNOUNCE_ITEMS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="number_of_announce_items_to_display" value="{S_NUMBER_OF_ANNOUNCE_ITEMS_TO_DISPLAY}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="max_announce_item_length">{L_MAX_ANNOUNCE_ITEM_LENGTH}:</label><br /><span>{L_MAX_ANNOUNCE_ITEM_LENGTH_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="5" maxlength="4" name="max_announce_item_length" value="{S_MAX_ANNOUNCE_ITEM_LENGTH}" type="text"></label></dd>
+	</dl>
+	<dl>
+	<dt><label for="announce_type">{L_ANNOUNCE_TYPE}:</label><br /><span>{L_ANNOUNCE_TYPE_EXPLAIN}</span></dt>
+	<dd>
+		<label><input type="radio" class="radio" id="announce_type" name="announce_type" value="2" <!-- IF S_ANNOUNCE_TYPE == 2 --> checked="checked"<!-- ELSE --><!-- ENDIF --> /> {L_LOCAL_ANNOUNCE}</label>
+		<label><input type="radio" class="radio" id="announce_type" name="announce_type" value="3" <!-- IF S_ANNOUNCE_TYPE == 3 --> checked="checked"<!-- ELSE --><!-- ENDIF --> /> {L_GLOBAL_ANNOUNCE}</label>
+		<label><input type="radio" class="radio" id="announce_type" name="announce_type" value="0" <!-- IF S_ANNOUNCE_TYPE == 0 --> checked="checked"<!-- ELSE --><!-- ENDIF --> /> {L_BOTH}</label>
+	</dd>
+	</dl>
+	<dl>
+		<dt><label for="allow_announce">{L_ALLOW_ANNOUNCE}:</label><br /><span>{L_ALLOW_ANNOUNCE_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="allow_announce" name="allow_announce" value="1" <!-- IF S_ALLOW_ANNOUNCE --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="allow_announce" value="0" <!-- IF not S_ALLOW_ANNOUNCE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'NEWS_REPORT' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_NEWS_SETTINGS}</legend>
+	<dl>
+		<dt><label for="max_news_item_length">{L_NUMBER_OF_NEWS_ITEMS_TO_DISPLAY}:</label><br /><span>{L_NUMBER_OF_NEWS_ITEMS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="number_of_news_items_to_display" value="{S_NUMBER_OF_NEWS_ITEMS_TO_DISPLAY}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="">{L_MAX_NEWS_ITEM_LENGTH}:</label><br /><span>{L_MAX_NEWS_ITEM_LENGTH_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="5" maxlength="4" name="max_news_item_length" value="{S_MAX_NEWS_ITEM_LENGTH}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="news_type">{L_NEWS_TYPE}:</label><br /><span>{L_NEWS_TYPE_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="news_type" name="news_type" value="4" <!-- IF S_NEWS_TYPE == 4 --> checked="checked"<!-- ELSE --><!-- ENDIF --> /> {L_LOCAL_NEWS}</label>
+			<label><input type="radio" class="radio" id="news_type" name="news_type" value="5" <!-- IF S_NEWS_TYPE == 5 --> checked="checked"<!-- ELSE --><!-- ENDIF --> /> {L_GLOBAL_NEWS}</label>
+			<label><input type="radio" class="radio" id="news_type" name="news_type" value="0" <!-- IF S_NEWS_TYPE == 0 --> checked="checked"<!-- ELSE --><!-- ENDIF --> /> {L_BOTH}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="allow_news">{L_ALLOW_NEWS}:</label><br /><span>{L_ALLOW_NEWS_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="allow_news" name="allow_news" value="1" <!-- IF S_ALLOW_NEWS --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="allow_news" value="0" <!-- IF not S_ALLOW_NEWS --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'BOT_TRACKER' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_BOT_SETTINGS}</legend>
+	<dl>
+		<dt><label for="allow_bot_display">{L_ALLOW_BOT_DISPLAY}:</label><br /><span>{L_ALLOW_BOT_DISPLAY_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="allow_bot_display" name="allow_bot_display" value="1" <!-- IF S_ALLOW_BOT_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="allow_bot_display" value="0" <!-- IF not S_ALLOW_BOT_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="number_of_bots_to_display">{L_NUMBER_OF_BOTS_TO_DISPLAY}:</label><br /><span>{L_NUMBER_OF_BOTS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><input class="post" size="3" maxlength="2" name="number_of_bots_to_display" value="{S_NUMBER_OF_BOTS_TO_DISPLAY}" type="text"></dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'LINKS' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_LINKS_SETTINGS}</legend>
+	<dl>
+		<dt><label for="number_of_links_to_display">{L_NUMBER_OF_LINKS_TO_DISPLAY}:</label><br /><span>{L_NUMBER_OF_LINKS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><input class="post" size="3" maxlength="2" name="number_of_links_to_display" value="{S_NUMBER_OF_LINKS_TO_DISPLAY}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="link_forum_id">{L_LINK_FORUM_ID}:</label><br /><span>{L_LINK_FORUM_ID_EXPLAIN}</span></dt>
+		<dd><input class="post" size="4" maxlength="255" name="link_forum_id" value="{S_LINK_FORUM_ID}" type="text"></dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'LINK_TO_US' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_LINKS_SETTINGS}</legend>
+	<dl>
+		<dt><label for="link_to_us_image">{L_LINK_TO_US}:</label><br /><span>{L_LINK_TO_US_EXPLAIN}</span></dt>
+		<dd><input class="post" size="30" maxlength="255" name="link_to_us_image" value="{S_LINK_TO_US_IMAGE}" type="text"></dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'RECENT_TOPICS' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_RECENT_TOPICS_SETTINGS}</legend>
+	<dl>
+		<dt><label for="number_of_recent_topics_to_display">{L_NUMBER_OF_RECENT_TOPICS_TO_DISPLAY}:</label><br /><span>{L_NUMBER_OF_RECENT_TOPICS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="number_of_recent_topics_to_display" value="{S_NUMBER_OF_RECENT_TOPICS_TO_DISPLAY}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="number_of_topics_per_forum">{L_NUMBER_OF_TOPICS_PER_FORUM}:</label><br /><span>{L_NUMBER_OF_TOPICS_PER_FORUM_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="number_of_topics_per_forum" value="{S_NUMBER_OF_TOPICS_PER_FORUM}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="search_days">{L_SEARCH_DAYS}:</label><br /><span>{L_SEARCH_DAYS_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="search_days" value="{S_SEARCH_DAYS}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="post_types">{L_POSTS_TYPES}:</label><br /><span>{L_POSTS_TYPES_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="post_types" name="post_types" value="1" <!-- IF S_POST_TYPES --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="post_types" value="0" <!-- IF not S_POST_TYPES --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'TOP_REFERRALS' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_TOP_REFERRALS_SETTINGS}</legend>
+	<dl>
+		<dt><label for="number_of_top_referrals_to_display">{L_NUMBER_OF_TOP_REFERRALS_TO_DISPLAY}:</label><br /><span>{L_NUMBER_OF_TOP_REFERRALS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="number_of_top_referrals_to_display" value="{S_NUMBER_OF_TOP_REFERRALS_TO_DISPLAY}" type="text"></label></dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'TOP_POSTERS' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_TOP_POSTERS_SETTINGS}</legend>
+	<dl>
+		<dt><label for="number_of_top_posters_to_display">{L_NUMBER_OF_TOP_POSTERS_TO_DISPLAY}:</label><br /><span>{L_NUMBER_OF_TOP_POSTERS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="number_of_top_posters_to_display" value="{S_NUMBER_OF_TOP_POSTERS_TO_DISPLAY}" type="text"></label></dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'THE_TEAM' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_THE_TEAM_SETTINGS}</legend>
+	<dl>
+		<dt><label for="number_of_team_members_to_display">{L_NUMBER_OF_TEAM_MEMBERS_TO_DISPLAY}:</label><br /><span>{L_NUMBER_OF_TEAM_MEMBERS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="number_of_team_members_to_display" value="{S_NUMBER_OF_TEAM_MEMBERS_TO_DISPLAY}" type="text"></label></dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'MOST_ACTIVE_TOPICS' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_TOP_TOPICS}</legend>
+	<dl>
+		<dt><label for="max_top_topics">{L_MAX_TOP_TOPICS}:</label><br /><span>{L_MAX_TOP_TOPICS_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="2" maxlength="3" id="max_top_topics" name="max_top_topics" value="{S_MAX_TOP_TOPICS}" type="text" /></label>
+		</dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'STYLE_DEVELOPMENT' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_MINI_MOD_DEVELOPMENT}</legend>
+	<dl>
+		<dt><label for="mini_mod_style_count">{L_MINI_MOD_STYLE_COUNT}:</label><br /><span>{L_MINI_MOD_STYLE_COUNT_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="2" maxlength="3" id="mini_mod_style_count" name="mini_mod_style_count" value="{S_MINI_MOD_STYLE_COUNT}" type="text" /></label>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="mini_mod_block_count">{L_MINI_MOD_BLOCK_COUNT}:</label><br /><span>{L_MINI_MOD_BLOCK_COUNT_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="2" maxlength="3" id="mini_mod_block_count" name="mini_mod_block_count" value="{S_MINI_MOD_BLOCK_COUNT}" type="text" /></label>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="mini_mod_mod_count">{L_MINI_MOD_MOD_COUNT}:</label><br /><span>{L_MINI_MOD_MOD_COUNT_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="2" maxlength="3" id="mini_mod_mod_count" name="mini_mod_mod_count" value="{S_MINI_MOD_MOD_COUNT}" type="text" /></label>
+		</dd>
+	</dl>
+</fieldset>
+</div>
+
+
+<div style="display:<!-- IF S_SWITCH == 'IRC_CHAT' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_IRC_CHANNEL}</legend>
+	<dl>
+		<dt><label for="irc_channel">{L_OPT_IRC_CHANNELS}:</label><br /><span>{L_OPT_IRC_CHANNELS_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="46" maxlength="45" id="opt_irc_channels" name="opt_irc_channels" value="{S_OPT_IRC_CHANNELS}" type="text" /></label>
+		</dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'LAST_ONLINE' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_LAST_ONLINE}</legend>
+	<dl>
+		<dt><label for="max_last_online">{L_MAX_LAST_ONLINE}:</label><br /><span>{L_MAX_LAST_ONLINE_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="2" maxlength="3" id="max_last_online" name="max_last_online" value="{S_MAX_LAST_ONLINE}" type="text" /></label>
+		</dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'AGE_RANGES' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_AGE_RANGES}</legend>
+	<dl>
+		<dt><label for="age_range_interval">{L_AGE_INTERVAL}:</label><br /><span>{L_AGE_INTERVAL_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="age_range_interval" value="{S_AGE_RANGE_INTERVAL}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="age_range_start">{L_AGE_START}:</label><br /><span>{L_AGE_START_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="age_range_start" value="{S_AGE_RANGE_START}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="age_upper_limit">{L_AGE_LIMIT}:</label><br /><span>{L_AGE_LIMIT_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="age_upper_limit" value="{S_AGE_UPPER_LIMIT}" type="text"></label></dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'SHOW' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_K_SHOW_SMILIES}</legend>
+	<dl>
+		<dt><label for="k_show_smilies">{L_K_SHOW_SMILIES}:</label><br /><span>{L_K_SHOW_SMILIES_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="k_show_smilies" name="k_show_smilies" value="1" <!-- IF S_K_SHOW_SMILIES --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_show_smilies" value="0" <!-- IF not S_K_SHOW_SMILIES --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<legend>{L_FOOTER_IMAGES}</legend>
+	<dl>
+		<dt><label for="allow_footer_images">{L_ALLOW_FOOTER_IMAGES}:</label><br /><span>{L_ALLOW_FOOTER_IMAGES_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="allow_footer_images" name="allow_footer_images" value="1" <!-- IF S_ALLOW_FOOTER_IMAGES --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="allow_footer_images" value="0" <!-- IF not S_ALLOW_FOOTER_IMAGES --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'COOKIES' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_BLOCK_COOKIES}</legend>
+	<dl>
+		<dt><label for="use_cookies">{L_USE_COOKIES}:</label><br /><span>{L_USE_COOKIES_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="use_cookies" name="use_cookies" value="1" <!-- IF S_USE_COOKIES --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="use_cookies" value="0" <!-- IF not S_USE_COOKIES --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+</div>
+
+<div style="display:<!-- IF S_SWITCH == 'RAND' -->inline<!-- ELSE -->none<!-- ENDIF -->"></div>
+<div style="display:<!-- IF S_SWITCH == 'LOGOS' -->inline<!-- ELSE -->none<!-- ENDIF -->"></div>
+
+<div style="display:<!-- IF S_SWITCH == 'DEFAULT_CONFIG' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_BLOCKS_GLOBAL}</legend>
+	<dl>
+		<dt><label for="display_blocks_global">{L_DISPLAY_BLOCKS_GLOBAL}:</label><br /><span>{L_DISPLAY_BLOCKS_GLOBAL_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="display_blocks_global" name="display_blocks_global" value="1" <!-- IF S_DISPLAY_BLOCKS_GLOBAL --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="display_blocks_global" value="0" <!-- IF not S_DISPLAY_BLOCKS_GLOBAL --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<legend>{L_SHOW_BLOCKS_ON_INDEX_PORTAL}</legend>
+	<dl>
+		<dt><label for="show_blocks_on_portal_l">{L_SHOW_BLOCKS_ON_PORTAL_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_portal_l" name="show_blocks_on_portal_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_PORTAL_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_portal_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_PORTAL_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_portal_r">{L_SHOW_BLOCKS_ON_PORTAL_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_portal_r" name="show_blocks_on_portal_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_PORTAL_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_portal_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_PORTAL_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="show_blocks_on_index_l">{L_SHOW_BLOCKS_ON_INDEX_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_index_l" name="show_blocks_on_index_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_INDEX_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_index_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_INDEX_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_index_r">{L_SHOW_BLOCKS_ON_INDEX_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_index_r" name="show_blocks_on_index_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_INDEX_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_index_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_INDEX_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="show_blocks_on_search_l">{L_SHOW_BLOCKS_ON_SEARCH_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_search_l" name="show_blocks_on_search_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_SEARCH_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_search_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_SEARCH_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_search_r">{L_SHOW_BLOCKS_ON_SEARCH_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_search_r" name="show_blocks_on_search_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_SEARCH_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_search_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_SEARCH_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="show_blocks_on_mcp_l">{L_SHOW_BLOCKS_ON_MCP_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_mcp_l" name="show_blocks_on_mcp_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_MCP_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_mcp_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_MCP_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_mcp_r">{L_SHOW_BLOCKS_ON_MCP_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_mcp_r" name="show_blocks_on_mcp_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_MCP_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_mcp_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_MCP_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="show_blocks_on_upc_l">{L_SHOW_BLOCKS_ON_UCP_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_ucp_l" name="show_blocks_on_ucp_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_UCP_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_ucp_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_UCP_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_ucp_r">{L_SHOW_BLOCKS_ON_UCP_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_ucp_r" name="show_blocks_on_ucp_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_UCP_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_ucp_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_UCP_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="show_blocks_on_members_l">{L_SHOW_BLOCKS_ON_MEM_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_members_l" name="show_blocks_on_members_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_MEM_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_members_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_MEM_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_members_r">{L_SHOW_BLOCKS_ON_MEM_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_members_r" name="show_blocks_on_members_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_MEM_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_members_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_MEM_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<legend>{L_K_SHOW_SMILIES}</legend>
+	<dl>
+		<dt><label for="k_show_smilies">{L_K_SHOW_SMILIES}:</label><br /><span>{L_K_SHOW_SMILIES_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="k_show_smilies" name="k_show_smilies" value="1" <!-- IF S_K_SHOW_SMILIES --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_show_smilies" value="0" <!-- IF not S_K_SHOW_SMILIES --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<legend>{L_PORTAL_LOGOS}</legend>
+	<dl>
+		<dt><label for="allow_rotating_logos">{L_RAND_LOGOS}:</label><br /><span>{L_RAND_LOGOS_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="allow_rotating_logos" name="allow_rotating_logos" value="1" <!-- IF S_RAND_LOGO --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" id="allow_rotating_logos" name="allow_rotating_logos" value="0" <!-- IF not S_RAND_LOGO --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<legend>{L_RAND_HEADER}</legend>
+	<dl>
+		<dt><label for="rand_header">{L_ALLOW_RAND_HEADER}:</label><br /><span>{L_ALLOW_RAND_HEADER_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="rand_header" name="rand_header" value="1" <!-- IF S_RAND_HEADER == '1' --> checked="checked"<!-- ENDIF --> /> {L_HEADER_IMAGE}</label><br />
+			<label><input type="radio" class="radio" id="rand_header" name="rand_header" value="0" <!-- IF S_RAND_HEADER == '0' --> checked="checked"<!-- ENDIF --> /> {L_NO_HEADER}</label>
+		</dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<legend>{L_RAND_BANNER}</legend>
+	<dl>
+		<dt><label for="rand_banner">{L_ALLOW_RAND_BANNER}:</label><br /><span>{L_ALLOW_RAND_BANNER_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="rand_banner" name="rand_banner" value="1" <!-- IF S_RAND_BANNER == '1' --> checked="checked"<!-- ENDIF --> /> {L_HEADER_BANNER}</label><br />
+			<label><input type="radio" class="radio" id="rand_banner" name="rand_banner" value="2" <!-- IF S_RAND_BANNER == '2' --> checked="checked"<!-- ENDIF --> /> {L_FOOTER_BANNER}</label><br />
+			<label><input type="radio" class="radio" id="rand_banner" name="rand_banner" value="3" <!-- IF S_RAND_BANNER == '3' --> checked="checked"<!-- ENDIF --> /> {L_BOTH_BANNERS}</label><br />
+			<label><input type="radio" class="radio" id="rand_banner" name="rand_banner" value="0" <!-- IF S_RAND_BANNER == '0' --> checked="checked"<!-- ENDIF --> /> {L_NO_BANNERS}</label>
+		</dd>
+	</dl>
+</fieldset>
+
+<fieldset>
+	<legend>{L_MINI_MOD_DEVELOPMENT}</legend>
+	<dl>
+		<dt><label for="mini_mod_style_count">{L_MINI_MOD_STYLE_COUNT}:</label><br /><span>{L_MINI_MOD_STYLE_COUNT_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="2" maxlength="3" id="mini_mod_style_count" name="mini_mod_style_count" value="{S_MINI_MOD_STYLE_COUNT}" type="text" /></label>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="mini_mod_block_count">{L_MINI_MOD_BLOCK_COUNT}:</label><br /><span>{L_MINI_MOD_BLOCK_COUNT_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="2" maxlength="3" id="mini_mod_block_count" name="mini_mod_block_count" value="{S_MINI_MOD_BLOCK_COUNT}" type="text" /></label>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="mini_mod_mod_count">{L_MINI_MOD_MOD_COUNT}:</label><br /><span>{L_MINI_MOD_MOD_COUNT_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="2" maxlength="3" id="mini_mod_mod_count" name="mini_mod_mod_count" value="{S_MINI_MOD_MOD_COUNT}" type="text" /></label>
+		</dd>
+	</dl>
+</fieldset>
+
+</div>
+
+{L_NO_VARS_FOUND}
+<!-- ENDIF -->
+
+<!-- IF MESSAGE -->
+<dl><legend><br /><b>{MESSAGE}</b><br /></legend></dl>
+<dl><br /></dl>
+<!-- ELSE -->
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+</fieldset>
+<!-- ENDIF -->
+{S_FORM_TOKEN}
+</form>
+<!-- INCLUDE overall_footer.html -->

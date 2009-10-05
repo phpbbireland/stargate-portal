@@ -1,0 +1,11 @@
+<span class="block_data">
+<table width="100%" cellspacing="5">
+  <!--<tr>
+	<th style="text-align:left;" colspan="2">{L_RSS_FEEDS}</td>
+</tr>-->
+  <!-- IF maincat.S_ROW_POSITION is even --><tr><!-- ENDIF -->
+    <td width="50%" valign="top"><!-- BEGIN rss_left_column --> {rss_left_column.FEEDS_TITLE} {rss_left_column.LEFT_SYNDICATION} <!-- END rss_left_column --></td>
+    <td width="50%" valign="top"><!-- BEGIN rss_right_column --> {rss_right_column.FEEDS_TITLE} {rss_right_column.RIGHT_SYNDICATION} <!-- END rss_right_column --></td>
+    <!-- IF maincat.S_ROW_POSITION is not even --></tr><!-- ENDIF -->
+</table>
+</span>
