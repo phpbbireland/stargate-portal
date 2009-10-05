@@ -16,9 +16,6 @@
 */
 
 /**
-*/
-
-/**
 * @ignore
 */
 define('IN_PHPBB', true);
