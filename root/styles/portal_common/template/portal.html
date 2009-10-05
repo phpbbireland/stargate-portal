@@ -1,0 +1,59 @@
+<!-- IF STARGATE -->
+	<!-- INCLUDE overall_header.html -->
+	<!-- BEGIN center_block_files -->
+		<div id="<!-- IF S_ARRANGE -->BLOCK_<!-- ENDIF -->{center_block_files.CENTER_BLOCK_ID}">
+			<div class="block_body">
+				<div class="inner">
+					<span class="corners-top"><span></span></span>
+					<div class="block_header">
+						<div style="text-align:{S_CONTENT_FLOW_BEGIN};">&nbsp;{center_block_files.CENTER_BLOCK_TITLE}&nbsp;</div>
+						<span class="showhide" id="_{center_block_files.CENTER_BLOCK_ID}">
+						<!-- IF not S_ARRANGE -->
+							{center_block_files.CENTER_BLOCK_IMG}
+						<!-- ENDIF -->
+						</span>
+						<!-- IF S_ARRANGE && S_IS_PORTAL -->
+						<span class="showhide"><a href="javascript:ShowHide('{center_block_files.CENTER_BLOCK_ID}','_{center_block_files.CENTER_BLOCK_ID}','BLOCK_{center_block_files.CENTER_BLOCK_ID}');">{HIDE_IMG}</a><span class="handle">{MOVE_IMG}</span></span>
+						<!-- ENDIF -->
+					</div>
+					<div class="box" id="<!-- IF not S_ARRANGE -->BLOCK_<!-- ENDIF -->{center_block_files.CENTER_BLOCK_ID}">
+					<div class="iefix" style="clear:both; width:100%;">
+					<!-- IF center_block_files.CENTER_BLOCK_SCROLL and not DISABLE_RT_SCROLL -->
+						<!-- IF not S_ARRANGE -->
+						<div class="scroll_outer" id="{center_block_files.CENTER_BLOCK_ID}_outer" onmouseover="do_speed(this, event)" onmousemove="do_speed(this, event)" onmouseout="set_defaults(this, event)"><div class="scroll_inner" id="{center_block_files.CENTER_BLOCK_ID}_inner">
+						{center_block_files.CENTER_BLOCKS}
+						</div></div>
+						<!-- ELSE -->
+						{L_SCROLLING_BLOCKS_DISABLED}
+						<!-- ENDIF -->
+					<!-- ELSE -->
+					{center_block_files.CENTER_BLOCKS}
+                    <!-- ENDIF -->
+                    </div>
+					</div>
+					<span class="corners-bottom"><span></span></span>
+				</div>
+			</div>
+			<script type="text/javascript">
+			<!--
+				if(GetCookie('BLOCK_{center_block_files.CENTER_BLOCK_ID}') == '2')
+				{
+					ShowHide('{center_block_files.CENTER_BLOCK_ID}','_{center_block_files.CENTER_BLOCK_ID}','BLOCK_{center_block_files.CENTER_BLOCK_ID}');
+				}
+			//-->
+			</script>
+		</div>
+		<!-- END center_block_files -->
+		<!-- IF STARGATE -->
+			<!-- IF S_DISPLAY_ONLINE_LIST -->
+				<!-- INCLUDE blocks/block_whos_on_line.html -->
+			<!-- ENDIF -->
+			<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+				<!-- INCLUDE blocks/block_birthday.html -->
+			<!-- ENDIF -->
+			<!-- IF NEWEST_USER -->
+				<!-- INCLUDE blocks/block_stats.html -->
+			<!-- ENDIF -->
+		<!-- ENDIF -->
+	<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->
