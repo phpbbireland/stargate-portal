@@ -5,12 +5,12 @@
 	<p>{CLOUD_CAPTCHA_EXPLAINS}</p>
 	<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/swfobject/ -->
 	<script type="text/javascript" src="{ROOT_PATH}styles/js/swfobject.js"></script>
-	<div id="cumuluscontent">
-		<p style="display:none;">{CUMULUS}</p>
+	<div id="captcha_cloud">
+		<p style="display:none;">{CC_CUMULUS}</p>
 	</div>
 		<script type="text/javascript">
 			var rnumber = Math.floor(Math.random()*9999999);
-			var so = new SWFObject("{T_THEME_PATH}/images/cloud/{CLOUD_MOVIE}?r="+rnumber, "tagcloudflash", 200, 200, "9", "272829");
+			var so = new SWFObject("{T_THEME_PATH}/images/cloud/tagcloud.swf?r="+rnumber, "tagcloudflash", 200, 200, "9", "272829");
 			so.addParam("wmode", "transparent");
 			so.addParam("allowScriptAccess", "always");
 			so.addVariable("tcolor", '0x000000');
@@ -19,9 +19,8 @@
 			so.addVariable("tspeed", 150);
 			so.addVariable("distr", "true");
 			so.addVariable("mode", "both");
-			so.addVariable({FLASHTAG});
-			so.addVariable({CATEGORIES});
-			so.write("cumuluscontent");
+			so.addVariable({CC_FLASHTAG});
+			so.write("captcha_cloud");
 		</script>
 	</center>
 	<div style="text-align:center">
