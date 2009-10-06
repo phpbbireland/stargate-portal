@@ -353,6 +353,10 @@ $lang = array_merge($lang, array(
 	'CLOUD_DISTR'				=> 'Tag distributions',
 	'CLOUD_DISTR_EXPLAIN'		=> 'Check for even tag distributions along sphere.',
 
+	'TEAMSPEAK_SETTINGS'		=> 'Teanspeak Config',
+	'TEAMSPEAK_PASS'			=> 'Password',
+	'TEAMSPEAK_CONNECT'			=> 'Connection',
+
 ));
 
 // Mini Mod vars

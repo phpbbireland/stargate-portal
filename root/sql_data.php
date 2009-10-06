@@ -890,6 +890,11 @@ $k_blocks_config_vars_array[] = array(
 	'is_dynamic'	=> '0',
 );
 $k_blocks_config_vars_array[] = array(
+	'config_name'	=> 'number_of_top_referrals_to_display',
+	'config_value'	=> '5',
+	'is_dynamic'	=> '0',
+);
+$k_blocks_config_vars_array[] = array(
 	'config_name'	=> 'poll_forum_id',
 	'config_value'	=> '2',
 	'is_dynamic'	=> '0',
@@ -1085,6 +1090,16 @@ $k_blocks_config_vars_array[] = array(
 $k_blocks_config_vars_array[] = array(
 	'config_name'	=> 'mp3_folder',
 	'config_value'	=> 'music',
+	'is_dynamic'	=> '0',
+);
+$k_blocks_config_vars_array[] = array(
+	'config_name'	=> 'teamspeak_pw',
+	'config_value'	=> '',
+	'is_dynamic'	=> '0',
+);
+$k_blocks_config_vars_array[] = array(
+	'config_name'	=> 'teamspeak_connection',
+	'config_value'	=> '',
 	'is_dynamic'	=> '0',
 );
 
@@ -1640,9 +1655,9 @@ $k_newsfeeds_array[] = array(
 	'feed_description'	=> '1'
 );
 
-$k_referer_table = 'phpbb_k_referer';
-$k_referer_array = array();
-$k_referer_array[] = array(
+$k_referrals_table = 'phpbb_k_referrals';
+$k_refereals_array = array();
+$k_referrals_array[] = array(
 	'id'			=> '1',
 	'host'			=> 'phpbbireland.com',
 	'hits'			=> '1',
@@ -1692,7 +1707,7 @@ $k_web_pages_array[] = array(
 	'page_name'		=> 'test',
 	'page_type'		=> 'F',
 	'last_updated'	=> 'Mon 25 Aug 2008',
-	'body'			=> '&lt;div id=&quot;page-footer&quot;&gt;&lt;div class=&quot;copyright&quot;&gt;Powered by &lt;a href=&quot;http://www.phpbb.com/&quot;&gt;phpBB&lt;/a&gt;  &amp;copy; 2000, 2002, 2005, 2007 phpBB Group&lt;br /&gt;Portal: &lt;a href=&quot;http://www.phpbbireland.com&quot;&gt; Stargate Portal (the original phpbb3portal)&lt;/a&gt; &amp;copy; 2005 - 2009 &lt;a href=&quot;mailto:o2l@eircom.net&quot;&gt;Michael O’Toole&lt;/a&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;&lt;a id=&quot;bottom&quot; name=&quot;bottom&quot; accesskey=&quot;z&quot;&gt;&lt;/a&gt;&lt;div class=&quot;bottom-left&quot;&gt;&lt;/div&gt;&lt;div class=&quot;bottom-center&quot;&gt;&lt;/div&gt;&lt;div class=&quot;bottom-right&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;',
+	'body'			=> '&lt;div id=&quot;page-footer&quot;&gt;&lt;div class=&quot;copyright&quot;&gt;Powered by &lt;a href=&quot;http://www.phpbb.com/&quot;&gt;phpBB&lt;/a&gt;  &amp;copy; 2000, 2002, 2005, 2007 phpBB Group&lt;/div&gt;&lt;div&gt;&lt;a id=&quot;bottom&quot; name=&quot;bottom&quot; accesskey=&quot;z&quot;&gt;&lt;/a&gt;&lt;div class=&quot;bottom-left&quot;&gt;&lt;/div&gt;&lt;div class=&quot;bottom-center&quot;&gt;&lt;/div&gt;&lt;div class=&quot;bottom-right&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;',
 	'head'			=> '0',
 	'foot'			=> '0',
 	'external_file'	=> '',
@@ -1715,14 +1730,14 @@ $k_web_pages_array[] = array(
 	'page_type'		=> 'B',
 	'last_updated'	=> 'Sat 18 Jul 2009',
 	'body'			=> '',
-	'head'			=> '0',
-	'foot'			=> '0',
+	'head'			=> '3',
+	'foot'			=> '4',
 	'external_file'	=> '',
 );
 
 $k_youtube_table = 'phpbb_k_youtube';
 $k_youtube_array[] = array(
-	'id'				=> '1',
+	'video_id'				=> '1',
 	'video_category'	=> 'Gregorian',
 	'video_who'			=> 'Gregorian',
 	'video_link'		=> 'TP71E7QLy9A',
