@@ -64,9 +64,7 @@ class acp_k_vars
 			$db->sql_freeresult($result);
 		}
 
-
 		// set S_SWITCH to load the correct variables in k_vars //
-
 		switch ($choice)
 		{
 			case 'acronym':	
@@ -104,7 +102,6 @@ class acp_k_vars
 				$template->assign_vars(array( 'S_SWITCH' => $choice )); 
 				break;
 			}
-
 			default:
 			{
 				$template->assign_vars(array( 'S_SWITCH' => 'MISC' )); 
@@ -173,6 +170,9 @@ class acp_k_vars
 			'S_NUMBER_OF_TOP_POSTERS_TO_DISPLAY'	=> $k_config['number_of_top_posters_to_display'],
 			'S_NUMBER_OF_TOP_REFERRALS_TO_DISPLAY'	=> $k_config['number_of_top_referrals_to_display'],
 			'S_NUMBER_OF_TEAM_MEMBERS_TO_DISPLAY'	=> $k_config['number_of_team_members_to_display'],
+
+			'S_TEAMSPEAK_PW'						=> $k_config['teamspeak_pw'],
+			'S_TEAMSPEAK_CONNECTION'				=> $k_config['teamspeak_connection'],
 
 			'S_OPT_IRC_CHANNELS'					=> $k_config['opt_irc_channels'],
 			'S_SEARCH_DAYS'							=> $k_config['search_days'],
@@ -264,6 +264,9 @@ class acp_k_vars
 				$mini_mod_block_count					= request_var('mini_mod_block_count', '');
 				$mini_mod_mod_count						= request_var('mini_mod_mod_count', '');
 
+				$teamspeak_pw							= request_var('teamspeak_pw', '');
+				$teamspeak_connection					= request_var('teamspeak_connection', '');
+
 				$k_show_smilies							= request_var('k_show_smilies', '');
 				$rand_banner							= request_var('rand_banner', '');
 				$rand_header							= request_var('rand_header', '');
@@ -289,6 +292,8 @@ class acp_k_vars
 				$cloud_mode								= request_var('cloud_mode', '');
 				$cloud_wmode							= request_var('cloud_wmode', '');
 				$cloud_distr							= request_var('cloud_distr', '');
+				$teamspeak_pw								= request_var('teamspeak_pw', '');
+				$teamspeak_connection								= request_var('teamspeak_connection', '');
  
 				$k_config['show_lb_ipsmuy'][0]			= request_var('show_blocks_on_index_l', '');
 				$k_config['show_rb_ipsmuy'][0]			= request_var('show_blocks_on_index_r', '');
@@ -300,6 +305,8 @@ class acp_k_vars
 				$k_config['show_rb_ipsmuy'][3]			= request_var('show_blocks_on_mcp_r', '');
 				$k_config['show_lb_ipsmuy'][4]			= request_var('show_blocks_on_ucp_l', '');
 				$k_config['show_rb_ipsmuy'][4]			= request_var('show_blocks_on_ucp_r', '');
+				$k_config['show_lb_ipsmuy'][5]			= request_var('show_blocks_on_members_l', '');
+				$k_config['show_rb_ipsmuy'][5]			= request_var('show_blocks_on_members_r', '');
 
 				switch($announce_type)
 				{
@@ -319,8 +326,6 @@ class acp_k_vars
 					default:	$news_type = 0;
 						break;
 				}
-
-
 
 				//sgp_acp_set_config('news_forum_id', $news_forum_id);
 				sgp_acp_set_config('allow_acronyms', $allow_acronyms);
@@ -373,19 +378,22 @@ class acp_k_vars
 				sgp_acp_set_config('cloud_wmode', $cloud_wmode);
 				sgp_acp_set_config('cloud_distr', $cloud_distr);
 
+				sgp_acp_set_config('teamspeak_pw', $teamspeak_pw);
+				sgp_acp_set_config('teamspeak_connection', $teamspeak_connection);
+
 				sgp_acp_set_config('show_lb_ipsmuy', $k_config['show_lb_ipsmuy']);
 				sgp_acp_set_config('show_rb_ipsmuy', $k_config['show_rb_ipsmuy']);
-				
+
 				$mode='reset';
 
-				$message = 'Data saved... Please wait...';
+				$message = $user->lang['SAVED_BUT_PURGE_REQD'];
 
 				$template->assign_vars(array(
-					'S_OPT' => 'Saved',
+					'S_OPT' => $user->lang['SAVING'],
 					'MESSAGE' => $message,
 				));
 
-				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;block=$block");
+				meta_refresh(3, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;block=$block");
 				return;
 				break;
 			}

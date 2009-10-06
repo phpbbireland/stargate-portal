@@ -43,6 +43,8 @@ if (!defined('IN_PHPBB'))
 	$left_count = $centre_count= $right_count = 0;
 	$show_left = $show_right = false;
 
+	$big_image_path = $phpbb_root_path . 'images/block_images/large/';
+
 	$loop_count = 0;
 	$this_page = explode(".", $user->page['page']);
 
@@ -116,7 +118,6 @@ if (!defined('IN_PHPBB'))
 				}
 				break;
 
-				case 'memberlist':
 				case 'index':
 				{
 					if(SHOW_LB_ON_INDEX && $active_block['position'] == 'L' || SHOW_RB_ON_INDEX && $active_block['position'] == 'R')
@@ -125,8 +126,27 @@ if (!defined('IN_PHPBB'))
 						$show_left = SHOW_LB_ON_INDEX;
 						$show_right = SHOW_RB_ON_INDEX;
 					}
+					else
+					if(SHOW_LB_ON_MEM && $active_block['position'] == 'L' || SHOW_RB_ON_MEM && $active_block['position'] == 'R')
+					{
+						include($phpbb_root_path . 'blocks/' . $filename . '.' . $phpEx); 
+						$show_left = SHOW_LB_ON_MEM;
+						$show_right = SHOW_RB_ON_MEM;
+					}
 					break;
 				}
+
+				case 'memberlist':
+				{
+					if(SHOW_LB_ON_MEM && $active_block['position'] == 'L' || SHOW_RB_ON_MEM && $active_block['position'] == 'R')
+					{
+						include($phpbb_root_path . 'blocks/' . $filename . '.' . $phpEx); 
+						$show_left = SHOW_LB_ON_MEM;
+						$show_right = SHOW_RB_ON_MEM;
+					}
+					break;
+				}
+
 				case 'mcp':
 				{
 					if(SHOW_LB_ON_MCP && $active_block['position'] == 'L' || SHOW_RB_ON_MCP && $active_block['position'] == 'R')
@@ -573,8 +593,8 @@ if(isset($left_block_ary))
     	    'LEFT_BLOCK_TITLE'		=> $left_block_title[$block],
 			'LEFT_BLOCK_SCROLL' 	=> $left_block_scroll[$block],
 			'LEFT_BLOCK_HEIGHT'		=> $left_block_height[$block],
-			'LEFT_BLOCK_IMG'		=> ($left_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/' . $left_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/none.gif" height="1px" width="1px" alt="" >',
-			'LEFT_BLOCK_IMG_2'		=> ($left_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/large/' . strtolower($left_block_title[$block]) . '.png' . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/none.png" alt="" >',
+			'LEFT_BLOCK_IMG'		=> ($left_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $left_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/none.gif" height="1px" width="1px" alt="" >',
+			'LEFT_BLOCK_IMG_2'		=> (file_exists($big_image_path . $left_block_img[$block])) ? '<img src="' . $big_image_path  . $left_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/large/none.png" alt="" >',
 			'S_CONTENT_FLOW_BEGIN'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
 			'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
     	));
@@ -592,12 +612,12 @@ if(isset($right_block_ary))
     	    'RIGHT_BLOCK_TITLE'		=> $right_block_title[$block],
 			'RIGHT_BLOCK_SCROLL'	=> $right_block_scroll[$block],
 			'RIGHT_BLOCK_HEIGHT'	=> $right_block_height[$block],
-			'RIGHT_BLOCK_IMG'		=> ($right_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/' . $right_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/none.gif" height="1px" width="1px" alt="" >',
-			'RIGHT_BLOCK_IMG_2'		=> ($right_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/large/' .  strtolower($right_block_title[$block]) . '.png' . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/none.png"  alt="" >',
+			'RIGHT_BLOCK_IMG'		=> ($right_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $right_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/none.gif" height="1px" width="1px" alt="" >',
+			'RIGHT_BLOCK_IMG_2'		=> (file_exists($big_image_path . $right_block_img[$block])) ? '<img src="' . $big_image_path  . $right_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/large/none.png" alt="" >',
+
 			'S_CONTENT_FLOW_BEGIN'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
 			'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
     	));
-		//echo strtolower($right_block_title[$block]);echo '<br />';
 	}
 }
 
@@ -618,12 +638,12 @@ if(isset($center_block_ary))
     	    'CENTER_BLOCK_TITLE'	=> $center_block_title[$block],
 			'CENTER_BLOCK_SCROLL'	=> $center_block_scroll[$block],
 			'CENTER_BLOCK_HEIGHT'	=> $center_block_height[$block],
-			'CENTER_BLOCK_IMG'		=> ($center_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/' . $center_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/none.gif" height="1px" width="1px" alt="" >',
-			'CENTER_BLOCK_IMG_2'	=> ($center_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/large/' . strtolower($center_block_title[$block]) . '.png' . '" alt="'.$center_block_title[$block].'" />' : '<img src="' . $phpbb_root_path . 'images/block_images/large/none.png" alt="" >',
+			'CENTER_BLOCK_IMG'		=> ($center_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $center_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/none.gif" height="1px" width="1px" alt="" >',
+			'CENTER_BLOCK_IMG_2'	=> (file_exists($big_image_path . $center_block_img[$block])) ? '<img src="' . $big_image_path  . $center_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/large/none.png" alt="" >',
+
 			'S_CONTENT_FLOW_BEGIN'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
 			'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
 	    ));
-		//echo strtolower($center_block_title[$block]);echo '<br />';
 	}
 }
 

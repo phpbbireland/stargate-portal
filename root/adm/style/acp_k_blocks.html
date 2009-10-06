@@ -5,13 +5,13 @@ function set_image(data)
 {
 	document.getElementById('img_file_name').value=data;
 	document.getElementById('img_alt_text').value=data;
-	document.getElementById("bimage").innerHTML = " <img align='absmiddle' src='./../images/block_images/" + data + "' />"
+	document.getElementById("bimage").innerHTML = " <img align='absmiddle' src='./../images/block_images/small/" + data + "' />"
 
 }
 function display_block_image(myForm)
 {
     var bimage = myForm.img_file_name;
-    document.getElementById("bimage").innerHTML = " <img align='absmiddle' src='./../images/block_images/" + bimage.value + "' />"
+    document.getElementById("bimage").innerHTML = " <img align='absmiddle' src='./../images/block_images/small/" + bimage.value + "' />"
 }
 </script>
 <!-- END: Edit #1 -->
@@ -102,7 +102,7 @@ function expMenu(id)
 				<!-- IF bdata.S_POSITION === "r" -->Right (center 2x)<!-- ENDIF -->
 			</td>
 			<td align="left" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""> {bdata.S_FNAME_H}</td>
-			<td class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->"><div align="center"><img src="./../images/block_images/{bdata.S_FNAME_I}"></div></td>
+			<td class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->"><div align="center"><img src="./../images/block_images/small/{bdata.S_FNAME_I}"></div></td>
 			<td align="right" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><div align="center">{bdata.S_VIEW_BY}</div></td>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width="" colspan="5">
 				<div align="center">
@@ -217,7 +217,7 @@ function expMenu(id)
 			<option value="{img_file_name.S_BLOCK_FILE_I}" <!-- IF img_file_name.S_BLOCK_FILE_I == S_FNAME_I -->selected <!-- ENDIF -->>{img_file_name.S_BLOCK_FILE_I}</option>
 			<!-- END img_file_name -->
 			</select>
-			<span name='bimage' id='bimage'> <img src='./../images/block_images/{S_FNAME_I}'> </span>
+			<span name='bimage' id='bimage'> <img src='./../images/block_images/small/{S_FNAME_I}'> </span>
 			</label>
 		</dd>
 	</dl>
@@ -228,7 +228,7 @@ function expMenu(id)
 			<!-- BEGIN img_file_name -->
 				<!-- IF img_file_name.S_BLOCK_FILE_I -->
 					<a href="#" onclick="set_image('{img_file_name.S_BLOCK_FILE_I}', true, true); return false;">
-					<img src='./../images/block_images/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}'>
+					<img src='./../images/block_images/small/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}'>
 					</a>
 				<!-- ENDIF -->
 			<!-- END img_file_name -->
@@ -352,7 +352,7 @@ function expMenu(id)
 			<option value="{img_file_name.S_BLOCK_FILE_I}" <!-- IF img_file_name.S_BLOCK_FILE_I == S_FNAME_I -->selected <!-- ENDIF -->>{img_file_name.S_BLOCK_FILE_I}</option>
 			<!-- END img_file_name -->
 			</select>
-			<span name='bimage' id='bimage'> <img src='./../images/block_images/{S_FNAME_I}'> </span>
+			<span name='bimage' id='bimage'> <img src='./../images/block_images/small/{S_FNAME_I}'> </span>
 			</label>
 		</dd>
 	</dl>
@@ -363,7 +363,7 @@ function expMenu(id)
 			<!-- BEGIN img_file_name -->
 				<!-- IF img_file_name.S_BLOCK_FILE_I -->
 					<a href="#" onclick="set_image('{img_file_name.S_BLOCK_FILE_I}', true, true); return false;">
-					<img src='./../images/block_images/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}'>
+					<img src='./../images/block_images/small/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}'>
 					</a>
 				<!-- ENDIF -->
 			<!-- END img_file_name -->

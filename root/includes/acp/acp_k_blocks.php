@@ -54,7 +54,6 @@ class acp_k_blocks
 		//$groupid = request_var('group_id', '');
 
 		// get title for block whos id = $block //
-
 		//$mini_mod_id = get_module_id($block);  
 
 		$template->assign_vars(array(
@@ -241,15 +240,8 @@ class acp_k_blocks
 					$dirs = dir('./../styles/portal_common/template/blocks');
 					while ($file = $dirs->read())
 					{
-						// small bug? in srtpos stripos...  If the needle is found in the fist character it appears to return 0 which will result in false (if) so 
-						if(stripos($file, "lock_", 1) && !stripos($file, ".bak"))
+						if(!stripos($file, ".bak"))
 							$dirslist .= "$file ";
-						/*
-						if (eregi("html", $file) && eregi("block", $file) && !eregi("bak", $file) && !eregi("blocks", $file))
-						{
-							$dirslist .= "$file ";
-						}
-						*/
 					}
 					closedir($dirs->handle);
 					$dirslist = explode(" ", $dirslist);
@@ -262,7 +254,7 @@ class acp_k_blocks
 					$dirslist='';
 
 					$dirslist='none ';
-					$dirs = dir('./../images/block_images');
+					$dirs = dir('./../images/block_images/small');
 
 					while ($file = $dirs->read())
 					{
@@ -358,8 +350,7 @@ class acp_k_blocks
 
 				while ($file = $dirs->read())
 				{
-					// small bug? in srtpos stripos...  If the needle is found in the fist character it appears to return 0 which will result in false (if) so 
-					if(stripos($file, "lock_") && !stripos($file, ".bak"))
+					if(!stripos($file, ".bak"))
 					{
 						$dirslist .= "$file ";
 					}
@@ -378,10 +369,10 @@ class acp_k_blocks
 				// get all available block images //
 
 				$dirslist='none ';
-				$dirs = dir('./../images/block_images');
+				$dirs = dir('./../images/block_images/small');
 				while ($file = $dirs->read())
 				{
-					if(stripos($file, ".gif") || stripos($file, ".png") && stripos($file ,"logo_"))
+					if(stripos($file, ".gif") || stripos($file, ".png"))
 						$dirslist .= "$file ";
 				}
 				closedir($dirs->handle);
