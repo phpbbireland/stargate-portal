@@ -40,7 +40,6 @@ while($row = $db->sql_fetchrow($result))
 	$title = str_replace(' ','_', $row['title']);
 	$title = (!empty($user->lang[$title])) ? $user->lang[$title] : $title;
 
-	
 	$template->assign_block_vars('blocks', array(
 		'BLOCK_ID'           => $row['id'],
 		'BLOCK_NAME'         => $title,

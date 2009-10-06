@@ -23,9 +23,18 @@
 		exit;
 	}
 
+	// 2 bug fixes 01 October 2009
+	$this_page = explode(".", $user->page['page']);
+	if($this_page[0] == 'viewtopic'|| $this_page[0] == 'ucp')
+	{
+		return;
+	}
+	// 2 bug fixes
+
 	$phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 	global $k_config, $b_poll, $config, $phpbb_root_path, $db, $user, $template, $phpEx;
+
 	include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 
 	/**
@@ -36,14 +45,14 @@
 	$b_forum_id	= request_var('f', $k_config['poll_forum_id']);
 	$b_topic_id	= request_var('t', $k_config['poll_topic_id']);
 	$b_post_id	= request_var('p', $k_config['poll_post_id']);
-	$b_poll_view	= $k_config['poll_view'];
+	$b_poll_view = $k_config['poll_view'];
 
 	$b_poll_position = $k_config['poll_position'];
 
 	$b_voted_id	= request_var('vote_id', array('' => 0));
 
-	$b_start	  = request_var('start', 0);
-	$b_view	  = request_var('view', '');
+	$b_start	= request_var('start', 0);
+	$b_view		= request_var('view', '');
 
 	$b_sort_days	= request_var('st', ((!empty($user->data['user_post_show_days'])) ? $user->data['user_post_show_days'] : 0));
 	$b_sort_key	= request_var('sk', ((!empty($user->data['user_post_sortby_type'])) ? $user->data['user_post_sortby_type'] : 't'));
@@ -51,6 +60,7 @@
 
 	$b_update	  = request_var('update', false);
 	$b_poll->type = $b_poll_view;
+
 	// Do we have a topic or post id?
 	if (!$b_topic_id && !$b_post_id && !$b_forum_id)
 	{

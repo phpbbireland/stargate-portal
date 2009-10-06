@@ -23,11 +23,15 @@ if ( !defined('IN_PHPBB') )
 {
 	die("Hacking attempt");
 }
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+//$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 
 
 $template->assign_vars(array(
 	'USER_NAME' => $user->data['username'],
+	'USER_NAME' => 'michaelo',
+	'CONNECT'	=> $k_config['teamspeak_connection'],
+	'PASSWORD'	=> $k_config['teamspeak_pass'],
+	'IP'		=> '',
 ));
 
 ?>
