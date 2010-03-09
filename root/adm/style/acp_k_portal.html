@@ -1,0 +1,45 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<h1>{L_TITLE}</h1>
+
+<p>{L_TITLE_EXPLAIN}</p>
+
+<form id="acp_portal" method="post" action="{U_ACTION}">
+
+
+<table cellspacing="1">
+	<thead>	
+		<tr><th colspan="7">{L_PBLOCK_HEADER}</th></tr>
+		<th>{L_PBLOCK_NAME}</th>
+		<th>{L_PBLOCK_VERSION}</th>
+		<th>{L_PBLOCK_CLASS}</th>
+		<th>{L_PBLOCK_APPROVED}</th>
+		<th>{L_PBLOCK_AUTHOR}</th>
+		<th>{L_PBLOCK_DATE}</th>
+		<th>{L_PBLOCK_SITE}</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="row2" width="1"><input class="post" size="20" maxlength="80" name="pblocks_name" value="{S_PBLOCKS_NAME}" type="text"></td>
+			<td class="row2" width="1"><input class="post" size="5"  maxlength="80" name="pblocks_version" value="{S_PBLOCKS_VERSION}" type="text"></td>
+			<td class="row2" width="1"><input class="post" size="10" maxlength="80" name="pblocks_class" value="{S_PBLOCKS_CLASS}" type="text"></td>
+			<td class="row2" width="1"><input class="post" size="5"  maxlength="80" name="pblocks_approved" value="{S_PBLOCK_APPROVED}" type="text"></td>
+			<td class="row2" width="1"><input class="post" size="20" maxlength="80" name="pblocks_author" value="{S_PBLOCK_AUTHOR}" type="text"></td>
+			<td class="row2" width="1"><input class="post" size="10" maxlength="80" name="pblocks_date" value="{S_PBLOCK_DATE}" type="text"></td>
+			<td class="row2" width="1"><input class="post" size="20" maxlength="80" name="pblocks_site" value="{S_PBLOCK_SITE}" type="text"></td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+</fieldset>
+{S_FORM_TOKEN}
+</form>
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,147 @@
+/* Image replacement titles */
+h2.imgrep {
+	height: 32px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	margin: 3px  0 10px 0;
+	font-size: 1em;
+	border-bottom: none;
+	font-size: 0em;
+	color: #FFFFFF;
+	text-indent: -9999px;
+	}
+
+
+
+h2.modules0 {
+	background-image: url("titles/modules0.gif");
+	}
+
+h2.about {
+	background-image: url("titles/about.gif");
+	}
+h2.features {
+	background-image: url("titles/features.gif");
+	}
+h2.welcome {
+	background-image: url("titles/welcome.gif");
+	height:44px;
+	}
+h2.team {
+	background-image: url("titles/team.gif");
+	}
+h2.history {
+	background-image: url("titles/history.gif");
+	}
+h2.download {
+	background-image: url("titles/download.gif");
+	}
+
+h2.map {
+	background-image: url("titles/map.gif");
+	}
+h2.downloads {
+	background-image: url("titles/downloads.gif");
+	}
+h2.support {
+	background-image: url("titles/support.gif");
+	}
+h2.customise {
+	background-image: url("titles/customise.gif");
+	}
+h2.community {
+	background-image: url("titles/community.gif");
+	}
+h2.mods {
+	background-image: url("titles/modifications.gif");
+	}
+h2.styles {
+	background-image: url("titles/styles.gif");
+	}
+h2.intl {
+	background-image: url("titles/intl.gif");
+	}
+h2.bugs {
+	background-image: url("titles/bugs.gif");
+	}
+h2.security {
+	background-image: url("titles/security.gif");
+	}
+h2.incidents {
+	background-image: url("titles/incidents.gif");
+	}
+
+h2.documentation {
+	background-image: url("titles/documentation.gif");
+	}
+h2.development {
+	background-image: url("titles/development.gif");
+	}
+h2.languages {
+	background-image: url("titles/languages.gif");
+	}
+h2.faq {
+	background-image: url("titles/faq.gif");
+	}
+h2.tutorials {
+	background-image: url("titles/tutorials.gif");
+	}
+h2.search {
+	background-image: url("titles/search.gif");
+	}
+h2.modx {
+	background-image: url("titles/modx.gif");
+	}
+h2.modsfaq {
+	background-image: url("titles/modsfaq.gif");
+	}
+h2.modxcomparison {
+	background-image: url("titles/modxcomparison.gif");
+	}
+h2.modsdb {
+	background-image: url("titles/moddb.gif");
+	}
+h2.modsqueue {
+	background-image: url("titles/modqueue.gif");
+	}
+h2.modsmy {
+	background-image: url("titles/modsmy.gif");
+	}
+h2.stylesdb {
+	background-image: url("titles/styledb.gif");
+	}
+h2.stylesqueue {
+	background-image: url("titles/stylequeue.gif");
+	}
+h2.stylesmy {
+	background-image: url("titles/stylesmy.gif");
+	}
+h2.kb {
+	background-image: url("titles/kb.gif");
+	}
+h2.changelog {
+	background-image: url("titles/changelog.gif");
+	}
+h2.designing_prosilver {
+	background-image: url("titles/designing_prosilver.gif");
+	height: 48px;
+	}
+h2.phpbbjobsboard {
+	background-image: url("titles/phpbbjobsboard.gif");
+	height: 42px;
+	}
+h2.error401 {
+	background-image: url("titles/error401.gif");
+	}
+h2.error403 {
+	background-image: url("titles/error403.gif");
+	}
+h2.error404 {
+	background-image: url("titles/error404.gif");
+	}
+h2.error412 {
+	background-image: url("titles/error412.gif");
+	}
+h2.error500 {
+	background-image: url("titles/error500.gif");
+	}

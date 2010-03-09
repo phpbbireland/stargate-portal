@@ -1,0 +1,253 @@
+<!-- INCLUDE overall_header.html -->
+<a name="maincontent"></a>
+
+<form id="acp_k_vars" method="post" action="{U_ACTION}">
+
+<!-- IF S_OPT  == "Configure" -->
+<h1>{L_VARS_FOUND}: {S_SWITCH}</h1>
+<p>{L_TITLE_EXPLAIN_BLOCK}</p>
+
+
+<div style="display:<!-- IF S_SWITCH == 'k_age_ranges_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_age_ranges_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_announce_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_announce_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_bot_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_bot_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_cloud_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_cloud_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_irc_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_irc_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_last_online_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_last_online_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_links_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_links_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_link_to_us_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_link_to_us_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_news_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_news_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_recent_topics_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_recent_topics_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_team_speak_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_team_speak_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_the_team_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_the_team_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_top_referrals_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_top_referrals_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_top_posters_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_top_posters_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_top_topics_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_top_topics_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_cloud_search_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_cloud_search_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_link_convert_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_link_convert_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_quotes_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_quotes_vars.html --></div>
+
+
+<div style="display:<!-- IF S_SWITCH == '' -->inline<!-- ELSE -->none<!-- ENDIF -->">
+<fieldset>
+	<legend>{L_SHOW_BLOCKS_ON_INDEX_PORTAL}</legend>
+	<dl>
+		<dt><label for="show_blocks_on_portal_l">{L_SHOW_BLOCKS_ON_PORTAL_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_portal_l" name="show_blocks_on_portal_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_PORTAL_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_portal_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_PORTAL_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_portal_r">{L_SHOW_BLOCKS_ON_PORTAL_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_portal_r" name="show_blocks_on_portal_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_PORTAL_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_portal_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_PORTAL_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="show_blocks_on_index_l">{L_SHOW_BLOCKS_ON_INDEX_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_index_l" name="show_blocks_on_index_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_INDEX_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_index_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_INDEX_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_index_r">{L_SHOW_BLOCKS_ON_INDEX_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_index_r" name="show_blocks_on_index_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_INDEX_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_index_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_INDEX_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="show_blocks_on_search_l">{L_SHOW_BLOCKS_ON_SEARCH_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_search_l" name="show_blocks_on_search_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_SEARCH_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_search_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_SEARCH_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_search_r">{L_SHOW_BLOCKS_ON_SEARCH_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_search_r" name="show_blocks_on_search_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_SEARCH_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_search_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_SEARCH_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="show_blocks_on_mcp_l">{L_SHOW_BLOCKS_ON_MCP_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_mcp_l" name="show_blocks_on_mcp_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_MCP_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_mcp_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_MCP_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_mcp_r">{L_SHOW_BLOCKS_ON_MCP_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_mcp_r" name="show_blocks_on_mcp_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_MCP_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_mcp_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_MCP_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="show_blocks_on_upc_l">{L_SHOW_BLOCKS_ON_UCP_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_ucp_l" name="show_blocks_on_ucp_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_UCP_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_ucp_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_UCP_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_ucp_r">{L_SHOW_BLOCKS_ON_UCP_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_ucp_r" name="show_blocks_on_ucp_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_UCP_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_ucp_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_UCP_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="show_blocks_on_members_l">{L_SHOW_BLOCKS_ON_MEM_L}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_members_l" name="show_blocks_on_members_l" value="1" <!-- IF S_SHOW_BLOCKS_ON_MEM_L --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_members_l" value="0" <!-- IF not S_SHOW_BLOCKS_ON_MEM_L --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="show_blocks_on_members_r">{L_SHOW_BLOCKS_ON_MEM_R}:</label><br /></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="show_blocks_on_members_r" name="show_blocks_on_members_r" value="1" <!-- IF S_SHOW_BLOCKS_ON_MEM_R --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="show_blocks_on_members_r" value="0" <!-- IF not S_SHOW_BLOCKS_ON_MEM_R --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<legend>{L_K_SHOW_SMILIES}</legend>
+	<dl>
+		<dt><label for="k_show_smilies">{L_K_SHOW_SMILIES}:</label><br /><span>{L_K_SHOW_SMILIES_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="k_show_smilies" name="k_show_smilies" value="1" <!-- IF S_K_SHOW_SMILIES --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="k_show_smilies" value="0" <!-- IF not S_K_SHOW_SMILIES --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+
+
+<fieldset>
+	<legend>{L_FOOTER_IMAGES}</legend>
+	<dl>
+		<dt><label for="allow_footer_images">{L_ALLOW_FOOTER_IMAGES}:</label><br /><span>{L_ALLOW_FOOTER_IMAGES_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="allow_footer_images" name="allow_footer_images" value="1" <!-- IF S_ALLOW_FOOTER_IMAGES --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="allow_footer_images" value="0" <!-- IF not S_ALLOW_FOOTER_IMAGES --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+
+<fieldset>
+	<legend>{L_BLOCK_COOKIES}</legend>
+	<dl>
+		<dt><label for="use_cookies">{L_USE_COOKIES}:</label><br /><span>{L_USE_COOKIES_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="use_cookies" name="use_cookies" value="1" <!-- IF S_USE_COOKIES --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="use_cookies" value="0" <!-- IF not S_USE_COOKIES --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+
+<fieldset>
+	<legend>{L_BLOCKS_GLOBAL}</legend>
+	<dl>
+		<dt><label for="display_blocks_global">{L_DISPLAY_BLOCKS_GLOBAL}:</label><br /><span>{L_DISPLAY_BLOCKS_GLOBAL_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="display_blocks_global" name="display_blocks_global" value="1" <!-- IF S_DISPLAY_BLOCKS_GLOBAL --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="display_blocks_global" value="0" <!-- IF not S_DISPLAY_BLOCKS_GLOBAL --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+
+<fieldset>
+	<legend>{L_PORTAL_LOGOS}</legend>
+	<dl>
+		<dt><label for="allow_rotating_logos">{L_RAND_LOGOS}:</label><br /><span>{L_RAND_LOGOS_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="allow_rotating_logos" name="allow_rotating_logos" value="1" <!-- IF S_ALLOW_ROTATING_LOGOS --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" id="allow_rotating_logos" name="allow_rotating_logos" value="0" <!-- IF not S_ALLOW_ROTATING_LOGOS --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<legend>{L_RAND_HEADER}</legend>
+	<dl>
+		<dt><label for="rand_header">{L_ALLOW_RAND_HEADER}:</label><br /><span>{L_ALLOW_RAND_HEADER_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="rand_header" name="rand_header" value="1" <!-- IF S_RAND_HEADER == '1' --> checked="checked"<!-- ENDIF --> /> {L_HEADER_IMAGE}</label><br />
+			<label><input type="radio" class="radio" id="rand_header" name="rand_header" value="0" <!-- IF S_RAND_HEADER == '0' --> checked="checked"<!-- ENDIF --> /> {L_NO_HEADER}</label>
+		</dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<legend>{L_RAND_BANNER}</legend>
+	<dl>
+		<dt><label for="rand_banner">{L_ALLOW_RAND_BANNER}:</label><br /><span>{L_ALLOW_RAND_BANNER_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="rand_banner" name="rand_banner" value="1" <!-- IF S_RAND_BANNER == '1' --> checked="checked"<!-- ENDIF --> /> {L_HEADER_BANNER}</label><br />
+			<label><input type="radio" class="radio" id="rand_banner" name="rand_banner" value="2" <!-- IF S_RAND_BANNER == '2' --> checked="checked"<!-- ENDIF --> /> {L_FOOTER_BANNER}</label><br />
+			<label><input type="radio" class="radio" id="rand_banner" name="rand_banner" value="3" <!-- IF S_RAND_BANNER == '3' --> checked="checked"<!-- ENDIF --> /> {L_BOTH_BANNERS}</label><br />
+			<label><input type="radio" class="radio" id="rand_banner" name="rand_banner" value="0" <!-- IF S_RAND_BANNER == '0' --> checked="checked"<!-- ENDIF --> /> {L_NO_BANNERS}</label>
+		</dd>
+	</dl>
+</fieldset>
+<fieldset>
+	<legend>{L_MINI_MOD_DEVELOPMENT}</legend>
+	<dl>
+		<dt><label for="mini_mod_style_count">{L_MINI_MOD_STYLE_COUNT}:</label><br /><span>{L_MINI_MOD_STYLE_COUNT_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="2" maxlength="3" id="mini_mod_style_count" name="mini_mod_style_count" value="{S_MINI_MOD_STYLE_COUNT}" type="text" /></label>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="mini_mod_block_count">{L_MINI_MOD_BLOCK_COUNT}:</label><br /><span>{L_MINI_MOD_BLOCK_COUNT_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="2" maxlength="3" id="mini_mod_block_count" name="mini_mod_block_count" value="{S_MINI_MOD_BLOCK_COUNT}" type="text" /></label>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="mini_mod_mod_count">{L_MINI_MOD_MOD_COUNT}:</label><br /><span>{L_MINI_MOD_MOD_COUNT_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="2" maxlength="3" id="mini_mod_mod_count" name="mini_mod_mod_count" value="{S_MINI_MOD_MOD_COUNT}" type="text" /></label>
+		</dd>
+	</dl>
+</fieldset>
+
+
+<fieldset>
+	<legend>{L_ACRONYMS}</legend>
+	<dl>
+		<dt><label for="allow_acronyms">{L_ALLOW_ACRONYMS}:</label><br /><span>{L_ALLOW_ACRONYMS_EXPLAIN}</span></dt>
+		<dd>
+		<label><input type="radio" class="radio" id="allow_acronyms" name="allow_acronyms" value="1"<!-- IF S_ALLOW_ACRONYMS --> checked="checked" <!-- ENDIF --> />{L_YES}</label>
+		<label><input type="radio" class="radio" id="allow_acronyms" name="allow_acronyms" value="0"<!-- IF not S_ALLOW_ACRONYMS --> checked="checked" <!-- ENDIF --> />{L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>
+
+</div>
+
+{L_NO_VARS_FOUND}
+<!-- ENDIF -->
+
+<!-- IF MESSAGE -->
+<dl><legend><br /><b>{MESSAGE}</b><br /></legend></dl>
+<dl><br /></dl>
+<!-- ELSE -->
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+</fieldset>
+<!-- ENDIF -->
+{S_FORM_TOKEN}
+</form>
+<!-- INCLUDE overall_footer.html -->

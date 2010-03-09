@@ -1,0 +1,73 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<h1>{L_TITLE}</h1>
+
+<p>{L_TITLE_EXPLAIN}</p>
+
+<form id="acp_k_config" method="post" action="{U_ACTION}">
+
+<!-- IF S_OPT  == "Configure" -->
+<fieldset>
+	<legend>{L_BLOCKS_CONFIGURE}</legend>
+	<dl>
+		<dt><label for="portal_version">{L_PORTAL_VERSION}:</label><br /><span>{L_PORTAL_VERSION_EXPLAIN}</span></dt>
+		<dd><input class="post" size="6" maxlength="5" name="portal_version" value="{S_PORTAL_VERSION}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="blocks_width">{L_PORTAL_BLOCKS_WIDTH}:</label><br /><span>{L_PORTAL_BLOCKS_WIDTH_EXPLAIN}</span></dt>
+		<dd><input class="post" size="4" maxlength="3" name="blocks_width" value="{S_BLOCKS_WIDTH}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="blocks_enabled">{L_PORTAL_BLOCKS_ENABLED}:</label><br /><span>{L_PORTAL_BLOCKS_ENABLED_EXPLAIN}</span></dt>
+		<dd>
+			<label>
+			<input type="radio" class="radio" name="blocks_enabled" id="blocks_enabled" value="1"<!-- IF S_BLOCKS_ENABLED --> checked="checked" <!-- ENDIF --> />{L_YES}
+			<input type="radio" class="radio" name="blocks_enabled" id="blocks_enabled" value="0"<!-- IF not S_BLOCKS_ENABLED --> checked="checked" <!-- ENDIF --> />{L_NO}
+			</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="">{L_PORTAL_SET_LAYOUT}:</label><br /><span>{L_PORTAL_SET_LAYOUT_EXPLAIN}</span></dt>
+		<dd><label>
+			<select name="set_layout_default" id="set_layout_default" class="post">
+			<option value="0" <!-- IF S_PORTAL_SET_LAYOUT_DEFAULT == 0 --> selected  <!-- ENDIF --> >{L_BLOCK_DEFAULT}</option>
+			<option value="1" <!-- IF S_PORTAL_SET_LAYOUT_DEFAULT == 1 --> selected  <!-- ENDIF --> >{L_BLOCK_TWO_COLUMN}</option>
+			<option value="2" <!-- IF S_PORTAL_SET_LAYOUT_DEFAULT == 2 --> selected  <!-- ENDIF --> >{L_BLOCK_THREE_COLUMN}</option>
+			<option value="3" <!-- IF S_PORTAL_SET_LAYOUT_DEFAULT == 3 --> selected  <!-- ENDIF --> >{L_BLOCK_FOUR_COLUMN}</option>
+			<option value="4" <!-- IF S_PORTAL_SET_LAYOUT_DEFAULT == 4 --> selected  <!-- ENDIF --> >{L_BLOCK_FIVE_COLUMN}</option>
+			</select></label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="set_layout_new">{L_PORTAL_SET_LAYOUT_NEW}:</label><br /><span>{L_PORTAL_SET_LAYOUT_NEW_EXPLAIN}</span></dt>
+		<dd><label>
+			<select name="set_layout_new" id="set_layout_new" class="post">
+				<option value="0" <!-- IF S_PORTAL_SET_LAYOUT_NEW == 0 --> selected  <!-- ENDIF --> >{L_BLOCK_DEFAULT}</option>
+				<option value="1" <!-- IF S_PORTAL_SET_LAYOUT_NEW == 1 --> selected  <!-- ENDIF --> >{L_BLOCK_TWO_COLUMN}</option>
+				<option value="2" <!-- IF S_PORTAL_SET_LAYOUT_NEW == 2 --> selected  <!-- ENDIF --> >{L_BLOCK_THREE_COLUMN}</option>
+				<option value="3" <!-- IF S_PORTAL_SET_LAYOUT_NEW == 3 --> selected  <!-- ENDIF --> >{L_BLOCK_FOUR_COLUMN}</option>
+				<option value="4" <!-- IF S_PORTAL_SET_LAYOUT_NEW == 4 --> selected  <!-- ENDIF --> >{L_BLOCK_FIVE_COLUMN}</option>
+			</select></label>
+		</dd>
+	</dl>
+</fieldset>
+
+<!-- ENDIF -->
+</table>
+
+
+<!-- IF S_OPT == 'Config Data Saved' || S_OPT == 'Block Files Created' || S_OPT == 'Saved' -->
+<b>{S_OPT}<br /></b>
+<!-- ELSE -->
+<!-- IF S_OPT != "" -->
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />&nbsp;
+</fieldset>
+<!-- ENDIF -->
+<!-- ENDIF -->
+{S_FORM_TOKEN}
+</form>
+<!-- INCLUDE overall_footer.html -->

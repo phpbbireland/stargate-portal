@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http
+://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/
+@version $Id: stargate_041.xml 315 2009-01-10 05:43:06Z nexur $ -->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.2.xsd">
+
+
+<header>
+	<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+	<title lang="en">Stargate Portal Language update script 0.4.1, 0.4.2 to RC1.0.0</title>
+	<description lang="en">This file will assist in updating your language files</description>
+	<author-notes lang="en">Not test yet! Please report problems to: http://www.stargate-portal.com</author-notes>
+
+	<author-group>
+		<author>
+		<realname>Michael O'Toole</realname>
+		<email>o2l@eircom.net</email>
+		<username>michaelo</username>
+		<homepage>http://www.phpbbireland.com</homepage>
+		<contributions />
+		</author>
+	</author-group>
+
+	<mod-version>1.0.0</mod-version>
+	<installation>
+			<level>easy</level>
+			<time>200</time>
+			<target-version>3.0.4</target-version>
+	</installation>
+	<history/>
+</header>
+
+<action-group>
+
+
+
+<open src="language/en/common.php">
+	<edit>
+        <find><![CDATA[	'default_dateformat'	=> 'D M d, Y g:i a', // Mon Jan 01, 2007 1:37 pm
+	// Portal Language Variables //
+	'PORTAL'						=> 'Portal',
+	'FORUM_PORTAL'					=> 'Portal',
+	'TO_DAY'						=> 'Date: %s',
+	'USER_COUNTRY_FLAG'				=> 'Country Flag',
+	'USER_COUNTRY_FLAG_EXPLAIN'		=> 'Full mod requires <b>Location</b> data above (Google Map).',
+	'USER_REAL_NAME'				=> 'Real Name',
+	'USER_REAL_NAME_EXPLAIN'		=> 'Users first name',
+	'SUBMITTED_BY'					=> 'Submitted By',
+	'BY'							=> 'By',
+	'TITLE'							=> 'Title',
+	'READ_FULL'						=> 'Read full message',
+	'SHOW_ALL'						=> 'Show all announcements',
+	'DONT_HAVE_ACCOUNT' 			=> 'We are a free and open<br />community, all are welcome.<br />',
+	'REGISTRATION'       			=> '<b>Click here to Register</b>',
+	'FLAG'							=> 'Flag',
+	'FORUM_INDEX'					=> 'Forum',
+	'POST_BY_AUTHOR'				=> 'Author:',
+	'PROFILE_SMALL'					=> 'UCP',
+	'POST_BY_POSTER'				=> 'by',
+	'LOGIN_ERROR_USER_REAL_NAME'	=> 'Your real name (first or given name) is incorrect or too short (between 3 and 30 characters).',
+	'LOGIN_ERROR_USER_FLAG'			=> 'Country Flag incorrect or empty...',
+
+	'FLASH_IS_OFF'		=> '[flash] is <em>OFF</em>',
+	'FLASH_IS_ON'		=> '[flash] is <em>ON</em>',
+	'FLOOD_ERROR'		=> 'You cannot make another post so soon after your last.',
+	'FONT_COLOR'		=> 'Font colour',
+	'FONT_HUGE'			=> 'Huge',
+	'FONT_LARGE'		=> 'Large',
+	'FONT_NORMAL'		=> 'Normal',
+	'FONT_SIZE'			=> 'Font size',
+	'FONT_SMALL'		=> 'Small',
+	'FONT_TINY'			=> 'Tiny',
+	'MORE_SMILIES'		=> 'View more smilies',
+	'NO_ANNOUNCEMENTS'	=> 'No current announcements',
+
+	// BEGIN of text added by Quick Posting MOD
+	'K_QUICK_REPLY'			=> 'Kiss Simple Quick Reply',
+	'ADD_SMILIES'			=> 'Add smilies',
+	'ATTACH_SIG'			=> 'Attach your signature',
+	'DISABLE_BBCODE'		=> 'Disable BBCode',
+	'DISABLE_MAGIC_URL'		=> 'Don\'t automatically parse URLs',
+	'DISABLE_SMILIES'		=> 'Disable smilies',
+	'RECENT_REPLY'			=> 'View latest reply to topic...',
+	'QUICK_REPLY'			=> 'Quick Reply',
+	'QUICK_REPLY_NO'		=> 'Hide Quick Reply',
+	'ACP_MINI'				=> 'Admin',
+	'PROFILE_SMALL'			=> 'UCP',
+	'RAND_BANNER'			=> 'Portal Random Banner',
+	'ARRANGE_ON'			=> 'Arrange block',
+	'ARRANGE_OFF'			=> 'Save block layouts',
+	'WIDE'			=> '100%',
+	'NARROW'		=> '70%',
+	'VIEW_POSTS'	=> 'View Posts',
+	'CHATROOM'		=> 'Chat',
+
+	// Shorter version of standard lang var for small (narrow) styles //
+	'POST_NEWS'					=> 'News',
+	'POST_NEWS_GLOBAL'			=> 'Global News',
+	'SEARCH_ACTIVE_TOPICS_SMALL'	=> 'Active Topics!',
+	'SEARCH_NEW_SMALL'			=> 'New Posts!',
+	'SEARCH_SELF_SMALL'			=> 'Your Posts!',
+	'SEARCH_UNANSWERED_SMALL'	=> 'Unanswered Posts!',
+	'VIEW'						=> 'View',
+	'VIEW_TOPIC_NEWS'			=> 'News: ',
+));]]></find>
+        <action type="replace-with"><![CDATA[	// Portal Language Variables //
+	'PORTAL'						=> 'Portal',
+	'FORUM_PORTAL'					=> 'Portal',
+	'TO_DAY'						=> 'Date: %s',
+	'USER_COUNTRY_FLAG'				=> 'Country Flag',
+	'USER_COUNTRY_FLAG_EXPLAIN'		=> 'Full mod requires <b>Location</b> data above (Google Map).',
+	'USER_REAL_NAME'				=> 'Real Name',
+	'USER_REAL_NAME_EXPLAIN'		=> 'Users first name',
+	'SUBMITTED_BY'					=> 'Submitted By',
+	'BY'							=> 'By',
+	'TITLE'							=> 'Title',
+	'READ_FULL'						=> 'Read full message',
+	'SHOW_ALL'						=> 'Show all announcements',
+	'DONT_HAVE_ACCOUNT' 			=> 'We are a free and open<br />community, all are welcome.<br />',
+	'REGISTRATION'       			=> '<b>Click here to Register</b>',
+	'FLAG'							=> 'Flag',
+	'FORUM_INDEX'					=> 'Forum',
+	'POST_BY_AUTHOR'				=> 'Author:',
+	'PROFILE_SMALL'					=> 'UCP',
+	'POST_BY_POSTER'				=> 'by',
+	'LOGIN_ERROR_USER_REAL_NAME'	=> 'Your real name (first or given name) is incorrect or too short (between 3 and 30 characters).',
+	'LOGIN_ERROR_USER_FLAG'			=> 'Country Flag incorrect or empty...',
+
+	'FLASH_IS_OFF'		=> '[flash] is <em>OFF</em>',
+	'FLASH_IS_ON'		=> '[flash] is <em>ON</em>',
+	'FLOOD_ERROR'		=> 'You cannot make another post so soon after your last.',
+	'FONT_COLOR'		=> 'Font colour',
+	'FONT_HUGE'			=> 'Huge',
+	'FONT_LARGE'		=> 'Large',
+	'FONT_NORMAL'		=> 'Normal',
+	'FONT_SIZE'			=> 'Font size',
+	'FONT_SMALL'		=> 'Small',
+	'FONT_TINY'			=> 'Tiny',
+	'MORE_SMILIES'		=> 'View more smilies',
+	'NO_ANNOUNCEMENTS'	=> 'No current announcements',
+	'VERSION'			=> 'Version',
+
+	// BEGIN of text added by Quick Posting MOD
+	'K_QUICK_REPLY'			=> 'Kiss Simple Quick Reply',
+	'ADD_SMILIES'			=> 'Add smilies',
+	'ATTACH_SIG'			=> 'Attach your signature',
+	'DISABLE_BBCODE'		=> 'Disable BBCode',
+	'DISABLE_MAGIC_URL'		=> 'Don\'t automatically parse URLs',
+	'DISABLE_SMILIES'		=> 'Disable smilies',
+	'RECENT_REPLY'			=> 'View latest reply...',
+	'QUICK_REPLY'			=> 'Quick Reply',
+	'QUICK_REPLY_NO'		=> 'Hide Quick Reply',
+	'ACP_MINI'				=> 'Admin',
+	'PROFILE_SMALL'			=> 'UCP',
+	'RAND_BANNER'			=> 'Portal Random Banner',
+	'ARRANGE_ON'			=> 'Arrange block',
+	'ARRANGE_OFF'			=> 'Save block layouts',
+	'WIDE'			=> 'Wide',
+	'NARROW'		=> 'Fixed',
+	'VIEW_POSTS'	=> 'View Posts',
+	'CHATROOM'		=> 'Chat',
+
+	// Shorter version of standard lang var for small (narrow) styles //
+	'POST_NEWS'					=> 'News',
+	'POST_NEWS_GLOBAL'			=> 'Global News',
+	'SEARCH_ACTIVE_TOPICS_SMALL'	=> 'Active Topics!',
+	'SEARCH_NEW_SMALL'			=> 'New Posts!',
+	'SEARCH_SELF_SMALL'			=> 'Your Posts!',
+	'SEARCH_UNANSWERED_SMALL'	=> 'Unanswered Posts!',
+	'VIEW'						=> 'View',
+	'VIEW_TOPIC_NEWS'			=> 'News: ',
+
+	//SGP Refresh ALL
+	'CACHE_PURGED'		=> '<br />&nbsp;&#187;&nbsp;Cache purged!',
+	'CACHE_DIR_CLEANED'	=> '<br />&nbsp;&#187;&nbsp;cache directory cleaned up.',
+	'DISABSLE_USE'		=> '<br />&nbsp;&#187;&nbsp;Disabled, use refresh in ACP for time being...',
+	'DATABASE_TABLE'	=> ' database table!</b>',
+	'DELETING_RSSCACHE'	=> '<b>Deleting rsscache_*.dat files in cache directory:</b>',
+	'FAILED_UPDATE'		=> '<br /><b>Failed to update ',
+	'LOG_RSS_CACHE_CLEANED'	=> '<strong>Deleted cached versions of all rsscache_*.dat files</strong><br />%s',
+	'NO_INFO_FOUND'		=> '<br /><b>No info found in ',
+	'PURGING_CACHE'		=> '<b>Purging cache:</b>',
+	'REFRESHED'		=> ' - <b>refreshed</b>',
+	'REFRESHING_TEMPLATES'	=> '<b>Refreshing styles templates:</b>',
+	'REFRESHING_THEMES'	=> '<b>Refreshing styles themes:</b>',
+	'REFRESHING_IMAGESETS'	=> '<b>Refreshing styles imagesets:</b>',
+	'SGP_REFRESH_ALL'	=> 'SGP Refresh ALL',
+	'SGPRA_EXEPTIONS'	=> '<strong><font color="#FF0000">!NOTE</font>:<br />SGP Refresh ALL completed with exeptions!</strong> (see above for info)<br />',
+	'SGPRA_LOG_IN'		=> '<strong>log in</strong></a> as an <font color="#FF0000"><strong>ADMINISTRATOR</strong></font> and <font color="#FF0000"><strong>refresh</strong></font> this page...</b><br /><br /><hr />',
+	'SGPRA_NO_ADMIN'	=> '<font color="#FF0000"><strong>You do not have permission to run SGP Refresh ALL!</strong></font>',
+	'SGPRA_NO_ERRORS'	=> '<br /><strong><font color="#00FF00">SGP Refresh ALL completed without any errors!...</font></strong><br />',
+
+	'ARRANGE_ON'	=> 'Arrange Blocks',
+	'ARRANGE_OFF'	=> 'Save Changes',
+	'SGP_TOOLS'		=> 'Stargate Tools',
+	'WIDE2'			=> 'Style Width (100%)',
+	'NARROW2'		=> 'Style Width (70~90%)',
+	'TOOLS_ON'		=> 'Portal Tools',
+	'TOOLS_OFF'		=> 'Save Changes',
+	'ARRANGE_ON'	=> 'Arrange Blocks',
+	'ARRANGE_OFF'	=> 'Save Changes',
+	'SGP_TOOLS'		=> 'Stargate Tools',
+	'WIDE2'			=> 'Style Width (100%)',
+	'NARROW2'		=> 'Style Width (~70%)',
+	'PLURAL'		=> 'S',
+
+	'MAGIC_PASSWORD'	=> 'Secret password',
+	'MAGIC_EXPLAIN'		=> 'For the secret password please see below.',
+	'MAGIC_EXPLAIN2'	=> 'In an effort to reduce spam we have added some extra protection, please add word in \'red\' to the Secret Password field above.',
+));
+]]></action>
+			<comment lang="en">If in doubt you can replace all the portal vars with the 'Replace With row'.</comment>
+	</edit>
+</open>
+<open src="language/en/viewtopic.php">
+	<edit>
+        <find><![CDATA[	'MAKE_STICKY'				=> 'Change to Sticky',]]></find>
+        <action type="after-add"><![CDATA[	'MAKE_NEWS'					=> 'Change to News',
+	'MAKE_NEWS_GLOBAL'			=> 'Change to Global News',]]></action>
+			<comment lang="en">If the edit exists just ignore this edit.</comment>
+	</edit>
+</open>
+<open src="language/en/acp/common.php">
+	<edit>
+        <find><![CDATA[	'NO_EMAILS_DEFINED'		=> 'No valid e-mail addresses found.',]]></find>
+        <action type="after-add"><![CDATA[	'NO_EDIT'				=> 'Can\'t Edit',
+	'NO_DELETE'				=> 'Can\'t Delete',
+	'NO_MOVE_DOWN'			=> 'Can\'t move down',
+	'NO_MOVE_UP'			=> 'Can\'t move up',
+	'NO_RESYNC'				=> 'Resynchronise Disabled',]]></action>
+			<comment lang="en"></comment>
+	</edit>
+	<edit>
+        <find><![CDATA[// phpbbportal profile fields
+$lang = array_merge($lang, array(
+
+	'ACP_CAT_PORTAL'				=> 'Portal',
+	'ACP_K_CONFIG'					=> 'Portal Config',
+	'ACP_K_BLOCKS'					=> 'Blocks',
+	'ACP_K_MENUS'					=> 'Menus',
+	'ACP_K_MODULES'					=> 'Modules',
+	'ACP_K_VARS'					=> 'Manage Mod Variables',
+	'ACP_K_POLL'					=> 'Manage Poll Variables',
+	'ACP_K_NEWSFEEDS'				=> 'Manage Newsfeeds Variables',
+	'ACP_PORTAL_CONFIG'				=> 'Portal Config',
+
+// Blocks
+
+	'ACP_K_BLOCKS_ADD'				=> 'Add a New Block',
+	'ACP_K_BLOCKS_EDIT'				=> 'Edit Block',
+	'ACP_K_BLOCKS_DELETE'			=> 'Delete Blocks',
+	'ACP_K_BLOCKS_MANAGE'			=> 'Manage Blocks',
+	'ACP_K_UP'						=> 'Move Up',
+	'ACP_K_DOWN'					=> 'Move Down',
+	'ACP_K_PAGE_LEFT_BLOCKS'		=> 'Manage Left Blocks',
+	'ACP_K_PAGE_CERTRE_BLOCKS'		=> 'Manage Centre Blocks',
+	'ACP_K_PAGE_RIGHT_BLOCKS'		=> 'Manage Right Blocks',
+	'ACP_K_CENTRE_LEFT_BLOCKS'		=> 'Manage Centre Left Blocks',
+	'ACP_K_CENTRE_CENTRE_BLOCKS'	=> 'Manage Centre Middle Blocks',
+	'ACP_K_CENTRE_RIGHT_BLOCKS'		=> 'Manage Centre Right Blocks',
+
+// Menus
+
+	'ACP_K_MENU_HEADER'				=> 'Header Menus',
+	'ACP_K_MENU_MAIN'				=> 'Main (navigation) Menu',
+	'ACP_K_MENU_SUB'				=> 'Sub Menus',
+	'ACP_K_MENU_MANAGE'				=> 'Manage Menus',
+	'ACP_K_MENU_CREATE'				=> 'Create a new Menu Item',
+	'ACP_K_MENU_EDIT'				=> 'Edit Menu Item',
+	'ACP_K_MENU_DELETE'				=> 'Delete a Menu Item',
+	'ACP_K_MENU_ICONS'				=> 'View Menu Icons',
+	'ACP_K_MENU_ALL'				=> 'View all Menu Items',
+	'ACP_K_MENU_UNALLOCATED'		=> 'View unallocated items',
+
+// Modules
+
+	'ACP_K_MODS_ADD'				=> 'Add a New Module',
+	'ACP_K_MODS_BLOCKS'				=> 'Manage Block Module',
+	'ACP_K_MODS_BUGS'				=> 'Update Bugs Module',
+	'ACP_K_MODS_MODULES'			=> 'Update Mods Modules',
+	'ACP_K_MODS_THEMES'				=> 'Update Themes Module',
+	'ACP_K_MODS_STATUS'				=> 'Update Status Module',
+	'ACP_K_MODS_MISC'				=> 'Miscellaneous Modules',
+	'ACP_K_MODS_ALL'				=> 'View all Modules',
+	'ACP_K_MODS_EDIT'				=> 'Edit Module',
+	'ACP_K_MODS_DELETE'				=> 'Delete Module',
+	'ACP_K_CONFIG_WELCOME'			=> 'Edit Welcome Message',
+
+// Modules Variables
+
+	'ACP_K_VARS_CONFIG'				=> 'Manage Module Variables',
+	'ACP_K_ADMIN_POLL'				=> 'Manage Poll Variables',
+	'ACP_CAT_K_POLL_MANAGE'			=> 'Portal Poll',
+	'ACP_K_ADMIN_NEWSFEEDS'			=> 'Manage Newsfeeds Variables',
+	'ACP_K_ADMIN_POLL'				=> 'Manage Portal Poll',
+));
+
+
+// Stargate aka Kiss Plugins module
+$lang = array_merge($lang, array(
+
+	'ACP_CAT_PLUGINS'			=> 'Plugins',
+	'ACP_CAT_PLUGINS_EXPLAIN'	=> 'Stargate Portal Plug-ins Mod Manager',
+
+	'ACP_PLUGINS'				=> 'Plugins',
+	'ACP_PLUGIN_VARIABLES'		=> 'Configure Defaults',
+	'ACP_PLUGIN_CONFIG'			=> 'Configure Plugin Defaults',
+
+	'ACP_PLUGIN_MANAGE'			=> 'Manage Plugin',
+	'ACP_PLUGIN_ADD'			=> 'Add New Plugin',
+	'ACP_PLUGIN_EDIT'			=> 'Edit Plugin',
+	'ACP_PLUGIN_DELETE'			=> 'Delete Plugin',
+	'ACP_PLUGIN_UPDATE'			=> 'Update plugin',
+	'ACP_PLUGIN_UP'				=> 'Move Up',
+	'ACP_PLUGIN_DOWN'			=> 'Move Down',
+	'AVAILABLE_FORUM_IMAGE'		=> 'Available Images',
+	'AVAILABLE_FORUM_IMAGE_EXPLAIN'		=> 'Display a list of available forum images (images/forum_icons/). Hover over an image to see the path/name...',
+	'SHOW_FORUM_IMAGES'					=> 'Show available froum images.',
+));
+// phpbbportal profile fields
+
+
+// Mike
+$lang = array_merge($lang, array(
+	'MOD_IMAGES'  => 'The image mod allows the admin to select images for editing where images are stored in the Admins current style.',
+	'MOD_ICONS'   => 'The image mod allows the admin to select icons for editing where icons are stored in the Admins current style.',
+]]></find>
+        <action type="replace-with"><![CDATA[// phpbbportal profile fields
+$lang = array_merge($lang, array(
+
+	'ACP_CAT_PORTAL'				=> 'Portal',
+	'ACP_CAT_PORTAL_TOOLS'			=> 'Portal Tools',
+	'ACP_CAT_CLOUD'					=> 'Cloud Tags',
+
+// Common
+	'ACP_K_UP'						=> 'Move Up',
+	'ACP_K_DOWN'					=> 'Move Down',
+
+// Blocks
+	'ACP_K_BLOCKS'					=> 'Blocks',
+	'ACP_K_BLOCKS_ADD'				=> 'Add a New Block',
+	'ACP_K_BLOCKS_EDIT'				=> 'Edit Block',
+	'ACP_K_BLOCKS_DELETE'			=> 'Delete Blocks',
+	'ACP_K_BLOCKS_MANAGE'			=> 'Manage All Blocks',
+	'ACP_K_PAGE_LEFT_BLOCKS'		=> 'Manage Left Blocks',
+	'ACP_K_PAGE_CERTRE_BLOCKS'		=> 'Manage Centre Blocks',
+	'ACP_K_PAGE_RIGHT_BLOCKS'		=> 'Manage Right Blocks',
+
+// Menus
+	'ACP_K_MENUS'					=> 'Menus',
+	'ACP_K_MENU_HEADER'				=> 'Header Menus',
+	'ACP_K_MENU_MAIN'				=> 'Main (navigation) Menu',
+	'ACP_K_MENU_SUB'				=> 'Sub (secondary) Menus',
+	'ACP_K_MENU_MANAGE'				=> 'Manage Menus',
+	'ACP_K_MENU_CREATE'				=> 'Create a new Menu Item',
+	'ACP_K_MENU_EDIT'				=> 'Edit Menu Item',
+	'ACP_K_MENU_DELETE'				=> 'Delete a Menu Item',
+	'ACP_K_MENU_ICONS'				=> 'Manage Menu Icons',
+	'ACP_K_MENU_ALL'				=> 'View all Menu Items',
+	'ACP_K_MENU_UNALLOCATED'		=> 'View unallocated items',
+
+// Modules
+	'ACP_K_MODS_ADD'				=> 'Add a New Module',
+	'ACP_K_MODS_BLOCKS'				=> 'Block Modules',
+	'ACP_K_MODS_BUGS'				=> 'Bugs Modules',
+	'ACP_K_MODS_MODULES'			=> 'Mods Modules',
+	'ACP_K_MODS_STYLES'				=> 'Styles Modules',
+	'ACP_K_MODS_STATUS'				=> 'Status Modules',
+	'ACP_K_MODS_MISC'				=> 'Miscellaneous Modules',
+	'ACP_K_MODS_MODS'				=> 'Mod Modules',
+	'ACP_K_MODS_ALL'				=> 'All Modules',
+	'ACP_K_MODS_EDIT'				=> 'Edit Module',
+	'ACP_K_MODS_DELETE'				=> 'Delete Module',
+	'ACP_K_CONFIG_WELCOME'			=> 'Manage Welcome Message',
+	'ACP_K_CONFIG_STYLES'			=> 'Manage Styles Mods',
+
+// Modules Web Pages
+	'ACP_K_WEB_PAGES_ADD'			=> 'Add a New Web Page',
+	'ACP_K_WEB_PAGES_ALL'			=> 'View all pages',
+	'ACP_K_WEB_PAGES_EDIT'			=> 'Edit Web Page',
+	'ACP_K_WEB_PAGES_DELETE'		=> 'Delete this web page',
+	'ACP_K_WEB_PAGES_BODY'			=> 'Page Bodies',
+	'ACP_K_WEB_PAGES_HEAD'			=> 'Page Headers',
+	'ACP_K_WEB_PAGES_FOOT'			=> 'Page Footers',
+	'ACP_K_WEB_PAGES_PORTAL'		=> 'Manage Portal pages',
+
+// Modules Variables
+	'ACP_K_VARS'				=> 'Portal Variables',
+	'ACP_K_CONFIG'				=> 'Main Config',
+	'ACP_K_PORTAL_CONFIG'		=> 'Portal Config',
+	'ACP_K_MODULES'				=> 'Mini Modules ',
+	'ACP_K_VARS_CONFIG'			=> 'Configure Variables',
+	'ACP_K_VARS_CONFIG2'		=> 'Block Module Variables',
+	'ACP_K_POLL'				=> 'Poll Variables',
+	'ACP_K_NEWSFEEDS'			=> 'Newsfeeds Variables',
+	'ACP_K_ACRONYMS'			=> 'Acronyms',
+	'ACP_K_WEB_PAGES'			=> 'Web Pages',
+	'ACP_K_REFERERS'			=> 'HTTP Referers',
+	'ACP_K_TOOLS'				=> 'Additional Mods and Tools',
+	'ACP_MOD_VERSION_CHECK'		=> 'Mod Version Check',
+// Cloud
+	'ACP_K_CLOUD'				=> 'Cloud',
+	'ACP_K_CLOUD_EXPLAIN'		=> 'Here you can add, edit and delete tags',
+	'ACP_K_CLOUD_TAG'			=> 'Tag',
+	'ACP_K_CLOUD_TAG_EXPLAIN'	=> 'Here you can add, edit and delete tags',
+	'ACP_K_CLOUD_ADD'			=> 'Add a tag',
+	'ACP_K_CLOUD_DELETE'		=> 'Delete tag',
+	'ACP_K_CLOUD_EDIT'			=> 'Edit tag',
+	'ACP_K_CLOUD_BROWSE'		=> 'Browse tags',
+));
+
+// Stargate aka Kiss Plugins module
+$lang = array_merge($lang, array(
+
+	'ACP_CAT_K_BLOCKS_MANAGE'		=> 'Portal Blocks',
+	'ACP_CAT_K_MENUS_MANAGE'		=> 'Portal Menus',
+
+	'ACP_CAT_K_MODULES_MANAGE'		=> 'Portal Mini Modules',
+	'ACP_CAT_K_TOOLS_MANAGE'		=> 'Portal Tools & other Mods',
+
+	'ACP_CAT_K_WEB_PAGES_MANAGE'	=> 'Portal Web Pages',
+
+	'ACP_CAT_PLUGINS'			=> 'Plugins',
+	'ACP_CAT_PLUGINS_EXPLAIN'	=> 'Stargate Portal Plug-ins Mod Manager',
+
+	'ACP_PLUGINS'				=> 'Plugins',
+	'ACP_PLUGIN_VARIABLES'		=> 'Configure Defaults',
+	'ACP_PLUGIN_CONFIG'			=> 'Configure Plugin Defaults',
+
+	'ACP_PLUGIN_MANAGE'			=> 'Manage Plugin',
+	'ACP_PLUGIN_ADD'			=> 'Add New Plugin',
+	'ACP_PLUGIN_EDIT'			=> 'Edit Plugin',
+	'ACP_PLUGIN_DELETE'			=> 'Delete Plugin',
+	'ACP_PLUGIN_UPDATE'			=> 'Update plugin',
+	'ACP_PLUGIN_UP'				=> 'Move Up',
+	'ACP_PLUGIN_DOWN'			=> 'Move Down',
+	'AVAILABLE_FORUM_IMAGE'		=> 'Available Images',
+	'AVAILABLE_FORUM_IMAGE_EXPLAIN'		=> 'Display a list of available forum images (images/forum_icons/). Hover over an image to see the path/name...',
+	'SHOW_FORUM_IMAGES'					=> 'Show available forum images.',
+	'ENABLE_PORTAL'				=> 'Enable Portal',
+));
+// phpbbportal profile fields
+
+
+// Mike
+$lang = array_merge($lang, array(
+	'MOD_IMAGES'	=> 'The image mod allows the admin to select images for editing where images are stored in the Admins current style.',
+	'MOD_ICONS'		=> 'The image mod allows the admin to select icons for editing where icons are stored in the Admins current style.',
+	'VARS_FOUND'	=> 'Editing config for',]]></action>
+			<comment lang="en"></comment>
+	</edit>
+</open>
+
+<open src="language/en/acp/permissions_phpbb.php">
+	<edit>
+        <find><![CDATA[	'acl_a_k_portal'	=> array('lang' => 'Can view portal settings', 'cat' => 'portal'),
+	'acl_a_k_config'	=> array('lang' => 'Can manage portal config settings', 'cat' => 'portal'),
+	'acl_a_k_blocks'	=> array('lang' => 'Can manage portal blocks', 'cat' => 'portal'),
+	'acl_a_k_menus'		=> array('lang' => 'Can manage portal menus', 'cat' => 'portal'),
+	'acl_a_k_vars'		=> array('lang' => 'Can manage portal variables', 'cat' => 'portal'),
+	'acl_a_k_modules'	=> array('lang' => 'Can manage portal modules', 'cat' => 'portal'),]]></find>
+        <action type="replace-with"><![CDATA[	'acl_a_k_portal'	=> array('lang' => 'Can view portal settings', 'cat' => 'portal'),
+	'acl_a_k_web_pages'	=> array('lang' => 'Can manage portal web pages', 'cat' => 'portal'),
+	'acl_a_k_tools'		=> array('lang' => 'Can manage portal tools', 'cat' => 'portal'),]]></action>
+			<comment lang="en"></comment>
+	</edit>
+</open>
+
+
+<open src="language/en/acp/styles.php">
+	<edit>
+        <find><![CDATA[	'IMG_GLOBAL_UNREAD_LOCKED_MINE'		=> 'Global locked posted to new',]]></find>
+        <action type="after-add"><![CDATA[	'IMG_NEWS_READ'					=> 'News',
+	'IMG_NEWS_READ_MINE'			=> 'News posted to',
+	'IMG_NEWS_READ_LOCKED'			=> 'News locked',
+	'IMG_NEWS_READ_LOCKED_MINE'		=> 'News locked posted to',
+	'IMG_NEWS_UNREAD'				=> 'News new posts',
+	'IMG_NEWS_UNREAD_MINE'			=> 'News posted to new',
+	'IMG_NEWS_UNREAD_LOCKED'		=> 'News locked new post',
+	'IMG_NEWS_UNREAD_LOCKED_MINE'	=> 'News locked posted to new',]]></action>
+			<comment lang="en"></comment>
+	</edit>
+</open>
+
+
+<open src="">
+	<edit>
+        <find><![CDATA[]]></find>
+        <action type="replace-with"><![CDATA[]]></action>
+			<comment lang="en"></comment>
+	</edit>
+</open>
+
+
+<diy-instructions lang="en-gb"></diy-instructions>
+  </action-group>
+</mod>

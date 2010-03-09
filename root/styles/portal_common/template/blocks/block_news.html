@@ -1,0 +1,69 @@
+<!-- IDTAG block_news.html 17 March 2008 copyright phpbbireland.com 2007 -->
+
+<span class="news">
+<div>
+	<a id="nstart" name="top" accesskey="t"></a>
+
+	<!-- BEGIN news_row -->
+	<!-- IF news_row.S_NO_TOPICS -->
+		<center><span class="genmed"><strong>{L_NO_NEWS}</strong></span></center></dd>
+	<!-- ELSE -->
+	<div class="mynews <!-- IF news_row.S_ROW_COUNT is even -->bg1a<!-- ELSE -->bg2a<!-- ENDIF -->">
+		<div class="inner" style="min-height:90px;">
+			<span class="corners-top-news"><span></span></span>
+
+			<div class="news" style="width:100%;">
+				<span class="news_title" > {news_row.MINI_POST_IMG} <strong>{news_row.TITLE}</strong></span>
+				<span class="news_poll"> {news_row.ATTACH_ICON_IMG} <!-- IF news_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --></span>
+				<span class="news_time"> {news_row.TIME} </span>
+			</div>
+
+			<div style="width:100%; padding-top: 20px; padding-bottom: 20px;">
+				<span style="float:left; text-align:left; width:90%;">{news_row.TEXT}<a href="{news_row.U_VIEW}"> </a></span>
+				<span class="news_image"><img class="forum_icons" src="./images/forum_icons/news.png" width="48px" height="48px" alt="" /></span>
+			</div>
+					<!-- IF news_row.S_HAS_ATTACHMENTS -->
+						<br clear="all" /><br />
+						<table class="tablebg" width="100%" cellspacing="1">
+						<tr>
+							<td class="row3"><b class="genmed">{L_ATTACHMENTS}: </b></td>
+						</tr>
+						<!-- BEGIN attachment -->
+							<tr>
+								<!-- IF news_row.attachment.S_ROW_COUNT is even -->
+								<td class="row2">
+								<!-- ELSE -->
+								<td class="row1">
+								<!-- ENDIF -->
+									{news_row.attachment.DISPLAY_ATTACHMENT}
+								</td>
+							</tr>
+						<!-- END attachment -->
+						</table>
+					<!-- ENDIF -->
+
+			<br clear="all" />
+			<div style="width:100%;"><br /><hr /></div>
+
+			<div style="width:100%;">
+				<span class="news_poster"> {L_SUBMITTED_BY}:  <a href="{news_row.U_USER_PROFILE}">{news_row.POSTER}</a></span>
+				<span class="news_comments"> {L_COMMENTS}: {news_row.REPLIES}</span>
+				<span class="news_reply">
+					<a href="{news_row.U_VIEW}"> {news_row.U_VIEW_IMG}</a>
+					<a href="{news_row.U_PRINT}">{news_row.U_PRINT_IMG}</a>
+					<!-- IF news_row.ALLOW_REPLY -->
+					<a href="{news_row.U_POST_COMMENT}">{news_row.U_COMMENT_IMG}</a>
+					<!-- ENDIF -->
+					<a href="#nstart" title="Top"><img src="{T_IMAGESET_PATH}/icon_back_top.gif" width="14" height="14" alt="Top" /></a>
+				</span>
+			</div>
+			<span class="corners-bottom-news"><span></span></span>
+		</div>
+	</div>
+	<!-- ENDIF -->
+	<!-- IF news_row.S_NOT_LAST --><br /><!-- ENDIF -->
+	<!-- END news_row -->
+</div>
+</span>
+
+<!-- IDTAG ends block_news -->

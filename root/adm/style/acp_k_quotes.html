@@ -1,0 +1,86 @@
+<!-- INCLUDE overall_header.html -->
+<style>
+fieldset dt {
+	width: 25%;
+	text-align: left;
+	border: none;
+	border-right: 1px solid #CCCCCC;
+	padding-top: 3px;
+}
+
+.rtl fieldset dd {
+	margin: 0 25% 0 0;
+	padding: 0 5px 0 0;
+	border: none;
+	border-right: 1px solid #CCCCCC;
+}
+
+fieldset dd {
+	margin: 0 0 0 25%;
+	padding: 0 0 0 5px;
+	border: none;
+	border-left: 1px solid #CCCCCC;
+	vertical-align: top;
+	font-size: 1.00em;
+}
+
+</style>
+<a name="maincontent"></a>
+
+<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+
+<h1>{L_ACP_K_QUOTES}</h1>
+<p>{L_QUOTE_EXPLAIN}</p>
+
+<!-- IF S_EDIT_QUOTE -->
+	<form id="acp_quote" method="post" action="{U_ACTION}">
+	<fieldset>
+		<legend><!-- IF S_EDIT -->{L_EDIT_QUOTE}<!-- ELSE -->{L_ADD_QUOTE}<!-- ENDIF --></legend>
+		<dl>
+			<dt><label for="quote">{L_QUOTE}</label><br /></dt>
+			<dd><textarea id="quote" type="text" name="quote" value="{QUOTE}" rows="5" cols="400" />{QUOTE}</textarea></dd>
+
+		</dl>
+		<dl>
+			<dt><label for="author">{L_QUOTE_AUTHOR}:</label></dt>
+			<dd><input id="author" type="text" name="author" value="{AUTHOR}" maxlength="100" size="40" /></dd>
+		</dl>
+		{S_HIDDEN_FIELDS}
+		<p class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="save" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		</p>
+	</fieldset>
+	</form>
+<!-- ELSE -->
+	<form id="acp_quote" method="post" action="{U_ACTION}">
+	<fieldset class="tabulated">
+		<legend>{L_QUOTES}</legend>
+		<table cellspacing="1">
+			<thead>
+				<tr>
+					<th>{L_QUOTE}</th>
+					<th>{L_QUOTE_AUTHOR}</th>
+					<th>{L_ACTION}</th>
+				</tr>
+			</thead>
+		<tbody>
+		<!-- BEGIN quotes -->
+			<!-- IF quotes.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<td style="text-align: left;">{quotes.QUOTE}</td>
+			<td style="text-align: left;">{quotes.AUTHOR}</td>
+			<td>&nbsp;<a href="{quotes.U_EDIT}">{ICON_EDIT}</a>&nbsp;&nbsp;<a href="{quotes.U_DELETE}">{ICON_DELETE}</a>&nbsp;</td>
+			</tr>
+		<!-- END quotes -->
+		</tbody>
+	</table>
+	<p class="quick" style="text-align:center;">{S_HIDDEN_FIELDS}
+		<input class="button1" name="add" id="add" type="submit" value="{L_QUOTE_ADD}" />
+		<input class="button2" name="config" id="config" type="submit" value="{L_CONFIG_QUOTES}" />
+	</p>
+	</fieldset>
+	</form>
+	<strong><br />{MESSAGE}</strong>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

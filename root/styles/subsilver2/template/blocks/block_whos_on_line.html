@@ -1,0 +1,20 @@
+<!-- IDTAG block_whos_on_line starts 13 September 2007 -->
+<!-- INCLUDE blocks/blocks_header_left.html -->
+	<a href="{U_VIEWONLINE}"> {L_WHO_IS_ONLINE} <img src="{T_THEME_PATH}/images/mini_whosonline.gif" height="12" width="14" alt="{L_WHO_IS_ONLINE}" /></a>
+<!-- INCLUDE blocks/blocks_header_right.html -->
+
+<!-- IF S_DISPLAY_ONLINE_LIST -->
+<div class="box" style="text-align:left; padding:0;">
+	<span style="float:left; width:auto; height:auto; padding:5px; padding-top:30px; padding-bottom:30px;"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}"/></span>
+	<div style="margin-left:40px; border-left: solid 1px #B7B7B6; " >
+		<div class="row1" style="padding: 5px;">
+			{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /><br />{LOGGED_IN_USER_LIST}<br /><br />
+		</div>
+		<div class="row1" style="padding: 5px; border-top: solid 1px #B7B7B6;">
+			<!-- IF LEGEND --><em><strong>{L_LEGEND}:</strong> {LEGEND}</em><!-- ENDIF -->
+		</div>
+	</div>
+</div>
+<!-- ENDIF -->
+<!-- INCLUDE blocks/blocks_footer.html -->
+<!-- IDTAG block_whos_on_line ends -->

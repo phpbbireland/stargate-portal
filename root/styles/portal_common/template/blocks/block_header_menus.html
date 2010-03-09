@@ -1,0 +1,25 @@
+<!-- IDTAG block_header_menus.html starts November 4, 2007 -->
+<!-- IF portal_header_menus_row && S_USER_LOGGED_IN -->
+<div id="tabs">
+	<ul>
+	<!-- BEGIN portal_header_menus_row -->
+		<li <!-- IF portal_header_menus_row.S_SELECTED -->class="activetab"<!-- ENDIF -->>
+		<a href="{portal_header_menus_row.PORTAL_HEADER_MENU_LINK}">
+		<span class="menus"><!-- IF portal_header_menus_row.PORTAL_HEADER_MENU_ICON -->
+		<img src="{T_THEME_PATH}/images/pips/{portal_header_menus_row.PORTAL_HEADER_MENU_ICON}" alt="" /><!-- ENDIF -->
+		{portal_header_menus_row.PORTAL_HEADER_MENU_NAME}</span></a></li>
+	<!-- END portal_header_menus_row -->
+	</ul>
+</div>
+<!-- ENDIF -->
+<!-- IF not S_USER_LOGGED_IN -->
+<div id="tabs">
+	<ul>
+		<li class="activetab"><a href="web.php?mode=welcome"><span>Welcome</span></a></li>
+		<li><a href="web.php?mode=about"><span>About</span></a></li>
+		<li><a href="web.php?mode=features"><span>The features</span></a></li>
+	</ul>
+	<!-- IF DEBUG_QUERIES -->{HM_PORTAL_DEBUG}<!-- ENDIF -->
+</div>
+<!-- ENDIF -->
+<!-- IDTAG block_header_menus.html ends -->

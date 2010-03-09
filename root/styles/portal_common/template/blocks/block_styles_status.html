@@ -1,0 +1,38 @@
+<!-- IDTAG start block_style_status.html 17 March 2008 copyright phpbbireland.com 2007 -->
+
+<div class="block_data">
+<!-- BEGIN our_mod_style_row -->
+	<div class="style_status">
+		<div style="text-align:center; padding-top:5px; padding-bottom:2px;">&bull; <a rel="external" href="{our_mod_style_row.U_MOD_LINK}"><span class="red">{our_mod_style_row.MOD_NAME}</span></a> &bull; </div>
+		<div style="text-align:center; padding:3px;">{L_VERSION}: {our_mod_style_row.MOD_VERSION}</div>
+		<div style="text-align:center">{L_STATUS}: {our_mod_style_row.MOD_STATUS}<br /></div>
+		<div style="text-align:center">{our_mod_style_row.MOD_INFO}<br /></div>
+		<div style="text-align:center; padding:3px;">{L_LAST_UPDATED}:<br />{our_mod_style_row.MOD_UPDATED}</div>
+		<div style="text-align:center"><br />{L_DESIGNED_BY}: <a rel="external" href="{our_mod_style_row.U_MOD_LINK}">{our_mod_style_row.MOD_AUTHOR}</a></div>
+		<!-- IF our_mod_style_row.MOD_AUTHOR_2 --><div style="text-align:center"><br />{L_PORTED_BY}: <a rel="external" href="{our_mod_style_row.MOD_LINK_2}">{our_mod_style_row.MOD_AUTHOR_2}</a></div><!-- ENDIF -->
+		<!-- IF our_mod_style_row.U_MOD_TEST_IT --><div style="text-align:center"><a rel="rel" href="{our_mod_style_row.U_MOD_TEST_IT}">{TEST_IT_IMG}</a></div><!-- ENDIF -->
+		<!-- IF our_mod_style_row.MOD_THIS < MOD_COUNT --><div class="hr"><hr /></div><!-- ENDIF -->
+	</div>
+<!-- END our_mod_style_row -->
+<!-- IF DEBUG_QUERIES -->{SS_PORTAL_DEBUG}<!-- ENDIF -->
+</div>
+
+<div class="block_data">
+<div class="hr">&nbsp;</div>
+<!-- BEGIN mod_style_row -->
+	<div class="style_status">
+		<div style="text-align:center; padding-top:5px; padding-bottom:2px;">&bull; <a rel="external" href="{mod_style_row.U_MOD_LINK}"><span class="red">{mod_style_row.MOD_NAME}</span></a> &bull; </div>
+		<div style="text-align:center; padding:3px;">{L_VERSION}: {mod_style_row.MOD_VERSION}</div>
+		<div style="text-align:center">{L_STATUS}: {mod_style_row.MOD_STATUS}<br /></div>
+		<div style="text-align:center">{mod_style_row.MOD_INFO}<br /></div>
+		<div style="text-align:center; padding:3px;">{L_LAST_UPDATED}:<br />{mod_style_row.MOD_UPDATED}</div>
+		<div style="text-align:center"><br />{L_DESIGNED_BY}: <a rel="external" href="{mod_style_row.U_MOD_LINK}">{mod_style_row.MOD_AUTHOR}</a></div>
+		<!-- IF mod_style_row.MOD_AUTHOR_2 --><div style="text-align:center"><br />{L_PORTED_BY}: <a rel="external" href="{mod_style_row.MOD_LINK_2}">{mod_style_row.MOD_AUTHOR_2}</a></div><!-- ENDIF -->
+		<!-- IF mod_style_row.U_MOD_TEST_IT --><div style="text-align:center"><a rel="rel" href="{mod_style_row.U_MOD_TEST_IT}">{TEST_IT_IMG}</a></div><!-- ENDIF -->
+		<!-- IF mod_style_row.MOD_THIS < MOD_COUNT --><div class="hr"><hr /></div><!-- ENDIF -->
+	</div>
+<!-- END mod_style_row -->
+<!-- IF DEBUG_QUERIES -->{SS_PORTAL_DEBUG}<!-- ENDIF -->
+</div>
+
+<!-- IDTAG ends block_style_status.html -->

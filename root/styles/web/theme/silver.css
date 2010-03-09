@@ -1,0 +1,26 @@
+body {
+	font-size: 10px;
+}
+
+.forabg  {
+	background: #505C65 url(images/silver/forabg.gif) repeat-x;
+}
+
+.forumbg  {
+	background: #505C65 url(images/silver/forabg.gif) repeat-x;
+}
+
+.navbar {
+	background-image:url(images/silver/innerbox_bg.gif);
+	background-repeat: repeat-x;
+}
+
+li.row {
+	background-image: url(images/silver/row_bg.gif);
+	background-color: #e8ecee;
+}
+.head1 {
+	padding:10px;
+
+	font-weight:bold;
+}

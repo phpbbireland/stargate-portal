@@ -1,0 +1,61 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+
+<h1>{L_ACP_ACRONYMS}</h1>
+<p>{L_ACP_ACRONYMS_EXPLAIN}</p>
+
+<!-- IF S_EDIT_ACRONYM -->
+	<form id="acp_acronym" method="post" action="{U_ACTION}">
+	<fieldset>
+		<legend><!-- IF S_EDIT -->{L_EDIT_ACRONYM}<!-- ELSE -->{L_ADD_ACRONYM}<!-- ENDIF --></legend>
+		<dl>
+			<dt><label for="acronym">{L_ACRONYM}</label><br /></dt>
+			<dd><input id="acronym" type="text" name="acronym" value="{ACRONYM}" maxlength="100" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="meaning">{L_ACRONYM_MEANING}:</label></dt>
+			<dd><input id="meaning" type="text" name="meaning" value="{MEANING}" maxlength="120" size="60" /></dd>
+		</dl>
+		{S_HIDDEN_FIELDS}
+		<p class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="save" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		</p>
+	</fieldset>
+	</form>
+<!-- ELSE -->
+	<form id="acp_acronym" method="post" action="{U_ACTION}">
+	<fieldset class="tabulated">
+		<legend>{L_ACRONYM}</legend>
+		<table cellspacing="1">
+			<thead>
+				<tr>
+					<th>{L_ACRONYM}</th>
+					<th>{L_ACRONYM_MEANING}</th>
+					<th>{L_ACTION}</th>
+				</tr>
+			</thead>
+		<tbody>
+
+		<!-- BEGIN acronyms -->
+			<!-- IF acronyms.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<td style="text-align: left;">{acronyms.ACRONYM}</td>
+			<td style="text-align: left;">{acronyms.MEANING}</td>
+			<td>&nbsp;<a href="{acronyms.U_EDIT}">{ICON_EDIT}</a>&nbsp;&nbsp;<a href="{acronyms.U_DELETE}">{ICON_DELETE}</a>&nbsp;</td>
+			</tr>
+		<!-- END acronyms -->
+	</tbody>
+	</table>
+	<p class="quick" style="text-align:center;">{S_HIDDEN_FIELDS}
+		<input class="button1" name="add" id="add" type="submit" value="{L_ADD_ACRONYM}" />
+		<input class="button2" name="config" id="config" type="submit" value="{L_CONFIG_ACRONYMS}" />
+	</p>
+	</fieldset>
+	</form>
+	<strong><br />{MESSAGE}</strong>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

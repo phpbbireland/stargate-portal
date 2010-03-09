@@ -1,0 +1,857 @@
+/* Website styles */
+
+* {
+	/* Reset browsers default margin, padding and font sizes */
+	margin: 0;
+	padding: 0;
+	}
+html {
+	color: #536482;
+	background-color: #ACA8A1;
+	font-size: 100%;
+
+	}
+body {
+	/* Text-Sizing with ems: http://www.clagnut.com/blog/348/ */
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	color: #536482;
+	background-color: #ACA8A1;
+	font-size: 62.5%;			/* This sets the default font size to be equivalent to 10px */
+	margin: 0;
+	text-align: center;
+	}
+
+/* Main blocks
+---------------------------------------- */
+#web-wrap {
+	width: 930px;
+	background: #FFFFFF url("images/bg_body.gif") repeat-y 0 0;
+	margin: 10px auto;
+	text-align: left;
+	padding: 0;
+	}
+#simple-wrap {
+	padding: 6px 10px;
+	}
+#web-page-header {
+	background: url("images/web_bg_header.gif") repeat-x 0 0;
+	height: 150px;
+	clear: both;
+	}
+#page-body {
+	margin: 0 20px;
+	clear: both;
+	}
+#page-body .navbar {
+	margin: 4px 0;
+	}
+	
+/* JobCoin.com forum widget tweaking */
+
+#page-body .jobcoin {
+	background-color: #D6ECD5;
+	color: #228822;
+	}
+	
+#page-body .jobcoin ul {
+	list-style: none;
+	padding: 0 0 1em;
+	}
+	
+#page-body .jobcoin li.hotjobs {
+	float: left;
+	}
+
+#page-body .jobcoin li.viewall {
+	float: right;
+	}
+
+/* Page body content styles */
+#main {
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	width: 580px;
+	float: left;
+	clear: both;
+	}
+#main2 {
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	width: 430px;
+	float: left;
+	clear: both;
+	}
+#main-extra {
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	width: 580px;
+	float: none;
+	clear: both;
+	}
+.wide {
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	width: 100% !important;
+	float: none;
+	clear: both;
+}
+#main a, #main-extra a {
+	text-decoration: underline;
+}
+#main a.no-underline, #main-extra a.no-underline {
+	text-decoration: none;
+}
+#main .pagination a {
+	text-decoration: none;
+}
+#main h3 a, #main-extra h3 a {
+	color: #d21a4e;
+}
+#main h3, #main-extra h3 {
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+	text-transform: none;
+	color: #d21a4e;
+	border-bottom: none;
+}
+#main h3 span, #main-extra h3 span {
+	color: #222222;
+	}
+#main .panel h3, #main-extra .panel h3 {
+	border-bottom:1px solid #CCCCCC;
+	color:#115098;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:1.05em;
+	font-weight:bold;
+	padding-bottom:2px;
+	text-transform:uppercase;
+	margin:0.5em 0pt;
+}
+#extras h3 a {
+	color: #333333;
+}
+
+#main h4, #main-extra h4, #main h5, #main-extra h5 {
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+	text-transform: none;
+	color: #333333;
+	margin-top: 1.5em;
+	}
+#main p, #main-extra p {
+	margin-bottom: 1em;
+	font-size: 1.2em;
+	}
+#main strong, #main-extra strong {
+	color: #222222;
+	}
+#main .pagination strong {
+	color: #FFF;
+	}
+#main b, #main-extra b {
+	color: #222222;
+	font-weight: normal;
+	}
+#main ul, #main ol {
+	font-size: 1.2em;
+	margin-left: 2em;
+	line-height: 1.3em;
+	}
+#main ul ul, #main ol ol{
+	font-size: 1em;
+	}
+#main ul h3, #main ol h3 {
+	font-size: 1em;
+	}
+#main ul.list, #main-extra ul.list {
+	margin-bottom: 1em;
+	font-size: 1em;
+	}
+#main ul.list ul, #main-extra ul.list ul {
+	margin-bottom: 0;
+	}
+#main ul.list li, #main-extra ul.list li {
+	margin-bottom: 0.2em;
+	font-size: 1.2em;
+	margin-left: 1.5em;
+	color:#536482;
+	}
+#main ul.list li li, #main-extra ul.list li li {
+	font-size: 1em;
+	}
+
+#main div.column1 {
+	width: 275px;
+	float: left;
+	clear: left;
+	}
+#main div.column2 {
+	width: 275px;
+	float: right;
+	}
+
+#main div.columnspace {
+	width: 20px;
+	height: auto;
+	float: left;
+}
+
+dl.text {
+	font-size: 1.2em;
+}
+dl.text dt  {
+	font-weight: bold;
+	margin-top: 1.2em;
+}
+
+/* Tools listing */
+dl.tools {
+
+}
+dl.tools dt {
+	font-size: 1em;
+}
+dl.tools dd {
+	margin-bottom: 0.5em;
+	font-size: 1em;
+}
+dl.tools dd a {
+	color: #222222;
+}
+
+
+/* Specific column content tweaks */
+#main div.column1 p, #main div.column2 p {
+	margin-bottom: 0.5em;
+	}
+body.home #main div.column1 li, body.home #main div.column2 li {
+	font-size: 1.1em;
+	}
+
+
+/* News listing */
+#main ul.news {
+	border-top: 1px solid #FFFFFF;
+	list-style: none;
+	margin-left: 0;
+	}
+#main ul.news li {
+	padding: 5px 0 4px 0;
+	border-bottom: 1px solid #CCCCCC;
+	}
+#main ul.news li.last {
+	border-bottom: none;
+	}
+#main ul.news {
+	border-top: none;
+	}
+#main ul.news li {
+	padding: 0 0 4px 0;
+	margin-bottom: 5px;
+	margin-left: 0;
+	border-bottom-color: #E0E0E0;
+	}
+	
+/* JobCoin.com index widget tweaking */
+#main .column1.jobcoin-widget h3 {
+	margin-bottom: 0;
+	}
+#main .column1.jobcoin-widget h4 {
+	margin: 0 0 3px;
+	font-weight: normal;
+	font-style: italic;
+	}
+#main .column1.jobcoin-widget .mini-panel.feed-stats p {
+	margin: 5px 0;
+	}
+
+/* Feed Statistics */
+#main .mini-panel.feed-stats p {
+	margin: 0;
+	}
+	
+#main .mini-panel.feed-stats p a {
+	padding: 1px 0pt 1px 17px;
+	background: transparent url(images/feed-icon-14x14.png) no-repeat scroll 0 50%;
+	}
+
+#main .mini-panel.feed-stats p img {
+	vertical-align: middle;
+	}
+	
+/* Menu  listing */
+ul.menu {
+	border-top: 1px solid #FFFFFF;
+	list-style: none;
+	}
+ul.menu li {
+	padding: 5px 0 4px 0;
+	border-bottom: 1px solid #CCCCCC;
+	margin: 0;
+	}
+ul.menu li.last {
+	border-bottom: none;
+	}
+
+/* Ads  listing */
+ul.ads {
+	border-top: 1px solid #FFFFFF;
+	list-style: none;
+	}
+ul.ads li {
+	padding: 5px 0 4px 0;
+	border-bottom: 1px solid #CCCCCC;
+	margin: 0;
+	}
+ul.ads li.last {
+	border-bottom: none;
+	}
+
+/* Text-link favicon-age */
+a.ads-favicon {
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+	padding: 2px 0 2px 18px;
+	}
+
+
+/* Search box
+--------------------------------------------- */
+#navbar #search-box {
+	display: block;
+	float: right;
+	width: 165px;
+	height: 30px;
+	margin: 0px;
+	background: url("images/bg_search.gif") 0 0 no-repeat;
+	position: static;
+	}
+#navbar #search-box fieldset {
+	border: none;
+	padding-top: 6px;
+	}
+#navbar #search-box input {
+	width: 125px;
+	height: 19px !important;
+	margin-left: 28px;
+	border: none !important;
+	background-color: transparent;
+	font-size: 1.1em !important;
+	padding-top: 2px
+	}
+ul.navlinks {
+	font-weight: normal;
+}
+
+.new {
+	color: #d21a4e !important;
+	font-weight: bold;
+	}
+
+
+/* Extras column */
+#extras {
+	width: 260px;
+	float: right;
+	margin:0px;
+	}
+#extras2 {
+	width: 440px;
+	float: right;
+	margin:0px;
+	}
+
+dl.extra-box {
+	display: block;
+	width: 260px;
+	height: 77px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	margin-bottom: 5px;
+	}
+
+dl.extra-box-images {
+	display: block;
+	width: 500px;
+	height: 320px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	margin-bottom: 5px;
+	}
+
+dl.extra-box dt a {
+	font-weight: bold;
+	display: block;
+	padding: 10px 0 5px 10px;
+	color: #333333 !important;
+	text-decoration: none !important;
+	}
+dl.extra-box dd a {
+	font-weight: bold;
+	display: block;
+	color: #FFFFFF !important;
+	padding-left: 10px;
+	padding-right: 50px;
+	text-decoration: none !important;
+	}
+dl.extra-box dd.fileformat {
+	padding-left: 10px;
+	padding-top: 5px;
+}
+dl.extra-box dd.fileformat label {
+	color: #FFF;
+}
+dl.extra-box dt a:hover {
+	text-decoration: none;
+	color: #000000 !important;
+	}
+
+ul.download-update {
+	font-size: 1.2em;	
+}
+
+
+dl.next {
+	background-image: url("images/next.png");
+	}
+dl.previous {
+	background-image: url("images/previous.png");
+	}
+
+dl.download {
+	background-image: url("images/bg_download.png");
+	}
+dl.download2 {
+	background-image: url("images/bg_download2.png");
+	}
+dl.downloadr {
+	background-image: url("images/bg_downloadr.png");
+	}
+dl.downloadb {
+	background-image: url("images/bg_downloadb.png");
+	}
+dl.download-contrib {
+	background-image: url("images/bg_download_contrib.png");
+	}
+dl.shop {
+	background-image: url("images/bg_shop.png");
+	}
+
+dl.themes {
+	background-image: url("images/themes.gif");
+	}
+
+div.mini-panel {
+	padding: 0 10px;
+	background-color: #ebebeb;
+	margin-bottom: 5px;
+	}
+div.mini-panel h3 {
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	margin: 5px 0 0 0;
+	font-weight: bold;
+	color: #333333;
+	}
+div.mini-panel p {
+	font-size: 1em;
+	margin: 3px 0;
+}
+div.mini-panel span.corners-top,
+div.mini-panel span.corners-bottom {
+	margin: 0 -10px;
+	}
+div.sections {
+	/* */
+}
+
+
+
+
+/* Page footer styles*/
+#page-footer {
+	background: url("images/bg_footer.gif") repeat-x 0 100%;
+	clear: both;
+	/*padding-top: 15px;*/
+	}
+#page-footer p {
+	border-top: 1px solid #CCCCCC;
+	margin: 15px 30px 0 30px;
+	padding-top: 10px;
+	text-align: center;
+	}
+#page-footer .navbar {
+	margin: 4px 30px 15px;
+	/* This navbar doesn't follow a floated element, so thus doesn't need the "height: 1%" hack, which amazingly destroys margin */
+	height: auto;
+	}
+#page-footer p#sf-tracker, #page-footer p#sf-tracker a img {
+	border: none;
+	margin: 0;
+	padding: 0;
+	height: 0;
+	width: 0;
+	line-height: 0;
+	}
+#page-footer #advert-leaderboard, #page-footer #advert-leaderboard img,
+#page-footer #advert-leaderboard iframe, #page-footer #advert-leaderboard object{
+	width: 728px;
+	height: 90px;
+	border: none;
+	margin: 0 auto;
+	padding: 0;
+	}
+#page-footer #advert-leaderboard {
+	padding-top: 15px;
+}
+#copyright {
+	padding: 0 5px 5px 5px;
+	text-align: center;
+	color: #555555;
+	}
+#copyright a {
+	color: #222222;
+	}
+
+/* Ads*/
+
+div.banner-ad {
+	border: solid 1px #DDDDDD;
+	border-width: 1px 0;
+	padding: 1em 0;
+	text-align: center;
+	background: url("images/bg_ads.gif") no-repeat  100% 100%;
+}
+
+/* License agreement */
+#license {
+	height: 200px;
+	overflow: auto;
+	border: 1px solid #DDDDDD;
+	border-width: 1px 0;
+	padding: 1em;
+	background-color: #F7F7F7;
+	margin: 0.2em 0;
+}
+#license h3 {
+	color: #536482;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+div.expand {
+	text-align: right;
+	text-transform: uppercase;
+	font-size: 1.1em;
+}
+
+/* Subscription link */
+div.subscribe fieldset  {
+	padding-top: 5px;
+	border-top: 1px solid #FFFFFF;
+}
+
+
+
+/*
+	About Page: Team Listing
+*/
+
+div.column1wide {
+	width: 50%;
+	float: left;
+	clear: left;
+	}
+div.column2wide {
+	width: 50%;
+	float: right;
+	}
+
+#main-extra h3.teamtitle {
+	font-size: 1.8em;
+	font-weight: bold;
+	padding: 5px 10px;
+	margin: 1.2em 0 0;
+	border: none;
+	text-transform: none;
+}
+
+#main-extra p.teamdesc {
+	margin: 0;
+	padding: 0 20px;
+}
+
+#main-extra dl.member-outline {
+	margin: 0.5em 0 0;
+	padding: 0 20px;
+	font-size: 1.2em;
+}
+
+#main-extra dl.member-outline dt.name-term a,
+#main-extra dl.member-outline dt.name-term a strong {
+	text-decoration: none;
+	color: #536482;
+}
+
+#main-extra dd.detailed-definition {
+	padding: 0 10px;
+	background-color: #ebebeb;
+	margin: 5px 15px 20px 15px;
+	}
+
+#main-extra dd.detailed-definition span.corners-top,
+#main-extra dd.detailed-definition span.corners-bottom {
+	margin: 0 -10px;
+	}
+
+#main-extra dl.info-snippets {
+	margin: 0;
+	padding: 0;
+}
+
+#main-extra div.user-photo {
+	float: left;
+	text-align: center;
+	vertical-align: top;
+	font-size: 1.0em;
+	padding: 0 10px 5px 0;
+}
+
+#main-extra div.user-photo img {
+	border: 1px solid #000000;
+}
+
+#main-extra div.content-panel {
+	text-align: left;
+	vertical-align: top;
+	padding: 8px 5px;
+}
+
+#main-extra div.user-photo a:link,
+#main-extra div.user-photo a:hover,
+#main-extra div.user-photo a:visited,
+#main-extra div.content-panel a:link,
+#main-extra div.content-panel a:hover,
+#main-extra div.content-panel a:visited {
+	text-decoration: none;
+}
+
+#main-extra dt.snippet-name {
+	font-weight: bold;
+	font-size: 1.20em;
+	color: #000000;
+	margin: 0;
+	padding: 0;
+}
+
+#main-extra dl.info-snippets dd.snippet-location,
+#main-extra dl.info-snippets dd.snippet-blurb {
+	margin: 0 0 1em;
+	font-size: 0.925em;
+}
+
+#main-extra dl.info-snippets dd.snippet-links {
+	font-size: 0.875em;
+}
+
+#main-extra dl.info-snippets dd.snippet-rank{
+	font-size: 0.85em;
+	font-weight: 500;
+}
+
+#about-acp {
+	text-align: center;
+	clear: both;
+	padding-top: 1em;
+}
+
+/*
+	About Page: Team Map
+*/
+
+#pinTextTable .name {
+	font-size: 1.4em;
+	font-weight: bold;
+	color: #000000;
+	padding: 0 0 4px 0;
+	text-align: left;
+}
+
+#pinTextTable .contentTD {
+	font-size: 1.0em;
+	font-weight: normal;
+	color: #000000;
+	padding: 5px 4px 4px 5px;
+	margin: 0;
+	text-align: left;
+}
+
+#pinTextTable .imgTD {
+	padding: 4px 5px 4px 4px;
+	margin: 0;
+}
+
+#pinTextTable img {
+	border: 1px solid #000000;
+}
+
+#pinTextTable a:link,
+#pinTextTable a:visited,
+#pinTextTable a:active {
+	color: #0071DB;
+	text-decoration: none;
+}
+#pinTextTable a:hover {
+	color: #000000;
+}
+
+
+/*
+	About Page: Team Administration
+*/
+
+#listTable th {
+	font-size: 1.3em;
+	font-weight: bold;
+	text-align: center;
+}
+
+#listTable td {
+	font-size: 1.2em;
+	font-weight: normal;
+	padding: 5px;
+}
+
+/*
+	Tutorials
+*/
+ul#tutorials {
+	margin: 40px 0 0 0;
+	padding: 0;
+	width: 680px;
+	list-style: none;
+}
+
+ul#tutorials li {
+	float: left;
+	width: 200px;
+	height: 150px;
+	text-align: center;
+	
+	margin: 0 25px 10px 0;
+}
+
+/*
+	Trackers
+*/
+body.trackers div.ticket-body {
+	font-size: 1.2em;
+}
+
+body.trackers #main p.commentauthor {
+	font-size: 1em;
+	color: #000;
+	font-weight: bold;
+}
+
+body.trackers div.notice img {
+	position: relative;
+	top: 2px;
+}
+
+.issue-icon, .issue-icon a {
+	background: transparent none no-repeat scroll 0pt;
+}
+
+.issue-icon, .issue-icon a {
+	background-image: url("images/button_new_issue.gif");
+}
+
+.buttons div.issue-icon {
+	width: 93px;
+	height: 25px;
+}
+
+body.trackers div#ticket-review {
+	width: 100%;
+	height: 250px;
+	border: 0;
+	overflow: auto;
+}
+
+body.trackers span.small a {
+	text-decoration: none !important;
+}
+
+body.trackers .panel table.table1 {
+	margin-bottom: 1em;
+}
+
+body.trackers .panel table.table1 td  {
+	padding: 5px;
+}
+
+body.trackers .panel table.table1 thead th {
+	color: #333333;
+	font-weight: bold;
+	border-bottom: 1px solid #333333;
+	padding: 5px;
+}
+
+body.trackers .panel table.table1 tbody th {
+	font-style: italic;
+	background-color: transparent !important;
+	border-bottom: none;
+}
+
+body.trackers .mini-panel .status {
+	margin: 10px 0 10px 0;
+}
+
+dt.bold {
+	color: #676767;
+	font-weight: bold;
+}
+
+dt.bold:hover {
+	color: #000000;
+}
+
+/* Viewtopic style listings on the website */
+#main ul.topiclist {
+	font-size: 1em;
+	margin-left: 0;
+	line-height: 1.3em;
+}
+#main a.topictitle {
+	text-decoration: none;
+}
+
+/* KB */
+ul.topiclist dt.kb_noapprove {
+	width: 70%
+}
+ul.topiclist dt.kb_noapprove_small {
+	width: 60%
+}
+dd.kb_writtenby {
+	width: 20%;
+	font-size: 1.1em;
+	text-align: center;
+}
+dd.kb_writtenby_small {
+	width: 20%;
+	font-size: 1.1em;
+	text-align: center;
+}
+dd.kb_writtenby span, dd.kb_writtenby_small span {
+	display: block;
+	padding: 0 5px;
+}
+dd.kb_actions {
+	width: 20%;
+	font-size: 1.1em;
+}
+dd.kb_actions span {
+	display: block;
+	padding: 0 5px;
+}
+
+/* Rules */
+#main ol#rules ol {
+	list-style: lower-alpha;
+}

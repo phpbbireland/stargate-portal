@@ -1,0 +1,14 @@
+<fieldset>
+	<legend>{L_BOT_SETTINGS}</legend>
+	<dl>
+		<dt><label for="allow_bot_display">{L_ALLOW_BOT_DISPLAY}:</label><br /><span>{L_ALLOW_BOT_DISPLAY_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="allow_bot_display" name="allow_bot_display" value="1" <!-- IF S_ALLOW_BOT_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="allow_bot_display" value="0" <!-- IF not S_ALLOW_BOT_DISPLAY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="number_of_bots_to_display">{L_NUMBER_OF_BOTS_TO_DISPLAY}:</label><br /><span>{L_NUMBER_OF_BOTS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><input class="post" size="3" maxlength="2" name="number_of_bots_to_display" value="{S_NUMBER_OF_BOTS_TO_DISPLAY}" type="text"></dd>
+	</dl>
+</fieldset>

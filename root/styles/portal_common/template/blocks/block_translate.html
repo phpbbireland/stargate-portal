@@ -1,0 +1,109 @@
+<!-- IDTAG block_translate.html 20 November 2008 -->
+<div class="block_data">
+<div>
+	<div class="translate_head"><strong>{L_SELECT}:</strong></div>
+	<center>
+		<span style="position: relative; float:left; width:33%;">
+			<div style="cursor:pointer;" id="babelfish" onclick="ShowHide('babel'); hideMenu('google'); hideMenu('live');" title="Babel Fish"><span></span><img src="./images/babelfish.gif" alt="Babel Fish" /></div>
+		</span>
+		<span style="position: relative; float:left; width:33%;">
+			<div style="cursor:pointer;" id="livetr" onclick="ShowHide('live'); hideMenu('babel'); hideMenu('google');" title="Windows live"><span></span><img src="./images/live.gif" alt="Windows live" /></div>
+		</span>
+		<span style="position: relative; float:right; width:33%;">
+			<div style="cursor:pointer;" id="googletr" onclick="ShowHide('google'); hideMenu('babel'); hideMenu('live');" title="Google"><span></span><img src="./images/google.gif" alt="Google" /></div>
+		</span>
+		<br clear="all" />
+	</center>
+	<div class="translate_head">{L_TRANSLATE_SITE}</div>
+	<!-- BEGIN translate -->
+	<div style="display: none;" id="babel">
+		<center><br /><strong>Babel Fish:</strong></center>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_zh&url={translate.BASE_URL}portal.php" /><img src="./images/flags/cn.gif" alt="" /> <strong>Chinese-simp</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_zt&url={translate.BASE_URL}portal.php" /><img src="./images/flags/tw.gif" alt="" /> <strong>Chinese-trad</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_nl&url={translate.BASE_URL}portal.php" /><img src="./images/flags/nl.gif" alt="" /> <strong>Dutch</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_fr&url={translate.BASE_URL}portal.php" /><img src="./images/flags/fr.gif" alt="" /> <strong>French</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_de&url={translate.BASE_URL}portal.php" /><img src="./images/flags/de.gif" alt="" /> <strong>German</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_el&url={translate.BASE_URL}portal.php" /><img src="./images/flags/gr.gif" alt="" /> <strong>Greek</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_it&url={translate.BASE_URL}portal.php" /><img src="./images/flags/it.gif" alt="" /> <strong>Italian</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_ja&url={translate.BASE_URL}portal.php" /><img src="./images/flags/jp.gif" alt="" /> <strong>Japanese</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_ko&url={translate.BASE_URL}portal.php" /><img src="./images/flags/kp.gif" alt="" /> <strong>Korean</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_pt&url={translate.BASE_URL}portal.php" /><img src="./images/flags/pt.gif" alt="" /> <strong>Portuguese</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_ru&url={translate.BASE_URL}portal.php" /><img src="./images/flags/ru.gif" alt="" /> <strong>Russian</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_es&url={translate.BASE_URL}portal.php" /><img src="./images/flags/es.gif" alt="" /> <strong>Spanish</strong></a></div></div>
+		<div class="trans"><div><a href="http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp={translate.USER_LANG}_en&url={translate.BASE_URL}portal.php" /><img src="./images/flags/uk.gif" alt="" /> <strong>English</strong></a></div></div>
+	</div>
+
+	<div style="display: none;" id="google">
+		<center><br /><strong>Google:</strong></center>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=ar&sl={translate.USER_LANG}&tl=ar&u={translate.BASE_URL}portal.php" /><img src="./images/flags/sa.gif" alt="" /> <strong>Arabic</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=bg&sl={translate.USER_LANG}&tl=bg&u={translate.BASE_URL}portal.php" /><img src="./images/flags/bg.gif" alt="" /> <strong>Bulgarian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=ca&sl={translate.USER_LANG}&tl=ca&u={translate.BASE_URL}portal.php" /><img src="./images/flags/ka.gif" alt="" /> <strong>Catalan</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=zh-CN&sl={translate.USER_LANG}&tl=zh-CN&u={translate.BASE_URL}portal.php" /><img src="./images/flags/cn.gif" alt="" /> <strong>Chinese-simp</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=zh-TW&sl={translate.USER_LANG}&tl=zh-TW&u={translate.BASE_URL}portal.php" /><img src="./images/flags/tw.gif" alt="" /> <strong>Chinese-trad</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=hr&sl={translate.USER_LANG}&tl=hr&u={translate.BASE_URL}portal.php" /><img src="./images/flags/hr.gif" alt="" /> <strong>Croatian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=cs&sl={translate.USER_LANG}&tl=cs&u={translate.BASE_URL}portal.php" /><img src="./images/flags/cs.gif" alt="" /> <strong>Czech</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=da&sl={translate.USER_LANG}&tl=da&u={translate.BASE_URL}portal.php" /><img src="./images/flags/dk.gif" alt="" /> <strong>Danish</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=nl&sl={translate.USER_LANG}&tl=nl&u={translate.BASE_URL}portal.php" /><img src="./images/flags/nl.gif" alt="" /> <strong>Dutch</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=en&sl={translate.USER_LANG}&tl=en&u={translate.BASE_URL}portal.php" /><img src="./images/flags/uk.gif" alt="" /> <strong>English</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=tl&sl={translate.USER_LANG}&tl=tl&u={translate.BASE_URL}portal.php" /><img src="./images/flags/tl.gif" alt="" /> <strong>Filipino</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=fi&sl={translate.USER_LANG}&tl=fi&u={translate.BASE_URL}portal.php" /><img src="./images/flags/fi.gif" alt="" /> <strong>Finnish</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=fr&sl={translate.USER_LANG}&tl=fr&u={translate.BASE_URL}portal.php" /><img src="./images/flags/fr.gif" alt="" /> <strong>French</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=de&sl={translate.USER_LANG}&tl=de&u={translate.BASE_URL}portal.php" /><img src="./images/flags/de.gif" alt="" /> <strong>German</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=el&sl={translate.USER_LANG}&tl=el&u={translate.BASE_URL}portal.php" /><img src="./images/flags/gr.gif" alt="" /> <strong>Greek</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=iw&sl={translate.USER_LANG}&tl=iw&u={translate.BASE_URL}portal.php" /><img src="./images/flags/iw.gif" alt="" /> <strong>Hebrew</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=hi&sl={translate.USER_LANG}&tl=hi&u={translate.BASE_URL}portal.php" /><img src="./images/flags/in.gif" alt="" /> <strong>Hindi</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=id&sl={translate.USER_LANG}&tl=id&u={translate.BASE_URL}portal.php" /><img src="./images/flags/id.gif" alt="" /> <strong>Indonesian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=it&sl={translate.USER_LANG}&tl=it&u={translate.BASE_URL}portal.php" /><img src="./images/flags/it.gif" alt="" /> <strong>Italian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=ja&sl={translate.USER_LANG}&tl=ja&u={translate.BASE_URL}portal.php" /><img src="./images/flags/jp.gif" alt="" /> <strong>Japanese</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=ko&sl={translate.USER_LANG}&tl=ko&u={translate.BASE_URL}portal.php" /><img src="./images/flags/kr.gif" alt="" /> <strong>Korean</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=lv&sl={translate.USER_LANG}&tl=lv&u={translate.BASE_URL}portal.php" /><img src="./images/flags/lv.gif" alt="" /> <strong>Latvian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=lt&sl={translate.USER_LANG}&tl=lt&u={translate.BASE_URL}portal.php" /><img src="./images/flags/lt.gif" alt="" /> <strong>Lithuanian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=no&sl={translate.USER_LANG}&tl=no&u={translate.BASE_URL}portal.php" /><img src="./images/flags/no.gif" alt="" /> <strong>Norwegian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=pl&sl={translate.USER_LANG}&tl=pl&u={translate.BASE_URL}portal.php" /><img src="./images/flags/pl.gif" alt="" /> <strong>Polish</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=pt&sl={translate.USER_LANG}&tl=pt&u={translate.BASE_URL}portal.php" /><img src="./images/flags/pt.gif" alt="" /> <strong>Portuguese</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=ro&sl={translate.USER_LANG}&tl=ro&u={translate.BASE_URL}portal.php" /><img src="./images/flags/ro.gif" alt="" /> <strong>Romanian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=ru&sl={translate.USER_LANG}&tl=ru&u={translate.BASE_URL}portal.php" /><img src="./images/flags/ru.gif" alt="" /> <strong>Russian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=sr&sl={translate.USER_LANG}&tl=sr&u={translate.BASE_URL}portal.php" /><img src="./images/flags/cs.gif" alt="" /> <strong>Serbian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=sk&sl={translate.USER_LANG}&tl=sk&u={translate.BASE_URL}portal.php" /><img src="./images/flags/sk.gif" alt="" /> <strong>Slovak</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=sl&sl={translate.USER_LANG}&tl=sl&u={translate.BASE_URL}portal.php" /><img src="./images/flags/sk.gif" alt="" /> <strong>Slovenian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=es&sl={translate.USER_LANG}&tl=es&u={translate.BASE_URL}portal.php" /><img src="./images/flags/es.gif" alt="" /> <strong>Spanish</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=hi&sl={translate.USER_LANG}&tl=hi&u={translate.BASE_URL}portal.php" /><img src="./images/flags/in.gif" alt="" /> <strong>Hindi</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=sv&sl={translate.USER_LANG}&tl=sv&u={translate.BASE_URL}portal.php" /><img src="./images/flags/se.gif" alt="" /> <strong>Swedish</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=uk&sl={translate.USER_LANG}&tl=uk&u={translate.BASE_URL}portal.php" /><img src="./images/flags/ua.gif" alt="" /> <strong>Ukranian</strong></a></div></div>
+		<div class="trans"><div><a href="http://66.102.9.104/translate_c?hl=vi&sl={translate.USER_LANG}&tl=vi&u={translate.BASE_URL}portal.php" /><img src="./images/flags/vn.gif" alt="" /> <strong>Vietnamese</strong></a></div></div>
+	</div>
+
+	<div style="display: none;" id="live">
+		<center><br /><strong>Windows live:</strong></center>
+		<div class="trans"><div><a href="http://www.windowslivetranslator.com/BV.aspx?ref=Internal&lp={translate.USER_LANG}_ar&__VIEWSTATE=/wEPDwUKLTEwNzQzMjY3NmRk#{translate.BASE_URL}portal.php" /><img src="./images/flags/sa.gif" alt="" /> <strong>Arabic</strong></a></div></div>
+		<div class="trans"><div><a href="http://www.windowslivetranslator.com/BV.aspx?ref=Internal&lp={translate.USER_LANG}_zh-CHS&__VIEWSTATE=/wEPDwUKLTEwNzQzMjY3NmRk#{translate.BASE_URL}portal.php" /><img src="./images/flags/cn.gif" alt="" /> <strong>Chinese-simp</strong></a></div></div>
+		<div class="trans"><div><a href="http://www.windowslivetranslator.com/BV.aspx?ref=Internal&lp={translate.USER_LANG}_zh-CHT&__VIEWSTATE=/wEPDwUKLTEwNzQzMjY3NmRk#{translate.BASE_URL}portal.php" /><img src="./images/flags/tw.gif" alt="" /> <strong>Chinese-trad</strong></a></div></div>
+		<div class="trans"><div><a href="http://www.windowslivetranslator.com/BV.aspx?ref=Internal&lp={translate.USER_LANG}_nl&__VIEWSTATE=/wEPDwUKLTEwNzQzMjY3NmRk#{translate.BASE_URL}portal.php" /><img src="./images/flags/nl.gif" alt="" /> <strong>Dutch</strong></a></div></div>
+		<div class="trans"><div><a href="http://www.windowslivetranslator.com/BV.aspx?ref=Internal&lp={translate.USER_LANG}_fr&__VIEWSTATE=/wEPDwUKLTEwNzQzMjY3NmRk#{translate.BASE_URL}portal.php" /><img src="./images/flags/fr.gif" alt="" /> <strong>French</strong></a></div></div>
+		<div class="trans"><div><a href="http://www.windowslivetranslator.com/BV.aspx?ref=Internal&lp={translate.USER_LANG}_de&__VIEWSTATE=/wEPDwUKLTEwNzQzMjY3NmRk#{translate.BASE_URL}portal.php" /><img src="./images/flags/de.gif" alt="" /> <strong>German</strong></a></div></div>
+		<div class="trans"><div><a href="http://www.windowslivetranslator.com/BV.aspx?ref=Internal&lp={translate.USER_LANG}_it&__VIEWSTATE=/wEPDwUKLTEwNzQzMjY3NmRk#{translate.BASE_URL}portal.php" /><img src="./images/flags/it.gif" alt="" /> <strong>Italian</strong></a></div></div>
+		<div class="trans"><div><a href="http://www.windowslivetranslator.com/BV.aspx?ref=Internal&lp={translate.USER_LANG}_ja&__VIEWSTATE=/wEPDwUKLTEwNzQzMjY3NmRk#{translate.BASE_URL}portal.php" /><img src="./images/flags/jp.gif" alt="" /> <strong>Japanese</strong></a></div></div>
+		<div class="trans"><div><a href="http://www.windowslivetranslator.com/BV.aspx?ref=Internal&lp={translate.USER_LANG}_ko&__VIEWSTATE=/wEPDwUKLTEwNzQzMjY3NmRk#{translate.BASE_URL}portal.php" /><img src="./images/flags/kr.gif" alt="" /> <strong>Korean</strong></a></div></div>
+		<div class="trans"><div><a href="http://www.windowslivetranslator.com/BV.aspx?ref=Internal&lp={translate.USER_LANG}_pt&__VIEWSTATE=/wEPDwUKLTEwNzQzMjY3NmRk#{translate.BASE_URL}portal.php" /><img src="./images/flags/pt.gif" alt="" /> <strong>Portuguese</strong></a></div></div>
+		<div class="trans"><div><a href="http://www.windowslivetranslator.com/BV.aspx?ref=Internal&lp={translate.USER_LANG}_es&__VIEWSTATE=/wEPDwUKLTEwNzQzMjY3NmRk#{translate.BASE_URL}portal.php" /><img src="./images/flags/es.gif" alt="" /> <strong>Spanish</strong></a></div></div>
+	</div>
+	<script language="JavaScript">
+		//<!--
+		function babelReset()
+		{
+			parent.location.href='{translate.BASE_URL}portal.php'
+		}
+		document.write("<a target='_self' title='{L_RESET}' href='javascript:babelReset()' class=xs ><div class='translate_reset'><br />{L_TRANSLATE_RESET}</div></a>");
+		document.close();
+		// -->
+	</script>
+	<!-- END translate -->
+	<!-- IF DEBUG_QUERIES -->{TR_PORTAL_DEBUG}<!-- ENDIF -->
+</div>
+</div>
+<!-- IDTAG ends -->
+
+<!-- if ie 5 or 6 -->
+<!--[if lte IE 6]>
+<br />
+<![endif]-->

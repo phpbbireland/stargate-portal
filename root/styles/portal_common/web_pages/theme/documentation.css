@@ -1,0 +1,139 @@
+#main .titlepage .releaseinfo, #main .titlepage .copyright {
+	display: none;
+}
+#main .copyright {
+	display: none;
+}
+#main .authorgroup {
+	display: none;
+}
+
+#main .titlepage h1.title {
+	color: #536482;
+}
+
+/* Tables of contents */
+
+#main .toc {
+	margin-bottom: 1.2em;
+}
+#main .toc p, #main .abstract p.title {
+	margin: 20px 0 3px;
+}
+#main .toc p b, #main .abstract p.title b {
+	font-weight: bold;
+	color: #D21A4E;
+}
+#main .toc dl {	
+	font-size: 1.2em;
+}
+#main .toc dl a {	
+	text-decoration: underline;
+}
+#main .toc dl dl {
+	font-size: 1em;
+	margin-left: 1em;
+}
+#main .list-of-figures {
+	display: none;
+}
+
+/* Section */
+#main .section h2.title {
+	margin-bottom: 20px;
+}
+#main .section ul, #main .section ol {
+	font-size: 1em;
+	line-height: 1em;
+	margin-bottom: 20px;
+}
+#main .section ul ul, #main .section ol ol {
+	margin-bottom: 0;
+}
+#main .section ul p, #main .section ol p {
+	margin: 0;
+	padding: 0;
+}
+
+/* Special items */
+#main .section .guilabel {
+	text-transform: uppercase;
+	font-size: 0.9em;
+	font-weight: bold;
+}
+#main .section .note, #main .section .important, #main .section .tip {
+	border: 1px solid #CCCCCC;
+	padding: 0.8em;
+	margin: 3em !important;
+}
+#main .section .note h3.title, #main .section .important h3.title, #main .section .tip h3.title  {
+	color: #536482;
+	margin-top: 0 !important;
+	padding-top: 0;
+}
+
+#main .section .warning {
+	padding: 0.8em;
+	margin: 3em !important;	
+	color: #FFF;
+	background-color: #D21A4E;
+}
+#main .section .warning h3 {
+	color: #FFF;
+	margin-top: 0 !important;
+	padding-top: 0;	
+}
+
+#main .section .tip  {
+	background-color: #BFDEFF;
+	border-color: #0066CC;
+}
+#main .section .important,  #main .section .note {
+	background-color: #FFFFCC;
+	border-color: #FF9900;
+}
+
+#main .section .figure {
+	margin: 2em 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#main .section .figure .title {
+	display: none;
+}
+#main .section .figure .mediaobject {
+	text-align: center;
+}
+#main .section .figure .mediaobject img {
+	border: 1px solid #000;
+}
+#main .section .figure .caption p {
+	font-size: 0.85em;
+	color: #000;
+}
+#main .section .variablelist dt {
+	text-transform: uppercase;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+#main pre {
+	font: 1.2em Monaco, "Andale Mono","Courier New", Courier, mono;
+	color: #2E8B57;
+	background-color: #efefef; 
+	border: 1px solid rgb(221, 221, 221); 
+	padding: 5px; 
+	overflow: auto; 
+	width: 560px;	
+}
+
+#main code {
+	font-family: Monaco, "Andale Mono","Courier New", Courier, mono;
+}
+
+.docbook #main blockquote {
+	background-image: none;
+}
+
+.docbook #main .title b {
+	font-weight: bold;
+}
