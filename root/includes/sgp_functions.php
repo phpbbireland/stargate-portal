@@ -5,19 +5,19 @@
 * @version $Id: sgp_functions.php 336 2009-01-23 02:06:37Z Michealo $
 * @copyright (c) Michael O'Toole 2005 phpBBireland
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* Last updated: 10 November 2008 by NeXur
+* Last updated: 10 November 2008 by Mike
 * Do not remove copyright from any file.
 */
 
 /* 
 * A couple of functions rescued from functions.php
-* Part of the Acronym code @based on the original Acronym © 2005 CodeMonkeyX
+* Part of the Acronym code @based on the original Acronym ï¿½ 2005 CodeMonkeyX
 * @copyright (c) 2007 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 
 /*
-* Several of the phpBB functions core are repeated here with two alterations.
+* One or two of the phpBB functions core are repeated here with two alterations.
 *
 * Function names are proceeded with 'sgp_' and wrapped in 'function_exists'
 * to prevent re-declaration.
