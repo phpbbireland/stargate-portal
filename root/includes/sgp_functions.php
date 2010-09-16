@@ -834,9 +834,9 @@ if(!function_exists('ready_text_for_storage'))
 		generate_text_for_storage($data, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
 
 		$data_array = array(
-			'mod_text'              => $data,
-			'mod_bbcode_uid'        => $uid,
-			'mod_bbcode_bitfield'   => $bitfield,
+			'mod_text'				=> $data,
+			'mod_bbcode_uid'		=> $uid,
+			'mod_bbcode_bitfield'	=> $bitfield,
 			'mod_bbcode_options'	=> $options,
 		);
 		return($data_array);

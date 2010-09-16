@@ -5,10 +5,10 @@
 * @author  Michael O'Toole - aka Michaelo
 * @begin   Saturday, Jan 22, 2005
 * @copyright (c) 2005-2009 phpbbireland
-* @home    http://www.phpbbireland.com
+* @home	http://www.phpbbireland.com
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 * @note: Do not remove this copyright. Just append yours if you have modified it,
-*        this is part of the Stargate Portal copyright agreement...
+*		this is part of the Stargate Portal copyright agreement...
 *
 * @version $Id: sgp_portal_blocks.php 314 23 November 2009 22:02:31Z Michealo $
 * Updated:
@@ -83,26 +83,26 @@ if (!defined('IN_PHPBB'))
 
 	$user_id = $user->data['user_id'];
 
-    $sql = 'SELECT id, html_file_name, position, view_pages, title
-        FROM ' . K_BLOCKS_TABLE . '
-        WHERE active = 1 
+	$sql = 'SELECT id, html_file_name, position, view_pages, title
+		FROM ' . K_BLOCKS_TABLE . '
+		WHERE active = 1 
 			AND (view_by != 0 OR view_all = 1)';
 
-    $result = $db->sql_query($sql, $sgp_cache_time);
+	$result = $db->sql_query($sql, $sgp_cache_time);
 
-    $active_blocks = array();
+	$active_blocks = array();
 
-    while ($row = $db->sql_fetchrow($result))
-    {
-        $active_blocks[] = $row;
+	while ($row = $db->sql_fetchrow($result))
+	{
+		$active_blocks[] = $row;
 		$arr[$row['id']] = explode(','  , $row['view_pages']);
-    }
+	}
 
 	include($phpbb_root_path . 'blocks/block_build' . '.' . $phpEx);
 
-    foreach ($active_blocks as $active_block)
-    {
-        $filename = substr($active_block['html_file_name'], 0, strpos($active_block['html_file_name'], '.'));
+	foreach ($active_blocks as $active_block)
+	{
+		$filename = substr($active_block['html_file_name'], 0, strpos($active_block['html_file_name'], '.'));
 
 		if (file_exists($phpbb_root_path . 'blocks/' . $filename . '.' . $phpEx))
 		{
@@ -120,7 +120,7 @@ if (!defined('IN_PHPBB'))
 				include($phpbb_root_path . 'blocks/' . $filename . '.' . $phpEx);
 			}
 		}
-    }
+	}
 
 	$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type
 		FROM " . USERS_TABLE . "
@@ -367,17 +367,17 @@ if (isset($left_block_ary) && $show_left)
 {
 	foreach ($left_block_ary as $block => $value)
 	{
-    	$template->assign_block_vars('left_block_files', array(
-        	'LEFT_BLOCKS'			=> portal_block_template($value),
-	        'LEFT_BLOCK_ID'			=> 'L_' .$left_block_id[$block],
-    	    'LEFT_BLOCK_TITLE'		=> $left_block_title[$block],
+		$template->assign_block_vars('left_block_files', array(
+			'LEFT_BLOCKS'			=> portal_block_template($value),
+			'LEFT_BLOCK_ID'			=> 'L_' .$left_block_id[$block],
+			'LEFT_BLOCK_TITLE'		=> $left_block_title[$block],
 			'LEFT_BLOCK_SCROLL' 	=> $left_block_scroll[$block],
 			'LEFT_BLOCK_HEIGHT'		=> $left_block_height[$block],
 			'LEFT_BLOCK_IMG'		=> ($left_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $left_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/none.gif" height="1px" width="1px" alt="" >',
 			'LEFT_BLOCK_IMG_2'		=> (file_exists($big_image_path . $left_block_img[$block])) ? '<img src="' . $big_image_path  . $left_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/large/none.png" alt="" >',
 			'S_CONTENT_FLOW_BEGIN'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
 			'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
-    	));
+		));
 	}
 }
 
@@ -385,10 +385,10 @@ if (isset($right_block_ary) && $show_right)
 {
 	foreach ($right_block_ary as $block => $value)
 	{
-    	$template->assign_block_vars('right_block_files', array(
-        	'RIGHT_BLOCKS'			=> portal_block_template($value),
-	        'RIGHT_BLOCK_ID'		=> 'R_' .$right_block_id[$block],
-    	    'RIGHT_BLOCK_TITLE'		=> $right_block_title[$block],
+		$template->assign_block_vars('right_block_files', array(
+			'RIGHT_BLOCKS'			=> portal_block_template($value),
+			'RIGHT_BLOCK_ID'		=> 'R_' .$right_block_id[$block],
+			'RIGHT_BLOCK_TITLE'		=> $right_block_title[$block],
 			'RIGHT_BLOCK_SCROLL'	=> $right_block_scroll[$block],
 			'RIGHT_BLOCK_HEIGHT'	=> $right_block_height[$block],
 			'RIGHT_BLOCK_IMG'		=> ($right_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $right_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/none.gif" height="1px" width="1px" alt="" >',
@@ -396,7 +396,7 @@ if (isset($right_block_ary) && $show_right)
 
 			'S_CONTENT_FLOW_BEGIN'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
 			'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
-    	));
+		));
 	}
 }
 
@@ -424,10 +424,10 @@ if (isset($center_block_ary) && $show_center)
 			}
 		}
 
-    	$template->assign_block_vars('center_block_files', array(
-        	'CENTER_BLOCKS'			=> portal_block_template($value),
-	        'CENTER_BLOCK_ID'		=> 'C_' .$center_block_id[$block],
-    	    'CENTER_BLOCK_TITLE'	=> $center_block_title[$block],
+		$template->assign_block_vars('center_block_files', array(
+			'CENTER_BLOCKS'			=> portal_block_template($value),
+			'CENTER_BLOCK_ID'		=> 'C_' .$center_block_id[$block],
+			'CENTER_BLOCK_TITLE'	=> $center_block_title[$block],
 			'CENTER_BLOCK_SCROLL'	=> $center_block_scroll[$block],
 			'CENTER_BLOCK_HEIGHT'	=> $center_block_height[$block],
 			'CENTER_BLOCK_IMG'		=> ($center_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $center_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/none.gif" height="1px" width="1px" alt="" >',
@@ -435,13 +435,13 @@ if (isset($center_block_ary) && $show_center)
 
 			'S_CONTENT_FLOW_BEGIN'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
 			'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
-	    ));
+		));
 	}
 }
 
 $template->assign_vars(array(
-	'AVATAR'            => sgp_get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
-	'BLOCK_WIDTH'       => $blocks_width . 'px',
+	'AVATAR'			=> sgp_get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
+	'BLOCK_WIDTH'	   => $blocks_width . 'px',
 
 	'PORTAL_ACTIVE'		=> $config['portal_enabled'],
 	'PORTAL_VERSION'	=> $config['portal_version'],
@@ -460,12 +460,12 @@ $template->assign_vars(array(
 	'S_CONTENT_FLOW_BEGIN'		=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
 	'S_CONTENT_FLOW_END'		=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
 
-	'USER_NAME'         => $user->data['username'],
-	'USERNAME_FULL'	    => get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
+	'USER_NAME'		 => $user->data['username'],
+	'USERNAME_FULL'		=> get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']),
 	'U_INDEX'			=> append_sid("{$phpbb_root_path}index.$phpEx"),
 	'U_PORTAL'			=> append_sid("{$phpbb_root_path}portal.$phpEx"),
 	'U_PORTAL_ARRANGE'	=> append_sid("{$phpbb_root_path}portal.$phpEx", "arrange=1"),
-	'U_STAFF'	        => append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=leaders'),
+	'U_STAFF'			=> append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=leaders'),
 	'U_SEARCH_BOOKMARKS'=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&mode=bookmarks'),
 ));
 
