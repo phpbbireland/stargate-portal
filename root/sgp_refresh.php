@@ -488,7 +488,7 @@ page_footer();
 			{
 				if (!($fp = @fopen("{$phpbb_root_path}styles/$template_path$pathfile$file", 'r')))
 				{
-					trigger_error("Could not open {$phpbb_root_path}styles/$template_path$pathfile$file", E_USER_ERROR);
+					trigger_error($user->lang['COULD_NOT_OPEN'] . " {$phpbb_root_path}styles/$template_path$pathfile$file", E_USER_ERROR);
 				}
 				$template_data = fread($fp, filesize("{$phpbb_root_path}styles/$template_path$pathfile$file"));
 				fclose($fp);

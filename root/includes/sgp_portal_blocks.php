@@ -238,10 +238,23 @@ if (!defined('IN_PHPBB'))
 
 		while ($row = $db->sql_fetchrow($result))
 		{
+			$block_position = $row['position'];
+
+			// override default position with user designated position //
+			if (in_array($row['id'], $LB)) 
+			{
+				$block_position		= 'L';
+			} else if (in_array($row['id'], $CB)) 
+			{
+				$block_position		= 'C';
+			} else if (in_array($row['id'], $RB)) 
+			{
+				$block_position		= 'R';
+			}
+
 			$block_id			= $row['id'];
 			$block_ndx			= $row['ndx'];
 			$block_title		= $row['title'];
-			$block_position		= $row['position'];
 			$block_active		= $row['active'];
 			$block_type			= $row['type'];
 			$block_view_by		= $row['view_by'];
@@ -500,6 +513,7 @@ if ($this_page[0] == 'viewtopic')
 		'S_USER_LOGGED_IN'		=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
 		'S_K_SHOW_SMILES'		=> $k_config['k_show_smilies'],
 		'QUOTE_IMG' 			=> $user->img('icon_post_quote', 'REPLY_WITH_QUOTE'),
+		//'PORTAL_DEBUG_MESSAGE'	=> $portal_debug_message,
 		)
 	);
 }

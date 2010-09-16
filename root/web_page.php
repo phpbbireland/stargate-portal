@@ -79,7 +79,6 @@ $sql = "SELECT id, page_name, page_meta, page_desc, page_extn ,body, head, foot 
 if (!$result = $db->sql_query($sql))
 {
 	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
-	trigger_error($user->lang['ERROR_PORTAL_MODULE'] , basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
 }
 $row = $db->sql_fetchrow($result);
 
@@ -90,7 +89,7 @@ if (count($row['id']) == 0)
 	$sql = "SELECT id, page_name, page_meta, page_desc, page_extn ,body, head, foot FROM ". K_WEB_PAGES_TABLE . " WHERE page_name = '$mode' ";
 	if (!$result = $db->sql_query($sql))
 	{ 
-		trigger_error('ERROR_PORTAL_MODULE');
+		trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
 	}
 	$row = $db->sql_fetchrow($result);
 }
@@ -114,8 +113,7 @@ $db->sql_freeresult($result);
 $sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = '$headone' ";
 if (!$result = $db->sql_query($sql)) 
 {
-	//trigger_error('Error! Could not query portal modules information: ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
-	trigger_error('ERROR_PORTAL_MODULE');
+	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
 }
 
 $row = $db->sql_fetchrow($result);
@@ -127,8 +125,7 @@ $sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = '$footone' ";
 
 if (!$result = $db->sql_query($sql)) 
 {
-	//trigger_error('Error! Could not query portal modules information: ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
-	trigger_error('ERROR_PORTAL_MODULE'); 
+	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
 }
 
 $row = $db->sql_fetchrow($result);

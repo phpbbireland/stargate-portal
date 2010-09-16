@@ -40,25 +40,6 @@ global $phpbb_root_path;
 */
 
 
-
-/* old code
-if(!function_exists('stargate_init'))
-{
-	function stargate_init()
-	{
-		// cache is set in common.php
-
-		if(STARGATE)
-		{
-			;
-		}
-	}
-}
-*/
-
-
-
-
 /***
 * generate random logo
 */
@@ -369,9 +350,9 @@ if(!function_exists('search_block_func'))
 		$phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 		$template->assign_vars(array(
-			"L_SEARCH_ADV" => $lang['SEARCH_ADV'],
-			"L_SEARCH_OPTION" => (!empty($portal_config['search_option_text'])) ? $portal_config['search_option_text'] : $board_config ['sitename'],
-			'U_SEARCH'		=> append_sid("{$phpbb_root_path}search.$phpEx", 'keywords=' . urlencode($keywords)),
+			"L_SEARCH_ADV"		=> $lang['SEARCH_ADV'],
+			"L_SEARCH_OPTION"	=> (!empty($portal_config['search_option_text'])) ? $portal_config['search_option_text'] : $board_config ['sitename'],
+			'U_SEARCH'			=> append_sid("{$phpbb_root_path}search.$phpEx", 'keywords=' . urlencode($keywords)),
 			)
 		);
 	}
@@ -513,28 +494,33 @@ if($k_config['rand_header'] == 1)
 }
 
 
+/*
 if(!function_exists('sgp_delete_cookies'))
 {
 	function sgp_delete_cookies()
 	{
-		// Delete Cookies with dynamic names (do NOT delete poll cookies)
+		global $user, $phpbb_root_path, $phpEx;
+
 		if (confirm_box(true))
 		{
-			set_cookie('sgp_im3_LB', '', 1);
-			set_cookie('sgp_im3_CB', '', 1);
-			set_cookie('sgp_im3_RB', '', 1);
-			set_cookie('sgp_style_colour', '', 1);
+			$user->set_cookie('sgp_right', '', 1);
+			$user->set_cookie('sgp_center', '', 1);
+			$user->set_cookie('sgp_left', '', 1);
+			$user->set_cookie('sgp_block_cache', '0', 1);
+			$user->set_cookie('sgp_style_colour', '', 1);
 		}
 		else
 		{
-			confirm_box(false, 'DELETE_COOKIES', '');
+			confirm_box(false, 'DELETE_SGP_COOKIES_CONFIRM', '');
 		}
-		meta_refresh(3, append_sid("{$phpbb_root_path}index.$phpEx"));
 
-		$message = $user->lang['COOKIES_DELETED'] . '<br /><br />' . sprintf($user->lang['RETURN_INDEX'], '<a href="' . append_sid("{$phpbb_root_path}index.$phpEx") . '">', '</a>');
+		meta_refresh(3, append_sid("{$phpbb_root_path}portal.$phpEx"));
+
+		$message = $user->lang['SGP_COOKIES_DELETED'] . '<br /><br />' . sprintf($user->lang['RETURN_PORTAL'], '<a href="' . append_sid("{$phpbb_root_path}portalx.$phpEx") . '">', '</a>');
 		trigger_error($message);
 	}
 }
+*/
 
 if(!function_exists('get_user_data'))
 {

@@ -509,6 +509,7 @@ class acp_k_blocks
 					));
 
 					$cache->destroy('sql', K_BLOCKS_TABLE);
+
 					delete_this_block_cached_file($html_file_name);
 
 					if ($position)
