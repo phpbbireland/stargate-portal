@@ -1,0 +1,13 @@
+/* phpBB Website Styles Index
+	
+   Copyright 2006 phpBB Group ( http://www.phpbb.com/ )
+   --------------------------------------------------------------
+*/
+xx{T_THEME_WEB_PATH}xx
+
+@import url("{T_THEME_WEB_PATH}/website.css");
+@import url("{T_THEME_WEB_PATH}/headers.css");
+@import url("{T_THEME_WEB_PATH}/navigation.css");
+@import url("{T_THEME_WEB_PATH}/titles.css");
+@import url("{T_THEME_WEB_PATH}/documentation.css");
+@import url("{T_THEME_WEB_PATH}/silver.css");

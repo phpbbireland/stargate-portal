@@ -18,10 +18,8 @@
 					<div class="box" id="<!-- IF not S_ARRANGE -->BLOCK_<!-- ENDIF -->{right_block_files.RIGHT_BLOCK_ID}">
 						<div class="iefix" style="clear:both; width:100%;">
 						<!-- IF right_block_files.RIGHT_BLOCK_SCROLL -->
-							<!-- IF not S_ARRANGE -->
-							<div class="scroll_outer" id="{right_block_files.RIGHT_BLOCK_ID}_outer" onmouseover="do_speed(this, event)" onmousemove="do_speed(this, event)" onmouseout="set_defaults(this, event)"><div class="scroll_inner" id="{right_block_files.RIGHT_BLOCK_ID}_inner">
-							{right_block_files.RIGHT_BLOCKS}
-							</div></div>
+							<!-- IF not S_ARRANGE --><!-- DO NOT EDIT THE NEXT LINE UNLESS YOU KNOW WHAT YOU ARE DOING -->
+							<div class="scroll_outer" id="{right_block_files.RIGHT_BLOCK_ID}_outer" onmouseover="do_speed(this, event)" onmousemove="do_speed(this, event)" onmouseout="set_defaults(this, event)"><div class="scroll_inner" id="{right_block_files.RIGHT_BLOCK_ID}_inner">{right_block_files.RIGHT_BLOCKS}</div></div>
 							<!-- ELSE -->
 							{L_SCROLLING_BLOCKS_DISABLED}
 							<!-- ENDIF -->

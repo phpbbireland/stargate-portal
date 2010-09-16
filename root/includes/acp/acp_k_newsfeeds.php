@@ -30,37 +30,36 @@ class acp_k_newsfeeds
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 		
 		include_once($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
-		
+
 		$message ='';
-		
+
 		$user->add_lang('acp/k_newsfeeds');
 		$this->tpl_name = 'acp_k_newsfeeds';
 		$this->page_title = 'ACP_K_NEWSFEEDS';
-		
+
 		$form_key = 'acp_k_newsfeeds';
 		add_form_key($form_key);
-		
+
 		// Set up general vars
 		$action = request_var('action', '');
 		$action = (isset($_POST['edit'])) ? 'edit' : $action;
 		$action = (isset($_POST['add'])) ? 'add' : $action;
 		$action = (isset($_POST['save'])) ? 'save' : $action;
 		$feed_id = request_var('id', 0);
-		
+
 		$sql = 'SELECT config_name, config_value
 			FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . '';  
-			
+
 		$result = $db->sql_query($sql);
-			
-		while($row = $db->sql_fetchrow($result))
+
+		while ($row = $db->sql_fetchrow($result))
 		{
 			$config[$row['config_name']] = $row['config_value'];
 		}
-		
+
 		switch ($action)
 		{
 			case 'editfeeds':
-			
 	 			if ($action == 'editfeeds')
 				{
 					$config_feeds_cache_time = request_var('rss_feeds_cache_time','', true);
@@ -80,16 +79,15 @@ class acp_k_newsfeeds
 					'S_FOPEN' 				=> ($type=='fopen') ? true : false,
 					'FEED_RANDOM_LIMIT'		=> $config['rss_feeds_random_limit']
 				));					
-
             break;				
 						
 			case 'savefeeds':
-		
+
 				$config_feeds_cache_time = request_var('rss_feeds_cache_time','', true);
 				$config_feeds_items_limit = request_var('rss_feeds_items_limit','', true);
 				$config_feeds_random_limit = request_var('rss_feeds_random_limit','', true);
 				$config_feeds_type = request_var('rss_feeds_type','', true);
-								
+
  				if ($action == 'savefeeds')
 				{
 					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $config_feeds_cache_time . ' WHERE config_name = "rss_feeds_cache_time"');
@@ -102,10 +100,10 @@ class acp_k_newsfeeds
 					$message = $user->lang['CONFIG_UPDATED'];
 				}
 				$db->sql_query($sql);
-								
+
 				$cache->destroy('config');
 				trigger_error($message . adm_back_link($this->u_action));
-				
+
 				$template->assign_vars(array(
 					'S_SAVE_FEEDS'			=> true,
 					'U_BACK'				=> $this->u_action,					
@@ -114,7 +112,7 @@ class acp_k_newsfeeds
 					'FEED_ITEMS_LIMIT'		=> $config['rss_feeds_items_limit'],
 					'FEED_TYPE'				=> $config['rss_feeds_type'],
 					'FEED_RANDOM_LIMIT'		=> $config['rss_feeds_random_limit']
-					));					
+				));					
 				
 			break;			
 
@@ -169,7 +167,6 @@ class acp_k_newsfeeds
 				{
 					trigger_error($user->lang['MUST_SELECT_FEED'] . adm_back_link($this->u_action), E_USER_WARNING);
 				}
-
 			break;
 
 			case 'edit':
@@ -216,9 +213,10 @@ class acp_k_newsfeeds
 					'FEED_DESCRIPTION_SHOW_1' 	=> (($feed_description['feed_description'] == '1') ? 'checked' : '' ),
 					'FEED_DESCRIPTION_SHOW_2' 	=> (($feed_description['feed_description'] == '2') ? 'checked' : '' ),
 					));
-
 				return;
+			break;
 
+			default:
 			break;
 		}
 
@@ -243,24 +241,22 @@ class acp_k_newsfeeds
 				'FEED_URL'			=> $row['feed_url'],
 				'FEED_POSITION'		=> $row['feed_position'],
 				'FEED_SHOW'			=> $active,
-				'FEED_SHOW_POSITION'=> $position,
-				'FEED_SHOW_DESCRIPTION'=> $description,
-				'U_EDIT'			=> $this->u_action . '&amp;action=edit&amp;id=' . $row['feed_id'],
-				'U_DELETE'			=> $this->u_action . '&amp;action=delete&amp;id=' . $row['feed_id']
-				));
-
+				'FEED_SHOW_POSITION'	=> $position,
+				'FEED_SHOW_DESCRIPTION'	=> $description,
+				'U_EDIT'				=> $this->u_action . '&amp;action=edit&amp;id=' . $row['feed_id'],
+				'U_DELETE'				=> $this->u_action . '&amp;action=delete&amp;id=' . $row['feed_id']
+			));
 		}
 
-			$template->assign_block_vars('rss_column', array(
-				'FEED_CACHE_TIME'	=> 	$config['rss_feeds_cache_time'],
-				'FEED_ITEMS_LIMIT'	=> 	$config['rss_feeds_items_limit'],				
-				'FEED_RANDOM_LIMIT'	=> 	$config['rss_feeds_random_limit'],
-				'FEED_TYPE'			=> 	$config['rss_feeds_type'],
-				'U_EDIT_FEEDS'		=> 	$this->u_action . '&amp;action=editfeeds'
-				));
+		$template->assign_block_vars('rss_column', array(
+			'FEED_CACHE_TIME'	=> 	$config['rss_feeds_cache_time'],
+			'FEED_ITEMS_LIMIT'	=> 	$config['rss_feeds_items_limit'],				
+			'FEED_RANDOM_LIMIT'	=> 	$config['rss_feeds_random_limit'],
+			'FEED_TYPE'			=> 	$config['rss_feeds_type'],
+			'U_EDIT_FEEDS'		=> 	$this->u_action . '&amp;action=editfeeds'
+		));
 
-			$db->sql_freeresult($result);			
-		
+		$db->sql_freeresult($result);			
 	}
 }
 

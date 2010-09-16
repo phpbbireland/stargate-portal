@@ -19,15 +19,14 @@
 * @ignore
 */
 
-	if ( !defined('IN_PHPBB') )
+	if (!defined('IN_PHPBB'))
 	{
 		exit;
 	}
 
 	$phpEx = substr(strrchr(__FILE__, '.'), 1);
 
-	$queries = 0;
-	$cached_queries = 0;
+	$queries = $cached_queries = 0;
 
 	$user->add_lang('portal/portal_blocks_variables');
 
@@ -36,11 +35,14 @@
 	global $db, $user, $_SID, $_EXTRA_URL;
 	global $k_groups, $k_group_id, $k_group_name_id;
 
+	$sgp_cache_time = $k_config['sgp_cache_time'];
+
 	// menu_type 0 = Header Menu,
 	// menu type 1 = Main Nav blocks,
 	// menu type 2 = Sub Nav Block
 
 	$j = 0;
+	$is_sub_heading = false;
 	$k_groups = array();
 	$k_group_name_id = array();
 	$k_group_id = array();
@@ -52,9 +54,9 @@
 		WHERE menu_type = " . WELCOME_MESSAGE . " && view_by != 0
 		ORDER BY ndx ASC ";
 
-	if (!$result = $db->sql_query($sql, 1200))
+	if (!$result = $db->sql_query($sql, $sgp_cache_time))
 	{
-		trigger_error('Error! Could not query portal menus information: ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+		trigger_error($user->lang['ERROR_PORTAL_MENUS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}
 
 	$portal_menus = array();
@@ -69,7 +71,8 @@
 
 	get_all_groups();
 	$memberships = array();
-	$memberships = group_memberships(false, $user->data['user_id'], false);
+	$memberships = sgp_group_memberships(false, $user->data['user_id'], false);
+	//$memberships = group_memberships(false, $user->data['user_id'], false);
 
 	for ($i = 0; $i < count($portal_menus); $i++)
 	{
@@ -88,7 +91,7 @@
 		$menu_item_view_by = $portal_menus[$i]['view_by'];
 
 		// Advanced group options...
-		if($menu_item_view_by == 0)
+		if ($menu_item_view_by == 0)
 		{
 			$process_menu_item = false;
 		}
@@ -99,7 +102,7 @@
 				foreach ($memberships as $member)
 				{
 					$group_name = $k_group_id[$member['group_id']]['group_name'];
-					if($menu_item_view_by == $member['group_id'] || $member['group_id'] == $k_group_name_id['ADMINISTRATORS'])
+					if ($menu_item_view_by == $member['group_id'] || $member['group_id'] == $k_group_name_id['ADMINISTRATORS'])
 					{
 						$process_menu_item = true;
 					}
@@ -112,36 +115,51 @@
 							case 'GUESTS':
 							case 'Anonymous':
 							case 'ANONYMOUS':
-
-									if($menu_item_view_by == 1 || $menu_item_view_by == $k_group_name_id['GUESTS']) $process_menu_item = true;
-								break;
+								if ($menu_item_view_by == 1 || $menu_item_view_by == $k_group_name_id['GUESTS'])
+								{
+									$process_menu_item = true;
+								}
+							break;
 
 							case 'Registered':
 							case 'REGISTERED':
-
-									if($menu_item_view_by < 4 || $menu_item_view_by < $k_group_name_id['GLOBAL_MODERATORS']) $process_menu_item = true;
-								break;
+								if ($menu_item_view_by < 4 || $menu_item_view_by < $k_group_name_id['GLOBAL_MODERATORS'])
+								{
+									$process_menu_item = true;
+								}
+							break;
 
 							case 'Registered Coppa':
 							case 'REGISTERED_COPPA':
-
-									if($menu_item_view_by < 4 || $menu_item_view_by < $k_group_name_id['GLOBAL_MODERATORS']) $process_menu_item = true;
-								break;
+								if ($menu_item_view_by < 4 || $menu_item_view_by < $k_group_name_id['GLOBAL_MODERATORS'])
+								{	
+									$process_menu_item = true;
+								}
+							break;
 
 							case 'Global Moderators':
 							case 'GLOBAL_MODERATORS':
 								
-								if($menu_item_view_by < 5 || $menu_item_view_by < $k_group_name_id['ADMINISTRATORS']) $process_menu_item = true;
+								if ($menu_item_view_by < 5 || $menu_item_view_by < $k_group_name_id['ADMINISTRATORS'])
+								{
+									$process_menu_item = true;
+								}
 							break;
 
 							case 'Bots':
 							case 'BOTS':
-								
-								if($menu_item_view_by ==  1 || $menu_item_view_by ==  6 || $menu_item_view_by ==  $k_group_name_id['GUESTS'] || $menu_item_view_by ==  $k_group_name_id['BOTS']) $process_menu_item = true;
+								if ($menu_item_view_by ==  1 || $menu_item_view_by ==  6 || $menu_item_view_by ==  $k_group_name_id['GUESTS'] || $menu_item_view_by ==  $k_group_name_id['BOTS'])
+								{
+									$process_menu_item = true;
+								}
 							break;
 							
 							default:
-								if($menu_item_view_by == $loop_count || $menu_item_view_by < 3 || $menu_item_view_by < $k_group_name_id['REGISTERED_COPPA']) $process_menu_item = true;
+								if ($menu_item_view_by == $loop_count || $menu_item_view_by < 3 || $menu_item_view_by < $k_group_name_id['REGISTERED_COPPA'])
+								{
+									$process_menu_item = true;
+								}
+							break;
 						}
 					}
 				}
@@ -153,7 +171,7 @@
 			}
 		}
 		
-		if($portal_menus[$i]['append_uid'] == 1)							// do we need to pass user id //
+		if ($portal_menus[$i]['append_uid'] == 1)							// do we need to pass user id //
 		{
 			$isamp = '&amp';
 			$u_id = $user->data['user_id'];
@@ -164,50 +182,68 @@
 			$isamp = '';
 		}
 
-		if($portal_menus[$i]['append_sid'] == 1)							// do we need to pass user session id //
+		if ($portal_menus[$i]['append_sid'] == 1)							// do we need to pass user session id //
 		{
 			$s_id = '?sid=';
 			$s_id .= $user->session_id;
 		}
 		else
-		$s_id = '';
-
-		if($process_menu_item && $portal_menus[$i]['sub_heading']) $j++;
-
-		if($process_menu_item)
 		{
-			if(strstr($portal_menus[$i]['link_to'], 'http'))
-				$link = ($portal_menus[$i]['link_to']) ? $portal_menus[$i]['link_to'] : '';
-			else
-				$link = ($portal_menus[$i]['link_to']) ? append_sid("{$phpbb_root_path}" . $portal_menus[$i]['link_to'] . $s_id . $u_id) : '';
+			$s_id = '';
+		}
 
-			$template->assign_block_vars('portal_menus_row_' . $j, array(
+		if ($process_menu_item && $portal_menus[$i]['sub_heading'])
+		{
+			$j++;
+		}
+
+		if ($process_menu_item)
+		{
+			if (strstr($portal_menus[$i]['link_to'], 'http'))
+			{
+				$link = ($portal_menus[$i]['link_to']) ? $portal_menus[$i]['link_to'] : '';
+			}
+			else
+			{
+				$link = ($portal_menus[$i]['link_to']) ? append_sid("{$phpbb_root_path}" . $portal_menus[$i]['link_to'] . $s_id . $u_id) : '';
+			}
+
+			$is_sub_heading = ($portal_menus[$i]['sub_heading']) ? true : false;
+
+			switch($portal_menus[$i]['extern'])
+			{
+				case 1:
+					$link_option = ' target="_blank"';
+				break;
+
+				case 2:
+					$link_option = ' onclick="window.open(this.href); return false;"';
+				break;
+
+				default:
+					 $link_option = '';
+				break;
+			}
+
+			//print ("<a href=\"page.php\" onClick=\"NewWin=window.open(this.href,'NewWin','toolbar=no,status=no,width=500,height=300,scrollbars=yes');re turn false;\" STYLE=\"text-decoration: underline;\">link</a>");
+			$template->assign_block_vars('portal_menus_row', array(
+				'EXTERN'				=> $link_option,
+				'PORTAL_MENU_HEAD_NAME'	=> ($is_sub_heading) ? $name : '',
 				'PORTAL_MENU_NAME' 		=> $name,
 				'U_PORTAL_MENU_LINK' 	=> ($portal_menus[$i]['sub_heading']) ? '' : $link,
 				'PORTAL_MENU_ICON'		=> ($portal_menus[$i]['menu_icon']) ? '<img src="' . $phpbb_root_path . 'images/block_images/' . $portal_menus[$i]['menu_icon'] . '" height="16px" width="16px" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/none.gif" height="15px" width="15px" alt="" />',
 				'S_SOFT_HR'				=> $portal_menus[$i]['soft_hr'],
 				'S_SUB_HEADING' 		=> ($portal_menus[$i]['sub_heading']) ? true : false,
-				'S_COUNT'				=> $i,
-				'S_MENU'				=> $j,
 			));
-
-			// save the menu name for processing later //
-			if(($portal_menus[$i]['sub_heading']))
-				$my_names[$j] = $name;
 		}
 	}
 
 	$template->assign_vars(array(
+		'DEBUG_QUERIES'		=> (defined('DEBUG_QUERIES')) ? DEBUG_QUERIES : false,
 		'S_USER_LOGGED_IN'	=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
-		'U_INDEX'			=> "{$phpbb_root_path}index.$phpEx$SID",
-		'U_PORTAL'			=> "{$phpbb_root_path}portal.$phpEx$SID",
-		'S_NO_OF_MENUS'		=> $j,
-		'S_MAIN_1'			=> !empty($my_names[1]) ? $my_names[1] : '',
-		'S_MAIN_2'			=> !empty($my_names[2]) ? $my_names[2] : '',
-		'S_MAIN_3'			=> !empty($my_names[3]) ? $my_names[3] : '',
-		'S_MAIN_4'			=> !empty($my_names[4]) ? $my_names[4] : '',
-		'S_MAIN_5'			=> !empty($my_names[5]) ? $my_names[5] : '',
-		'M_PORTAL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+		'U_INDEX'			=> append_sid("{$phpbb_root_path}index.$phpEx"),
+		'U_PORTAL'			=> append_sid("{$phpbb_root_path}portal.$phpEx"),
+		'MENUS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	));
 
 ?>

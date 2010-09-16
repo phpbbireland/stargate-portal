@@ -22,12 +22,11 @@
 	<dl>
 		<dt><label for="blocks_enabled">{L_PORTAL_BLOCKS_ENABLED}:</label><br /><span>{L_PORTAL_BLOCKS_ENABLED_EXPLAIN}</span></dt>
 		<dd>
-			<label>
-			<input type="radio" class="radio" name="blocks_enabled" id="blocks_enabled" value="1"<!-- IF S_BLOCKS_ENABLED --> checked="checked" <!-- ENDIF --> />{L_YES}
-			<input type="radio" class="radio" name="blocks_enabled" id="blocks_enabled" value="0"<!-- IF not S_BLOCKS_ENABLED --> checked="checked" <!-- ENDIF --> />{L_NO}
-			</label>
+			<label><input type="radio" class="radio" name="blocks_enabled" id="blocks_enabled" value="1"<!-- IF S_BLOCKS_ENABLED --> checked="checked" <!-- ENDIF --> />{L_YES}</label>
+			<label><input type="radio" class="radio" name="blocks_enabled" id="blocks_enabled" value="0"<!-- IF not S_BLOCKS_ENABLED --> checked="checked" <!-- ENDIF --> />{L_NO}</label>
 		</dd>
 	</dl>
+
 	<dl>
 		<dt><label for="">{L_PORTAL_SET_LAYOUT}:</label><br /><span>{L_PORTAL_SET_LAYOUT_EXPLAIN}</span></dt>
 		<dd><label>
@@ -58,16 +57,15 @@
 </table>
 
 
-<!-- IF S_OPT == 'Config Data Saved' || S_OPT == 'Block Files Created' || S_OPT == 'Saved' -->
-<b>{S_OPT}<br /></b>
-<!-- ELSE -->
-<!-- IF S_OPT != "" -->
+<!-- IF S_OPT == 'ConfigDataSaved' || S_OPT == 'BlockFilesCreated' || S_OPT == 'Saved' -->
+	<b>{S_OPT}<br /></b>
+<!-- ELSEIF S_OPT != "" -->
 <fieldset class="submit-buttons">
 	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
 	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />&nbsp;
 </fieldset>
 <!-- ENDIF -->
-<!-- ENDIF -->
+
 {S_FORM_TOKEN}
 </form>
 <!-- INCLUDE overall_footer.html -->

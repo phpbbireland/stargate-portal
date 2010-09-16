@@ -2,8 +2,8 @@
 /**
 *
 * @package acp Stargate Portal
-* @version $Id: acp_k_blocks.php 312 2009-01-02 02:51:12Z Michealo $
-* @copyright (c) 2007 Michael O'Toole aka michaelo
+* @version $Id: acp_k_blocks.php 312 2009-11-23 02:51:12Z Michealo $
+* @copyright (c) 2005-2009 Michael O'Toole aka michaelo
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
@@ -21,6 +21,12 @@ if (!defined('IN_PHPBB'))
 * @package acp
 */
 
+/**
+* @notes
+* S_OPTIONS = switch used to determine position/action
+* L_BLOCK_REPORT = general html report text
+**/
+
 class acp_k_blocks
 {
 	var $u_action = '';
@@ -28,7 +34,7 @@ class acp_k_blocks
 	function main($id, $mode)
 	{
 		global $db, $user, $auth, $template, $cache;
-		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+		global $config, $k_config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $SID;
 
 		$user->add_lang('acp/k_blocks');
 		$this->tpl_name = 'acp_k_blocks';
@@ -40,8 +46,13 @@ class acp_k_blocks
 		$action	= request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;
 
-		$forum_id	= request_var('f', 0);
-		$forum_data = $errors = array();
+		//$forum_id	= request_var('f', 0);
+		//$forum_data = $errors = array();
+
+		//$view_page_id[]	= ( ( isset($_POST['view_page_id']) ) ? $_POST['view_page_id'] : ( (isset($_GET['view_page_id'])) ? $_GET['view_page_id'] : array()));
+	 
+		//$view_page_id[] = request_var('view_page_id', array());
+
 		if ($submit && !check_form_key($form_key))
 		{
 			$submit = false;
@@ -49,45 +60,77 @@ class acp_k_blocks
 			trigger_error($user->lang['FORM_INVALID']);
 		}
 
-		$block='';
-		$block	= request_var('id', '');
-		//$groupid = request_var('group_id', '');
+		//$block	= request_var('id', '');
 
-		// get title for block whos id = $block //
-		//$mini_mod_id = get_module_id($block);  
+		// Can not use append_sid here, the $block_id is assigned to the html but unknow to this code //
+		// Would require i add a form element and use request_var to retrieve it //
+		// The global $SID is available so I make use of it...?
 
 		$template->assign_vars(array(
-			'U_EDIT2'			=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=edit" . '&amp;block=' . $block,
-			'U_UP'				=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=up" . '&amp;block=' . $block,
-			'U_DOWN'			=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=down" . '&amp;block=' . $block,
 			'U_BACK'			=> $this->u_action,
-			'U_DELETE'			=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=delete" . '&amp;block=' . $block,
-			'U_SET_VARS_W'		=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_modules&amp;mode=welcome" . '&amp;block=' . $block,
-			'U_SET_VARS'		=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config" . '&amp;block=' . $block,
-			'U_LINK_MINIMOD'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_modules&mode=edit" . '&amp;module=' . $block 
+			'U_EDIT2'			=> "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_blocks&amp;mode=edit&amp;block=",
+			'U_UP'				=> "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_blocks&amp;mode=up&amp;block=",
+			'U_DOWN'			=> "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_blocks&amp;mode=down&amp;block=",
+			'U_DELETE'			=> "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_blocks&amp;mode=delete&amp;block=",
+			'U_SET_VARS_W'		=> "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_modules&amp;mode=welcome&amp;block=",
+			'U_SET_VARS'		=> "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_vars&amp;mode=config&amp;block=",
+			'U_LINK_MINIMOD'	=> "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_modules&mode=edit&amp;module=",
+			'U_MANAGE_PAGES'	=> "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_pages&mode=manage"
 		));
 
 		// Set up general vars
 		$mode	= request_var('mode', '');
 		$block	= request_var('block', '');
 
-		$u_action = "{$phpbb_admin_path}index.$phpEx$SID&amp;i=$id&amp;mode=$mode"; // ? is this needed ? //
+		// bold current row text so things are easier to follow when moving... could use cookie? //
+		if (($block) ? $block : 0)
+		{
+			$sql = 'UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $block . ' WHERE config_name = "adm_block"';
+			$db->sql_query($sql);
+		}
+		else
+		{
+			$wheresql =  ' WHERE config_name = "adm_block"';
+
+			$sql = 'SELECT config_name, config_value
+				FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . $wheresql;
+			
+			$result = $db->sql_query($sql);
+
+			$row = $db->sql_fetchrow($result);
+
+			$k_config[$row['config_name']] = $row['config_value'];
+		}
+
+		$template->assign_vars(array(
+			'ADM_BLOCK'	=> $k_config['adm_block'],
+		));
+
+		$u_action = append_sid("{$phpbb_admin_path}index.$phpEx" , "i=$id&amp;mode=$mode");
 
 		switch ($mode)
 		{
 			case 'up':
 			case 'down':
-
 			{
-				$to_move;
-				$move_to;
+				$to_move = $move_to = array();
 
 				// get current block data//
 				$sql = "SELECT id, ndx, position FROM " . K_BLOCKS_TABLE . "
 					WHERE id = $block LIMIT 1";
 
-				if(!$result = $db->sql_query($sql))
-					trigger_error('Error! Could not get Blocks data from table, ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+				if (!$result = $db->sql_query($sql))
+				{
+					//trigger_error('Error! Could not get Blocks data from table, ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					trigger_error('ERROR_PORTAL_BLOCKS');
+				}
+
+				// Added function to reindex blocks after a block deletion Dicky
+				if (isset($current_position) && $current_position != $position)
+				{
+					$index_start = get_lowest_ndx($current_position);
+					reindex_column($current_position, $index_start);
+				}
 
 				$row = $db->sql_fetchrow($result);
 				$to_move['id'] = $row['id'];
@@ -95,11 +138,11 @@ class acp_k_blocks
 
 				$position = $row['position'];
 
-				if($mode == 'up')
+				if ($mode == 'up')
 				{
 					$temp = $temp - 1;
 				}
-				if($mode == 'down')
+				if ($mode == 'down')
 				{
 					$temp = $temp + 1;
 				}				
@@ -108,78 +151,134 @@ class acp_k_blocks
 				$sql = "SELECT id, ndx, position FROM " . K_BLOCKS_TABLE . "
 					WHERE ndx =  $temp AND position = '$position' LIMIT 1";
 
-				if(!$result = $db->sql_query($sql))
+				if (!$result = $db->sql_query($sql))
+				{
 					trigger_error('Error! '. $user->lang['BLOCK_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+				}
 
 				$row = $db->sql_fetchrow($result);
 
 				$move_to['id'] = $row['id'];
 				$move_to['ndx']  = $row['ndx'];
 
-				if($move_to['ndx'] != $temp )
+				if ($move_to['ndx'] != $temp || $move_to['id'] == '')
+				{
 					trigger_error('Error! '. $user->lang['BLOCK_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
-
-				if($mode == 'up')
-				{
-					$sql = "UPDATE " . K_BLOCKS_TABLE . " SET ndx = " . $to_move['ndx'] . " WHERE id = " . $move_to['id'];
-					if(!$result = $db->sql_query($sql))
-						trigger_error('Error! '. $user->lang['BLOCK_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
-
-					$sql = "UPDATE " . K_BLOCKS_TABLE . " SET ndx = " . $move_to['ndx'] . " WHERE id = " . $to_move['id'];
-					if(!$result = $db->sql_query($sql))
-						trigger_error('Error! '. $user->lang['BLOCK_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 				}
-				if($mode == 'down')
-				{
-					$sql = "UPDATE " . K_BLOCKS_TABLE . " SET ndx = " . $move_to['ndx'] . " WHERE id = " . $to_move['id'];
-					if(!$result = $db->sql_query($sql))
-						trigger_error('Error! '. $user->lang['BLOCK_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 
+				if ($mode == 'up')// mod validation note... sql is not repeated!
+				{
+					// sql is not duplicated
 					$sql = "UPDATE " . K_BLOCKS_TABLE . " SET ndx = " . $to_move['ndx'] . " WHERE id = " . $move_to['id'];
-					if(!$result = $db->sql_query($sql))
+					if (!$result = $db->sql_query($sql))
+					{
 						trigger_error('Error! '. $user->lang['BLOCK_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					}
+					$sql = "UPDATE " . K_BLOCKS_TABLE . " SET ndx = " . $move_to['ndx'] . " WHERE id = " . $to_move['id'];
+					if (!$result = $db->sql_query($sql))
+					{
+						trigger_error('Error! '. $user->lang['BLOCK_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					}
+				}
+
+				if ($mode == 'down')// mod validation note... sql is not repeated!
+				{
+					// sql is not duplicated
+					$sql = "UPDATE " . K_BLOCKS_TABLE . " SET ndx = " . $move_to['ndx'] . " WHERE id = " . $to_move['id'];
+					if (!$result = $db->sql_query($sql))
+					{
+						trigger_error('Error! '. $user->lang['BLOCK_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					}
+					$sql = "UPDATE " . K_BLOCKS_TABLE . " SET ndx = " . $to_move['ndx'] . " WHERE id = " . $move_to['id'];
+					if (!$result = $db->sql_query($sql))
+					{
+						trigger_error('Error! '. $user->lang['BLOCK_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					}
 				}
 
 				$template->assign_vars(array(
 					'L_BLOCK_REPORT'	=> $user->lang['BLOCK_UPDATING'],
 				));
 
-				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=manage");
+				if ($position)
+				{
+					$mode = $position;
+				}
+				else
+				{
+					$mode = 'manage';
+				}
+
+				$cache->destroy('sql', K_BLOCKS_TABLE);
+
+				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode='. $mode));
 
 				break;
 			}
 
 			case 'add':
 			{
-				if($submit)
+				if ($submit)
 				{
-					if(request_var('html_file_name','') == "" OR request_var('title','') == "")
+					if (request_var('html_file_name','') == "" OR request_var('title','') == "")
 					{
-						$message = 'You have not entered the correct data'; //$message = $user->lang['MISSING_DATA'];
+						$message = $user->lang['MISSING_BLOCK_DATA'];
+
 						$template->assign_vars(array(
-							'L_BLOCK_REPORT' => 'Required data is missing...<br />',
+							'L_BLOCK_REPORT' => $message .'<br />',
 						));
 
-						meta_refresh(5, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=add");
+						meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=add'));
 						return;
 					}
 
-					//$id		= request_var('m_id']; // auto assigned
-					//$ndx		= request_var('ndx'];  // we calculate this ?
-					$title		= utf8_normalize_nfc(request_var('title', '', true));
-					$position	= request_var('position', '');
-					$active 	= request_var('active', '');
-					$type		= request_var('type', '');
-					$scroll  	= request_var('scroll', '');
-					$view_by	= request_var('view_by', '');
+					//$id			= request_var('m_id']; // auto assigned
+					//$ndx			= request_var('ndx'];  // we calculate this ?
+					$title			= utf8_normalize_nfc(request_var('title', '', true));
+					$position		= request_var('position', '');
+					$active 		= request_var('active', 1);
+					$type			= request_var('type', '');
+					$scroll  		= request_var('scroll', 0);
+					$view_by		= request_var('view_by', 1);
+					$view_groups	= request_var('view_groups', '');
+					$view_all		= request_var('view_all', 1);
+					$view_pages		= request_var('view_pages', '');
 					$html_file_name		= request_var('html_file_name', '');
+					$var_file_name		= request_var('var_file_name', '');
 					$img_file_name		= request_var('img_file_name', '');
-					$has_vars			= request_var('has_vars', '');
-					$minimod_based		= request_var('minimod_based', '');
-					$mod_block_id		= request_var('mod_block_id', '');
+					$has_vars			= request_var('has_vars', 0);
+					$minimod_based		= request_var('minimod_based', 0);
+					$mod_block_id		= request_var('mod_block_id', 0);
 
-					if($img_file_name == '') $img_file_name = 'none';
-					if($minimod_based == 0) $mod_block_id = '0';
+					if ($view_all)
+					{
+						$view_by = 1;
+					}
+					if ($img_file_name == 'none')
+					{
+						$img_file_name = 'none.gif';
+					}
+					if ($has_vars == 0)
+					{
+						$var_file_name = '';
+					}
+					if ($minimod_based == 0)
+					{
+						$mod_block_id = '0';
+					}
+
+					//$view_page_id	= ( ( isset($_POST['view_page_id']) ) ? $_POST['view_page_id'] : ( (isset($_GET['view_page_id'])) ? $_GET['view_page_id'] : array()));
+					$view_page_id = request_var('view_page_id', array(0));
+
+					for ($i = 0; $i < count($view_page_id); $i++)
+					{
+						$view_pages .= $view_page_id[$i];
+
+						if ($i < count($view_page_id) - 1)
+						{
+							$view_pages .= ',';
+						}
+					}
 
 					$ndx = get_next_ndx($position);		// get the next ndx to use for this position	//
 
@@ -188,18 +287,22 @@ class acp_k_blocks
 						'title'				=> $title,
 						'active'			=> $active,
 						'html_file_name'	=> $html_file_name,
+						'var_file_name'		=> $var_file_name,
 						'img_file_name'		=> $img_file_name,
 						'position'			=> $position,
 						'view_by'			=> $view_by,
+						'view_groups'		=> $view_groups,
+						'view_all'			=> $view_all,
+						'view_pages'		=> $view_pages,
 						'scroll'			=> $scroll,
 						'has_vars'			=> $has_vars,	
 						'minimod_based'		=> $minimod_based,
 						'mod_block_id'		=> $mod_block_id,
-		           );
+					  );
 
-	               if(!$db->sql_query('INSERT INTO ' . K_BLOCKS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_array)))
+					if (!$db->sql_query('INSERT INTO ' . K_BLOCKS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_array)))
 					{
-						trigger_error('Error! Could not add block. ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+						trigger_error('Error!' . $user->lang['COULD_NOT_ADD_BLOCK'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 					}
 					else
 					{
@@ -212,7 +315,7 @@ class acp_k_blocks
 
 					$cache->destroy('sql', K_BLOCKS_TABLE);
 
-					meta_refresh(2, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=manage");
+					meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=manage'));
 					return;
 				}
 				else
@@ -220,15 +323,17 @@ class acp_k_blocks
 
 					// get all groups and fill array //
 					get_all_groups();
+					get_all_pages(0);
 					get_all_minimods();
+					get_all_vars_files($block);
 
 					//Get all installed blocks//
 					$data='';
 					$c = 0;
 					$sql = 'SELECT * FROM ' . K_BLOCKS_TABLE;
-					if( $result = $db->sql_query($sql) )
+					if ($result = $db->sql_query($sql))
 					{
-						while ( $row = $db->sql_fetchrow($result) )
+						while ($row = $db->sql_fetchrow($result))
 						{
 							$data .= $row['id'];
 							$data .=' ';
@@ -237,19 +342,27 @@ class acp_k_blocks
 					}
 
 					$dirslist='none ';
-					$dirs = dir('./../styles/portal_common/template/blocks');
+					//$dirs = dir('./../styles/portal_common/template/blocks');
+					$dirs = dir($phpbb_root_path . 'styles/portal_common/template/blocks');
+
 					while ($file = $dirs->read())
 					{
-						if(!stripos($file, ".bak"))
+						if (!stripos($file, ".bak"))
+						{
 							$dirslist .= "$file ";
+						}
 					}
+
 					closedir($dirs->handle);
 					$dirslist = explode(" ", $dirslist);
 					sort($dirslist);
-					for ( $i=0; $i < sizeof($dirslist); $i++ )
+
+					for ($i=0; $i < sizeof($dirslist); $i++)
 					{
-						if($dirslist[$i] != '')
+						if ($dirslist[$i] != '')
+						{
 							$template->assign_block_vars('html_file_name', array('S_BLOCK_FILE_HTML' => $dirslist[$i]));
+						}
 					}
 					$dirslist='';
 
@@ -258,7 +371,7 @@ class acp_k_blocks
 
 					while ($file = $dirs->read())
 					{
-						if(stripos($file, ".gif") ||  stripos($file, ".png"))
+						if (stripos($file, ".gif") ||  stripos($file, ".png"))
 							$dirslist .= "$file ";
 					}
 
@@ -266,10 +379,12 @@ class acp_k_blocks
 					$dirslist = explode(" ", $dirslist);
 					sort($dirslist);
 
-					for ( $i=0; $i < sizeof($dirslist); $i++ )
+					for ($i=0; $i < sizeof($dirslist); $i++)
 					{
-						if($dirslist[$i] != '')
+						if ($dirslist[$i] != '')
+						{
 							$template->assign_block_vars('img_file_name', array('S_BLOCK_FILE_I' => $dirslist[$i]));
+						}
 					}
 					$dirslist='';
 
@@ -280,77 +395,143 @@ class acp_k_blocks
 
 			case 'edit':
 			{
-				if($submit)
+				if ($submit)
 				{
 					$id				= request_var('id', '');
-					$ndx			= request_var('ndx', '');
+					$ndx			= request_var('ndx', 0);
 					$title			= utf8_normalize_nfc(request_var('title', '', true));
 					$position		= request_var('position', '');
 					$type			= request_var('type', '');
-					$active 		= request_var('active', '');
-					$view_by		= request_var('view_by', '');
-					$scroll			= request_var('scroll', '');
-					$has_vars		= request_var('has_vars', '');
-					$minimod_based	= request_var('minimod_based', '');
-					$mod_block_id	= request_var('mod_block_id', '');
+					$active 		= request_var('active', 1);
+					$view_by		= request_var('view_by', 1);
+					$view_groups	= request_var('view_groups', '');
+					$view_all		= request_var('view_all', 1);
+					$view_pages		= request_var('view_pages', '');
+					$scroll			= request_var('scroll', 0);
+					$has_vars		= request_var('has_vars', 0);
+					$minimod_based	= request_var('minimod_based', 0);
+					$mod_block_id	= request_var('mod_block_id', 0);
 					$html_file_name	= request_var('html_file_name', '');
+					$var_file_name	= request_var('var_file_name', '');
 					$img_file_name	= request_var('img_file_name', ''); 
+		
+					//$view_page_id	= ( ( isset($_POST['view_page_id']) ) ? $_POST['view_page_id'] : ( (isset($_GET['view_page_id'])) ? $_GET['view_page_id'] : array()));
+					$view_page_id = request_var('view_page_id', array(0));
 
-					if($type == 1)
+					for ($i = 0; $i < count($view_page_id); $i++)
+					{
+						$view_pages .= $view_page_id[$i];
+
+						if ($i < count($view_page_id) - 1)
+						{
+							$view_pages .= ',';
+						}
+					}
+
+
+					// this shoud not happen but just in case //
+					if (!$id)
+					{
+						$template->assign_vars(array(
+							'L_BLOCK_REPORT' => $user->lang['UNKNOWN_ERROR'],
+						));
+						$submit = false;
+						return;
+					}
+
+					if ($type == 1)
+					{
 						$type = 'H';
+					}
 					else
+					{
 						$type = 'B';
+					}
 
-					if($view_by == '') $view_by = 0;
+					if ($view_by == '' && !$view_all)
+					{
+						$view_by = 0;
+					}
+					else if ($view_all)
+					{
+						$view_by = 1;
+					}
 
-					if($img_file_name == '') $img_file_name = 'none';
-					if($minimod_based == 0) $mod_block_id = '0';
+					if ($img_file_name == 'none')
+					{
+						$img_file_name = 'none.gif';
+					}
+					if ($has_vars == 0)
+					{
+						$var_file_name = '';
+					}
+					if ($minimod_based == 0)
+					{
+						$mod_block_id = '0';
+					}
 
 					// get the current block position //
 					$current_position = get_current_position($id);
 
 					// if moving block position (column) //
-					if($current_position != $position)
+					if ($current_position != $position)
+					{
 						$ndx = get_next_ndx($position);
+					}
 
 					$sql = "UPDATE " . K_BLOCKS_TABLE . "
 					SET
 						ndx = '$ndx',
-						title = '$title',
-						position = '$position',
 						active = '$active',
-						type = '$type',
-						html_file_name = '$html_file_name',
-						img_file_name = '$img_file_name',
+						title = '" . $db->sql_escape($title) . "', 
+						position = '" . $db->sql_escape($position) . "',
+						type = '" . $db->sql_escape($type) . "',
+						html_file_name = '" . $db->sql_escape($html_file_name) . "', 
+						var_file_name = '" . $db->sql_escape($var_file_name) . "', 
+						img_file_name = '" . $db->sql_escape($img_file_name) . "', 
+						view_groups = '" . $db->sql_escape($view_groups) . "', 
+						view_pages = '" . $db->sql_escape($view_pages) . "', 
 						view_by = '$view_by',
+						view_all = '$view_all',
 						scroll = '$scroll',
 						has_vars = '$has_vars',
 						minimod_based = '$minimod_based',
 						mod_block_id = '$mod_block_id'
 				 	WHERE id = '$id'";
 
-					if(!$result = $db->sql_query($sql))
-						trigger_error('Error! Could not edit block. ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					if (!$result = $db->sql_query($sql))
+					{
+						trigger_error($user->lang['COULD_NOT_EDIT_BLOCK'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					}
 
 					$template->assign_vars(array(
-						'L_BLOCK_REPORT'	=> 'Block has been edited successfully! Returning...</font><br />',
+						'L_BLOCK_REPORT'	=> $user->lang['SAVING'],
 					));
 
 					$cache->destroy('sql', K_BLOCKS_TABLE);
+					delete_this_block_cached_file($html_file_name);
 
-					meta_refresh(2, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=manage");
+					if ($position)
+					{
+						$mode = $position;
+					}
+					else
+					{
+						$mode = 'manage';
+					}
 
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=' . $mode));
 					return;
 				}
 
 				// get all available html files, note.. we search the admin styles folder //
 
 				$dirslist='none ';
-				$dirs = dir('./../styles/portal_common/template/blocks');
+				$dirs = dir($phpbb_root_path . 'styles/portal_common/template/blocks');
 
 				while ($file = $dirs->read())
 				{
-					if(!stripos($file, ".bak"))
+					if (!stripos($file, ".bak"))
 					{
 						$dirslist .= "$file ";
 					}
@@ -360,42 +541,59 @@ class acp_k_blocks
 				$dirslist = explode(" ", $dirslist);
 				sort($dirslist);
 
-				for ( $i=0; $i < sizeof($dirslist); $i++ )
+				for ($i=0; $i < sizeof($dirslist); $i++)
 				{
-					if($dirslist[$i] != '')
+					if ($dirslist[$i] != '')
+					{
 						$template->assign_block_vars('html_file_name', array('S_BLOCK_FILE_HTML' => $dirslist[$i]));
+					}
 				}
 
 				// get all available block images //
 
 				$dirslist='none ';
-				$dirs = dir('./../images/block_images/small');
+				//$dirs = dir('./../images/block_images/small');
+				$dirs = dir($phpbb_root_path . 'images/block_images/small');
+
 				while ($file = $dirs->read())
 				{
-					if(stripos($file, ".gif") || stripos($file, ".png"))
+					if (stripos($file, ".gif") || stripos($file, ".png"))
+					{
 						$dirslist .= "$file ";
+					}
 				}
 				closedir($dirs->handle);
 
 				$dirslist = explode(" ", $dirslist);
 				sort($dirslist);
 
-				for ( $i=0; $i < sizeof($dirslist); $i++ )
+				for ($i=0; $i < sizeof($dirslist); $i++)
 				{
-					if($dirslist[$i] != '')
+					if ($dirslist[$i] != '')
+					{
 						$template->assign_block_vars('img_file_name', array('S_BLOCK_FILE_I' => $dirslist[$i]));
+					}
 				}
 				$dirslist='';
 
 				$template->assign_vars(array('S_OPTIONS' => 'Add'));
 
+				if ($block == '' || $block == 0) // just checking!
+				{
+					trigger_error($user->lang['NO_BLOCK_ID'] . adm_back_link($this->u_action), E_USER_WARNING);
+				}
+
 				$sql = 'SELECT * FROM ' . K_BLOCKS_TABLE . ' WHERE id=' . $block;
-				if( $result = $db->sql_query($sql) )
+
+				if ($result = $db->sql_query($sql))
 				{
 					$row = $db->sql_fetchrow($result);
 				}
 
-				if($row['img_file_name'] == '') $row['img_file_name'] = 'none';
+				if ($row['img_file_name'] == '')
+				{
+					$row['img_file_name'] = 'none.gif';
+				}
 
 				$template->assign_vars(array(
 					'S_ID'			=> $row['id'],
@@ -405,8 +603,12 @@ class acp_k_blocks
 					'S_ACTIVE'		=> $row['active'],
 					'S_TYPE'		=> $row['type'],
 					'S_FNAME_H'		=> $row['html_file_name'],
+					'S_FNAME_V'		=> $row['var_file_name'],
 					'S_FNAME_I'		=> $row['img_file_name'],
 					'S_VIEW_BY'		=> $row['view_by'],
+					'S_VIEW_GROUPS'	=> $row['view_groups'],
+					'S_VIEW_ALL'	=> $row['view_all'],
+					'S_VIEW_PAGES'	=> $row['view_pages'],
 					'S_SCROLL'		=> $row['scroll'],
 					'S_HAS_VARS'	=> $row['has_vars'],
 					'S_MINIMOD_BASED'	=> $row['minimod_based'],
@@ -414,8 +616,10 @@ class acp_k_blocks
 				)); 
 
 				// get all groups and fill array //
+				get_all_pages($block);
 				get_all_groups();
 				get_all_minimods();
+				get_all_vars_files($block);
 
 				$db->sql_freeresult($result);
 
@@ -435,19 +639,29 @@ class acp_k_blocks
 
 				if (confirm_box(true))
 				{
-					$sql = 'SELECT title, id
+					$sql = 'SELECT title, id, position
 						FROM ' . K_BLOCKS_TABLE . '
 						WHERE id = ' . $block;
 					$result = $db->sql_query($sql);
 
-					$title = (string) $db->sql_fetchfield('title');
-					$id = (int) $db->sql_fetchfield('id');
+					$row = $db->sql_fetchrow($result);
+
+					$title = $row['title'];
+					$id = $row['id'];
+					$position = $row['position'];
+
 					$db->sql_freeresult($result);
 					$title .= ' Block ';
 
-					$sql = 'DELETE FROM ' . K_BLOCKS_TABLE . "
-						WHERE id = $block";
+					// Get lowest ndx for current position block Dicky
+					$index_start = get_lowest_ndx($position);
+
+					$sql = "DELETE FROM " . K_BLOCKS_TABLE . "
+						WHERE id = " . $block;
 					$db->sql_query($sql);
+
+					// Added function to reindex blocks after a block deletion
+					reindex_column($position, $index_start);
 
 					$template->assign_vars(array(
 						'L_BLOCK_REPORT' => $title . 'Deleted!</font><br />',
@@ -455,7 +669,7 @@ class acp_k_blocks
 
 					$cache->destroy('sql', K_BLOCKS_TABLE);
 
-					meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=manage");
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=manage'));
 
 					break;
 
@@ -471,7 +685,7 @@ class acp_k_blocks
 
 				$template->assign_vars(array('L_BLOCK_REPORT' => 'Action Cancelled...'));
 
-				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=manage");
+				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=manage'));
 
 				break;
 			}
@@ -487,12 +701,12 @@ class acp_k_blocks
 
 					$sql = 'SELECT * FROM ' . K_BLOCKS_TABLE . ' ORDER by position, ndx';
 
-					if( $result = $db->sql_query($sql) )
+					if ($result = $db->sql_query($sql))
 					{
 						while($row = $db->sql_fetchrow($result))
 						{
 							$thispos = $row['position'];
-							if($thispos == $newpos)
+							if ($thispos == $newpos)
 								$index_no++;
 							else
 								$index_no = 1;
@@ -504,20 +718,23 @@ class acp_k_blocks
 
 							$results = $db->sql_query($sql);
 
-							if(!$results)
-								trigger_error('Error! re-indexing blocks, ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+							if (!$results)
+							{
+								trigger_error($user->lang['RE-INDEXING BLOCKS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+							}
 						}
 					}
 
 					$db->sql_freeresult($result);
 
 					$template->assign_vars(array(
+						'S_BUTTON_HIDE'	=> true,
 						'L_BLOCK_REPORT' => $user->lang['BLOCKS_REINDEXED'],
 					));
 
 					$cache->destroy('sql', K_BLOCKS_TABLE);
 
-					meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=manage");
+					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=manage'));
 
 					break;
 
@@ -533,35 +750,59 @@ class acp_k_blocks
 
 				$template->assign_vars(array('L_BLOCK_REPORT' => 'Action Cancelled...'));
 
-				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_blocks&amp;mode=manage");
+				meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_blocks&amp;mode=manage'));
 
 				break;
 			}
 
-			case 'default':
-
 			case 'tools':
-							$template->assign_vars(array('S_OPTIONS' => 'Tools'));
-							break; 	//default: trigger_error('NO_MODE');
-			case 'L':
-			case 'C':
+						$template->assign_vars(array('S_OPTIONS' => 'Tools'));
+			break;
+
+			case 'L':	
+			case 'C':	
 			case 'R':
 			case '1':
 			case '2':
-			case '3':
+			case '3':	$template->assign_vars(array('S_TYPE' => $mode));
+
 			case 'manage':
 			{
-				if($mode != 'manage')
-					$sql = "SELECT * FROM " . K_BLOCKS_TABLE . " WHERE position = '$mode' ORDER by ndx, type";
-				else
-					$sql = 'SELECT * FROM ' . K_BLOCKS_TABLE . ' ORDER by position, ndx';
-					//$sql = 'SELECT * FROM ' . K_BLOCKS_TABLE . ' ORDER by active DESC, type, ndx, id';
-
-				if( $result = $db->sql_query($sql) )
+				if ($mode != 'manage')
 				{
-					while ( $row = $db->sql_fetchrow($result) )
+					$sql = "SELECT * FROM " . K_BLOCKS_TABLE . " WHERE position = '" . $db->sql_escape($mode) . "' ORDER by ndx, type";
+				}
+				else
+				{
+					$sql = 'SELECT * FROM ' . K_BLOCKS_TABLE . ' ORDER by position, ndx';
+				}
+
+				$l_b_first = $r_b_first = $c_b_first = $l_b_last = $r_b_last = $c_b_last = 1;
+
+				if ($result = $db->sql_query($sql))
+				{
+					while ($row = $db->sql_fetchrow($result))
 					{
-						if($row['img_file_name'] == '') $row['img_file_name'] = 'none';
+						if ($row['img_file_name'] == '')
+						{
+							$row['img_file_name'] = 'none';
+						}
+
+						if ($mode == 'manage')
+						{
+							if ($row['position'] == 'L')
+							{	
+								$l_b_last = $l_b_last + 1;
+							}
+							else if ($row['position'] == 'R')
+							{	
+								$r_b_last = $r_b_last + 1;
+							}
+							else if ($row['position'] == 'C')
+							{	
+								$c_b_last = $c_b_last + 1;
+							}
+						}
 
 						$template->assign_block_vars('bdata', array(
 						'S_ID' 				=> $row['id'],
@@ -571,8 +812,12 @@ class acp_k_blocks
 						'S_ACTIVE'			=> $row['active'],
 						'S_TYPE'			=> $row['type'],
 						'S_FNAME_H'			=> $row['html_file_name'],
+						'S_FNAME_V'			=> $row['var_file_name'],
 						'S_FNAME_I'			=> $row['img_file_name'],
 						'S_VIEW_BY'	 		=> which_group($row['view_by']),
+						'S_VIEW_GROUPS'		=> $row['view_groups'],
+						'S_VIEW_ALL' 		=> $row['view_all'],
+						'S_VIEW_PAGES'		=> $row['view_pages'],
 						'S_SCROLL'			=> $row['scroll'],
 						'S_HAS_VARS'		=> $row['has_vars'],
 						'S_MINIMOD_BASED'	=> $row['minimod_based'],
@@ -586,10 +831,16 @@ class acp_k_blocks
 
 				$template->assign_vars(array(
 					'S_OPTIONS'	=> 'Manage',
+					'S_LBL'	=> $l_b_last-1,
+					'S_RBL'	=> $r_b_last-1,
+					'S_CBL'	=> $c_b_last-1,
+					'S_LRC'	=> '1',
 				));
 
-				break;
+			break;
 			}
+			case 'default':
+			break;
 		}
 
 		$template->assign_vars(array('U_ACTION'		=> $u_action));
@@ -601,8 +852,8 @@ function get_next_ndx($pos)
 {
 	global $db;
 
-	$sql = "SELECT * FROM " . K_BLOCKS_TABLE . " WHERE position = '$pos' ORDER by ndx DESC";
-	if( $result = $db->sql_query($sql) )
+	$sql = "SELECT * FROM " . K_BLOCKS_TABLE . " WHERE position = '" . $db->sql_escape($pos) . "' ORDER by ndx DESC";
+	if ($result = $db->sql_query($sql))
 	{
 		$row = $db->sql_fetchrow($result);		// just get last block ndx details	//
 		$ndx = $row['ndx'];						// only need last ndx returned		//
@@ -615,8 +866,8 @@ function get_current_position($my_id)
 {
 	global $db;
 
-	$sql = "SELECT position FROM " . K_BLOCKS_TABLE . " WHERE id = '$my_id' ";
-	if( $result = $db->sql_query($sql) )
+	$sql = "SELECT position FROM " . K_BLOCKS_TABLE . " WHERE id = '" . $db->sql_escape($my_id) . "' ";
+	if ($result = $db->sql_query($sql))
 	{
 		$row = $db->sql_fetchrow($result);		
 		$position = $row['position'];
@@ -631,13 +882,13 @@ function get_module_id($block)
 {
 echo '> '; echo $block;
 
-	if($block == '')
+	if ($block == '')
 		return;
 
 	global $db;
 
 	$sql = "SELECT mod_id FROM " . K_MODULES_TABLE . " WHERE mod_block_id = '$block' ";
-	if( $result = $db->sql_query($sql) )
+	if ( $result = $db->sql_query($sql) )
 	{
 		$row = $db->sql_fetchrow($result);		
 		return($row['mod_block_id']);
@@ -649,6 +900,7 @@ echo '> '; echo $block;
 function resync_ndx_on_delete($id)
 {
 	// outstanding... we need to resync ndx on delete and add ... might also add a swap to make things faster...
+	// should not be required...
 }
 
 function get_all_groups()
@@ -682,6 +934,57 @@ function get_all_groups()
 	$db->sql_freeresult($result);
 }
 
+/**
+* Takes the $id of a given block
+*
+* (a) sets the page id, name and checkboxes for this block and
+*    any pages it is displayed in...
+*
+* (b) creates the pages array
+* 
+* 20 August 2010
+*
+**/
+function get_all_pages($id)
+{
+	global $db, $template;
+
+	if ($id != 0)
+	{
+		$sql = 'SELECT id, view_pages FROM ' . K_BLOCKS_TABLE . ' WHERE id=' . $id;
+		if ($result = $db->sql_query($sql))
+		{
+			$row = $db->sql_fetchrow($result);
+		}
+		$db->sql_freeresult($result);
+		$arr = explode(','  , $row['view_pages']);
+	}
+
+	// Get all pages 
+	$sql = 'SELECT page_id, page_name
+		FROM ' . K_PAGES_TABLE . '
+		ORDER BY page_id ASC, page_name';
+	$result = $db->sql_query($sql);
+
+	$template->assign_block_vars('pages', array(
+		'PAGE_NAME'		=> 'None',
+		'PAGE_ID'		=> 0,
+	));
+
+	while ($row = $db->sql_fetchrow($result))
+	{
+		$page_id = $row['page_id'];
+		$page_name = $row['page_name'];
+		$template->assign_block_vars('pages', array(
+			'PAGE_NAME'		=> $page_name,
+			'PAGE_ID'		=> $page_id,
+			'IS_CHECKED'	=> ($id) ? (in_array($page_id, $arr)) ? true : false : '',
+			)
+		);
+	}
+	$db->sql_freeresult($result);
+}
+
 function which_group($id)
 {
 	global $db, $template;
@@ -699,10 +1002,14 @@ function which_group($id)
 
 	//????//$name = mb_convert_case($name, MB_CASE_TITLE, "UTF-8");
 
-	if($name == '')
+	if ($name == '')
+	{
 		return('None');
+	}
 	else
+	{
 		return ($name);
+	}
 }
 
 
@@ -729,4 +1036,122 @@ function get_all_minimods()
 	}
 	$db->sql_freeresult($result);
 }
+
+function get_all_vars_files($block)
+{
+	global $template;
+
+	$dirslist='none ';
+	$dirs = dir('./../adm/style/k_block_vars');
+
+	while ($file = $dirs->read())
+	{
+		if (!stripos($file, ".bak"))
+		{
+			if ($file != '.' and $file != '..')
+			{
+				$dirslist .= "$file ";
+			}
+		}
+	}
+	closedir($dirs->handle);
+
+	$dirslist = explode(" ", $dirslist);
+	sort($dirslist);
+
+	for ($i=0; $i < sizeof($dirslist); $i++)
+	{
+		if ($dirslist[$i] != '')
+		{
+			$template->assign_block_vars('var_file_name', array('S_VAR_FILE_NAME' => $dirslist[$i]));
+		}
+	}
+	$dirslist = '';
+}
+
+
+function delete_this_block_cached_file($thisfile)
+{
+	global $cache, $phpbb_root_path;
+
+	$thisfile .= '.php';
+
+	$dirslist='';
+
+	$dirs = dir($phpbb_root_path . 'cache');
+
+	while ($file = $dirs->read())
+	{
+		if (strpos($file, $thisfile))
+		{
+			$cache->destroy($file);
+			//unset($file);
+		}
+	}
+
+	closedir($dirs->handle);
+}
+
+function delete_all_block_cached_files()
+{
+	global $cache, $phpbb_root_path;
+
+	$dirslist='';
+
+	$dirs = dir($phpbb_root_path . 'cache');
+
+	while ($file = $dirs->read())
+	{
+		if (stripos($file, "_blocks.block_"))
+		{
+			$cache->destroy($file);
+		}
+	}
+	closedir($dirs->handle);
+}
+
+
+function reindex_column($position, $idx)
+{
+	global $db;
+
+	$sql = "SELECT id, ndx
+		FROM  " . K_BLOCKS_TABLE . "
+		WHERE position = '" . $db->sql_escape($position) . "'
+		ORDER BY ndx";
+
+	if ($result = $db->sql_query($sql))
+	{
+		$i = $idx;
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$id = $row['id'];
+			$sql = 'UPDATE ' . K_BLOCKS_TABLE . ' SET ndx = ' . $i . ' WHERE id = ' . $id;
+			if (!$result = $db->sql_query($sql))
+			{
+				trigger_error($user->lang['COULD_NOT_REINDEX_BLOCKS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+			}
+			++$i;
+		}
+	}
+	$db->sql_freeresult($result);
+}
+
+// Get lowest ndx for current position block
+function get_lowest_ndx($position)
+{
+	global $db;
+
+	$sql = "SELECT ndx
+		FROM  " . K_BLOCKS_TABLE . "
+		WHERE position = '" . $position . "'
+		ORDER BY ndx ASC LIMIT 1";
+	$result = $db->sql_query($sql);
+
+	$index_start = (int) $db->sql_fetchfield('ndx');
+	$db->sql_freeresult($result);
+	
+	return ($index_start);
+}
+
 ?>

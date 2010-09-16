@@ -30,6 +30,56 @@ function set_data(data)
 }
 </script>
 
+
+<script>
+// Not very elegant but it works Mike //
+function set_val(data, id)
+{
+	var mydata;
+	var element = null;
+
+	mydata = document.getElementById(id).value;
+
+	if (data == '0')
+	{
+		data = '';
+	}
+
+    //document.getElementById(view).value = mydata + data;
+	document.getElementById(id).value = data;
+
+	if(data == 'style')
+	{
+		// redirect?
+	}
+	else if ($data = 'mod')
+	{
+		// redirect?
+	}
+	else if ($data = 'block')
+	{
+	/*
+		if (document.getElementById)
+		{
+			element = document.getElementById(id);
+		}
+		else if (document.all)
+		{
+			element = document.all[id];
+		}
+		else if (document.layers)
+		{
+			element = document.layers[id];
+		}
+		//element.style.display = "";
+		//document.getElementById(id).visibility.value = "";
+		*/
+	}
+
+}
+</script>
+
+
 <a name="maincontent"></a>
 
 <h1>{L_TITLE}</h1>
@@ -39,10 +89,13 @@ function set_data(data)
 <form id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="module" value="{S_MOD_ID}" />
 <fieldset>
 	<legend>{L_MODULES_TYPE}</legend>
+
+	<div id="warning" name="warning" style="visibility:none" >{L_WARNING} </div>
+
 	<dl>
 		<dt><label for="available">{L_AVAILABLE_TYPES}:</label><br />{L_AVAILABLE_TYPES_EXPLAIN}</dt>
 		<dd><label>
-			<select name="available" id="available" class="post">
+			<select name="available" id="available" class="post" onchange="set_val(this.options[this.selectedIndex].value,'new_type'); ">
 			<!-- BEGIN available -->
 			<option value="{available.S_AVAILABLE_TYPES}">{available.S_AVAILABLE_TYPES}</option>
 			<!-- END available -->
@@ -52,8 +105,9 @@ function set_data(data)
 	</dl>
 	<dl>
 		<dt><label for="new_type">{L_NEW_TYPE}:</label><br /><span>{L_NEW_TYPE_EXPLAIN}</span></dt>
-		<dd><br /><input class="post" size="29" maxlength="30" name="new_type" value="{edit.S_NEW_TYPE}" type="text"></dd>
+		<dd><br /><input class="post" size="29" maxlength="30" id="new_type" name="new_type" value="{edit.S_NEW_TYPE}" type="text"></dd>
 	</dl>
+	<hr />
 	<dl>
 		<dt><label for="mod_name">{L_BMS_NAME}:</label><br /><span>{L_BMS_NAME_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="45" maxlength="50" name="mod_name" value="{edit.S_MOD_NAME}" type="text"></dd>
@@ -68,7 +122,7 @@ function set_data(data)
 	</dl>
 	<dl>
 		<dt><label for="mod_origin">{L_MOD_ORIGIN}:</label><br /><span>{L_MOD_ORIGIN_EXPLAIN}</span></dt>
-		<dd>
+		<dd><br />
 			<label><input type="radio" class="radio" id="mod_origin" name="mod_origin" value="1" <!-- IF edit.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 			<label><input type="radio" class="radio" name="mod_origin" value="0" <!-- IF not edit.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 		</dd>
@@ -76,6 +130,10 @@ function set_data(data)
 	<dl>
 		<dt><label for="mod_copyright">{L_COPYRIGHT}:</label><br /><span>{L_COPYRIGHT_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="45" maxlength="255" id="mod_copyright" name="mod_copyright" value="{edit.S_MOD_COPYRIGHT}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_filename">{L_MOD_FILENAME}:</label><br /><span>{L_MOD_FILENAME_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="100" name="mod_filename" value="{edit.S_MOD_FILENAME}" type="text"></dd>
 	</dl>
 	<dl>
 		<dt><label for="mod_author_co">{L_AUTHOR_CO}:</label><br /><span>{L_AUTHOR_CO_EXPLAIN}</span></dt>
@@ -106,10 +164,22 @@ function set_data(data)
 		<dt><label for="mod_last_updated">{L_LAST_UPDATED}:</label><br /><span>{L_LAST_UPDATED_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="17" maxlength="17" name="mod_last_updated" value="{edit.S_MOD_LAST_UPDATED}" type="text"></dd>
 	</dl>
-	<dl>
-		<dt><label for="mod_details">{L_INFO}:</label><br /><span>{L_INFO_EXPLAIN}</span></dt>
-		<dd><textarea id="mod_details" name="mod_details" rows="8" cols="200">{S_MOD_DETAILS}</textarea></dd>
-	</dl>
+
+	<div style="padding:0px; margin: 0px; margin-top: -20px;">
+		<h2>{L_EDITOR_NAME}</h2>
+		<fieldset>
+			<!-- INCLUDE sgp_editor/sgp_quickreply_buttons.html -->
+			<div style="float:right; text-align:center; width:20%;"><strong style="padding:8px;">{L_SMILIES}</strong>
+				<span style="width:100%; min-height: 160px; float:right; text-align:center; padding:8px; border-left: solid 1px #B4BAC0;">
+					<!-- INCLUDE sgp_editor/sgp_quickreply_smilies.html -->
+					<!-- INCLUDE sgp_editor/sgp_add_vars.html -->
+				</span>
+			</div>
+			<textarea style="width:75%;" id="mod_details" name="mod_details" rows="10" cols="400">{S_MOD_DETAILS}</textarea>
+			<!-- INCLUDE sgp_editor/sgp_quickreply_options.html -->
+		</fieldset>
+	</div>
+
 </fieldset>
 <!-- ENDIF -->
 
@@ -145,7 +215,7 @@ function set_data(data)
 	</dl>
 	<dl>
 		<dt><label for="mod_origin">{L_MOD_ORIGIN}:</label><br /><span>{L_MOD_ORIGIN_EXPLAIN}</span></dt>
-		<dd>
+		<dd><br />
 			<label><input type="radio" class="radio" id="mod_origin" name="mod_origin" value="1" <!-- IF edit.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 			<label><input type="radio" class="radio" name="mod_origin" value="0" <!-- IF not edit.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 		</dd>
@@ -153,6 +223,10 @@ function set_data(data)
 	<dl>
 		<dt><label for="mod_copyright">{L_COPYRIGHT}:</label><br /><span>{L_COPYRIGHT_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="45" maxlength="255" id="mod_copyright" name="mod_copyright" value="{edit.S_MOD_COPYRIGHT}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_filename">{L_MOD_FILENAME}:</label><br /><span>{L_MOD_FILENAME_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="100" name="mod_filename" value="{edit.S_MOD_FILENAME}" type="text"></dd>
 	</dl>
 	<dl>
 		<dt><label for="mod_author_co">{L_AUTHOR_CO}:</label><br /><span>{L_AUTHOR_CO_EXPLAIN}</span></dt>
@@ -190,15 +264,34 @@ function set_data(data)
 	</dl>
 	<div><textarea style="width:99%;" id="mod_details" name="mod_details" rows="25" cols="600">{edit.S_MOD_DETAILS}</textarea></div>
 	<!-- ELSE -->
+	<hr />
 	<dl>
-		<dt><label for="mod_details">{L_INFO}:</label><br /><span>{L_INFO_EXPLAIN}</span></dt>
-		<dd><textarea id="mod_details" name="mod_details" rows="3" cols="200">{edit.S_MOD_DETAILS}</textarea></dd>
+		<dt><label for="mod_details"><b>{L_INFO}:</b></label><span>{L_INFO_1_EXPLAIN}</span></dt>
+		<dd>{L_INFO_2_EXPLAIN}</dd>
 	</dl>
+
+	<div style="padding:0px; margin: 0px; margin-top: -20px;">
+		<h2>{L_EDITOR_NAME}</h2>
+		<fieldset>
+			<!-- INCLUDE sgp_editor/sgp_quickreply_buttons.html -->
+			<div style="float:right; text-align:center; width:20%;"><strong style="padding:8px;">{L_SMILIES}</strong>
+				<span style="width:100%; min-height: 160px; float:right; text-align:center; padding:8px; border-left: solid 1px #B4BAC0;">
+					<!-- INCLUDE sgp_editor/sgp_quickreply_smilies.html -->
+					<!-- INCLUDE sgp_editor/sgp_add_vars.html -->
+				</span>
+			</div>
+			<textarea style="width:75%;" id="mod_details" name="mod_details" rows="10" cols="400">{edit.S_MOD_DETAILS}</textarea>
+			<!-- INCLUDE sgp_editor/sgp_quickreply_options.html -->
+		</fieldset>
+	</div>
+
+	<!-- May add a basic WYSIWYG editor in later versions... -->
 	<!-- ENDIF -->
 </fieldset>
+
+
 <!-- ENDIF -->
 <!-- END edit -->
-
 
 <!-- IF S_OPTION == 'welcome' -->
 <form id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="module" value="{S_MOD_ID}" />
@@ -220,8 +313,8 @@ function set_data(data)
 			<td class="row1" width="auto"><div align="left">{welcome.S_MOD_DETAILS}</div></td>
 			<td class="row1" width="30px" colspan="2">
 				<div align="center">
-					<img src="images/icon_delete_disabled.gif" title="You can't delete the welcome message" border="0" alt="{L_DELETE}">
-					<a href="{U_EDIT}{welcome.S_MOD_ID}"><img src="images/icon_edit.gif" title="Edit Welcome Message" border="0" alt="{L_EDIT}"></a>
+					<img src="images/icon_delete_disabled.gif" title="You can't delete the welcome message" border="0" alt="{L_DELETE}" />
+					<a href="{U_EDIT}{welcome.S_MOD_ID}"><img src="images/icon_edit.gif" title="{L_EDIT_WELCOME_MESSAGE}" border="0" alt="{L_EDIT}" /></a>
 				</div>
 			</td>
 		</tr>
@@ -261,7 +354,7 @@ function set_data(data)
 	</dl>
 	<dl>
 		<dt><label for="mod_origin">{L_MOD_ORIGIN}:</label><br /><span>{L_MOD_ORIGIN_EXPLAIN}</span></dt>
-		<dd>
+		<dd><br />
 			<label><input type="radio" class="radio" id="mod_origin" name="mod_origin" value="1" <!-- IF welcom.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 			<label><input type="radio" class="radio" name="mod_origin" value="0" <!-- IF not welcome.S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 		</dd>
@@ -269,6 +362,10 @@ function set_data(data)
 	<dl>
 		<dt><label for="mod_copyright">{L_COPYRIGHT}:</label><br /><span>{L_COPYRIGHT_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="45" maxlength="255" id="mod_copyright" name="mod_copyright" value="{welcome.S_MOD_COPYRIGHT}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="mod_filename">{L_MOD_FILENAME}:</label><br /><span>{L_MOD_FILENAME_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="100" name="mod_filename" value="{edit.S_MOD_FILENAME}" type="text"></dd>
 	</dl>
 	<dl>
 		<dt><label for="mod_author_co">{L_AUTHOR_CO}:</label><br /><span>{L_AUTHOR_CO_EXPLAIN}</span></dt>
@@ -298,11 +395,28 @@ function set_data(data)
 		<dt><label for="mod_last_updated">{L_LAST_UPDATED}:</label><br /><span>{L_LAST_UPDATED_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="17" maxlength="17" name="mod_last_updated" value="{welcome.S_MOD_LAST_UPDATED}" type="text"></dd>
 	</dl>
+<!--
 	<dl>
 		<dt><label for="mod_details">{L_INFO}:</label><br /><span>{L_INFO_EXPLAIN}</span></dt>
 		<dd><textarea id="mod_details" name="mod_details" rows="3" cols="200">{welcome.S_MOD_DETAILS}</textarea></dd>
 	</dl>
+-->
+	<div style="padding:0px; margin: 0px; margin-top: -20px;">
+		<h2>{L_EDITOR_NAME}</h2>
+		<fieldset>
+			<!-- INCLUDE sgp_editor/sgp_quickreply_buttons.html -->
+			<div style="float:right; text-align:center; width:20%;"><strong style="padding:8px;">{L_SMILIES}</strong>
+				<span style="width:100%; min-height: 160px; float:right; text-align:center; padding:8px; border-left: solid 1px #B4BAC0;">
+					<!-- INCLUDE sgp_editor/sgp_quickreply_smilies.html -->
+					<!-- INCLUDE sgp_editor/sgp_add_vars.html -->
+				</span>
+			</div>
+			<textarea style="width:75%;" id="mod_details" name="mod_details" rows="10" cols="400">{welcome.S_MOD_DETAILS}</textarea>
+			<!-- INCLUDE sgp_editor/sgp_quickreply_options.html -->
+		</fieldset>
+	</div>
 </fieldset>
+
 <!-- ENDIF -->
 <!-- END welcome -->
 
@@ -339,6 +453,10 @@ function set_data(data)
 		<dd><br /><input class="post" size="45" maxlength="255" id="mod_copyright" name="mod_copyright" value="{S_MOD_COPYRIGHT}" type="text"></dd>
 	</dl>
 	<dl>
+		<dt><label for="mod_filename">{L_MOD_FILENAME}:</label><br /><span>{L_MOD_FILENAME_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="45" maxlength="100" name="mod_filename" value="{edit.S_MOD_FILENAME}" type="text"></dd>
+	</dl>
+	<dl>
 		<dt><label for="mod_type">{L_TYPE}:</label><br /><span>{L_TYPE_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="30"  maxlength="30" name="mod_type" value="style" type="text"></dd>
 	</dl>
@@ -349,7 +467,7 @@ function set_data(data)
 	</dl>
 	<dl>
 		<dt><label for="mod_origin">{L_MOD_ORIGIN}:</label><br /><span>{L_MOD_ORIGIN_EXPLAIN}</span></dt>
-		<dd>
+		<dd><br />
 			<label><input type="radio" class="radio" id="mod_origin" name="mod_origin" value="1" <!-- IF S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 			<label><input type="radio" class="radio" name="mod_origin" value="0" <!-- IF not S_MOD_ORIGIN --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 		</dd>
@@ -412,11 +530,11 @@ function set_data(data)
 			<td class="row1" width="30px" colspan="2">
 				<div align="center">
 				<!-- IF all.S_MOD_TYPE == 'welcome' -->
-					<img src="images/icon_delete_disabled.gif" border="0" alt="{L_DELETE}">
+					<img src="images/icon_delete_disabled.gif" border="0" alt="{L_DELETE}" />
 				<!-- ELSE -->
-					<a href="{U_DELETE}{all.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}"></a>
+					<a href="{U_DELETE}{all.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}" /></a>
 				<!-- ENDIF -->
-					<a href="{U_EDIT}{all.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}"></a>
+					<a href="{U_EDIT}{all.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}" /></a>
 				</div>
 			</td>
 		</tr>
@@ -429,8 +547,8 @@ function set_data(data)
 			<td class="row1" width="auto"><div align="left">{block.S_MOD_DETAILS}</div></td>
 			<td class="row1" width="30px" colspan="2">
 				<div align="center">
-					<a href="{U_DELETE}{block.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}"></a>
-					<a href="{U_EDIT}{block.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}"></a>
+					<a href="{U_DELETE}{block.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}" /></a>
+					<a href="{U_EDIT}{block.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}" /></a>
 				</div>
 			</td>
 		</tr>
@@ -443,8 +561,8 @@ function set_data(data)
 			<td class="row1" width="auto"><div align="left">{mod.S_MOD_DETAILS}</div></td>
 			<td class="row1" width="30px" colspan="2">
 				<div align="center">
-					<a href="{U_DELETE}{mod.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}"></a>
-					<a href="{U_EDIT}{mod.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}"></a>
+					<a href="{U_DELETE}{mod.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}" /></a>
+					<a href="{U_EDIT}{mod.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}" /></a>
 				</div>
 			</td>
 		</tr>
@@ -459,11 +577,11 @@ function set_data(data)
 			<td class="row1" width="30px" colspan="2">
 				<div align="center">
 				<!-- IF all.S_MOD_TYPE == 'welcome' -->
-					<img src="images/icon_delete_disabled.gif" border="0" alt="{L_DELETE}">
+					<img src="images/icon_delete_disabled.gif" border="0" alt="{L_DELETE}" />
 				<!-- ELSE -->
-					<a href="{U_DELETE}{style.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}"></a>
+					<a href="{U_DELETE}{style.S_MOD_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}" /></a>
 				<!-- ENDIF -->
-					<a href="{U_EDIT}{style.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}"></a>
+					<a href="{U_EDIT}{style.S_MOD_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}" /></a>
 				</div>
 			</td>
 		</tr>
@@ -501,4 +619,61 @@ function set_data(data)
 
 {S_FORM_TOKEN}
 </form>
+
+
+
+<script type="text/javascript">
+var form_name = 'acp_k_modules';
+var text_name = 'mod_details';
+var load_draft = false;
+var upload = false;
+
+// Define the bbCode tags
+var bbcode = new Array();
+var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->);
+var imageTag = false;
+
+// Helpline messages
+var help_line = {
+	b: '{LA_BBCODE_B_HELP}',
+	i: '{LA_BBCODE_I_HELP}',
+	u: '{LA_BBCODE_U_HELP}',
+	q: '{LA_BBCODE_Q_HELP}',
+	c: '{LA_BBCODE_C_HELP}',
+	l: '{LA_BBCODE_L_HELP}',
+	o: '{LA_BBCODE_O_HELP}',
+	p: '{LA_BBCODE_P_HELP}',
+	w: '{LA_BBCODE_W_HELP}',
+	a: '{LA_BBCODE_A_HELP}',
+	s: '{LA_BBCODE_S_HELP}',
+	f: '{LA_BBCODE_F_HELP}',
+	e: '{LA_BBCODE_E_HELP}',
+	d: '{LA_BBCODE_D_HELP}'
+	<!-- BEGIN custom_tags -->
+		,cb_{custom_tags.BBCODE_ID}: '{custom_tags.A_BBCODE_HELPLINE}'
+	<!-- END custom_tags -->
+}
+
+function checkForm()
+{
+	if (document.getElementById(text_name).value.length < 2)
+	{
+		if (!upload)
+		{
+			alert('{L_EMPTY_MESSAGE}');
+			return false;
+		}
+		upload = false;
+		return true;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+var panels = new Array('options-panel', 'attach-panel', 'poll-panel');
+var show_panel = 'options-panel';
+</script>
+<script type="text/javascript" src="style/sgp_editor/sgp_se_editor.js"></script>
 <!-- INCLUDE overall_footer.html -->

@@ -19,23 +19,20 @@
 * @ignore
 */
 
-if ( !defined('IN_PHPBB') )
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
 // for bots test //
-$page_title = $user->lang['BLOCK_PORTAL_STATUS'];
+//$page_title = $user->lang['BLOCK_PORTAL_STATUS'];
 
-global $config;
+global $config, $k_config;
 
-$queries = 0;
-$cached_queries = 0;
+$queries = $cached_queries = 0;
 
+/*
 	// Retrieve Portal Status items from database //
-
-	// or for more use //$template->assign_block_vars('rept',array('PORTAL_PROGRESS' => progress_bar(65)));
-	//$template->assign_vars(array('PORTAL_PROGRESS' => k_progress_bar(95)));
 
 	global $db, $k_config; 
 
@@ -49,14 +46,20 @@ $cached_queries = 0;
 	$row = $db->sql_fetchrow($result);
 
 	$template->assign_vars(array(
-		'STATUS_TITLE'			=> $row['mod_name'],
-		'STATUS_LAST_UPDATE'	=> $row['mod_last_update'],
-		'STATUS_DATA'			=> htmlspecialchars_decode($row['mod_details']),
-		'STATUS_STYLE_LINK'		=> htmlspecialchars_decode($row['mod_link']),
-		'PORTAL_PROGRESS'		=> k_progress_bar(95),
-		'STATUS_COPYRIGHT'		=> htmlspecialchars_decode($row['mod_copyright']),
-		'P_VERSION'				=> $config['portal_version'],
-		'PS_PORTAL_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+		'MOD_TITLE'			=> $row['mod_name'],
+		'MOD_LAST_UPDATE'	=> $row['mod_last_update'],
+		'MOD_DATA'			=> htmlspecialchars_decode($row['mod_details']),
+		'MOD_STYLE_LINK'	=> htmlspecialchars_decode($row['mod_link']),
+		'MOD_PROGRESS'		=> k_progress_bar($row['mod_status']),
+		'MOD_COPYRIGHT'		=> htmlspecialchars_decode($row['mod_copyright']),
+		'P_VERSION'			=> $config['portal_version'],
+		'PS_PORTAL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+	));
+*/
+
+	$template->assign_vars(array(
+		'P_VERSION'	=> $config['portal_version'],
+		'PORTAL_STATUS_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	));
 
 ?>

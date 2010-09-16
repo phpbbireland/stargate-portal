@@ -22,20 +22,18 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-$queries = 0;
-$cached_queries = 0;
-
+$queries = $cached_queries = 0;
 
 global $k_config, $k_blocks;
+$sgp_cache_time = $k_config['sgp_cache_time'];
 
-$range_interval = $k_config['age_range_interval']; //this calculates the interval in the age groups ... if 10 => 10-19, 20-29, if 5 => 10-14, 15-19...
+$range_interval = $k_config['age_range_interval'];	//this calculates the interval in the age groups ... if 10 => 10-19, 20-29, if 5 => 10-14, 15-19...
 $range_start = $k_config['age_range_start'];
-$upper_limit = $k_config['age_upper_limit']; //will show results upto value -1
-$birthdays = array();
+$upper_limit = $k_config['age_upper_limit'];		//will show results upto value -1
 $current_time = getdate(time());
 $my_age = '';
-$age_ranges = array();
 $total_age = 0;
+$age_ranges = $birthdays = array();
 
 //initialize the array
 for ($i = $range_start; $i < $upper_limit; $i += $range_interval)
@@ -45,8 +43,8 @@ for ($i = $range_start; $i < $upper_limit; $i += $range_interval)
 
 $sql = 'SELECT user_birthday FROM ' . USERS_TABLE . "
 		WHERE user_birthday != ''
-		AND user_type <> 2";
-$result = $db->sql_query($sql, 600);
+			AND user_type <> 2";
+$result = $db->sql_query($sql, $sgp_cache_time);
 
 while ($row = $db->sql_fetchrow($result))
 {
@@ -64,11 +62,13 @@ foreach ($birthdays as $row)
 	{
 		$age = $current_time['year'] - $row[2];
 	}
+
 	//now increment the appropriate counter
 	if ($age < $range_start || $age >= $upper_limit)
 	{
 		continue;
 	}
+
 	$age_ranges[$age - (($age - $range_start) % $range_interval)]++;
 	$total_age = $total_age + $age;
 }
@@ -88,6 +88,7 @@ if ($user->data['user_birthday'])
 		$my_age = $current_time['year'] - $my_age_data[2];
 	}
 }
+
 if ($total_age_counts)
 {
 	$average_age = $total_age / $total_age_counts;
@@ -120,10 +121,8 @@ if ($total_age_counts)
 		));
 	}
 }
-else
-{
-	$template->assign_vars(array(
-		'AR_PORTAL_DEBUG' => sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
-	));
-}
+
+$template->assign_vars(array(
+	'AGE_RANGE_DEBUG' => sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+));
 ?>

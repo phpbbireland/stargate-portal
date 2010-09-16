@@ -1,0 +1,54 @@
+<fieldset>
+	<legend>{L_ACP_CLOUD}</legend>
+	<dl>
+		<dt><label for="cloud_max_tags">{L_CLOUD_MAX_TAGS}:</label><br /><span>{L_CLOUD_MAX_TAGS_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="3" name="cloud_max_tags" value="{S_CLOUD_MAX_TAGS}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_movie">{L_CLOUD_MOVIE}:</label><br /><span>{L_CLOUD_MOVIE_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="20" maxlength="40" name="cloud_movie" value="{S_CLOUD_MOVIE}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_width">{L_CLOUD_WIDTH}:</label><br /><span>{L_CLOUD_WIDTH_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="4" maxlength="4" name="cloud_width" value="{S_CLOUD_WIDTH}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_height">{L_CLOUD_HEIGHT}:</label><br /><span>{L_CLOUD_HEIGHT_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="4" maxlength="4" name="cloud_height" value="{S_CLOUD_HEIGHT}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_tcolour">{L_CLOUD_TCOLOUR}:</label><br /><span>{L_CLOUD_TCOLOUR_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="15" name="cloud_tcolour" value="{S_CLOUD_TCOLOUR}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_tcolour2">{L_CLOUD_TCOLOUR2}:</label><br /><span>{L_CLOUD_TCOLOUR2_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="15" name="cloud_tcolour2" value="{S_CLOUD_TCOLOUR2}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_hicolour">{L_CLOUD_HICOLOUR}:</label><br /><span>{L_CLOUD_HICOLOUR_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="15" name="cloud_hicolour" value="{S_CLOUD_HICOLOUR}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_bg_colour">{L_CLOUD_BG_COLOUR}:</label><br /><span>{L_CLOUD_BG_COLOUR_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="6" name="cloud_bg_colour" value="{S_CLOUD_BG_COLOUR}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_speed">{L_CLOUD_SPEED}:</label><br /><span>{L_CLOUD_SPEED_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="5" maxlength="3" name="cloud_speed" value="{S_CLOUD_SPEED}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_mode">{L_CLOUD_MODE}:</label><br /><span>{L_CLOUD_MODE_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="15" name="cloud_mode" value="{S_CLOUD_MODE}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_wmode">{L_CLOUD_WMODE}:</label><br /><span>{L_CLOUD_WMODE_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="10" maxlength="15" name="cloud_wmode" value="{S_CLOUD_WMODE}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_distr">{L_CLOUD_DISTR}:</label><br /><span>{L_CLOUD_DISTR_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="cloud_distr" name="cloud_distr" value="1" <!-- IF S_CLOUD_DISTR --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" id="cloud_distr" name="cloud_distr" value="0" <!-- IF not S_CLOUD_DISTR --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>

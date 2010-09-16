@@ -19,8 +19,8 @@
 * @ignore
 */
 
-define('IN_PHPBB', true);
-if ( !defined('IN_PHPBB') )
+//define('IN_PHPBB', true);
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
@@ -29,7 +29,7 @@ $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 include($phpbb_root_path . 'common.' . $phpEx);
-include_once($phpbb_root_path . 'includes/functions.' . $phpEx);
+//include_once($phpbb_root_path . 'includes/functions.' . $phpEx);
 include_once($phpbb_root_path . 'includes/functions_template.' . $phpEx);
 
 // Start session management
@@ -37,19 +37,15 @@ $user->session_begin(false);
 $auth->acl($user->data);
 $user->setup('portal/portal');
 
-if ( !defined('IN_PHPBB') )
-{
-	exit;
-}
 
-$upload_dir = 'musix';
-$upload = 'Upload';
+$upload_dir = 'musix';				// not a typo ... ;)
+$upload = $user->lang['UPLOAD'];
 
 $template->assign_vars(array(
-	'U_UPLOAD_DIR'    => $upload_dir,
-	'L_UPLOAD_FILE'   => $upload,
+	'U_UPLOAD_DIR'	=> $upload_dir,
+	'L_UPLOAD_FILE'	=> $upload,
 	'MP3_POPUP'		=> $user->lang['MP3_POPUP'],
-	'PATH'          => './..',
+	'PATH'			=> './..',
  ));
 
 
@@ -57,7 +53,7 @@ page_header('MP3');
 
 $template->set_filenames(array(
 	'body' => 'blocks/block_mp3_popup_player.html',
-	)
-);
+));
+
 page_footer();
 ?>

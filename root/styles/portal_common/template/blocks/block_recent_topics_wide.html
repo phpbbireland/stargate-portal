@@ -3,40 +3,9 @@
 <!-- IF S_COUNT_RECENT -->
 	<div style="width:100%; overflow:visible;">
 		<table width="100%" cellpadding="1" cellspacing="1">
-			<!-- BEGIN scrollwide -->
-			<!-- BEGIN recent_topic_row -->
-				<!-- IF scrollwide.recent_topic_row.S_ROW_COUNT == 0 -->
-				<tr>
-					<td>{L_TITLE}</td>
-					<td>{L_POSTER}</td>
-					<td align="right">{L_POSTED}/{L_EDITED}</td>
-				</tr>
-				<tr><td colspan="3"><hr /></td></tr>
-				<!-- ENDIF -->
-				<!-- IF scrollwide.recent_topic_row.S_UNIQUE -->
-					<tr class="bg3"><td colspan="3" style="text-align:left;"><strong><a title="{recent_topic_row.TOOLTIP2}" href="{scrollwide.recent_topic_row.U_FORUM}">{scrollwide.recent_topic_row.S_FORUM}</a></strong></td><!--<td style="text-align:right;">{L_FORUM}</td>--></tr>
-				<!-- ENDIF -->
-				<!-- IF scrollwide.recent_topic_row.S_ROW_COUNT is even --><tr class="bg2"><!-- ELSE --><tr class="bg1"><!-- ENDIF -->
-				<td>{scrollwide.recent_topic_row.LAST_POST_IMG} <a href="{scrollwide.recent_topic_row.U_TITLE}" title="{recent_topic_row.TOOLTIP}" >
-				<span class="<!-- IF scrollwide.recent_topic_row.S_TYPE == 2 or scrollwide.recent_topic_row.S_TYPE == 3 -->red<!-- ELSEIF scrollwide.recent_topic_row.S_TYPE == 4 or scrollwide.recent_topic_row.S_TYPE == 5 -->orange<!-- ELSEIF scrollwide.recent_topic_row.S_TYPE == 1 -->green<!-- ELSE --><!-- ENDIF -->">{scrollwide.recent_topic_row.S_TITLE}</span></a>:
-				</td>
-				<td>{scrollwide.recent_topic_row.S_POSTER} </td>
-				<td align="right">{scrollwide.recent_topic_row.S_POSTTIME}</td>
-			</tr>
-			<!-- END recent_topic_row -->
-			<tr><td colspan="3">
-				<table width="100%" cellpadding="0" cellspacing="0">
-					<tr>
-						<td class="bg3" style="padding:3px;" align="left"><b>Legend:</b><span class="red"> Announcements</span>, <span class="green"> Sticky</span>, <span class="orange"> News</span> and <b> Normal</b> posts.</td>
-						<td class="bg3" style="padding:3px;" align="right"><b>{SEARCH_TYPE}, {SEARCH_LIMIT}</b></td>
-					</tr>
-				</table>
-			</td></tr>
-			<!-- END scrollwide -->
 
-			<!-- BEGIN staticwide -->
-			<!-- BEGIN recent_topic_row -->
-				<!-- IF staticwide.recent_topic_row.S_ROW_COUNT == 0 -->
+			<!-- BEGIN scrollwide_recent_topic_row -->
+				<!-- IF scrollwide_recent_topic_row.S_ROW_COUNT_W == 0 -->
 				<tr>
 					<td>{L_TITLE}</td>
 					<td>{L_POSTER}</td>
@@ -44,31 +13,61 @@
 				</tr>
 				<tr><td colspan="3"><hr /></td></tr>
 				<!-- ENDIF -->
-				<!-- IF staticwide.recent_topic_row.S_UNIQUE -->
-					<tr class="bg3"><td colspan="3" style="text-align:left;"><strong><a href="{staticwide.recent_topic_row.U_FORUM}">{staticwide.recent_topic_row.S_FORUM}</a></strong></td><!--<td style="text-align:right;">{L_FORUM}</td>--></tr>
+				<!-- IF scrollwide_recent_topic_row.S_UNIQUE_W -->
+					<tr class="bg3"><td colspan="3" style="text-align:left;"><strong><a title="{scrollwide_recent_topic_row.TOOLTIP2_W}" href="{scrollwide_recent_topic_row.U_FORUM_W}">{scrollwide_recent_topic_row.FORUM_W}</a></strong></td></tr>
 				<!-- ENDIF -->
-				<!-- IF staticwide.recent_topic_row.S_ROW_COUNT is even --><tr class="bg2"><!-- ELSE --><tr class="bg1"><!-- ENDIF -->{staticwide.topicrow.TOOLTIP}***
-				<td>{staticwide.recent_topic_row.LAST_POST_IMG} <a href="{staticwide.recent_topic_row.U_TITLE}" title="{topicrow.TOOLTIP}..." title="{staticwide.topicrow.TOOLTIP}..." >
-					<span class="<!-- IF staticwide.recent_topic_row.S_TYPE == 2 or staticwide.recent_topic_row.S_TYPE == 3 -->red<!-- ELSEIF staticwide.recent_topic_row.S_TYPE == 4 or staticwide.recent_topic_row.S_TYPE == 5 -->orange<!-- ELSEIF staticwide.recent_topic_row.S_TYPE == 1 -->green<!-- ELSE --><!-- ENDIF -->">{staticwide.recent_topic_row.S_TITLE}</span></a>:
+				<!-- IF scrollwide_recent_topic_row.S_ROW_COUNT is even --><tr class="bg2"><!-- ELSE --><tr class="bg1"><!-- ENDIF -->
+				<td>{scrollwide_recent_topic_row.LAST_POST_IMG_W}
+
+				<a href="{scrollwide_recent_topic_row.U_TITLE_W}" title="{scrollwide_recent_topic_row.TOOLTIP_W}">
+
+				<span class="<!-- IF scrollwide_recent_topic_row.S_TYPE_W == 2 or scrollwide_recent_topic_row.S_TYPE_W == 3 -->red<!-- ELSEIF scrollwide_recent_topic_row.S_TYPE_W == 4 or scrollwide_recent_topic_row.S_TYPE_W == 5 -->orange<!-- ELSEIF scrollwide_recent_topic_row.S_TYPE_W == 1 -->green<!-- ELSE --><!-- ENDIF -->">{scrollwide_recent_topic_row.TITLE_W}</span></a>:
 				</td>
-				<td>{staticwide.recent_topic_row.S_POSTER} </td>
-				<td align="right">{staticwide.recent_topic_row.S_POSTTIME}</td>
+				<td>{scrollwide_recent_topic_row.POSTER_FULL_W} </td>
+				<td align="right">{scrollwide_recent_topic_row.POSTTIME_W}</td>
 			</tr>
-			<!-- END recent_topic_row -->
+			<!-- END scrollwide_recent_topic_row -->
+
+			<!-- BEGIN staticwide_recent_topic_row -->
+				<!-- IF staticwide_recent_topic_row.S_ROW_COUNT_W == 0 -->
+				<tr>
+					<td>{L_TITLE}</td>
+					<td>{L_POSTER}</td>
+					<td align="right">{L_POSTED}/{L_EDITED}</td>
+				</tr>
+				<tr><td colspan="3"><hr /></td></tr>
+				<!-- ENDIF -->
+
+				<!-- IF staticwide_recent_topic_row.S_UNIQUE_W -->
+					<tr class="bg3"><td colspan="3" style="text-align:left;"><strong><a title="{staticwide_recent_topic_row.TOOLTIP2_W}" href="{staticwide_recent_topic_row.U_FORUM_W}">{staticwide_recent_topic_row.FORUM_W}</a></strong></td></tr>
+				<!-- ENDIF -->
+
+				<!-- IF staticwide_recent_topic_row.S_ROW_COUNT is even --><tr class="bg2"><!-- ELSE --><tr class="bg1"><!-- ENDIF -->
+				<td>{staticwide_recent_topic_row.LAST_POST_IMG_W}
+
+					<a href="{staticwide_recent_topic_row.U_TITLE_W}" title="{staticwide_recent_topic_row.TOOLTIP_W}">
+
+					<span class="<!-- IF staticwide_recent_topic_row.S_TYPE_W == 2 or staticwide_recent_topic_row.S_TYPE_W == 3 -->red<!-- ELSEIF staticwide_recent_topic_row.S_TYPE_W == 4 or staticwide_recent_topic_row.S_TYPE_W == 5 -->orange<!-- ELSEIF staticwide_recent_topic_row.S_TYPE_W == 1 -->green<!-- ELSE --><!-- ENDIF -->">{staticwide_recent_topic_row.TITLE_W}</span></a>:
+				</td>
+				<td>{staticwide_recent_topic_row.POSTER_FULL_W} </td>
+				<td align="right">{staticwide_recent_topic_row.POSTTIME_W}</td>
+			</tr>
+			<!-- END staticwide_recent_topic_row -->
+
 			<tr><td colspan="3">
 				<table width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-						<td class="bg3" style="padding:3px;" align="left"><b>{SEARCH_TYPE}, {SEARCH_LIMIT}</b></td>
-						<td class="bg3" style="padding:3px;" align="right"><b>Title Legend:</b><span class="red"> Announcements</span>, <span class="green"> Sticky</span>, <span class="orange"> News</span><b> Normal</b></td>
+						<td class="bg3" style="padding:3px;" align="left"><b>{L_LEGEND}:</b><span class="red"> {L_ANNOUNCEMENTS}</span> <span class="green"> {L_STICKY}</span> <span class="orange"> {L_NEWS}</span> &amp; <b> {L_NORMAL}</b> {L_POSTS}.</td>
+						<td class="bg3" style="padding:3px;" align="right"><b>{SEARCH_TYPE} &bull; {SEARCH_LIMIT}</b></td>
 					</tr>
 				</table>
 			</td></tr>
-			<!-- END staticwide -->
+
 		</table>
 	</div>
 <!-- ELSE -->
 <div><center><span class="genmed"><strong>{L_NO_RECENT_TOPICS}</strong></span></center></div>
 <!-- ENDIF -->
-<!-- IF DEBUG_QUERIES -->{RT_PORTAL_DEBUG}<!-- ENDIF -->
 </div>
 <!-- IDTAG ends block_recent_topics -->
+<!-- IF DEBUG_QUERIES --><div class="block_data">{RECENT_TOPICS_WIDE_DEBUG}</div><!-- ENDIF -->

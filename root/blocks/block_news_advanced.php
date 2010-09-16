@@ -28,9 +28,8 @@ $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 
 global $k_config;
-
-$queries = 0;
-$cached_queries = 0;
+$sgp_cache_time = $k_config['sgp_cache_time'];
+$queries = $cached_queries = 0;
 
 // Get portal cache data
 $number_of_news_items_to_display = $k_config['number_of_news_items_to_display'];
@@ -49,16 +48,19 @@ $parse = true;
 switch($news_type)
 {
 	case 0:   // both
-		$a_type = "(t.topic_id = p.topic_id AND t.topic_type = 4 AND t.topic_status <> 2 AND (t.topic_time_limit = 0 OR (t.topic_time + t.topic_time_limit)  <  $time_now) OR " . "t.topic_id = p.topic_id AND t.topic_type = 5 AND t.topic_status <> 2 AND (t.topic_time_limit = 0 OR (t.topic_time + t.topic_time_limit)  <  $time_now ))";
-		break;
+		$a_type = "(t.topic_id = p.topic_id AND t.topic_type = 4 AND t.topic_status <> 2 AND (t.topic_time_limit = 0 OR (t.topic_time + t.topic_time_limit)  >  $time_now) OR " . "t.topic_id = p.topic_id AND t.topic_type = 5 AND t.topic_status <> 2 AND (t.topic_time_limit = 0 OR (t.topic_time + t.topic_time_limit)  <  $time_now ))";
+	break;
+
 	case 4:   // local News
-		$a_type = "(t.topic_id = p.topic_id AND t.topic_type = 4 AND t.topic_status <> 2 AND (t.topic_time_limit = 0 OR (t.topic_time + t.topic_time_limit)  <  $time_now))";
-		break;
+		$a_type = "(t.topic_id = p.topic_id AND t.topic_type = 4 AND t.topic_status <> 2 AND (t.topic_time_limit = 0 OR (t.topic_time + t.topic_time_limit)  >  $time_now))";
+	break;
+
 	case 5:   // global news
-		$a_type = "(t.topic_id = p.topic_id AND t.topic_type = 5 AND t.topic_status <> 2 AND (t.topic_time_limit = 0 OR (t.topic_time + t.topic_time_limit)  <  $time_now))";
-		break;
-	default://global
-		$a_type = "(t.topic_id = p.topic_id AND t.topic_type = 5 AND t.topic_status <> 2 AND (t.topic_time_limit = 0 OR (t.topic_time + t.topic_time_limit)  <  $time_now))";
+		$a_type = "(t.topic_id = p.topic_id AND t.topic_type = 5 AND t.topic_status <> 2 AND (t.topic_time_limit = 0 OR (t.topic_time + t.topic_time_limit)  >  $time_now))";
+	break;
+
+	default:	//global news
+		$a_type = "(t.topic_id = p.topic_id AND t.topic_type = 5 AND t.topic_status <> 2 AND (t.topic_time_limit = 0 OR (t.topic_time + t.topic_time_limit)  >  $time_now))";
 	break;
 }
 
@@ -105,61 +107,66 @@ $sql = 'SELECT
 	ORDER BY
 		t.topic_time DESC';
 
-// query the database
-if(!($result = $db->sql_query_limit($sql, (($number_of_news_items_to_display) ? $number_of_news_items_to_display : 1))))
+$qry_limit = ($number_of_news_items_to_display) ? $number_of_news_items_to_display : 1;
+if (!($result = $db->sql_query_limit($sql, $qry_limit, 0, $sgp_cache_time)))
 {
-	trigger_error("Could not query news data ", "", __LINE__, __FILE__, $sql);
+	trigger_error('ERROR_PORTAL_NEWS');
 }
 
 $i = 0;
 while ($row = $db->sql_fetchrow($result))
 {
-	// Do post have an attachment? If so, add them to the list //
-	if ($row['post_attachment'] && $config['allow_attachments'])
+	if ($auth->acl_get('f_read', $row['forum_id']))
 	{
-		$attach_list = $row['post_id'];
-		$attach_list_forums = $row['forum_id'];
-
-		if ($row['post_approved'])
+		// Do post have an attachment? If so, add them to the list //
+		if ($row['post_attachment'] && $config['allow_attachments'])
 		{
-			$has_attachments = true;
+			$attach_list = $row['post_id'];
+			$attach_list_forums = $row['forum_id'];
+
+			if ($row['post_approved'])
+			{
+				$has_attachments = true;
+			}
 		}
-	}
-	$post_list[$i++] = $row['post_id'];
+		$post_list[$i++] = $row['post_id'];
 
-	// store all data for now //
-	$rowset[$row['post_id']] = array(
-		'post_id'			=> $row['post_id'],
-		'post_text'			=> $row['post_text'],
-		'topic_id'			=> $row['topic_id'],
-		'forum_id'			=> $row['forum_id'],
-		'post_id'			=> $row['post_id'],
-		'poster_id'			=> $row['poster_id'],
-		'topic_replies'		=> $row['topic_replies'],
-		'topic_time'		=> $user->format_date($row['post_time']),
-		'topic_title'		=> $row['topic_title'],
-		'topic_type'		=> $row['topic_type'],
-		'topic_status'		=> $row['topic_status'],
-		'username'			=> $row['username'],
-		'user_colour'		=> $row['user_colour'],
-		'poll_title'		=> ($row['poll_title']) ? true : false,
-		'post_time'			=> create_date($config['default_dateformat'], $row['post_time'],  $config['board_timezone']),
-		'topic_time'		=> create_date($config['default_dateformat'], $row['topic_time'], $config['board_timezone']),
-		'post_approved'		=> $row['post_approved'],
-		'post_attachment'	=> $row['post_attachment'],
-		'bbcode_bitfield'	=> $row['bbcode_bitfield'],
-		'bbcode_uid'		=> $row['bbcode_uid'],
-		'forum_name'		=> $row['forum_name'],
-	);
+		// store all data for now //
+		$rowset[$row['post_id']] = array(
+			'post_id'			=> $row['post_id'],
+			'post_text'			=> $row['post_text'],
+			'topic_id'			=> $row['topic_id'],
+			'forum_id'			=> $row['forum_id'],
+			'post_id'			=> $row['post_id'],
+			'poster_id'			=> $row['poster_id'],
+			'topic_replies'		=> $row['topic_replies'],
+			'topic_time'		=> $user->format_date($row['post_time']),
+			'topic_title'		=> $row['topic_title'],
+			'topic_type'		=> $row['topic_type'],
+			'topic_status'		=> $row['topic_status'],
+			'username'			=> $row['username'],
+			'user_colour'		=> $row['user_colour'],
+			'poll_title'		=> ($row['poll_title']) ? true : false,
+			'post_time'			=> create_date($config['default_dateformat'], $row['post_time'],  $config['board_timezone']),
+			'topic_time'		=> create_date($config['default_dateformat'], $row['topic_time'], $config['board_timezone']),
+			'post_approved'		=> $row['post_approved'],
+			'post_attachment'	=> $row['post_attachment'],
+			'bbcode_bitfield'	=> $row['bbcode_bitfield'],
+			'bbcode_uid'		=> $row['bbcode_uid'],
+			'forum_name'		=> $row['forum_name'],
+		);
 
-	// Define the global bbcode bitfield, will be used to load bbcodes
-	$bbcode_bitfield = $bbcode_bitfield | base64_decode($row['bbcode_bitfield']);
+		// Define the global bbcode bitfield, will be used to load bbcodes
+		$bbcode_bitfield = $bbcode_bitfield | base64_decode($row['bbcode_bitfield']);
 
-	// build a list of allowed posts containing attachments //
-	if($row['post_attachment'] && $config['allow_attachments'])
-	{
-		$where_attachments .= $row['post_id'] . ', ';
-		$extensions .= $cache->obtain_attach_extensions($row['forum_id']);
+		// build a list of allowed posts containing attachments //
+		if ($row['post_attachment'] && $config['allow_attachments'])
+		{
+			global $cache;
+
+			$where_attachments .= $row['post_id'] . ', ';
+			$extensions .= $cache->obtain_attach_extensions($row['forum_id']);
+		}
 	}
 }
 $db->sql_freeresult($result);
@@ -169,15 +176,17 @@ if (sizeof($attach_list))
 {
 	$where_attachments = rtrim($where_attachments, ', ');
 
-	if($where_attachments == '')
+	if ($where_attachments == '')
+	{
 		$where_attachments = '1';
+	}
 
 	if ($auth->acl_get('u_download'))
 	{
 		$sql = 'SELECT *
 			FROM ' . ATTACHMENTS_TABLE . '
 			WHERE post_msg_id IN (' . $where_attachments . ')
-			AND in_message = 0
+				AND in_message = 0
 			ORDER BY filetime DESC';
 		$result = $db->sql_query($sql, 300);
 				
@@ -215,7 +224,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 	if (($max_news_item_length != 0) && (strlen($row['post_text']) > $max_news_item_length))
 	{
 		$row['post_text'] = sgp_truncate_message($row['post_text'], $max_news_item_length);
-		$row['post_text'] .= ' <a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $row['topic_id']) . '"><strong>' . $user->lang['VIEW_FULL_ARTICLE']  . '</strong><img class="ilower" src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/post_view_big.png' . '" title="' . $user->lang['VIEW_FULL_ARTICLE']  . '" alt="' . $user->lang['VIEW_FULL_ARTICLE']  . '" /></a>';
+		$row['post_text'] .= ' <a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $row['topic_id']) . '"><strong>' . $user->lang['VIEW_FULL_ARTICLE']  . '</strong><img class="ilower" src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/post_view.png' . '" title="' . $user->lang['VIEW_FULL_ARTICLE']  . '" alt="' . $user->lang['VIEW_FULL_ARTICLE']  . '" /></a>';
 		$parse = false;
 	}
 
@@ -238,7 +247,8 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 	}
 
 	$forum_id = $row['forum_id'];
-	if($store != $forum_id)
+
+	if ($store != $forum_id)
 	{
 		$store = $forum_id;
 	}
@@ -300,7 +310,8 @@ $template->assign_vars(array(
 	'S_NEWS_COUNT' 	=> sizeof($posts),
 	'S_NEWS_COUNT_RETURNED' => sizeof($post_list),
 	'T_IMAGESET_LANG_PATH'	=> "{$phpbb_root_path}styles/" . $user->theme['imageset_path'] . '/imageset/' . $user->data['user_lang'],
-	'N_PORTAL_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+
+	'NEWS_ADVANCED_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
 // END: Fetch News //

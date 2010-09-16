@@ -19,18 +19,16 @@
 * @ignore
 */
 
-	if ( !defined('IN_PHPBB') )
+	if (!defined('IN_PHPBB'))
 	{
 		exit;
 	}
 
 	$phpEx = substr(strrchr(__FILE__, '.'), 1);
 
-	$queries = 0;
-	$cached_queries = 0;
-
-	// portal globals/cache
 	global $k_config, $phpbb_root_path;
+	$sgp_cache_time = $k_config['sgp_cache_time'];
+	$queries = $cached_queries = 0;
 
 	// retrieve portal config variables
 	$number_of_links_to_display = $k_config['number_of_links_to_display'];
@@ -40,22 +38,29 @@
 		FROM " . K_BLOCKS_TABLE . "
 		WHERE html_file_name = 'block_links.html' ";
 
-	if( $result = $db->sql_query($sql) )
+	if ($result = $db->sql_query($sql, $sgp_cache_time))
 	{
 		$row = $db->sql_fetchrow($result);
 		$scroll = $row['scroll'];
 	}
 	else
-		trigger_error('Error! Could not query <strong> Blocks Table</strong>: ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+	{
+		//trigger_error('Error! Could not query <strong> Blocks Table</strong>: ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+		trigger_error('ERROR_PORTAL_BLOCKS');
+	}
 
 	$db->sql_freeresult($result);
 
-	if(isset($k_config['link_forum_id']) && $k_config['link_forum_id'] != 0)
-		$links_forum = 'posting.php?mode=post&amp;f=' . (int)$k_config['link_forum_id'];
+	if (isset($k_config['link_forum_id']) && $k_config['link_forum_id'] != 0)
+	{
+		//$links_forum = 'posting.php?mode=post&amp;f=' . (int)$k_config['link_forum_id'];
+		$links_forum =  append_sid("{$phpbb_root_path}posting.$phpEx", 'f=' . (int)$k_config['link_forum_id']);
+	}
 	else
+	{
 		$links_forum = '';
+	}
 
-	//$linkimage1 = "phpbbireland";
 	$imglist = '';
 
 	mt_srand((double)microtime()*1000002);
@@ -68,35 +73,37 @@
 			$imglist .= "$file ";
 		*/
 
-		if(strpos($file, ".gif") || strpos($file, ".jpg") || strpos($file, ".png"))
+		if (strpos($file, ".gif") || strpos($file, ".jpg") || strpos($file, ".png"))
+		{
 			$imglist .= "$file ";
-
-		/*
-    	if (eregi("gif", $file) || eregi("jpg", $file) || eregi("png", $file) )
-    	{
-			$imglist .= "$file ";
-    	}
-		*/
+		}
 	}
 	closedir($imgs->handle);
+
 	$imglist = explode(" ", $imglist);
 
 	$a = sizeof($imglist);
 
 	$a = $a - 1;	// correct for loop //
 
-	if($a < 1)		// don't process if no images //
+	if ($a < 1)		// don't process if no images //
+	{
 		return;
+	}
 
-	if($number_of_links_to_display > $a)	// we do not have enough images! so display what we have //
+	if ($number_of_links_to_display > $a)	// we do not have enough images! so display what we have //
+	{
 		$number_of_links_to_display = $a;
+	}
 
 	$random = mt_rand(0, $a);
 
 	if ($random >= ($a - $number_of_links_to_display))
+	{
 		$random = ($a - $number_of_links_to_display);
+	}
 
-	if($scroll)
+	if ($scroll)
 	{
 		$linkscontent  = '<br /> <div style="text-align: center; width: 100%; margin: 0 auto; padding: 0;">';
 
@@ -104,20 +111,24 @@
 		{
 			$image = $imglist[$i];
 
-			if(strpos($image, '.gif'))
+			if (strpos($image, '.gif'))
+			{
 				$lnk = explode(".gif", $image);
-			else
-			if(strpos($image, '.png'))
+			}
+			else if (strpos($image, '.png'))
+			{
 				$lnk = explode(".png", $image);
-			else
-			if(strpos($image, '.jpg'))
+			}
+			else if (strpos($image, '.jpg'))
+			{
 				$lnk = explode(".jpg", $image);
+			}
 
 			$lnk[0] = str_replace('+','/', $lnk[0]);
 			$lnk[0] = str_replace('@','?', $lnk[0]);
 			$lnk[0] = str_replace('£','+', $lnk[0]);
 
-			$linkscontent .= "<a rel=\"external\" href=\"http://$lnk[0]\"><img src=\"".$phpbb_root_path."images/links/$image\" alt=\"$lnk[0]\" /></a><br /><br />";
+			$linkscontent .= "<a rel=\"external\" TARGET=\"_blank\" href=\"http://$lnk[0]\"><img src=\"".$phpbb_root_path."images/links/$image\" alt=\"$lnk[0]\" /></a><br /><br />";
 		}
 
 		$linkscontent .= "</div>";
@@ -131,20 +142,24 @@
 
 			$image = $imglist[$i+$random];
 
-			if(strstr($image, 'gif'))
+			if (strstr($image, 'gif'))
+			{
 				$lnk = explode(".gif", $image);
-			else
-			if(strstr($image, 'png'))
+			}
+			else if (strstr($image, 'png'))
+			{
 				$lnk = explode(".png", $image);
-			else
-			if(strstr($image, 'jpg'))
+			}
+			else if (strstr($image, 'jpg'))
+			{
 				$lnk = explode(".jpg", $image);
+			}
 
 			$lnk[0] = str_replace('+','/', $lnk[0]);
 			$lnk[0] = str_replace('@','?', $lnk[0]);
 			$lnk[0] = str_replace('£','+', $lnk[0]);
 
-			$linkscontent .= "<a rel=\"external\" href=\"http://$lnk[0]\"><img src=\"".$phpbb_root_path."images/links/$image\" alt=\"$lnk[0]\" /></a><br /><br />";
+			$linkscontent .= "<a rel=\"external\" TARGET=\"_blank\" href=\"http://$lnk[0]\"><img src=\"".$phpbb_root_path."images/links/$image\" alt=\"$lnk[0]\" /></a><br /><br />";
 		}
 
 		$linkscontent .= "</div>";
@@ -158,7 +173,7 @@
 		'LINKS_ERROR' 		=> true,
 		'LINKS_COUNT'		=> $a,
 		'S_SCROLL_LINKS'	=> ($scroll) ? true : false,
-		'NK_PORTAL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+		'LINKS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	));
 
 ?>

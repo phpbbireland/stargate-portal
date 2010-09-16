@@ -24,8 +24,7 @@
 		exit;
 	}
 
-	$queries = 0;
-	$cached_queries = 0;
+	$queries = $cached_queries = 0;
 
 	global $db;
 
@@ -40,9 +39,11 @@
 	// Generally speaking you ca use the mod type to retrieve several rows for your mini-module...
 
 	$sql = "SELECT * FROM ". K_MODULES_TABLE . " WHERE mod_id = 6 ";
-	if (!$result = $db->sql_query($sql))
+
+	if (!$result = $db->sql_query($sql, 600))
 	{
-		trigger_error('Error! Could not query styles status information: ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+		trigger_error($user->lang['ERROR_PORTAL_STYLE_STATUS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+		//trigger_error('ERROR_PORTAL_STYLE_STATUS');
 	}
 
 	$row = $db->sql_fetchrow($result);
@@ -51,7 +52,8 @@
 		'UNRESOLVED_TITLE'	=> $row['mod_name'],
 		'UNRESOLVED'		=> $row['mod_details'],
 		'UNRESOLVED_LINK'	=> $row['mod_link'],
-		'UE_PORTAL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+
+		'UE_DEBUG'			=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 		)
 	);
 

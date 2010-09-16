@@ -19,16 +19,18 @@
 * @ignore
 */
 
-if ( !defined('IN_PHPBB') )
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
 // disable block for bots (else bots will not work). 05 September 2009
-$grp = get_group_name($user->data['group_id']);
+$grp = sgp_get_group_name($user->data['group_id']);
 
-if($grp == 'Bots')
+if ($grp == 'Bots' || $grp == 'Guests')
+{
 	return;
+}
 
 //$user->add_lang('portal/portal');
 $user->add_lang('search');
@@ -36,6 +38,7 @@ $user->add_lang('search');
 $submit			= request_var('submit', false);
 $keywords		= request_var('keywords', '', true);
 
+$queries = $cached_queries = 0;
 
 // Is user able to search or it has been disabled?
 if (!$auth->acl_get('u_search') || !$auth->acl_getf_global('f_search') || !$config['load_search'])
@@ -56,10 +59,11 @@ $template->assign_vars(array(
 
 $template->assign_vars(array(
 	'S_USER_LOGGED_IN'	=> ($user->data['user_id'] != ANONYMOUS) ? true : false,	
-	'SITE_NAME'          => $config['sitename'],
-	'U_INDEX'	         => "{$phpbb_root_path}index.$phpEx$SID",
-	'U_PORTAL' 	         => "{$phpbb_root_path}portal.$phpEx$SID",
-	'U_SEARCH_BOOKMARKS' => append_sid("{$phpbb_root_path}ucp.$phpEx", '&amp;i=main&mode=bookmarks'),	
+	'SITE_NAME'         => $config['sitename'],
+	'U_INDEX'			=> append_sid("{$phpbb_root_path}index.$phpEx"),
+	'U_PORTAL'			=> append_sid("{$phpbb_root_path}index.$phpEx"),
+	'U_SEARCH_BOOKMARKS'=> append_sid("{$phpbb_root_path}ucp.$phpEx", '&amp;i=main&mode=bookmarks'),
+	'SEARCH_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
 ?>

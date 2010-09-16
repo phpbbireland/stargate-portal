@@ -6,7 +6,7 @@
 */
 
 /* highslide 02 April 2008 */
-.highslide img	{ width:350px; }
+.highslide img	{ max-width:350px; }
 
 /* in search 10 February 2008 */
 input.full	{ width: 99%; }

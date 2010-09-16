@@ -21,40 +21,38 @@
 
 define('IN_PHPBB', true);
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 include($phpbb_root_path . 'common.' . $phpEx);
-include_once($phpbb_root_path . 'includes/functions_template.' . $phpEx);
+include($phpbb_root_path . 'includes/functions_template.' . $phpEx);
 
 // Start session management
 $user->session_begin(false);
 $auth->acl($user->data);
 $user->setup('portal/portal');
 
-$queries = 0;
-$cached_queries = 0;
+global $config, $user;
+$queries = $cached_queries = $total_queries = 0;
 
-	if ( !defined('IN_PHPBB') )
-	{
-		exit;
-	}
+$template->assign_vars( array(
+	'TITLE'				=> $user->lang['IRC_TITLE'],
+	'SITENAME'			=> $config['sitename'],
+	'USERNAME'			=> $user->data['username'] . '_sgp',
+	'OPT_IRC_CHANNELS'	=> $k_config['opt_irc_channels'],
+));
 
-	global $config, $user;
+page_header($user->lang['SGP_IRC_POPUP']);
 
-	$template->assign_vars( array(
-		'SITENAME' => $config['sitename'],
-		'USERNAME' => $user->data['username'] . '_sgp',
-		'OPT_IRC_CHANNELS' => $k_config['opt_irc_channels'],
-		'IR_PORTAL_DEBUG' => sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
-	));
-
-	page_header('IRC');
-
-	$template->set_filenames(array(
-		'body' => 'blocks/block_irc_popup.html',
-		)
-	);
-	page_footer();
+$template->set_filenames(array(
+	'body' => 'blocks/block_irc_popup.html',
+	)
+);
+page_footer();
 
 ?>

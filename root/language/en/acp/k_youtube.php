@@ -28,8 +28,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_VIDEO'				=> 'Portal videos.',
 	'ACP_VIDEO_EXPLAIN'		=> 'Here you can add, edit and delete videos.',
-
-'ACP_K_YOUTUBE_BROWSE' => 'Browse!',
+	'ACP_K_YOUTUBE_BROWSE' => 'Browse!',
 
 	'VIDEO_LINK'			=> 'Video Link',
 	'VIDEO_LINK_EXPLAIN'	=> 'youtube video link code.',
@@ -54,6 +53,8 @@ $lang = array_merge($lang, array(
 	'ID'					=> 'ID',
 	'CONFIRM_OPERATION_VIDEO' => 'Delete this video?',
 	'SWITCHING'				=> 'Switching to k_config',
+
+	'VIDEO_COMMENT'			=> 'Comments', 
 
 ));
 

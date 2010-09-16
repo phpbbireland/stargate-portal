@@ -38,7 +38,8 @@ class acp_k_acronyms
 		global $config, $k_config;
 		global $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
-		include_once($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
+		include($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
+		include($phpbb_root_path . 'includes/sgp_functions_admin.'.$phpEx);
 
 		$user->add_lang('acp/k_acronyms'); 
 		$user->add_lang('acp/k_vars');
@@ -56,6 +57,9 @@ class acp_k_acronyms
 		$action = (isset($_POST['add'])) ? 'add' : ((isset($_POST['save'])) ? 'save' : ((isset($_POST['config'])) ? 'config' : $action));
 
 		///$form_action = $this->u_action. '&action=add';
+
+		//$reserved_words = 
+		///$reserved_words = get_reserved_words();
 
 		$s_hidden_fields = '';
 		$acronym_info = array();
@@ -85,23 +89,6 @@ class acp_k_acronyms
 			//continue
 
 			case 'add':
-
-				$acronym_info['acronym'] = '';
-
-				// remove the leading and trailing spaces from acronyms //
-				$temp = '';
-				$len = strlen($acronym_info['acronym']);
-				if($len)
-				{
-					$acronym_info['acronym'][$len-1] = '';
-
-					for($i = 1; $i < $len; $i++)
-					{
-						$temp .= $acronym_info['acronym'][$i];
-					}
-					$acronym_info['acronym'] = $temp;
-				}
-
 				$template->assign_vars(array(
 					'S_EDIT_ACRONYM'	=> true,
 					'S_EDIT'			=> false,
@@ -112,34 +99,35 @@ class acp_k_acronyms
 					'LANG'				=> (isset($acronym_info['lang'])) ? $acronym_info['lang'] : $user->data['user_lang'],
 					'S_HIDDEN_FIELDS'	=> $s_hidden_fields)
 				);
-
 				return;
-
 			break;
 
 			case 'save':
 				$acronym_id	= request_var('acronym_id', 0);
 				$acronym	= utf8_normalize_nfc(request_var('acronym', '', true));
 
-				if(isset($_POST['acronym'])) 
-					$acronym = utf8_normalize_nfc(request_var('acronym', '', true));
+				$meaning	= utf8_normalize_nfc(request_var('meaning', '', true));
+				$lang		= request_var('lang', $user->data['user_lang'], true);
 
-				$acronym = (trim($acronym) == '') ? $acronym : utf8_normalize_nfc(str_replace(' ', '&nbsp;', $acronym));
-
-				$meaning = utf8_normalize_nfc(request_var('meaning', '', true));
-				$lang				= request_var('lang', $user->data['user_lang'], true);
-
+				// valid entries? //
 				if (!$acronym || !$meaning)
 				{
 					trigger_error($user->lang['ENTER_ACRONYM'] . adm_back_link($this->u_action), E_USER_WARNING);
 				}
+/*
+				// check reserved words //
+				if (in_array($acronym, $reserved_words, true))
+				{
+					trigger_error($user->lang['RESERVED'] . adm_back_link($this->u_action), E_USER_WARNING);
+				}
 
-				// Save acronyms with a leading and trailing space to stop them from being replaced if part of another word or phrase... 
-				// as in URL's or links. This means all acronyms must be whole words or phrases... 30 January 2009 Mike //
-				// This could probably be achieved with less hassle in in preg_replace ? //
-
+				if (validate_acronym_meaning($meaning) == FALSE)
+				{
+					trigger_error($user->lang['ACRO_IN_ACRO'] . adm_back_link($this->u_action), E_USER_WARNING);
+				}
+*/
 				$sql_ary = array(
-					'acronym'	=> ' '. $acronym . ' ',
+					'acronym'	=> $acronym,
 					'meaning'	=> $meaning,
 					'lang'		=> $lang,
 				);
@@ -164,12 +152,11 @@ class acp_k_acronyms
 					)
 				);
 
-				meta_refresh(3, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_acronyms");
+				meta_refresh(3, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_acronyms'));
 
 			break;
 
 			case 'delete':
-
 				$acronym_id = request_var('id', 0);
 
 				if (!$acronym_id)
@@ -200,8 +187,7 @@ class acp_k_acronyms
 						)
 					);
 
-					meta_refresh(2, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_acronyms");
-					//trigger_error($user->lang['ACRONYM_REMOVED'] . adm_back_link($this->u_action));
+					meta_refresh(2, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_acronyms'));
 
 				}
 				else
@@ -218,10 +204,12 @@ class acp_k_acronyms
 
 			case 'config':
 				$template->assign_vars(array(
-					'MESSAGE' => $user->lang['SWITCHING'],
+					'MESSAGE' => $user->lang['SWITCHING'] .' to k_acronym_vars.html',
 					)
 				);
-				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;switch=acronym");
+
+				$switch = 'k_acronym_vars.html';
+				meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_vars&amp;mode=config&amp;switch=" . $switch));
 
 			break;
 		}
@@ -249,4 +237,26 @@ class acp_k_acronyms
 		$db->sql_freeresult($result);
 	}
 }
+
+function validate_acronym_meaning($meaning)
+{
+	global $db;
+	$sql = 'SELECT acronym
+		FROM ' . K_ACRONYMS_TABLE;
+	$result = $db->sql_query($sql);
+
+	while ($row = $db->sql_fetchrow($result))
+	{
+		//echo $meaning . '  ' . $row['acronym'] . '<br />';
+
+		if (strpos($meaning, $row['acronym']))
+		{
+			$db->sql_freeresult($result);
+			return(false);
+		}
+	}
+	$db->sql_freeresult($result);
+	return(true);
+}
+
 ?>

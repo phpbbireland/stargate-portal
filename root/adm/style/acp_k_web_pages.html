@@ -1,77 +1,106 @@
 <!-- INCLUDE overall_header.html -->
-
 <a name="maincontent"></a>
 
 <h1>{L_TITLE}</h1>
 <p>{L_TITLE_EXPLAIN}</p>
 
-<form id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="module" value="{S_ID}" />
+<form name="acp_k_modules" id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="module" value="{S_ID}" />
 
-<!-- TO ADD A MOD REPLACE COPY THIS CODE AND REPLACE THER ? WITH THE MOD TYPE -->
-
-<!-- BEGIN edit -->
-<!-- IF S_OPTION == 'edit' -->
+<!-- BEGIN edit --><!-- IF S_OPTION == 'edit' -->
 <fieldset>
-	<legend>{S_PAGE_NAME}</legend>{S_PAGE_TYPE}{S_PAGE_TYPE}
+	<legend>{S_PAGE_NAME}</legend>
 	<dl>
-		<dt><label for="id">{L_ID}:</label><br /><span>{L_ID_EXPLAIN}</span></dt>
+		<dt><label for="id">{L_ID}:</label><span>{L_ID_EXPLAIN}</span></dt>
 		<dd><input type="hidden" class="post" size="5" maxlength="5" name="id" value="{edit.S_ID}" type="text">{edit.S_ID}</dd>
 	</dl>
+	<hr />
 	<dl>
 		<dt><label for="active">{L_ACTIVE}:</label><br /><span>{L_ACTIVE_EXPLAIN}</span></dt>
-		<dd>
+		<dd><br />
 		<label><input type="radio" class="radio" id="active" name="active" value="1"<!-- IF edit.S_ACTIVE --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 		<label><input type="radio" class="radio" id="active" name="active" value="0"<!-- IF not edit.S_ACTIVE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 		</dd>
 	</dl>
 	<dl>
 		<dt><label for="page_type">{L_WEB_PAGE_TYPE}:</label><br /><span>{L_WEB_PAGE_TYPE_EXPLAIN}</span></dt>
-		<dd>
+		<dd><br />
 		<label><input type="radio" class="radio" id="page_type" name="page_type" value="H"<!-- IF edit.S_PAGE_TYPE == 'H' --> checked="checked"<!-- ENDIF --><!-- IF not edit.S_PAGE_TYPE == 'H' -->checked="checked="<!-- ENDIF --> /> {L_HEAD}</label>
 		<label><input type="radio" class="radio" id="page_type" name="page_type" value="B"<!-- IF edit.S_PAGE_TYPE == 'B' --> checked="checked"<!-- ENDIF --><!-- IF not edit.S_PAGE_TYPE == 'B' -->checked="checked="<!-- ENDIF --> /> {L_BODY}</label>
 		<label><input type="radio" class="radio" id="page_type" name="page_type" value="F"<!-- IF edit.S_PAGE_TYPE == 'F' --> checked="checked"<!-- ENDIF --><!-- IF not edit.S_PAGE_TYPE == 'F' -->checked="checked="<!-- ENDIF --> /> {L_FOOT}</label>
 		<label><input type="radio" class="radio" id="page_type" name="page_type" value="P"<!-- IF edit.S_PAGE_TYPE == 'P' --> checked="checked"<!-- ENDIF --><!-- IF not edit.S_PAGE_TYPE == 'P' -->checked="checked="<!-- ENDIF --> /> {L_PORTAL_PAGE}</label>
 		</dd>
 	</dl>
+	<!-- IF edit.S_PAGE_TYPE == 'B' -->
+	<hr />
 	<dl>
 		<dt><label for="page_name">{L_WEB_PAGE_NAME}:</label><br /><span>{L_WEB_PAGE_NAME_EXPLAIN}</span></dt>
-		<dd><br /><input class="post" size="30" maxlength="50" name="page_name" value="{edit.S_PAGE_NAME}" type="text"></dd>
+		<dd><br /><input class="post" size="50" maxlength="99" name="page_name" value="{edit.S_PAGE_NAME}" type="text"></dd>
 	</dl>
+	<dl>
+		<dt><label for="page_extn">{L_PAGE_EXTN}:</label><br /><span>{L_PAGE_EXTN_EXPLAIN}</span></dt>
+		<dd><br />
+		<label><input type="radio" class="radio" id="active" name="page_extn" value="1"<!-- IF edit.S_PAGE_EXTN --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+		<label><input type="radio" class="radio" id="active" name="page_extn" value="0"<!-- IF not edit.S_PAGE_EXTN --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="head">{L_WEB_PAGE_HEAD}:</label>{L_WEB_PAGE_HEAD_EXPLAIN}</dt>
+		<dd><label>{S_HEAD_OPT}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="foot">{L_WEB_PAGE_FOOT}:</label>{L_WEB_PAGE_FOOT_EXPLAIN}</dt>
+		<dd><label>{S_FOOT_OPT}</label>
+		</dd>
+	</dl>
+	<hr />
+	<!-- ENDIF -->
+
+	<dl>
+		<dt><label for="page_desc">{L_PAGE_DESC}:</label><br /><span>{L_PAGE_DESC_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="50" maxlength="99" name="page_desc" value="{edit.S_PAGE_DESC}" type="text"></dd>
+	</dl>
+	<hr />
+
 	<dl>
 		<dt><label for="last_updated">{L_LAST_UPDATED}:</label><br /><span>{L_LAST_UPDATED_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="17" maxlength="17" name="last_updated" value="{edit.S_LAST_UPDATED}" type="text"></dd>
 	</dl>
-	<!-- IF edit.S_PAGE_TYPE == 'B' -->
-	<dl>
-		<dt><label for="head">{L_WEB_PAGE_HEAD}:</label><br />{L_WEB_PAGE_HEAD_EXPLAIN}</dt>
-		<dd><label><div>{S_HEAD_OPT}</div></label>
-		</dd>
-	</dl>
-	<dl>
-		<dt><label for="foot">{L_WEB_PAGE_FOOT}:</label><br />{L_WEB_PAGE_FOOT_EXPLAIN}</dt>
-		<dd><label><div>{S_FOOT_OPT}</div></label>
-		</dd>
-	</dl>
-	<!-- ENDIF -->
+	<hr />
 	<dl>
 		<dt><label for="external_file">{L_EXTERNAL_FILE}:</label><br /><span>{L_EXTERNAL_FILE_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="50" maxlength="255" name="external_file" value="{edit.S_EXTERNAL_FILE}" type="text"></dd>
 	</dl>
 	<dl>
-		<dt><label for="body">{L_WEB_PAGE_BODY}:</label><br /><span>{L_WEB_PAGE_BODY_EXPLAIN}</span></dt>
-		<dd></dd>
+		<dt><label for="body">{L_WEB_PAGE_BODY}:</label></dt>
+		<dd>{L_WEB_PAGE_BODY_EXPLAIN}</dd>
 	</dl>
-	<div><textarea style="width:99%;" id="body" name="body" rows="20" cols="600">{edit.S_BODY}</textarea></div>
+
+	<div style="padding:0px; margin: 0px;">
+		<h2>{L_EDITOR_NAME}</h2>
+		<fieldset>
+			<!-- INCLUDE sgp_editor/sgp_quickreply_buttons.html -->
+			<div style="float:right; text-align:center; width:20%;">
+				<span style="width:100%; min-height: 160px; float:right; text-align:center; padding:8px; border-left: solid 1px #B4BAC0;">
+					<!-- INCLUDE sgp_editor/sgp_add_vars.html -->
+				</span>
+			</div>
+			<textarea id="acp_k_modules" style="width:75%;" id="body" name="body" rows="10" cols="400">{edit.S_BODY}</textarea>
+			<!-- INCLUDE sgp_editor/sgp_quickreply_options.html -->
+		</fieldset>
+	</div>
+
+	<!-- IF edit.S_PAGE_TYPE == 'B' -->
+	<dl style="padding-top:5px;">
+		<dt><label for="page_meta">{L_PAGE_META}:</label><br /><span>{L_PAGE_META_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="80" maxlength="255" name="page_meta" value="{edit.S_PAGE_META}" type="text"></dd>
+	</dl>
+	<!-- ENDIF -->
+
 </fieldset>
-<!-- ENDIF -->
-<!-- END edit -->
+<!-- ENDIF --><!-- END edit -->
 
-
-
-
-
-<!-- IF  S_OPTION == 'add' || S_OPTION == '' -->
-<!-- IF S_SELECT == '' -->
+<!-- IF  S_OPTION == 'add' || S_OPTION == '' --><!-- IF S_SELECT == '' -->
 <fieldset>
 	<legend>{L_WEB_PAGE_ADD_}</legend>
 	<dl>
@@ -84,6 +113,7 @@
 		</dd>
 	</dl>
 </fieldset>
+
 <fieldset class="submit-buttons">
 	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
 </fieldset>
@@ -96,7 +126,7 @@
 		<dt><label for="active">{L_ACTIVE}:</label><br /><span>{L_ACTIVE_EXPLAIN}</span></dt>
 		<dd>
 		<label><input type="radio" class="radio" id="active" name="active" value="1"<!-- IF S_ACTIVE --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-		<label><input type="radio" class="radio" id="active" name="active" value="0"<!-- IF not S_ACTIVE --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+		<label><input type="radio" class="radio" id="active" name="active" value="0"<!-- IF not S_ACTIVE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 		</dd>
 	</dl>
 	<dl>
@@ -108,10 +138,20 @@
 		<label><input type="radio" class="radio" id="page_type" name="page_type" value="P"<!-- IF S_PAGE_TYPE == 'P' --> checked="checked"<!-- ENDIF --> /> {L_PORTAL_PAGE}</label>
 		</dd>
 	</dl>
+
+	<!-- IF S_PAGE_TYPE != 'H' and S_PAGE_TYPE != 'F' -->
 	<dl>
 		<dt><label for="page_name">{L_WEB_PAGE_NAME}:</label><br /><span>{L_WEB_PAGE_NAME_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="45" maxlength="50" name="page_name" value="{S_PAGE_NAME}" type="text"></dd>
 	</dl>
+	<dl>
+		<dt><label for="page_extn">{L_PAGE_EXTN}:</label><br /><span>{L_PAGE_EXTN_EXPLAIN}</span></dt>
+		<dd><br />
+		<label><input type="radio" class="radio" id="active" name="page_extn" value="1"<!-- IF edit.S_PAGE_EXTN --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+		<label><input type="radio" class="radio" id="active" name="page_extn" value="0"<!-- IF not edit.S_PAGE_EXTN --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<!-- ENDIF -->
 	<dl>
 		<dt><label for="last_updated">{L_LAST_UPDATED}:</label><br /><span>{L_LAST_UPDATED_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="17" maxlength="17" name="last_updated" value="{S_LAST_UPDATED}" type="text"></dd>
@@ -127,7 +167,19 @@
 		<dd><label><div>{S_FOOT_OPT}</div></label>
 		</dd>
 	</dl>
+	<hr />
+	<dl>
+		<dt><label for="page_desc">{L_PAGE_DESC}:</label><br /><span>{L_PAGE_DESC_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="50" maxlength="99" name="page_desc" value="{edit.S_PAGE_DESC}" type="text"></dd>
+	</dl>
+	<hr />
+
 	 <!-- ENDIF -->
+	<dl>
+		<dt><label for="external_file">{L_EXTERNAL_FILE}:</label><br /><span>{L_EXTERNAL_FILE_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="50" maxlength="255" name="external_file" value="{edit.S_EXTERNAL_FILE}" type="text"></dd>
+	</dl>
+
 	<dl>
 		<dt><label for="body">
 			<!-- IF S_PAGE_TYPE == 'H' -->
@@ -141,27 +193,50 @@
 		</dt>
 		<dd></dd>
 	</dl>
-	<dl>
-		<dt><label for="external_file">{L_EXTERNAL_FILE}:</label><br /><span>{L_EXTERNAL_FILE_EXPLAIN}</span></dt>
-		<dd><br /><input class="post" size="50" maxlength="255" name="external_file" value="{edit.S_EXTERNAL_FILE}" type="text"></dd>
-	</dl>
-	<div><textarea style="width:99%;" id="body" name="body" rows="20" cols="600">{S_BODY}</textarea></div>
-</fieldset>
-<!-- ENDIF -->
-<!-- ENDIF -->
 
+	<div style="padding:0px; margin: 0px;">
+		<h2>{L_EDITOR_NAME}</h2>
+		<fieldset>
+			<!-- INCLUDE sgp_editor/sgp_quickreply_buttons.html -->
+			<div style="float:right; text-align:center; width:20%;">
+				<span style="width:100%; min-height: 160px; float:right; text-align:center; padding:8px; border-left: solid 1px #B4BAC0;">
+					<!-- INCLUDE sgp_editor/sgp_add_vars.html -->
+				</span>
+			</div>
+			<textarea id="acp_k_modules" style="width:75%;" id="body" name="body" rows="10" cols="400">{S_BODY}</textarea>
+			<!-- INCLUDE sgp_editor/sgp_quickreply_options.html -->
+		</fieldset>
+	</div>
+
+	<!-- IF S_PAGE_TYPE == 'B' -->
+	<dl style="padding-top:5px;">
+		<dt><label for="page_meta">{L_PAGE_META}:</label><br /><span>{L_PAGE_META_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="80" maxlength="255" name="page_meta" value="{edit.S_PAGE_META}" type="text"></dd>
+	</dl>
+	<!-- ENDIF -->
+
+</fieldset>
+<!-- ENDIF --><!-- ENDIF -->
 
 <!-- IF S_OPTION == 'all' -->
-<form id="acp_k_modules" method="post" action="{U_ACTION}">
+<form name="acp_k_modules" id="acp_k_modules" method="post" action="{U_ACTION}">
 	<table cellspacing="1" cellspacing="0" border="0">
 	<thead>
-		<tr><th colspan="13">{L_WEB_PAGES_HEADER_ADMIN}</th></tr>
+		<tr><th colspan="13">{L_WEB_PAGES_{L_HEADER}_ADMIN}</th></tr>
 		<th style="text-align:center">{L_ID}</th>
 		<th style="text-align:center">{L_ACTIVE}</th>
 		<th>{L_WEB_PAGE_TYPE}</th>
+
+		<!-- IF S_PAGE_TYPE != 'head' && S_PAGE_TYPE != 'foot' -->
 		<th>{L_WEB_PAGE_NAME}</th>
+		<!-- ENDIF -->
+
+		<!-- IF S_PAGE_TYPE == 'body' -->
+		<!--<th>{L_WEB_PAGE_TITLE}</th>-->
+		<!-- ENDIF -->
+		<th>{L_WEB_PAGE_DESC}</th>
+
 		<th>{L_WEB_PAGE_HEAD}</th>
-		<th style="text-align:center">{L_WEB_PAGE_BODY}</th>
 		<th>{L_WEB_PAGE_FOOT}</th>
 		<th style="text-align:center">{L_LAST_UPDATED}</th>
 		<th style="text-align:center;">{L_OPTIONS}</th>
@@ -169,22 +244,28 @@
 	<tbody>
 		<!-- BEGIN all -->
 		<tr>
-			<td class="<!-- IF all.S_PAGE_TYPE == 'H' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="30px;"><div align="right">{all.S_ID}</div></td>
-			<td class="<!-- IF all.S_PAGE_TYPE == 'H' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="auto;"><div align="center"><!-- IF all.S_ACTIVE -->Active<!-- ELSE -->Disabled<!-- ENDIF --></div></td>
-			<td class="<!-- IF all.S_PAGE_TYPE == 'H' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="auto;">
+			<td class="<!-- IF all.S_PAGE_TYPE == 'H' or all.S_PAGE_TYPE == 'F' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="30px;"><div align="right">{all.S_ID}</div></td>
+			<td class="<!-- IF all.S_PAGE_TYPE == 'H' or all.S_PAGE_TYPE == 'F' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="auto;"><div align="center"><!-- IF all.S_ACTIVE -->{L_ACTIVE}<!-- ELSE -->{L_DISABLED}<!-- ENDIF --></div></td>
+			<td class="<!-- IF all.S_PAGE_TYPE == 'H' or all.S_PAGE_TYPE == 'F' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="auto;">
 				<div align="left">
-				<!-- IF all.S_PAGE_TYPE == 'H' -->Page Header
-				<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->Page Body
-				<!-- ELSEIF all.S_PAGE_TYPE == 'F' -->Page Footer
+				<!-- IF all.S_PAGE_TYPE == 'H' -->{L_HEADER}
+				<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->{L_BODY}
+				<!-- ELSEIF all.S_PAGE_TYPE == 'F' -->{L_FOOTER}
+				<!-- ELSEIF all.S_PAGE_TYPE == 'P' -->{L_WRAPPER}
 				<!-- ENDIF -->
 				</div>
 			</td>
-			<td class="<!-- IF all.S_PAGE_TYPE == 'H' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="auto;;"><div align="left">{all.S_PAGE_NAME}</div></td>
-			<td class="<!-- IF all.S_PAGE_TYPE == 'H' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="40px;"><div align="right">{all.S_HEAD}</div></td>
-			<td class="<!-- IF all.S_PAGE_TYPE == 'H' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="auto"><div align="center">{L_SELECT_EDIT_TO_VIEW}</div></td>
-			<td class="<!-- IF all.S_PAGE_TYPE == 'H' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="40px;"><div align="right">{all.S_FOOT}</div></td>
-			<td class="<!-- IF all.S_PAGE_TYPE == 'H' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="120px;"><div align="right">{all.S_LAST_UPDATED}</div></td>
-			<td class="<!-- IF all.S_PAGE_TYPE == 'H' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="auto" colspan="2">
+			<!-- IF S_PAGE_TYPE != 'head' && S_PAGE_TYPE != 'foot' -->
+			<td class="<!-- IF all.S_PAGE_TYPE == 'H' or all.S_PAGE_TYPE == 'F' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="auto"><div align="left"><!-- IF all.S_PAGE_NAME and all.S_PAGE_EXTN == 0 -->{all.S_PAGE_NAME}.html<!-- ELSE -->{all.S_PAGE_NAME}<!-- ENDIF --></div></td>
+			<!-- ENDIF -->
+			<!-- IF S_PAGE_TYPE == 'body' -->
+			<!--<td class="<!-- IF all.S_PAGE_TYPE == 'H' or all.S_PAGE_TYPE == 'F' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="auto"><div align="left">{all.S_PAGE_TITLE}</div></td>-->
+			<!-- ENDIF -->
+			<td class="<!-- IF all.S_PAGE_TYPE == 'H' or all.S_PAGE_TYPE == 'F' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="auto"><div align="left">{all.S_PAGE_DESC}</div></td>
+			<td class="<!-- IF all.S_PAGE_TYPE == 'H' or all.S_PAGE_TYPE == 'F' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="55px;"><div align="right">{all.S_HEAD}</div></td>
+			<td class="<!-- IF all.S_PAGE_TYPE == 'H' or all.S_PAGE_TYPE == 'F' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="55px"><div align="right">{all.S_FOOT}</div></td>
+			<td class="<!-- IF all.S_PAGE_TYPE == 'H' or all.S_PAGE_TYPE == 'F' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="140px"><div align="right">{all.S_LAST_UPDATED}</div></td>
+			<td class="<!-- IF all.S_PAGE_TYPE == 'H' or all.S_PAGE_TYPE == 'F' -->row2<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->row5<!-- ELSE -->row3<!-- ENDIF -->" width="auto" colspan="2">
 				<div align="center">
 					<a href="{U_DELETE}{all.S_ID}"><img src="images/icon_delete.gif" border="0" alt="{L_DELETE}"></a>
 					<a href="{U_EDIT}{all.S_ID}"><img src="images/icon_edit.gif" border="0" alt="{L_EDIT}"></a>
@@ -206,7 +287,7 @@
 <dl><br /></dl>
 <!-- ENDIF -->
 
-<!-- prevent someone pressing submit while data is being saved -->
+<!-- prevent pressing submit while data is being saved -->
 <!-- IF S_OPTION == 'add' || $S_OPTION == 'new' || S_OPTION == 'edit' -->
 <fieldset class="submit-buttons">
 	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
@@ -214,7 +295,62 @@
 </fieldset>
 <!-- ENDIF -->
 
-
 {S_FORM_TOKEN}
 </form>
+
+
+<script type="text/javascript">
+var form_name = 'acp_k_modules';
+var text_name = 'acp_k_modules';
+var load_draft = false;
+var upload = false;
+
+// Define the bbCode tags
+var bbcode = new Array();
+var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->);
+var imageTag = false;
+
+// Helpline messages
+var help_line = {
+	b: '{LA_BBCODE_B_HELP}',
+	i: '{LA_BBCODE_I_HELP}',
+	u: '{LA_BBCODE_U_HELP}',
+	q: '{LA_BBCODE_Q_HELP}',
+	c: '{LA_BBCODE_C_HELP}',
+	l: '{LA_BBCODE_L_HELP}',
+	o: '{LA_BBCODE_O_HELP}',
+	p: '{LA_BBCODE_P_HELP}',
+	w: '{LA_BBCODE_W_HELP}',
+	a: '{LA_BBCODE_A_HELP}',
+	s: '{LA_BBCODE_S_HELP}',
+	f: '{LA_BBCODE_F_HELP}',
+	e: '{LA_BBCODE_E_HELP}',
+	d: '{LA_BBCODE_D_HELP}'
+	<!-- BEGIN custom_tags -->
+		,cb_{custom_tags.BBCODE_ID}: '{custom_tags.A_BBCODE_HELPLINE}'
+	<!-- END custom_tags -->
+}
+
+function checkForm()
+{
+	if (document.getElementById(text_name).value.length < 2)
+	{
+		if (!upload)
+		{
+			alert('{L_EMPTY_MESSAGE}');
+			return false;
+		}
+		upload = false;
+		return true;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+var panels = new Array('options-panel', 'attach-panel', 'poll-panel');
+var show_panel = 'options-panel';
+</script>
+<script type="text/javascript" src="style/sgp_editor/sgp_se_editor.js"></script>
 <!-- INCLUDE overall_footer.html -->

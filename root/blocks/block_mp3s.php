@@ -19,9 +19,9 @@
 * @ignore
 */
 
-	define('IN_PHPBB', true);
+	//define('IN_PHPBB', true);
 
-	if ( !defined('IN_PHPBB') )
+	if (!defined('IN_PHPBB'))
 	{
 		exit;
 	}
@@ -36,6 +36,8 @@
 	$song_list[] = '';
 
 	$mp3_path = 'mp3/music/';
+
+	$queries = $cached_queries = 0;
 
 /*
 	mt_srand((double)microtime()*1000000);
@@ -60,13 +62,17 @@
 	}
 	closedir($handle);
 */
+
  	$upload_dir = 'music';
- 	$upload = 'Upload';
+	$upload = $user->lang['UPLOAD'];
+
 	$template->assign_vars(array(
 		'U_UPLOAD_DIR'	=> $upload_dir,
 		'L_UPLOAD_FILE'	=> $upload,
 		'MP3_POPUP_IMG'	=> $user->img('button_mp3_popup', 'MP3_POPUP'),
 		//'UPLOAD_IMG'      => $user->img('icon_upload', 'UPLOAD'),
+
+		'MP3S_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	 ));
 
 ?>

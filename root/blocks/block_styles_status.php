@@ -19,10 +19,14 @@
 * @ignore
 */
 
-	if ( !defined('IN_PHPBB') )
+	if (!defined('IN_PHPBB'))
 	{
 		exit;
 	}
+
+	$queries = $cached_queries = 0;
+
+/*
 	// Retrieve Styles Status items from database //
 	$queries = 0;
 	$cached_queries = 0;
@@ -73,12 +77,10 @@
 			'U_STYLE_TEST_IT'		=> ($styles_status[$i]['mod_link_id'] && $select_allow) ? $phpbb_root_path . 'portal.php?style=' . $styles_status[$i]['mod_link_id'] : '',
 		));
 	}
+*/
 
 $template->assign_vars(array(
-	'STYLE_COUNT'		=> $last_style - 1,
-	'DOWNLOAD_IMG'		=> '<img src="' . $phpbb_root_path . 'images/download.png" alt="" />',
-	'TEST_IT_IMG'		=> '<img src="' . $phpbb_root_path . 'images/test_it.png" alt="" />',
-	'SS_PORTAL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+	'STYLE_STATUS_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
 

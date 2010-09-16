@@ -33,20 +33,20 @@
 	</div>
 <!-- ENDIF -->
 <!-- IF NO_VIEWONLINE_A -->
-	<div>
-        <center>
-			<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
-				<strong>{L_NO_VIEW_USERS_A}</strong>
-				<br /><br />
-				<input type="submit" class="button2" name="{L_LOGIN}" value="{L_LOGIN}" /></input>
-				<br /><br />
-				<p>{L_DONT_HAVE_ACCOUNT}</p>
-				<a href="ucp.php?cid=&amp;mode=register">{L_REGISTRATION}</a>
-			</form>
-		</center>
+	<div style="text-align:center">
+		<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
+			<strong>{L_NO_VIEW_USERS_A}</strong>
+			<br /><br />
+			<input type="submit" class="button2" name="{L_LOGIN}" value="{L_LOGIN}"></input>
+			<br /><br />
+			<p>{L_DONT_HAVE_ACCOUNT}</p>
+			<a href="ucp.php?cid=&amp;mode=register">{L_REGISTRATION}</a>
+		</form>
 		<br />
 	</div>
 <!-- ENDIF -->
-<!-- IF DEBUG_QUERIES -->{LO_PORTAL_DEBUG}<!-- ENDIF -->
 </div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{LAST_ONLINE_DEBUG}</div><!-- ENDIF -->
+
 <!-- IDTAG ends block_last_online.html -->
+

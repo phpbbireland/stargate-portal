@@ -1,0 +1,77 @@
+<!-- IDTAG start block_style_status.html 17 March 2008 copyright phpbbireland.com 2007 -->
+
+<div class="block_data" style="max-height: 800px; overflow:auto;">
+	<div style="float:left; text-align:left; width:100%;"><strong>Custom Designs:</strong><hr /><hr /></div>
+	<!-- BEGIN our_mod_style_row -->
+		<span style="width:25%; min-width:200px; float:left; margin:0px; margin-left:auto; margin-right:auto;">
+			<div style="text-align:center;">
+			<a rel="external" href="{our_mod_style_row.U_MOD_LINK}"><span class="red">{our_mod_style_row.MOD_NAME}</span></a><br />
+			<!-- IF our_mod_style_row.MOD_THUMB -->
+				<a href="{our_mod_style_row.MOD_IMG}" class="highslide" onclick="return hs.expand(this)"><img src="{our_mod_style_row.MOD_THUMB}" width="180px" height="120px" alt="{our_mod_style_row.MOD_THUMB}" title="Click to enlarge" /></a><br />
+				{our_mod_style_row.MOD_STATUS}<br />
+			<!-- ENDIF -->
+
+			{L_VERSION}: <strong>{our_mod_style_row.MOD_VERSION}</strong><br />
+
+			<div class="minimod_author" style="min-height: 25px">
+			{L_DESIGNED_BY}: <a rel="external" href="{our_mod_style_row.U_MOD_LINK}"><strong>{our_mod_style_row.MOD_AUTHOR}</strong></a>
+			</div>
+
+			{L_LAST_UPDATED}: {our_mod_style_row.MOD_UPDATED}<br />
+
+
+			<div class="minimod_info" style="padding:4px; padding-top:0px;">{our_mod_style_row.MOD_INFO}</div>
+
+			<!-- IF our_mod_style_row.MOD_AUTHOR_2 -->
+				{L_PORTED_BY}: <a rel="external" href="{our_mod_style_row.MOD_LINK_2}">{our_mod_style_row.MOD_AUTHOR_2}</a><br />
+			<!-- ENDIF -->
+
+			<div class="minimod_details" id="{our_mod_style_row.MOD_THIS}" style="min-height:55px; padding:4px; padding-top:0px; border: solid 1px #333333; display:none;">{our_mod_style_row.MOD_DETAILS}</div>
+
+			<strong>{our_mod_style_row.MOD_DOWNLOAD_COUNT}</strong><br />
+			<!-- IF our_mod_style_row.U_MOD_TEST_IT --><a rel="rel" href="{our_mod_style_row.U_MOD_TEST_IT}">{TEST_IT_IMG}</a><!-- ENDIF -->
+			<a rel="rel" href="{our_mod_style_row.U_MOD_FILENAME}">{DOWNLOAD_IMG}</a>
+			<a href="javascript:ShowHide('{our_mod_style_row.MOD_THIS}');">{INFO_IMG}</a>
+			</div><br /><hr /><br />
+		</span>
+	<!-- END our_mod_style_row -->
+</div>
+
+
+<div class="block_data" style="max-height: 800px; overflow:auto;">
+	<div style="float:left; text-align:left; width:100%;"><strong>Ported Styles:</strong><hr /><hr /></div>
+	<!-- BEGIN mod_style_row -->
+		<span style="width:25%; min-width:200px; float:left; margin:0px; margin-left:auto; margin-right:auto;">
+			<div style="text-align:center;">
+			<a rel="external" href="{mod_style_row.U_MOD_LINK}"><span class="red">{mod_style_row.MOD_NAME}</span></a><br />
+			<!-- IF mod_style_row.MOD_THUMB -->
+				<a href="{mod_style_row.MOD_IMG}" class="highslide" onclick="return hs.expand(this)"><img src="{mod_style_row.MOD_THUMB}" width="180px" height="120px" alt="{mod_style_row.MOD_THUMB}" title="Click to enlarge" /></a><br />
+				Port {L_STATUS}: {mod_style_row.MOD_STATUS}<br />
+			<!-- ENDIF -->
+
+			{L_VERSION}: {mod_style_row.MOD_VERSION}<br />
+			{L_LAST_UPDATED}: {mod_style_row.MOD_UPDATED}<br />
+
+			<div class="minimod_author" style="min-height: 25px">
+			{L_DESIGNED_BY}: <a rel="external" href="{mod_style_row.U_MOD_LINK}">{mod_style_row.MOD_AUTHOR}</a>
+			</div>
+
+			<div class="minimod_info" style="padding:4px; padding-top:0px;">{mod_style_row.MOD_INFO}</div>
+			<!-- IF mod_style_row.MOD_AUTHOR_2 -->
+				{L_PORTED_BY}: <a rel="external" href="{mod_style_row.MOD_LINK_2}">{mod_style_row.MOD_AUTHOR_2}</a><br />
+			<!-- ENDIF -->
+
+			<div class="minimod_details" id="{mod_style_row.MOD_THIS}" style="min-height:55px; padding:4px; padding-top:0px; border: solid 1px #333333; display:none;">{mod_style_row.MOD_DETAILS}</div>
+
+			{mod_style_row.MOD_DOWNLOAD_COUNT}<br />
+			<!-- IF mod_style_row.U_MOD_TEST_IT --><a rel="rel" href="{mod_style_row.U_MOD_TEST_IT}">{TEST_IT_IMG}</a><!-- ENDIF -->
+			<a rel="rel" href="{mod_style_row.U_MOD_FILENAME}">{DOWNLOAD_IMG}</a>
+			<a href="javascript:ShowHide('{mod_style_row.MOD_THIS}');">{INFO_IMG}</a>
+			</div><br /><hr /><br />
+		</span>
+	<!-- END mod_style_row -->
+</div>
+This block was written using the MiniMod module... No database entries or sql queries were required.
+Only installed styles will be displayed here... The block is for stargatestyles only... Anyone wanting to use this code will have to ask Mitch.
+<!-- IF DEBUG_QUERIES --><div class="block_data">{STYLE_STATUS_DEBUG}</div><!-- ENDIF -->
+<!-- IDTAG ends block_style_status.html -->

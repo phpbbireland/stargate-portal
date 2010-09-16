@@ -2,10 +2,13 @@
 <!-- IE fix, padding-left:4px and width:99% -->
 <div class="block_data">
 	<div class="unresolved">
-		<!-- BEGIN notice_row -->
-		{notice_row.NOTICE}
-		<!-- END notice_row -->
+		<!-- BEGIN our_mod_notice_row -->
+		{our_mod_notice_row.MOD_DETAILS}
+		<!-- END our_mod_notice_row -->
 	</div>
-	<!-- IF DEBUG_QUERIES -->{UE_PORTAL_DEBUG}<!-- ENDIF -->
+	<!-- IF our_mod_notice_row.U_MOD_SUPPORT -->
+		<div style="text-align:center"><a rel="external" href="{our_mod_notice_row.U_MOD_SUPPORT}">{DOWNLOAD_IMG}</a></div>
+	<!-- ENDIF -->
 </div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{NOTICE_DEBUG}</div><!-- ENDIF -->
 <!-- IDTAG block_notice ends -->

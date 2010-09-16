@@ -25,7 +25,7 @@
 
 	// 2 bug fixes 01 October 2009
 	$this_page = explode(".", $user->page['page']);
-	if($this_page[0] == 'viewtopic'|| $this_page[0] == 'ucp')
+	if ($this_page[0] == 'viewtopic'|| $this_page[0] == 'ucp')
 	{
 		return;
 	}
@@ -35,6 +35,10 @@
 
 	global $k_config, $b_poll, $config, $phpbb_root_path, $db, $user, $template, $phpEx;
 
+	$sgp_cache_time = $k_config['sgp_cache_time'];
+
+	$queries = $cached_queries = 0;
+
 	include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 
 	/**
@@ -42,12 +46,11 @@
 	*/
 
 	// Initial var setup
-	$b_forum_id	= request_var('f', $k_config['poll_forum_id']);
-	$b_topic_id	= request_var('t', $k_config['poll_topic_id']);
+	$b_forum_id	= request_var('f', '');
+	$b_topic_id	= request_var('t', '');
+
 	$b_post_id	= request_var('p', $k_config['poll_post_id']);
 	$b_poll_view = $k_config['poll_view'];
-
-	$b_poll_position = $k_config['poll_position'];
 
 	$b_voted_id	= request_var('vote_id', array('' => 0));
 
@@ -61,10 +64,12 @@
 	$b_update	  = request_var('update', false);
 	$b_poll->type = $b_poll_view;
 
+	$s_can_vote = false;
+
 	// Do we have a topic or post id?
-	if (!$b_topic_id && !$b_post_id && !$b_forum_id)
+	//if (!$b_topic_id && !$b_post_id && !$b_forum_id)
+	if (!$b_post_id)
 	{
-		//	trigger_error('NO_TOPIC');
 		$k_config['poll_topic_id'] = false;
 	}
 
@@ -76,7 +81,8 @@
 			$sql = 'SELECT forum_id
 				FROM ' . TOPICS_TABLE . "
 				WHERE topic_id = $b_topic_id";
-			$result = $db->sql_query($sql);
+			$result = $db->sql_query($sql, $sgp_cache_time);
+
 			$b_forum_id = (int) $db->sql_fetchfield('forum_id');
 			$db->sql_freeresult($result);
 
@@ -98,7 +104,7 @@
 		}
 	}
 
-	if(!$b_forum_id)
+	if (!$b_forum_id)
 	{
 		// This rather complex gaggle of code handles querying for topics but
 		// also allows for direct linking to a post (and the calculation of which
@@ -143,18 +149,21 @@
 		// user clicked to view a global topic
 		$sql = $db->sql_build_query('SELECT', $sql_array);
 	}
+	/*
 	else
 	{
 		$sql = 'SELECT t.*, f.*
 			  FROM ' . TOPICS_TABLE . ' t,' . FORUMS_TABLE . ' f
 			  WHERE f.forum_id = ' . $b_forum_id . '
-			  AND  t.forum_id = ' . $b_forum_id . '
-			  AND t.poll_start <> 0
+				AND  t.forum_id = ' . $b_forum_id . '
+				AND t.poll_start <> 0
 			  ORDER BY t.poll_start DESC
 			  LIMIT 1';
 	}
+	*/
 
-	$result = $db->sql_query($sql);
+	$result = $db->sql_query($sql, $sgp_cache_time);
+
 	$topic_data = $db->sql_fetchrow($result);
 	$db->sql_freeresult($result);
 
@@ -204,7 +213,7 @@
 
 	// General Viewtopic URL for return links
 	//$b_viewtopic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$b_forum_id&amp;t=$b_topic_id&amp;start=$b_start&amp;$u_sort_param");
-	$b_viewtopic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$b_forum_id&amp;t=$b_topic_id&amp;start=$b_start&amp;");
+	$b_viewtopic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$b_forum_id&amp;t=$b_topic_id&amp;start=$b_start&");
 
 	// Does this topic contain a poll?
 	if (!empty($topic_data['poll_start']))
@@ -215,7 +224,7 @@
 				AND p.post_id = {$topic_data['topic_first_post_id']}
 				AND p.topic_id = o.topic_id
 			ORDER BY o.poll_option_id";
-		$result = $db->sql_query($sql);
+		$result = $db->sql_query($sql, $sgp_cache_time);
 
 		$b_poll_info = array();
 		while ($row = $db->sql_fetchrow($result))
@@ -231,7 +240,7 @@
 				FROM ' . POLL_VOTES_TABLE . '
 				WHERE topic_id = ' . $b_topic_id . '
 				  AND vote_user_id = ' . $user->data['user_id'];
-			$result = $db->sql_query($sql);
+			$result = $db->sql_query($sql, $sgp_cache_time);
 
 			while ($row = $db->sql_fetchrow($result))
 			{
@@ -256,6 +265,7 @@
 			(($topic_data['poll_length'] != 0 && $topic_data['poll_start'] + $topic_data['poll_length'] > time()) || $topic_data['poll_length'] == 0) &&
 			$topic_data['topic_status'] != ITEM_LOCKED &&
 			$topic_data['forum_status'] != ITEM_LOCKED) ? true : false;
+
 		$s_display_results = (!$s_can_vote || ($s_can_vote && sizeof($cur_voted_id)) || $b_view == 'viewpoll') ? true : false;
 
 		if ($b_update && $s_can_vote)
@@ -264,7 +274,7 @@
 			{
 				$redirect_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$b_forum_id&amp;t=$b_topic_id");
 
-				meta_refresh(5, $redirect_url);
+				meta_refresh(3, $redirect_url);
 
 				$message = (!sizeof($b_voted_id)) ? 'NO_VOTE_OPTION' : 'TOO_MANY_VOTE_OPTIONS';
 				$message = $user->lang[$message] . '<br /><br />' . sprintf($user->lang['RETURN_TOPIC'], '<a href="' . $redirect_url . '">', '</a>');
@@ -386,9 +396,9 @@
 				'POLL_OPTION_RESULT'	=> $b_poll_option['poll_option_total'],
 				'POLL_OPTION_PERCENT'	=> $option_pct_txt,
 				'POLL_OPTION_PCT'		=> round($option_pct * 100),
-				'POLL_OPTION_IMG'		=> ($b_poll_position == 'left' || $b_poll_position == 'right') ? ($user->img('poll_center', $option_pct_txt, round($option_pct * 50))) : ($user->img('poll_center', $option_pct_txt, round($option_pct * 150))),
+				'POLL_OPTION_IMG'		=> $user->img('poll_center', $option_pct_txt, round($option_pct * 90)),
+				'POLL_OPTION_IMG_C'		=> $user->img('poll_center', $option_pct_txt, round($option_pct * 200)),
 				'POLL_OPTION_VOTED'		=> (in_array($b_poll_option['poll_option_id'], $cur_voted_id)) ? true : false,
-				//'POLL_OPTION_IMG_C'		=> $user->img('poll_center', $option_pct_txt, round($option_pct * 250)),
 				)
 			);
 		}
@@ -408,32 +418,41 @@
 			'BS_IS_MULTI_CHOICE'	=> ($topic_data['poll_max_options'] > 1) ? true : false,
 			'BS_POLL_ACTION'		=> $b_viewtopic_url,
 			'BU_VIEW_RESULTS'		=> $b_viewtopic_url . '&amp;view=viewpoll',
-			'BS_POLL_POSITION'		=> $b_poll_position,
+			'BU_VIEW_RESULTS'		=> $b_viewtopic_url . '',
 			)
 		);
 
-		$full = $medium = $simple = false;
+		unset($b_poll_end, $b_poll_info, $b_voted_id);
+
+		$detailed = $simple = false;
 
 		switch($b_poll->type)
 		{
-			case 'full':
-				$full = true;
+			case 'detailed':
+				$detailed = true;
 			break;
-			case 'medium':
-				$medium = true;
-			break;
+
 			case 'simple':
 				$simple = true;
 			break;
+
 			default:
+			break;
 		}
 
 		$template->assign_vars(array(
-			'S_FULL'	=> $full,
-			'S_MEDIUM'	=> $medium,
+			'S_FULL'	=> $detailed,
 			'S_SIMPLE'	=> $simple,
 		));
 
-		unset($poll_end, $poll_info, $voted_id);
+		if ($s_can_vote)
+		{
+			add_form_key('posting');
+		}
 	}
+
+	$template->assign_vars(array(
+		'POLL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+	));
+
 ?>

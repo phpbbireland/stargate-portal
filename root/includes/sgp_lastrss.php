@@ -7,11 +7,11 @@
  *			(c) 2003-2004 original lastRSS by Vojtech Semecky http://lastrss.oslab.net/
  *
  *   Ported and rewritten for PhpBB3 and Stargate Portal by: NeXur
- *   begin					: Mars 2008
+ *   begin					: March 2008
  *   copyright				: (C) 2008 Martin Larsson - aka NeXur
  *   website				: http://www.phpbbireland.com
  *   email					: martinl@bredband.net
- *   last update			: 27 October 2008 
+ *   last update			: 27 May 2010 Mike
  *
  *   note: Do not remove this copyright. Just append yours if you have modified it.
  ************************************************************************************/
@@ -45,6 +45,8 @@ class lastRSS
 	var $itemtags = array('title', 'link', 'author', 'category', 'comments', 'enclosure', 'guid', 'pubDate', 'source');
 	var $imagetags = array('title', 'url', 'link', 'width', 'height');
 	var $textinputtags = array('title', 'description', 'name', 'link');	
+	var $cache_dir = '';
+	var $type = '';
 	// -------------------------------------------------------------------
 	// Parse RSS file and returns associative array.
 	// -------------------------------------------------------------------
@@ -53,28 +55,36 @@ class lastRSS
 	*/
 	function curl_get_rss($url)
 	{
-	global $rss, $user;
+		global $rss, $user;
 		// initiate and set options
-		$ch = @curl_init($url);
-		@curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
-		@curl_setopt( $ch, CURLOPT_FAILONERROR, 1);
-		@curl_setopt( $ch, CURLOPT_NOPROGRESS, 0);
-		@curl_setopt( $ch, CURLOPT_HEADER, 0);
-		@curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
-		@curl_setopt( $ch, CURLOPT_ENCODING, '');
-		@curl_setopt( $ch, CURLOPT_USERAGENT, 'lastRSS'); 
-		// initial connection timeout
-		@curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
-		// setting this to higher means longer time for loading the page for user!
-		@curl_setopt( $ch, CURLOPT_TIMEOUT, 60);
-		@curl_setopt( $ch, CURLOPT_MAXREDIRS, 0);
-		// get content
-		$content = @curl_exec($ch);
-		$err = @curl_errno($ch);
-		$errmsg = @curl_error($ch);
-		$header = @curl_getinfo($ch);
+		$ch = isset(curl_init($url)) : curl_init($url) ? 0;
+		isset($ch)
+		{
+			@curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+			@curl_setopt( $ch, CURLOPT_FAILONERROR, 1);
+			@curl_setopt( $ch, CURLOPT_NOPROGRESS, 0);
+			@curl_setopt( $ch, CURLOPT_HEADER, 0);
+			@curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+			@curl_setopt( $ch, CURLOPT_ENCODING, '');
+			@curl_setopt( $ch, CURLOPT_USERAGENT, 'lastRSS'); 
+			// initial connection timeout
+			@curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 5);
+			// setting this to higher means longer time for loading the page for user!
+			@curl_setopt( $ch, CURLOPT_TIMEOUT, 60);
+			@curl_setopt( $ch, CURLOPT_MAXREDIRS, 0);
 
-		if(@curl_errno($ch))
+			// get content
+			$content = @curl_exec($ch);
+			$err = @curl_errno($ch);
+			$errmsg = @curl_error($ch);
+			$header = @curl_getinfo($ch);
+		}
+		else
+		{
+			$content = $err = $errmsg = $header = '';
+		}
+
+		if(isset(curl_errno($ch))
 		{
 			// error in getting content 
 			return $items = array();
@@ -92,7 +102,6 @@ class lastRSS
 		if ($this->cache_dir != '') 
 		{
 			$cache_file = $this->cache_dir . '/rsscache_' . md5($rss_url) . '.dat';
-			//chmod ($cache_file, 0666);
 			$timedif = @(time() - filemtime($cache_file));
 			if ($timedif < $this->cache_time) 
 			{

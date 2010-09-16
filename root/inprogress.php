@@ -39,8 +39,6 @@ $user->setup();
 if(STARGATE)
 {
 	$user->add_lang('portal/portal');
-	//include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
-	include($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
 }
 
 /* Temp page */

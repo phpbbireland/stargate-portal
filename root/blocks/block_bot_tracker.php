@@ -25,22 +25,27 @@ if (!defined('IN_PHPBB'))
 
 /**
 */
-	$page_title = $user->lang['BLOCK_BOT_TRACKER'];
 
-	$queries = 0;
-	$cached_queries = 0;
+
+	$queries = $cached_queries = 0;
+
+	include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
 
 	global $k_config;
+	$sgp_cache_time = $k_config['sgp_cache_time'];
 
 	$number_of_bots_to_show = $k_config['number_of_bots_to_display'];
 	$show_bot_tracker = $k_config['allow_bot_display'];
+	$after_date = $config['board_startdate'];
+	$loop_count = 0;
 
 	$sql = 'SELECT username, user_colour, user_lastvisit
 		FROM ' . USERS_TABLE . '
-		WHERE user_type = ' . USER_IGNORE . ' 
+		WHERE user_type = ' . USER_IGNORE . '
+		AND user_lastvisit > ' . $after_date . '
 		ORDER BY user_lastvisit DESC';
 
-	$result = $db->sql_query_limit($sql, $number_of_bots_to_show, 0, 600);
+	$result = $db->sql_query_limit($sql, $number_of_bots_to_show, 0, $sgp_cache_time);
 
 	while ($row = $db->sql_fetchrow($result))
 	{
@@ -50,14 +55,16 @@ if (!defined('IN_PHPBB'))
 			'BOT_NAME'					=> $bot_name,
 			'BOT_TRACKER_VISIT_DATE'	=> $user->format_date($row['user_lastvisit'], 'D. M. d Y, H:i'),
 		));
+		$loop_count = $loop_count + 1;
 	}
 	$db->sql_freeresult($result);
 
 	// assign vars
 	$template->assign_vars(array(
-		'BOT_TRACKER'		=> sprintf($user->lang['BOT_TRACKER'], $number_of_bots_to_show),
+		'NO_DATA'				=> ($loop_count == 0) ? true : false,
+		'BOT_TRACKER'			=> sprintf($user->lang['BOT_TRACKER'], $number_of_bots_to_show),
 		'S_BOT_TRACKER_SHOW'	=> ($show_bot_tracker) ? true : false,
-		'BT_PORTAL_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+		'BOT_TRACKER_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	));
 
 ?>

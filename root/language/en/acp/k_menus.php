@@ -15,24 +15,39 @@ if (empty($lang) || !is_array($lang))
 // phpbbportal profile fields
 $lang = array_merge($lang, array(
 
-	'TITLE' 			=> 'Stargate (aka Kiss) Menu Manager (Administration)',
-	'TITLE_EXPLAIN'		=> 'Here you can Add, Edit and Delete Menus. Header Menu (type 0, at top of page/header), Navigation Menu (type 1, in main Nav block, and Sub Menu (type 2, in Sub menu block).<br />Legend: NDX = Index or sort order, Icon = Menu Icon (each menu item can have a different icon), Alt = Alternative text, Link = Link to whatever... Menu icons are located in images/block_images directory.<br />',
+	'TITLE' 				=> 'Stargate (aka Kiss) Menu Manager (Administration)',
+	'TITLE_EXPLAIN'			=> 'Here you can Add, Edit and Delete Menus... <strong>Note</strong> fields marked with * cannot be empty<br />Legend: NDX = Index or sort order, Icon = Menu Icon (each menu item can have a different icon), Alt = Alternative text, Link = Link to whatever... <br />Menu icons are located in images/block_images directory.',
+	'TITLE_ICON_EXPLAIN'	=> 'Manage Icons',
+
 	'ACP_MENUS' 		=> 'Menus',
-		
+
 	'MENUS_HEADER_ADMIN'	=> 'Menu Management',
-	'MENUS_ADD_HEADER'		=> 'Add a menu item: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [Select Type: 0 = Header Menu, &nbsp; 1 = Nav Menu, &nbsp;  2 = Sub Menu]',
+	'MENUS_ADD_HEADER'		=> 'Add a menu item:',
 	'MENUS_EDIT'			=> 'Edit Menu.',
 	'MENU_ICONS_HEADER'		=> 'Manage Menu Icons ',
 	'MENU_DISABLED'			=> 'Dis',
 	'MENU_DISABLED_BIG'		=> 'MENU is Disabled',
 	'MENU_ACTIVE'			=> 'A',
 	'MENU_ACTIVE_BIG'		=> 'MENU is Active',
+
+	'MENU_EXTERN_EXPLAIN'	=> 'Open this link in browser tab:',
+	'MENU_EXTERN'			=> 'Link Options',
+	'MENU_EXTERN_SHORT'		=> 'Extrn',
+	'MENU_EXTERN_WINDOW'	=> 'Window',
+	'MENU_EXTERN_TAB'		=> 'Tab',
+	'MENU_EXTERN_NORMAL'	=> 'Normal',
+
+	'OPEN_SAME'				=> 'No',
+	'OPEN_TAB'				=> 'In Tab',
+	'OPEN_WIN'				=> 'Win',
+
 	'MENU_TYPE_BIG'			=> 'File Type',
 	'MENU_VIEW_BY_SHORT'	=> 'Allow View By',
 	'MENU_VIEWED_BY' 			=> 'Which groups can view this menu item?',
-	'MENU_VIEWED_BY_EXPLAINED'	=> '<br />For additional groups, obtain group ID\'s from ACP, Manage Groups',
-	'MENU_ITEM_NAME'			=> 'Menu item name',
-	'MENU_ITEM_NAME_EXPLAIN'	=> 'The menu item title will be replaced by the appropriate lang var if they exist in the lang block_menus_vars.php, else the value shown here will be used.',
+	'MENU_VIEWED_BY_EXPLAINED'	=> 'Admin can see all menu items...',
+	'MENU_ITEM_NAME_SHORT'		=> 'Name',
+	'MENU_ITEM_NAME'			=> '* Menu item name/title',
+	'MENU_ITEM_NAME_EXPLAIN'	=> 'Will be replaced by user language variable if it exist in block_menus_vars.php, else the value shown here will be used.',
 	'MENU'					=> 'Menu',
 	'MENUID' 				=> 'ID',
 	'MENU_ID' 				=> 'ID',
@@ -46,30 +61,30 @@ $lang = array_merge($lang, array(
 	'MENU_UP' 				=> 'Up',
 	'MENU_DOWN' 			=> 'Dn',
 	'MENU_LINK'				=> 'Menu link',
-	'MENU_LINK_BIG'			=> 'Link to file',
+	'MENU_LINK_BIG'			=> '* Link to file',
 	'MENU_LINK_EXPLAIN'		=> 'Link associated with this menu item.',
 	'MENU_ICON_ALT_TEXT'	=> 'Image alt text',
 	'MENU_ICON_THIS'		=> ' current icon = ',
 	'MENU_ICON'				=> 'Menu Icon',
-	'MENU_ICONS'			=> 'Menu icon images found',
-	'MENU_ICON_BIG'			=> 'Menu item image',
+	'MENU_ICONS'			=> 'Available menu icon images.<br />Located in: images/block_images/small',
+	'MENU_ICON_BIG'			=> 'Menu item image to use',
 	'MENU_NDX'				=> 'NDX',
 	'MENU_NDX_BIG'			=> 'Menu Index (for sort order)',
-	'MENU_TYPE'				=> 'Type',
+	'MENU_TYPE'				=> '* Type',
 	'MENU_TYPE_HEADER'		=> 'Header Menu',
 	'MENU_TYPE_BLOCK_NAV'	=> 'Nav Menu',
 	'MENU_TYPE_BLOCK_SUB'	=> 'Sub Menu',
 	'MENU_TYPE_FOOTER'		=> 'Footer Menu',
 	'MENU_TYPE_OTHER'		=> 'Unassigned',
 	'MENU_UPDATED'			=> 'Menu updated',
-	'MENU_TYPE_EXPLAIN'		=> 'The position of the menu.',
+	'MENU_TYPE_EXPLAIN'		=> 'The position of the menu (you must select one option).',
 	'MENU_VIEW_BY'			=> 'View by',
 	'DO_NOT_EDIT'			=> 'Note: Do not edit this value',
 	'PROCESS'				=> 'process',
 	'ICON'					=> 'Icon',
 	'MENU_ICON_COUNT'		=> 'Available Icons ',
-	'MENU_ICON_EXPLAIN'		=> 'Icon for this menu item. ',
-	'MANAGE_MENU_ICONS'	=> 'Manage Menu Icons: ',
+	'MENU_ICON_EXPLAIN'		=> 'Icon to use with this menu item. ',
+	'MANAGE_MENU_ICONS'		=> 'Manage Menu Icons: ',
 	
 	'HEADER_MENU'		=> 'Header Menu',
 	'NAV_MENU'			=> 'Navigation Menu',
@@ -104,7 +119,16 @@ $lang = array_merge($lang, array(
 	'SUB'	=> 'Sub',
 	'FOOT'	=> 'Footer',
 	'ADD_ICON'	=> 'Add new icon',
-	'MENU_MOVE_ERROR' => 'The ndx\'s values are not consecutive, or you are trying to move a menu item out of its group...<br />Go back and manually correct the ndx values, then try again. ',
+	'MENU_MOVE_ERROR' => 'The ndx’s values are not consecutive, or you are trying to move a menu item out of its group...<br />Go back and manually correct the ndx values, then try again. ',
+
+	'UNDER_CONSTRUCTION'	=> '<strong>Under construction... <br />This section of the portal ACP is for future development (links are disabled)...</strong><br /><br />Here you can see all available block images, later you will be able to add, delete and update images...',
+	'SOURCE_DIRECTORY'		=> 'Source Directory = images/block_images/small',
+
+	'SORT_ORDER_UPDATING'	=> 'Sort order updating... please wait!<br />',
+	'MISSING_DATA'			=> '<br />You are missing one or more required fields... Please use browser back arrow and add required fields',
+
+	'PORTAL_ERROR_MENU'		=> 'Could not query portal menus information',
+
 ));
 // Message Settings
 $lang = array_merge($lang, array(

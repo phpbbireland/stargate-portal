@@ -1,0 +1,26 @@
+<fieldset>
+	<legend>{L_ANNOUNCE_SETTINGS}</legend>
+	<dl>
+		<dt><label for="number_of_announce_items_to_display">{L_NUMBER_OF_ANNOUNCE_ITEMS_TO_DISPLAY}:</label><br /><span>{L_NUMBER_OF_ANNOUNCE_ITEMS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="number_of_announce_items_to_display" value="{S_NUMBER_OF_ANNOUNCE_ITEMS_TO_DISPLAY}" type="text"></label></dd>
+	</dl>
+	<dl>
+		<dt><label for="max_announce_item_length">{L_MAX_ANNOUNCE_ITEM_LENGTH}:</label><br /><span>{L_MAX_ANNOUNCE_ITEM_LENGTH_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="5" maxlength="4" name="max_announce_item_length" value="{S_MAX_ANNOUNCE_ITEM_LENGTH}" type="text"></label></dd>
+	</dl>
+	<dl>
+	<dt><label for="announce_type">{L_ANNOUNCE_TYPE}:</label><br /><span>{L_ANNOUNCE_TYPE_EXPLAIN}</span></dt>
+	<dd>
+		<label><input type="radio" class="radio" id="announce_type" name="announce_type" value="2" <!-- IF S_ANNOUNCE_TYPE == 2 --> checked="checked"<!-- ELSE --><!-- ENDIF --> /> {L_LOCAL_ANNOUNCE}</label>
+		<label><input type="radio" class="radio" id="announce_type" name="announce_type" value="3" <!-- IF S_ANNOUNCE_TYPE == 3 --> checked="checked"<!-- ELSE --><!-- ENDIF --> /> {L_GLOBAL_ANNOUNCE}</label>
+		<label><input type="radio" class="radio" id="announce_type" name="announce_type" value="0" <!-- IF S_ANNOUNCE_TYPE == 0 --> checked="checked"<!-- ELSE --><!-- ENDIF --> /> {L_BOTH}</label>
+	</dd>
+	</dl>
+	<dl>
+		<dt><label for="allow_announce">{L_ALLOW_ANNOUNCE}:</label><br /><span>{L_ALLOW_ANNOUNCE_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" id="allow_announce" name="allow_announce" value="1" <!-- IF S_ALLOW_ANNOUNCE --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="allow_announce" value="0" <!-- IF not S_ALLOW_ANNOUNCE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+</fieldset>

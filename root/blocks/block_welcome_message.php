@@ -19,22 +19,23 @@
 * @ignore
 */
 
-if ( !defined('IN_PHPBB') )
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
-$queries = 0;
-$cached_queries = 0;
+	$queries = $cached_queries = 0;
 
-	global $db, $user;
-	$pos = 0;
-	//$sql = "SELECT * FROM ". K_MODULES_TABLE . " WHERE mod_type LIKE 'welcome_message' LIMIT 1";
+	global $db, $user, $k_config;
+	$sgp_cache_time = $k_config['sgp_cache_time'];
+
+	include($phpbb_root_path . 'includes/sgp_functions.' . $phpEx);
+
 	$sql = "SELECT * FROM ". K_MODULES_TABLE . " WHERE mod_id = 1";
 
-	if (!$result = $db->sql_query($sql, 6000))
+	if (!$result = $db->sql_query($sql, $sgp_cache_time))
 	{
-		trigger_error('Error! Could not query messages (Welcome etc...): ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+		trigger_error('ERROR_PORTAL_WELCOME' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}
 	else
 	{
@@ -47,17 +48,39 @@ $cached_queries = 0;
 
 		$mod_details = process_for_vars($mod_details, true);
 
-		if($user->data['username'] == 'Anonymous')
+		if ($row['mod_bbcode_bitfield'])
+		{
+			$bbcode->bbcode_second_pass($info, $row['mod_bbcode_uid'], $row['mod_bbcode_bitfield']);
+		}
+		$mod_details = bbcode_nl2br($mod_details);
+		$mod_details = smiley_text($mod_details);
+
+
+		// note [you] is a pseudo bbcode //
+
+		/*
+		if ($user->data['username'] == 'Anonymous')
+		{
+
 			$mod_details = str_replace("[you]", $user->lang['GUEST'], $mod_details);
+		}
 		else
+		{
 			$mod_details = str_replace("[you]", ('<span style="font-weight:bold; color:#' . $user->data['user_colour'] . ';">' . $user->data['username'] . '</span>'), $mod_details);
+		}
+		*/
+
+		$mod_details = process_for_admin_bbcodes($mod_details);
 
 		$template->assign_vars( array(
 			'W_TITLE'	=> $mod_name,
-			'W_IMAGE'	=> $mod_image,
+			'W_IMAGE'	=> ($mod_image) ? $mod_image : '',
 			'W_LINK'	=> $mod_link,
 			'W_MESSAGE'	=>  htmlspecialchars_decode($mod_details),
-			'W_PORTAL_DEBUG' => sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+
+			'WELCOME_MESSAGE_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 		));
 	}
+
+
 ?>

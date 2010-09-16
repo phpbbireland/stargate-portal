@@ -24,15 +24,15 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-$queries = 0;
-$cached_queries = 0;
+$queries = $cached_queries = 0;
 
 global $phpbb_root_path;
 
 $rand_image = get_random_image($phpbb_root_path . 'images/books', false, '');
+
 $template->assign_vars(array(
 	'BOOKSCONTENT'		=> $rand_image,
-	'B_PORTAL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+	'BOOKS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
 ?>

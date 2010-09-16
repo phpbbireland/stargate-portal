@@ -19,11 +19,12 @@
 * @ignore
 */
 
-if ( !defined('IN_PHPBB') )
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
+$queries = $cached_queries = 0;
 
 // Set some stats, get posts count from forums data if we... hum... retrieve all forums data
 $total_posts	= $config['num_posts'];
@@ -47,11 +48,10 @@ $template->assign_vars(array(
 	'FORUM_NEW_IMG'			=> $user->img('forum_unread', 'NEW_POSTS'),
 	'FORUM_LOCKED_IMG'		=> $user->img('forum_read_locked', 'NO_NEW_POSTS_LOCKED'),
 	'FORUM_NEW_LOCKED_IMG'	=> $user->img('forum_unread_locked', 'NO_NEW_POSTS_LOCKED'),
-	));
+));
 
-$template->set_filenames(array(
-	'body' => 'blocks/block_statistics.html',
-	)
-);
+$template->assign_vars(array(
+	'STATISTICS_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+));
 
 ?>

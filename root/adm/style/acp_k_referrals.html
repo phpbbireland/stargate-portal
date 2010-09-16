@@ -2,7 +2,7 @@
 
 <a name="maincontent"></a>
 
-		<div><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></div>
+<div><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></div>
 
 <h1>{L_TITLE}</h1>
 <p>{L_TITLE_EXPLAIN}</p>
@@ -12,8 +12,7 @@
 function switchMarks(status)
 {
 	for( var i=0; i < document.acp_k_referrals.length; i++ )
-		if( document.acp_k_referrals.elements[i].type == 'checkbox' )
-			document.acp_k_referrals.elements[i].checked = status;
+		if (document.acp_k_referrals.elements[i].type == 'checkbox' ) document.acp_k_referrals.elements[i].checked = status;
 }
 function IsMarked()
 {
@@ -33,6 +32,7 @@ function confirmDeleteAll()
 }
 // -->
 </script>
+
 <form action="{S_ACTION}" method="post" name="sitestats_form">
 <table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline">
 	<tr>

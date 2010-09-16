@@ -23,29 +23,29 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
-$queries = 0;
-$cached_queries = 0;
+
+$queries = $cached_queries = 0;
+
 	$sql = 'SELECT *
 		FROM ' . K_QUOTES_TABLE . '
 		ORDER by rand()
 		LIMIT 1';
 	
-	if($result = $db->sql_query($sql))
+	if ($result = $db->sql_query($sql, 600))
 	{
 		$row = $db->sql_fetchrow($result);
 	}
 	else
-		trigger_error('Error 42:quotes');
+	{
+		trigger_error('ERROR_PORTAL_QUOTES');
+	}
 	
 	$db->sql_freeresult($result);
-	
-	$quote_data = $row['quote'];
-	$quote_data_author = $row['author'];
-	
+
 	$template->assign_vars(array(
-		'L_QUOTES'			=> $quote_data,
-		'L_QUOTES_AUTHOR'	=> $quote_data_author,
-		'Q_PORTAL_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+		'L_QUOTES'			=> $row['quote'],
+		'L_QUOTES_AUTHOR'	=> $row['author'],
+		'QUOTES_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	));
 
 ?>

@@ -10,7 +10,7 @@
 * @note: Do not remove this copyright. Just append yours if you have modified it,
 *        this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: portal.php 291 2008-12-24 13:28:56Z nexur $
+* @version $Id: portal.php 291 2008-12-24 13:28:56Z Mike $
 * Updated: 20 February 2009
 *
 */
@@ -26,25 +26,19 @@ include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 
 if(!STARGATE)
 {
-  header('Location: ' . 'index.php');
-  exit();
+	redirect(append_sid("{$phpbb_root_path}index.$phpEx"));
 }
 
 // Start session management
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('portal/portal');
+$user->add_lang('portal/portal');
 
 display_forums('', $config['load_moderators']);
 
-// Stargate Portal
-if(STARGATE)
-{
-	$user->add_lang('portal/portal');
-	//include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
-	include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
-}
-// Stargate Portal
+global $k_config;
+$sgp_cache_time = $k_config['sgp_cache_time'];
 
 // Set some stats, get posts count from forums data if we... hum... retrieve all forums data
 $total_posts	= $config['num_posts'];
@@ -56,13 +50,7 @@ $l_total_post_s = ($total_posts == 0) ? 'TOTAL_POSTS_ZERO' : 'TOTAL_POSTS_OTHER'
 $l_total_topic_s = ($total_topics == 0) ? 'TOTAL_TOPICS_ZERO' : 'TOTAL_TOPICS_OTHER';
 
 // Do we want to arrange the blocks ? //
-$arrange = (int)request_var('arrange', false);
-if($arrange)
-{
-	$cookie_name = '';
-	$cookie_name = str_replace($config['cookie_name'] . '_', '', $cookie_name);
-	$user->set_cookie($cookie_name . 'CSET', '1', time() + 31536000);
-}
+$arrange = request_var('arrange', 0);
 
 // Grab group details for legend display
 if ($auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel'))
@@ -86,7 +74,7 @@ else
 			AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . $user->data['user_id'] . ')
 		ORDER BY g.group_name ASC';
 }
-$result = $db->sql_query($sql, 200);
+$result = $db->sql_query($sql, $sgp_cache_time);
 
 $legend = array();
 while ($row = $db->sql_fetchrow($result))
@@ -116,7 +104,7 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 		FROM ' . USERS_TABLE . "
 		WHERE user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%'
 			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
-	$result = $db->sql_query($sql,600);
+	$result = $db->sql_query($sql, $sgp_cache_time);
 
 	while ($row = $db->sql_fetchrow($result))
 	{
@@ -134,9 +122,9 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 $template->assign_vars(array(
 	'S_IS_PORTAL'	=> true,
 	'S_ARRANGE' 	=> $arrange,
-	'MOVE_IMG'		=> '<img src="./images/move.png"  alt="move" title="Move" height="13px" width="13px" />',
-	'HIDE_IMG'		=> '<img src="./images/hide.png"  alt="hide" title="Hide" height="13px" width="13px"/>',
-	'SHOW_IMG'		=> '<img src="./images/show.png"  alt="show" title="Show" height="13px" width="13px"/>',
+	'MOVE_IMG'		=> '<img src="./images/move.png"  alt="move" title="' . $user->lang['MOVE'] . '" height="13px" width="13px" />',
+	'HIDE_IMG'		=> '<img src="./images/hide.png"  alt="hide" title="' . $user->lang['HIDE'] . '" height="13px" width="13px"/>',
+	'SHOW_IMG'		=> '<img src="./images/show.png"  alt="show" title="' . $user->lang['SHOW'] . '" height="13px" width="13px"/>',
 
 	'TOTAL_POSTS'	=> sprintf($user->lang[$l_total_post_s], $total_posts),
 	'TOTAL_TOPICS'	=> sprintf($user->lang[$l_total_topic_s], $total_topics),
@@ -153,13 +141,18 @@ $template->assign_vars(array(
 
 	'S_LOGIN_ACTION'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login'),
 	'S_DISPLAY_BIRTHDAY_LIST'	=> ($config['load_birthdays']) ? true : false,
-
 	'U_MARK_FORUMS'		=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'hash=' . generate_link_hash('global') . '&amp;mark=forums') : '',
 	'U_MCP'				=> ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=front', true, $user->session_id) : '')
 );
 
 // Output page
 page_header($user->lang['PORTAL']);
+
+// Do not move this next line 307-002 //
+if(STARGATE)
+{
+	include_once($phpbb_root_path . 'includes/sgp_portal_blocks.' . $phpEx);
+}
 
 $template->set_filenames(array(
 	'body' => 'portal.html')

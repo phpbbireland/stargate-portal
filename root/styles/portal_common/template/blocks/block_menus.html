@@ -1,59 +1,20 @@
 <!-- IDTAG starts block_menus.html 13 September 2007 copyright phpbbireland.com 2007 -->
-
 <div class="block_data">
 	<div id="my_menu" class="sdmenu">
 		<div class="nav_menu">
-			<span class="sub_heading">{S_MAIN_1}</span>
-			<!-- BEGIN portal_menus_row_1 -->
-				<!-- IF not portal_menus_row_1.S_SUB_HEADING -->
-					<span class="menu_item" style="padding-left:15px;">
-					<!-- IF portal_menus_row_1.PORTAL_MENU_ICON -->{portal_menus_row_1.PORTAL_MENU_ICON}<!-- ENDIF -->
-					<a href="{portal_menus_row_1.U_PORTAL_MENU_LINK}"><strong>{portal_menus_row_1.PORTAL_MENU_NAME}</strong></a>
+			<!-- BEGIN portal_menus_row -->
+				<!-- IF portal_menus_row.S_SUB_HEADING -->
+					<span class="sub_heading">{portal_menus_row.PORTAL_MENU_HEAD_NAME}</span>
+				<!-- ELSE -->
+					<span class="menu_item">
+					<!-- IF portal_menus_row.PORTAL_MENU_ICON -->{portal_menus_row.PORTAL_MENU_ICON}<!-- ENDIF -->
+						<a href="{portal_menus_row.U_PORTAL_MENU_LINK}" <!-- IF portal_menus_row.EXTERN == '2' --> target="_blank" onclick="window.open(this.href); return false;"<!-- ENDIF --><!-- IF portal_menus_row.EXTERN == '1' --> target="_blank" <!-- ENDIF -->>{portal_menus_row.PORTAL_MENU_NAME}</a>
 					</span>
-					<!-- IF portal_menus_row_1.S_SOFT_HR == 1 --></div> <br /><img src="./images/soft_hr.gif" /><!-- ENDIF -->
+					<!-- IF portal_menus_row.S_SOFT_HR == 1 --></div> <br /><img src="./images/soft_hr.gif" /><!-- ENDIF -->
 				<!-- ENDIF -->
-			<!-- END portal_menus_row_1 -->
-		</div>
-		<div class="nav_menu">
-			<span class="sub_heading">{S_MAIN_2}</span>
-			<!-- BEGIN portal_menus_row_2 -->
-				<!-- IF not portal_menus_row_2.S_SUB_HEADING -->
-					<span class="menu_item" style="padding-left:15px;">
-						<!-- IF portal_menus_row_2.PORTAL_MENU_ICON -->{portal_menus_row_2.PORTAL_MENU_ICON}<!-- ENDIF --> <a href="{portal_menus_row_2.U_PORTAL_MENU_LINK}"><strong>{portal_menus_row_2.PORTAL_MENU_NAME}</strong></a>
-					</span>
-					<!-- IF portal_menus_row_2.S_SOFT_HR == 1 --></div> <br /><img src="./images/soft_hr.gif" /><!-- ENDIF -->
-				<!-- ENDIF -->
-			<!-- END portal_menus_row_2 -->
-		</div>
-		<div class="nav_menu">
-			<span class="sub_heading">{S_MAIN_3}</span>
-			<!-- BEGIN portal_menus_row_3 -->
-				<!-- IF not portal_menus_row_3.S_SUB_HEADING -->
-					<span class="menu_item" style="padding-left:15px;">
-						<!-- IF portal_menus_row_3.PORTAL_MENU_ICON -->{portal_menus_row_3.PORTAL_MENU_ICON}<!-- ENDIF --> <a href="{portal_menus_row_3.U_PORTAL_MENU_LINK}"><strong>{portal_menus_row_3.PORTAL_MENU_NAME}</strong></a>
-					</span>
-					<!-- IF portal_menus_row_3.S_SOFT_HR == 1 --> <br /><img src="./images/soft_hr.gif" /><!-- ENDIF -->
-				<!-- ENDIF -->
-			<!-- END portal_menus_row_3 -->
-		</div>
-		<div class="nav_menu">
-			<span class="sub_heading">{S_MAIN_4}</span>
-			<!-- BEGIN portal_menus_row_4 -->
-				<!-- IF not portal_menus_row_4.S_SUB_HEADING -->
-					<span class="menu_item" style="padding-left:15px;">
-						<!-- IF portal_menus_row_4.PORTAL_MENU_ICON -->{portal_menus_row_4.PORTAL_MENU_ICON}<!-- ENDIF --> <a href="{portal_menus_row_4.U_PORTAL_MENU_LINK}"><strong>{portal_menus_row_4.PORTAL_MENU_NAME}</strong></a>
-					</span>
-					<!-- IF portal_menus_row_4.S_SOFT_HR == 1 --> <br /><img src="./images/soft_hr.gif" /><!-- ENDIF -->
-				<!-- ENDIF -->
-			<!-- END portal_menus_row_4 -->
+			<!-- END portal_menus_row -->
 		</div>
 	</div>
-	<!-- IF DEBUG_QUERIES -->{M_PORTAL_DEBUG}<!-- ENDIF -->
 </div>
-
+<!-- IF DEBUG_QUERIES --><div class="block_data">{MENUS_DEBUG}</div><!-- ENDIF -->
 <!-- IDTAG block_menus ends -->
-
-<!-- if ie 5 or 6 -->
-<!--[if lte IE 6]>
-<br />
-<![endif]-->

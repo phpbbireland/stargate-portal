@@ -1,0 +1,485 @@
+.topiclist dd.portal  {
+border:none;
+border-bottom:          1px solid navy;
+border:					none;
+font-size:              1.0em;
+font-weight:            normal;
+padding:                0px;
+text-align:             left;
+width:                  100%;
+line-height:            1.4em;
+}
+
+
+.portal
+{
+	margin-top: 15px;
+	margin-bottom: 45px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin:5px;
+}
+
+dd.portal a 
+{ 
+	font-size: 1.1em; 
+	text-decoration:none; 
+	font-weight:bold;
+}
+
+.gensmall {
+	margin: 1px 1px;
+	font-size: 10px;
+}
+
+.headerbar {
+	background-color: #F7F7F7;
+	background-image: url("images/bg_header.gif");
+	color: #C0FFFF;
+}
+
+.navbar {
+	background-color: #F7F7F7; background-image: url("images/navbar.gif");
+}
+
+
+.forabg {
+
+	/*? background colour can be used to create a border is padding small 1 or 2 or 3 px ?*/
+	background-color: #0077B2;
+	/*? the background image is the border... ?*/
+	background-image: url("images/bg_list.gif");
+
+	/*? the background image is the border... ?*/
+/*	background-image: url("images/bg_list_border.gif");*/
+	/*? background colour can be used to create a border is padding small 1 or 2 or 3 px ?*/
+/*	background-color: #BB0606;*/
+
+	margin-bottom: 10px;												/*? set gap between blocks at bottom ?*/
+	padding: 0 5px;														/*? padd area inside, note setting to 1 will produce square corners, max is 5px ?*/
+	clear: both;
+}
+
+
+
+.k_quick {
+	width:60%;
+	text-align:left;
+	margin-bottom: 4px; 
+	padding: 0 5px;
+	clear: both;
+	background-color: #0077B2; 
+	background-image: url("images/bg_list.gif");
+	background-repeat: repeat-x;
+}  
+
+.navmenu { line-height: 100%; font-family: Verdana, Arial, Helvetica, sans-serif; font-size : 11px; font-weight:normal; text-decoration: none; color : #105289; }
+.navmenu a { font-weight:bold; text-decoration: none; color : #105289; }
+.navmenu a:visited { text-decoration: none; color : #105289; }
+.navmenu a:hover { text-decoration: none; color : #CC0000; }
+
+
+/* to make block a little narrower use padding below... */ 
+ul.blocks {
+  list-style-type: none;
+  text-align:center;
+  position: 0 50%;
+  background: #EFEFEF none repeat-x 0 0;
+  border:none;
+  padding:4px;														/*? set padding inside block ?*/
+  margin-top:2px;													/*? set gap at top to stop overlap ?*/
+}
+
+ul.news {
+  text-align: center;
+  position: 0 50%;
+  background: #EFEFEF none repeat-x 0 0;
+  padding: 3px;
+  margin: 2px;
+}
+
+.block_border
+{
+  border-width:           1px;
+  border-top-color:       #70B1D3;
+  border-top-style:       ridge;
+  border-right-color:     #86A6C0;
+  border-right-style:     ridge;
+  border-bottom-color:    #86A6C0;
+  border-bottom-style:    ridge;
+  border-left-color:      #70B1D3;
+  border-left-style:      ridge;
+}
+ul.blocks dd { position:center;}
+ul.blocks dl { position:center;}
+
+ul.newslist {
+	display: block;
+	list-style-type: none;
+	margin: 0;
+	font-size: 1.1em;
+}
+ul.newslist li {
+	display: block;
+	list-style-type: none;
+	color: #777777;
+	margin: 0;
+}
+
+ul.newslist dl {
+	position: relative;
+}
+
+ul.newslist li.row dl {
+	padding: 2px 0;
+}
+
+ul.newslist dt {
+	display: block;
+	float: left;
+	width: 50%;
+	font-size: 1em;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+ul.newslist dd {
+	display: block;
+	float: left;
+	border-left: 1px solid #FFFFFF;
+	padding: 4px 0;
+}
+
+* html ul.newslist li { position: relative; }
+
+li.newsliat dt, li.newslist dd {
+	line-height: 1em;
+	border-left-width: 0px;
+	margin: 2px 0 4px 0;
+	color: #000000;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-size: 1em;
+	font-family: Verdana, Arial, Helvetica, sans-serif; font-weight:bold; text-decoration: none;
+	/*text-transform: uppercase;*/
+}
+
+li.newslist a {text-decoration:none;}
+
+.mynews_header { 
+	background-color: #FBFBFB; /*fcfcfc*/
+	/*background-image: url("images/bg_list.gif");*/
+
+}
+.mynews {
+	background: #FFFCFD none repeat-x 0 0;
+	margin-bottom: 4px; 
+	padding: 0 5px;
+	clear: both;
+}
+
+.list_new_pre_beat
+{
+	color: red;
+/*	font-weight: xbold;*/
+}
+.list_pre_beat 
+{
+	color: gray;
+/*	font-weight: xbold;*/
+}
+.list_beta 
+{
+	color: orange;
+/*	font-weight: xbold;*/
+} 
+.list_pre_release
+{
+	color: blue;
+/*	font-weight: xbold;*/
+} 
+.list_release
+{
+	color: green;
+	font-weight: bold;
+}
+
+ul.block_header
+{
+	/*cursor: move;*/
+	text-align:left;
+	color:#F6FAFE;
+	font-weight:bold; 
+	font-size:11px; 
+	line-height:135%;
+	padding-left:3px; padding-bottom:3px; 
+	position:center;
+}
+ul.block_header a {color:#F6FAFE;}
+ul.block_header a:hover {color:#FFC000; 	text-decoration: none;}
+
+.handle{cursor: move;}
+
+/*
+.showhide div.showhide 
+{
+	background-image: url("images/hide.gif");
+}
+
+.hide {
+	display:none;
+}
+.show {
+	display:block;
+} 
+*/
+
+
+/* Links for forum/topic lists */
+a.forumtitle {
+	font-family: "Trebuchet MS", Helvetica, Arial, Sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #898989;
+	text-decoration: none;
+}
+
+/* a.forumtitle:visited { color: #898989; } */
+
+a.forumtitle:hover {
+	color: #FF4040;
+	text-decoration: underline;
+}
+
+a.forumtitle:active {
+	color: #898989;
+}
+
+
+table.table1 thead th {
+	color: #FFEFEF;		/* #105289;*/
+}
+
+h1 {
+	color: #105288;
+}
+
+
+
+/*----- buttons.css -----*/
+.k_quick_reply_yes-icon, .k_quick_reply_yes-icon a	{ background: transparent none 0 0 no-repeat; }
+.k_quick_reply_no-icon,  .k_quick_reply_no-icon a	{ background: transparent none 0 0 no-repeat; }
+
+.buttons div.k_quick_reply_no-icon	{ width:96px; height:25px; }
+.buttons div.k_quick_reply_yes-icon	{ width:96px; height:25px; }
+
+.bbb-icon-bold .bbb-icon-bold a { background: transparent none 0 0 no-repeat; }
+
+/*----- colours.css -----*/
+.news_head { 
+ background-color: #FAFCFE; 
+ background-image: url("images/bg_head.gif");
+}
+.forabg_head { 
+ background-color: #FAFCFE; 
+ background-image: url("images/bg_header.gif"); 
+}
+
+span.corners-top-news {
+ background-image: url("images/corners_left_news.png");
+}
+
+span.corners-top-news span {
+ background-image: url("images/corners_right_news.png");
+}
+
+span.corners-bottom-news {
+ background-image: url("images/corners_left_news.png");
+}
+
+span.corners-bottom-news span {
+ background-image: url("images/corners_right_news.png");
+}
+
+.navbg a:visited, .forumbg .header a:visited, .forabg .header a:visited, th a:visited {	color: #FFFFFE;}
+
+.navbg a:hover, .forumbg .header a:hover, .forabg .header a:hover, th a:hover {	color: #F0F0F0;}
+
+.navbg a:active, .forumbg .header a:active, .forabg .header a:active, th a:active {	color: #FFFFFE;}
+
+ul.blocks {
+ background-color: #EFEFEF;
+ background-image: url("images/gradient.gif");
+}
+ul.news {
+ background-color: #EFEFEF;
+ /*background-image: url("images/gradient.gif");*/
+}
+
+.online_left_image {
+ background-image: url("{T_IMAGESET_LANG_PATH}/icon_user_online_left.gif");
+}
+
+.online {
+ background-image: url("{T_IMAGESET_LANG_PATH}/icon_user_online.gif");
+}
+
+.pm .postprofile_left {
+ border-right-color: #DDDDDD;
+}
+.postprofile_left strong {
+ color: #000000;
+}
+
+.k_quick_reply_yes-icon, .k_quick_reply_yes-icon a	{ background-image: url("{T_IMAGESET_LANG_PATH}/button_quick_reply_yes.gif"); }
+.k_quick_reply_no-icon,  .k_quick_reply_no-icon a	{ background-image: url("{T_IMAGESET_LANG_PATH}/button_quick_reply_no.gif"); }
+
+.bbb-bold, .bbb-bold a { border:none; background-image: url("images/bbcode/bbb-icon-bold.gif"); width:22px; height:22px;}
+.bbb-bold:hover		{ background-position: 0px -23px;}
+.bbb-italic, .bbb-italic a  { border:none; background-image: url("images/bbcode/bbb-icon-italic.gif");  width:22px; height:22px;}
+.bbb-italic:hover           { background-position: 0px -23px;}
+.bbb-quote, .bbb-quote a    { border:none; background-image: url("images/bbcode/bbb-icon-quote.gif");   width:22px; height:22px;}
+.bbb-quote:hover            { background-position: 0px -23px;}
+.bbb-code, .bbb-code a      { border:none; background-image: url("images/bbcode/bbb-icon-code.gif");    width:22px; height:22px;}
+.bbb-code:hover             { background-position: 0px -23px;}
+.bbb-list, .bbb-list a      { border:none; background-image: url("images/bbcode/bbb-icon-list.gif");    width:22px; height:22px;}
+.bbb-list:hover             { background-position: 0px -23px;}
+.bbb-flash, .bbb-flash a    { border:none; background-image: url("images/bbcode/bbb-icon-flash.gif");   width:22px; height:22px;}
+.bbb-flash:hover            { background-position: 0px -23px;}
+.bbb-image, .bbb-image a    { border:none; background-image: url("images/bbcode/bbb-icon-image.gif");   width:22px; height:22px;}
+.bbb-image:hover            { background-position: 0px -23px;}
+.bbb-url, .bbb-url a        { border:none; background-image: url("images/bbcode/bbb-icon-url.gif");     width:22px; height:22px;}
+.bbb-url:hover              { background-position: 0px -23px;}
+.bbb-under_line, .bbb-under_line a       { border:none; background-image: url("images/bbcode/bbb-icon-under_line.gif");    width:22px; height:22px;}
+.bbb-under_line:hover                    { background-position: 0px -23px;}
+.bbb-align_center, .bbb-align_center a   { border:none; background-image: url("images/bbcode/bbb-icon-align_center.gif");  width:22px; height:22px;}
+.bbb-align_center:hover                  { background-position: 0px -23px;}
+.bbb-align_left, .bbb-align_left a       { border:none; background-image: url("images/bbcode/bbb-icon-align_left.gif");  width:22px; height:22px;}
+.bbb-align_left:hover                    { background-position: 0px -23px;}
+.bbb-align_right, .bbb-align_right a     { border:none; background-image: url("images/bbcode/bbb-icon-align_right.gif");  width:22px; height:22px;}
+.bbb-align_right:hover                   { background-position: 0px -23px;}
+.bbb-ordered_list, .bbb-ordered_list a   { border:none; background-image: url("images/bbcode/bbb-icon-ordered_list.gif");  width:22px; height:22px;}
+.bbb-ordered_list:hover                  { background-position: 0px -23px;}
+.bbb-add_list_item, .bbb-add_list_item a { border:none; background-image: url("images/bbcode/bbb-icon-add_list_item.gif"); width:22px; height:22px;}
+.bbb-add_list_item:hover                 { background-position: 0px -23px;}
+.bbb-note, .bbb-note a        { border:none; background-image: url("images/bbcode/bbb-icon-note.gif");    width:22px; height:22px;}
+.bbb-note:hover               { background-position: 0px -23px;}
+.bbb-spoiler, .bbb-spoiler a  { border:none; background-image: url("images/bbcode/bbb-icon-spoiler.gif"); width:22px; height:22px;}
+.bbb-spoiler:hover            { background-position: 0px -23px;}
+.bbb-tab, .bbb-tab a          { border:none; background-image: url("images/bbcode/bbb-icon-tab.gif");     width:22px; height:22px;}
+.bbb-tab:hover                { background-position: 0px -23px;}
+.bbb-sup, .bbb-sup a          { border:none; background-image: url("images/bbcode/bbb-icon-sup.gif");     width:22px; height:22px;}
+.bbb-sup:hover                { background-position: 0px -23px;}
+.bbb-sub, .bbb-sub a          { border:none; background-image: url("images/bbcode/bbb-icon-sub.gif");     width:22px; height:22px;}
+.bbb-sub:hover                { background-position: 0px -23px;}
+.bbb-strike, .bbb-strike a    { border:none; background-image: url("images/bbcode/bbb-icon-strike.gif");  width:22px; height:22px;}
+.bbb-strike:hover             { background-position: 0px -23px;}
+.bbb-link, .bbb-link a        { border:none; background-image: url("images/bbcode/bbb-icon-link.gif");    width:22px; height:22px;}
+.bbb-link:hover               { background-position: 0px -23px;}
+
+.rollover, .rollover a { display:inline; float:left; } 
+.rollover a:hover { background-position: 0 -23px; }
+
+.bbb-icon-spacer {border:none; background-image: url("images/bbcode/bbb-icon-spacer.gif"); width:3px; height:22px;}
+
+/*----- common.css -----*/
+
+.ul, .li, .{text-align:left;}
+.news_head { background: #FAFCFE none repeat-x 0 0; margin-bottom: 4px; padding: 0 5px; clear: both; }
+.news {	background: #FAFCFE none repeat-x 0 0;	margin-bottom: 4px;	padding: 0 5px;	clear: both;}
+
+.k_panel { margin-bottom: 4px; padding: 0 10px; }
+
+span.corners-top-news { background-image: none; background-position: 0 0; margin: 0 -5px; }
+span.corners-top-news span { background-image: none; background-position: 100% 0; }
+span.corners-bottom-news { background-image: none; background-position: 0 100%; margin: 0 -5px; clear: both; }
+span.corners-bottom-news span { background-image: none; background-position: 100% 100%; }
+
+
+/*----- contents -----*/
+
+ul.blocks { background: #f9f9f9 none repeat-x 0 0; }
+dd.mylastpost span { display: block; padding-left: 5px; font-size: 1.1em; }
+
+.postbody_left { padding: 0; line-height: 1.48em; color: #333333; width: 76%; float: right; }
+
+
+/* Poster profile block left align Michael's Mod
+-------------------------------------------------*/
+.postprofile_left {
+/* Also see tweaks.css */
+ padding-left:10px;
+ margin: 5px 0 10px 0;
+ min-height: 80px;
+ color: #666666;
+ border-right: 1px solid #FFFAFF;
+ width: 22%;
+ float: left;
+ display: inline;
+}
+.pm .postprofile_left {
+ border-right: 1px solid #DDDDDD;
+}
+
+.postprofile_left dd, .postprofile_left dt { line-height: 1.2em; margin-right: 28px; }
+
+.avatar_left { border: none; margin-bottom: 3px; }
+.online_left_image { background-image: none; background-position: 0 0; background-repeat: no-repeat; }
+.date-today {  color: #E61A1A; font-weight: bold; }
+.date-tomorrow, .last-post { color: #EABB00; font-weight: bold; }
+.date-yesterday, .last-post { color: #18C935; font-weight: bold; }
+
+
+/*----- forms.css -----*/
+#format-buttons_bbc { margin: 3px 0 2px 0; }
+#format-buttons_bbc input, #format-buttons_bbc select { vertical-align: middle; }
+
+
+
+/*----- links.css -----*/
+/* no edits */
+
+/*----- tweaks.css -----*/
+* html .postbody_left h3 img { vertical-align: middle; }
+
+* html .rtl #search-box { margin-right: 0; margin-left: 35px; }
+
+
+/*
+span.corners-top, span.corners-top-news, span.corners-bottom, span.corners-bottom-news, span.corners-top span, span.corners-top-news span, span.corners-bottom span, span.corners-bottom-news span {
+ font-size: 1px;
+ line-height: 1px;
+ display: block;
+ height: 5px;
+ background-repeat: no-repeat;
+}
+*/
+dl.icon dt {
+ padding-left: 45px;				/* Space for folder icon */
+ background-repeat: no-repeat;
+ background-position: 27px 70%;		/* Position of topic icon */
+ background-position: 16px 0px;		/* Position of topic icon mike */
+}
+
+
+.imageline { width:auto; height:auto; border:none; float:left; padding-top: 5px;}
+
+/*
+* Set link to white so we can see them...
+*/
+
+.forabg .header a:link {
+	color: #FFFFFF;
+}
+.forabg .header a:hover {
+	color: #FFFFFF;
+}
+.block_header a:link {
+	color: #FFFFFF;
+}
+.block_header a:hover {
+	color: #FFF0C0;
+}
+
+.dl, .dd{border:0px; padding:0px; margin:0px;}
+

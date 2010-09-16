@@ -1,6 +1,16 @@
 <!-- IF STARGATE -->
 	<!-- INCLUDE overall_header.html -->
 
+	<!-- IF PORTAL_MESSAGE -->
+		<div class="block_body">
+			<div class="inner">
+				<span class="corners-top"><span></span></span>
+					<div class="block_header"><div class="portal_message">{PORTAL_MESSAGE}</div></div>
+				<span class="corners-bottom"><span></span></span>
+			</div>
+		</div>
+	<!-- ENDIF -->
+
 		<!-- BEGIN center_block_files -->
 		<div id="<!-- IF S_ARRANGE -->BLOCK_<!-- ENDIF -->{center_block_files.CENTER_BLOCK_ID}">
 			<div class="block_body">
@@ -10,7 +20,7 @@
 						<span style="text-align:{S_CONTENT_FLOW_BEGIN};">&nbsp;{center_block_files.CENTER_BLOCK_TITLE}&nbsp;</span>
 						<span class="showhide" id="_{center_block_files.CENTER_BLOCK_ID}">
 						<!-- IF not S_ARRANGE -->
-							{center_block_files.CENTER_BLOCKS_IMG}
+							{center_block_files.CENTER_BLOCK_IMG}
 						<!-- ENDIF -->
 						</span>
 						<!-- IF S_ARRANGE && S_IS_PORTAL -->
@@ -23,9 +33,7 @@
 					<div class="iefix" style="clear:both; width:100%;">
 					<!-- IF center_block_files.CENTER_BLOCK_SCROLL and not DISABLE_RT_SCROLL -->
 						<!-- IF not S_ARRANGE -->
-						<div class="scroll_outer" id="{center_block_files.CENTER_BLOCK_ID}_outer" onmouseover="do_speed(this, event)" onmousemove="do_speed(this, event)" onmouseOut="set_defaults(this, event)"><div class="scroll_inner" id="{center_block_files.CENTER_BLOCK_ID}_inner">
-						{center_block_files.CENTER_BLOCKS}
-						</div></div>
+						<div class="scroll_outer" id="{center_block_files.CENTER_BLOCK_ID}_outer" onmouseover="do_speed(this, event)" onmousemove="do_speed(this, event)" onmouseout="set_defaults(this, event)"><div class="scroll_inner" id="{center_block_files.CENTER_BLOCK_ID}_inner">{center_block_files.CENTER_BLOCKS}</div></div>
 						<!-- ELSE -->
 						{L_SCROLLING_BLOCKS_DISABLED}
 						<!-- ENDIF -->

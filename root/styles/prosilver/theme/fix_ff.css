@@ -1,5 +1,5 @@
 /* Fix Firefox - Last Updated: 06 October 2008 Mike */
-.showhide img { float: left; margin-top: -14px; margin-right: 8px; }
+.showhide img { float: left; margin-top: -14px; margin-right: 1px; }
 .handle { float: right; cursor: move; }
 .show_in_ie { display:none; }
 

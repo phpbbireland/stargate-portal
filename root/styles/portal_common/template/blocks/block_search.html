@@ -39,7 +39,7 @@ function url_search()
 		<div style="text-align:center;">
 			<input class="inputbox search" type="text" name="keywords" size="21" />{S_HIDDEN_FIELDS}
 		</div>
-		<img src="{T_THEME_PATH}/images/spacer.gif" alt="" width="99%" height="8" />
+		<div style="padding-top:5px; width:99%;"></div>
 		<div style="text-align:center;">
 			<select class="inputbox full" style="font-size:11px; padding:2px;" name="search_engine" >
                 <optgroup label="{SITE_NAME}">
@@ -64,6 +64,7 @@ function url_search()
 			<br /><br />
 			<a href="{U_SEARCH}">{L_ADVANCED_SEARCH}</a>
 		</div>
+		<!-- IF DEBUG_QUERIES --><div class="block_data">{SEARCH_DEBUG}</div><!-- ENDIF -->
 	</div>
 </form>
 

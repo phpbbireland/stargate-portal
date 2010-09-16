@@ -21,7 +21,7 @@
 
 //define('IN_PHPBB', true);
 
-if ( !defined('IN_PHPBB') )
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
@@ -30,9 +30,11 @@ if ( !defined('IN_PHPBB') )
 
 global $k_config, $phpbb_root_path;
 
+$queries = $cached_queries = 0;
+
 $directory = $k_config['mp3_folder'];
 $upload_dir = $directory;
-$upload = 'Upload';
+$upload = $user->lang['UPLOAD'];
 
 $template->assign_vars(array(
 	'U_UPLOAD_DIR'	=> $upload_dir,
@@ -40,5 +42,6 @@ $template->assign_vars(array(
 	'MP3_POPUP_IMG'	=> $user->img('button_mp3_popup', 'MP3_POPUP'),
 	'UPLOAD_IMG'	=> $user->img('icon_upload', 'UPLOAD'),
 	'PATH'			=> $phpbb_root_path,
+	'MP3_PLAYER_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
  ));
 ?>

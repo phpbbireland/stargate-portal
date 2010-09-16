@@ -24,8 +24,7 @@ if ( !defined('IN_PHPBB') )
 	exit;
 }
 
-$queries = 0;
-$cached_queries = 0;
+$queries = $cached_queries = $total_queries = 0;
 
 // borrowed from common.php //
 // We have to generate a full HTTP/1.1 header here since we can't guarantee to have any of the information
@@ -61,9 +60,9 @@ $template->assign_vars(array(
 	'SITE_LINK_TXT'				=> sprintf($user->lang['SITE_LINK_TXT'], $config['sitename']),
 	'SITE_LINK_TXT_EXPLAIN'		=> sprintf($user->lang['SITE_LINK_TXT_EXPLAIN'], $config['sitename']),
 	'SITE_LINK_TXT_EXPLAIN2'	=> $user->lang['SITE_LINK_TXT_EXPLAIN2'],
-    'U_SITE_LINK'        		=>  '&lt;a&nbsp;href=&quot;' . $url . '&quot;&nbsp;title=&quot;' . $config['site_desc'] . '&quot;&gt;' . ' &lt;'. 'img src=&quot;' . $site_ref_img . '&quot; ' . '&gt;' . '&lt;/a&gt;',
-    'U_SITE_LINK_IMG'      		=>  '<a href="' . $url . '/portal.php">' . '<img src="' . $phpbb_root_path . 'images/links/' . $site_ref_img . '" alt="" /></a>',
-	'L_PORTAL_DEBUG'			=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+    'U_SITE_LINK'        		=>  '&lt;a&nbsp;href=&quot;' . $url . '/portal.php' . '&quot;&nbsp;title=&quot;' . $config['site_desc'] . '&quot;&gt;' . ' &lt;'. 'img src=&quot;' . $url . $phpbb_root_path . 'images/links/' . $site_ref_img . '&quot; ' . '&gt;' . '&lt;/a&gt;',
+    'U_SITE_LINK_IMG'      		=>  '<a href="' . $url . '/portal.php">' . '<img src="' . $phpbb_root_path . 'images/' . $site_ref_img . '" height="31px" width="93px" alt="" /></a>',
+	'L_PORTAL_DEBUG'			=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	)
 );
 

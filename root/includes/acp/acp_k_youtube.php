@@ -32,6 +32,8 @@ class acp_k_youtube
 		global $db, $user, $auth, $template, $cache;
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
+		include($phpbb_root_path . 'includes/sgp_functions.' . $phpEx);
+
 		$user->add_lang('acp/k_youtube');
 		$this->tpl_name = 'acp_k_youtube';
 		$this->page_title = 'ACP_YOUTUBE';
@@ -55,15 +57,16 @@ class acp_k_youtube
 					'MESSAGE' => $user->lang['SWITCHING'],
 				));
 
-				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;switch=k_youtube"); 
-				break;
+				meta_refresh (1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;switch=k_youtube"); 
+			break;
 
 			case 'add':
 				$mode = '';
-				meta_refresh(0, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=add"); 
-				break;
+				meta_refresh (0, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=add"); 
+			break;
 
 			default:
+			break;
 		}
 
 
@@ -86,15 +89,17 @@ class acp_k_youtube
 		switch ($mode)
 		{
 			case 'edit':
-			{
-				if($submit)
+
+				if ($submit)
 				{
-					$video_id		= request_var('video_id', '');
-					$video_link		= request_var('video_link', '');
-					$video_rating	= request_var('video_rating', '');
-					$video_category = utf8_normalize_nfc(request_var('video_category', '', true));
-					$video_who		= utf8_normalize_nfc(request_var('video_who', '', true)); 
-					$video_title	= utf8_normalize_nfc(request_var('video_title', '', true));
+					$video_id		 = request_var('video_id', '');
+					$video_link		 = request_var('video_link', '');
+					$video_rating	 = request_var('video_rating', '');
+					$video_category  = utf8_normalize_nfc(request_var('video_category', '', true));
+					$video_who		 = utf8_normalize_nfc(request_var('video_who', '', true)); 
+					$video_title	 = utf8_normalize_nfc(request_var('video_title', '', true));
+					$video_comment	 = utf8_normalize_nfc(request_var('video_comment', ''));
+					$video_poster_id = request_var('video_poster_id', '');
 
 					$sql_ary = array(
 						//'video_id'	=> $video_id,
@@ -103,12 +108,16 @@ class acp_k_youtube
 						'video_who'			=> $video_who,
 						'video_rating'		=> $video_rating,
 						'video_title'		=> $video_title,
+						'video_comment'		=> $video_comment,
+						//'video_poster_id'	=> $video_poster_id,
 					);
 
 					$sql = 'UPDATE ' . K_YOUTUBE_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE video_id = " . $video_id;
 
-					if(!$result = $db->sql_query($sql))
-						trigger_error('Error! Could not update youtube table. ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					if (!$result = $db->sql_query($sql))
+					{
+						trigger_error($user->lang['ERROR_PORTAL_VIDEO'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					}
 
 					$template->assign_vars(array(
 						'MESSAGE' => 'Data is being saved....</font><br />',
@@ -116,17 +125,15 @@ class acp_k_youtube
 					));
 
 					meta_refresh(0, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=browse");
-					break;
 				}
 
 				get_video_item($video_id);
 
 				$template->assign_vars(array('S_OPTION' => 'edit'));
-				break;
-			}
+			break;
 
 			case 'delete':
-			{
+
 				//get the title of the video to make delete clearer to the user...
 				$video_name = get_video_item($video_id);
 
@@ -136,7 +143,9 @@ class acp_k_youtube
 						WHERE video_id = ' . $video_id;
 
 					if (!$result = $db->sql_query($sql))
-						trigger_error('Error! Could not delete video. ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					{
+						trigger_error($user->lang['ERROR_PORTAL_VIDEO'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					}
 
 					$template->assign_vars(array(
 						'MESSAGE' =>  ' Deleting! ' . $video_id . '<br />',
@@ -159,29 +168,34 @@ class acp_k_youtube
 
 				$template->assign_vars(array('MESSAGE' => 'Action Cancelled...'));
 				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=browse");
-				break;
-			}
+			break;
 
 			case 'add':
-			{
-				if($submit)
-				{
-					//$video_id		= request_var('video_id', '');
-					$video_link		= request_var('video_link', '');
-					$video_rating	= request_var('video_rating', '');
-					$video_category = utf8_normalize_nfc(request_var('video_category', '', true));
-					$video_who		= utf8_normalize_nfc(request_var('video_who', '', true)); 
-					$video_title	= utf8_normalize_nfc(request_var('video_title', '', true));
 
-					if(strstr($video_link, 'None'))
+				if ($submit)
+				{
+					//$video_id		 = request_var('video_id', '');
+					$video_link		 = request_var('video_link', '');
+					$video_rating	 = request_var('video_rating', '');
+					$video_category  = utf8_normalize_nfc(request_var('video_category', '', true));
+					$video_who		 = utf8_normalize_nfc(request_var('video_who', '', true)); 
+					$video_title	 = utf8_normalize_nfc(request_var('video_title', '', true));
+					$video_comment	 = utf8_normalize_nfc(request_var('video_comment', '', true));
+					$video_poster_id = request_var('video_poster_id', '');
+
+					if (strstr($video_link, 'None'))
+					{
 						$video_link = '';
+					}
 
 	               $sql_array = array(
-					   'video_category'	=> $video_category,
-                       'video_who'		=> $video_who,
-                       'video_link'		=> $video_link,
-                       'video_title'	=> $video_title,
-                       'video_rating'	=> $video_rating,
+					   'video_category'		=> $video_category,
+						'video_who'			=> $video_who,
+						'video_link'		=> $video_link,
+						'video_title'		=> $video_title,
+						'video_rating'		=> $video_rating,
+						'video_comment'		=> $video_comment,
+						'video_poster_id'	=> $user->data['user_id'],
                     );
 		           $db->sql_query('INSERT INTO ' . K_YOUTUBE_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_array));
 
@@ -202,16 +216,18 @@ class acp_k_youtube
 						'MESSAGE' =>  'Sample data has been added...<br />',
 					));
 					$mode = 'add';
-					break;
 				}
-			}
+			break;
+
 			case 'config':
-				break;
+			break;
+
 			case 'browse':
 				get_youtube_data();
-				break;
+			break;
+
 			case 'default':
-				break;
+			break;
 		}
 
 		$template->assign_vars(array(
@@ -239,6 +255,10 @@ function get_youtube_data()
 			'VIDEO_WHO'			=> $row['video_who'],
 			'VIDEO_RATING'		=> $row['video_rating'],
 			'VIDEO_TITLE'		=> $row['video_title'],
+			'VIDEO_COMMENT'		=> $row['video_comment'],
+			'VIDEO_POSTER_ID'	=> $row['video_poster_id'],
+			'VIDEO_POSTER'		=> get_user_data('name', $row['video_poster_id']),
+
 		)); 
 	}
 	$db->sql_freeresult($result);
@@ -250,23 +270,23 @@ function get_video_item($video_id)
 	global $db, $template;//, $s_hidden_fields;
 	$copy = false;
 
-	if($video_id == 0) // used for copying a tag //
+	if ($video_id == 0) // used for copying a tag //
 	{
 		$copy = true;
 		$sql = 'SELECT *
 			FROM ' . K_YOUTUBE_TABLE . '
-				WHERE video_id = 1';
+			WHERE video_id = 1';
 	}
 	else
 	{
 		$sql = 'SELECT *
 			FROM ' . K_YOUTUBE_TABLE . '
-				WHERE video_id = ' . $video_id;
+			WHERE video_id = ' . $video_id;
 	}
 
 	$result = $db->sql_query($sql);
 
-	if( $result = $db->sql_query($sql) )
+	if ($result = $db->sql_query($sql))
 	{
 		$row = $db->sql_fetchrow($result);
 	}
@@ -278,13 +298,20 @@ function get_video_item($video_id)
 		'VIDEO_WHO'			=> $row['video_who'],
 		'VIDEO_RATING'		=> $row['video_rating'],
 		'VIDEO_TITLE'		=> $row['video_title'],
+		'VIDEO_COMMENT'		=> $row['video_comment'],
+		'VIDEO_POSTER_ID'	=> $row['video_poster_id'],
+		'VIDEO_POSTER'		=> get_user_data('name', $row['video_poster_id']),
 	));
 
 	$db->sql_freeresult($result);
 
-	if($video_id != 0)
+	if ($video_id != 0)
+	{
 		return($row['video_title']);
+	}
 	else
+	{
 		return('');
+	}
 }
 ?>

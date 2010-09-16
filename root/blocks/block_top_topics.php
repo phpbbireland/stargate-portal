@@ -25,21 +25,25 @@ if (!defined('IN_PHPBB'))
 }
 
 // for bots test //
-$page_title = $user->lang['BLOCK_TOP_TOPICS'];
+//$page_title = $user->lang['BLOCK_TOP_TOPICS'];
 
 global $k_config;
-$queries = 0;
-$cached_queries = 0;
+$sgp_cache_time = $k_config['sgp_cache_time'];
+
+$queries = $cached_queries = 0;
 
 $max_top_topics = $k_config['max_top_topics'];
+$days_top_topics = $k_config['days_top_topics'];
 
 $sql = 'SELECT topic_id, topic_title, topic_replies, forum_id
 	FROM ' . TOPICS_TABLE . '
 	WHERE topic_approved = 1
-	AND topic_replies <> 0
+		AND topic_replies <> 0
+		AND topic_status <> 2
+		AND topic_last_post_time > ' . (time() - $days_top_topics * 86400 ) . '
 	ORDER BY topic_replies DESC';
 
-$result = $db->sql_query_limit($sql, $max_top_topics);
+$result = $db->sql_query_limit($sql, $max_top_topics, 0 , $sgp_cache_time);
 
 while($row = $db->sql_fetchrow($result))
 {
@@ -53,7 +57,8 @@ while($row = $db->sql_fetchrow($result))
 	{
 		// reduce length and pad with ... if too long //
 		$my_title = smilies_pass($row['topic_title']);
-		if(strlen($my_title) > 16)
+
+		if (strlen($my_title) > 16)
 		{
 			$my_title = sgp_checksize ($my_title, 14);
 		}
@@ -70,7 +75,8 @@ while($row = $db->sql_fetchrow($result))
 $db->sql_freeresult($result);
 
 $template->assign_vars(array(
-	'TT_PORTAL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+	'TOP_TOPICS_DAYS'	=> sprintf($user->lang['TOP_TOPICS_DAYS'], $k_config['days_top_topics']),
+	'TOP_TOPICS_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
 ?>

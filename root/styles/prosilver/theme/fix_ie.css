@@ -6,7 +6,7 @@
 */
 
 /* highslide 02 April 2008 */
-.highslide img	{ width:350px; }
+.highslide img	{ max-width:350px; }
 
 /* in search 10 February 2008 */
 input.full	{ width: 99%; }
@@ -46,3 +46,8 @@ div.sdmenu span {
 .showhide img { max-width:16px; max-height:16px; }
 
 .show_in_ie { display:block; }
+
+.top_gap {clear:both; padding-top: 0px;}
+.bottom_gap {margin-top: 2px; }
+.left_blocks_col_show, .left_blocks_col_hide {margin-bottom: 3px; margin-top: 0px; }
+.right_blocks_col_show, .right_blocks_col_hide {margin-bottom: 3px; margin-top: 0px;}

@@ -50,7 +50,7 @@ class acp_k_cloud
 
 		$action = (isset($_POST['add_tag'])) ? 'add' : ((isset($_POST['save'])) ? 'save' : ((isset($_POST['config'])) ? 'config' : $action));
 
-		switch($action)
+		switch ($action)
 		{
 			case 'config':
 				$template->assign_vars(array(
@@ -58,22 +58,24 @@ class acp_k_cloud
 				));
 
 				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;switch=cloud"); 
-				break;
+			break;
 
 			case 'add':
 				$mode = '';
 				meta_refresh(0, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_cloud&amp;mode=add"); 
-				break;
+			break;
 
 			default:
 		}
 
 		$submit = (isset($_POST['submit'])) ? true : false;
 
-		//if(!$submit) get_cloud_data();
+		//if (!$submit) get_cloud_data();
 
-		if(!$action && $mode == 'browse');
+		if (!$action && $mode == 'browse');
+		{
 			get_cloud_data();
+		}
 
 		if ($submit && !check_form_key($form_key))
 		{
@@ -100,7 +102,7 @@ class acp_k_cloud
 			{
 				//$tag_id = request_var('tag_id', 0);
 
-				if($submit)
+				if ($submit)
 				{
 					$tag_id		= request_var('tag_id', '');
 					$is_active	= request_var('is_active', '');
@@ -132,8 +134,10 @@ class acp_k_cloud
 
 					$sql = 'UPDATE ' . K_CLOUD_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE tag_id = $tag_id";
 
-					if(!$result = $db->sql_query($sql))
-						trigger_error('Error! Could not update Cloud table. ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					if (!$result = $db->sql_query($sql))
+					{
+						trigger_error($user->lang['ERROR_PORTAL_CLOUD'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+					}
 
 					$cache->destroy('sql', K_CLOUD_TABLE);
 
@@ -203,7 +207,7 @@ class acp_k_cloud
 
 			case 'add':
 			{
-				if($submit)
+				if ($submit)
 				{
 					//$tag_id		=request_var('tag_id', '');
 					$is_active	= request_var('is_active', '');
@@ -216,8 +220,10 @@ class acp_k_cloud
 					$hcolour	= request_var('hcolour', '');
 					$text		= utf8_normalize_nfc(request_var('text', '', true));
 
-					if(strstr($link, 'None'))
+					if (strstr($link, 'None'))
+					{
 						$link = '';
+					}
 
 					$colour = str_replace("#", "", $colour);
 					$colour2  = str_replace("#", "", $colour2);
@@ -304,7 +310,7 @@ function get_tag_item($id)
 	global $db, $template;//, $s_hidden_fields;
 	$copy = false;
 
-	if($id == 0) // used for copying a tag //
+	if ($id == 0) // used for copying a tag //
 	{
 		$copy = true;
 		$sql = 'SELECT *
@@ -320,7 +326,7 @@ function get_tag_item($id)
 
 	$result = $db->sql_query($sql);
 
-	if( $result = $db->sql_query($sql) )
+	if ($result = $db->sql_query($sql))
 	{
 		$row = $db->sql_fetchrow($result);
 	}

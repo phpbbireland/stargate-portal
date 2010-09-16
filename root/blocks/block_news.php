@@ -19,7 +19,7 @@
 * @ignore
 */
 
-if ( !defined('IN_PHPBB') )
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
@@ -30,10 +30,13 @@ if ( !defined('IN_PHPBB') )
 	//-- Note: The News Forum ID must be set in ACP -> Portal Config
 	//-- News Items are seen by everyone! Reply is restricted...
 
+	global $k_config;
+	$sgp_cache_time = $k_config['sgp_cache_time'];
+
 	$sql = 'SELECT config_name, config_value
 		FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . '';  
 		
-	$result = $db->sql_query($sql);
+	$result = $db->sql_query($sql, $sgp_cache_time);
 			
 	while($row = $db->sql_fetchrow($result))
 	{
@@ -70,7 +73,7 @@ if ( !defined('IN_PHPBB') )
 	{
 		for ($i = 0; $i < count($fetch_news); $i++)
 		{
-	  		if( isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true )
+	  		if (isset($fetch_news[$i]['striped']) && $fetch_news[$i]['striped'] == true)
 		    {
 				$open_bracket = '[ ';
 				$close_bracket = ' ]';
@@ -119,6 +122,7 @@ if ( !defined('IN_PHPBB') )
 
 	$template->assign_vars(array(
 		'S_DISPLAY_NEWS_LIST'	=> ($allow_news) ? true : false,
+		'NEWS_DEBUG'			=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 		)
 	);
 

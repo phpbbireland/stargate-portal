@@ -2,7 +2,7 @@
 
 <div class="block_data">
 	<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/swfobject/ -->
-	<script type="text/javascript" src="{ROOT_PATH}styles/js/swfobject.js"></script>
+	<script type="text/javascript" src="{ROOT_PATH}js/swfobject.js"></script>
 
 	<!-- for all browsers except IE -->
 	<div id="cumuluscontent">
@@ -25,8 +25,16 @@
 		//]]>
 		</script>
 	</div>
-
-	<!-- IF DEBUG_QUERIES -->{B_PORTAL_DEBUG}<!-- ENDIF -->
 </div>
 
+<div class="block_data" onclick="ShowHide(info)" style="text-align:center; font-size:10px;">
+<img src="./images/info.gif" width="22" height="22" onclick="ShowHide('info');" />
+	<div id="info" style="display:none;">
+		<strong>Cloud 9 Admin Links<br /><br />Assigned links via ACP<br />Based on Roy Tanck's Cumulus...<br />phpbbireland March 2009</strong>
+		<a href="http://www.roytanck.com/tag-cloud" rel="external" title="Mod: Stargate Portal's Admin assigned links"><br />
+		<img src="./images/extras/link-url.png" width="16" height="14" />Roy's link</a>
+	</div>
+</div>
+
+<!-- IF DEBUG_QUERIES --><div class="block_data">{CLOUD_DEBUG}</div><!-- ENDIF -->
 <!-- IDTAG ends block_books -->

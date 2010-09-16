@@ -1,12 +1,11 @@
 <!-- IDTAG block_news_advanced.html 27 November 2008 copyright phpbbireland.com -->
-
 <div class="news">
-		<a id="astart" name="top" accesskey="t"></a>
-		<!-- IF S_NEWS_COUNT_RETURNED == 0 -->
+	<a id="astart" name="top" accesskey="t"></a>
+	<!-- IF S_NEWS_COUNT_RETURNED == 0 -->
 		<center><span class="genmed"><strong>{L_NO_NEWS}</strong></span></center>
-		<!-- ELSE -->
-		<!-- BEGIN news_row -->
-			<!-- IF news_row.S_TOPIC_TYPE != 3 -->
+	<!-- ELSE -->
+	<!-- BEGIN news_row -->
+		<!-- IF news_row.S_TOPIC_TYPE != 3 -->
 			<div class="mynews <!-- IF news_row.S_ROW_COUNT is even -->bg1a<!-- ELSE -->bg2a<!-- ENDIF -->">
 			<!-- ELSE -->
 			<div class="mynews bg3a">
@@ -58,11 +57,10 @@
 					<span class="corners-bottom-news"><span></span></span>
 				</div>
 			</div>
-			<!-- IF news_row.S_NOT_LAST --><br /><!-- ENDIF -->
-		<!-- END news_row -->
-
-		<!-- ENDIF -->
-		<!-- IF DEBUG_QUERIES -->{N_PORTAL_DEBUG}<!-- ENDIF -->
+		<!-- IF news_row.S_NOT_LAST --><br /><!-- ENDIF -->
+	<!-- END news_row -->
+	<!-- ENDIF -->
 </div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{NEWS_ADVANCED_DEBUG}</div><!-- ENDIF -->
 
 <!-- IDTAG ends block_news_advanced.html -->

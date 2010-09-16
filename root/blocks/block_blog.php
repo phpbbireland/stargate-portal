@@ -23,4 +23,10 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
+$queries = $cached_queries = 0;
+
+$template->assign_vars(array(
+	'BLOG_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+));
+
 ?>

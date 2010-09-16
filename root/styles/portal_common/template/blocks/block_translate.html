@@ -4,13 +4,13 @@
 	<div class="translate_head"><strong>{L_SELECT}:</strong></div>
 	<center>
 		<span style="position: relative; float:left; width:33%;">
-			<div style="cursor:pointer;" id="babelfish" onclick="ShowHide('babel'); hideMenu('google'); hideMenu('live');" title="Babel Fish"><span></span><img src="./images/babelfish.gif" alt="Babel Fish" /></div>
+			<div style="cursor:pointer;" id="babelfish" onclick="ShowHide('babel'); hideMenu('google'); hideMenu('live');" title="Babel Fish"><span></span><img src="./images/babelfish.png" alt="Babel Fish" /></div>
 		</span>
 		<span style="position: relative; float:left; width:33%;">
-			<div style="cursor:pointer;" id="livetr" onclick="ShowHide('live'); hideMenu('babel'); hideMenu('google');" title="Windows live"><span></span><img src="./images/live.gif" alt="Windows live" /></div>
+			<div style="cursor:pointer;" id="livetr" onclick="ShowHide('live'); hideMenu('babel'); hideMenu('google');" title="Windows live"><span></span><img src="./images/live.png" alt="Windows live" /></div>
 		</span>
 		<span style="position: relative; float:right; width:33%;">
-			<div style="cursor:pointer;" id="googletr" onclick="ShowHide('google'); hideMenu('babel'); hideMenu('live');" title="Google"><span></span><img src="./images/google.gif" alt="Google" /></div>
+			<div style="cursor:pointer;" id="googletr" onclick="ShowHide('google'); hideMenu('babel'); hideMenu('live');" title="Google"><span></span><img src="./images/google.png" alt="Google" /></div>
 		</span>
 		<br clear="all" />
 	</center>
@@ -98,12 +98,8 @@
 		// -->
 	</script>
 	<!-- END translate -->
-	<!-- IF DEBUG_QUERIES -->{TR_PORTAL_DEBUG}<!-- ENDIF -->
 </div>
 </div>
 <!-- IDTAG ends -->
 
-<!-- if ie 5 or 6 -->
-<!--[if lte IE 6]>
-<br />
-<![endif]-->
+<!-- IF DEBUG_QUERIES --><div class="block_data">{TRANSLATE_DEBUG}</div><!-- ENDIF -->

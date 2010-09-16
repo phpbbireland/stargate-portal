@@ -26,16 +26,13 @@
 				<br />{L_TOTAL_AGE}:&nbsp;<strong>{TOTAL_AGE}</strong>&nbsp;{L_YEARS}
 				<br />{L_AVERAGE_AGE}:&nbsp;<strong>{AVERAGE_AGE}</strong>&nbsp;{L_YEARS}
 			</div>
-			<br />
 		</div>
 	<!-- ELSE -->
-	<div>
-		<center>
-			<p>{L_NONE}</p>
-		</center>
-		<br />
+	<div style="text-align:center">
+		{L_NONE}
 	</div>
 	<!-- ENDIF -->
-	<!-- IF DEBUG_QUERIES -->{AR_PORTAL_DEBUG}<!-- ENDIF -->
+
 </div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{AGE_RANGE_DEBUG}</div><!-- ENDIF -->
 <!-- IDTAG ends block_age_ranges.html -->

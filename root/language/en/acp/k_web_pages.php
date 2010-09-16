@@ -34,15 +34,20 @@ $lang = array_merge($lang, array(
 	'ID'				=> 'ID',
 	'ACTIVE'			=> 'Active',
 	'ACTIVE_EXPLAIN'	=> 'You can disable/enable this web page.',
+	'DISABLED'			=> 'Disabled',
 	'WEB_PAGE_ADD'		=> 'Add a web page...',
 	'WEB_PAGE_ADD_'		=> 'Select the type of page...',
-	'WEB_PAGE_NAME'		=> 'Page Name',
-	'WEB_PAGE_TYPE'		=> 'Page Type',
-	'WEB_PAGE_HEAD'		=> 'Head',
-	'WEB_PAGE_BODY'		=> 'HTML body',
-	'WEB_PAGE_FOOT'		=> 'Foot',
+	'WEB_PAGE_NAME'		=> 'Page name',
+	'WEB_PAGE_TYPE'		=> 'Page type',
 
-	'WEB_PAGE_TYPE_EXPLAIN'	=> 'This Web Page is a header/body/footer ?',
+	'WEB_PAGE_HEAD'		=> 'Head ID',
+	'WEB_PAGE_BODY'		=> 'HTML body',
+	'WEB_PAGE_FOOT'		=> 'Foot ID',
+	'WEB_PAGE_HEAD_EXPLAIN'		=> 'Select a header to use with this page.',
+	'WEB_PAGE_FOOT_EXPLAIN'		=> 'Select a footer to use with this page.',
+
+
+	'WEB_PAGE_TYPE_EXPLAIN'	=> 'This web page is a header/body/footer ?',
 
 	'HEAD' => 'Page Header',
 	'BODY' => 'Page Body',
@@ -56,12 +61,8 @@ $lang = array_merge($lang, array(
 	'WEB_PAGES_HEADER_ADMIN'	=> 'Manage Portal Web Pages',
 	'PAGES' => ' web pages',
 
-	'WEB_PAGE_HEAD_EXPLAIN'		=> 'The header page to use.',
-	'WEB_PAGE_FOOT_EXPLAIN'		=> 'The footer page to use.',
-
-
 	'ID_EXPLAIN'				=> 'The ID for the web page (automatically assigned).',
-	'WEB_PAGE_NAME_EXPLAIN'		=> 'These are common types.',
+	'WEB_PAGE_NAME_EXPLAIN'		=> 'This is the actual page name (without the extension).',
 	'WEB_PAGE_BODY_EXPLAIN'		=> 'The html code for the header/body/footer/portal. ',
 
 
@@ -90,10 +91,26 @@ $lang = array_merge($lang, array(
 	'MOD_NAME' => 'Mod Name',
 	'MOD_TYPE' => 'Mod Type',
 	'MOD_INFO' => 'Mod Details',
-	'SELECT_EDIT_TO_VIEW'	=> '<span style="font-style:italic">Select edit to view this code...</span>',
+	'SELECT_EDIT_TO_VIEW'	=> '<span style="font-style:italic">Edit to view this code</span>',
 	'LAST_UPDATED'	=> 'Last Updated',
 	'EXTERNAL_FILE'					=> 'External file',
-	'EXTERNAL_FILE_EXPLAIN'			=> 'You can use an external file in place of database stored html code (this is of future development).',
+	'EXTERNAL_FILE_EXPLAIN'			=> 'You can use an external file for this body, else enter the html code for the body below (future development).',
+
+	'PAGE_EXTN'				=> 'Remove extension',
+	'PAGE_EXTN_EXPLAIN'		=> 'By default pages use the html extension but it is not required.',
+	'PAGE_DESC'				=> 'Description for this page',
+	'PAGE_DESC_EXPLAIN'		=> 'Description appears in web browser?',
+	'PAGE_META'				=> 'Meta data (Keywords)',
+	'PAGE_META_EXPLAIN'		=> 'Add Keywords that match the content of the page (grab from code above). Max size 255 characters.',
+
+	'WEB_PAGE_DESC'				=> 'Page description',
+	'WEB_PAGE_TITLE'			=> 'Page title',
+	'WEB_PAGE_TITLE_EXPLAIN'	=> 'Page title Helter?',
+
+	'HEADER'	=> 'Header',
+	'FOOTER'	=> 'Footer',
+	'WRAPPER'	=> 'Wrapper',
+
 ));
 
 ?>

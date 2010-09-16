@@ -28,10 +28,9 @@ $lang = array_merge($lang, array(
 	'TITLE_MAIN' => 'General Portal Variable',
 	'TITLE_BLOCK' => 'Portal Block Variable',
 
-	'TITLE_EXPLAIN_MAIN'	=> 'Setting for variables used by general portal code...',
-	'TITLE_EXPLAIN_BLOCK'	=> 'To configure variable for individual blocks, first select the block from the <b>BLOCK</b> menu...<br /><br />
-	To view variables for a speific block we use switches based on block names (converted to uppercase with underscores replacing spaces).<br />
-	If you add a new block containing variables, they will displayed from the \'Configure Variables\' menu... You can also edit acp_k_vars.html and add the necessary switch to open these block variables directly from the Block Menu. (see acp_k_vars.html for examples)',
+	'TITLE_EXPLAIN_MAIN'	=> 'Setting for variables used by general portal blocks...',
+	'TITLE_EXPLAIN_BLOCK'	=> 'Blocks can contain variables, normally stored in the K_BLOCKS_CONFIG_VAR_TABLE, associated html file (to display the variables) are located in adm/style/k_block_vars folder.<br />
+	If you add your own block variables, you need to include the html file to display and edit these variables.',
 
 	'NEWS_SETTINGS'		=> 'News Settings',
 
@@ -67,7 +66,6 @@ $lang = array_merge($lang, array(
 	'ALLOW_NEWS_EXPLAIN' => 'Allow News to be displayed in portal page.',
 
 	'ANNOUNCE_SETTINGS'		=> 'Announcement Settings',
-
 	'ANNOUNCE_FORUM_ID' => 'Announcements Forum ID',
 	'ANNOUNCE_FORUM_ID_EXPLAIN' => 'The ID of the announcement forum.',
 	'NUMBER_OF_ANNOUNCE_ITEMS_TO_DISPLAY' => 'Number of announcements to display',
@@ -88,8 +86,8 @@ $lang = array_merge($lang, array(
 	'NUMBER_OF_LINKS_TO_DISPLAY_EXPLAIN' => '0 (zero) to scroll all links...',
 	'LINKS_SCROLL_AMOUNT' => 'Scroll Amount/Speed',
 	'LINKS_SCROLL_AMOUNT_EXPLAIN' => 'Set to 1 for slow... 5 for fast...',
-	'LINK_TO_US' => 'Link to us Image',
-	'LINK_TO_US_EXPLAIN' => 'Enter the image name. Located in: (./images/links/) (size: 88x31px)',
+	'LINK_TO_US' => 'The link image name',
+	'LINK_TO_US_EXPLAIN' => 'The image must exist in: ./images folder. (size: 88x31px)',
 	'LINK_FORUM_ID' => 'The id of the forum to be used for uploading link images',
 	'LINK_FORUM_ID_EXPLAIN' => 'Places a link at the bottom of the Link Block to direct members to a designated links upload forum, should one exist.',
 
@@ -103,25 +101,33 @@ $lang = array_merge($lang, array(
 	'K_SHOW_SMILIES_EXPLAIN' => 'Some mods may require you don\'t display Smilies on Quick Reply',
 
 	'SHOW_BLOCKS_ON_INDEX_PORTAL' => 'Blocks display options.',
-	'SHOW_BLOCKS_ON_INDEX_L' => 'Display the left blocks on the index page.',
-	'SHOW_BLOCKS_ON_INDEX_R' => 'Display the right blocks on the index page.',
-	'SHOW_BLOCKS_ON_PORTAL_L' => 'Display the left blocks on the portal page.',
-	'SHOW_BLOCKS_ON_PORTAL_R' => 'Display the right blocks on the portal page.',
-	'SHOW_BLOCKS_ON_SEARCH_L' => 'Display the left blocks on the Search page.',
-	'SHOW_BLOCKS_ON_SEARCH_R' => 'Display the right blocks on the Search page.',
-	'SHOW_BLOCKS_ON_MCP_L' => 'Display the left blocks on the MCP page.',
-	'SHOW_BLOCKS_ON_MCP_R' => 'Display the right blocks on the MCP page.',
-	'SHOW_BLOCKS_ON_UCP_L' => 'Display the left blocks on the UCP page.',
-	'SHOW_BLOCKS_ON_UCP_R' => 'Display the right blocks on the UCP page.',
-	'SHOW_BLOCKS_ON_MEM_L' => 'Display the left blocks on the Members page.',
-	'SHOW_BLOCKS_ON_MEM_R' => 'Display the right blocks on the Members page.',
+	'SHOW_BLOCKS_ON_INDEX_L' => 'Display the left blocks on the index page',
+	'SHOW_BLOCKS_ON_INDEX_R' => 'Display the right blocks on the index page',
+	'SHOW_BLOCKS_ON_PORTAL_L' => 'Display the left blocks on the portal page',
+	'SHOW_BLOCKS_ON_PORTAL_R' => 'Display the right blocks on the portal page',
+	'SHOW_BLOCKS_ON_SEARCH_L' => 'Display the left blocks on the Search page',
+	'SHOW_BLOCKS_ON_SEARCH_R' => 'Display the right blocks on the Search page',
+	'SHOW_BLOCKS_ON_MCP_L' => 'Display the left blocks on the MCP page',
+	'SHOW_BLOCKS_ON_MCP_R' => 'Display the right blocks on the MCP page',
+	'SHOW_BLOCKS_ON_UCP_L' => 'Display the left blocks on the UCP page',
+	'SHOW_BLOCKS_ON_UCP_R' => 'Display the right blocks on the UCP page',
+	'SHOW_BLOCKS_ON_MEM_L' => 'Display the left blocks on the Members page',
+	'SHOW_BLOCKS_ON_MEM_R' => 'Display the right blocks on the Members page',
+
+
+	'SHOW_BLOCKS_ON_VT_L' => 'Display the left blocks on the Viewtopic page',
+	'SHOW_BLOCKS_ON_VT_R' => 'Display the right blocks on the Viewtopic page',
+	'SHOW_BLOCKS_ON_VF_L' => 'Display the left blocks on the Viewforum page',
+	'SHOW_BLOCKS_ON_VF_R' => 'Display the right blocks on the Viewforum page',
+	'SHOW_BLOCKS_ON_VO_L' => 'Display the left blocks on the Viewonline page',
+	'SHOW_BLOCKS_ON_VO_R' => 'Display the right blocks on the Viewonline page',
 
 	//'SHOW_BLOCKS_ON_INDEX_L_EXPLAIN' => 'Enable or disable left blocks on index page.',
 	//'SHOW_BLOCKS_ON_INDEX_R_EXPLAIN' => 'Enable or disable right blocks on index page.',
 
 	'BLOCKS_GLOBAL'	=> 'Display blocks options',
-	'DISPLAY_BLOCKS_GLOBAL' => 'Display blocks on all pages',
-	'DISPLAY_BLOCKS_GLOBAL_EXPLAIN' => 'You can over-ride this choice for individual pages below.',
+	'DISPLAY_BLOCKS_GLOBAL' => 'Enable blocks for all pages',
+	'DISPLAY_BLOCKS_GLOBAL_EXPLAIN' => 'Setting to NO will disable all blocks on all pages. This will override all other block settings.',
 
 	'ANNOUNCE_TYPE'	=> 'Announcement type',
 	'ANNOUNCE_TYPE_EXPLAIN'	=> 'Which type of announcements do you want to display?',
@@ -138,7 +144,7 @@ $lang = array_merge($lang, array(
 	'ALLOW_RAND_BANNER' => 'Displays a banner in the site header and/or footer',
 	'ALLOW_RAND_BANNER_EXPLAIN' => 'You can add a randomly selected banner image to the header and or footer...<br />Images must be placed in the images/rand_banner folder.<br /><b>Note</b>, for a fixed banner just place one image in folder.',
 	'ALLOW_RAND_HEADER' => 'Displays a random header image at top of portal and index page',
-	'ALLOW_RAND_HEADER_EXPLAIN' => 'The images width/height can be set in the portal.css file, the tag being random_header_image.<br />Random header images must be placed in the images/rand_header folder.<br />',
+	'ALLOW_RAND_HEADER_EXPLAIN' => 'The images width/height can be set in one of the style css file, the tag being random_header_image.<br />Random header images must be placed in the images/rand_header folder.<br />',
 
 	'BLOCK_COOKIES'		=> 'Block Cookies',
 	'USE_COOKIES'		=> 'Use cookies to store block info',
@@ -156,9 +162,11 @@ $lang = array_merge($lang, array(
 	'NUMBER_OF_TEAM_MEMBERS_TO_DISPLAY'			=> 'Number of team members to display',
 	'NUMBER_OF_TEAM_MEMBERS_TO_DISPLAY_EXPLAIN'	=> 'Set the number of members to display in Members Block',
 
+	'EXCLUDE'			=> 'Exclude forums for search',
+	'EXCLUDE_EXPLAIN'	=> 'The ID\'s of the forums to exclude from search... (comma separated)',
+
 	'SWITCH_VARS'	=> 'Switch Main/Block variables',
 	'NO_VARS_FOUND'	=> '',
-
 ));
 
 // Portal Menu Names + add you menu language variables here! //
@@ -241,8 +249,21 @@ $lang = array_merge($lang, array(
 	'TOP_TOPICS'				=> 'Most active topics.',
 	'MAX_TOP_TOPICS'			=> 'Number of topics to display.',
 	'MAX_TOP_TOPICS_EXPLAIN'	=> 'The max number of most active topics to display.',
+	'DAYS_TOP_TOPICS'			=> 'Number of days to look back for top topics.',
+	'DAYS_TOP_TOPICS_EXPLAIN'	=> 'The number of past days used for the search.',
 	'TOPICSPERFORUM'			=> 'Number of topics per forum.',
 	'TOPICSPERFORUM_EXPLAIN'	=> 'Limit the number of topics returned for each forum.',
+	'SAVING'					=> 'Updating database...',
+	'SAVED'						=> 'Saving changes...',
+	'REQUIRED_DATA_MISSING'		=> 'Required data is missing...<br />',
+	'UNKNOWN_ERROR'				=> 'Error not processing saved data<br />',
+	'IRC_CHAT'					=> 'IRC Chat',
+	'YOUTUBE_LINK'				=> 'Actual youtube link (URL)',
+	'YOUTUBE_LINK_EXPLAIN'		=> 'Just in case youtube ever change we best provide an alternate',
+	'NO_CONFIG_FILE_FOUND'		=> 'No configuration required, or no file available for this module.',
+	'BLOCK_CACHE_TIME_HEAD'		=> 'Block Cache Time',
+	'BLOCK_CACHE_TIME'			=> 'Set the block cache time.',
+	'BLOCK_CACHE_TIME_EXPLAIN'	=> 'Currently all blocs use the same cache period.',
 ));
 
 // Block Names
@@ -261,7 +282,7 @@ $lang = array_merge($lang, array(
 // Acronyms
 $lang = array_merge($lang, array(
 	'ACP_ACRONYMS'			=> 'Manage acronyms',
-	'ACP_ACRONYMS_EXPLAIN'	=> 'This mod allow you to add as many acronyms as you like...',
+	'ACP_ACRONYMS_EXPLAIN'	=> 'Add and manage acronyms in posts...',
 	'ACRONYM'				=> 'Acronym',
 	'ACRONYM_EXPLAIN'		=> 'From this control panel you can add, edit, and remove acronyms that will be automatically added to posts on your forums.',
 
@@ -275,6 +296,15 @@ $lang = array_merge($lang, array(
 	'EDIT_ACRONYM_EXPLAIN'		=> 'Edit the meaning for the acronym:',
 	'ACRONYM_MEANING'			=> 'Enter the full meaning',
 	'CONFIG_ACRONYMS'			=> 'Configure',
+
+	'RESERVED'				=> 'Reserved words.',
+	'RESERVED_EXPLAIN'		=> 'These words cannot be used as an acronym, they are in the reserved word list...',
+	'RESERVED_WORD_LIST'	=> 'Manage reserved words',
+	'DELETE'				=> 'To delete words, simply remove them',
+	'DELETE_CURRENT'		=> 'Remove',
+	'ADD_NEW_WORD'			=> 'Add word',
+	'NEW_WORD'				=> 'Add new reserved word.',
+
 ));
 
 // IRC Channel
@@ -357,6 +387,11 @@ $lang = array_merge($lang, array(
 	'TEAMSPEAK_PASS'			=> 'Password',
 	'TEAMSPEAK_CONNECT'			=> 'Connection',
 
+	'CLOUD_SEARCH'				=> 'Cloud Search Block',
+	'CLOUD_SEARCH_ALLOW'		=> 'Show Cloud Search Block',
+	'CLOUD_SEARCH_CACHE'			=> 'Cache time for this block',
+	'CLOUD_SEARCH_CACHE_EXPLAIN'	=> ' (cache time in seconds).',
+
 ));
 
 // Mini Mod vars
@@ -372,4 +407,12 @@ $lang = array_merge($lang, array(
 	'MINI_MOD_MOD_COUNT'			=> 'The number of mods to display in this block',
 	'MINI_MOD_MOD_COUNT_EXPLAIN'	=> '',
 ));
+
+// SGP Quick Reply vars 11 February 2010
+$lang = array_merge($lang, array(
+	'SGP_QR_SETTINGS'	=> 'SGP Quick Reply Settings',
+	'SGP_QR'			=> 'Use SGP quick reply',
+	'SGP_QR_EXPLAIN'	=> 'Replace the default quick reply with the portal version',
+));
+
 ?>

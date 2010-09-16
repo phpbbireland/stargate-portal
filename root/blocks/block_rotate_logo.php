@@ -19,12 +19,12 @@
 * @ignore
 */
 
-if ( !defined('IN_PHPBB') )
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
-$imglist ="";
+$imglist = "";
 mt_srand((double)microtime()*1000132);
 
 global $rand_logo;
@@ -35,23 +35,18 @@ $logos_dir = "{$phpbb_root_path}styles/" . $user->theme['imageset_path'] . '/ima
 @$handle=opendir($logos_dir);
 
 // quick report because people forget to add the image directory //
-if( !$handle ) 
-	trigger_error('Error! Check to see if you added the image directory: ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+if (!$handle)
+{
+	trigger_error($user->lang['WARNINGIMG_DIR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+}
 
 
 while (false!==($file = readdir($handle)))
 {
-	if(strpos($file, ".gif") || strpos($file, ".jpg") || strpos($file, ".png"))
-		$imglist .= "$file ";
-	/*
-	if (preg_match("/\b^.gif\b/i", $file) || preg_match("/\b^.jpg\b/i", $file) || preg_match("/\b^.png\b/i", $file))
-		$imglist .= "$file ";
-
-	if (eregi("gif", $file) || eregi("jpg", $file) || eregi("png", $file))
+	if (strpos($file, ".gif") || strpos($file, ".jpg") || strpos($file, ".png"))
 	{
 		$imglist .= "$file ";
 	}
-	*/
 }
 closedir($handle);
 
@@ -60,8 +55,11 @@ $a = sizeof($imglist)-2;
 $random = mt_rand(0, $a);
 $image = $imglist[$random];
 
-
 $rand_logo .= '<img src="' . $logos_dir . '/' . $image . '" alt="" /><br />';
-$template->assign_vars(array('RAND_LOGO' => $rand_logo));
+
+$template->assign_vars(array(
+	'RAND_LOGO' => $rand_logo
+));
+
 $imgs ='';
 ?>

@@ -1,7 +1,5 @@
-<!-- IF STARGATE -->
 <!-- quickreply_buttons.html (SGP) 16 September 2009 start -->
-
-<div id="format-buttons_bbc" style="float:left;">
+<div id="format-buttons_bbc" style="float:left; width:75%">
 	<input type="button" class="bbb-bold" accesskey="b" name="addbbcode0" style="" onclick="bbstyle(0)" title="{L_BBCODE_B_HELP}" width="22"/>
 	<input type="button" class="bbb-italic" accesskey="i" name="addbbcode2" style="" onclick="bbstyle(2)" title="{L_BBCODE_I_HELP}" />
 	<input type="button" class="bbb-under_line" accesskey="u" name="addbbcode4" style="" onclick="bbstyle(4)" title="{L_BBCODE_U_HELP}" />
@@ -19,9 +17,9 @@
 		<input type="button" class="bbb-url" accesskey="w" name="addbbcode16" style="" onclick="bbstyle(16)" title="{L_BBCODE_W_HELP}" />
 	<!-- ENDIF -->
 	<!-- IF S_BBCODE_FLASH -->
-		<input type="button" class="bbb-flash" accesskey="f" name="addbbcode18" onclick="bbstyle(18)" />
+		<input type="button" class="bbb-flash" accesskey="f" name="addbbcode18" onclick="bbstyle(18)" title="{L_BBCODE_D_HELP}" />
 	<!-- ENDIF -->
-	<select style="height:22px;" name="addbbcode20" onchange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]');this.form.addbbcode20.selectedIndex = 2;" title="{L_FONT_SIZE}">
+	<select style="height:20px;" name="addbbcode20" onchange="bbfontstyle('[size=' + this.form.addbbcode20.options[this.form.addbbcode20.selectedIndex].value + ']', '[/size]');this.form.addbbcode20.selectedIndex = 2;" title="{L_FONT_SIZE}">
 	<option class="style_bg_color" value="100" selected="selected">{L_FONT_SIZE}</option>
 	<option class="style_bg_color" style="font-size:8px;"  value="60"> {L_FONT_TINY}</option>
 	<option class="style_bg_color" style="font-size:10px;" value="85"> {L_FONT_SMALL}</option>
@@ -33,6 +31,4 @@
 		<input type="button" class="bbb-{custom_tags.BBCODE_TAG}" name="addbbcode{custom_tags.BBCODE_ID}" onclick="bbstyle({custom_tags.BBCODE_ID})" title="{custom_tags.BBCODE_HELPLINE}" />
 	<!-- END custom_tags -->
 </div>
-
 <!-- quickreply_buttons.html (SGP) 16 September 2009 end -->
-<!-- ENDIF -->

@@ -3,9 +3,10 @@
 	<!-- IF S_USER_LOGGED_IN and not S_IS_BOT -->
 		<div>
 			<span style="position: relative; float:left; text-align:center; width:100%;">
-				<a href="./blocks/block_irc_popup.php" onclick="window.open('','popup','toolbar=0,resizable=1,location=0,status=0,menubar=0,scrollbars=0,width=550,height=450,left=210,screenX=210,top=60,screenY=60')" title="{L_IRC_POPUP}"><span></span>{L_IRC_POPUP}</a>
+				<a href="./blocks/block_irc_popup.php" onclick="window.open('','popup','toolbar=0,resizable=1,location=0,status=0,menubar=0,scrollbars=0,width=550,height=450,left=210,screenX=210,top=60,screenY=60')" Target="popup" title="{L_IRC_POPUP}"><span></span>{L_IRC_POPUP}</a>
 			</span>
 		</div>
+	<!--<p style="text-align:center">{L_BLOCK_CURRENTLY_DISABLED}</p>-->
 	<!-- ELSE -->
 	<div>
         <center>
@@ -20,6 +21,6 @@
 		<br />
 	</div>
 	<!-- ENDIF -->
-	<!-- IF DEBUG_QUERIES -->{IR_PORTAL_DEBUG}<!-- ENDIF -->
 </div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{IRC_DEBUG}</div><!-- ENDIF -->
 <!-- IDTAG ends block_irc.html -->

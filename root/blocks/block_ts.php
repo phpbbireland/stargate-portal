@@ -21,10 +21,10 @@
 
 if ( !defined('IN_PHPBB') )
 {
-	die("Hacking attempt");
+	exit;
 }
-//$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 
+$queries = $cached_queries = 0;
 
 $template->assign_vars(array(
 	'USER_NAME' => $user->data['username'],
@@ -32,6 +32,7 @@ $template->assign_vars(array(
 	'CONNECT'	=> $k_config['teamspeak_connection'],
 	'PASSWORD'	=> $k_config['teamspeak_pass'],
 	'IP'		=> '',
+	'TS_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
 ?>

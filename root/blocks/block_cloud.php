@@ -25,12 +25,13 @@ if (!defined('IN_PHPBB'))
 }
 
 // for bots test //
-$page_title = $user->lang['BLOCK_CLOUD'];
+//$page_title = $user->lang['BLOCK_CLOUD'];
 
-global $k_config, $user_id, $user, $template, $phpbb_root_path, $phpEx, $db, $config;
+global $config, $k_config, $user_id, $user, $template, $phpbb_root_path, $phpEx, $db;
 
-$queries = 0;
-$cached_queries = 0;
+$sgp_cache_time = $k_config['sgp_cache_time'];
+$queries = $cached_queries = 0;
+
 $cumuluscontent = '';
 
 $cloud_max_tags		= $k_config['cloud_max_tags'];
@@ -49,7 +50,7 @@ $cloud_wmode		= '"' . $k_config['cloud_wmode'] . '"';
 $sql = 'SELECT *
 	FROM ' . K_CLOUD_TABLE . '
 	WHERE is_active = 1';
-$result = $db->sql_query_limit($sql, $cloud_max_tags, 0, 600);
+$result = $db->sql_query_limit($sql, $cloud_max_tags, 0, $sgp_cache_time);
 
 while ($row = $db->sql_fetchrow($result))
 {
@@ -81,7 +82,7 @@ $template->assign_vars(array(
 	'CUMULUS'			=> $cumuluscontent,
 	'CLOUD_MOVIE'		=> $cloud_movie,
 
-	'B_PORTAL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+	'CLOUD_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 
 ?>

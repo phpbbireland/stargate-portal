@@ -19,11 +19,14 @@
 * @ignore
 */
 
-	if ( !defined('IN_PHPBB') )
+	if (!defined('IN_PHPBB'))
 	{
 		exit;
 	}
 
+	$queries = $cached_queries = $total_queries = 0;
+
+/*
 	$queries = 0;
 	$cached_queries = 0;
 
@@ -65,5 +68,10 @@
 		'LAST_UPDATE'		=> "13 November 2006",
 		'S_PORTAL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
 	));
+*/
 
+	$template->assign_vars( array(
+		'LAST_UPDATE'	=> "13 November 2006",
+		'S_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+	));
 ?>

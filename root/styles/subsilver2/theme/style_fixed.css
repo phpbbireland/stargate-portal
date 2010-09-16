@@ -1,5 +1,5 @@
 .stylewidth {
-	width: 70%;
+	width: 80%;
 	margin: 0;
 	margin-left: auto;
 	margin-right: auto;
@@ -17,8 +17,11 @@
 	width:auto;
 }
 #logodesc {
+	/*
 	border-left: 1px solid #4787A7;
 	border-right: 1px solid #4787A7;
+	*/
+	border:none;
 }
 
 /* code with lines Mike */

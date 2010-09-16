@@ -7,12 +7,10 @@
 	<!-- BEGIN admin -->
 	<div style="text-align:center; clear:both;">
 		<span style="position: relative; float:left; "><img src="{T_THEME_PATH}/images/admins.png" alt="" /> <strong>{admin.USERNAME_FULL}</strong></span>
-		<span style="position: relative; float:right; padding-top: 4px; ">{admin.COUNTRY_FLAG_IMG} IMG</span>
 	</div>
 	<!-- BEGINELSE -->
 	<div style="text-align:center; clear:both;">
 		<span style="position: relative; float:left;">{L_NO_ADMINS}</span>
-		<span style="position: relative; float:right;">{admin.COUNTRY_FLAG_IMG}</span>
 	</div>
 	<!-- END admin -->
 
@@ -22,15 +20,13 @@
 	<!-- BEGIN mod -->
 	<div style="text-align:center; clear:both;">
 		<span style="position: relative; float:left;  "><img src="{T_THEME_PATH}/images/mods.png" alt="" /> <strong>{mod.USERNAME_FULL}</strong></span>
-		<span style="position: relative; float:right; padding-top: 4px; ">{mod.COUNTRY_FLAG_IMG} IMG</span>
 	</div>
 	<!-- BEGINELSE -->
 	<div style="text-align:center; clear:both;">
 		<span style="position: relative; float:left;">{L_NO_MODS}</span>
 	</div>
 	<!-- END mod -->
-	<!-- IF DEBUG_QUERIES -->{T_PORTAL_DEBUG}<!-- ENDIF -->
 	<br />
 </div>
-
+<!-- IF DEBUG_QUERIES --><div class="block_data">{THE_TEAM_DEBUG}</div><!-- ENDIF -->
 <!-- IDTAG ends block_the_team.html -->

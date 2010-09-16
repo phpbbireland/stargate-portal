@@ -19,18 +19,20 @@
 * @ignore
 */
 
-if ( !defined('IN_PHPBB') )
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
-global $db, $user;
+global $db, $user, $k_config;
+$sgp_cache_time = $k_config['sgp_cache_time'];
+
 $pos = 0;
 
 // types: welcome message,  info, style //
 $sql = "SELECT * FROM ". K_MODULES_TABLE . " WHERE mod_id = 1";
 
-if (!$result = $db->sql_query($sql))
+if (!$result = $db->sql_query($sql,$sgp_cache_time))
 {
 	trigger_error('Error! Could not query messages (Welcome etc...): ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }
@@ -42,10 +44,18 @@ else
 	$mod_details	= $row['mod_details'];
 	$mod_link		= $row['mod_download_link'];
 
+	/*
 	if($user->data['username'] == 'Anonymous')
+	{
 		$mod_details = str_replace("[you]" ,$user->lang['GUEST'], $mod_details);
+	}
 	else
+	{
 		$mod_details = str_replace("[you]", ('back ' . '<span style="font-weight:bold; color:#' . $user->data['user_colour'] . ';">' . $user->data['username'] . '</span>'), $mod_details);
+	}
+	*/
+
+	$mod_details = process_for_admin_bbcodes($mod_details);
 
 	$template->assign_vars( array(
 		'TITLE'		=> htmlspecialchars_decode($mod_name),

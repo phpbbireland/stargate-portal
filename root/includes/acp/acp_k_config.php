@@ -26,27 +26,27 @@ class acp_k_config
 		
 	function main($id, $mode)
 	{
-		
 		global $db, $user, $auth, $template, $cache;
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
-	
+
 		$message ='';
-			
+
 		$user->add_lang('acp/k_config');
 		$this->tpl_name = 'acp_k_config';
 		$this->page_title = 'ACP_K_PORTAL_CONFIG';
 
 		$form_key = 'acp_k_config';
 		add_form_key($form_key);		
-		
+
 		$action = request_var('action', '');
 		$mode	= request_var('mode', '');	
 		$generate = request_var('generate', '');	
-		
+
 		$submit = (isset($_POST['submit'])) ? true : false;
 
 		$forum_id	= request_var('f', 0);		
 		$forum_data = $errors = array();
+
 		if ($submit && !check_form_key($form_key))
 		{
 			$submit = false;
@@ -55,7 +55,7 @@ class acp_k_config
 		}		
 
 		$sql = 'SELECT * FROM ' . K_BLOCKS_CONFIG_TABLE . '';
-		if( $result = $db->sql_query($sql) )
+		if ($result = $db->sql_query($sql))
 		{
 			$row = $db->sql_fetchrow($result);
 
@@ -67,11 +67,10 @@ class acp_k_config
 		}
 		else
 		{
-			trigger_error('Error! Could not query portal config information: ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+			trigger_error($user->lang['ERROR_PORTAL_CONFIG'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 		}	
-		
+
 		$template->assign_vars(array(
-		
 			'L_PORTAL_MESSAGE'				=> $message,
 			'S_BLOCKS_WIDTH'				=> $row['blocks_width'],
 			'S_BLOCKS_ENABLED'				=> $row['blocks_enabled'],
@@ -79,21 +78,19 @@ class acp_k_config
 			'S_PORTAL_VERSION'				=> $row['portal_version'],			
 			'S_BLOCK_ID'                    => $row['id'],
 			'U_BACK'						=> $this->u_action,
-			
-//			'U_BACK'							=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=portal_config&amp;mode=config",
-			
-			)
-		);		
+//			'U_BACK'						=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=portal_config&amp;mode=config",
+		));		
 		
-		$template->assign_vars(array('S_OPT' => 'Configure'));
+		$template->assign_vars(array('S_OPT' => 'Configure')); // S_OPT is not a language variabe //
 
-		if($submit) 
+		if ($submit) 
 		{
 			$mode = 'save';
 		}
 		else
+		{
 			$mode = 'reset';
-		
+		}
 	
 		switch ($mode)
 		{
@@ -117,7 +114,7 @@ class acp_k_config
 				
 				$mode='reset';
 				
-				$template->assign_vars(array('S_OPT' => 'Config Data Saved'));
+				$template->assign_vars(array('S_OPT' => 'ConfigDataSaved')); // S_OPT is not a language variabe //
 				
 				//$message = $user->lang['L_PORTAL_CONFIG_UPDATED']; 
 
@@ -125,13 +122,17 @@ class acp_k_config
 				return;
 				break;
 			}
-			case 'default': break;
+			case 'default': 
+			break;
 		}
-		
+
+		/*
 		switch ($action)
 		{
-			case 'default': break;
-		}		
+			case 'default': 
+			break;
+		}
+		*/
 		
 	}				
 }

@@ -42,6 +42,12 @@ $lang = array_merge($lang, array(
 	'MEANING'				=> 'Enter the full meaning',
 	'ACRONYM_EDIT_EXPLAIN'	=> 'The acronym:',
 	'ACRONYM_UPDATED'		=> 'Acronym Updated...',
+	'ACRONYM_ADDED'			=> 'Acronym added',
+	'ACRONYM_REMOVED'		=> 'Acronym removed',
+	'RESERVED'				=> 'This word cannot be used as an acronym...<br />It is in the reserved word list...',
+	'RESERVED_WORD_LIST'	=> 'Manage reserved words', 
+	'ACRO_IN_ACRO'			=> 'You cannot embed an existing acronym in another acronym meaning',
+	'RESERVED_WORDS'		=> 'Reserved Words',
 ));
 
 ?>

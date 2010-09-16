@@ -34,16 +34,13 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 $user->session_begin();
 $auth->acl($user->data);
-$user->setup('common');
-$user->setup('acp/styles');
+$user->setup(array('common', 'acp/styles'));
 
-//$user->add_lang('portal/portal');
-include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
-include_once($phpbb_root_path . 'includes/portal_blocks.' . $phpEx);
+//include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+//include($phpbb_root_path . 'includes/sgp_portal_blocks.' . $phpEx);
 
-global $db, $lang, $template, $phpbb_root_path, $phpEx, $cache, $config, $language, $table_prefix;
 $current_version = '1.0.0';
-$page_title = 'SGP Refresh ALL - version: ' . $current_version;
+$page_title = $user->lang['SGP_REFRESH_ALL'] . $current_version;
 $no_exeptions = true;
 
 // Output page
@@ -53,7 +50,7 @@ $template->set_filenames(array(
 	'body' => 'sgp_refresh.html')
 );
 
-if( $user->data['is_registered'] && $auth->acl_get('a_') ) 	 
+if ($user->data['is_registered'] && $auth->acl_get('a_')) 	 
 {
 	$template->assign_vars(array(
 		'S_IS_ADMIN' => true,
@@ -165,6 +162,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 			$sql2 = 'UPDATE ' . STYLES_THEME_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . "
 				WHERE theme_id = " . $theme_row['theme_id'];
 			$result2 = $db->sql_query($sql2);
+
 			if (!$result2)
 			{
 				$template->assign_block_vars('theme_row', array(
@@ -188,6 +186,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 		}
 	}
 	$db->sql_freeresult($result);
+
 /* Disabled for the time being
 	//Refresh all styles imagesets
 	$sql = 'SELECT *
@@ -372,6 +371,8 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 	}
 	$db->sql_freeresult($result);
 */
+
+
 	// purge cache
 	$cache->purge();
 	
@@ -389,12 +390,12 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 	$dirname = $phpbb_root_path . 'cache/'; //path to cache directory
 	$dir = opendir($dirname);
 	
-	while(false != ($file = readdir($dir))) 
+	while (false != ($file = readdir($dir))) 
 	{
-		if(($file != ".") and ($file != ".."))
+		if (($file != ".") and ($file != ".."))
 		{
 			$fileChunks = explode(".", $file);
-			if($fileChunks[1] == $desired_extension)
+			if ($fileChunks[1] == $desired_extension)
 			{
 				@unlink($dirname . $file); //remove file
 			}
@@ -404,6 +405,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 	$log_file_list = $user->lang['ALL_FILES'];
 
 	add_log('admin', 'LOG_RSS_CACHE_CLEANED', $log_file_list);
+
 	$template->assign_vars(array(
 		'S_RSS_CACHE'				=> true,
 	));
@@ -431,6 +433,7 @@ else
 			'S_LOGININFO' => '<br /><a href="' . $phpbb_root_path . 'ucp.php?mode=login">' . $user->lang['SGPRA_LOG_IN'],
 		));
 }
+
 page_footer();
 
 	/**
@@ -612,8 +615,9 @@ page_footer();
 		// adjust paths
 		return str_replace('./', 'styles/' . $theme_row['theme_path'] . '/theme/', $stylesheet);
 	}
+
 	/**
-	* Load css file contents
+	* Load css file contents (code taken form acp_styles.php)
 	*/
 	function load_css_file($path, $filename)
 	{

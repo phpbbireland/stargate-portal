@@ -51,7 +51,7 @@ class acp_k_referrals
 			
 		$result = $db->sql_query($sql);
 			
-		while($row = $db->sql_fetchrow($result))
+		while ($row = $db->sql_fetchrow($result))
 		{
 			$k_config[$row['config_name']] = $row['config_value'];
 		}
@@ -63,20 +63,23 @@ class acp_k_referrals
 		//
 		// Get POST/GET variables...
 		//
-		$start = intval( (isset($_POST['start'])) ? $_POST['start'] : ( (isset($_GET['start'])) ? $_GET['start'] : 0 ) );
-		$sort_method = ( (isset($_POST['sort'])) ? $_POST['sort'] : ( (isset($_GET['sort'])) ? $_GET['sort'] : 'hits' ) );
-		$sort_order  = ( (isset($_POST['order'])) ? $_POST['order'] : ( (isset($_GET['order'])) ? $_GET['order'] : 'DESC' ) );
-		$filter_flag = ( (isset($_POST['filter'])) ? $_POST['filter'] : ( (isset($_GET['filter'])) ? $_GET['filter'] : 'disabled' ) );
+
+		//$start = intval( (isset($_POST['start'])) ? $_POST['start'] : ( (isset($_GET['start'])) ? $_GET['start'] : 0 ) );
+		$start = intval( (isset($_POST['start'])) ? request_var('start', 0) : ( (isset($_GET['start'])) ? request_var('start', 0) : 0 ) );
+		$sort_method = ( (isset($_POST['sort'])) ? request_var('sort', '') : ( (isset($_GET['sort'])) ? request_var('sort', '') : 'hits' ) );
+		$sort_order  = ( (isset($_POST['order'])) ? request_var('order', '') : ( (isset($_GET['order'])) ? request_var('order', '') : 'DESC' ) );
+		$filter_flag = ( (isset($_POST['filter'])) ? request_var('filter', '') : ( (isset($_GET['filter'])) ? request_var('filter', '') : 'disabled' ) );
 
 		$enable		= ( isset($_POST['enable']) ) ? TRUE : 0;
 		$delete		= ( isset($_POST['delete']) ) ? TRUE : 0;
 		$delete_all	= ( isset($_POST['deleteall']) ) ? TRUE : 0;
 
-		$id_list	= ( ( isset($_POST['id_list']) ) ? $_POST['id_list'] : ( (isset($_GET['id_list'])) ? $_GET['id_list'] : array()));
+		//$id_list	= ( ( isset($_POST['id_list']) ) ? $_POST['id_list'] : ( (isset($_GET['id_list'])) ? $_GET['id_list'] : array()));
+		$id_list = request_var('id_list', array(0));
 
 		//Rows to show from blocksetting * 2
 		$rows_per_page = $k_config['num_refviews'];
-		if( !is_numeric($rows_per_page) )
+		if (!is_numeric($rows_per_page))
 		{
 			$rows_per_page = 10;
 		}
@@ -88,51 +91,56 @@ class acp_k_referrals
 		{
 			case 'update_num_refviews':
 
-			$config_num_refviews = request_var('num_refviews','', true);
-			if ($action == 'update_num_refviews')
-			{
-				$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $config_num_refviews . ' WHERE config_name = "num_refviews"');
-				$message = $user->lang['CONFIG_UPDATED'];
-			}
+				$config_num_refviews = request_var('num_refviews','', true);
+				if ($action == 'update_num_refviews')
+				{
+					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $config_num_refviews . ' WHERE config_name = "num_refviews"');
+					$message = $user->lang['CONFIG_UPDATED'];
+				}
 				$db->sql_query($sql);
 				trigger_error($message . adm_back_link($this->u_action));
+
+			break;
+
+			default:
 			break;
 		}
 
 		//
 		// Check which mode we should operate in...
 		//
-		if( $enable )
+		if ($enable)
 		{
-			for( $i = 0; $i < count($id_list); $i++ )
+			for ($i = 0; $i < count($id_list); $i++)
 			{
 				$sql = 'UPDATE '.K_REFERRALS_TABLE.
 					" SET enabled = ".( ($filter_flag == 'enabled') ? 0 : 1 ).
 					" WHERE id = ".$id_list[$i];
-				if( !$result = $db->sql_query($sql) )
+				if (!$result = $db->sql_query($sql))
 				{
 					trigger_error(GENERAL_ERROR, "Couldn't update HTTP Referrals (id=".$id_list[$i].") from database", '', __LINE__, __FILE__, $sql);
 				}
 			}
 		}
-		else if( $delete )
+		else if ($delete)
 		{
-			for( $i = 0; $i < count($id_list); $i++ )
+			for ($i = 0; $i < count($id_list); $i++)
 			{
 				$sql = 'DELETE FROM '.K_REFERRALS_TABLE." WHERE id = ".$id_list[$i];
-				if( !$result = $db->sql_query($sql) )
+				if (!$result = $db->sql_query($sql))
 				{
-					trigger_error(GENERAL_ERROR, "Couldn't delete HTTP Referrals (id=".$id_list[$i].") from database", '', __LINE__, __FILE__, $sql);
+					trigger_error($user->lang['ERROR_PORTAL_HTTP_DELETE'] , '', __LINE__, __FILE__, $sql);
 				}
 			}
 		}
-		else if( $delete_all )
+		else if ($delete_all)
 		{
 			$sql = 'DELETE FROM '.K_REFERRALS_TABLE.
 				' WHERE enabled = '.( ($filter_flag == 'enabled') ? 1 : 0 );
-			if( !$result = $db->sql_query($sql) )
+
+			if (!$result = $db->sql_query($sql))
 			{
-				trigger_error(GENERAL_ERROR, "Couldn't delete HTTP Referrals from database", '', __LINE__, __FILE__, $sql);
+				trigger_error($user->lang['ERROR_PORTAL_HTTP_DELETE'] , '', __LINE__, __FILE__, $sql);
 			}
 		}
 
@@ -146,7 +154,8 @@ class acp_k_referrals
 			'lastvisit'		=> $user->lang['LAST_VISIT'],
 		);
 		$s_sort_method = '';
-		foreach( $a_sort_method as $s_value => $s_text )
+
+		foreach ($a_sort_method as $s_value => $s_text)
 		{
 			$selected = ($s_value == $sort_method) ? ' selected' : '';
 			$s_sort_method .= '<option value="'.$s_value.'"'.$selected.'>'.$s_text.'</option>';
@@ -157,16 +166,19 @@ class acp_k_referrals
 		//
 		$total_rows = array();
 		$sql = 'SELECT COUNT(*) AS total FROM '.K_REFERRALS_TABLE.' WHERE enabled = 0';
-		if( !$result = $db->sql_query($sql) )
+
+		if (!$result = $db->sql_query($sql))
 		{
-			trigger_error(GENERAL_ERROR, "Couldn't query HTTP Referrals Count", '', __LINE__, __FILE__, $sql);
+			trigger_error($user->lang['ERROR_PORTAL_HTTP_QUERY'] , '', __LINE__, __FILE__, $sql);
 		}
+
 		$row = $db->sql_fetchrow($result);
 		$total_rows[0] = $row['total'];
 		$sql = 'SELECT COUNT(*) AS total FROM '.K_REFERRALS_TABLE.' WHERE enabled = 1';
-		if( !$result = $db->sql_query($sql) )
+
+		if (!$result = $db->sql_query($sql))
 		{
-			trigger_error(GENERAL_ERROR, "Couldn't query HTTP Referrals Count", '', __LINE__, __FILE__, $sql);
+			trigger_error($user->lang['ERROR_PORTAL_HTTP_QUERY'] , '', __LINE__, __FILE__, $sql);
 		}
 		$row = $db->sql_fetchrow($result);
 		$total_rows[1] = $row['total'];
@@ -175,7 +187,7 @@ class acp_k_referrals
 		//
 		// Default process is report...
 		//
-		switch( $sort_method )
+		switch ($sort_method)
 		{
 			case 'host':
 				$order_by = 'host '.$sort_order;
@@ -194,9 +206,10 @@ class acp_k_referrals
 		$sql = 'SELECT * FROM '.K_REFERRALS_TABLE.
 			' WHERE enabled = '.( ($filter_flag == 'enabled') ? 1 : 0 ).
 			' ORDER BY '.$order_by.' LIMIT '.$start.', '.$rows_per_page;
-		if( !$result = $db->sql_query($sql) )
+
+		if (!$result = $db->sql_query($sql))
 		{
-			trigger_error(GENERAL_ERROR, "Couldn't query HTTP Referrals Information", '', __LINE__, __FILE__, $sql);
+			trigger_error($user->lang['ERROR_PORTAL_HTTP_QUERY'] , '', __LINE__, __FILE__, $sql);
 		}
 		$rowset = $db->sql_fetchrowset($result);
 		$rowset_count = count($rowset);
@@ -208,9 +221,9 @@ class acp_k_referrals
 			'body' => 'adm/style/acp_k_referrals.html')
 		);
 
-		if( $rowset_count > 0 )
+		if ($rowset_count > 0)
 		{
-			for( $i = 0; $i < $rowset_count; $i++ )
+			for ($i = 0; $i < $rowset_count; $i++)
 			{
 				$template->assign_block_vars('datarow', array(
 					'ID'			=> $rowset[$i]['id'],
@@ -227,8 +240,8 @@ class acp_k_referrals
 			$template->assign_block_vars('no_referrals_sw', array());
 		}
 		$template->assign_vars(array(
-			'L_TITLE'				=> $user->lang['REFERRALSS_MANAGEMENT'],
-			'L_EXPLAIN'				=> $user->lang['REFERRALSS_MANAGEMENT_EXPLAIN'].$user->lang['ENABLED'].'('.$total_rows[1].'), '.$user->lang['DISABLED'].'('.$total_rows[0].')',
+			'L_TITLE'				=> $user->lang['REFERRALS_MANAGEMENT'],
+			'L_EXPLAIN'				=> $user->lang['REFERRALS_MANAGEMENT_EXPLAIN'].$user->lang['ENABLED'].'('.$total_rows[1].'), '.$user->lang['DISABLED'].'('.$total_rows[0].')',
 			'U_FORM_ACTION'			=> append_sid(@basename(__FILE__)),
 			'L_SELECT_FILTER'		=> $user->lang['SELECT_FILTER'],
 			'L_ENABLED'				=> $user->lang['ENABLED'],
@@ -250,7 +263,7 @@ class acp_k_referrals
 			'L_FIRST_VISIT'			=> $user->lang['FIRST_VISIT'],
 			'L_LAST_VISIT'			=> $user->lang['LAST_VISIT'],
 
-			'L_NO_REFERRALSS'		=> ($filter_flag == 'enabled') ? $user->lang['NO_ENABLED_REFERRALSS'] : $user->lang['NO_DISABLED_REFERRALSS'],
+			'L_NO_REFERRALS'		=> ($filter_flag == 'enabled') ? $user->lang['NO_ENABLED_REFERRALS'] : $user->lang['NO_DISABLED_REFERRALS'],
 			'L_MARK'				=> $user->lang['MARK'],
 			'L_MARK_ALL'			=> $user->lang['MARK_ALL'],
 			'L_UNMARK_ALL'			=> $user->lang['UNMARK_ALL'],
@@ -260,7 +273,7 @@ class acp_k_referrals
 			'L_NO_ITEMS_MARKED'		=> $user->lang['NO_ITEMS_MARKED'],
 			'L_PLEASE_CONFIRM'		=> $user->lang['PLEASE_CONFIRM'],
 			'S_ACTION'				=> $this->u_action . '&amp;action=update_num_refviews',
-			'REFERRALSS_COUNT'		=> $k_config['num_refviews'],
+			'REFERRALS_COUNT'		=> $k_config['num_refviews'],
 
 			'PAGINATION'	=> generate_pagination(append_sid($phpbb_admin_path."index.php?filter=$filter_flag&amp;sort=$sort_method&amp;order=$sort_order&amp;i=k_referrals"), $total_rows[$total_now], $rows_per_page, $start),
 			'PAGE_NUMBER'	=> sprintf($user->lang['PAGE_OF'], ( floor( $start / $rows_per_page ) + 1 ), ceil( $total_rows[$total_now] / $rows_per_page ))

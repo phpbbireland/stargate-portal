@@ -18,7 +18,7 @@
 /**
 * @ignore
 */
-if ( !defined('IN_PHPBB') )
+if (!defined('IN_PHPBB'))
 {
 	exit;
 }
@@ -29,30 +29,33 @@ $imglist ="";
 mt_srand((double)microtime()*1000000);
 
 $handle=opendir('images/pictures/thumbs');
-if( !$handle) trigger_error('Check to see if you added the image directory!');
+if (!$handle) 
+{
+	// does trigger_error require $user->lang['WARNINGIMG_DIR'] ? //
+	trigger_error('WARNINGIMG_DIR');
+}
+
 while (false!==($file = readdir($handle)))
 {
-	if(strpos($file, ".gif") || strpos($file, ".jpg") || strpos($file, ".png"))
+	if (strpos($file, ".gif") || strpos($file, ".jpg") || strpos($file, ".png"))
+	{
 		$imglist .= "$file ";
-
-	/*
-	if (preg_match("/\b^.gif\b/i", $file) || preg_match("/\b^.jpg\b/i", $file) || preg_match("/\b^.png\b/i", $file))
-		$imglist .= "$file ";
-
-    if (eregi("gif", $file) || eregi("jpg", $file) || eregi("png", $file))
-    {
-			$imglist .= "$file ";
-    }
-	*/
+	}
 }
+
 closedir($handle);
 $imglist = explode(" ", $imglist);
 $a = sizeof($imglist)-2;
 $random = mt_rand(0, $a);
 $image = $imglist[$random];
+
 //$asin = explode(".", $image);
 //$picturescontent = "<br /><center><a href=\"http://www." .$pictures . "/exec/obidos/ASIN/$asin[0]/$pictures_id\" target=\"_blank\">";
-$picturescontent .= "<img src=\"images/pictures/thumbs/$image\" border=\"0\" alt=\"$image\"><br/ >$image</center>";
-$template->assign_vars(array('PICTURESCONTENT' => $picturescontent));
+
+$picturescontent .= "<img src=\"images/pictures/thumbs/$image\" border=\"0\" alt=\"$image\" /><br/ >$image</center>";
+
+$template->assign_vars(array(
+	'PICTURESCONTENT' => $picturescontent
+));
 $imgs ='';
 ?>

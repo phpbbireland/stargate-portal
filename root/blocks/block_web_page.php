@@ -19,22 +19,25 @@
 * @ignore
 */
 
-	if ( !defined('IN_PHPBB') )
+	if (!defined('IN_PHPBB'))
 	{
 		exit;
 	}
 	//$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 
 
-	global $db, $user;
+	global $db, $user, $k_config;
+	$sgp_cache_time = $k_config['sgp_cache_time'];
+
 	$pos = 0;
+
 	//$sql = "SELECT * FROM ". K_MODULES_TABLE . " WHERE mod_type LIKE 'welcome_message' LIMIT 1";
 	$sql = "SELECT * FROM ". K_MODULES_TABLE . " WHERE mod_type LIKE 'web_page'";
 
-
-	if (!$result = $db->sql_query($sql))
+	if (!$result = $db->sql_query($sql, $sgp_cache_time))
 	{
-		trigger_error('Error! Could not query messages (Welcome etc...): ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+		trigger_error($user->lang['ERROR_PORTAL_WELCOME'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+		//trigger_error('ERROR_PORTAL_WELCOME');
 	}
 	else
 	{

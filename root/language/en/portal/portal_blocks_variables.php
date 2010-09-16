@@ -106,9 +106,11 @@ $lang = array_merge($lang, array(
 	'STATS'		 		=> 'Statistics',
 	'STYLE_STATUS'		=> 'Styles Status',
 	'SUB_MENU'			=> 'Sub Menu',
+	'TEAM'				=> 'The Team',
 	'TOP_10_PICS'		=> 'Top 10 Rated Pictures',
 	'TOP_DOWNLOADS'		=> 'Top Downloads',
 	'TOP_POSTERS'		=> 'Top Posters',
+	'TOP_TOPICS_DAYS'	=> 'in the last %d days',
 	'UNRESOLVED'		=> 'Unresolved',
 	'UCP'				=> 'User CP',
 	'USER_INFO'			=> 'User Information',
@@ -117,7 +119,7 @@ $lang = array_merge($lang, array(
 	'CLOUD9_LINKS'		=> 'Cloud9 Links',
 	'CLOUD9_SEARCHES'	=> 'Cloud9 Searches',
 
-	'NO_BLOCKD_IN_DEVEOPMENT' => 'No blocks in development!',
+	'NO_BLOCKD_IN_DEVELOPMENT' => 'No blocks in development!',
 ));
 
 // Block Names

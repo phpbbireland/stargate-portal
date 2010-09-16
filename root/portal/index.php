@@ -71,9 +71,34 @@ $versions = array(
 	'1.0.2' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
+	// Version 1.0.3
+	'1.0.3' => array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
+	// Version 1.0.4
+	'1.0.4' => array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
+	// Version 1.0.5
+	'1.0.5' => array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
 
-	// Second RC version 1.0.3
-	'1.0.3'	=> array(
+	// Version 1.0.5
+	'1.0.6' => array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
+
+	// Version 2.0.5
+	'2.0.0' => array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
+	// Version 2.0.5
+	'2.0.5' => array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
+	// New version RC 2
+	'3.0.5'	=> array(
 
 		'permission_add' => array(
 			array('a_k_portal', 1),
@@ -90,6 +115,14 @@ $versions = array(
 		'config_add' => array(
 			array('portal_enabled', true),
 		),
+
+
+		'users_add' => array(
+			array('user_left_blocks', '2'),
+			array('user_center_blocks', '2'),
+			array('user_right_blocks', '2'),
+		),
+
 
 		'table_add' => array(
 			array('phpbb_k_acronyms', array(
@@ -112,9 +145,12 @@ $versions = array(
 						'type'				=> array('CHAR:1', 'H'),
 						'active'			=> array('BOOL', '1'),
 						'html_file_name'	=> array('VCHAR', ''),
-						'php_file_name'		=> array('VCHAR', 'none.gif'),
+						'var_file_name'		=> array('VCHAR', 'none.gif'),
 						'img_file_name'		=> array('VCHAR', 'none.gif'),
 						'view_by'			=> array('UINT', '0'),
+						'view_all'			=> array('BOOL', '1'),
+						'view_groups'		=> array('VCHAR:100', ''),
+						'view_pages'		=> array('VCHAR:100', ''),
 						'groups'			=> array('UINT', '0'),
 						'scroll'			=> array('BOOL', '0'),
 						'block_height'		=> array('USINT', '0'),
@@ -134,6 +170,7 @@ $versions = array(
 						'menu_type'		=> array('USINT', '0'),
 						'name'			=> array('VCHAR:50', ''),
 						'link_to'		=> array('VCHAR', ''),
+						'extern'		=> array('BOOL', '0'),
 						'menu_icon'		=> array('VCHAR:30', 'none.gif'),
 						'append_sid'	=> array('BOOL', '1'),
 						'append_uid'	=> array('BOOL', '0'),
@@ -192,6 +229,7 @@ $versions = array(
 					'mod_type'				=> array('VCHAR:50', ''),
 					'mod_origin'			=> array('BOOL', '0'),
 					'mod_name'				=> array('VCHAR', ''),
+					'mod_filename'			=> array('XSTEXT_UNI', ''),
 					'mod_author'			=> array('XSTEXT_UNI', ''),
 					'mod_link'				=> array('VCHAR', NULL),
 					'mod_author_co'			=> array('VCHAR', NULL),
@@ -203,6 +241,9 @@ $versions = array(
 					'mod_download_count'	=> array('UINT:8', '0'),
 					'mod_status'			=> array('USINT', '0'),
 					'mod_version'			=> array('VCHAR:10', NULL),
+					'mod_bbcode_uid'		=> array('VCHAR_UNI:8', ''),
+					'mod_bbcode_bitfield'	=> array('VCHAR_UNI', ''),
+					'mod_bbcode_options'	=> array('UINT:4', '0'),
 					),
 					'PRIMARY_KEY'	=> 'mod_id',
 					'KEYS'			=> array('mod_name'	=> array('INDEX', 'mod_name'),
@@ -214,13 +255,17 @@ $versions = array(
 				'COLUMNS'	=> array(
 					'id'			=> array('UINT', NULL, 'auto_increment'),
 					'active'		=> array('BOOL', '1'),
-					'page_name'		=> array('XSTEXT_UNI', ''),
+					'page_name'		=> array('VCHAR_UNI:60', ''),
 					'page_type'		=> array('CHAR:1', 'B'),
 					'last_updated'	=> array('VCHAR:15', NULL),
 					'body'			=> array('MTEXT_UNI', ''),
 					'head'			=> array('UINT', '0'),
 					'foot'			=> array('UINT', '0'),
 					'external_file'	=> array('VCHAR_UNI', ''),
+					'page_meta'		=> array('VCHAR_UNI', ''),
+					'page_title'	=> array('VCHAR_UNI:100', ''),
+					'page_desc'		=> array('VCHAR_UNI:100', ''),
+					'page_extn'		=> array('BOOL', '0'),
 					),
 					'PRIMARY_KEY'	=> 'id',
 				),
@@ -232,8 +277,10 @@ $versions = array(
 					'video_category'	=> array('XSTEXT_UNI', ''),
 					'video_who'			=> array('XSTEXT_UNI', ''),
 					'video_link'		=> array('VCHAR', '12'),
-					'video_title'		=> array('XSTEXT_UNI', '0'),
-					'video_rating'		=> array('USINT', '4'),
+					'video_title'		=> array('XSTEXT_UNI', ''),
+					'video_rating'		=> array('UINT', '4'),
+					'video_comment'		=> array('STEXT_UNI', NULL),
+					'video_poster_id'	=> array('UINT', '0'),
 					),
 					'PRIMARY_KEY'	=> 'video_id',
 					'KEYS'			=> array('video_category'	=> array('INDEX', 'video_category'),
@@ -280,6 +327,25 @@ $versions = array(
 					'PRIMARY_KEY'	=> 'tag_id',
 				),
 			),
+
+			array('phpbb_k_resource', array(
+				'COLUMNS'	=> array(
+					'id'	=> array('UINT', NULL, 'auto_increment'),
+					'word'	=> array('VCHAR:30', ''),
+					'type'	=> array('CHAR:1', 'V'),
+					),
+					'PRIMARY_KEY'	=> 'id',
+				),
+			),
+
+			array('phpbb_k_pages', array(
+				'COLUMNS'	=> array(
+					'page_id'			=> array('UINT', NULL, 'auto_increment'),
+					'page_name'		=> array('VCHAR_UNI:100', ''),
+					),
+					'PRIMARY_KEY'	=> 'page_id',
+				),
+			),
 		),
 
 		'module_add' => array(
@@ -313,6 +379,14 @@ $versions = array(
 					'module_basename' => 'k_web_pages',
 				),
 			),
+			array('acp', 'ACP_K_CLOUD',		array(
+					'module_basename' => 'k_cloud',
+				),
+			),
+			array('acp', 'ACP_K_YOUTUBE',	array(
+					'module_basename' => 'k_youtube',
+				),
+			),
 			array('acp', 'ACP_K_TOOLS',		array(
 					'module_basename' => 'k_acronyms',
 				), 
@@ -333,15 +407,18 @@ $versions = array(
 					'module_basename' => 'k_vars',
 				),
 			),
-			array('acp', 'ACP_K_CLOUD',		array(
-					'module_basename' => 'k_cloud',
+			array('acp', 'ACP_K_TOOLS',		array(
+					'module_basename' => 'k_quotes',
 				),
 			),
-			array('acp', 'ACP_K_YOUTUBE',	array(
-					'module_basename' => 'k_youtube',
+			array('acp', 'ACP_K_TOOLS',	array(
+					'module_basename' => 'k_resource_words',
 				),
 			),
-
+			array('acp', 'ACP_K_TOOLS',	array(
+					'module_basename' => 'k_pages',
+				),
+			),
 		), 
 
 		'table_column_add' => array(
@@ -362,6 +439,8 @@ $versions = array(
 			array($k_referrals_table, $k_referrals_array),
 			array($k_web_pages_table, $k_web_pages_array),
 			array($k_youtube_table, $k_youtube_array),
+			array($k_resource_table, $k_resource_array),
+			array($k_pages_table, $k_pages_array),
 		),
 	),
 

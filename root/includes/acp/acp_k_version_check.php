@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package acp
 */
-class acp_version_check
+class acp_k_version_check
 {
 	var $u_action;
 

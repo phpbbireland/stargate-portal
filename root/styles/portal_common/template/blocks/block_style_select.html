@@ -18,7 +18,7 @@
 	<!-- ENDIF -->
 	<!-- IF S_USER_LOGGED_IN and S_SELECT_ALLOW -->
 		<form method="post" id="style_select" action="{S_SELECT_ACTION}">
-			<div>{S_SELECT_STYLE}{S_SELECT_CHANGE}</div>
+			<div style="font-size:10px;">{S_SELECT_STYLE}{S_SELECT_CHANGE}</div>
 			<div><strong>{S_CUR_COPYRIGHT}</strong></div>
 			<!-- IF U_PORTED_BY --><div style="padding:5px;">{L_PORTED_BY} {U_PORTED_BY}</div><!-- ENDIF -->
 			<div style="padding-top:3px;">{L_MAKE_PERMANENT}	<input type="radio" class="radio" id="permanent" name="permanent" value="1"<!-- IF S_PERMANENT --> checked="checked"<!-- ENDIF --> /> {L_YES}</input></div>
@@ -28,6 +28,6 @@
 		</form>
 	<!-- ENDIF -->
 	</div>
-	<!-- IF DEBUG_QUERIES -->{S_PORTAL_DEBUG}<!-- ENDIF -->
 </div>
 <!-- IDTAG ends block_style_select -->
+<!-- IF DEBUG_QUERIES --><div class="block_data">{STYLE_SELECT_DEBUG}</div><!-- ENDIF -->

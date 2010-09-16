@@ -103,10 +103,12 @@ $lang = array_merge($lang, array(
 	'TOPIC_MOVED'	=> 'Post Moved',
 	'TIME'			=> 'Time %s',
 
-	'USER_COUNTRY_FLAG'		=> 'Country Flag',
-	'USER_COUNTRY_FLAG_EXPLAIN'		=> 'Full mod requires <b>Location</b> data above (Google Map).',
-	'USER_REAL_NAME' 		=> 'Real Name',
-	'USER_REAL_NAME_EXPLAIN' => 'Users first name',
+	'USER_COUNTRY_FLAG'			=> 'Country Flag',
+	'UCF_MOD'					=> 'A valid location is required for this Mod',
+	'USER_COUNTRY_FLAG_EXPLAIN'	=> 'Full mod requires <b>Location</b> data above (Google Map).',
+
+	'USER_REAL_NAME'			=> 'Real Name',
+	'USER_REAL_NAME_EXPLAIN'	=> 'Users first name',
 
 	'VIEW_COMMENTS'			=> 'View Comments',
 	'VIEW_FULL_ARTICLE'		=> 'Read full article',
@@ -129,6 +131,8 @@ $lang = array_merge($lang, array(
 
 	'SELECT_STYLE_EXPLAINED' => '<span class="green"><b>Green</b></span> = Released<br /><span class="orange"><b>Orange</b></span> = Beta Theme<br /><span class="gray"><b>Gray</b></span> = Pre-beta Theme<br /><span class="red"><b>Red</b></span> = New Pre-beta Team<br />',
 	'SMILIES' => 'Smilies',
+
+	'NO_SEARCHS'			=> 'No words found.',
 	'MESSAGE_BODY_EXPLAIN'	=> 'Type your message here...',
 
 	'BBCODE_A_HELP'				=> 'Inline uploaded attachment: [attachment=]filename.ext[/attachment]',
@@ -193,7 +197,6 @@ $lang = array_merge($lang, array(
 	'WIDE2'			=> 'Style Width (100%)',
 	'NARROW2'		=> 'Style Width (~70%)',
 
-
 	'TOOLS_ON'	=> 'Portal Tools',
 	'TOOLS_OFF'	=> 'Save Changes',
 
@@ -226,12 +229,13 @@ $lang = array_merge($lang, array(
 	'HTTP_HOST'		=> 'Host',
 	'HITS'			=> 'Hits',
 	'STATUS'		=> 'Progress',
-	'STATUS_2'		=> 'pregress bar',
+	'STATUS_2'		=> 'progress bar',
 	'STYLE_SELECT_DISABLED' => 'Style Switch is Disabled',
 	'NO_VIEW_USERS_R'		=> 'You are not authorized to view the online users list.',
 	'NO_VIEW_USERS_A'		=> 'In order to view the online list you have to be registered and logged in.',
 
-	'PORTAL_DEBUG_QUERIES'	=> 'Queries: %d (cached: %d)',
+	'PORTAL_DEBUG_QUERIES'	=> '<div style="text-align:center; border: dotted 1px #FF0000; background-color:#E4DFD2; padding:5px;">Q = %d, C = %d, RT = %d</div>',
+	'PORTAL_DEBUG_RUNTOT'	=> 'Running: %d',
 	'INPROGRESS'			=> 'Under construction',
 	'BOARD_DEFAULT_STYLE'	=> 'Default Style',
 	'STYLE'					=> 'Style',
@@ -250,6 +254,19 @@ $lang = array_merge($lang, array(
 	'NO_ANNOUNCEMENTS'		=> 'No Announcements...',
 	'NO_NEWS'				=> 'No news to report...',
 	'NO_UNRESOLVED'			=> 'No bugs to report...',
+
+	'DEV_VERSION'			=> 'Version (RC)',
+	
+	'VIDEO_COMMENTS'		=> 'Comments',
+	'NO_COMMENTS'			=> 'No comments to display.',
+	'IN_HOUSE_DESIGNS'		=> 'In House Designs',
+	'IRC_TITLE'				=> 'Stargate Portal IRC Popup',
+	'SGP_IRC_POPUP'			=> 'Stargate Portal IRC Popup',
+
+	'UPLOAD'	=> 'Upload',
+	'CURRENTLY_DISABLED'	=> 'Code is currently disable pending updates',
+
+	'TEMPORARILY_HIDE_BLOCKS'	=> 'Temporarily Hide Blocks',
 
 	//Keep bots happy
 	'BLOCK_BOT_TRACKER'		=> 'Stargate Portal Bot Tracker',

@@ -7,16 +7,21 @@
 	<div><span style="position: relative; float:left; width:99%; padding-bottom:3px;"></span></div><div><hr /></div>
 	<div class="top_poster">
 		<!-- BEGIN top_topics -->
-			<span class="bg2" style="position: relative; float:left; text-align:left; width:70%; padding:0;" >
-				<a href="{top_topics.S_SEARCH_ACTION}" title="{top_topics.FULL_T_TITLE}">{top_topics.TOPIC_TITLE}</a>
-			</span>
-			<span class="bg2" style="position: relative; float:right; text-align:right; width:30%; padding:0; font-weight: bold;">
+			<span class="bg2" style="position: relative; float:left; text-align:left; width:70%; overflow:hidden; margin:0px; padding:0;" ><a href="{top_topics.S_SEARCH_ACTION}" title="{top_topics.FULL_T_TITLE}">{top_topics.TOPIC_TITLE}</a></span>
+			<span class="bg2" style="position: relative; float:right; text-align:right; width:24%; overflow:auto; margin:0px; padding:0; font-weight: bold;">
 				{top_topics.TOPIC_REPLIES}
 			</span>
-			<br />
+			<div><span style="position: relative; float:left; width:99%; padding-bottom:1px;"></span></div>
+		<!-- BEGINELSE -->
+			<span class="bg2" style="position: relative; float:left; text-align:left; width:100%; padding:0;" >
+				{NO_TOP_TOPICS}
+			</span>
 		<!-- END top_topics -->
-		<br />
+			<div><span style="position: relative; float:left; width:99%; padding-bottom:1px;"></span></div>
+			<span class="bg2" style="position: relative; float:left; text-align:center; width:100%; padding:0;" >
+				{TOP_TOPICS_DAYS}
+			</span>
 	</div>
-	<!-- IF DEBUG_QUERIES -->{TT_PORTAL_DEBUG}<!-- ENDIF -->
 </div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{TOP_TOPICS_DEBUG}</div><!-- ENDIF -->
 <!-- IDTAG ends block_top_topics.html -->

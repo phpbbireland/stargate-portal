@@ -14,6 +14,22 @@ function display_block_image(myForm)
     document.getElementById("bimage").innerHTML = " <img align='absmiddle' src='./../images/block_images/small/" + bimage.value + "' />"
 }
 </script>
+
+<script language="javascript" type="text/javascript">
+<!--
+function switchMarks(status)
+{
+	for (var i=0; i < document.acp_blocks.length; i++)
+	{
+		if (document.acp_blocks.elements[i].type == 'checkbox')
+		{
+			document.acp_blocks.elements[i].checked = status;
+		}
+	}
+}
+// -->
+</script>
+
 <!-- END: Edit #1 -->
 
 <script>
@@ -46,7 +62,7 @@ function expMenu(id)
 	{
 		if (element.style.display == "none")
 		{
-			element.style.display = "";
+			element.style.display = "block";
 			return 1;
 		}
 		else
@@ -63,7 +79,27 @@ function expMenu(id)
 }
 </script>
 
+<script>
+// Not very elegant but it works Mike //
+function set_ids(data, view)
+{
+	var mydata;
 
+	mydata = document.getElementById(view).value;
+
+	if (data == '0')
+	{
+		mydata = '';
+		data = '';
+	}
+	else if(mydata)
+	{
+		mydata = mydata + ',';
+	}
+
+    document.getElementById(view).value = mydata + data;
+}
+</script>
 
 <a name="maincontent"></a>
 
@@ -71,7 +107,7 @@ function expMenu(id)
 
 <p>{L_TITLE_EXPLAIN}</p>
 
-<form id="acp_blocks" method="post" action="{U_ACTION}">
+<form id="acp_blocks" name="acp_blocks" method="post" action="{U_ACTION}">
 
 <!-- IF S_OPTIONS  == "Manage" -->
 	<table cellspacing="1" cellspacing="0" border="0">
@@ -89,58 +125,60 @@ function expMenu(id)
 	</thead>
 	<tbody>
 		<!-- BEGIN bdata -->
-		<tr>
+		<tr <!-- IF bdata.S_ID == ADM_BLOCK -->style="font-weight:bold;"<!-- ENDIF -->>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><div align="right">{bdata.S_ID}</div></td>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><div align="right">{bdata.S_NDX}</div></td>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><!-- IF bdata.S_ACTIVE} == 1 -->Active<!-- ELSE -->Disabled<!-- ENDIF --></td>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width="">{bdata.S_TITLE}</td>
 			<td class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->">
-				<!-- IF bdata.S_POSITION === "L" -->Page Left<!-- ENDIF -->
-				<!-- IF bdata.S_POSITION === "C" -->Page Center<!-- ENDIF -->
-				<!-- IF bdata.S_POSITION === "R" -->Page Right<!-- ENDIF -->
-				<!-- IF bdata.S_POSITION === "l" -->Left (centre 2x)<!-- ENDIF -->
-				<!-- IF bdata.S_POSITION === "r" -->Right (center 2x)<!-- ENDIF -->
+				<!-- IF bdata.S_POSITION === "L" -->{L_PAGE_LEFT}<!-- ENDIF -->
+				<!-- IF bdata.S_POSITION === "C" -->{L_PAGE_CENTRE}<!-- ENDIF -->
+				<!-- IF bdata.S_POSITION === "R" -->{L_PAGE_RIGHT}<!-- ENDIF -->
+				<!-- IF bdata.S_POSITION === "l" -->{L_LEFT_OF_CENTRE}<!-- ENDIF -->
+				<!-- IF bdata.S_POSITION === "r" -->{L_RIGHT_OF_CENTRE}<!-- ENDIF -->
 			</td>
 			<td align="left" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""> {bdata.S_FNAME_H}</td>
-			<td class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->"><div align="center"><img src="./../images/block_images/small/{bdata.S_FNAME_I}"></div></td>
-			<td align="right" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><div align="center">{bdata.S_VIEW_BY}</div></td>
+			<td class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->"><div align="center"><img src="./../images/block_images/small/{bdata.S_FNAME_I}" /></div></td>
+			<td align="right" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><div align="center"><!-- IF bdata.S_VIEW_ALL -->{L_ALL_GROUPS}<!-- ELSE -->{bdata.S_VIEW_GROUPS}<!-- ENDIF --></div></td>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width="" colspan="5">
 				<div align="center">
-					<!-- IF bdata.S_FIRST_ROW && not bdata.S_LAST_ROW -->
+
+					<!-- IF bdata.S_FIRST_ROW or bdata.S_NDX == '1' -->
 						{ICON_MOVE_UP_DISABLED}
-						<a href="{U_DOWN}{bdata.S_ID}"><img src="images/icon_down.gif" title="Move Down" border="0" alt="{L_BLOCK_DOWN}" /></a>
-					<!-- ELSEIF not bdata.S_FIRST_ROW && not bdata.S_LAST_ROW-->
-						<a href="{U_UP}{bdata.S_ID}"><img src="images/icon_up.gif" title="Move Up" border="0" alt="{L_BLOCK_UP}" /></a>
-						<a href="{U_DOWN}{bdata.S_ID}"><img src="images/icon_down.gif" title="Move Down" border="0" alt="{L_BLOCK_DOWN}" /></a>
-					<!-- ELSEIF bdata.S_LAST_ROW && not bdata.S_FIRST_ROW -->
-						<a href="{U_UP}{bdata.S_ID}"><img src="images/icon_up.gif" title="Move Up" border="0" alt="{L_BLOCK_UP}" /></a>
+						<a href="{U_DOWN}{bdata.S_ID}"><img src="images/icon_down.gif" title="{L_MOVE_DOWN}" border="0" alt="{L_BLOCK_DOWN}" /></a>
+
+					<!-- ELSEIF bdata.S_LAST_ROW or bdata.S_NDX == S_LBL and bdata.S_POSITION == 'L' || bdata.S_NDX == S_RBL and bdata.S_POSITION == 'R' || bdata.S_NDX == S_CBL and bdata.S_POSITION == 'C'  -->
 						{ICON_MOVE_DOWN_DISABLED}
+						<a href="{U_UP}{bdata.S_ID}"><img src="images/icon_up.gif" title="{L_MOVE_UP}" border="0" alt="{L_BLOCK_UP}" /></a>
+
 					<!-- ELSE -->
-					{ICON_MOVE_UP_DISABLED}
-					{ICON_MOVE_DOWN_DISABLED}
+						<a href="{U_UP}{bdata.S_ID}"><img src="images/icon_up.gif" title="{L_MOVE_UP}" border="0" alt="{L_BLOCK_UP}" /></a>
+						<a href="{U_DOWN}{bdata.S_ID}"><img src="images/icon_down.gif" title="{L_MOVE_DOWN}" border="0" alt="{L_BLOCK_DOWN}" /></a>
 					<!-- ENDIF -->
-					<a href="{U_EDIT2}{bdata.S_ID}"><img src="images/icon_edit.gif" title="Edit block" border="0" alt="{L_EDIT}" /></a>
+
+
+					<a href="{U_EDIT2}{bdata.S_ID}"><img src="images/icon_edit.gif" title="{L_EDIT_BLOCK}" border="0" alt="{L_EDIT}" /></a>
 
 					<!-- IF bdata.S_FNAME_H != 'block_welcome_message.html' -->
-					<a href="{U_DELETE}{bdata.S_ID}"><img src="images/icon_delete.gif" title="Delete this block" border="0" alt="{L_DELETE}"></a>
+					<a href="{U_DELETE}{bdata.S_ID}"><img src="images/icon_delete.gif" title="{L_DELETE_THIS_BLOCK}" border="0" alt="{L_DELETE}" /></a>
 					<!-- ELSE -->
 					{ICON_DELETE_DISABLED}
 					<!-- ENDIF -->
 
 					<!-- IF bdata.S_HAS_VARS -->
 						<!-- IF bdata.S_FNAME_H == "block_welcome.html" -->
-						<a href="{U_SET_VARS_W}{bdata.S_ID}"><img src="images/vars_edit.gif" title="Set variables in Mini-Modules" border="0" alt="{L_VARS_HAS_EDIT}"></a>
+						<a href="{U_SET_VARS_W}{bdata.S_ID}"><img src="images/vars_edit.gif" title="{L_SET_VARIABLES_IN_MINI-MODULES}" border="0" alt="{L_VARS_HAS_EDIT}" /></a>
 						<!-- ELSE -->
-						<a href="{U_SET_VARS}{bdata.S_ID}"><img src="images/vars_edit.gif" title="{L_VARS_HAS_EDIT}" border="0" alt=""></a>
+						<a href="{U_SET_VARS}{bdata.S_ID}"><img src="images/vars_edit.gif" title="{L_VARS_HAS_EDIT}" border="0" alt="" /></a>
 						<!-- ENDIF -->
 					<!-- ELSE -->
-					<img src="images/vars_no_edit.gif" title="Block has no variables" title="{L_VARS_NO_EDIT}" border="0" alt="">
+					<img src="images/vars_no_edit.gif" title="Block has no variables" title="{L_VARS_NO_EDIT}" border="0" alt="" />
 					<!-- ENDIF -->
 
 					<!-- IF bdata.S_MINIMOD_BASED -->
-						<a href="{U_LINK_MINIMOD}{bdata.S_MOD_BLOCK_ID}"><img src="images/minimod_edit.gif" title="{L_MINIMOD_DETAILS_SHOW}" border="0" alt=""></a>
+						<a href="{U_LINK_MINIMOD}{bdata.S_MOD_BLOCK_ID}"><img src="images/minimod_edit.gif" title="{L_MINIMOD_DETAILS_SHOW}" border="0" alt="" /></a>
 					<!-- ELSE -->
-					<img src="images/minimod_no_edit.gif" title="{L_MINIMOD_DETAILS_NO_EDIT}" border="0" alt="">
+					<img src="images/minimod_no_edit.gif" title="{L_MINIMOD_DETAILS_NO_EDIT}" border="0" alt="" />
 					<!-- ENDIF -->
 
 				</div>
@@ -171,11 +209,11 @@ function expMenu(id)
 	<dl>
 		<dt><label for="position">{L_BLOCK_POSITION_BIG}:</label><br /></dt>
 		<dd><label><select name="position" class="post">
-				<option value="L" <!-- IF S_POSITION === "L" -->selected <!-- ENDIF -->>Page Left</option>
-				<option value="C" <!-- IF S_POSITION === "C" -->selected <!-- ENDIF -->>Page Center</option>
-				<option value="R" <!-- IF S_POSITION === "R" -->selected <!-- ENDIF -->>Page Right</option>
-				<option value="l" <!-- IF S_POSITION === "l" -->selected <!-- ENDIF -->>Left (centre 2x)</option>
-				<option value="r" <!-- IF S_POSITION === "r" -->selected <!-- ENDIF -->>Right (center 2x)</option>
+				<option value="L" <!-- IF S_POSITION === "L" -->selected <!-- ENDIF -->>{L_PAGE_LEFT}</option>
+				<option value="C" <!-- IF S_POSITION === "C" -->selected <!-- ENDIF -->>{L_PAGE_CENTRE}</option>
+				<option value="R" <!-- IF S_POSITION === "R" -->selected <!-- ENDIF -->>{L_PAGE_RIGHT}</option>
+				<option value="l" <!-- IF S_POSITION === "l" -->selected <!-- ENDIF -->>{L_LEFT_OF_CENTRE}</option>
+				<option value="r" <!-- IF S_POSITION === "r" -->selected <!-- ENDIF -->>{L_RIGHT_OF_CENTRE}</option>
 			</select></label>
 		</dd>
 	</dl>
@@ -187,7 +225,7 @@ function expMenu(id)
 			</label>
 		</dd>
 	</dl>
-		<dl>
+	<dl>
 		<dt><label for="type">{L_BLOCK_TYPE_BIG}:</label></dt>
 		<dd>
 			<label><input type="radio" name="type" value="1" <!-- IF S_TYPE -->checked="checked" <!-- ENDIF --> /> {L_HTML}</label>
@@ -206,10 +244,6 @@ function expMenu(id)
 		</dd>
 	</dl>
 	<dl>
-		<dt><label for="img_alt_text">{L_BLOCK_ICON_ALT_TEXT}:</label></dt>
-		<dd><label><input type="text" maxlength="255" size="50" id="img_alt_text" name="img_alt_text" value="{S_IMG_ALT_TEXT}" class="post" /></label></dd>
-	</dl>
-	<dl>
 		<dt><label for="img_file_name">{L_BLOCK_FNAME_I_BIG}:</label><br /><span>{L_BLOCK_FNAME_I_EXPLAIN}</span></dt>
 		<dd><label>
 			<select name="img_file_name" id="img_file_name" class="post" onchange="display_block_image(this.form); return false;">
@@ -217,7 +251,7 @@ function expMenu(id)
 			<option value="{img_file_name.S_BLOCK_FILE_I}" <!-- IF img_file_name.S_BLOCK_FILE_I == S_FNAME_I -->selected <!-- ENDIF -->>{img_file_name.S_BLOCK_FILE_I}</option>
 			<!-- END img_file_name -->
 			</select>
-			<span name='bimage' id='bimage'> <img src='./../images/block_images/small/{S_FNAME_I}'> </span>
+			<span name='bimage' id='bimage'> <img src='{PHPBB_ROOT_PATH}images/block_images/small/{S_FNAME_I}' /> </span>
 			</label>
 		</dd>
 	</dl>
@@ -228,24 +262,14 @@ function expMenu(id)
 			<!-- BEGIN img_file_name -->
 				<!-- IF img_file_name.S_BLOCK_FILE_I -->
 					<a href="#" onclick="set_image('{img_file_name.S_BLOCK_FILE_I}', true, true); return false;">
-					<img src='./../images/block_images/small/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}'>
+					<img src='./../images/block_images/small/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}' />
 					</a>
 				<!-- ENDIF -->
 			<!-- END img_file_name -->
 			</span>
 		<dd/>
 	</dl>
-	<dl>
-		<dt><label>{L_BLOCK_VIEW_BY}:</label>{L_BLOCK_VIEW_BY_EXPLAINED}</dt>
-		<dd><label>
-			<select name="view_by" id="view_by" class="post">{S_VIEW_BY}
-			<!-- BEGIN groups -->
-			<option value="{groups.GROUP_ID}" <!-- IF groups.GROUP_ID == S_VIEW_BY -->selected <!-- ENDIF -->>{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
-			<!-- END groups -->
-			</select>
-			</label>
-		</dd>
-	</dl>
+	<hr />
 	<dl>
 		<dt><label for="scroll">{L_BLOCK_SCROLL_BIG}:</label><br /><span>{L_BLOCK_SCROLL_BIG_EXPLAIN}</span></dt>
 		<dd>
@@ -254,14 +278,81 @@ function expMenu(id)
 			<label><input type="radio" name="scroll" value="0" <!-- IF not S_SCROLL -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
 		</dd>
 	</dl>
+	<hr />
+	<dl>
+		<dt><label for="view_pages">{L_VIEW_PAGES}:</label><br /><span>{L_VIEW_PAGES_EXPLAIN}</span></dt>
+		<!--<dd><br /><input class="post" size="45" maxlength="100" id="view_pages" name="view_pages" value="{S_VIEW_PAGES}" type="text"></dd>-->
+		<dd><span class="imageline" style="padding:5px; border: solid 1px #D7D7D7;">{S_VIEW_PAGES}</span></dd>
+	</dl>
+	<dl>
+		<dt><label for="view_pages">{L_VIEW_PAGE2}</label><br />{L_VIEW_PAGE_EXPLAIN2}</dt>
+		<dd>
+			<!-- split pages into two sections-->
+			<!-- BEGIN pages -->
+				<!-- IF pages.PAGE_ID <= 10 and pages.PAGE_ID != 0 -->
+				<input type="checkbox" style="cursor:pointer" name="view_page_id[]" value="{pages.PAGE_ID}" <!-- IF pages.IS_CHECKED -->checked="checked" <!-- ENDIF --> /> ({pages.PAGE_ID}) {pages.PAGE_NAME} <br />
+				<!-- ENDIF -->
+			<!-- END pages -->
+			<br /><hr />
+			<!-- BEGIN pages -->
+				<!-- IF pages.PAGE_ID > 10 and pages.PAGE_ID != 0 -->
+				<input type="checkbox" style="cursor:pointer" name="view_page_id[]" value="{pages.PAGE_ID}" <!-- IF pages.IS_CHECKED -->checked="checked" <!-- ENDIF --> /> ({pages.PAGE_ID}) {pages.PAGE_NAME} <br />
+				<!-- ENDIF -->
+			<!-- END pages -->
+		</dd>
+	</dl>
+	<dl>
+		<dt><a href="{U_MANAGE_PAGES}" target="_blank" type="button" name="allpages" value="{L_MANAGE_PAGES}" class="button1" />{L_MANAGE_PAGES}</a><dt>
+		<dd style="float:left;">
+			<input type="button" name="mark_all" value="{L_MARK_ALL}" class="button1" onclick="switchMarks(true, '');" />&nbsp;
+			<input type="button" name="unmark_all" value="{L_UNMARK_ALL}" class="button1" onclick="switchMarks(false,'');" />&nbsp;
+		</dd>
+	</dl>
+	<hr />
+	<dl>
+		<dt><label for="view_groups">{L_BLOCK_VIEW_GROUPS}:</label><br /><span>{L_BLOCK_VIEW_GROUPS_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="view_by">{L_BLOCK_VIEW_BY}:</label><br /><span>{L_BLOCK_VIEW_BY_EXPLAIN}</span></dt>
+		<dd><label><br />
+			<select name="view_by" id="view_by" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'view_groups'); ">{S_VIEW_BY}
+			<!-- BEGIN groups -->
+			<option value="{groups.GROUP_ID}" <!-- IF groups.GROUP_ID == S_VIEW_BY -->selected <!-- ENDIF -->>{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
+			<!-- END groups -->
+			</select>
+			</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="view_all">{L_BLOCK_VIEW_ALL}:</label><br /><span>{L_BLOCK_VIEW_ALL_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" name="view_all" value="1" <!-- IF S_VIEW_ALL -->checked="checked" <!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" name="view_all" value="0" <!-- IF not S_VIEW_ALL -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
 	<dl>
 		<dt><label for="has_vars">{L_HAS_VARS}:</label><br /><span>{L_HAS_VARS_EXPLAIN}</dt>
 		<dd>
 		<br />
-			<label><input type="radio" name="has_vars" value="1" <!-- IF S_HAS_VARS -->checked="checked" <!-- ENDIF --> /> {L_YES}</label>
-			<label><input type="radio" name="has_vars" value="0" <!-- IF not S_HAS_VARS -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
+			<label><input onclick="ShowHide('vars');" type="radio" name="has_vars" value="1" <!-- IF S_HAS_VARS -->checked="checked" <!-- ENDIF --> /> {L_YES}</label>
+			<label><input onclick="ShowHide('vars');" type="radio" name="has_vars" value="0" <!-- IF not S_HAS_VARS -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
 		</dd>
 	</dl>
+	<div style="display:<!-- IF not S_HAS_VARS -->none<!-- ELSE -->block<!-- ENDIF -->" id="vars">
+ 	<dl>
+		<dt><label for="var_file_name">{L_BLOCK_VAR_FILE}:</label><br />{L_BLOCK_VAR_FILE_EXPLAIN}</dt>
+		<dd><label>
+		<select name="var_file_name" class="post">
+			<!-- BEGIN var_file_name -->
+			<option value="{var_file_name.S_VAR_FILE_NAME}" <!-- IF var_file_name.S_VAR_FILE_NAME == S_FNAME_V -->selected <!-- ENDIF -->>{var_file_name.S_VAR_FILE_NAME}</option>
+			<!-- END var_file_name -->
+		</select>
+		</dd>
+	</dl>
+	</div>
+
 	<hr />
 	<dl>
 		<dt><label for="has_vars">{L_MINIMOD_BASED}:</label><br /><span>{L_MINIMOD_BASED_EXPLAIN}</dt>
@@ -271,7 +362,7 @@ function expMenu(id)
 			<label><input onclick="ShowHide('show');" type="radio" name="minimod_based" value="0" <!-- IF not S_MINIMOD_BASED -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
 		</dd>
 	</dl>
-	<div style="display:<!-- IF not S_MINIMOD_BASED -->none<!-- ENDIF -->" id="show">
+	<div style="display:<!-- IF not S_MINIMOD_BASED -->none<!-- ELSE -->block<!-- ENDIF -->" id="show">
  	<dl>
 		<dt><label for="mod_block_id">{L_MINIMOD_OPTIONS}:</label><br />{L_MINIMOD_OPTIONS_EXPLAIN}</dt>
 		<dd><label>
@@ -284,6 +375,11 @@ function expMenu(id)
 	</dl>
 	</div>
 
+	<hr />
+	<dl>
+		<dt><label for="cache_time">{L_BLOCK_CACHE_TIME}:</label><br />{L_BLOCK_CACHE_TIME_EXPLAIN}</dt>
+		<dd><label><br /><input type="text" maxlength="10" size="6" name="cache_time" value="{S_CACHE_TIME}" class="post" /></label></dd>
+	</dl>
 </fieldset>
 <!-- ENDIF -->
 
@@ -305,11 +401,11 @@ function expMenu(id)
 		<dt><label>{L_BLOCK_POSITION_BIG}:</label></dt>
 		<dd><label>
 				<select name="position" class="post">
-					<option value="L" <!-- IF bdata.S_POSITION === "L" -->selected <!-- ENDIF -->>Page Left</option>
-					<option value="C" <!-- IF bdata.S_POSITION === "C" -->selected <!-- ENDIF -->>Page Center</option>
-					<option value="R" <!-- IF bdata.S_POSITION === "R" -->selected <!-- ENDIF -->>Page Right</option>
-					<option value="l" <!-- IF bdata.S_POSITION === "l" -->selected <!-- ENDIF -->>Left (centre 2x)</option>
-					<option value="r" <!-- IF bdata.S_POSITION === "r" -->selected <!-- ENDIF -->>Right (center 2x)</option>
+					<option value="L" <!-- IF bdata.S_POSITION === "L" -->selected <!-- ENDIF -->>{L_PAGE_LEFT}</option>
+					<option value="C" <!-- IF bdata.S_POSITION === "C" -->selected <!-- ENDIF -->>{L_PAGE_CENTRE}</option>
+					<option value="R" <!-- IF bdata.S_POSITION === "R" -->selected <!-- ENDIF -->>{L_PAGE_RIGHT}</option>
+					<option value="l" <!-- IF bdata.S_POSITION === "l" -->selected <!-- ENDIF -->>{L_LEFT_OF_CENTRE}</option>
+					<option value="r" <!-- IF bdata.S_POSITION === "r" -->selected <!-- ENDIF -->>{L_RIGHT_OF_CENTRE}</option>
 				</select>
 			</label>
 		</dd>
@@ -340,11 +436,6 @@ function expMenu(id)
 		</dd>
 	</dl>
 	<dl>
-		<dt><label for="img_alt_text">{L_BLOCK_ICON_ALT_TEXT}:</label></dt>
-		<dd><label><input type="text" maxlength="255" size="50" id="img_alt_text" name="img_alt_text" value="{S_IMG_ALT_TEXT}" class="post" /></label></dd>
-	</dl>
-
-	<dl>
 		<dt><label for="img_file_name">{L_BLOCK_FNAME_I_BIG}:</label><br /><span>{L_BLOCK_FNAME_I_EXPLAIN}</span></dt>
 		<dd><label>
 			<select name="img_file_name" id="img_file_name" class="post" onchange="display_block_image(this.form); return false;">
@@ -352,7 +443,7 @@ function expMenu(id)
 			<option value="{img_file_name.S_BLOCK_FILE_I}" <!-- IF img_file_name.S_BLOCK_FILE_I == S_FNAME_I -->selected <!-- ENDIF -->>{img_file_name.S_BLOCK_FILE_I}</option>
 			<!-- END img_file_name -->
 			</select>
-			<span name='bimage' id='bimage'> <img src='./../images/block_images/small/{S_FNAME_I}'> </span>
+			<span name='bimage' id='bimage'> <img src='./../images/block_images/small/{S_FNAME_I}' /> </span>
 			</label>
 		</dd>
 	</dl>
@@ -363,24 +454,41 @@ function expMenu(id)
 			<!-- BEGIN img_file_name -->
 				<!-- IF img_file_name.S_BLOCK_FILE_I -->
 					<a href="#" onclick="set_image('{img_file_name.S_BLOCK_FILE_I}', true, true); return false;">
-					<img src='./../images/block_images/small/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}'>
+					<img src='./../images/block_images/small/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}' />
 					</a>
 				<!-- ENDIF -->
 			<!-- END img_file_name -->
 			</span>
 		<dd/>
 	</dl>
+
 	<dl>
-		<dt><label>{L_BLOCK_VIEW_BY}:</label>{L_BLOCK_VIEW_BY_EXPLAINED}</dt>
+		<dt><label for="view_groups">{L_BLOCK_VIEW_GROUPS}:</label><br /><span>{L_BLOCK_VIEW_GROUPS_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text"></dd>
+	</dl>
+
+	<dl>
+		<dt>{L_BLOCK_VIEW_BY_EXPLAIN}</dt>
 		<dd><label>
-			<select name="view_by" id="view_by" class="post">{S_VIEW_BY}
+
+			<select name="view_by" id="view_by" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'view_groups'); ">{S_VIEW_BY}
 			<!-- BEGIN groups -->
-			<option value="{groups.GROUP_ID}" <!-- IF groups.GROUP_ID == S_VIEW_BY -->selected <!-- ENDIF -->>{groups.GROUP_ID}, {groups.GROUP_NAME}</option>
+			<option value="{groups.GROUP_ID}" <!-- IF groups.GROUP_ID == S_VIEW_BY -->selected <!-- ENDIF -->>{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
 			<!-- END groups -->
 			</select>
 			</label>
 		</dd>
 	</dl>
+	<dl>
+		<dt><label for="view_all">{L_BLOCK_VIEW_ALL}:</label><br /><span>{L_BLOCK_VIEW_ALL_EXPLAIN}</span></dt>
+		<dd>
+		<br />
+			<label><input type="radio" name="view_all" value="1" <!-- IF S_VIEW_ALL -->checked="checked" <!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" name="view_all" value="0" <!-- IF not S_VIEW_ALL -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+
+	<hr />
 	<dl>
 		<dt><label>{L_BLOCK_SCROLL_BIG}:</label><span>{L_BLOCK_SCROLL_BIG_EXPLAIN}</span></dt>
 		<dd>
@@ -389,18 +497,59 @@ function expMenu(id)
 			<label><input type="radio" name="scroll" value="0" <!-- IF not S_SCROLL -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
 		</dd>
 	</dl>
+
+
 	<dl>
-		<dt><label>{L_HAS_VARS}:</label><br /><span>{L_HAS_VARS_EXPLAIN}</span></dt>
+		<dt><label for="view_pages">{L_VIEW_PAGES}:</label><br /><span>{L_VIEW_PAGES_EXPLAIN}</span></dt>
+		<!--<dd><br /><input class="post" size="45" maxlength="100" id="view_pages" name="view_pages" value="{S_VIEW_PAGES}" type="text"></dd>-->
+		<dd><span class="imageline" style="padding:5px; border: solid 1px #D7D7D7;">{S_VIEW_PAGES}</span></dd>
+	</dl>
+	<dl>
+		<dt><label for="view_pages">{L_VIEW_PAGE2}</label><br />{L_VIEW_PAGE_EXPLAIN2}</dt>
 		<dd>
-		<br />
-			<label><input type="radio" name="has_vars" value="1" <!-- IF S_HAS_VARS -->checked="checked" <!-- ENDIF --> /> {L_YES}</label>
-			<label><input type="radio" name="has_vars" value="0" <!-- IF not S_HAS_VARS -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
+			<!-- split pages into two sections-->
+			<!-- BEGIN pages -->
+				<!-- IF pages.PAGE_ID <= 10 and pages.PAGE_ID != 0 -->
+				<input type="checkbox" style="cursor:pointer" name="view_page_id[]" value="{pages.PAGE_ID}" <!-- IF pages.IS_CHECKED -->checked="checked" <!-- ENDIF --> /> ({pages.PAGE_ID}) {pages.PAGE_NAME} <br />
+				<!-- ENDIF -->
+			<!-- END pages -->
+			<br /><hr />
+			<!-- BEGIN pages -->
+				<!-- IF pages.PAGE_ID > 10 and pages.PAGE_ID != 0 -->
+				<input type="checkbox" style="cursor:pointer" name="view_page_id[]" value="{pages.PAGE_ID}" <!-- IF pages.IS_CHECKED -->checked="checked" <!-- ENDIF --> /> ({pages.PAGE_ID}) {pages.PAGE_NAME} <br />
+				<!-- ENDIF -->
+			<!-- END pages -->
 		</dd>
 	</dl>
+	<dl>
+		<dt><dt>
+		<dd style="float:left;">
+			<input type="button" name="mark_all" value="{L_MARK_ALL}" class="button1" onclick="switchMarks(true, '');" />&nbsp;
+			<input type="button" name="unmark_all" value="{L_UNMARK_ALL}" class="button1" onclick="switchMarks(false,'');" />&nbsp;
+		</dd>
+	</dl>
+	<hr />
 
-
-
-
+	<dl>
+		<dt><label for="has_vars">{L_HAS_VARS}:</label><br /><span>{L_HAS_VARS_EXPLAIN}</dt>
+		<dd>
+		<br />
+			<label><input onclick="ShowHide('vars');" type="radio" name="has_vars" value="1" <!-- IF S_HAS_VARS -->checked="checked" <!-- ENDIF --> /> {L_YES}</label>
+			<label><input onclick="ShowHide('vars');" type="radio" name="has_vars" value="0" <!-- IF not S_HAS_VARS -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<div style="display:<!-- IF not S_HAS_VARS -->none<!-- ELSE -->block<!-- ENDIF -->" id="vars">
+ 	<dl>
+		<dt><label for="var_file_name">{L_BLOCK_VAR_FILE}:</label><br />{L_BLOCK_VAR_FILE_EXPLAIN}</dt>
+		<dd><label>
+		<select name="var_file_name" class="post">
+			<!-- BEGIN var_file_name -->
+			<option value="{var_file_name.S_VAR_FILE_NAME}" <!-- IF var_file_name.S_VAR_FILE_NAME == S_FNAME_V -->selected <!-- ENDIF -->>{var_file_name.S_VAR_FILE_NAME}</option>
+			<!-- END var_file_name -->
+		</select>
+		</dd>
+	</dl>
+	</div>
 	<hr />
 	<dl>
 		<dt><label for="has_vars">{L_MINIMOD_BASED}:</label><br /><span>{L_MINIMOD_BASED_EXPLAIN}</dt>
@@ -410,7 +559,7 @@ function expMenu(id)
 			<label><input onclick="ShowHide('show');" type="radio" name="minimod_based" value="0" <!-- IF not S_MINIMOD_BASED -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
 		</dd>
 	</dl>
-	<div style="display:<!-- IF not S_MINIMOD_BASED -->none<!-- ENDIF -->" id="show">
+	<div style="display:<!-- IF not S_MINIMOD_BASED -->none<!-- ELSE -->block<!-- ENDIF -->" id="show">
  	<dl>
 		<dt><label for="mod_block_id">{L_MINIMOD_OPTIONS}:</label><br />{L_MINIMOD_OPTIONS_EXPLAIN}</dt>
 		<dd><label>
@@ -422,10 +571,6 @@ function expMenu(id)
 		</dd>
 	</dl>
 	</div>
-
-
-
-
 </fieldset>
 <!-- ENDIF -->
 
@@ -436,10 +581,9 @@ function expMenu(id)
 <!-- ENDIF -->
 
 <!-- IF L_BLOCK_REPORT -->
-	<!--<b><a href="{U_BACK}">{L_BLOCK_REPORT}<br /></a></b>-->
 	<b>{L_BLOCK_REPORT}<br /></b>
 <!-- ELSE -->
-	<!-- IF S_OPTIONS != "Delete" && S_OPTIONS != 'Manage'-->
+	<!-- IF S_OPTIONS != "Delete" && S_OPTIONS != 'Manage' && S_OPTIONS != "Save" -->
 	<fieldset class="submit-buttons">
 		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
 		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
@@ -447,13 +591,19 @@ function expMenu(id)
 	<!-- ENDIF -->
 <!-- ENDIF -->
 
-<!-- IF S_OPTIONS == 'Manage'-->
+<!-- 05 June 2010 -->
+<!-- IF S_OPTIONS != 'Edit' -->
+	<!-- IF S_OPTIONS == 'Manage' and S_TYPE != ''  -->
 	<p class="quick" style="text-align:center;">
 		<input class="button2" name="add_block" type="submit" value="{L_BLOCKS_ADD_HEADER}" />
 		<input type="hidden" name="mode" value="add" />
+	</p>
+	<!-- ELSEIF S_OPTIONS == 'Manage' -->
+	<p class="quick" style="text-align:center;">
 		<input class="button2" name="reindex" type="submit" value="{L_BLOCKS_REINDEX}" />
 		<input type="hidden" name="mode" value="reindex" />
 	</p>
+	<!-- ENDIF -->
 <!-- ENDIF -->
 
 {S_FORM_TOKEN}

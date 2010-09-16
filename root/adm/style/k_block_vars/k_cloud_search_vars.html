@@ -1,0 +1,14 @@
+<fieldset>
+	<legend>{L_CLOUD_SEARCH}</legend>
+	<dl>
+		<dt><label for="cloud_search_allow">{L_CLOUD_SEARCH_ALLOW}:</label></dt>
+		<dd>
+		<label><input type="radio" class="radio" id="cloud_search_allow" name="cloud_search_allow" value="1"<!-- IF S_CLOUD_SEARCH_ALLOW --> checked="checked" <!-- ENDIF --> />{L_YES}</label>
+		<label><input type="radio" class="radio" id="cloud_search_allow" name="cloud_search_allow" value="0"<!-- IF not S_CLOUD_SEARCH_ALLOW --> checked="checked" <!-- ENDIF --> />{L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="cloud_search_cache">{L_CLOUD_SEARCH_CACHE}:</label><span>{L_CLOUD_SEARCH_CACHE_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="6" maxlength="8" name="cloud_search_cache" value="{S_CLOUD_SEARCH_CACHE}" type="text"></label></dd>
+	</dl>
+</fieldset>

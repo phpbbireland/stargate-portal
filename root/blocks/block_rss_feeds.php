@@ -33,14 +33,30 @@ if (!defined('IN_PHPBB'))
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 // include lastRSS
-include_once($phpbb_root_path . 'includes/sgp_lastrss.'.$phpEx);
 
-$queries = 0;
-$cached_queries = 0;
+include($phpbb_root_path . 'includes/sgp_lastrss.'.$phpEx);
+
+global $_config;
+$sgp_cache_time = $k_config['sgp_cache_time'];
+$queries = $cached_queries = 0;
 
 function ShowRSSdesc($url) 
 {
     global $rss, $user, $phpbb_root_path;
+	// Create lastRSS object
+	$rss = new lastRSS;
+
+
+	// portal globals/cache
+	global $k_config;
+
+	// Set cache dir, cache interval and character encoding
+	$rss->cache_dir = './cache';
+	$rss->cache_time = $k_config['rss_feeds_cache_time']; // Maximum age of the cache file for feed before it is updated, in seconds. 
+	$rss->cp = 'UTF-8';  // character encoding of your page ! phpBB default is UTF8 so you don´t need to edit it
+	$rss->rsscp = 'UTF-8'; // default encoding of RSS if encoding tag is not available
+	$rss->items_limit = $k_config['rss_feeds_items_limit']; //number of news
+	$rss->type = $k_config['rss_feeds_type']; // connection type (fopen / curl)
 
     if ($rs = $rss->get($url)) 
 	{
@@ -77,7 +93,10 @@ function ShowRSSdesc($url)
 }
 function ShowRSSnodesc($url) 
 {
-    global $rss, $phpbb_root_path;
+	global $rss, $phpbb_root_path, $user;
+
+	// Create lastRSS object
+	$rss = new lastRSS;
 
     if ($rs = $rss->get($url)) 
 	{
@@ -111,23 +130,11 @@ function ShowRSSnodesc($url)
 		return $msg;
 	}
 }
-// Create lastRSS object
-$rss = new lastRSS;
-
-// portal globals/cache
-global $k_config;
 
 // retrieve portal config variables
 $rss_feeds_random_limit = $k_config['rss_feeds_random_limit'];
 
-	
-// Set cache dir, cache interval and character encoding
-$rss->cache_dir = './cache';
-$rss->cache_time = $k_config['rss_feeds_cache_time']; // Maximum age of the cache file for feed before it is updated, in seconds. 
-$rss->cp = 'UTF-8';  // character encoding of your page ! phpBB default is UTF8 so you don´t need to edit it
-$rss->rsscp = 'UTF-8'; // default encoding of RSS if encoding tag is not available
-$rss->items_limit = $k_config['rss_feeds_items_limit']; //number of news
-$rss->type = $k_config['rss_feeds_type']; // connection type (fopen / curl)
+
 
 $sql = 'SELECT *
    FROM ' . K_NEWSFEEDS_TABLE . '
@@ -135,7 +142,7 @@ $sql = 'SELECT *
    ORDER BY feed_id DESC';
 $result = $db->sql_query_limit($sql, $rss_feeds_random_limit);
 
-if(!($result = $db->sql_query($sql, 600)))
+if(!($result = $db->sql_query($sql, $sgp_cache_time)))
 {
 	trigger_error('RSS_LIST_ERROR');
 } 
@@ -161,35 +168,40 @@ for ($i = 0; isset($feeds[$i]['id']); $i++)
 		'S_ROW_POSITION'	=> $feeds[$i]['position'],
 	));
 
-	if($feeds[$i]['position'] == 1) // left side
+	if ($feeds[$i]['position'] == 1) // left side
 	{
 		// Get left RSS content
 		$feed_left_url[$feeds[$i]['position'] == 1] = $feeds[$i]['url'];
 		$rss_left_column = '';
-		if($feeds[$i]['description'] == 1)
+		if ($feeds[$i]['description'] == 1)
 		{
 			foreach ($feed_left_url as $url) $rss_left_column.=ShowRSSdesc($url);
 		}
-		if($feeds[$i]['description'] == 2)
+		if ($feeds[$i]['description'] == 2)
 		{
 			foreach ($feed_left_url as $url) $rss_left_column.=ShowRSSnodesc($url);
 		}
+
+		$find		= array('<strong>', '</strong>');
+		$replace	= array('<br />', '<br />');
+		$rss_left_column = str_replace($find, $replace, $rss_left_column);
+
 		$template->assign_block_vars('rss_left_column', array(
-			'LEFT_SYNDICATION' => $rss_left_column,
-			'FEEDS_TITLE' => '<a href="' . $feeds[$i]['url'] . '" rel="external">' . $feeds[$i]['title'] . "</a>",
+			'LEFT_SYNDICATION' => $rss_left_column . '<br />',
+			'FEEDS_TITLE' => '<a href="' . $feeds[$i]['url'] . '" rel="external" style="text-align:center;">' . $feeds[$i]['title'] . "</a>",
 		));
 	}
 	
-	if($feeds[$i]['position'] == 2) // right side
+	if ($feeds[$i]['position'] == 2) // right side
 	{
 		// Get right RSS content
 		$feed_right_url[$feeds[$i]['position'] == 2] = $feeds[$i]['url'];
 		$rss_right_column ='';
-		if($feeds[$i]['description'] == 1)
+		if ($feeds[$i]['description'] == 1)
 		{
 			foreach ($feed_right_url as $url) $rss_right_column.=ShowRSSdesc($url);
 		}
-		if($feeds[$i]['description'] == 2)
+		if ($feeds[$i]['description'] == 2)
 		{
 			foreach ($feed_right_url as $url) $rss_right_column.=ShowRSSnodesc($url);
 		}
@@ -199,7 +211,7 @@ for ($i = 0; isset($feeds[$i]['id']); $i++)
 		));
 	}
 	$template->assign_vars(array(
-		'RS_PORTAL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0'),
+		'RSS_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	));
 
 }
