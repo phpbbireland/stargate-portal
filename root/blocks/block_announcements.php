@@ -108,7 +108,7 @@ $sql = 'SELECT
 // query the database
 if (!($result = $db->sql_query_limit($sql, (($number_of_announce_items_to_display) ? $number_of_announce_items_to_display : 1), 0, $sgp_cache_time)))
 {
-	trigger_error($user->lang['ERROR_PORTAL_ANNOUNCE'], "", __LINE__, __FILE__, $sql);
+	trigger_error($user->lang['ERROR_PORTAL_ANNOUNCE'] 	. ' ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
 }
 
 $i = 0;

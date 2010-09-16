@@ -37,7 +37,6 @@
 	if (!$result = $db->sql_query($sql, $sgp_cache_time))
 	{
 		trigger_error($user->lang['ERROR_PORTAL_WELCOME'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
-		//trigger_error('ERROR_PORTAL_WELCOME');
 	}
 	else
 	{

@@ -57,7 +57,7 @@ $queries = $cached_queries = 0;
 
 	if (!$result = $db->sql_query($sql, $sgp_cache_time))
 	{
-		trigger_error($user->lang['ERROR_FORUM_INFO']. basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+		trigger_error($user->lang['ERROR_FORUM_INFO'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}
 
 	while( $row = $db->sql_fetchrow($result) )
@@ -94,7 +94,7 @@ $queries = $cached_queries = 0;
 
 	if (!$result = $db->sql_query($sql, $sgp_cache_time))
 	{
-		trigger_error('ERROR_PORTAL_RECENT_TOPICS');
+		trigger_error('ERROR_PORTAL_RECENT_TOPICS' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}
 
 	while ($row = $db->sql_fetchrow($result))
@@ -131,7 +131,7 @@ $queries = $cached_queries = 0;
 	}
 	else
 	{
-		trigger_error('ERROR_PORTAL_RECENT_TOPICS');
+		trigger_error('ERROR_PORTAL_RECENT_TOPICS' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}
 
 	$db->sql_freeresult($result);

@@ -105,7 +105,7 @@ $styles_num = sizeof($db->sql_fetchrowset($result));
 		
 if (!$result = $db->sql_query($sql))
 {
-	trigger_error($user->lang['ERROR_PORTAL_STYLE_SELECT']. basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+	trigger_error($user->lang['ERROR_PORTAL_STYLE_SELECT'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }
 
 $select_theme = "<select class=\"inputbox autowidth\" onchange=\"this.form.submit();\" name=\"style\" >\n";

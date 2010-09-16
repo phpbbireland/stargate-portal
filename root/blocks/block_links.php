@@ -27,33 +27,23 @@
 	$phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 	global $k_config, $phpbb_root_path;
+
 	$sgp_cache_time = $k_config['sgp_cache_time'];
 	$queries = $cached_queries = 0;
+
+	$show_all_links = true;
 
 	// retrieve portal config variables
 	$number_of_links_to_display = $k_config['number_of_links_to_display'];
 
-	// should we scroll this data ?
-	$sql = "SELECT scroll
-		FROM " . K_BLOCKS_TABLE . "
-		WHERE html_file_name = 'block_links.html' ";
-
-	if ($result = $db->sql_query($sql, $sgp_cache_time))
+	if($number_of_links_to_display < 6 and $number_of_links_to_display != 0)
 	{
-		$row = $db->sql_fetchrow($result);
-		$scroll = $row['scroll'];
-	}
-	else
-	{
-		//trigger_error('Error! Could not query <strong> Blocks Table</strong>: ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
-		trigger_error('ERROR_PORTAL_BLOCKS');
+		$show_all_links = false;
 	}
 
-	$db->sql_freeresult($result);
-
+	// do we have a dedicated links upload forum? If not don't show the link upload image //
 	if (isset($k_config['link_forum_id']) && $k_config['link_forum_id'] != 0)
 	{
-		//$links_forum = 'posting.php?mode=post&amp;f=' . (int)$k_config['link_forum_id'];
 		$links_forum =  append_sid("{$phpbb_root_path}posting.$phpEx", 'f=' . (int)$k_config['link_forum_id']);
 	}
 	else
@@ -68,11 +58,6 @@
 
 	while ($file = $imgs->read())
 	{
-		/*
-		if (preg_match("/\b^.gif\b/i", $file) || preg_match("/\b^.jpg\b/i", $file) || preg_match("/\b^.png\b/i", $file))
-			$imglist .= "$file ";
-		*/
-
 		if (strpos($file, ".gif") || strpos($file, ".jpg") || strpos($file, ".png"))
 		{
 			$imglist .= "$file ";
@@ -103,7 +88,8 @@
 		$random = ($a - $number_of_links_to_display);
 	}
 
-	if ($scroll)
+	// The number of link images to show (scrolled if scroll set in block)
+	if ($show_all_links)
 	{
 		$linkscontent  = '<br /> <div style="text-align: center; width: 100%; margin: 0 auto; padding: 0;">';
 
@@ -139,7 +125,6 @@
 
 		for ($i = 0; $i <= $number_of_links_to_display-1; $i++)
 		{
-
 			$image = $imglist[$i+$random];
 
 			if (strstr($image, 'gif'))
@@ -172,7 +157,6 @@
 		'SUBMIT_LINK' 		=> $links_forum,
 		'LINKS_ERROR' 		=> true,
 		'LINKS_COUNT'		=> $a,
-		'S_SCROLL_LINKS'	=> ($scroll) ? true : false,
 		'LINKS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	));
 

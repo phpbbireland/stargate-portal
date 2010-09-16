@@ -110,7 +110,7 @@ $sql = 'SELECT
 $qry_limit = ($number_of_news_items_to_display) ? $number_of_news_items_to_display : 1;
 if (!($result = $db->sql_query_limit($sql, $qry_limit, 0, $sgp_cache_time)))
 {
-	trigger_error('ERROR_PORTAL_NEWS');
+	trigger_error('ERROR_PORTAL_NEWS' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }
 
 $i = 0;

@@ -76,9 +76,7 @@ else
 }
 $db->sql_freeresult($result);
 
-$style_row = ($scroll) ? 'scrollwide' : 'staticwide';
-
-//$template->assign_block_vars($style_row, array());
+$style_row = ($scroll) ? 'scrollwide_' : 'staticwide_';
 
 // get all forums //
 $sql = "SELECT * FROM ". FORUMS_TABLE . " ORDER BY forum_id";
@@ -143,6 +141,7 @@ $sql = 'SELECT SQL_CACHE p.post_id, t.topic_id, t.topic_time, t.topic_title, t.t
 $result = $db->sql_query_limit($sql, $display_this_many);
 
 $row = $db->sql_fetchrowset($result);
+
 $db->sql_freeresult($result);
 
 $row_count = count($row);
@@ -152,7 +151,6 @@ if ($row_count < $display_this_many)
 {
 	$display_this_many = $row_count;
 }
-
 
 /* 
 We need a way to disable scrolling (of any block) if the information retrieved
@@ -226,7 +224,7 @@ for ($i = 0; $i < $display_this_many; $i++)
 	}
 
 
-	$template->assign_block_vars($style_row . '.recent_topic_row', array(
+	$template->assign_block_vars($style_row . 'recent_topic_row', array(
 		'LAST_POST_IMG_W'	=> $user->img('icon_topic_newest', 'VIEW_LATEST_POST'),
 		'LAST_POST_IMG_W'	=> $next_img,
 		'FORUM_W'			=> $forum_name,
@@ -234,23 +232,16 @@ for ($i = 0; $i < $display_this_many; $i++)
 		'TITLE_W'			=> censor_text($my_title),
 		'U_TITLE_W'			=> $view_topic_url . '&amp;p=' . $row[$i]['topic_last_post_id'] . '#p' . $row[$i]['topic_last_post_id'],
 		'POSTER_FULL_W'		=> get_username_string('full', $row[$i]['topic_last_poster_id'], $row[$i]['topic_last_poster_name'], $row[$i]['topic_last_poster_colour']),
-
-		//'POSTER'			=> $row[$i]['topic_last_poster_name'],
-		//'S_TEST'			=> $user->lang['WIDE_VERSION'],
-
 		'POSTTIME_W'		=> $this_post_time,
 		'S_ROW_COUNT_W'		=> $i,
-
 		'S_UNIQUE_W'		=> $unique,
-
-		'S_TYPE_W'		=> $row[$i]['topic_type'],
-		'TOOLTIP_W'		=> bbcode_strip($row[$i]['post_text']),
-		'TOOLTIP2_W'	=> bbcode_strip($row[$i]['forum_desc']),
-
-		//'TOOLTIP'		=> bbcode_strip(censor_text($row[$i]['post_text'])),
+		'S_TYPE_W'			=> $row[$i]['topic_type'],
+		'TOOLTIP_W'			=> bbcode_strip($row[$i]['post_text']),
+		'TOOLTIP2_W'		=> bbcode_strip($row[$i]['forum_desc']),
+		//'TOOLTIP'			=> bbcode_strip(censor_text($row[$i]['post_text'])),
 		//'TOOLTIP2'		=> bbcode_strip(censor_text($row[$i]['forum_desc'])),
 	));
-	//echo 'Count: ' . $i . ' Current ID = ' . $row[$i]['forum_id'] . ' Last ID = '. $last_forum . '<br />';
+
 	$last_forum = $row[$i]['forum_id'];
 }
 

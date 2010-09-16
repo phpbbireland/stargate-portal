@@ -78,8 +78,7 @@ $sql = "SELECT id, page_name, page_meta, page_desc, page_extn ,body, head, foot 
 
 if (!$result = $db->sql_query($sql))
 {
-	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
-	trigger_error($user->lang['ERROR_PORTAL_MODULE'] , basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+	trigger_error('ERROR_PORTAL_MODULE');
 }
 $row = $db->sql_fetchrow($result);
 
