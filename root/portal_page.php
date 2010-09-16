@@ -38,8 +38,10 @@
 	$auth->acl($user->data);
 	$user->setup('portal/portal');
 
-	global k_config;
+	global $k_config;
 	$sgp_cache_time = $k_config['sgp_cache_time'];
+
+	$sgp_cache_time = 0;
 
 	$portal_page = request_var('portal_page', 0);
 
