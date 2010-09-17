@@ -4,14 +4,14 @@
 ://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/
 @version $Id: stargate_041.xml 315 2009-01-10 05:43:06Z michaelo $ -->
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
-  <header>
-    <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+<header>
+<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-    <title lang="en">Stargate Portal (aka Kiss Portal)</title>
+<title lang="en">Stargate Portal (aka Kiss Portal)</title>
 
 	<description lang="en">An advanced, fully integrated, portal for phpBB 3.0.7PL1</description>
 
-    <author-notes lang="en">
+<author-notes lang="en">
 	Stargate Portal (aka Kiss Portal) is an advanced, fully integrated, portal for phpBB3. 
 	The portal is packed with a host of features all of which are configurable via portal tab in the ACP.
 
@@ -23,6 +23,9 @@
 	Features:
 			For a complete list see: http://www.stargate-portal.com/forum/web_pages.php?mode=features (Available end of December 2010)
 
+	Defalt Style:
+	Set override user styles to yes and prosilver as default, until you update your favorite styles...
+
 	Style Support:
 	A substantial number of the more popular styles have already been updated to support the Stargate Portal, should your favorite style require updating please contact stargate-portal.com and request a port...
 
@@ -31,61 +34,61 @@
 	The portal copyright must be maintained in all page footers... Should you choose to remove this copyright notice, do not expect support as none will be given...
 
 	Many thanks to everyone who supported the portal and a special thanks to the development team: JohnnyTheOne, livewirestu, NeXur, HelterSkelter and Mitch...
-    </author-notes>
+</author-notes>
 
-    <author-group>
-      <author>
-        <realname>Michael O'Toole</realname>
-        <email>o2l@eircom.net</email>
-        <username>michaelo</username>
-		<contributions-group>
-			<contributions status="past" from="2005" to="2010" position="Author"/>
-		</contributions-group>
-        <homepage>http://www.stargate-portal.com</homepage>
-        <contributions />
-      </author>
+<author-group>
+<author>
+	<realname>Michael O'Toole</realname>
+	<email>o2l@eircom.net</email>
+	<username>michaelo</username>
+	<contributions-group>
+		<contributions status="past" from="2005" to="2010" position="Author"/>
+	</contributions-group>
+	<homepage>http://www.stargate-portal.com</homepage>
+<contributions />
+</author>
+</author-group>
 
-    </author-group>
-    <mod-version>3.0.5</mod-version>
-    <installation>
-      <level>intermediate</level>
-      <time>2503</time>
-      <target-version>3.0.7-PL1</target-version>
-    </installation>
-    <history>
-      <entry>
-        <date>2005-06-06</date>
-			<rev-version>
-			0.0.1
-			<release></release>
-			</rev-version>
-        <changelog lang="en">
-          <change>Original name: KISS Portal</change>
-		  <change>Not released to public (testing only)...</change>
-		  <change>Contained a handful of blocks and ACP controls.</change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2008-06-06</date>
-			<rev-version>
+<mod-version>3.0.6</mod-version>
+	<installation>
+	<level>intermediate</level>
+	<time>2503</time>
+	<target-version>3.0.7-PL1</target-version>
+	</installation>
+	<history>
+		<entry>
+			<date>2005-06-06</date>
+				<rev-version>
+				0.0.1
+				<release></release>
+				</rev-version>
+			<changelog lang="en">
+				<change>Original name: KISS Portal</change>
+				<change>Not released to public (testing only)...</change>
+				<change>Contained a handful of blocks and ACP controls.</change>
+			</changelog>
+		</entry>
+		<entry>
+		<date>2008-06-06</date>
+		<rev-version>
 			1.0.0
 			<release></release>
-			</rev-version>
-        <changelog lang="en">
-          <change>Released for testing only...</change>
-		  <change>Several additional blocks.</change>
-		  <change>Introduced additional ACP control.</change>
-		  <change>Added Mini-modules...</change>
-		  <change>Added portal youtube mod...</change>
-		  <change>Added web pages...</change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2010-17-03</date>
-		<rev-version>
-			<release>RC2</release>
-			2.0.0
 		</rev-version>
+			<changelog lang="en">
+			<change>Released for testing only...</change>
+			<change>Several additional blocks.</change>
+			<change>Introduced additional ACP control.</change>
+			<change>Added Mini-modules...</change>
+			<change>Added portal youtube mod...</change>
+			<change>Added web pages...</change>
+			</changelog>
+		</entry>
+		<entry>
+			<date>2010-17-03</date>
+			<rev-version>
+			<release>RC2</release>
+				2.0.0
+			</rev-version>
         <changelog lang="en">
         <change>Updated to support common file sharing mod... </change>
         <change>Removed pips images.</change>
@@ -131,7 +134,7 @@
       <entry>
         <date>2010-30-09</date>
 		<rev-version>
-			3.0.5
+			3.0.6
 			<release>RC3</release>
 		</rev-version>
         <changelog lang="en">
@@ -140,13 +143,12 @@
 		  <change>Hopefully the final RC releases...</change>
         </changelog>
       </entry>
-    </history>
+</history>
 	<link-group>
-
-		<link type="template" href="subsilver2.xml" lang="en">subsilver2</link>
+	<link type="template" href="subsilver2.xml" lang="en">subsilver2</link>
 	</link-group>
-    <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
-  </header>
+<meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
+</header>
 
 <action-group>
 <copy>
@@ -2184,12 +2186,6 @@ $lang = array_merge($lang, array(
 </open>
 
 <open src="styles/prosilver/template/viewtopic_body.html">
-<edit>
-<find><![CDATA[		<!-- IF postrow.POSTER_FROM --><dd><strong>{L_LOCATION}:</strong> {postrow.POSTER_FROM}</dd><!-- ENDIF -->]]></find>
-<action type="replace-with"><![CDATA[		<!-- IF postrow.POSTER_FROM --><dd><strong>{L_LOCATION}:</strong> {postrow.POSTER_FROM} <!-- IF postrow.POSTER_FLAG --><a rel="external" href="http://maps.google.com/maps?q={postrow.POSTER_FROM}" target="_blank">{postrow.POSTER_FLAG}</a></dd><!-- ENDIF --><!-- ENDIF -->
-		<!-- IF not postrow.POSTER_FROM and postrow.POSTER_FLAG -->	&nbsp; {postrow.POSTER_FLAG}<!-- ENDIF -->]]></action>
-</edit>
-<comment lang="en">187</comment>
 
 <edit>
 <find><![CDATA[<!-- IF S_QUICK_REPLY -->
@@ -2273,8 +2269,7 @@ img_news_unread_locked_mine	= news_unread_locked_mine.gif*27*27</action>
 </edit>
 </open>
 
-<diy-instructions lang="en-gb">
-Point your browser to: your_site/portal/ and follow the onscreen instructions...
+<diy-instructions lang="en-gb">Point your browser to: your_site/portal/index.php and follow the onscreen instructions...
 Note! If you browse to root (index) at this point you will receive a template error... Ignore it and browse to: your_site/portal/
 
 Go to ACP...
@@ -2283,11 +2278,13 @@ Set others as desired...
 
 Portal Default Mods
 For additional mods visit: http://www.stargate-portal.com/forum/web_pages.php?mode=mods (Available end of July 2010)
+Pre-edited styles are also available.... 
 
 When you have completed all modifications (code, styles and mods):
-Refresh all styles Templates/Themes/Imagesets + Purge cache.
-Delete or rename the portal directory (we recommend you change portal folders name until you have everything working).
+Refresh prosilver styles (Templates, Themes and Imagesets), then Purge the cache.
+In the ACP, go to the PORTAL tab and set block visibility to whatever you require.
 
+Delete or rename the portal directory (we recommend you change portal folders name until you have everything working).
 </diy-instructions>
 </action-group>
 </mod>
