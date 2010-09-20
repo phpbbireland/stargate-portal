@@ -424,6 +424,9 @@ $versions = array(
 		'table_column_add' => array(
 			array('phpbb_icons', 'icons_group', array('BOOL', 0)),
 			array('phpbb_smilies', 'smiley_group', array('BOOL', 0)),
+			array('phpbb_users', 'user_left_blocks', array('VCHAR', '')),
+			array('phpbb_users', 'user_center_blocks', array('VCHAR', '')),
+			array('phpbb_users', 'user_right_blocks', array('VCHAR', '')),
 		),
 
 		'table_insert' => array(
