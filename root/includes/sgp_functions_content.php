@@ -145,8 +145,10 @@ if (!function_exists('phpbb_preg_quote'))
 /**
 * Truncates post while retaining special characters
 * Length set in ACP for Announcements or News items
-* @param string $txt and $length (truncate to length).
-* Last updated: 25 March 2010 Mike
+* @param string $txt, $length (truncate to length).
+*
+* If $options var true, return entire message if it contains attachments.
+* Last updated: 28 September 2010 Mike
 */
 
 if (!function_exists('sgp_truncate_message'))
@@ -154,52 +156,12 @@ if (!function_exists('sgp_truncate_message'))
 	function sgp_truncate_message($txt, $length)
 	{
 		global $phpbb_root_path, $config;
+		$buffer = $div_append = '';
+		$extend = 0;
 
-		//$txt = bbcode_strip($txt);
-
-		$buffer = $div_append = $uid = '';
-
-		$start_positions = $end_positions = array();
-		$j = $i = $new_len = 0;
-		$off_set = 1;
-
-		$len = $length;
-
-		// we don't currently truncate messages containing bbcodes //
-		if (strlen($txt) > $len)
+		if (strlen($txt) > $length)
 		{
-			$uid = get_post_bbcode_uid($txt);
-		}
-
-		if ($uid)
-		{
-			//bbcode_strip($txt);
-			//$uid = false;
-			return($txt);
-		}
-
-		if ($uid)
-		{
-			while ($off_set != 0)
-			{
-				$start_positions[$j] = stripos($txt, $uid, $off_set);
-				$end_positions[$j] = stripos($txt, $uid, ($start_positions[$j]+1));
-				$off_set = $end_positions[$j];
-				$j++;
-			}
-
-			for ($i = 0; $i < $j - 1; $i++)
-			{
-				if($len > $start_positions[$i])
-				{
-					$new_len = $end_positions[$i];
-				}
-			}
-
-			// Allow for bbcode length //
-			$len = $new_len + 9;
-			// fudge colour length //
-			if (stripos($txt, 'color=#')) $len += 20;
+			$extend = correct_truncate_length($txt, $length);
 		}
 
 		if (stripos($txt, '</div>'))
@@ -207,54 +169,97 @@ if (!function_exists('sgp_truncate_message'))
 			$div_append = '</div>';
 		}
 
-		if (strlen($txt) > $len)
+		if (strlen($txt) > $length)
 		{
-			for ($i = 0; $i <= $len; $i++)
+			for ($i = 0; $i <= $extend; $i++)
 			{
 				$buffer .= $txt[$i];
 			}
 		}
 
 		$buffer .= '...';
+
 		return($buffer . $div_append);
 	}
 }
 
-// get and return bbcode_uid from any text Mike 25 March 2010 //
-if (!function_exists('get_post_bbcode_uid'))
+/*
+* When truncating text or post message ensure we do not truncate in the middle
+* of special text such as bbcode, smilies, attachments etc...
+*
+* The function is passed the text to truncate and the required lenth of the
+* truncated text... 
+*
+* It returns the length of the truncated string altered to avoid splitting 
+* special code... 
+*
+* 28 September 2010 Mike.... requires testing as usual...
+*/
+if (!function_exists('correct_truncate_length'))
 {
-	function get_post_bbcode_uid($txt)
+	function correct_truncate_length($txt, $truncate)
 	{
-		$start = false;
-		$uid = '';
+		$smile_start = $smile_end = $uid_start = $uid_end = 0;
+
+		$return_val = $truncate;
 
 		$len = strlen($txt);
 
-		for ($i = 0; $i < strlen($txt); $i++)
+		for ($i = 0; $i < $len; $i++)
 		{
-			if ($i + 9 >= $len)
-			{
-				return($uid);
-			}
 
-			if ($txt[$i] == ':')
+			if($txt[$i] == '<' && $txt[$i + 5] == 's' && $txt[$i + 6] == ':')
 			{
-				if($txt[$i + 9] == ']')
-				{
-					$start = true;
-				}
-			}
-
-			if ($start)
-			{
-				while ($txt[$i] != ']')
+				$smile_start = $i;
+				while ($txt[$i] != '>' && $i < $len)
 				{
 					$i++;
-					$uid .= $txt[$i];
 				}
-				return($uid);
+				$smile_end = $i;
+
+				if($smile_start < $truncate && $smile_end < $truncate) // || $smile_start > $truncate)
+				{
+					$return_val = $truncate;
+
+				}
+				if($smile_start < $truncate && $smile_end > $truncate)
+				{
+					$return_val = $smile_end;
+				}
+			}
+			
+			if($txt[$i] == ':' && $txt[$i + 9] == ']')
+			{
+				$uid_start = $i;
+
+				while($i < $len)
+				{
+					if($txt[$i] == '[' && $txt[$i+1] == '/')
+					{
+						while($txt[$i] != ']' && $i < $len)
+						{
+							$i++;
+						}
+						$uid_end = $i;
+						break;
+					}
+					$i++;
+				}
+				$i++;
+
+				if($uid_start < $truncate && $uid_end < $truncate)
+				{
+					$return_val = $truncate;
+
+				}
+
+				if($uid_start < $truncate && $uid_end > $truncate)
+				{
+					$return_val = $uid_end;
+				}
 			}
 		}
+		return($return_val);
 	}
 }
 ?>

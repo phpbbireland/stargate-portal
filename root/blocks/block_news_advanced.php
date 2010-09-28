@@ -42,8 +42,6 @@ $has_attachments = $display_notice = false;
 $attach_list = $post_list = $posts = $attachments = $extensions = array();
 $time_now = time();
 
-$parse = true;
-
 // Build sql WHERE clause based on $config['news_type']... //fix stu http://www.phpbbireland.com/phpBB3/viewtopic.php?p=16804
 switch($news_type)
 {
@@ -107,8 +105,8 @@ $sql = 'SELECT
 	ORDER BY
 		t.topic_time DESC';
 
-$qry_limit = ($number_of_news_items_to_display) ? $number_of_news_items_to_display : 1;
-if (!($result = $db->sql_query_limit($sql, $qry_limit, 0, $sgp_cache_time)))
+// query the database
+if(!($result = $db->sql_query_limit($sql, (($number_of_news_items_to_display) ? $number_of_news_items_to_display : 1))))
 {
 	trigger_error('ERROR_PORTAL_NEWS' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }
@@ -220,12 +218,11 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 	$store = 0;
 	$row =& $rowset[$post_list[$i]];
 
-	// Size the message to max length
+	// Size the message to max length set in ACP
 	if (($max_news_item_length != 0) && (strlen($row['post_text']) > $max_news_item_length))
 	{
 		$row['post_text'] = sgp_truncate_message($row['post_text'], $max_news_item_length);
 		$row['post_text'] .= ' <a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $row['topic_id']) . '"><strong>' . $user->lang['VIEW_FULL_ARTICLE']  . '</strong><img class="ilower" src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/post_view.png' . '" title="' . $user->lang['VIEW_FULL_ARTICLE']  . '" alt="' . $user->lang['VIEW_FULL_ARTICLE']  . '" /></a>';
-		$parse = false;
 	}
 
 	// Parse the message
@@ -241,7 +238,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 	$message = bbcode_nl2br($message);
 	$message = smiley_text($message);
 
-	if (!empty($attachments[$row['post_id']]) && $parse)
+	if (!empty($attachments[$row['post_id']]))
 	{
 		parse_attachments($row['forum_id'], $message, $attachments[$row['post_id']], $update_count);
 	}
@@ -289,7 +286,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 	$template->assign_block_vars('news_row', $postrow);
 
 	// Display not already displayed Attachments for this post, we already parsed them. ;)
-	if (!empty($attachments[$row['post_id']]) && $parse)
+	if (!empty($attachments[$row['post_id']]))
 	{
 		foreach ($attachments[$row['post_id']] as $attachment)
 		{

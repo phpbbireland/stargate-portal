@@ -26,7 +26,7 @@ if ( !defined('IN_PHPBB') )
 
 $queries = $cached_queries = $total_queries = 0;
 
-// borrowed from common.php //
+// borrowed from common.php copyright phpBB //
 // We have to generate a full HTTP/1.1 header here since we can't guarantee to have any of the information
 
 $server_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME');
