@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="./modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http
+://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/
+@version $Id: stargate_041.xml 315 2009-01-10 05:43:06Z michaelo $ -->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+  <header>
+    <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+    <title lang="en-gb">Stargate Portal 2.0.1 Country Flags Mod</title>
+    <description lang="en-gb">User Country flags mod for Stargate Portal for phpBB 3.0.7</description>
+    <author-notes lang="en-gb">Mod updated for SGP (build) 307-201 </author-notes>
+    <author-group>
+      <author>
+        <realname>Michael O'Toole</realname>
+        <email>o2l@eircom.net</email>
+        <username>Michaelo</username>
+        <homepage>http://www.stargate-portal.com</homepage>
+        <contributions />
+      </author>
+    </author-group>
+    <mod-version>2.0.1</mod-version>
+    <installation>
+      <level>easy</level>
+      <time>100</time>
+		<target-version>3.0.7-PL1</target-version>
+    </installation>
+    <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
+  </header>
+<action-group>
+
+<copy>
+      <file from="root/styles/subsilver2/imageset/*.*" to="styles/subsilver2/imageset/*.*" />
+      <file from="root/styles/subsilver2/imageset/en/*.*" to="styles/subsilver2/imageset/en/*.*" />
+      <file from="root/styles/subsilver2/template/*.*" to="styles/subsilver2/template/*.*" />
+      <file from="root/styles/subsilver2/template/blocks/*.*" to="styles/subsilver2/template/blocks/*.*" />
+      <file from="root/styles/subsilver2/theme/*.*" to="styles/subsilver2/theme/*.*" />
+      <file from="root/styles/subsilver2/theme/images/*.*" to="styles/subsilver2/theme/images/*.*" />
+</copy>
+
+<open src="styles/subsilver2/template/ucp_profile_profile_info.html">
+<edit>
+<find><![CDATA[<!-- INCLUDE ucp_header.html -->
+]]></find>
+        <action type="after-add"><![CDATA[
+<script>
+function DisplayFlag(myForm)
+{
+	var flagname = myForm.user_country_flag;
+	document.getElementById("UserFlag").innerHTML = " <img align='absmiddle' src='./images/flags/" + flagname.value + "' />"
+}
+</script>]]></action>
+</edit>
+<edit>
+<find><![CDATA[<tr>
+	<td class="row1" width="35%"><b class="genmed">{L_LOCATION}: </b></td>
+	<td class="row2"><input class="post" type="text" name="location" size="30" maxlength="100" value="{LOCATION}" /></td>
+</tr>]]></find>
+<action type="after-add"><![CDATA[<!-- IF STARGATE -->
+	<tr>
+		<td class="row1" width="35"><b class="genmed">{L_USER_COUNTRY_FLAG}:</b></td>
+		<td class="row2"><select name="user_country_flag" id="user_country_flag" onchange="DisplayFlag(this.form); return false;" /> {S_USER_COUNTRY_FLAG_OPTIONS}</select>
+			<span  name='UserFlag' id='UserFlag'><img src="./images/flags/{USER_COUNTRY_FLAG_IMG}" align="absmiddle" /></span>
+		</td>
+	</tr>
+<!-- ENDIF -->]]></action>
+</edit>
+</open>
+
+
+<open src="styles/subsilver2/template/ucp_register.html">
+<edit>
+<find><![CDATA[<form name="register" method="post" action="{S_UCP_ACTION}">]]></find>
+<action type="before-add"><![CDATA[<script>
+function DisplayFlag(myForm)
+{
+    var flagname = myForm.user_country_flag;
+    document.getElementById("UserFlag").innerHTML = " <img align='absmiddle' src='./images/flags/" + flagname.value + "' />"
+}
+</script>]]></action>
+</edit>
+<edit>
+<find><![CDATA[<!-- IF .profile_fields -->]]></find>
+<action type="before-add"><![CDATA[<!-- IF STARGATE -->
+	<tr>
+		<td class="row1"><b class="genmed">{L_USER_COUNTRY_FLAG}:</b></td>
+		<td class="row2">
+			<select name="user_country_flag" id="user_country_flag" onchange="DisplayFlag(this.form); return false;" /> {S_USER_COUNTRY_FLAG_OPTIONS}</select>
+			<span  name='UserFlag' id='UserFlag'><img src="./images/flags/{USER_COUNTRY_FLAG_IMG}" align="absmiddle" /></span>
+		</td>
+	</tr>
+<!-- ENDIF -->]]></action>
+</edit>
+</open>
+
+<open src="styles/subsilver2/template/memberlist_body.html">
+<edit>
+<find><![CDATA[	<th nowrap="nowrap" width="10%"><a href="{U_SORT_POSTS}">{L_POSTS}</a></th>]]></find>
+<action type="after-add"><![CDATA[	<th nowrap="nowrap" class="flag"><a href="{U_SORT_FLAGS}#memberlist">{L_FLAG}</a></th>]]></action>
+</edit>
+<edit>
+<find><![CDATA[				<td colspan="8"><b class="gensmall">{L_GROUP_MEMBERS}</b></td>
+			</tr>]]></find>
+<action type="after-add"><![CDATA[			<tr class="row3">
+				<td colspan="8">&nbsp;</th>
+			</tr>
+]]></action>
+</edit>
+<edit>
+<find><![CDATA[		<td class="gen" align="center">{memberrow.POSTS}</td>]]></find>
+<action type="after-add"><![CDATA[		<td class="flag" align="center">{memberrow.COUNTRY_FLAG_IMG}</td>]]></action> 
+</edit>
+<edit>
+<find><![CDATA[	<td class="cat" colspan="<!-- IF S_IN_SEARCH_POPUP -->9<!-- ELSE -->8<!-- ENDIF -->" align="center"><!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE --><input class="btnlite" type="submit" value="{L_SELECT_MARKED}" /><!-- ELSE --><span class="gensmall">{L_SELECT_SORT_METHOD}:</span>&nbsp;<select name="sk">{S_MODE_SELECT}</select>&nbsp; <span class="gensmall">{L_ORDER}</span>&nbsp;<select name="sd">{S_ORDER_SELECT}</select>&nbsp; <input type="submit" name="submit" value="{L_SUBMIT}" class="btnlite" /><!-- ENDIF --></td>]]></find>
+<action type="replace-with"><![CDATA[	<td class="cat" colspan="<!-- IF S_IN_SEARCH_POPUP -->10<!-- ELSE -->9<!-- ENDIF -->" align="center"><!-- IF S_IN_SEARCH_POPUP and not S_SELECT_SINGLE --><input class="btnlite" type="submit" value="{L_SELECT_MARKED}" /><!-- ELSE --><span class="gensmall">{L_SELECT_SORT_METHOD}:</span>&nbsp;<select name="sk">{S_MODE_SELECT}</select>&nbsp; <span class="gensmall">{L_ORDER}</span>&nbsp;<select name="sd">{S_ORDER_SELECT}</select>&nbsp; <input type="submit" name="submit" value="{L_SUBMIT}" class="btnlite" /><!-- ENDIF --></td>]]></action>
+</edit>
+</open>
+
+
+<open src="styles/subsilver2/template/memberlist_leaders.html">
+<edit>
+<find><![CDATA[	<th nowrap="nowrap" width="15%">{L_RANK}</th>]]></find>
+<action type="after-add"><![CDATA[	<th nowrap="nowrap" class="flag">{L_FLAG}</th>]]></action>
+</edit>
+<edit>
+<find><![CDATA[<td colspan="5"><b class="gensmall">{L_ADMINISTRATORS}</b></td>]]></find>
+<action type="replace-with"><![CDATA[<td colspan="6"><b class="gensmall">{L_ADMINISTRATORS}</b></td>]]></action>
+</edit>
+<edit>
+<find><![CDATA[	<td class="gen" align="center"><!-- IF admin.RANK_IMG -->{admin.RANK_IMG}<!-- ELSE -->{admin.RANK_TITLE}<!-- ENDIF --></td>]]></find>
+<action type="after-add"><![CDATA[	<td class="gen" align="center">{admin.COUNTRY_FLAG_IMG}</td>]]></action>
+</edit>
+<edit>
+<find><![CDATA[		<td class="row1" colspan="5" align="center"><span class="gen">{L_NO_ADMINISTRATORS}</span></td>]]></find>
+<action type="replace-with"><![CDATA[		<td class="row1" colspan="6" align="center"><span class="gen">{L_NO_ADMINISTRATORS}</span></td>]]></action>
+</edit>
+<edit>
+<find><![CDATA[<td colspan="5"><b class="gensmall">{L_MODERATORS}</b></td>]]></find>
+<action type="replace-with"><![CDATA[<td colspan="6"><b class="gensmall">{L_MODERATORS}</b></td>]]></action>
+</edit>
+<edit>
+<find><![CDATA[	<td class="gen" align="center"><!-- IF mod.RANK_IMG -->{mod.RANK_IMG}<!-- ELSE -->{mod.RANK_TITLE}<!-- ENDIF --></td>]]></find>
+<action type="after-add"><![CDATA[	<td class="gen" align="center">{mod.COUNTRY_FLAG_IMG}</td>]]></action>
+</edit>
+<edit>
+<find><![CDATA[		<td class="row1" colspan="5" align="center"><span class="gen">{L_NO_MODERATORS}</span></td>]]></find>
+<action type="replace-with"><![CDATA[		<td class="row1" colspan="6" align="center"><span class="gen">{L_NO_MODERATORS}</span></td>]]></action>
+</edit>
+</open>
+
+<open src="styles/subsilver2/template/viewtopic_body.html">
+<edit>
+<find><![CDATA[					<!-- IF postrow.POSTER_FROM --><br /><b>{L_LOCATION}:</b> {postrow.POSTER_FROM}<!-- ENDIF -->]]></find>
+<action type="replace-with"><![CDATA[					<!-- IF postrow.POSTER_FROM --><br /><b>{L_LOCATION}:</b> {postrow.POSTER_FROM} <!-- IF postrow.POSTER_FLAG --><a rel="external" href="http://maps.google.com/maps?q={postrow.POSTER_FROM}" target="_blank">{postrow.POSTER_FLAG}</a><!-- ENDIF --><!-- ENDIF -->
+					<!-- IF not postrow.POSTER_FROM and postrow.POSTER_FLAG -->	&nbsp; {postrow.POSTER_FLAG}<!-- ENDIF -->]]></action>
+</edit>
+</open>
+
+
+<diy-instructions lang="en-gb">
+Delete cache...</diy-instructions>
+</action-group>
+</mod>

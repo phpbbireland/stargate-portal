@@ -23,9 +23,6 @@
 	Features:
 			For a complete list see: http://www.stargate-portal.com/forum/web_pages.php?mode=features (Available end of December 2010)
 
-	Defalt Style:
-	Set override user styles to yes and prosilver as default, until you update your favorite styles...
-
 	Style Support:
 	A substantial number of the more popular styles have already been updated to support the Stargate Portal, should your favorite style require updating please contact stargate-portal.com and request a port...
 
@@ -34,22 +31,19 @@
 	The portal copyright must be maintained in all page footers... Should you choose to remove this copyright notice, do not expect support as none will be given...
 
 	Many thanks to everyone who supported the portal and a special thanks to the development team: JohnnyTheOne, livewirestu, NeXur, HelterSkelter and Mitch...
+
+	Please note the change log does not include non public (development) releases... See site for more information.
 </author-notes>
 
-<author-group>
-<author>
-	<realname>Michael O'Toole</realname>
-	<email>o2l@eircom.net</email>
-	<username>michaelo</username>
-	<contributions-group>
-		<contributions status="past" from="2005" to="2010" position="Author"/>
-	</contributions-group>
-	<homepage>http://www.stargate-portal.com</homepage>
-<contributions />
-</author>
-</author-group>
+	<author-group>
+		<author>
+			<realname>Michael O'Toole</realname>
+			<homepage>http://www.stargate-portal.com/</homepage>
+			<email>o2l@eircom.net</email>
+		</author>
+	</author-group>
+	<mod-version>3.1.0</mod-version>
 
-<mod-version>3.0.6</mod-version>
 	<installation>
 	<level>intermediate</level>
 	<time>2503</time>
@@ -58,10 +52,7 @@
 	<history>
 		<entry>
 			<date>2005-06-06</date>
-				<rev-version>
-				0.0.1
-				<release></release>
-				</rev-version>
+				<rev-version>0.0.1</rev-version>
 			<changelog lang="en">
 				<change>Original name: KISS Portal</change>
 				<change>Not released to public (testing only)...</change>
@@ -70,10 +61,7 @@
 		</entry>
 		<entry>
 		<date>2008-06-06</date>
-		<rev-version>
-			1.0.0
-			<release></release>
-		</rev-version>
+		<rev-version>1.0.0</rev-version>
 			<changelog lang="en">
 			<change>Released for testing only...</change>
 			<change>Several additional blocks.</change>
@@ -84,11 +72,8 @@
 			</changelog>
 		</entry>
 		<entry>
-			<date>2010-17-03</date>
-			<rev-version>
-			<release>RC2</release>
-				2.0.0
-			</rev-version>
+			<date>2010-03-17</date>
+			<rev-version>2.0.0</rev-version>
         <changelog lang="en">
         <change>Updated to support common file sharing mod... </change>
         <change>Removed pips images.</change>
@@ -110,45 +95,35 @@
         </changelog>
       </entry>
       <entry>
-        <date>2010-17-03</date>
-		<rev-version>
-			2.0.4
-			<release>RC2</release>
-		</rev-version>
+        <date>2010-08-17</date>
+		<rev-version>2.0.4</rev-version>
         <changelog lang="en">
 		  <change>Mod validation report (first draft) fixes.</change>
           <change>Lots of corrections as per coding guidelines...</change>
         </changelog>
       </entry>
       <entry>
-        <date>2010-17-03</date>
-		<rev-version>
-			2.0.5
-			<release>RC2</release>
-		</rev-version>
+        <date>2010-09-30</date>
+		<rev-version>3.0.0</rev-version>
         <changelog lang="en">
-		  <change>Mod validation report (second draft) fixes.</change>
-          <change>Updated poll block.</change>
+		  <change>Covering 2.0.4 to 3.0.9.</change>
+		  <change>Mod validation fixes... </change>
         </changelog>
       </entry>
       <entry>
-        <date>2010-30-09</date>
-		<rev-version>
-			3.0.6
-			<release>RC3</release>
-		</rev-version>
+        <date>2010-09-30</date>
+		<rev-version>3.1.0</rev-version>
         <changelog lang="en">
-		  <change>Mod validation report (third draft) fixes.</change>
-		  <change>For more detailed releases information see: http://www.stargate-portal.com/forum/viewforum.php?f=10</change>
-		  <change>Hopefully the final RC releases...</change>
+			<change>Please note, development release are not identified here.</change>
+			<change>For detailed information see: http://www.stargate-portal.com/forum/viewforum.php?f=10</change>
         </changelog>
       </entry>
-</history>
+    </history>
 	<link-group>
-	<link type="template" href="subsilver2.xml" lang="en">subsilver2</link>
+		<link type="template" href="subsilver2.xml" lang="en">subsilver2</link>
 	</link-group>
-<meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
-</header>
+    <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
+  </header>
 
 <action-group>
 <copy>
@@ -188,6 +163,7 @@
 
 <open src="adm/index.php">
 <edit>
+
 <find><![CDATA[		'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
 	));]]></find>
 <action type="after-add"><![CDATA[
@@ -202,12 +178,12 @@
 	}
 	// Stargate Portal
 ]]></action>
-<comment lang="en"></comment>
 </edit>
 </open>
 
 <open src="adm/style/acp_forums.html">
 <edit>
+
 <find><![CDATA[<!-- INCLUDE overall_header.html -->]]></find>
 <action type="after-add"><![CDATA[<!-- Start: Edit #1 : Small mod to show all available icon images in images/forum_images directory, copyright 2007 phpbbireland.com Mike -->
 <script>
@@ -265,7 +241,6 @@ function expMenu(id)
 }
 </script>
 <!-- END: Edit #1 -->]]></action>
-<comment lang="en"></comment>
 </edit>
 
 <edit>
@@ -301,7 +276,6 @@ function expMenu(id)
 		</div>
 	</dl>
 	<!-- END: Edit #2 -->]]></action>
-<comment lang="en"></comment>
 </edit>
 </open>
 
@@ -365,7 +339,6 @@ function expMenu(id)
 .rollover, .rollover a { display: inline; float:left; } .rollover a:hover { background-position: 0 -23px; }
 .bbb-icon-spacer {background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-spacer.gif"); width:3px; height:22px;}
 button {border: solid 3px;}]]></action>
-<comment lang="en"></comment>
 </edit>
 </open>
 
@@ -373,7 +346,6 @@ button {border: solid 3px;}]]></action>
 <edit>
 <find><![CDATA[		<p><a href="{U_ADM_INDEX}">{L_ADMIN_INDEX}</a> &bull; <a href="{U_INDEX}">{L_FORUM_INDEX}</a></p>]]></find>
 <action type="replace-with"><![CDATA[		<p><a href="{U_ADM_INDEX}">{L_ADMIN_INDEX}</a> &bull; <a href="{U_INDEX}">{L_FORUM_INDEX}</a><!-- IF STARGATE --> &bull; <a href="{U_PORTAL}">{L_PORTAL}</a><!-- ENDIF --></p>]]></action>
-<comment lang="en"></comment>
 </edit>
 </open>
 
@@ -393,7 +365,6 @@ if (STARGATE)
 }
 
 ]]></action>
-<comment lang="en"></comment>
 </edit>
 
 <edit>
@@ -563,24 +534,23 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 /* Stargate functions ends */
 
 ]]></action>
-<comment lang="en"></comment>
 </edit>
 </open>
 
 
 <open src="mcp.php">
 <edit>
+<comment lang="en">Line ~117</comment>
 <find><![CDATA[		'make_global'	=> 'f_announce',]]></find>
 <action type="after-add"><![CDATA[		'make_news'		=> 'f_announce',
 		'make_news_global'	=> 'f_announce',]]></action>
-<comment lang="en">~117</comment>
+
 </edit>
 
 <edit>
 <find><![CDATA[		case 'make_global':]]></find>
 <action type="after-add"><![CDATA[		case 'make_news':
 	    case 'make_news_global':]]></action>
-<comment lang="en"></comment>
 </edit>
 
 <edit>
@@ -606,18 +576,17 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 <inline-find>. POST_GLOBAL .</inline-find>
 <inline-action type="after-add"><![CDATA[ ' , ' . POST_NEWS . ' , ' . POST_NEWS_GLOBAL . ]]></inline-action>
 </inline-edit>
-<comment lang="en"></comment>
 </edit>
 </open>
 
 <open src="posting.php">
 <edit>
+<comment lang="en">News Posts</comment>
 <find>			case POST_ANNOUNCE:</find>
 <action type="after-add">
 
 			case POST_NEWS:
 			case POST_NEWS_GLOBAL:</action>
-<comment lang="en">News Posts</comment>
 </edit>
 </open>
 
@@ -654,7 +623,6 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 			}
 
 ]]></action>
-<comment lang="en"></comment>
 </edit>
 
 <edit>
@@ -668,17 +636,15 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 <edit>
 <find><![CDATA[				$tpl_ary = array(]]></find>
 <action type="after-add"><![CDATA[					'TOOLTIP'					=> $tool_tips,]]></action>
-<comment lang="en"></comment>
 </edit>
 </open>
 
 <open src="viewforum.php">
-
 <edit>
 <find><![CDATA[	'FOLDER_NEW_IMG'			=> $user->img('topic_unread', 'NEW_POSTS'),]]></find>
 <action type="after-add"><![CDATA[	'FOLDER_NEWS_IMG'			=> $user->img('news_read', 'NEW_POST_NEWS'),
 	'FOLDER_NEWS_NEW_IMG'		=> $user->img('news_unread', 'NO_NEW_POST_NEWS'),]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -708,19 +674,20 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 		}
 	}
 }]]></action>
-<comment lang="en"></comment>
+
 
 </edit>
 <edit>
+<comment lang="en">Line ~362</comment>
 <find><![CDATA[AND t.topic_type IN (' . POST_ANNOUNCE . ', ' . POST_GLOBAL . ')',]]></find>
 <inline-edit>
 <inline-find> ')',</inline-find>
 <inline-action type="before-add"><![CDATA[', ' . POST_NEWS . ', ' . POST_NEWS_GLOBAL .]]></inline-action>
 </inline-edit>
-<comment lang="en">Line 362</comment>
 </edit>
 
 <edit>
+<comment lang="en">line ~473</comment>
 <find><![CDATA[	$sql = 'SELECT *
 		FROM ' . TOPICS_TABLE . '
 		WHERE ' . $db->sql_in_set('topic_id', array_keys($shadow_topic_list));]]></find>
@@ -728,7 +695,6 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 		FROM ' . TOPICS_TABLE . ' t
 		' . $sql_join . '
 		WHERE ' . $db->sql_in_set(' t.topic_id', array_keys($shadow_topic_list));]]></action>
-<comment lang="en">line 473</comment>
 </edit>
 
 <edit>
@@ -742,21 +708,20 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 <edit>
 <find><![CDATA['FORUM_ID'					=> $forum_id,]]></find>
 <action type="after-add"><![CDATA[			'TOOLTIP'					=> (STARGATE && isset($row['message_tooltip'])) ? sgp_truncate_message(bbcode_strip(($row['message_tooltip'])), 500) : '',]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
+<comment lang="en">Line ~650</comment>
 <find><![CDATA[			'TOPIC_ICON_IMG_HEIGHT'	=> (!empty($icons[$row['icon_id']])) ? $icons[$row['icon_id']]['height'] : '',]]></find>
 <action type="after-add"><![CDATA[			'TOPIC_ICON_IMG_GROUP'	=> (!empty($icons[$row['icon_id']])) ? $icons[$row['icon_id']]['group'] : '',]]></action>
-<comment lang="en"></comment>
-<comment lang="en">Line 650</comment>
 </edit>
 
 <edit>
 <find><![CDATA[			'S_POST_GLOBAL'			=> ($row['topic_type'] == POST_GLOBAL) ? true : false,]]></find>
 <action type="after-add"><![CDATA[			'S_POST_NEWS'			=> ($row['topic_type'] == POST_NEWS) ? true : false,
 			'S_POST_NEWS_GLOBAL'	=> ($row['topic_type'] == POST_NEWS_GLOBAL) ? true : false,]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 
@@ -781,7 +746,7 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 				break;
 			}
 ]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -793,7 +758,7 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 <inline-find>$topic_data['topic_type'] == POST_ANNOUNCE</inline-find>
 <inline-action type="after-add"> || $topic_data['topic_type'] == POST_NEWS || $topic_data['topic_type'] == POST_NEWS_GLOBAL</inline-action>
 </inline-edit>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -803,7 +768,7 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 	$topic_mod .= ($allow_change_type && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_NEWS) ? '<option value="make_news">' . $user->lang['MAKE_NEWS'] . '</option>' : '';
 	$topic_mod .= ($allow_change_type && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_NEWS_GLOBAL) ? '<option value="make_news_global">' . $user->lang['MAKE_NEWS_GLOBAL'] . '</option>' : '';
 }]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -814,10 +779,11 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 		$message = acronym_pass($message);
 	}
 ]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
+<comment lang="en">Line ~1496</comment>
 <find><![CDATA[	$s_first_unread = false;
 	if (!$first_unread && $post_unread)
 	{
@@ -831,13 +797,12 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 	}
 
 ]]></action>
-<comment lang="en">1496</comment>
 </edit>
 
 <edit>
+<comment lang="en">Line ~1751</comment>
 <find><![CDATA[			'S_QUICK_REPLY'			=> true,]]></find>
 <action type="after-add"><![CDATA[			'S_SGP_QUICK_REPLY'		=> (isset($k_config)) ? ($k_config['sgp_quick_reply']) ? true : false : '',]]></action>
-<comment lang="en">1751</comment>
 </edit>
 
 </open>
@@ -849,7 +814,7 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 <find><![CDATA[			case 'make_global':]]></find>
 <action type="after-add"><![CDATA[			case 'make_news':
 			case 'make_news_global':]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -870,12 +835,13 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 			$check_acl = 'f_announce';
 			$l_new_type = (sizeof($topic_ids) == 1) ? 'MCP_MAKE_NEWS_GLOBAL' : 'MCP_MAKE_NEWSS_GLOBAL';
 		break;]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
 <open src="includes/functions_content.php">
 <edit>
+<comment lang="en">Style Based Smiles</comment>
 <find><![CDATA[function smiley_text($text, $force_option = false)
 {
 	global $config, $user, $phpbb_root_path;]]></find>
@@ -888,7 +854,6 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 		}
 	}
 ]]></action>
-<comment lang="en">Style Based Smiles</comment>
 </edit>
 
 <edit>
@@ -902,7 +867,7 @@ if (STARGATE)
 }
 
 ]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1070,13 +1035,13 @@ if (STARGATE)
 		}
 		return $k_groups;
 	}]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
 <find>				$icons[$row['icons_id']]['display'] = (bool) $row['display_on_posting'];</find>
 <action type="after-add">				$icons[$row['icons_id']]['group'] = (bool) $row['icons_group'];</action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1085,7 +1050,7 @@ if (STARGATE)
 <find>define('POST_GLOBAL', 3);</find>
 <action type="after-add">define('POST_NEWS', 4);
 define('POST_NEWS_GLOBAL', 5);</action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -1109,7 +1074,7 @@ define('K_REFERRALS_TABLE',			$table_prefix . 'k_referrals');
 define('K_YOUTUBE_TABLE',			$table_prefix . 'k_youtube');
 define('K_RESOURCE_TABLE',			$table_prefix . 'k_resource');
 define('K_PAGES_TABLE',				$table_prefix . 'k_pages');</action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1117,7 +1082,7 @@ define('K_PAGES_TABLE',				$table_prefix . 'k_pages');</action>
 <edit>
 <find><![CDATA[		'SITE_DESCRIPTION'				=> $config['site_desc'],]]></find>
 <action type="after-add"><![CDATA[		'STARGATE_VERSION'				=> (isset($config['portal_version'])) ? $config['portal_version'] : '0.0.0',]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -1193,7 +1158,7 @@ define('K_PAGES_TABLE',				$table_prefix . 'k_pages');</action>
 	}
 	// Stargate Portal End
 ]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -1225,7 +1190,7 @@ if (!function_exists('bbcode_strip'))
 		return preg_replace($RegEx, ' ', $text );
 	}
 }]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1256,7 +1221,7 @@ if (!function_exists('bbcode_strip'))
 					$folder_new = 'news_unread';
 				}
 			break;]]></action>
-<comment lang="en"></comment>
+
 </edit>
 <edit>
 <find><![CDATA[	if (empty($avatar) || !$avatar_type || (!$config['allow_avatar'] && !$ignore_config))
@@ -1279,13 +1244,9 @@ if (!function_exists('bbcode_strip'))
 </open>
 
 <open src="includes/functions_posting.php">
-<edit>
-<find><![CDATA[			'body' => 'posting_smilies.html')]]></find>
-<action type="replace-with"><![CDATA[			'body' => ($forum_id) ? 'posting_smilies.html' : 'posting_smilies_acp.html')]]></action>
-<comment lang="en">Line ~62</comment>
-</edit>
 
 <edit>
+<comment lang="en">Style Based Smiles</comment>
 <find><![CDATA[	if (sizeof($smilies))
 	{
 		$root_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? generate_board_url() . '/' : $phpbb_root_path;]]></find>
@@ -1295,14 +1256,13 @@ if (!function_exists('bbcode_strip'))
 			$config['smilies_path'] = 'styles/' . $user->theme['theme_path'] . '/theme/images/smilies';
 		}
 ]]></action>
-<comment lang="en">Style Based Smiles</comment>
 </edit>
 <edit>
 <find><![CDATA[		'global'	=> array('const' => POST_GLOBAL, 'lang' => 'POST_GLOBAL')]]></find>
 <action type="replace-with"><![CDATA[		'global'	=> array('const' => POST_GLOBAL, 'lang' => 'POST_GLOBAL'),
 		'news'		=> array('const' => POST_NEWS, 'lang' => 'POST_NEWS'),
 		'news_global'	=> array('const' => POST_NEWS_GLOBAL, 'lang' => 'POST_NEWS_GLOBAL')]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -1312,33 +1272,33 @@ if (!function_exists('bbcode_strip'))
 			$auth_key = ($auth_key == 'news') ? 'announce' : $auth_key;
 			$auth_key = ($auth_key == 'news_global') ? 'announce' : $auth_key;
 		}</action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
+<comment lang="en">Replace is used to here to ease the install process, please examine these lines if a previous mods altered this code...</comment>
 <find><![CDATA[			'S_TOPIC_TYPE_ANNOUNCE'	=> ($auth->acl_get('f_announce', $forum_id)))]]></find>
 <action type="replace-with"><![CDATA[			'S_TOPIC_TYPE_ANNOUNCE'	=> ($auth->acl_get('f_announce', $forum_id)),
 			'S_TOPIC_TYPE_NEWS'		=> ($auth->acl_get('f_announce', $forum_id)),
 			'S_TOPIC_TYPE_NEWS_GLOBAL'	=> ($auth->acl_get('f_announce', $forum_id)))]]></action>
-<comment lang="en">Replace is used to here to ease the install process, please examine these lines if a previous mods altered this code...</comment>
 </edit>
 
 <edit>
-<find><![CDATA[				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE) ? ($data['topic_time_limit'] * 86400) : 0,]]></find>
-<inline-edit>
-<inline-find><![CDATA[$topic_type == POST_ANNOUNCE]]></inline-find>
-<inline-action type="after-add"> || $topic_type == POST_NEWS || $topic_type == POST_NEWS_GLOBAL</inline-action>
-</inline-edit>
 <comment lang="en">(Occurs twice) 1st find</comment>
-</edit>
-
-<edit>
 <find><![CDATA[				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE) ? ($data['topic_time_limit'] * 86400) : 0,]]></find>
 <inline-edit>
 <inline-find><![CDATA[$topic_type == POST_ANNOUNCE]]></inline-find>
 <inline-action type="after-add"> || $topic_type == POST_NEWS || $topic_type == POST_NEWS_GLOBAL</inline-action>
 </inline-edit>
+</edit>
+
+<edit>
 <comment lang="en">2nd find</comment>
+<find><![CDATA[				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE) ? ($data['topic_time_limit'] * 86400) : 0,]]></find>
+<inline-edit>
+<inline-find><![CDATA[$topic_type == POST_ANNOUNCE]]></inline-find>
+<inline-action type="after-add"> || $topic_type == POST_NEWS || $topic_type == POST_NEWS_GLOBAL</inline-action>
+</inline-edit>
 </edit>
 
 </open>
@@ -1370,7 +1330,7 @@ if (!function_exists('bbcode_strip'))
 				}
 			}
 ]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1411,7 +1371,7 @@ if (!function_exists('bbcode_strip'))
 			}
 			// End of mod //
 		}]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1421,7 +1381,7 @@ if (!function_exists('bbcode_strip'))
 <action type="replace-with"><![CDATA[		global $user;
 		//if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START'))
 		if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START') || !empty($_GET['style']) && $user->data['user_id'] != ANONYMOUS && !$config['override_user_style'])]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1429,7 +1389,7 @@ if (!function_exists('bbcode_strip'))
 <edit>
 <find><![CDATA[						'override_user_style'	=> array('lang' => 'OVERRIDE_STYLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),]]></find>
 <action type="after-add"><![CDATA[						'portal_enabled'		=> array('lang' => 'ENABLE_PORTAL',			'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1462,13 +1422,13 @@ if (!function_exists('bbcode_strip'))
 				}
 				$dirslist='';
 				// End mod list forum_images Michaelo //]]></action>
-<comment lang="en"></comment>
+
 </edit>
 <edit>
 <find><![CDATA[					'FORUM_IMAGE_SRC'			=> ($forum_data['forum_image']) ? $phpbb_root_path . $forum_data['forum_image'] : '',]]></find>
 <action type="after-add"><![CDATA[					'FORUM_IMAGE_SRC_PATH'		=> $phpbb_root_path . 'images/forum_icons/',
 					'FORUM_IMAGE_PATH'			=> 'images/forum_icons/',]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1479,7 +1439,7 @@ if (!function_exists('bbcode_strip'))
 <inline-find>'pm_unread',</inline-find>
 <inline-action type="after-add"> 'news_read', 'news_read_mine', 'news_read_locked', 'news_read_locked_mine', 'news_unread', 'news_unread_mine', 'news_unread_locked', 'news_unread_locked_mine',</inline-action>
 </inline-edit>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1675,7 +1635,7 @@ if (!function_exists('bbcode_strip'))
 	'BLOCK_CURRENTLY_DISABLED'		=> 'Block disabled!',
 
 	'SOMETHING_WENT_WRONG'			=> 'An error occurred, this should not happen... Please check code at line indicated',]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1691,16 +1651,16 @@ if (!function_exists('bbcode_strip'))
 	'MCP_MAKE_NEWS_GLOBAL_CONFIRM'	=> 'Are you sure you want to change this topic to a Global News Item”?',
 	'MCP_MAKE_NEWSS_GLOBAL'			=> 'Modify to “Global News Items”',
 	'MCP_MAKE_NEWSS_GLOBAL_CONFIRM'	=> 'Are you sure you want to change these topics to a Global News Items”?',]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
 <open src="language/en/viewtopic.php">
 <edit>
+<comment lang="en">Make sure your editor saves all language files with encoding set to UTF-8 and file format Unix for all language file...</comment>
 <find><![CDATA[	'MAKE_STICKY'				=> 'Change to “Sticky”',]]></find>
 <action type="after-add"><![CDATA[	'MAKE_NEWS'					=> 'Change to “News”',
 	'MAKE_NEWS_GLOBAL'			=> 'Change to “Global News”',]]></action>
-<comment lang="en">Make sure your editor saves all language files with encoding set to UTF-8 and file format Unix for all language file...</comment>
 </edit>
 </open>
 
@@ -1712,7 +1672,7 @@ if (!function_exists('bbcode_strip'))
 	'NO_MOVE_DOWN'			=> 'Can’t move down',
 	'NO_MOVE_UP'			=> 'Can’t move up',
 	'NO_RESYNC'				=> 'Resynchronise Disabled',]]></action>
-      <comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -1779,6 +1739,10 @@ $lang = array_merge($lang, array(
 	'ACP_K_WEB_PAGES_FOOT'			=> 'Page Footers',
 	'ACP_K_WEB_PAGES_PORTAL'		=> 'Manage Portal pages',
 
+// phpBB Pages
+	'ACP_K_PAGES_ADD'		=> 'Add page',
+	'ACP_K_PAGES_DELETE'	=> 'Delete page',
+
 // Modules Variables
 	'ACP_K_VARS'				=> 'Portal Variables',
 	'ACP_K_CONFIG'				=> 'Main Config',
@@ -1829,6 +1793,26 @@ $lang = array_merge($lang, array(
 
 // Country Flag
 	'USER_COUNTRY_FLAG'			=> 'User Country Flag',
+
+// BBCODES used in pages
+	'BBCODE_A_HELP'				=> 'Inline uploaded attachment: [attachment=]filename.ext[/attachment]',
+	'BBCODE_B_HELP'				=> 'Bold text: [b]text[/b]',
+	'BBCODE_C_HELP'				=> 'Code display: [code]code[/code]',
+	'BBCODE_E_HELP'				=> 'List: Add list element',
+	'BBCODE_F_HELP'				=> 'Font size: [size=x-small]small text[/size]',
+	'BBCODE_IS_OFF'				=> '%sBBCode%s is <em>OFF</em>',
+	'BBCODE_IS_ON'				=> '%sBBCode%s is <em>ON</em>',
+	'BBCODE_I_HELP'				=> 'Italic text: [i]text[/i]',
+	'BBCODE_L_HELP'				=> 'List: [list]text[/list]',
+	'BBCODE_LISTITEM_HELP'		=> 'List item: [*]text[/*]',
+	'BBCODE_O_HELP'				=> 'Ordered list: [list=]text[/list]',
+	'BBCODE_P_HELP'				=> 'Insert image: [img]http://image_url[/img]',
+	'BBCODE_Q_HELP'				=> 'Quote text: [quote]text[/quote]',
+	'BBCODE_S_HELP'				=> 'Font color: [color=red]text[/color]  Tip: you can also use color=#FF0000',
+	'BBCODE_U_HELP'				=> 'Underline text: [u]text[/u]',
+	'BBCODE_W_HELP'				=> 'Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]',
+	'BBCODE_D_HELP'				=> 'Flash: [flash=width,height]http://url[/flash]',
+
 ));
 
 // Stargate aka Kiss Plugins module
@@ -1893,7 +1877,7 @@ $lang = array_merge($lang, array(
 	'ACP_K_PAGES_MANAGE'	=> 'Manage phpBB pages',
 	'ADD_VARS'				=> 'Manage variables',
 ));]]></action>
-      <comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1901,7 +1885,7 @@ $lang = array_merge($lang, array(
 <edit>
 <find><![CDATA[		'pm'			=> 'Private messages',]]></find>
 <action type="after-add"><![CDATA[		'portal'		=> 'Portal',]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -1910,7 +1894,7 @@ $lang = array_merge($lang, array(
 	'acl_a_k_portal'	=> array('lang' => 'Can view portal settings', 'cat' => 'portal'),
 	'acl_a_k_web_pages'	=> array('lang' => 'Can manage portal web pages', 'cat' => 'portal'),
 	'acl_a_k_tools'		=> array('lang' => 'Can manage portal tools', 'cat' => 'portal'),]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1925,7 +1909,7 @@ $lang = array_merge($lang, array(
 	'IMG_NEWS_UNREAD_MINE'			=> 'News posted to new',
 	'IMG_NEWS_UNREAD_LOCKED'		=> 'News locked new post',
 	'IMG_NEWS_UNREAD_LOCKED_MINE'	=> 'News locked posted to new',]]></action>
-      <comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1933,6 +1917,7 @@ $lang = array_merge($lang, array(
 
 <open src="styles/prosilver/template/index_body.html">
 <edit>
+<comment lang="en">line ~15</comment>
 <find><![CDATA[<!-- INCLUDE forumlist_body.html -->]]></find>
 <action type="after-add"><![CDATA[<!-- IF STARGATE -->
 	<!-- IF S_DISPLAY_ONLINE_LIST -->
@@ -1945,21 +1930,20 @@ $lang = array_merge($lang, array(
 		<!-- INCLUDE blocks/block_stats.html -->
 	<!-- ENDIF -->
 <!-- ENDIF -->]]></action>
-<comment lang="en">line ~15</comment>
 </edit>
 
 <edit>
+<comment lang="en">Line ~32</comment>
 <find><![CDATA[<!-- IF S_DISPLAY_ONLINE_LIST -->
 	<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->]]></find>
 <action type="before-add"><![CDATA[<!-- IF !STARGATE -->]]></action>
-<comment lang="en">32</comment>
 </edit>
 
 <edit>
+<comment lang="en">line ~45</comment>
 <find><![CDATA[	<p>{TOTAL_POSTS} &bull; {TOTAL_TOPICS} &bull; {TOTAL_USERS} &bull; {NEWEST_USER}</p>
 <!-- ENDIF -->]]></find>
 <action type="after-add"><![CDATA[<!-- ENDIF -->]]></action>
-<comment lang="en">line ~45</comment>
 </edit>
 </open>
 
@@ -1967,7 +1951,7 @@ $lang = array_merge($lang, array(
 <edit>
 <find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/forum_fn.js"></script>]]></find>
 <action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/forum_fn.js"></script>]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1975,7 +1959,7 @@ $lang = array_merge($lang, array(
 <edit>
 <find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/forum_fn.js"></script>]]></find>
 <action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/forum_fn.js"></script>]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -1985,14 +1969,14 @@ $lang = array_merge($lang, array(
 <find><![CDATA[<div id="page-footer">]]></find>
 <action type="before-add"><![CDATA[<!-- IF STARGATE --><!-- INCLUDE portal_tail.html --><!-- ENDIF -->
 ]]></action>
-<comment lang="en"></comment>
+
 </edit>
 <edit>
 <find><![CDATA[			<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>
 ]]></find>
 <action type="replace-with"><![CDATA[			<li class="icon-home"><!-- IF STARGATE --><a href="{U_PORTAL}">{L_PORTAL}</a> &bull; <!-- ENDIF --><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>
 ]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -2000,7 +1984,7 @@ $lang = array_merge($lang, array(
 ]]></find>
 <action type="after-add"><![CDATA[		<!-- IF STARGATE --><!-- INCLUDE portal_footer_pre.html --><!-- ENDIF -->
 		<!-- IF STARGATE --><!-- INCLUDE portal_footer.html --><!-- ENDIF -->]]></action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -2012,13 +1996,14 @@ $lang = array_merge($lang, array(
 	<!-- IF RAND_BANNER_POSITION == 2 or RAND_BANNER_POSITION == 3 --><div align="center">{RAND_BANNER}</div><!-- ENDIF -->
 </div>
 <!-- ENDIF -->]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
 
 <open src="styles/prosilver/template/attachment.html">
 <edit>
+<comment lang="en">Line ~7</comment>
 <find><![CDATA[		<!-- IF _file.S_THUMBNAIL -->
 		<dl class="thumbnail">
 			<dt><a href="{_file.U_DOWNLOAD_LINK}"><img src="{_file.THUMB_IMAGE}" alt="{_file.DOWNLOAD_NAME}" title="{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}" /></a></dt>
@@ -2039,39 +2024,39 @@ $lang = array_merge($lang, array(
 			<dd>{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}</dd>
 		</dl>
 		<!-- ENDIF -->]]></action>
-<comment lang="en">Line ~7</comment>
 </edit>
 </open>
 
 <open src="styles/prosilver/template/overall_header.html">
 <edit>
+<comment lang="en">Line ~16</comment>
 <find><![CDATA[<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>]]></find>
 <action type="after-add"><![CDATA[<link rel="stylesheet" type="text/css" href="{T_THEME_PATH}/style_wide.css" />
 <link rel="alternate stylesheet" type="text/css" media="screen" title="fixed" href="{T_THEME_PATH}/style_fixed.css" />]]></action>
-<comment lang="en">Line ~16</comment>
 </edit>
 
 <edit>
+<comment lang="en">Line ~88</comment>
 <find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/styleswitcher.js"></script>
 <script type="text/javascript" src="{T_TEMPLATE_PATH}/forum_fn.js"></script>]]></find>
 <action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/styleswitcher.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}js/forum_fn.js"></script>]]></action>
-<comment lang="en">Line ~88</comment>
 </edit>
 
 <edit>
+<comment lang="en">Line ~102</comment>
 <find><![CDATA[</head>]]></find>
 <action type="before-add"><![CDATA[<!-- IF STARGATE --><!-- INCLUDE portal_header.html --><!-- ENDIF -->]]></action>
-<comment lang="en">Line ~102</comment>
 </edit>
 
 <edit>
+<comment lang="en">Line ~104</comment>
 <find><![CDATA[<body id="phpbb" class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">]]></find>
 <action type="after-add"><![CDATA[<!-- IF STARGATE --><div class="stylewidth"><!-- ENDIF -->]]></action>
-<comment lang="en">Line ~104</comment>
 </edit>
 
 <edit>
+<comment lang="en">Line ~113</comment>
 <find><![CDATA[				<a href="{U_INDEX}" title="{L_INDEX}" id="logo">{SITE_LOGO_IMG}</a>
 ]]></find>
 <action type="replace-with"><![CDATA[				<!-- IF STARGATE -->
@@ -2079,10 +2064,10 @@ $lang = array_merge($lang, array(
 				<!-- ELSE -->
 					<a href="{U_INDEX}" title="{L_INDEX}" id="logo">{SITE_LOGO_IMG}</a>
 				<!-- ENDIF -->]]></action>
-<comment lang="en">Line ~113</comment>
 </edit>
 
 <edit>
+<comment lang="en">Line ~138</comment>
 <find><![CDATA[				<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a> <!-- BEGIN navlinks --> <strong>&#8249;</strong> <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a><!-- END navlinks --></li>
 ]]></find>
 <action type="replace-with"><![CDATA[			<!-- IF STARGATE -->
@@ -2090,10 +2075,10 @@ $lang = array_merge($lang, array(
 			<!-- ELSE -->
 				<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a> <!-- BEGIN navlinks --> <strong>&#8249;</strong> <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a><!-- END navlinks --></li>
 			<!-- ENDIF -->]]></action>
-<comment lang="en">Line ~138</comment>
 </edit>
 
 <edit>
+<comment lang="en">Line ~140</comment>
 <find><![CDATA[				<li class="rightside"><a href="#" onclick="fontsizeup(); return false;" onkeypress="return fontsizeup(event);" class="fontsize" title="{L_CHANGE_FONT_SIZE}">{L_CHANGE_FONT_SIZE}</a></li>]]></find>
 <action type="after-add"><![CDATA[				<!-- IF STARGATE -->
 					<li class="rightside">
@@ -2111,10 +2096,10 @@ $lang = array_merge($lang, array(
 					</li>
 				<!-- ENDIF -->
 ]]></action>
-<comment lang="en">Line ~140</comment>
 </edit>
 
 <edit>
+<comment lang="en">Line ~179</comment>
 <find><![CDATA[		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
 		<div id="information" class="rules">
 			<div class="inner"><span class="corners-top"><span></span></span>
@@ -2127,7 +2112,6 @@ $lang = array_merge($lang, array(
 			<!-- IF RAND_BANNER_POSITION == 1 or RAND_BANNER_POSITION == 3 --><div align="center">{RAND_BANNER}</div><!-- ENDIF -->
 			<!-- INCLUDE portal_head.html -->
 		<!-- ENDIF -->]]></action>
-<comment lang="en">Line ~179</comment>
 </edit>
 </open>
 
@@ -2136,7 +2120,7 @@ $lang = array_merge($lang, array(
 <find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/editor.js"></script>]]></find>
 <action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/editor.js"></script>
 ]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -2145,18 +2129,18 @@ $lang = array_merge($lang, array(
 <find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/editor.js"></script>]]></find>
 <action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/editor.js"></script>
 ]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
 <open src="styles/prosilver/template/search_results.html">
 <edit>
+<comment lang="en"></comment>
 <find><![CDATA[						<a href="{searchresults.U_VIEW_TOPIC}" class="topictitle">{searchresults.TOPIC_TITLE}</a> {searchresults.ATTACH_ICON_IMG}]]></find>
 <inline-edit>
 <inline-find><![CDATA[{searchresults.U_VIEW_TOPIC}"]]></inline-find>
 <inline-action type="after-add"><![CDATA[ title="{searchresults.TOOLTIP}"]]></inline-action>
 </inline-edit>
-<comment lang="en">Line </comment>
 </edit>
 </open>
 
@@ -2164,39 +2148,46 @@ $lang = array_merge($lang, array(
 <edit>
 <find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/styleswitcher.js"></script>]]></find>
 <action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/styleswitcher.js"></script>]]></action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
 <open src="styles/prosilver/template/viewforum_body.html">
 <edit>
+<comment lang="en">Line ~129</comment>
 <find><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and topicrow.S_TOPIC_TYPE gt 1 -->{L_ANNOUNCEMENTS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></find>
 <action type="replace-with"><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and topicrow.S_TOPIC_TYPE gt 1 -->{L_ANNOUNCEMENTS_AND_NEWS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></action>
-<comment lang="en">Line 129</comment>
 </edit>
 
 <edit>
+<comment lang="en">Line ~141</comment>
 <find><![CDATA[				<dt<!-- IF topicrow.TOPIC_ICON_IMG and S_TOPIC_ICONS --> style="background-image: url({T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}); background-repeat: no-repeat;"<!-- ENDIF --> title="{topicrow.TOPIC_FOLDER_IMG_ALT}"><!-- IF topicrow.S_UNREAD_TOPIC --><a href="{topicrow.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF --><a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a>]]></find>
 <inline-edit>
 <inline-find><![CDATA[<a href="{topicrow.U_VIEW_TOPIC}"]]></inline-find>
 <inline-action type="after-add"><![CDATA[ <!-- IF STARGATE -->title="{topicrow.TOOLTIP}"<!-- ENDIF --> ]]></inline-action>
 </inline-edit>
-<comment lang="en">Line 141</comment>
 </edit>
 </open>
 
 <open src="styles/prosilver/template/viewtopic_body.html">
+<edit>
+<comment lang="en">Line ~187</comment>
+<find><![CDATA[		<!-- IF postrow.POSTER_FROM --><dd><strong>{L_LOCATION}:</strong> {postrow.POSTER_FROM}</dd><!-- ENDIF -->]]></find>
+<action type="replace-with"><![CDATA[		<!-- IF postrow.POSTER_FROM --><dd><strong>{L_LOCATION}:</strong> {postrow.POSTER_FROM} <!-- IF postrow.POSTER_FLAG --><a rel="external" href="http://maps.google.com/maps?q={postrow.POSTER_FROM}" target="_blank">{postrow.POSTER_FLAG}</a></dd><!-- ENDIF --><!-- ENDIF -->
+		<!-- IF not postrow.POSTER_FROM and postrow.POSTER_FLAG -->	&nbsp; {postrow.POSTER_FLAG}<!-- ENDIF -->]]></action>
+</edit>
 
 <edit>
+<comment lang="en">Line ~226</comment>
 <find><![CDATA[<!-- IF S_QUICK_REPLY -->
 	<!-- INCLUDE quickreply_editor.html -->
 <!-- ENDIF -->]]></find>
 <action type="replace-with"><![CDATA[<!-- IF S_QUICK_REPLY and not STARGATE -->
 	<!-- INCLUDE quickreply_editor.html -->
 <!-- ENDIF -->]]></action>
-<comment lang="en">226</comment>
 </edit>
 <edit>
+<comment lang="en">Line ~243</comment>
 <find><![CDATA[<!-- ENDIF -->
 
 <div class="topic-actions">
@@ -2214,9 +2205,9 @@ $lang = array_merge($lang, array(
 				</span>
 			<!-- ENDIF -->
 	<!-- ENDIF -->]]></action>
-<comment lang="en">243</comment>
 </edit>
 <edit>
+<comment lang="en">Line ~252</comment>
 <find><![CDATA[	<!-- IF PAGINATION or TOTAL_POSTS -->
 		<div class="pagination">
 			{TOTAL_POSTS}
@@ -2229,7 +2220,6 @@ $lang = array_merge($lang, array(
 		<!-- INCLUDE sgp_quickreply_editor.html -->
 	<!-- ENDIF -->
 <!-- ENDIF -->]]></action>
-<comment lang="en">252</comment>
 </edit>
 </open>
 
@@ -2240,7 +2230,7 @@ $lang = array_merge($lang, array(
 <find>@import url("colours.css");</find>
 <action type="after-add">@import url("profile_on_left.css");
 </action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
@@ -2252,7 +2242,7 @@ img_poll_right = </find>
 <action type="replace-with">img_poll_left = poll_left.gif*12*4
 img_poll_center = poll_center.gif*12*
 img_poll_right = poll_right.gif*12*4</action>
-<comment lang="en"></comment>
+
 </edit>
 
 <edit>
@@ -2265,26 +2255,24 @@ img_news_unread				= news_unread.gif*27*27
 img_news_unread_mine		= news_unread_mine.gif*27*27
 img_news_unread_locked		= news_unread_locked.gif*27*27
 img_news_unread_locked_mine	= news_unread_locked_mine.gif*27*27</action>
-<comment lang="en"></comment>
+
 </edit>
 </open>
 
-<diy-instructions lang="en-gb">Point your browser to: your_site/portal/index.php and follow the onscreen instructions...
+<diy-instructions lang="en-gb">
+Point your browser to: your_site/portal/ and follow the onscreen instructions...
 Note! If you browse to root (index) at this point you will receive a template error... Ignore it and browse to: your_site/portal/
 
-Go to ACP...
-PERMISSIONS > Admin roles > Full Admin.... Click Portal Tab, set all options to yes...
-Set others as desired...
+Go to ACP > PERMISSIONS > Admin roles > Full Admin.... 
+Click Portal Tab, set all options to yes... Set others permissions as desired...
 
-Portal Default Mods
-For additional mods visit: http://www.stargate-portal.com/forum/web_pages.php?mode=mods (Available end of July 2010)
-Pre-edited styles are also available.... 
+Refresh prosilver Templates/Themes/Imagesets...
+Refresh subsilver 2 Templates/Themes/Imagesets if you completed the subsilver 2 installation...
 
-When you have completed all modifications (code, styles and mods):
-Refresh prosilver styles (Templates, Themes and Imagesets), then Purge the cache.
-In the ACP, go to the PORTAL tab and set block visibility to whatever you require.
+Purge the cache...
 
-Delete or rename the portal directory (we recommend you change portal folders name until you have everything working).
+Enable 'Create Thumbnail' to take advantage of highslide...
+Delete or rename the portal directory...
 </diy-instructions>
 </action-group>
 </mod>

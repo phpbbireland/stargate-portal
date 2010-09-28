@@ -25,7 +25,7 @@ if (!defined('IN_PHPBB'))
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
-include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 
 global $k_config;
 $sgp_cache_time = $k_config['sgp_cache_time'];

@@ -64,9 +64,9 @@
 
 	display_forums('', $config['load_moderators']);
 
-	$user->add_lang('portal/portal');
-	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
-	include_once($phpbb_root_path . 'includes/sgp_portal_blocks.' . $phpEx);
+//	$user->add_lang('portal/portal');
+//	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+//	include_once($phpbb_root_path . 'includes/sgp_portal_blocks.' . $phpEx);
 
 	// Set some stats, get posts count from forums data if we... hum... retrieve all forums data
 	$total_posts	= $config['num_posts'];
@@ -163,9 +163,10 @@
 
 		'LEGEND'		=> $legend,
 		'NEWEST_USER'	=> sprintf($user->lang['NEWEST_USER'], get_username_string('full', $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])),
-		'PORTAL_BODY'	=> htmlspecialchars_decode($portal_body),
-		'P_PAGE_NAME'	=> htmlspecialchars_decode($p_page_name),
+
 		'P_PAGE_DESC'	=> htmlspecialchars_decode($p_page_desc),
+		'P_PAGE_NAME'	=> htmlspecialchars_decode($p_page_name),
+		'PORTAL_BODY'	=> htmlspecialchars_decode($portal_body),
 
 		'MOVE_IMG'		=> '<img src="./images/move.png"  alt="move" title="' . $user->lang['MOVE'] . '" height="13px" width="13px" />',
 		'HIDE_IMG'		=> '<img src="./images/hide.png"  alt="hide" title="' . $user->lang['HIDE'] . '" height="13px" width="13px"/>',

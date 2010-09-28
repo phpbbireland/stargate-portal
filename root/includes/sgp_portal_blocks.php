@@ -371,7 +371,7 @@ if (isset($left_block_ary) && $show_left)
 			'LEFT_BLOCKS'			=> portal_block_template($value),
 			'LEFT_BLOCK_ID'			=> 'L_' .$left_block_id[$block],
 			'LEFT_BLOCK_TITLE'		=> $left_block_title[$block],
-			'LEFT_BLOCK_SCROLL' 	=> $left_block_scroll[$block],
+			'LEFT_BLOCK_SCROLL'		=> $left_block_scroll[$block],
 			'LEFT_BLOCK_HEIGHT'		=> $left_block_height[$block],
 			'LEFT_BLOCK_IMG'		=> ($left_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $left_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/none.gif" height="1px" width="1px" alt="" >',
 			'LEFT_BLOCK_IMG_2'		=> (file_exists($big_image_path . $left_block_img[$block])) ? '<img src="' . $big_image_path  . $left_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/large/none.png" alt="" >',
@@ -405,7 +405,7 @@ if (isset($center_block_ary) && $show_center)
 	foreach ($center_block_ary as $block => $value)
 	{
 		// As it is not always possible to display all data as intended in a narrow block (left or right blocks) we automatically load a wide layout if it exists //
-		// We check the default template folder and the common folder templates //
+		// We check the default template folder and the SGP common folder templates //
 
 		$my_file_wide = "{$phpbb_root_path}styles/" . $user->theme['template_path'] . '/template/blocks/' . $value;
 		$my_file_wide = str_replace('.html', '_wide.html', $my_file_wide);
@@ -469,13 +469,15 @@ $template->assign_vars(array(
 	'U_SEARCH_BOOKMARKS'=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=main&mode=bookmarks'),
 ));
 
+// process common data here //
 if ($this_page[0] == 'viewtopic')
 {
 	global $phpEx, $phpbb_root_path;
 	global $config, $user, $template, $k_quick_posting_mode, $forum_id, $post_data, $topic_id, $topic_data, $k_config;
 
-	// include_once required here... 
-	// using function_exists() will still result in redeclarations...
+	// include_once required is here //
+	// using function_exists() will still result in redeclarations errors //
+	// I confirmed I could use include_once under these circumstances over a year ago (official phpBB chat with devs) // 
 	include_once($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 	include_once($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 
@@ -513,7 +515,6 @@ if ($this_page[0] == 'viewtopic')
 		'S_USER_LOGGED_IN'		=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
 		'S_K_SHOW_SMILES'		=> $k_config['k_show_smilies'],
 		'QUOTE_IMG' 			=> $user->img('icon_post_quote', 'REPLY_WITH_QUOTE'),
-		//'PORTAL_DEBUG_MESSAGE'	=> $portal_debug_message,
 		)
 	);
 }

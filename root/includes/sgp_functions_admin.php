@@ -19,8 +19,6 @@ if (!function_exists('get_reserved_words'))
 {
 	function get_reserved_words()
 	{
-		return;
-
 		global $reserved_words, $db, $template;
 		$reserved_words = array();
 		$i = 0;

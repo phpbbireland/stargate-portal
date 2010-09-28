@@ -13,6 +13,10 @@
 /**
 * @package module_install
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 class acp_k_status_info
 {

@@ -61,6 +61,7 @@ class acp_k_web_pages
 		$template->assign_vars(array(
 			'U_EDIT'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_web_pages&amp;mode=edit&amp;module=" . $id,
 			'U_DELETE'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_web_pages&amp;mode=delete&amp;module=" . $id,
+			'U_ADD_VARS' => "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_resource_words&mode=select", 
 			)
 		);
 
@@ -263,6 +264,11 @@ class acp_k_web_pages
 					$foot			= utf8_normalize_nfc(request_var('foot', '', true));
 					$last_updated	= utf8_normalize_nfc(request_var('last_updated', '', true));
 
+					if($page_extn == '')
+					{
+						$page_extn = 0;
+					}
+
 					if ($head == '')
 					{
 						$head = 0;
@@ -289,6 +295,13 @@ class acp_k_web_pages
 					$cache->destroy('sql', K_WEB_PAGES_TABLE);
 					meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_web_pages&amp;mode=all");
 				}
+				else
+				{
+					$template->assign_vars(array(
+						'S_OPTION'			=> 'add',
+					));
+				}
+
 			break;
 
 			case 'delete':

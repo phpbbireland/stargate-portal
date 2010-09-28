@@ -39,7 +39,7 @@ $version_config_name = 'portal_version';
 $language_file = 'portal_install_umil';
 $logo_img = 'portal/portal_install.png';
 
-include('sql_data.' . $phpEx);
+include($phpbb_root_path . 'portal/sql_data.' . $phpEx);
 
 $versions = array(
 
@@ -93,12 +93,12 @@ $versions = array(
 	'2.0.0' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
-	// Version 2.0.5
-	'2.0.5' => array(
+	// Version 3.0.0
+	'3.0.0' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
-	// New version RC 2
-	'3.0.5'	=> array(
+	// New version 3.1.0 RC 3
+	'3.1.0'	=> array(
 
 		'permission_add' => array(
 			array('a_k_portal', 1),

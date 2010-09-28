@@ -114,7 +114,10 @@
 			$lnk[0] = str_replace('@','?', $lnk[0]);
 			$lnk[0] = str_replace('£','+', $lnk[0]);
 
-			$linkscontent .= "<a rel=\"external\" TARGET=\"_blank\" href=\"http://$lnk[0]\"><img src=\"".$phpbb_root_path."images/links/$image\" alt=\"$lnk[0]\" /></a><br /><br />";
+			// strict //
+			$linkscontent .= "<a href=\"http://$lnk[0]\" ><img src=\"".$phpbb_root_path."images/links/$image\" alt=\"$lnk[0]\" /></a><br /><br />";
+			// transitional //
+			//$linkscontent .= "<a href=\"http://$lnk[0]\" target=\"_blank\"><img src=\"".$phpbb_root_path."images/links/$image\" alt=\"$lnk[0]\" /></a><br /><br />";
 		}
 
 		$linkscontent .= "</div>";
@@ -144,7 +147,10 @@
 			$lnk[0] = str_replace('@','?', $lnk[0]);
 			$lnk[0] = str_replace('£','+', $lnk[0]);
 
-			$linkscontent .= "<a rel=\"external\" TARGET=\"_blank\" href=\"http://$lnk[0]\"><img src=\"".$phpbb_root_path."images/links/$image\" alt=\"$lnk[0]\" /></a><br /><br />";
+			// strict //
+			$linkscontent .= "<a href=\"http://$lnk[0]\"><img src=\"".$phpbb_root_path."images/links/$image\" alt=\"$lnk[0]\" /></a><br /><br />";
+			// transitional //
+			//$linkscontent .= "<a href=\"http://$lnk[0]\" target=\"_blank\"><img src=\"".$phpbb_root_path."images/links/$image\" alt=\"$lnk[0]\" /></a><br /><br />";
 		}
 
 		$linkscontent .= "</div>";

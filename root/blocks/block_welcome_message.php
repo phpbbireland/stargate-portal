@@ -50,11 +50,13 @@ if (!defined('IN_PHPBB'))
 
 		if ($row['mod_bbcode_bitfield'])
 		{
+			//include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+			$bbcode = new bbcode();
 			$bbcode->bbcode_second_pass($info, $row['mod_bbcode_uid'], $row['mod_bbcode_bitfield']);
 		}
+
 		$mod_details = bbcode_nl2br($mod_details);
 		$mod_details = smiley_text($mod_details);
-
 
 		// note [you] is a pseudo bbcode //
 

@@ -15,23 +15,17 @@
     </author-notes>
 
     <author-group>
-      <author>
-        <realname>Michael O'Toole</realname>
-        <email>o2l@eircom.net</email>
-        <username>michaelo</username>
-		<contributions-group>
-			<contributions status="past" from="2005" to="2009" position="Author"/>
-		</contributions-group>
-        <homepage>http://www.stargate-portal.com</homepage>
-        <contributions />
-      </author>
-
+		<author>
+			<realname>Michael O'Toole</realname>
+			<homepage>http://www.stargate-portal.com/</homepage>
+			<email>o2l@eircom.net</email>
+		</author>
     </author-group>
     <mod-version>2.0.0</mod-version>
     <installation>
       <level>intermediate</level>
       <time>2503</time>
-      <target-version>3.0.7</target-version>
+      <target-version>3.0.7-PL1</target-version>
     </installation>
     <history>
       <entry>

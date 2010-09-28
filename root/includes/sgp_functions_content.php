@@ -165,6 +165,7 @@ if (!function_exists('sgp_truncate_message'))
 
 		$len = $length;
 
+		// we don't currently truncate messages containing bbcodes //
 		if (strlen($txt) > $len)
 		{
 			$uid = get_post_bbcode_uid($txt);

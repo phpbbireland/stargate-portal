@@ -1,10 +1,20 @@
 <!-- IF STARGATE -->
 			</td>
-			<!-- IF S_SHOW_RIGHT_BLOCKS -->
-			<td valign="top" style="width:{BLOCK_WIDTH}; padding-left:15px;" id="right">
-				<!-- INCLUDE portal_layout_right.html -->
-			</td>
-			<!-- ENDIF -->
+		<!-- IF S_SHOW_RIGHT_BLOCKS -->
+		<td valign="top" style="width:{BLOCK_WIDTH}; padding-left:15px;" id="right">
+			<script type="text/javascript">
+				//<!--
+				if(GetCookie('right_blocks_col_hide') == '2')
+				{
+					ShowHide('right');
+					ShowHide('right_blocks_col_hide');
+					ShowHide('right_blocks_col_show');
+				}
+				//-->
+			</script>
+			<!-- INCLUDE portal_layout_right.html -->
+		</td>
+		<!-- ENDIF -->
 		</tr>
 	</table>
 

@@ -225,6 +225,7 @@ class acp_k_modules
 
 		include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 		generate_smilies('inline', 0);
+
 		s_get_vars();
 
 		switch ($mode)
@@ -325,6 +326,8 @@ class acp_k_modules
 					{
 						$mode = 'style';
 					}
+					
+					$cache->destroy('sql', K_MODULES_TABLE);
 
 					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_modules&amp;mode='. $mode));
 					return;	

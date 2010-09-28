@@ -218,8 +218,6 @@ function get_all_available_files()
 
 	$dirslist .= 'None ';
 
-	//print_r($arr);
-
 	while ($file = $dirs->read())
 	{
 		if (stripos($file, ".php") && !stripos($file, ".bak") && !in_array($file, $arr, true))

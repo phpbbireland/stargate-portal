@@ -48,6 +48,7 @@ $topic_title = '';
 
 if (isset($style) && $style != '1')
 {
+	// refresh page and set style to default (prosilver) //
 	echo $user->lang['SGP_STYLE_ERROR_10'];
 	meta_refresh(0, $phpbb_root_path . "web_page." . $phpEx ."?mode=" . $mode . "&amp;style=1");
 	return;
@@ -55,6 +56,15 @@ if (isset($style) && $style != '1')
 
 // This code also provided us with a common 404 page as we have added code to the htaccess to redirect //
 // page called without mode swicth, so set default page to 404 //
+
+// mpv does not like html file with no extension (thinks they are binary files?)
+// I will change the page name to .html for now... 
+if(strpos('.html', $mode) == false)
+{
+	// $nmode = $mode with no extension for db query //
+	$nmode = $mode;
+	$mode = $mode . '.html';
+}
 
 // Get a lsit of all web page and compare to $mode //
 $dir_list = sgp_get_file_list("{$phpbb_root_path}styles/portal_common/template/web_pages/pages/", '', false);
@@ -71,10 +81,11 @@ for ($i = 0; $i < count($dir_list); $i++)
 // we don't have the selected page //
 if (!$valid_mode)
 {
-	$mode = '404';
+	$mode = '404.html';
+	$nmode = '404';
 }
 
-$sql = "SELECT id, page_name, page_meta, page_desc, page_extn ,body, head, foot FROM ". K_WEB_PAGES_TABLE . " WHERE page_name = '$mode' ";
+$sql = "SELECT id, page_name, page_meta, page_desc, page_extn ,body, head, foot FROM ". K_WEB_PAGES_TABLE . " WHERE page_name = '$nmode' ";
 
 if (!$result = $db->sql_query($sql))
 {
@@ -85,7 +96,6 @@ $row = $db->sql_fetchrow($result);
 // Check to see if we added this page, else process the 404 page //
 if (count($row['id']) == 0) 
 {
-	$mode = '404';
 	$sql = "SELECT id, page_name, page_meta, page_desc, page_extn ,body, head, foot FROM ". K_WEB_PAGES_TABLE . " WHERE page_name = '$mode' ";
 	if (!$result = $db->sql_query($sql))
 	{ 
@@ -93,6 +103,7 @@ if (count($row['id']) == 0)
 	}
 	$row = $db->sql_fetchrow($result);
 }
+
 
 // get id's for processing and save body text //
 $idone = $row['id'];
@@ -132,37 +143,6 @@ $row = $db->sql_fetchrow($result);
 $foot = $row['body'];
 $db->sql_freeresult($result);
 
-
-/*
-//if (defined('IN_ADMIN'))// && isset($user->data['session_admin']) && $user->data['session_admin'])
-if (!file_exists($phpbb_root_path . 'styles/portal_common/web_pages/' . $mode))
-{
-
-	$vars = array('$page_name', '$page_meta', '$page_desc');
-	$data = array($page_name, $page_meta, $page_desc);
-
-	$head = htmlspecialchars_decode($head);
-	$head = str_replace($vars,$data,$head);
-	$body = htmlspecialchars_decode($body);
-	$foot = htmlspecialchars_decode($foot);
-
-	$filename = $page_name;
-	$contents = $head .= $body .= $foot;
-
-
-	if ($fp = @fopen($filename, 'wb'))
-	{
-		@fwrite ($fp, $contents);
-		if($fp > 0)
-			echo 'file written' . $filename;
-		@fclose($fp);
-
-		//phpbb_chmod($filename, CHMOD_READ | CHMOD_WRITE);
-	}
-	return;
-}
-*/
-
 $style1 = "./styles/" . $user->theme['theme_path'] . '/theme/overload.css';
 $style2 = "./styles/" . $user->theme['theme_path'] . '/theme/stylesheet.css';
 
@@ -193,6 +173,8 @@ $vars = array("\0", "\n", "\r", "\t", '$page_name', '$page_meta', '$page_desc');
 $data = array('', '', '', '', $page_name, $page_meta, $page_desc);
 $head = str_replace($vars, $data, $head);
 
+$body = str_replace('{L_NOT_FOUND}', '<h3>Web Pages Examples:</h3>These pages are presented as example only, not all links are valid...<br />', $body);
+
 $template->assign_vars( array(
 	'WEB_PAGE_HEAD'	=> htmlspecialchars_decode($head),
 	'WEB_PAGE_NAME'	=> $page_name,
@@ -201,6 +183,7 @@ $template->assign_vars( array(
 	'WEB_PAGE_BODY'	=> htmlspecialchars_decode($body),
 	'WEB_PAGE_FOOT'	=> htmlspecialchars_decode($foot),
 ));
+
 
 // generate page //
 page_header($user->lang['WEB_PAGE']);

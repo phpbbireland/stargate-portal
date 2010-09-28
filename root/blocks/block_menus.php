@@ -225,7 +225,6 @@
 				break;
 			}
 
-			//print ("<a href=\"page.php\" onClick=\"NewWin=window.open(this.href,'NewWin','toolbar=no,status=no,width=500,height=300,scrollbars=yes');re turn false;\" STYLE=\"text-decoration: underline;\">link</a>");
 			$template->assign_block_vars('portal_menus_row', array(
 				'EXTERN'				=> $link_option,
 				'PORTAL_MENU_HEAD_NAME'	=> ($is_sub_heading) ? $name : '',

@@ -11,13 +11,13 @@
 
 /* 
 * A couple of functions rescued from functions.php
-* Part of the Acronym code @based on the original Acronym � 2005 CodeMonkeyX
+* Part of the Acronym code @based on the original Acronym © 2005 CodeMonkeyX
 * @copyright (c) 2007 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 
 /*
-* One or two of the phpBB functions core are repeated here with two alterations.
+* Several of the phpBB functions core are repeated here with two alterations.
 *
 * Function names are proceeded with 'sgp_' and wrapped in 'function_exists'
 * to prevent re-declaration.
@@ -1208,7 +1208,10 @@ if(!function_exists('s_get_vars'))
 	{
 		global $db, $template;
 
-		$sql = 'SELECT * FROM ' . K_RESOURCE_TABLE . ' ORDER BY word ASC';
+		$type = "'V'";
+
+		$sql = 'SELECT * FROM ' . K_RESOURCE_TABLE  . ' WHERE type = ' . $type . ' ORDER BY word ASC';
+
 		$result = $db->sql_query($sql);	
 
 		while ($row = $db->sql_fetchrow($result))

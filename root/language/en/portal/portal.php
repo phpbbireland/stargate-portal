@@ -249,7 +249,7 @@ $lang = array_merge($lang, array(
 
 	'IN_PROGRESS'			=> 'This page is under construction',
 	'LINKS_FORUM'			=> 'Submit A Link',
-	'LINKS_FORUM_REQU'		=> 'Post your request here... approval required',
+	'LINKS_FORUM_REQU'		=> 'Post your request here... approval required... you must create a forum for links upload!',
 
 	'NO_ANNOUNCEMENTS'		=> 'No Announcements...',
 	'NO_NEWS'				=> 'No news to report...',
@@ -285,6 +285,9 @@ $lang = array_merge($lang, array(
 	'BLOCK_TOP_TOPICS'		=> 'Stargate Portal Top Topics',
 	'BLOCK_WEB_PAGES'		=> 'Stargate Portal Web Pages',
 	'BLOCK_WEB_TEAM'		=> 'Stargate Portal Web Team',
+	
+	// More BBCodes //
+	'BBCODE_ST_HELP'			=> 'Strike through: [strike]text[/strike]',
 
 ));
 //- stargate aka kiss portal lang definitions -//

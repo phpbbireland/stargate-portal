@@ -29,7 +29,7 @@ $lang = array_merge($lang, array(
 	'TITLE' => 'Manage Portal Web Pages',
 	'TITLE_EXPLAIN' => '<b>Small Modules Manager (Web Page Mod):</b><br />
 	These are small mods used to display and manage additional information used by the portal... a good example being the <strong>Welcome Message Mod</strong>...<br />
-	You can add your own types for such things as Styles, Blocks or Mods... Examine the Welcome Block to see what data can be saved...<br />Future versions will allow creating of additional database storage elements.',
+	You can add your own types for such things as Styles, Blocks or Mods... Examine the Welcome Block to see what data can be saved. Future versions will allow creating of additional database storage elements.<br />Items marked with * are mandatory.',
 
 	'ID'				=> 'ID',
 	'ACTIVE'			=> 'Active',
@@ -37,7 +37,7 @@ $lang = array_merge($lang, array(
 	'DISABLED'			=> 'Disabled',
 	'WEB_PAGE_ADD'		=> 'Add a web page...',
 	'WEB_PAGE_ADD_'		=> 'Select the type of page...',
-	'WEB_PAGE_NAME'		=> 'Page name',
+	'WEB_PAGE_NAME'		=> '*Page name/File name',
 	'WEB_PAGE_TYPE'		=> 'Page type',
 
 	'WEB_PAGE_HEAD'		=> 'Head ID',
@@ -47,7 +47,7 @@ $lang = array_merge($lang, array(
 	'WEB_PAGE_FOOT_EXPLAIN'		=> 'Select a footer to use with this page.',
 
 
-	'WEB_PAGE_TYPE_EXPLAIN'	=> 'This web page is a header/body/footer ?',
+	'WEB_PAGE_TYPE_EXPLAIN'	=> 'This web page is a header/body/footer?',
 
 	'HEAD' => 'Page Header',
 	'BODY' => 'Page Body',
@@ -62,7 +62,8 @@ $lang = array_merge($lang, array(
 	'PAGES' => ' web pages',
 
 	'ID_EXPLAIN'				=> 'The ID for the web page (automatically assigned).',
-	'WEB_PAGE_NAME_EXPLAIN'		=> 'This is the actual page name (without the extension).',
+	'WEB_PAGE_NAME_EXPLAIN'		=> 'Should be the same as the file name... example: wiki.html.<br />Required but not used for portal pages.',
+
 	'WEB_PAGE_BODY_EXPLAIN'		=> 'The html code for the header/body/footer/portal. ',
 
 

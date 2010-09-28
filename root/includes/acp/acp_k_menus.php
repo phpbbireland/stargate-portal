@@ -30,6 +30,8 @@ class acp_k_menus
 		global $db, $user, $auth, $template, $cache;
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
+		$store = '';
+
 		$user->add_lang('acp/k_menus');
 		$this->tpl_name = 'acp_k_menus';
 		$this->page_title = 'ACP_MENUS';
@@ -134,12 +136,25 @@ class acp_k_menus
 						trigger_error($user->lang['ERROR_PORTAL_MENUS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 					}
 
+
+					$cache->destroy('sql', K_MENUS_TABLE);
+
 					$template->assign_vars(array(
 						'L_MENU_REPORT' => 'Data is being saved....</font><br />',
 						'S_OPT' => 'saving',
 					));
 
-					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=nav'));
+					switch($menu_type)
+					{
+						case 1: $mode = 'nav';
+						break;
+						case 2: $mode = 'sub';
+						break;
+						default: $mode = 'manage';
+						break;
+					}
+
+					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=' . $mode));
 					break;
 				}
 
@@ -224,8 +239,7 @@ class acp_k_menus
 			case 'up':
 			case 'down':
 			{
-				$to_move;
-				$move_to;
+				$to_move = $move_to = '';
 
 				// get current menu data //
 				$sql = "SELECT m_id, ndx, menu_type FROM " . K_MENUS_TABLE . "
@@ -368,8 +382,8 @@ class acp_k_menus
 
 					$cache->destroy('sql', K_MENUS_TABLE);
 
-					//meta_refresh (1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_menus&amp;mode=$store");
-					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=$store' . $store));
+					//fix for the different menus...
+					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=' . $store));
 
 					$template->assign_vars(array(
 						'L_MENU_REPORT' => 'Menu Created...',

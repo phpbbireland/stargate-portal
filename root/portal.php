@@ -33,7 +33,7 @@ if(!STARGATE)
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('portal/portal');
-$user->add_lang('portal/portal');
+$user->add_lang('viewtopic');
 
 display_forums('', $config['load_moderators']);
 

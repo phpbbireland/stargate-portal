@@ -31,7 +31,7 @@ $queries = $cached_queries = 0;
 
 include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
 
-$max_top_posters = 10; // add to acp later...
+$max_top_posters = $k_config['number_of_top_posters_to_display'];
 
 $sql = 'SELECT user_id, username, user_posts, user_colour, user_type, group_id, user_avatar, user_avatar_type, user_avatar_width , user_avatar_height, user_website
 	FROM ' . USERS_TABLE . '
@@ -39,7 +39,7 @@ $sql = 'SELECT user_id, username, user_posts, user_colour, user_type, group_id, 
 		AND user_posts <> 0
 	ORDER BY user_posts DESC';
 
-$result = $db->sql_query_limit($sql, $max_top_posters, $sgp_cache_time);
+$result = $db->sql_query_limit($sql, $max_top_posters, 0 ,$sgp_cache_time);
 
 while($row = $db->sql_fetchrow($result))
 {
