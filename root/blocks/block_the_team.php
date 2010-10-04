@@ -24,18 +24,33 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $k_config;
+/**
+* 30 September 2010 Mike
+* Avoid reprocessing data if already available... every little helps ;) 
+**/
+
+// Get the currect page //
+$this_page = explode(".", $user->page['page']);
+
+// Is the information is already available? //
+if ($this_page[0] == 'memberlist')
+{
+	// The information is available so no need to process //
+	return;
+}
+
+global $k_config, $phpbb_root_path, $web_path;
+
 $sgp_cache_time = $k_config['sgp_cache_time'];
 $queries = $cached_queries = 0;
+$store = '';
+$change = true;
 
-// rework of code from memberlist.php and memberlist.php + to create blook_team. Still under construction
-// The aim is to display an image to reflect the user default group 
+// Rework of memberlist.php to create blook_team.
+// The aim is to display an image to reflect the user default group
 
 // initialise variables
 $poster_image_icon = '';
-
-// What do you want to do today? ... oops, I think that line is taken ...
-// Display a listing of board admins, moderators
 
 $admin_ary = $auth->acl_get_list(false, array('a_', 'm_'), false);
 
@@ -64,7 +79,7 @@ $admin_id_ary = array_unique($admin_id_ary);
 $global_mod_id_ary = array_unique($global_mod_id_ary);
 		
 // Admin group id...
-$sql = 'SELECT group_id, group_colour
+$sql = 'SELECT group_id, group_colour, group_name
 	FROM ' . GROUPS_TABLE . "
 	WHERE group_name = 'ADMINISTRATORS' || group_name ='STAFF'";
 $result = $db->sql_query($sql, $sgp_cache_time);
@@ -73,16 +88,15 @@ $admin_group_id = (int) $db->sql_fetchfield('group_id');
 $db->sql_freeresult($result);
 
 $sql = $db->sql_build_query('SELECT', array(
-		'SELECT'	=> 'u.user_id, u.group_id as default_group, u.username, u.user_colour, g.group_id, g.group_name',
+		'SELECT' => 'u.user_id, u.group_id as default_group, u.username, u.user_colour, u.username_clean,  g.group_id, g.group_name, g.group_colour, g.group_type',
 
-		'FROM'		=> array(
+		'FROM' => array(
 			USERS_TABLE		=> 'u',
 			GROUPS_TABLE	=> 'g'
 		),
 
-		'WHERE'		=> $db->sql_in_set('u.user_id', array_unique(array_merge($admin_id_ary, $global_mod_id_ary)), false, true) . '
+		'WHERE' => $db->sql_in_set('u.user_id', array_unique(array_merge($admin_id_ary, $global_mod_id_ary)), false, true) . '
 			AND u.group_id = g.group_id',
-
 		'ORDER_BY'	=> 'g.group_name ASC, u.username_clean ASC'
 ));
 $result = $db->sql_query($sql, $sgp_cache_time);
@@ -110,10 +124,59 @@ while ($row = $db->sql_fetchrow($result))
 		}
 	}
 
+	// The person is moderating several "public" forums, therefore the person should be listed, but not giving the real group name if hidden.
+	if ($row['group_type'] == GROUP_HIDDEN && !$auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel') && $row['ug_user_id'] != $user->data['user_id'])
+	{
+		$group_name = $user->lang['GROUP_UNDISCLOSED'];
+		$u_group = '';
+	}
+	else
+	{
+		$group_name = ($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name'];
+		$u_group = append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']);
+	}
+
+	$group_img = strtolower($group_name);
+	$group_img = str_replace(' ' , '_', $group_img);
+
+	// Use the code below to check for team images in the user style... If they don’t exist use default in ./image/teams //
+	if(file_exists($phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/teams/' . $group_img . '.png'))
+	{
+		$group_image_path = $phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/teams/';
+	}
+	else
+	{
+		$group_image_path = $phpbb_root_path . 'images/teams/';
+
+		if (!file_exists($group_image_path . $group_img . '.png'))
+		{
+			$group_img = 'default';
+		}
+	}
+
+
+	if($store != $group_name)
+	{
+		$change = true;
+	}
+	else
+	{
+		$change = false;
+	}
+
 	$template->assign_block_vars($which_row, array(
-		'USER_ID'		=> $row['user_id'],
+		'S_CHANGE'			=> $change,
+
+		'GROUP_IMG_PATH'	=> $group_image_path,
+		'GROUP_IMG'			=> $group_img,
+		'GROUP_NAME'		=> $group_name,
+		'GROUP_COLOR'		=> $row['group_colour'],
+		'USER_ID'			=> $row['user_id'],
 		'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], $row['username'], $row['user_colour']),
 	));
+
+	$store = $group_name;
+
 }
 $db->sql_freeresult($result);
 

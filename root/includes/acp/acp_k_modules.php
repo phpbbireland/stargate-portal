@@ -28,7 +28,7 @@ class acp_k_modules
 				
 		global $db, $user, $auth, $template, $cache;
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
-	
+
 		$message ='';
 		$search_message = '';
 		$found = 0;
@@ -108,9 +108,13 @@ class acp_k_modules
 			// Instantiate BBCode class
 			if (!isset($bbcode) && $mod_bbcode_bitfield !== '')
 			{
-				include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+				if (!class_exists('bbcode'))
+				{
+					include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+				}
 				$bbcode = new bbcode(base64_encode($mod_bbcode_bitfield));
 			}
+
 			if ($row['mod_bbcode_bitfield'])
 			{
 				$bbcode->bbcode_second_pass($mod_details, $row['mod_bbcode_uid'], $row['mod_bbcode_bitfield']);

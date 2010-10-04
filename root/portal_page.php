@@ -64,10 +64,6 @@
 
 	display_forums('', $config['load_moderators']);
 
-//	$user->add_lang('portal/portal');
-//	include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
-//	include_once($phpbb_root_path . 'includes/sgp_portal_blocks.' . $phpEx);
-
 	// Set some stats, get posts count from forums data if we... hum... retrieve all forums data
 	$total_posts	= $config['num_posts'];
 	$total_topics	= $config['num_topics'];

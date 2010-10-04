@@ -475,9 +475,9 @@ if ($this_page[0] == 'viewtopic')
 	global $phpEx, $phpbb_root_path;
 	global $config, $user, $template, $k_quick_posting_mode, $forum_id, $post_data, $topic_id, $topic_data, $k_config;
 
-	// include_once required is here //
 	// using function_exists() will still result in redeclarations errors //
-	// I confirmed I could use include_once under these circumstances over a year ago (official phpBB chat with devs) // 
+	// I confirmed I could use include once under these circumstances over a year ago (official phpBB chat with devs) // 
+	// I need to determine the actual functions required and check agains each ? //
 	include_once($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 	include_once($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 

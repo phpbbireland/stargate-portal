@@ -5,7 +5,7 @@
 * @version $Id: sgp_functions.php 336 2009-01-23 02:06:37Z Michealo $
 * @copyright (c) Michael O'Toole 2005 phpBBireland
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* Last updated: 10 November 2008 by Mike
+* Last updated: 28 September 2010 by Mike
 * Do not remove copyright from any file.
 */
 
@@ -749,7 +749,10 @@ if(!function_exists('sgp_build_minimod'))
 			// Instantiate BBCode class
 			if (!isset($bbcode) && $mod_bbcode_bitfield !== '')
 			{
-				include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+				if (!class_exists('bbcode'))
+				{
+					include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+				}
 				$bbcode = new bbcode(base64_encode($mod_bbcode_bitfield));
 			}
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<?xml-stylesheet type="text/xsl" href="./contrib/xsl/modx.prosilver.en.xsl"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--For security purposes, please check: http
 ://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/
 @version $Id: stargate_041.xml 315 2009-01-10 05:43:06Z michaelo $ -->
@@ -42,8 +42,8 @@
 			<email>o2l@eircom.net</email>
 		</author>
 	</author-group>
-	<mod-version>3.1.0</mod-version>
 
+<mod-version>3.1.1</mod-version>
 	<installation>
 	<level>intermediate</level>
 	<time>2503</time>
@@ -112,7 +112,7 @@
       </entry>
       <entry>
         <date>2010-09-30</date>
-		<rev-version>3.1.0</rev-version>
+		<rev-version>3.1.1</rev-version>
         <changelog lang="en">
 			<change>Please note, development release are not identified here.</change>
 			<change>For detailed information see: http://www.stargate-portal.com/forum/viewforum.php?f=10</change>
@@ -1672,7 +1672,6 @@ if (!function_exists('bbcode_strip'))
 	'NO_MOVE_DOWN'			=> 'Can’t move down',
 	'NO_MOVE_UP'			=> 'Can’t move up',
 	'NO_RESYNC'				=> 'Resynchronise Disabled',]]></action>
-
 </edit>
 
 <edit>
@@ -1909,7 +1908,6 @@ $lang = array_merge($lang, array(
 	'IMG_NEWS_UNREAD_MINE'			=> 'News posted to new',
 	'IMG_NEWS_UNREAD_LOCKED'		=> 'News locked new post',
 	'IMG_NEWS_UNREAD_LOCKED_MINE'	=> 'News locked posted to new',]]></action>
-
 </edit>
 </open>
 

@@ -97,8 +97,8 @@ $versions = array(
 	'3.0.0' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
-	// New version 3.1.0 RC 3
-	'3.1.0'	=> array(
+	// New version 3.1.1 MPV 3rd
+	'3.1.1'	=> array(
 
 		'permission_add' => array(
 			array('a_k_portal', 1),

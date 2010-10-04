@@ -29,7 +29,7 @@ class acp_k_poll
 		global $db, $user, $auth, $template, $cache;
 		global $k_config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
-		include_once($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
+		include($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
 
 		$message ='';
 

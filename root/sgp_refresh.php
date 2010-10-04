@@ -25,8 +25,8 @@ $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.'.$phpEx);
 include($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
-include_once($phpbb_root_path . "includes/acm/acm_file.$phpEx");
-include_once($phpbb_root_path . "includes/functions_admin.$phpEx");
+//include ... once($phpbb_root_path . "includes/acm/acm_file.$phpEx");
+include($phpbb_root_path . "includes/functions_admin.$phpEx");
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 
 // Report all errors, except notices
@@ -35,9 +35,6 @@ error_reporting(E_ALL ^ E_NOTICE);
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup(array('common', 'acp/styles'));
-
-//include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
-//include($phpbb_root_path . 'includes/sgp_portal_blocks.' . $phpEx);
 
 $current_version = '1.0.0';
 $page_title = $user->lang['SGP_REFRESH_ALL'] . $current_version;

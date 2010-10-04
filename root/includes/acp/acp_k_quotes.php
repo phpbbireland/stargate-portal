@@ -32,7 +32,7 @@ class acp_k_quotes
 		global $config, $k_config;
 		global $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
-		include_once($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
+		include($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
 
 		$user->add_lang('acp/k_quotes');
 

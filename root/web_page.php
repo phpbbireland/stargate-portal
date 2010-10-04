@@ -104,7 +104,6 @@ if (count($row['id']) == 0)
 	$row = $db->sql_fetchrow($result);
 }
 
-
 // get id's for processing and save body text //
 $idone = $row['id'];
 $headone = $row['head'];
@@ -183,7 +182,6 @@ $template->assign_vars( array(
 	'WEB_PAGE_BODY'	=> htmlspecialchars_decode($body),
 	'WEB_PAGE_FOOT'	=> htmlspecialchars_decode($foot),
 ));
-
 
 // generate page //
 page_header($user->lang['WEB_PAGE']);

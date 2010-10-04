@@ -39,7 +39,10 @@
 
 	$queries = $cached_queries = 0;
 
-	include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+	if (!class_exists('bbcode'))
+	{
+		include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+	}
 
 	/**
 	* @ignore

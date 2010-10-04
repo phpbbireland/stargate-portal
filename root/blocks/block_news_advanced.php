@@ -25,7 +25,10 @@ if (!defined('IN_PHPBB'))
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
-include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+if (!class_exists('bbcode'))
+{
+	include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+}
 
 global $k_config;
 $sgp_cache_time = $k_config['sgp_cache_time'];
@@ -222,7 +225,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 	if (($max_news_item_length != 0) && (strlen($row['post_text']) > $max_news_item_length))
 	{
 		$row['post_text'] = sgp_truncate_message($row['post_text'], $max_news_item_length);
-		$row['post_text'] .= ' <a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $row['topic_id']) . '"><strong>' . $user->lang['VIEW_FULL_ARTICLE']  . '</strong><img class="ilower" src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/post_view.png' . '" title="' . $user->lang['VIEW_FULL_ARTICLE']  . '" alt="' . $user->lang['VIEW_FULL_ARTICLE']  . '" /></a>';
+		$row['post_text'] .= ' <a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $row['topic_id']) . '"><strong>[' . $user->lang['VIEW_FULL_ARTICLE']  . ']</strong></a>';
 	}
 
 	// Parse the message

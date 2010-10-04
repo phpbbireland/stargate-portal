@@ -28,12 +28,13 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
-
+// Disabled while I find a bug... possibly php version related...
+return;
+// Disabled while I find a bug... possibly php version related...
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 // include lastRSS
-
 include($phpbb_root_path . 'includes/sgp_lastrss.'.$phpEx);
 
 global $_config;

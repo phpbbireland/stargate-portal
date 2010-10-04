@@ -157,9 +157,11 @@ if (!function_exists('sgp_truncate_message'))
 	{
 		global $phpbb_root_path, $config;
 		$buffer = $div_append = '';
-		$extend = 0;
+		$len = $extend = 0;
 
-		if (strlen($txt) > $length)
+		$len = strlen($txt);
+
+		if ($len > $length)
 		{
 			$extend = correct_truncate_length($txt, $length);
 		}
@@ -177,7 +179,7 @@ if (!function_exists('sgp_truncate_message'))
 			}
 		}
 
-		$buffer .= '...';
+		$buffer .= '... &nbsp;&nbsp;&nbsp;';
 
 		return($buffer . $div_append);
 	}
@@ -199,15 +201,20 @@ if (!function_exists('correct_truncate_length'))
 {
 	function correct_truncate_length($txt, $truncate)
 	{
-		$smile_start = $smile_end = $uid_start = $uid_end = 0;
+		$smile_start = $smile_end = $uid_start = $uid_end = $j = $k = $m = 0;
+		$ts = $te = $td = 0;
+		$tag_count = 0;
 
+		$tag_start = $tag_end = $tag_data = array();
+
+		$opening_tag_string = $closing_tag_string = '';
 		$return_val = $truncate;
 
 		$len = strlen($txt);
 
 		for ($i = 0; $i < $len; $i++)
 		{
-
+			// not nestled?
 			if($txt[$i] == '<' && $txt[$i + 5] == 's' && $txt[$i + 6] == ':')
 			{
 				$smile_start = $i;
@@ -230,18 +237,66 @@ if (!function_exists('correct_truncate_length'))
 			
 			if($txt[$i] == ':' && $txt[$i + 9] == ']')
 			{
+				$opening_tag_string = '';
+
+				while($txt[$i] != '[')
+				{
+					$i--;
+				}
+
+				$tag_start[$ts++] = $i;
 				$uid_start = $i;
+
+				while($txt[$i] != ']')
+				{
+							if($txt[$i] == '=')
+							{
+								while($txt[$i] != ':')
+								{
+									$i++;
+								}
+							}
+
+					$opening_tag_string .= $txt[$i++];
+				}
+				$opening_tag_string .= $txt[$i++];
+
+				$tag_data[$td] = $opening_tag_string;
+				//echo '<br />OT = ' . $tag_data[$td] . '<br />';
+				$td++;
 
 				while($i < $len)
 				{
 					if($txt[$i] == '[' && $txt[$i+1] == '/')
 					{
+						$closing_tag_string = '';
 						while($txt[$i] != ']' && $i < $len)
 						{
 							$i++;
 						}
 						$uid_end = $i;
-						break;
+						$tag_end[$te] = $i;
+
+						// grab end tag
+						// loop back to get the actual start [ //
+						while($txt[$i] != '[')
+						{
+							$i--;
+						}
+						// grab closing tag
+						while($txt[$i] != ']')
+						{
+							if($txt[$i] == '/') 
+								$i++;
+							$closing_tag_string .= $txt[$i++];
+						}
+						$closing_tag_string .= $txt[$i++];
+
+						if(strpos($tag_data[$ts-1], $closing_tag_string) !== false)
+						{
+							//echo '<br />SAME : Opening Tags =  (' . $tag_data[$td-1] . ') Closing Tags  = (' . $closing_tag_string . ') (' . $td. ')<br />';
+							break;
+						}
 					}
 					$i++;
 				}

@@ -850,7 +850,7 @@ $k_blocks_config_array[] = array(
 	'use_external_files'	=> '0',
 	'update_files'			=> '0',
 	'layout_default'		=> '2',
-	'portal_version'		=> '3.0.9',
+	'portal_version'		=> '3.1.1',
 	'portal_config'			=> 'Site',
 );
 
@@ -1872,7 +1872,7 @@ $k_web_pages_array[] = array(
 					&lt;/ul&gt;
 					&lt;div id=&quot;main&quot;&gt;
 						&lt;h2 class=&quot;imgrep error403&quot;&gt;File missing...&lt;/h2&gt;
-						&lt;p style=&quot;font-size:16px;&quot;&gt;&lt;strong&gt;{L_NOT_FOUND}&lt;/strong&gt;&lt;/p&gt;
+						&lt;p style=&quot;font-size:16px;&quot;&gt;&lt;strong&gt;The page you requested could not be found...&lt;/strong&gt;&lt;/p&gt;
 						&lt;p&gt;Please choose from the available links on right.&lt;/p&gt;
 					&lt;/div&gt;
 					&lt;div id=&quot;extras&quot;&gt;

@@ -29,7 +29,7 @@ class acp_k_resource_words
 		global $db, $user, $auth, $template, $cache , $k_cache;
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
-		include_once($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
+		include($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
 
 		$user->add_lang('acp/k_resource_words');
 		$this->tpl_name = 'acp_k_resource_words';

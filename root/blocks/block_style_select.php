@@ -10,8 +10,8 @@
 * @note: Do not remove this copyright. Just append yours if you have modified it,
 *        this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: block_style_select.php 297 2008-12-30 18:40:30Z JohnnyTheOne $
-* Updated: 14th October 2008 Mike, 12 November2008 NeXur
+* @version $Id: block_style_select.php 299 04 October 2010 01:38:00Z Michaelo $
+* Updated: 12 November2008 NeXur, 04 October 2010 Mike
 *
 */
 
@@ -29,7 +29,7 @@ $queries = $cached_queries = 0;
 global $user_id, $user, $template, $phpbb_root_path, $phpEx, $db, $config, $k_config;
 $sgp_cache_time = $k_config['sgp_cache_time'];
 
-include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
+$queries = $cached_queries = 0;
 
 $user_id = $user->data['user_id'];					// get user id
 $current_style = $user->data['user_style'];			// the current style
@@ -47,7 +47,7 @@ if (!$config['override_user_style'] && $new_style != '' && $new_style != $curren
 {
 	$sql = 'UPDATE ' . USERS_TABLE . '
 		SET user_style = ' . $new_style . "
-			WHERE user_id = $user_id";
+		WHERE user_id = $user_id";
 	$db->sql_query($sql);
 }
 
@@ -68,7 +68,7 @@ else
 }
 $result = $db->sql_query($sql, $sgp_cache_time);
 
-while( $row = $db->sql_fetchrow($result) )
+while ($row = $db->sql_fetchrow($result))
 {
 	$mod_id					= $row['mod_id'];
 	$mod_origin				= $row['mod_origin'];
@@ -99,7 +99,7 @@ $sql = 'SELECT style_name, style_id, style_active
 	FROM ' . STYLES_TABLE . '
 	WHERE style_active = 1
 	ORDER BY LOWER(style_name) ASC';
-$result = $db->sql_query($sql, 600);
+$result = $db->sql_query($sql, $sgp_cache_time);
 
 $styles_num = sizeof($db->sql_fetchrowset($result));
 		
@@ -110,7 +110,7 @@ if (!$result = $db->sql_query($sql))
 
 $select_theme = "<select class=\"inputbox autowidth\" onchange=\"this.form.submit();\" name=\"style\" >\n";
 
-while( $row = $db->sql_fetchrow($result) )
+while ($row = $db->sql_fetchrow($result))
 {
 	if ($new_style)
 	{
@@ -140,8 +140,11 @@ if (!$new_style)
 
 $s_select_action = append_sid('?style='. $new_style);
 
+
+/* 04 October 2010 MPV update testing 
+
 //check for vars in the current url
-$check = sizeof($_GET);
+//$check = sizeof($_GET);
 
 if ($check)
 {
@@ -150,19 +153,22 @@ if ($check)
 	$s_select_action = str_replace($order, $replace . '?style=' . $new_style . '&amp;', build_url('style'));
 }
 
+Preliminary test results... it appears to work fine... why the other code? 
+*/
+
 //check if only style or sid is set
-if ($check == 1 && isset($_REQUEST['style']) or isset($_REQUEST['sid']))
+if (isset($_REQUEST['style']) or isset($_REQUEST['sid']))
 {
 	$s_select_action = build_url('style') .'?style='. $new_style;
 }
 
 switch($style_download_count)
 {
-	case 0:		$style_download_count = sprintf($user->lang['DOWNLOAD_COUNT_NONE'], $style_download_count); 
+	case 0:		$style_download_count = sprintf($user->lang['DOWNLOAD_COUNT_NONE'], $style_download_count);
 	break;
-	case 1:		$style_download_count = sprintf($user->lang['DOWNLOAD_COUNT'], $style_download_count); 
+	case 1:		$style_download_count = sprintf($user->lang['DOWNLOAD_COUNT'], $style_download_count);
 	break;
-	default:	$style_download_count = sprintf($user->lang['DOWNLOAD_COUNTS'], $style_download_count); 
+	default:	$style_download_count = sprintf($user->lang['DOWNLOAD_COUNTS'], $style_download_count);
 	break;
 
 }
@@ -187,7 +193,7 @@ $template->assign_vars(array(
 	'S_COMPETED'		=> k_progress_bar($style_status),
 	'S_DOWNLOAD_IMG'	=> '<img src="' . $phpbb_root_path . 'images/download.png" alt="" />',
 	'S_ANIMGIF_IMG'		=> '<img src="' . $phpbb_root_path . 'images/theme_thumbs.gif" style="padding-bottom:6px;" width="120" height="84" alt="" />',
-	'STYLE_USERS'			=> sprintf($user->lang['STYLE_USERS'], $style_count, ($style_count == 1) ? '' : 's'),
+	'STYLE_USERS'		=> sprintf($user->lang['STYLE_USERS'], $style_count, ($style_count == 1) ? '' : 's'),
 	'STYLE_SELECT_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 

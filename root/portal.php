@@ -148,11 +148,12 @@ $template->assign_vars(array(
 // Output page
 page_header($user->lang['PORTAL']);
 
-// Do not move this next line 307-002 //
+/* Not required? 04 October 2010
 if(STARGATE)
 {
-	include_once($phpbb_root_path . 'includes/sgp_portal_blocks.' . $phpEx);
+	include($phpbb_root_path . 'includes/sgp_portal_blocks.' . $phpEx);
 }
+*/
 
 $template->set_filenames(array(
 	'body' => 'portal.html')

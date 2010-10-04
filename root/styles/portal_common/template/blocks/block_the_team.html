@@ -1,32 +1,46 @@
 <!-- IDTAG starts block_the_team.html copyright phpbbireland.com 2007 -->
+<!-- IF .admin or .mod -->
+	<div class="block_data;" style="padding:0px;margin:0px;">
+		<!-- BEGIN admin -->
+			<!-- IF admin.S_CHANGE -->
+			<div><span style="position: relative; float:left; width:100%;"><b>{admin.GROUP_NAME}</b></span></div>
+			<div><span style="position: relative; float:left; width:100%; padding-bottom:1px;"></span></div>
+			<div style="clear:both; padding-bottom: 2px;"><hr /></div>
+			<!-- ENDIF -->
 
-<div class="block_data">
-	<div><span style="position: relative; float:left; width:100%;"><b>{L_ADMINISTRATORS}</b></span></div>
-	<div><span style="position: relative; float:left; width:100%; padding-bottom:3px;"></span></div>
-	<div style="clear:both; padding-bottom: 3px;"><hr /></div>
-	<!-- BEGIN admin -->
-	<div style="text-align:center; clear:both;">
-		<span style="position: relative; float:left; "><img src="{T_THEME_PATH}/images/admins.png" alt="" /> <strong>{admin.USERNAME_FULL}</strong></span>
-	</div>
-	<!-- BEGINELSE -->
-	<div style="text-align:center; clear:both;">
-		<span style="position: relative; float:left;">{L_NO_ADMINS}</span>
-	</div>
-	<!-- END admin -->
+			<div style="text-align:center; clear:both;">
+				<span style="position: relative; float:left; "><img src="{admin.GROUP_IMG_PATH}{admin.GROUP_IMG}.png" alt="{admin.GROUP_IMG}.png" />
+					<strong>{admin.USERNAME_FULL}</strong>
+				</span>
+			</div>
+		<!-- BEGINELSE -->
 
-	<div><span style="float:left; width:100%; padding-top: 3px;"><b>{L_MODERATORS}</b></span></div>
-	<div><span style="position: relative; float:left; width:100%; padding-bottom:3px;"></span></div>
-	<div style="clear:both;  padding-bottom: 3px;"><hr /></div>
-	<!-- BEGIN mod -->
-	<div style="text-align:center; clear:both;">
-		<span style="position: relative; float:left;  "><img src="{T_THEME_PATH}/images/mods.png" alt="" /> <strong>{mod.USERNAME_FULL}</strong></span>
+		<div style="text-align:center; clear:both;">
+			<span style="position: relative; float:left;">{L_NO_ADMINS}</span>
+		</div>
+		<!-- END admin -->
+
+		<!-- BEGIN mod -->
+			<!-- IF mod.S_CHANGE -->
+			<div><span style="float:left; width:100%; padding-top: 1px;"><br /><b>{mod.GROUP_NAME}</b></span></div>
+			<div><span style="position: relative; float:left; width:100%; padding-bottom:1px;"></span></div>
+			<div style="clear:both;  padding-bottom: 2px;"><hr /></div>
+			<!-- ENDIF -->
+
+			<div style="text-align:center; clear:both;">
+				<span style="position: relative; float:left;"><img src="{mod.GROUP_IMG_PATH}{mod.GROUP_IMG}.png" alt="{mod.GROUP_IMG}.png" />
+					<strong>{mod.USERNAME_FULL}</strong>
+				</span>
+			</div>
+		<!-- BEGINELSE -->
+
+		<div style="text-align:center; clear:both;">
+			<span style="position: relative; float:left;">{L_NO_MODS}</span>
+		</div>
+		<!-- END mod -->
+		<br />
 	</div>
-	<!-- BEGINELSE -->
-	<div style="text-align:center; clear:both;">
-		<span style="position: relative; float:left;">{L_NO_MODS}</span>
-	</div>
-	<!-- END mod -->
-	<br />
-</div>
-<!-- IF DEBUG_QUERIES --><div class="block_data">{THE_TEAM_DEBUG}</div><!-- ENDIF -->
+	<!-- IF DEBUG_QUERIES --><div class="block_data">{THE_TEAM_DEBUG}</div><!-- ENDIF -->
+<!-- ENDIF -->
+
 <!-- IDTAG ends block_the_team.html -->
