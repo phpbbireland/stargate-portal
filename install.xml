@@ -2097,6 +2097,12 @@ $lang = array_merge($lang, array(
 </edit>
 
 <edit>
+<comment lang="en">Line ~178</comment>
+<find><![CDATA[	<a name="start_here"></a>]]></find>
+<action type="before-add"><![CDATA[		<div class="header_menu" style="margin-left:-7px; margin-bottom:1px;"><!-- INCLUDE blocks/block_header_menus.html --></div>]]></action>
+</edit>
+
+<edit>
 <comment lang="en">Line ~179</comment>
 <find><![CDATA[		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
 		<div id="information" class="rules">
