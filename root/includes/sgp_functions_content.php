@@ -235,7 +235,8 @@ if (!function_exists('correct_truncate_length'))
 				}
 			}
 			
-			if($txt[$i] == ':' && $txt[$i + 9] == ']')
+			// bbcode & make sure we have enought characters left to check //
+			if($txt[$i] == ':' && $txt[$i + 9] == ']' && $i + 9 < $len)
 			{
 				$opening_tag_string = '';
 
