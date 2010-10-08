@@ -235,83 +235,86 @@ if (!function_exists('correct_truncate_length'))
 				}
 			}
 			
-			// bbcode & make sure we have enought characters left to check //
-			if($txt[$i] == ':' && $txt[$i + 9] == ']' && $i + 9 < $len)
+			// find bbcodes & make sure we have enought characters left to check after tag //
+			if($i + 9 < $len)
 			{
-				$opening_tag_string = '';
-
-				while($txt[$i] != '[')
+				if($txt[$i] == ':' && $txt[$i + 9] == ']')
 				{
-					$i--;
-				}
+					$opening_tag_string = '';
 
-				$tag_start[$ts++] = $i;
-				$uid_start = $i;
-
-				while($txt[$i] != ']')
-				{
-							if($txt[$i] == '=')
-							{
-								while($txt[$i] != ':')
-								{
-									$i++;
-								}
-							}
-
-					$opening_tag_string .= $txt[$i++];
-				}
-				$opening_tag_string .= $txt[$i++];
-
-				$tag_data[$td] = $opening_tag_string;
-				//echo '<br />OT = ' . $tag_data[$td] . '<br />';
-				$td++;
-
-				while($i < $len)
-				{
-					if($txt[$i] == '[' && $txt[$i+1] == '/')
+					while($txt[$i] != '[')
 					{
-						$closing_tag_string = '';
-						while($txt[$i] != ']' && $i < $len)
-						{
-							$i++;
-						}
-						$uid_end = $i;
-						$tag_end[$te] = $i;
+						$i--;
+					}
 
-						// grab end tag
-						// loop back to get the actual start [ //
-						while($txt[$i] != '[')
+					$tag_start[$ts++] = $i;
+					$uid_start = $i;
+
+					while($txt[$i] != ']')
+					{
+								if($txt[$i] == '=')
+								{
+									while($txt[$i] != ':')
+									{
+										$i++;
+									}
+								}
+
+						$opening_tag_string .= $txt[$i++];
+					}
+					$opening_tag_string .= $txt[$i++];
+
+					$tag_data[$td] = $opening_tag_string;
+					//echo '<br />OT = ' . $tag_data[$td] . '<br />';
+					$td++;
+
+					while($i < $len)
+					{
+						if($txt[$i] == '[' && $txt[$i+1] == '/')
 						{
-							$i--;
-						}
-						// grab closing tag
-						while($txt[$i] != ']')
-						{
-							if($txt[$i] == '/') 
+							$closing_tag_string = '';
+							while($txt[$i] != ']' && $i < $len)
+							{
 								$i++;
-							$closing_tag_string .= $txt[$i++];
-						}
-						$closing_tag_string .= $txt[$i++];
+							}
+							$uid_end = $i;
+							$tag_end[$te] = $i;
 
-						if(strpos($tag_data[$ts-1], $closing_tag_string) !== false)
-						{
-							//echo '<br />SAME : Opening Tags =  (' . $tag_data[$td-1] . ') Closing Tags  = (' . $closing_tag_string . ') (' . $td. ')<br />';
-							break;
+							// grab end tag
+							// loop back to get the actual start [ //
+							while($txt[$i] != '[')
+							{
+								$i--;
+							}
+							// grab closing tag
+							while($txt[$i] != ']')
+							{
+								if($txt[$i] == '/') 
+									$i++;
+								$closing_tag_string .= $txt[$i++];
+							}
+							$closing_tag_string .= $txt[$i++];
+
+							if(strpos($tag_data[$ts-1], $closing_tag_string) !== false)
+							{
+								//echo '<br />SAME : Opening Tags =  (' . $tag_data[$td-1] . ') Closing Tags  = (' . $closing_tag_string . ') (' . $td. ')<br />';
+								break;
+							}
 						}
+						$i++;
 					}
 					$i++;
-				}
-				$i++;
 
-				if($uid_start < $truncate && $uid_end < $truncate)
-				{
-					$return_val = $truncate;
+					if($uid_start < $truncate && $uid_end < $truncate)
+					{
+						$return_val = $truncate;
 
-				}
+					}
 
-				if($uid_start < $truncate && $uid_end > $truncate)
-				{
-					$return_val = $uid_end;
+					if($uid_start < $truncate && $uid_end > $truncate)
+					{
+						$return_val = $uid_end;
+					}
 				}
 			}
 		}
