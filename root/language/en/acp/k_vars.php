@@ -261,9 +261,13 @@ $lang = array_merge($lang, array(
 	'YOUTUBE_LINK'				=> 'Actual youtube link (URL)',
 	'YOUTUBE_LINK_EXPLAIN'		=> 'Just in case youtube ever change we best provide an alternate',
 	'NO_CONFIG_FILE_FOUND'		=> 'No configuration required, or no file available for this module.',
+
 	'BLOCK_CACHE_TIME_HEAD'		=> 'Block Cache Time',
 	'BLOCK_CACHE_TIME'			=> 'Set the block cache time.',
 	'BLOCK_CACHE_TIME_EXPLAIN'	=> 'Currently all blocs use the same cache period.',
+
+	'BLOCK_RECENT_CACHE_TIME'			=> 'Set recent topics cache time.',
+	'BLOCK_RECENT_CACHE_TIME_EXPLAIN'	=> 'Currently all blocs except recent opics use the same cache period.',
 ));
 
 // Block Names

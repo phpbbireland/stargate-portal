@@ -46,11 +46,10 @@ $lang = array_merge($lang, array(
 	'WEB_PAGE_NAME_EXPLAIN1'	=> 'Do not enter an extension.',
 	'WEB_PAGE_NAME_EXPLAIN2'	=> 'If this page uses an associated file, we append .html to this entry.',
 
-	'WEB_PAGE_TYPE'			=> '*Page type',
-
-	'WEB_PAGE_HEAD'		=> 'Head ID',
-	'WEB_PAGE_BODY'		=> 'HTML body',
-	'WEB_PAGE_FOOT'		=> 'Foot ID',
+	'WEB_PAGE_TYPE'				=> 'Page type',
+	'WEB_PAGE_HEAD'				=> 'Head ID',
+	'WEB_PAGE_BODY'				=> 'HTML body',
+	'WEB_PAGE_FOOT'				=> 'Foot ID',
 	'WEB_PAGE_HEAD_EXPLAIN'		=> 'Select a header to use with this page.',
 	'WEB_PAGE_FOOT_EXPLAIN'		=> 'Select a footer to use with this page.',
 
@@ -61,6 +60,11 @@ $lang = array_merge($lang, array(
 	'BODY' => 'Page Body',
 	'FOOT' => 'Page Footer',
 	'PORTAL_PAGE'	=> 'Portal Page',
+
+	'HEAD1' => 'Header',
+	'BODY1' => 'Body',
+	'FOOT1' => 'Footer',
+	'PORTAL_PAGE1'	=> 'Portal',
 
 	'LINK'				=> 'Link',
 	'IMAGE'				=> 'Image',

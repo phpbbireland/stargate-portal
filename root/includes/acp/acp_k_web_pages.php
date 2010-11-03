@@ -55,8 +55,8 @@ class acp_k_web_pages
 		}
 
 		$template->assign_vars(array(
-			'U_EDIT'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_web_pages&amp;mode=edit&amp;module=" . $id,
-			'U_DELETE'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_web_pages&amp;mode=delete&amp;module=" . $id,
+			'U_EDIT'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_web_pages&amp;mode=edit&amp;module=",
+			'U_DELETE'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_web_pages&amp;mode=delete&amp;module=",
 			'U_ADD_VARS' => "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_resource_words&mode=select", 
 			)
 		);
@@ -123,7 +123,7 @@ class acp_k_web_pages
 					$page_meta		= utf8_normalize_nfc(request_var('page_meta', '', true));
 					$page_extn		= utf8_normalize_nfc(request_var('page_extn', '', true));
 					$external_file	= utf8_normalize_nfc(request_var('external_file', '', true));
-					$page_type		= request_var('page_type', '');
+					$page_type		= utf8_normalize_nfc(request_var('page_type', '', true));
 					$head			= utf8_normalize_nfc(request_var('head', '', true));
 					$body			= utf8_normalize_nfc(request_var('body', '', true));
 					$foot			= utf8_normalize_nfc(request_var('foot', '', true));
