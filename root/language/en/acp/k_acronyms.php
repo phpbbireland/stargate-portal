@@ -43,11 +43,12 @@ $lang = array_merge($lang, array(
 	'ACRONYM_EDIT_EXPLAIN'	=> 'The acronym:',
 	'ACRONYM_UPDATED'		=> 'Acronym Updated...',
 	'ACRONYM_ADDED'			=> 'Acronym added',
-	'ACRONYM_REMOVED'		=> 'Acronym removed',
-	'RESERVED'				=> 'This word cannot be used as an acronym...<br />It is in the reserved word list...',
-	'RESERVED_WORD_LIST'	=> 'Manage reserved words', 
-	'ACRO_IN_ACRO'			=> 'You cannot embed an existing acronym in another acronym meaning',
-	'RESERVED_WORDS'		=> 'Reserved Words',
+
+	'ACRONYM_REMOVED'			=> 'Acronym removed',
+	'NO_ACRONYM'				=> 'No acronym given',
+	'SWITCHING_TO_ACRONYM_VARS'	=> 'Switching to acronym vars.',
+	'ACRONYM_WARN'				=> 'The acronyms you entered already appears (as text) as part of another acronyms meaning...<br />The current mod configuration does not support this, perhaps later...<br /><br />For the moment try rewording the meaning or changing the case of the offending word, for example... \'MOD\' to \'Mod\'.<br />',
+	'ACRONYM_WARN_2'			=> 'You did not enter an acronym or meaning... please try again...',
 ));
 
 ?>

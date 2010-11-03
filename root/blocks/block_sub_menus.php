@@ -185,7 +185,7 @@
 				'PORTAL_SUB_MENU_HEAD_NAME'	=> ($is_sub_heading) ? $name : '',
 				'PORTAL_SUB_MENU_NAME'		=> ($is_sub_heading) ? '' : $name,
 				'U_PORTAL_SUB_MENU_LINK'	=> ($is_sub_heading) ? '' : $link,
-				'PORTAL_SUB_MENU_ICON'		=> ($portal_sub_menus[$i]['menu_icon'] == 'NONE') ? '' : '<img src="' . $phpbb_root_path . 'images/block_images/' . $portal_sub_menus[$i]['menu_icon'] . '" alt="" />',
+				'PORTAL_SUB_MENU_ICON'		=> ($portal_sub_menus[$i]['menu_icon'] == 'NONE') ? '' : '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $portal_sub_menus[$i]['menu_icon'] . '" alt="" />',
 				'S_SOFT_HR'					=> ($is_sub_heading) ? $portal_sub_menus[$i]['soft_hr'] : '',
 				'S_SUB_HEADING' 			=> ($is_sub_heading) ? true : false,
 			));

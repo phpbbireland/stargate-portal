@@ -104,20 +104,18 @@ class acp_k_config
 				
 				$sql = "UPDATE " . K_BLOCKS_CONFIG_TABLE . "
 					SET 
-					blocks_width = $blocks_width, 
-					blocks_enabled = $blocks_enabled, 
-					layout_default = $layout_default, 
-					portal_version = '$portal_version'
-					WHERE id = '$id' ";
+					blocks_width	= 	'" . $db->sql_escape($blocks_width) . "',
+					blocks_enabled	= 	'" . $db->sql_escape($blocks_enabled) . "',
+					layout_default	= 	'" . $db->sql_escape($layout_default) . "',
+					portal_version	= 	'" . $db->sql_escape($portal_version) . "'
+					WHERE id = '" . (int)$id . "'";
 
 				$db->sql_query($sql);
 				
 				$mode='reset';
 				
-				$template->assign_vars(array('S_OPT' => 'ConfigDataSaved')); // S_OPT is not a language variabe //
+				$template->assign_var('S_OPT', 'save');
 				
-				//$message = $user->lang['L_PORTAL_CONFIG_UPDATED']; 
-
 				meta_refresh(2, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_config&amp;mode=config");
 				return;
 				break;

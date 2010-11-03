@@ -49,14 +49,13 @@ $template->set_filenames(array(
 
 if ($user->data['is_registered'] && $auth->acl_get('a_')) 	 
 {
-	$template->assign_vars(array(
-		'S_IS_ADMIN' => true,
-	));
+	$template->assign_var('S_IS_ADMIN', true);
 	
 	//Refresh all styles templates
 	$sql = 'SELECT *
 		FROM ' . STYLES_TEMPLATE_TABLE . "
 		WHERE template_id > 0";
+
 	$result = $db->sql_query($sql);
 
 	if (!$result)
@@ -80,6 +79,7 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 			$sql2 = 'SELECT template_filename, template_mtime
 				FROM ' . STYLES_TEMPLATE_DATA_TABLE . "
 				WHERE template_id = " . $template_row['template_id'];
+
 			$result2 = $db->sql_query($sql2);
 			if (!$result2)
 			{
@@ -92,7 +92,6 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 			}
 			while ($row = $db->sql_fetchrow($result2))
 			{
-
 					// get folder info from the filename
 					if (($slash_pos = strrpos($row['template_filename'], '/')) === false)
 					{
@@ -102,7 +101,6 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 					{
 						$filelist[substr($row['template_filename'], 0, $slash_pos + 1)][] = substr($row['template_filename'], $slash_pos + 1, strlen($row['template_filename']) - $slash_pos - 1);
 					}
-
 			}
 			$db->sql_freeresult($result2);
 
@@ -378,9 +376,7 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 	cache_moderators();
 
 	add_log('admin', 'LOG_PURGE_CACHE');
-	$template->assign_vars(array(
-		'S_PURGE_CACHE'				=> true,
-	));
+	$template->assign_var('S_PURGE_CACHE', true);
 	
 	//RSS Newsfeeds files
 	$desired_extension = 'dat'; //extension we're looking for 
@@ -403,24 +399,18 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 
 	add_log('admin', 'LOG_RSS_CACHE_CLEANED', $log_file_list);
 
-	$template->assign_vars(array(
-		'S_RSS_CACHE'				=> true,
-	));
+	$template->assign_var('S_RSS_CACHE', true);
 	
 	/**
 	* Result output
 	*/
 	if ($no_exeptions)
 	{
-		$template->assign_vars(array(
-			'S_NO_EXEPTIONS' => true,
-		));
+		$template->assign_var('S_NO_EXEPTIONS', true);
 	}
 	else
 	{
-		$template->assign_vars(array(
-			'S_NO_EXEPTIONS' => false,
-		));
+		$template->assign_var('S_NO_EXEPTIONS', false);
 	}
 }
 else
@@ -632,14 +622,16 @@ page_footer();
 		}
 		if (defined('DEBUG'))
 		{
-			$content = "/* BEGIN @include $filename */ \n $content \n /* END @include $filename */ \n";
+			$content = "/* {L_BEGIN} @include $filename */ \n $content \n /* {L_END} @include $filename */ \n";
 		}
 
 		return $content;
 	}
 
+	/*
 	$template->assign_vars(array(
 		'STARGATE'				=> (STARGATE) ? true : false,
 		'S_SHOW_ON_PORTAL_R'	=> true,
 	));
+	*/
 ?>

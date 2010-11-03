@@ -85,21 +85,21 @@ if (!$valid_mode)
 	$nmode = '404';
 }
 
-$sql = "SELECT id, page_name, page_meta, page_desc, page_extn ,body, head, foot FROM ". K_WEB_PAGES_TABLE . " WHERE page_name = '$nmode' ";
+$sql = "SELECT id, page_name, page_meta, page_desc, page_extn ,body, head, foot FROM ". K_WEB_PAGES_TABLE . " WHERE page_name = '" . $db->sql_escape(utf8_clean_string($nmode)) . "'";
 
 if (!$result = $db->sql_query($sql))
 {
-	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', {L_LINE} ' . __LINE__); 
 }
 $row = $db->sql_fetchrow($result);
 
 // Check to see if we added this page, else process the 404 page //
 if (count($row['id']) == 0) 
 {
-	$sql = "SELECT id, page_name, page_meta, page_desc, page_extn ,body, head, foot FROM ". K_WEB_PAGES_TABLE . " WHERE page_name = '$mode' ";
+	$sql = "SELECT id, page_name, page_meta, page_desc, page_extn ,body, head, foot FROM ". K_WEB_PAGES_TABLE . " WHERE page_name = '" . $db->sql_escape(utf8_clean_string($mode)) . "'";
 	if (!$result = $db->sql_query($sql))
 	{ 
-		trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+		trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', {L_LINE} ' . __LINE__); 
 	}
 	$row = $db->sql_fetchrow($result);
 }
@@ -120,10 +120,11 @@ $style_path = $content = $topic_title = '';
 $db->sql_freeresult($result);
 
 // get the correct header using id from first query, save body text as $head //
-$sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = '$headone' ";
+$sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = '" . (int)$headone . "'";
+
 if (!$result = $db->sql_query($sql)) 
 {
-	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', {L_LINE} ' . __LINE__); 
 }
 
 $row = $db->sql_fetchrow($result);
@@ -131,11 +132,11 @@ $head = $row['body'];
 $db->sql_freeresult($result);
 
 // get the correct footer using id from last first, save body text as $foot //
-$sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = '$footone' ";
+$sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = '" . (int)$footone . "'";
 
 if (!$result = $db->sql_query($sql)) 
 {
-	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', {L_LINE} ' . __LINE__); 
 }
 
 $row = $db->sql_fetchrow($result);
@@ -172,7 +173,7 @@ $vars = array("\0", "\n", "\r", "\t", '$page_name', '$page_meta', '$page_desc');
 $data = array('', '', '', '', $page_name, $page_meta, $page_desc);
 $head = str_replace($vars, $data, $head);
 
-$body = str_replace('{L_NOT_FOUND}', '<h3>Web Pages Examples:</h3>These pages are presented as example only, not all links are valid...<br />', $body);
+$body = str_replace('{L_NOT_FOUND}', '<h3>{L_WEB_PAGE_EXAMPLES}</h3>{L_WEB_PAGE_EXAMPLES_2}', $body);
 
 $template->assign_vars( array(
 	'WEB_PAGE_HEAD'	=> htmlspecialchars_decode($head),

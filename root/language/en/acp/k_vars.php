@@ -282,7 +282,7 @@ $lang = array_merge($lang, array(
 // Acronyms
 $lang = array_merge($lang, array(
 	'ACP_ACRONYMS'			=> 'Manage acronyms',
-	'ACP_ACRONYMS_EXPLAIN'	=> 'Add and manage acronyms in posts...',
+	'ACP_ACRONYMS_EXPLAIN'	=> 'Add and manage acronyms in posts... <strong>Note:</strong> Acronyms appearing inside another antonyms meaning may cause problems...',
 	'ACRONYM'				=> 'Acronym',
 	'ACRONYM_EXPLAIN'		=> 'From this control panel you can add, edit, and remove acronyms that will be automatically added to posts on your forums.',
 

@@ -45,8 +45,8 @@ class acp_k_cloud
 
 		$mode			= request_var('mode', '');	
 		$tag_id			= request_var('tag_id', '');
-		//$cloud_group	= request_var('cloud_group', '');
 		$action			= request_var('config', '');
+		//$cloud_group	= request_var('cloud_group', '');
 
 		$action = (isset($_POST['add_tag'])) ? 'add' : ((isset($_POST['save'])) ? 'save' : ((isset($_POST['config'])) ? 'config' : $action));
 
@@ -54,10 +54,10 @@ class acp_k_cloud
 		{
 			case 'config':
 				$template->assign_vars(array(
-					'MESSAGE' => $user->lang['SWITCHING'],
+					'MESSAGE'	=> $user->lang['SWITCHING'],
 				));
 
-				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;switch=cloud"); 
+				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;switch=k_cloud_vars.html"); 
 			break;
 
 			case 'add':
@@ -70,8 +70,6 @@ class acp_k_cloud
 
 		$submit = (isset($_POST['submit'])) ? true : false;
 
-		//if (!$submit) get_cloud_data();
-
 		if (!$action && $mode == 'browse');
 		{
 			get_cloud_data();
@@ -81,7 +79,7 @@ class acp_k_cloud
 		{
 			$submit = false;
 			$mode = '';
-			trigger_error('Error! ' . $user->lang['FORM_INVALID'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+			trigger_error($user->lang['FORM_INVALID'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 		}
 
 		$template->assign_vars(array(
@@ -90,18 +88,16 @@ class acp_k_cloud
 			'U_EDIT'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_cloud&amp;mode=edit" . '&amp;tag_id=' . $tag_id,
 			'U_DELETE'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_cloud&amp;mode=delete" . '&amp;tag_id=' . $tag_id,
 			'U_BROWSE'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_cloud&amp;mode=browse",
-			'S_OPT'		=> 'browse',
 			'U_SWATCH1'	=> append_sid("{$phpbb_admin_path}swatch2.$phpEx", 'form=acp_k_cloud&amp;name=colour'),
 			'U_SWATCH2'	=> append_sid("{$phpbb_admin_path}swatch2.$phpEx", 'form=acp_k_cloud&amp;name=colour2'),
 			'U_SWATCH3'	=> append_sid("{$phpbb_admin_path}swatch2.$phpEx", 'form=acp_k_cloud&amp;name=hcolour'),
+			'S_OPTION'	=> 'browse',
 		));
 
 		switch ($mode)
 		{
 			case 'edit':
 			{
-				//$tag_id = request_var('tag_id', 0);
-
 				if ($submit)
 				{
 					$tag_id		= request_var('tag_id', '');
@@ -142,8 +138,8 @@ class acp_k_cloud
 					$cache->destroy('sql', K_CLOUD_TABLE);
 
 					$template->assign_vars(array(
-						'MESSAGE' => 'Data is being saved....</font><br />',
-						'S_OPT' => 'saving',
+						'MESSAGE' => $user->lang['DATA_IS_BEING_SAVED'] . '</font><br />',
+						'S_OPTION' => 'save',
 					));
 
 					meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_cloud&amp;mode=browse");
@@ -152,7 +148,7 @@ class acp_k_cloud
 
 				get_tag_item($tag_id);
 
-				$template->assign_vars(array('S_OPTION' => 'edit'));
+				$template->assign_var('S_OPTION', 'edit');
 				break;
 			}
 
@@ -180,8 +176,8 @@ class acp_k_cloud
 					$db->sql_query($sql);
 
 					$template->assign_vars(array(
-						'MESSAGE' =>  ' Deleting! ' . $tag_id . '</font><br />',
-						'S_OPT' => 'delete',
+						'MESSAGE'	=>  $user->lang['DELETING'] . $tag_id . '</font><br />',
+						'S_OPTION'	=> 'delete',
 					));
 
 					$cache->destroy('sql', K_CLOUD_TABLE);
@@ -198,7 +194,7 @@ class acp_k_cloud
 					)));
 				}
 
-				$template->assign_vars(array('MESSAGE' => 'Action Cancelled...'));
+				$template->assign_vars(array('MESSAGE' => $user->lang['ACTION_CANCELLED']));
 
 				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_cloud&amp;mode=browse");
 				break;
@@ -220,7 +216,7 @@ class acp_k_cloud
 					$hcolour	= request_var('hcolour', '');
 					$text		= utf8_normalize_nfc(request_var('text', '', true));
 
-					if (strstr($link, 'None'))
+					if (strstr($link, $user->lang['NONE']))
 					{
 						$link = '';
 					}
@@ -248,7 +244,7 @@ class acp_k_cloud
 					meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_cloud&amp;mode=browse");
 
 					$template->assign_vars(array(
-						'L_MENU_REPORT' => 'Tag Created...',
+						'L_MENU_REPORT' => $user->lang['TAG_CREATED'],
 					));
 
 					break;
@@ -256,7 +252,7 @@ class acp_k_cloud
 				else
 				{
 					get_tag_item(0);
-					$template->assign_vars(array('S_OPTION' => 'add'));
+					$template->assign_var('S_OPTION', 'add');
 					$mode = 'add';
 					break;
 				}

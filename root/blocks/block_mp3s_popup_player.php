@@ -19,15 +19,17 @@
 * @ignore
 */
 
-//define('IN_PHPBB', true);
 if (!defined('IN_PHPBB'))
 {
-	exit;
+	//exit;
+	define('IN_PHPBB', true);
 }
 
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
-$phpEx = substr(strrchr(__FILE__, '.'), 1);
+global $k_config;
 
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
+
+$phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 
 if (!class_exists('template_compile'))
@@ -40,8 +42,7 @@ $user->session_begin(false);
 $auth->acl($user->data);
 $user->setup('portal/portal');
 
-
-$upload_dir = 'musix';				// not a typo ... ;)
+$upload_dir = $k_config['mp3_folder'];
 $upload = $user->lang['UPLOAD'];
 
 $template->assign_vars(array(
@@ -51,12 +52,9 @@ $template->assign_vars(array(
 	'PATH'			=> './..',
  ));
 
-
-page_header('MP3');
-
+page_header('{L_MP3_PLAYER}');
 $template->set_filenames(array(
 	'body' => 'blocks/block_mp3_popup_player.html',
 ));
-
 page_footer();
 ?>

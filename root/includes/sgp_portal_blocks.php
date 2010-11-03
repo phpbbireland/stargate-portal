@@ -36,6 +36,8 @@ if (!defined('IN_PHPBB'))
 
 	$phpEx = substr(strrchr(__FILE__, '.'), 1);
 
+	$LB = $CB = $RB = array();
+
 	$user->add_lang('portal/portal');
 	$user->add_lang('portal/portal_blocks_variables');
 

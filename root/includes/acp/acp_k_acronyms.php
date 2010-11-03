@@ -19,6 +19,16 @@
 * @package acp
 */
 
+/**
+* 28 October 2010 
+* Edits re validation (Paul)
+*
+* Replace english with language var...
+* Remove confusing S_OPT/S_OPTION lower case switch looks like english...
+* Use $db->sql_build_array were possible to sanitise...
+**/
+
+
 
 if (!defined('IN_PHPBB'))
 {
@@ -57,9 +67,6 @@ class acp_k_acronyms
 		$action = (isset($_POST['add'])) ? 'add' : ((isset($_POST['save'])) ? 'save' : ((isset($_POST['config'])) ? 'config' : $action));
 
 		///$form_action = $this->u_action. '&action=add';
-
-		//$reserved_words = 
-		///$reserved_words = get_reserved_words();
 
 		$s_hidden_fields = '';
 		$acronym_info = array();
@@ -105,27 +112,15 @@ class acp_k_acronyms
 			case 'save':
 				$acronym_id	= request_var('acronym_id', 0);
 				$acronym	= utf8_normalize_nfc(request_var('acronym', '', true));
-
 				$meaning	= utf8_normalize_nfc(request_var('meaning', '', true));
-				$lang		= request_var('lang', $user->data['user_lang'], true);
+				$lang		= request_var('lang', $user->data['user_lang']);
 
 				// valid entries? //
 				if (!$acronym || !$meaning)
 				{
 					trigger_error($user->lang['ENTER_ACRONYM'] . adm_back_link($this->u_action), E_USER_WARNING);
 				}
-/*
-				// check reserved words //
-				if (in_array($acronym, $reserved_words, true))
-				{
-					trigger_error($user->lang['RESERVED'] . adm_back_link($this->u_action), E_USER_WARNING);
-				}
 
-				if (validate_acronym_meaning($meaning) == FALSE)
-				{
-					trigger_error($user->lang['ACRO_IN_ACRO'] . adm_back_link($this->u_action), E_USER_WARNING);
-				}
-*/
 				$sql_ary = array(
 					'acronym'	=> $acronym,
 					'meaning'	=> $meaning,
@@ -134,7 +129,7 @@ class acp_k_acronyms
 
 				if ($acronym_id)
 				{
-					$db->sql_query('UPDATE ' . K_ACRONYMS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . ' WHERE acronym_id = ' . $acronym_id);
+					$db->sql_query('UPDATE ' . K_ACRONYMS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . ' WHERE acronym_id = ' . (int)$acronym_id);
 				}
 				else
 				{
@@ -142,8 +137,9 @@ class acp_k_acronyms
 				}
 
 				$cache->destroy('_acronyms');
+				$cache->destroy('sql', K_MODULES_TABLE);
 
-				$log_action = ($acronym_id) ? 'LOG_EDIT_ACRONYM' : 'LOG_AD_ACRONYM';
+				$log_action = ($acronym_id) ? 'LOG_EDIT_ACRONYM' : 'LOG_ADD_ACRONYM';
 				add_log('admin', $log_action, $acronym);
 
 
@@ -168,19 +164,20 @@ class acp_k_acronyms
 				{
 					$sql = 'SELECT acronym
 						FROM ' . K_ACRONYMS_TABLE . "
-						WHERE acronym_id = $acronym_id";
+						WHERE acronym_id = " . (int)$acronym_id;
+
 					$result = $db->sql_query($sql);
 					$deleted_acronym = $db->sql_fetchfield('acronym');
 					$db->sql_freeresult($result);
 
 					$sql = 'DELETE FROM ' . K_ACRONYMS_TABLE . "
-						WHERE acronym_id = $acronym_id";
+						WHERE acronym_id = " . (int)$acronym_id;
 					$db->sql_query($sql);
 
 					$cache->destroy('_acronyms');
+					$cache->destroy('sql', K_MODULES_TABLE);
 
 					add_log('admin', 'LOG_ACRONYM_DELETE', $deleted_acronym);
-
 
 					$template->assign_vars(array(
 						'MESSAGE' => $user->lang['ACRONYM_REMOVED'],
@@ -204,7 +201,7 @@ class acp_k_acronyms
 
 			case 'config':
 				$template->assign_vars(array(
-					'MESSAGE' => $user->lang['SWITCHING'] .' to k_acronym_vars.html',
+					'MESSAGE' => $user->lang['SWITCHING_TO_ACRONYM_VARS'],
 					)
 				);
 
@@ -238,18 +235,17 @@ class acp_k_acronyms
 	}
 }
 
-function validate_acronym_meaning($meaning)
+/*
+function validate_acronym_meaning($acro)
 {
 	global $db;
-	$sql = 'SELECT acronym
+	$sql = 'SELECT meaning
 		FROM ' . K_ACRONYMS_TABLE;
 	$result = $db->sql_query($sql);
 
 	while ($row = $db->sql_fetchrow($result))
 	{
-		//echo $meaning . '  ' . $row['acronym'] . '<br />';
-
-		if (strpos($meaning, $row['acronym']))
+		if (strpos($row['meaning'], $acro))
 		{
 			$db->sql_freeresult($result);
 			return(false);
@@ -258,5 +254,6 @@ function validate_acronym_meaning($meaning)
 	$db->sql_freeresult($result);
 	return(true);
 }
+*/
 
 ?>

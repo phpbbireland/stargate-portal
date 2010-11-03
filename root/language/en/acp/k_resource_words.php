@@ -30,7 +30,7 @@ $lang = array_merge($lang, array(
 	'TITLE_EXPLAIN'	=> '
 	When you add or edit a web page, you can pass additional information in the form of variable data taken from the $config or $k_config tables.<br />
 	Before these variables can be accessed, you must first specify them using this form. The variable name will be replaced with the variable data automatically.<br />
-	Enter the variable name exactly as it appears in the databse (normally lower case without spaces), it will be converted to uppercase and wrapped in curly braces.',
+	Enter the variable name exactly as it appears in the database (normally lower case without spaces). If the variable does not exits it will be ignored....',
 	'TITLE_ADD'		=> 'Add Variable',
 
 	'ID'		=> 'ID',
@@ -97,6 +97,12 @@ $lang = array_merge($lang, array(
 	'REPORT'				=> 'Last process report',
 	'VAR_NOT_FOUND'			=> '<strong>%s</strong> is not a valid config variable... Add action was aborted!',
 	'VAR_ADDED'				=> '<strong>%s</strong> added!',
+
+	'UNKNOWN'	=> 'Unknown',
+	'K_CONFIG'	=> 'k_config',
+	'CONFIG'	=> 'config',
+	'PROCESS_REPORT'	=> 'Process report: %1$s',
+	'NA'				=> '...',
 ));
 
 ?>

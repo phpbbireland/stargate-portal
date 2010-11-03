@@ -187,8 +187,9 @@ function set_val(data, id)
 <!-- BEGIN edit -->
 <!-- IF S_OPTION == 'edit' -->
 <form id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="module" value="{S_MOD_ID}" />
+
 <fieldset>
-	<legend>{S_MOD_NAME}</legend>{S_MOD_TYPE}{S_MOD_TYPE}
+	<legend>{S_MOD_NAME}</legend>{S_MOD_TYPE}
 	<dl>
 		<dt><label for="mod_id">{L_ID}:</label><br /><span>{L_ID_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="3"  maxlength="3" name="mod_id" value="{edit.S_MOD_ID}" type="text"></dd>
@@ -198,7 +199,7 @@ function set_val(data, id)
 		<dd><br /><input class="post" size="3" maxlength="5" id="mod_link_id" name="mod_link_id" value="{edit.S_MOD_LINK_ID}" type="text"></dd>
 	</dl>
 	<dl>
-		<dt><label for="mod_type">{L_TYPE}:</label><br /><span>{L_TYPE_EXPLAIN}<!-- IF edit.S_MOD_ID == 1 --> <b>Do not change this module name!</b><!-- ENDIF --></span></dt>
+		<dt><label for="mod_type">{L_TYPE}:</label><br /><span>{L_TYPE_EXPLAIN}<!-- IF edit.S_MOD_ID == 1 --> <b>{L_DO_NOT_CHANGE}</b><!-- ENDIF --></span></dt>
 		<dd><br /><input class="post" size="30"  maxlength="30" name="mod_type" value="{edit.S_MOD_TYPE}" type="text"></dd>
 	</dl>
 	<dl>
@@ -313,7 +314,7 @@ function set_val(data, id)
 			<td class="row1" width="auto"><div align="left">{welcome.S_MOD_DETAILS}</div></td>
 			<td class="row1" width="30px" colspan="2">
 				<div align="center">
-					<img src="images/icon_delete_disabled.gif" title="You can't delete the welcome message" border="0" alt="{L_DELETE}" />
+					<img src="images/icon_delete_disabled.gif" title="{L_CANT_DELETE}" border="0" alt="{L_DELETE}" />
 					<a href="{U_EDIT}{welcome.S_MOD_ID}"><img src="images/icon_edit.gif" title="{L_EDIT_WELCOME_MESSAGE}" border="0" alt="{L_EDIT}" /></a>
 				</div>
 			</td>
@@ -334,7 +335,7 @@ function set_val(data, id)
 	</dl>
 	<dl>
 		<dt><label for="mod_link_id">{L_ID_TO_USE}:</label><br /><span>{L_ID_TO_USE_EXPLAIN}</span></dt>
-		<dd><br /><input class="post" size="3" maxlength="5" id="mod_link_id" name="mod_link_id" value="welcome.{S_MOD_LINK_ID}" type="text"></dd>
+		<dd><br /><input class="post" size="3" maxlength="5" id="mod_link_id" name="mod_link_id" value="{welcome.S_MOD_LINK_ID}" type="text"></dd>
 	</dl>
 	<dl>
 		<dt><label for="mod_type">{L_TYPE}:</label><br /><span>{L_TYPE_EXPLAIN}</span></dt>
@@ -587,7 +588,6 @@ function set_val(data, id)
 		</tr>
 		<!-- END style -->
 
-
 	</tbody>
 </table>
 
@@ -605,12 +605,18 @@ function set_val(data, id)
 <!-- ENDIF -->
 
 <!-- IF MESSAGE or SEARCH_MESSAGE -->
-<dl><legend><div style="float:right;"><br />&nbsp;<!-- IF MESSAGE --><b>{MESSAGE}</b><br /><!-- ENDIF --></div><div style="float:left;"><br />&nbsp;{SEARCH_MESSAGE}</div></legend></dl>
+<dl><legend>
+		<div style="float:left;"><!-- IF MESSAGE --><br />&nbsp;<b>{MESSAGE}</b><br /><!-- ENDIF --></div>
+		<!-- IF S_OPTION != 'saved' -->
+			<div style="float:left;"><br />&nbsp;{SEARCH_MESSAGE}</div>
+		<!-- ENDIF -->
+	</legend>
+</dl>
 <dl><br /></dl>
 <!-- ENDIF -->
 
 <!-- prevent someone pressing submit while data is being saved -->
-<!-- IF S_OPTION == 'add' || S_OPTION == 'new' || S_OPTION == 'edit' || S_OPTION == 'add_style' -->
+<!-- IF S_OPTION == 'add' || S_OPTION == 'new' || S_OPTION == 'edit' || S_OPTION == 'add_style' and S_OPTION != 'saved' -->
 <fieldset class="submit-buttons">
 	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
 	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
@@ -619,8 +625,6 @@ function set_val(data, id)
 
 {S_FORM_TOKEN}
 </form>
-
-
 
 <script type="text/javascript">
 var form_name = 'acp_k_modules';

@@ -102,6 +102,7 @@ $lang = array_merge($lang, array(
 	'BLOCKS_UPDATE_HTML_FILES' 			=> 'Update / Create block html files',
 
 	'BLOCKS_USE_EXTERNAL_FILES_EXPLAIN' => 'You can use external html files or auto-generated files',
-	'GENERATE' => 'Create Block HTML Files',
+	'GENERATE'		=> 'Create Block HTML Files',
+	'CONFIG_SAVED'	=> 'Config data saved...',
 ));
 ?>

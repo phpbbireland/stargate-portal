@@ -26,10 +26,13 @@ if (empty($lang) || !is_array($lang))
 // phpbbportal profile fields
 $lang = array_merge($lang, array(
 	
-	'TITLE' => 'Manage Portal Web Pages',
-	'TITLE_EXPLAIN' => '<b>Small Modules Manager (Web Page Mod):</b><br />
-	These are small mods used to display and manage additional information used by the portal... a good example being the <strong>Welcome Message Mod</strong>...<br />
-	You can add your own types for such things as Styles, Blocks or Mods... Examine the Welcome Block to see what data can be saved. Future versions will allow creating of additional database storage elements.<br />Items marked with * are mandatory.',
+	'TITLE'	=> 'Manage Portal Web Pages',
+
+	'TITLE_EXPLAIN' => '<b>Small Modules Manager (Web Page Mod):</b>
+	<br />These are small mods used to display and manage additional information used by the portal... a good example being the <strong>Welcome Message Mod</strong> minimod... You can add your own types for such things as Styles, Blocks or Mods...
+	<br />Items marked with * are mandatory.<br />',
+
+	'TITLE_EXPLAIN_MORE'	=> '<br />To access new pages you need to add a link to the one of the portals menus: web_page.php?mode=%1$s (see Sub Menu for more examples)...',
 
 	'ID'				=> 'ID',
 	'ACTIVE'			=> 'Active',
@@ -37,8 +40,13 @@ $lang = array_merge($lang, array(
 	'DISABLED'			=> 'Disabled',
 	'WEB_PAGE_ADD'		=> 'Add a web page...',
 	'WEB_PAGE_ADD_'		=> 'Select the type of page...',
-	'WEB_PAGE_NAME'		=> '*Page name/File name',
-	'WEB_PAGE_TYPE'		=> 'Page type',
+
+	'PAGE_NAME'					=> '<i>page name</i>',
+	'WEB_PAGE_NAME'				=> 'Page name',
+	'WEB_PAGE_NAME_EXPLAIN1'	=> 'Do not enter an extension.',
+	'WEB_PAGE_NAME_EXPLAIN2'	=> 'If this page uses an associated file, we append .html to this entry.',
+
+	'WEB_PAGE_TYPE'			=> '*Page type',
 
 	'WEB_PAGE_HEAD'		=> 'Head ID',
 	'WEB_PAGE_BODY'		=> 'HTML body',
@@ -47,7 +55,7 @@ $lang = array_merge($lang, array(
 	'WEB_PAGE_FOOT_EXPLAIN'		=> 'Select a footer to use with this page.',
 
 
-	'WEB_PAGE_TYPE_EXPLAIN'	=> 'This web page is a header/body/footer?',
+	'WEB_PAGE_TYPE_EXPLAIN'	=> 'Select the type of page to create.',
 
 	'HEAD' => 'Page Header',
 	'BODY' => 'Page Body',
@@ -62,7 +70,6 @@ $lang = array_merge($lang, array(
 	'PAGES' => ' web pages',
 
 	'ID_EXPLAIN'				=> 'The ID for the web page (automatically assigned).',
-	'WEB_PAGE_NAME_EXPLAIN'		=> 'Should be the same as the file name... example: wiki.html.<br />Required but not used for portal pages.',
 
 	'WEB_PAGE_BODY_EXPLAIN'		=> 'The html code for the header/body/footer/portal. ',
 
@@ -111,6 +118,8 @@ $lang = array_merge($lang, array(
 	'HEADER'	=> 'Header',
 	'FOOTER'	=> 'Footer',
 	'WRAPPER'	=> 'Wrapper',
+
+	'PAGE_TYPE_FILE'	=> 'File',
 
 ));
 

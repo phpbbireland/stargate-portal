@@ -6,13 +6,13 @@ function set_image(data)
 {
 	document.getElementById('menu_icon').value=data;
 	document.getElementById('alt').value=data;
-	document.getElementById("pip").innerHTML = " <img align='absmiddle' src='./../images/block_images/" + data + "' />"
+	document.getElementById("pip").innerHTML = " <img align='absmiddle' src='./../images/block_images/small/" + data + "' />"
 }
 
 function display_pip(myForm)
 {
     var pip = myForm.menu_icon;
-    document.getElementById("pip").innerHTML = " <img align='absmiddle' src='./../images/block_images/" + pip.value + "' />"
+    document.getElementById("pip").innerHTML = " <img align='absmiddle' src='./../images/block_images/small/" + pip.value + "' />"
 }
 </script>
 <!-- END: Edit #1 -->
@@ -20,36 +20,39 @@ function display_pip(myForm)
 <a name="maincontent"></a><h1>{L_TITLE}</h1>
 
 <table border="1">
-<!-- IF  S_OPT == 'icons' -->
+<!-- IF  S_OPTIONS == 'icons' -->
 <p>{L_TITLE_ICON_EXPLAIN}</p>
 <!-- ELSE -->
 <p>{L_TITLE_EXPLAIN}</p>
 <!-- ENDIF -->
-<form id="acp_menus" method="post" action="{U_ACTION}">
 
-<!-- IF S_OPT  == "head" || S_OPT == "nav" || S_OPT == "sub" || S_OPT == "all" || S_OPT == "unalloc" -->
+<form id="acp_menus" method="post" action="{U_ACTION}">
+<!-- IF S_OPTIONS  == "head" || S_OPTIONS == "nav" || S_OPTIONS == "sub" || S_OPTIONS == "all" || S_OPTIONS == "unalloc" -->
 <table cellspacing="1" border="0">
 	<thead>
 		<tr>
-			<th colspan="11"><div align="center"><font color="#FFFF33"><b>
-			<!-- IF S_OPT == "head" -->{L_HEADER_MENU}<!-- ENDIF -->
-			<!-- IF S_OPT == "nav" -->{L_NAV_MENU}<!-- ENDIF -->
-			<!-- IF S_OPT == "sub" -->{L_SUB_MENU}<!-- ENDIF -->
-			<!-- IF S_OPT == "all" -->{L_ALL_MENUS}<!-- ENDIF -->
-			<!-- IF S_OPT == "misc" -->{L_MISC}<!-- ENDIF -->
-			</b></font></tr>
+			<th colspan="11">
+			<div align="center"><font color="#FFFF33"><b>
+			<!-- IF S_OPTIONS == "head" -->{L_HEADER_MENU}<!-- ENDIF -->
+			<!-- IF S_OPTIONS == "nav" -->{L_NAV_MENU}<!-- ENDIF -->
+			<!-- IF S_OPTIONS == "sub" -->{L_SUB_MENU}<!-- ENDIF -->
+			<!-- IF S_OPTIONS == "all" -->{L_ALL_MENUS}<!-- ENDIF -->
+			<!-- IF S_OPTIONS == "misc" -->{L_MISC}<!-- ENDIF -->
+			</b></font></div>
+			</th>
+		</tr>
 		<tr>
-			<th><div align="center">{L_MENUID}</th>
-			<th><div align="center">{L_MENU_NDX}</th>
-			<th><div align="center">{L_MENU}</th>
-			<th><div align="center">{L_MENU_APPEND_SID}</th>
-			<th><div align="center">{L_MENU_APPEND_UID}</th>
-			<th><div align="center">{L_ICON}</th>
-			<th><div align="center">{L_MENU_ITEM_NAME_SHORT}</th>
-			<th><div align="center">{L_MENU_LINK}</th>
-			<th><div align="center">{L_MENU_EXTERN_SHORT}</th>
-			<th><div align="center">{L_MENU_VIEW_BY_SHORT}</th>
-			<th><div align="center">{L_OPTIONS}</th>
+			<th><div align="center">{L_MENUID}</div></th>
+			<th><div align="center">{L_MENU_NDX}</div></th>
+			<th><div align="center">{L_MENU}</div></th>
+			<th><div align="center">{L_MENU_APPEND_SID}</div></th>
+			<th><div align="center">{L_MENU_APPEND_UID}</div></th>
+			<th><div align="center">{L_ICON}</div></th>
+			<th><div align="center">{L_MENU_ITEM_NAME_SHORT}</div></th>
+			<th><div align="center">{L_MENU_LINK}</div></th>
+			<th><div align="center">{L_MENU_EXTERN_SHORT}</div></th>
+			<th><div align="center">{L_MENU_VIEW_BY_SHORT}</div></th>
+			<th><div align="center">{L_OPTIONS}</div></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -60,7 +63,7 @@ function display_pip(myForm)
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><!-- IF mdata.S_MENU_TYPE == '0' --> {L_HEAD}<!-- ELSEIF mdata.S_MENU_TYPE == '1' --> {L_NAV}<!-- ELSEIF mdata.S_MENU_TYPE == '2' --> {L_SUB}<!-- ELSEIF mdata.S_MENU_TYPE == '3' --> {L_FOOT}<!-- ENDIF --> </div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center">{mdata.S_MENU_APPEND_SID}</div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center">{mdata.S_MENU_APPEND_UID}</div></td>
-		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><img src='./../images/block_images/{mdata.S_MENU_ICON}'></div></td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><img src='./../images/block_images/small/{mdata.S_MENU_ICON}'></div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="left">{mdata.S_MENU_ITEM_NAME}</div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="left" style="max-width:200px; overflow:auto;"><!-- IF mdata.S_SUB_HEADING == '1' -->{L_SUB_HEADING}<!-- ENDIF -->{mdata.S_MENU_LINK}</div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><!-- IF not mdata.S_SUB_HEADING --><!-- IF mdata.S_MENU_EXTERN == '0' -->{L_NO}<!-- ELSEIF mdata.S_MENU_EXTERN == '1' -->{L_YES}<!-- ELSEIF mdata.S_MENU_EXTERN == '2' -->{L_YES}<!-- ENDIF --><!-- ENDIF --></div></td>
@@ -90,17 +93,11 @@ function display_pip(myForm)
 </table>
 <!-- ENDIF -->
 
-<!-- IF S_OPT == "create" -->
+<!-- IF S_OPTIONS == 'add' -->
 <br />
 <fieldset>
 	<legend>{L_MENUS_ADD_HEADER}</legend>
 	<br />
-<!--
-	<dl>
-		<dt><label>{L_MENU_NDX_BIG}:</label></dt>
-		<dd><label><input type="text" maxlength="2" size="5" name="ndx" value="{S_MENU_NDX}" class="post" /></label></dd>
-	</dl>
--->
 	<dl>
 		<dt><label for="menu_type">{L_MENU_TYPE}:</label><br /><span>{L_MENU_TYPE_EXPLAIN}</span></dt>
 		<dd><br />
@@ -126,7 +123,7 @@ function display_pip(myForm)
 				<option value="{menuicons.S_MENU_ICONS}" <!-- IF menuicons.S_MENU_ICONS == S_MENU_ICON -->selected <!-- ENDIF -->>{menuicons.S_MENU_ICONS}</option>
 				<!-- END menuicons -->
 				</select>
-				<span name='pip' id='pip'> <img src='./../images/block_images/{S_MENU_ICON}'> </span>
+				<span name='pip' id='pip'> <img src='./../images/block_images/small/{S_MENU_ICON}'> </span>
 				<!-- BEGIN menuicons --><span name='pip' id='pip'></span> &nbsp; <!-- END menuicons -->
 			</label>
 		</dd>
@@ -138,19 +135,13 @@ function display_pip(myForm)
 			<!-- BEGIN menuicons -->
 				<!-- IF menuicons.S_MENU_ICONS -->
 					<a href="#" onclick="set_image('{menuicons.S_MENU_ICONS}', true, true); return false;">
-					<img src='./../images/block_images/{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}'>
+					<img src='./../images/block_images/small/{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}'>
 					</a>
 				<!-- ENDIF -->
 			<!-- END menuicons -->
 			</span>
 		<dd/>
 	</dl>
-	<!--
-	<dl>
-		<dt><label for="alt">{L_MENU_ICON_ALT_TEXT}:</label></dt>
-		<dd><label><input type="text" maxlength="255" size="50" id="alt" name="alt" value="{S_MENU_ICON_ALT}" class="post" /></label></dd>
-	</dl>
-	-->
 	<hr />
 	<dl>
 		<dt><label for="append_sid">{L_MENU_APPEND_SID_BIG}:</label><br /><span>{L_MENU_APPEND_SID_EXPLAIN}</span></dt>
@@ -191,7 +182,7 @@ function display_pip(myForm)
 </fieldset>
 <!-- ENDIF -->
 
-<!-- IF S_OPT == "edit" -->
+<!-- IF S_OPTIONS == 'edit' -->
 <input type="hidden" name="m_id" value="{S_MENUID}" />
 <fieldset>
 	<legend>{L_MENUS_EDIT}</legend>
@@ -224,29 +215,23 @@ function display_pip(myForm)
 				<option value="{menuicons.S_MENU_ICONS}" <!-- IF menuicons.S_MENU_ICONS == S_MENU_ICON -->selected <!-- ENDIF -->>{menuicons.S_MENU_ICONS}</option>
 				<!-- END menuicons -->
 				</select>
-				<span name='pip' id='pip'> <img src='./../images/block_images/{S_MENU_ICON}'> </span>
-				<!-- BEGIN menuicons --><span name='pip' id='pip'></span> &nbsp; <!-- END menuicons -->
+				<span name='pip' id='pip'><img src='./../images/block_images/small/{S_MENU_ICON}'></span>
 			</label>
 		</dd>
 	</dl>
-
 	<dl>
 		<dt>{L_MENU_ICONS}:</dt>
 		<dd>
-			<span class="imageline" style="padding:5px; border: solid 1px #D7D7D7;">
+		<div class="imageline" style="padding:5px; border: solid 1px #D7D7D7;">
 			<!-- BEGIN menuicons -->
 				<!-- IF menuicons.S_MENU_ICONS -->
 					<a href="#" onclick="set_image('{menuicons.S_MENU_ICONS}', true, true); return false;">
-					<img src='./../images/block_images/{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}'>
+					<img src='./../images/block_images/small/{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}'>
 					</a>
 				<!-- ENDIF -->
 			<!-- END menuicons -->
-			</span>
+		</div>
 		<dd/>
-	</dl>
-	<dl>
-		<dt><label for="alt">{L_MENU_ICON_ALT_TEXT}:</label></dt>
-		<dd><label><input type="text" maxlength="255" size="50" id="alt" name="alt" value="{S_MENU_ICON_ALT}" class="post" /></label></dd>
 	</dl>
 	<dl>
 		<dt><label for="link_to">{L_MENU_LINK_BIG}:</label><br /><span>{L_MENU_LINK_EXPLAIN}</span></dt>
@@ -296,7 +281,7 @@ function display_pip(myForm)
 </fieldset>
 <!-- ENDIF -->
 
-<!-- IF S_OPT  == "icons" -->
+<!-- IF S_OPTIONS  == 'icons' -->
 <table cellspacing="1" border="0">
 <fieldset>
 <div>{L_UNDER_CONSTRUCTION}<br /></div>
@@ -309,17 +294,12 @@ function display_pip(myForm)
 	<!-- BEGIN menuicons -->
 	<tr>
 		<td align="right" class="row3" width="30px">{L_ICON}</td>
-		<td align="left" class="row4" width="20px"><img src="./../images/block_images/{menuicons.S_MENU_ICONS}" border="0" alt="" /></td>
+		<td align="left" class="row4" width="20px"><img src="./../images/block_images/small/{menuicons.S_MENU_ICONS}" border="0" alt="" /></td>
 		<td align="center" class="row2" width="auto">{menuicons.S_MENU_ICONS}</td>
 		<td align="center" class="row4" width="100px">
 			 &nbsp; <a href="#{mdata.S_MENUID}"><img src="images/icon_delete.gif" border="0"></a>
 			 &nbsp; <a href="#{mdata.S_MENUID}"><img src="images/file_up_to_date.gif" border="0"></a>
 			 &nbsp; <a href="#{mdata.S_MENUID}"><img src="images/file_new.gif" border="0"></a>
-			<!--
-			 &nbsp; <a href="{U_DELETE}{mdata.S_MENUID}"><img src="images/icon_delete.gif" border="0"></a>
-			 &nbsp; <a href="{U_RESYNC}{mdata.S_MENUID}"><img src="images/file_up_to_date.gif" border="0"></a>
-			 &nbsp; <a href="{U_ADD}{mdata.S_MENUID}"><img src="images/file_new.gif" border="0"></a>
-			 -->
 		</td>
 	</tr>
 	<!-- END menuicons -->
@@ -333,36 +313,25 @@ function display_pip(myForm)
 	{L_SOURCE_DIRECTORY}<br />
 	{L_ICONS_REPORT}
 </fieldset>
-<!--
-<p class="quick" style="text-align:center;">
-	<input class="button2" name="add_icon" type="submit" value="{L_ADD_ICON}" />
-	<input type="hidden" name="mode" value="add" />
-</p>
--->
-
 <!-- ENDIF -->
 
-
 <!-- IF L_MENU_REPORT -->
-<!--<b><a href="{U_BACK}"> {L_MENU_REPORT}<br /></a></b>-->
 <b>{L_MENU_REPORT}<br /></b>
 <!-- ENDIF -->
 
-<!-- IF S_OPT == "create" || S_OPT == 'edit' -->
+<!-- IF S_OPTIONS == 'add' || S_OPTIONS == 'edit' -->
 <fieldset class="submit-buttons">
 	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
 	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
 </fieldset>
 <!-- ENDIF -->
 
-<!-- IF S_OPT != "edit" && S_OPT != 'icons' && S_OPT != 'create' && S_OPT != 'icons' && S_OPT != 'updown' && S_OPT != 'saving' -->
+<!-- IF S_OPTIONS != 'add' && S_OPTIONS != 'edit' && S_OPTIONS != 'save' && S_OPTIONS != 'icons' && S_OPTIONS != 'updn' -->
 <p class="quick" style="text-align:center;">
 	<input class="button2" name="add_menu_option" type="submit" value="{L_MENU_ADD_NEW}" />
 	<input type="hidden" name="mode" value="create" />
 </p>
 <!-- ENDIF -->
-
-
 
 </table>
 {S_FORM_TOKEN}

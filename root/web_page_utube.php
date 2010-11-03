@@ -113,8 +113,7 @@ while($row = $db->sql_fetchrow($result))
 }
 $db->sql_freeresult($result);
 
-
-$sql = "SELECT id, page_name, page_meta, page_desc, page_extn, body, head, foot FROM ". K_WEB_PAGES_TABLE . " WHERE page_name = '$mode' ";
+$sql = "SELECT id, page_name, page_meta, page_desc, page_extn, body, head, foot FROM ". K_WEB_PAGES_TABLE . " WHERE page_name = '" . $db->sql_escape(utf8_clean_string($mode)) . "'";
 
 if (!$result = $db->sql_query($sql)) 
 { 
@@ -133,7 +132,7 @@ $foot_id = $row['foot'];
 $body = $row['body'];
 $db->sql_freeresult($result);
 
-$sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = '$head_id' ";
+$sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = " . $db->sql_escape($head_id);
 
 if (!$result = $db->sql_query($sql)) 
 { 
@@ -144,7 +143,7 @@ $row = $db->sql_fetchrow($result);
 $head = $row['body'];
 $db->sql_freeresult($result);
 
-$sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = '$foot_id' ";
+$sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = " . (int)$foot_id;
 
 if (!$result = $db->sql_query($sql)) 
 {

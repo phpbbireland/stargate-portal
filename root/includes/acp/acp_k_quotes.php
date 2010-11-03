@@ -62,7 +62,7 @@ class acp_k_quotes
 
 				$sql = 'SELECT *
 					FROM ' . K_QUOTES_TABLE . "
-					WHERE quote_id = $quote_id";
+					WHERE quote_id = " . (int)$quote_id;
 
 				$result = $db->sql_query($sql);
 
@@ -91,6 +91,7 @@ class acp_k_quotes
 				// remove the leading and trailing spaces from quotes //
 				$temp = '';
 				$len = strlen($quote_info['quote']);
+
 				if ($len)
 				{
 					$quote_info['quote'][$len-1] = '';
@@ -112,7 +113,6 @@ class acp_k_quotes
 					//'LANG'				=> (isset($quote_info['lang'])) ? $quote_info['lang'] : $user->data['user_lang'],
 					'S_HIDDEN_FIELDS'	=> $s_hidden_fields)
 				);
-
 				return;
 			break;
 
@@ -143,7 +143,7 @@ class acp_k_quotes
 
 				if ($quote_id)
 				{
-					$db->sql_query('UPDATE ' . K_QUOTES_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . ' WHERE quote_id = ' . $quote_id);
+					$db->sql_query('UPDATE ' . K_QUOTES_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . ' WHERE quote_id = ' . (int)$quote_id);
 				}
 				else
 				{
@@ -155,10 +155,7 @@ class acp_k_quotes
 				$log_action = ($quote_id) ? 'LOG_EDIT_QUOTES' : 'LOG_AD_QUOTES';
 				add_log('admin', $log_action, $quote);
 
-				$template->assign_vars(array(
-					'MESSAGE' => ($quote_id) ? $user->lang['QUOTE_UPDATED'] : $user->lang['QUOTE_ADDED'],
-					)
-				);
+				$template->assign_var('MESSAGE', ($quote_id) ? $user->lang['QUOTE_UPDATED'] : $user->lang['QUOTE_ADDED']);
 
 				meta_refresh(3, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_quotes");
 
@@ -177,28 +174,26 @@ class acp_k_quotes
 				{
 					$sql = 'SELECT quote
 						FROM ' . K_QUOTES_TABLE . "
-						WHERE quote_id = $quote_id";
+						WHERE quote_id = " . $quote_id;
+
 					$result = $db->sql_query($sql);
 
 					$deleted_quote = $db->sql_fetchfield('quote');
+
 					$db->sql_freeresult($result);
 
 					$sql = 'DELETE FROM ' . K_QUOTES_TABLE . "
-						WHERE quote_id = $quote_id";
+						WHERE quote_id = " . $quote_id;
+
 					$db->sql_query($sql);
 
 					$cache->destroy('_quotes');
 
 					add_log('admin', 'LOG_QUOTE_DELETE', $deleted_quote);
 
-					$template->assign_vars(array(
-						'MESSAGE' => $user->lang['QUOTE_REMOVED'],
-						)
-					);
+					$template->assign_var('MESSAGE', $user->lang['QUOTE_REMOVED']);
 
 					meta_refresh(2, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_quotes");
-					//trigger_error($user->lang['QUOTE_REMOVED'] . adm_back_link($this->u_action));
-
 				}
 				else
 				{
@@ -213,11 +208,8 @@ class acp_k_quotes
 			break;
 
 			case 'config':
-				$template->assign_vars(array(
-					'MESSAGE' => $user->lang['SWITCHING'],
-					)
-				);
-				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;block=39");
+				$template->assign_var('MESSAGE', $user->lang['SWITCHING']);
+				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;switch=k_quotes_vars.html");
 
 			break;
 		}

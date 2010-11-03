@@ -230,7 +230,7 @@
 				'PORTAL_MENU_HEAD_NAME'	=> ($is_sub_heading) ? $name : '',
 				'PORTAL_MENU_NAME' 		=> $name,
 				'U_PORTAL_MENU_LINK' 	=> ($portal_menus[$i]['sub_heading']) ? '' : $link,
-				'PORTAL_MENU_ICON'		=> ($portal_menus[$i]['menu_icon']) ? '<img src="' . $phpbb_root_path . 'images/block_images/' . $portal_menus[$i]['menu_icon'] . '" height="16px" width="16px" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/none.gif" height="15px" width="15px" alt="" />',
+				'PORTAL_MENU_ICON'		=> ($portal_menus[$i]['menu_icon']) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $portal_menus[$i]['menu_icon'] . '" height="16px" width="16px" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/_none.gif" height="15px" width="15px" alt="" />',
 				'S_SOFT_HR'				=> $portal_menus[$i]['soft_hr'],
 				'S_SUB_HEADING' 		=> ($portal_menus[$i]['sub_heading']) ? true : false,
 			));

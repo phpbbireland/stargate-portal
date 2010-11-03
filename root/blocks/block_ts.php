@@ -28,7 +28,6 @@ $queries = $cached_queries = 0;
 
 $template->assign_vars(array(
 	'USER_NAME' => $user->data['username'],
-	'USER_NAME' => 'michaelo',
 	'CONNECT'	=> $k_config['teamspeak_connection'],
 	'PASSWORD'	=> $k_config['teamspeak_pass'],
 	'IP'		=> '',

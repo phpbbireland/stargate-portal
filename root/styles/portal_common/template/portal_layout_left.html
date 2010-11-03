@@ -12,17 +12,16 @@
 					<!-- ENDIF -->
 				</div>
 				<div class="box" id="<!-- IF not S_ARRANGE -->BLOCK_<!-- ENDIF -->{left_block_files.LEFT_BLOCK_ID}">
-					<div class="iefix" style="clear:both; width:100%;">
-						<!-- IF left_block_files.LEFT_BLOCK_SCROLL -->
-							<!-- IF not S_ARRANGE --><!-- DO NOT EDIT THE NEXT LINE UNLESS YOU KNOW WHAT YOU ARE DOING -->
+					<!-- IF left_block_files.LEFT_BLOCK_SCROLL -->
+						<!-- IF not S_ARRANGE --><!-- DO NOT EDIT THE NEXT LINE UNLESS YOU KNOW WHAT YOU ARE DOING -->
 							<div class="scroll_outer" id="{left_block_files.LEFT_BLOCK_ID}_outer" onmouseover="do_speed(this, event)" onmousemove="do_speed(this, event)" onmouseout="set_defaults(this, event)"><div class="scroll_inner" id="{left_block_files.LEFT_BLOCK_ID}_inner">{left_block_files.LEFT_BLOCKS}</div></div>
-							<!-- ELSE -->
-								{L_SCROLLING_BLOCKS_DISABLED}
-							<!-- ENDIF -->
 						<!-- ELSE -->
-							{left_block_files.LEFT_BLOCKS}
+							{L_SCROLLING_BLOCKS_DISABLED}
 						<!-- ENDIF -->
-					</div>
+					<!-- ELSE -->
+						{left_block_files.LEFT_BLOCKS}
+					<!-- ENDIF -->
+
 				</div>
 			<span class="corners-bottom"><span></span></span></div>
 		</div>

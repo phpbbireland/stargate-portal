@@ -7,7 +7,7 @@
 			<div style="text-align:center;">
 			<a rel="external" href="{our_mod_style_row.U_MOD_LINK}"><span class="red">{our_mod_style_row.MOD_NAME}</span></a><br />
 			<!-- IF our_mod_style_row.MOD_THUMB -->
-				<a href="{our_mod_style_row.MOD_IMG}" class="highslide" onclick="return hs.expand(this)"><img src="{our_mod_style_row.MOD_THUMB}" width="180px" height="120px" alt="{our_mod_style_row.MOD_THUMB}" title="Click to enlarge" /></a><br />
+				<a href="{our_mod_style_row.MOD_IMG}" class="highslide" onclick="return hs.expand(this)"><img src="{our_mod_style_row.MOD_THUMB}" width="180px" height="120px" alt="{our_mod_style_row.MOD_THUMB}" title="{L_CLICK TO ENLARGE}" /></a><br />
 				{our_mod_style_row.MOD_STATUS}<br />
 			<!-- ENDIF -->
 
@@ -39,13 +39,13 @@
 
 
 <div class="block_data" style="max-height: 800px; overflow:auto;">
-	<div style="float:left; text-align:left; width:100%;"><strong>Ported Styles:</strong><hr /><hr /></div>
+	<div style="float:left; text-align:left; width:100%;"><strong>{L_PORTED_STYLES}:</strong><hr /><hr /></div>
 	<!-- BEGIN mod_style_row -->
 		<span style="width:25%; min-width:200px; float:left; margin:0px; margin-left:auto; margin-right:auto;">
 			<div style="text-align:center;">
 			<a rel="external" href="{mod_style_row.U_MOD_LINK}"><span class="red">{mod_style_row.MOD_NAME}</span></a><br />
 			<!-- IF mod_style_row.MOD_THUMB -->
-				<a href="{mod_style_row.MOD_IMG}" class="highslide" onclick="return hs.expand(this)"><img src="{mod_style_row.MOD_THUMB}" width="180px" height="120px" alt="{mod_style_row.MOD_THUMB}" title="Click to enlarge" /></a><br />
+				<a href="{mod_style_row.MOD_IMG}" class="highslide" onclick="return hs.expand(this)"><img src="{mod_style_row.MOD_THUMB}" width="180px" height="120px" alt="{mod_style_row.MOD_THUMB}" title="{L_CLICK TO ENLARGE}" /></a><br />
 				Port {L_STATUS}: {mod_style_row.MOD_STATUS}<br />
 			<!-- ENDIF -->
 
@@ -71,7 +71,6 @@
 		</span>
 	<!-- END mod_style_row -->
 </div>
-This block was written using the MiniMod module... No database entries or sql queries were required.
-Only installed styles will be displayed here... The block is for stargatestyles only... Anyone wanting to use this code will have to ask Mitch.
+{L_MINI_SAMPLE_1}
 <!-- IF DEBUG_QUERIES --><div class="block_data">{STYLE_STATUS_DEBUG}</div><!-- ENDIF -->
 <!-- IDTAG ends block_style_status.html -->

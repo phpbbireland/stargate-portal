@@ -55,6 +55,8 @@ $lang = array_merge($lang, array(
 	'SWITCHING'				=> 'Switching to k_config',
 
 	'VIDEO_COMMENT'			=> 'Comments', 
+	'VIDEO_CREATED'			=> 'Video created...',
+	'UTUBE_SAMPLE_DATA'		=> 'I have included some sample data, just edit to suit...',
 
 ));
 

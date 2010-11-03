@@ -60,7 +60,7 @@ class acp_k_vars
 		{
 			$sql = "SELECT id, title, var_file_name 
 				FROM ". K_BLOCKS_TABLE . " 
-				WHERE id = " . $block;
+				WHERE id = " . (int)$block;
 			$result = $db->sql_query($sql);
 
 			$row = $db->sql_fetchrow($result);
@@ -74,7 +74,7 @@ class acp_k_vars
 			$db->sql_freeresult($result);
 		}
 
-		$block = (request_var('block', '')) ? request_var('block', '') : 0;
+		$block = !empty($block) ? $block : 0;
 		$action = request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;
 
@@ -108,14 +108,12 @@ class acp_k_vars
 		{
 			$k_config[$row['config_name']] = $row['config_value'];
 
-			$template->assign_vars(array(
-				'S_' . (strtoupper($row['config_name'])) => $row['config_value'],
-			));
+			$template->assign_var('S_' . (strtoupper($row['config_name'])), $row['config_value']);
 		}
 		$db->sql_freeresult($result);
 
 		$template->assign_vars(array(
-			'S_OPT' => 'Configure',
+			'S_OPT' => 'config',
 			'MESSAGE' => '',
 		));
 
@@ -201,6 +199,7 @@ class acp_k_vars
 				$k_yourtube_link						= request_var('k_yourtube_link', '');
  
 				$block_cache_time						= request_var('block_cache_time', '');
+				$block_recent_cache_time				= request_var('block_recent_cache_time', '');
 
 				switch($announce_type)
 				{
@@ -287,6 +286,7 @@ class acp_k_vars
 				sgp_acp_set_config('k_yourtube_link', $k_yourtube_link);
 
 				sgp_acp_set_config('block_cache_time', $block_cache_time);
+				sgp_acp_set_config('block_recent_cache_time', $block_recent_cache_time);
 
 				$mode='reset';
 

@@ -74,7 +74,7 @@
 	$l_total_topic_s = ($total_topics == 0) ? 'TOTAL_TOPICS_ZERO' : 'TOTAL_TOPICS_OTHER';
 
 	// Do we want to arrange the blocks ? //
-	$arrange = (int)request_var('arrange', false);
+	$arrange = request_var('arrange', 0);
 	if ($arrange)
 	{
 		$cookie_name = '';

@@ -79,7 +79,8 @@ class acp_k_poll
 					'U_ACTION_EDIT_COLUMN'	=> $this->u_action . '&amp;action=editpoll',
 					'POLL_POST_ID'			=> $k_config['poll_post_id'],
 					'POLL_VIEW'				=> $k_config['poll_view'],
-				));					
+				));
+				$cache->destroy('sql', K_BLOCKS_CONFIG_VAR_TABLE);
             break;				
 
 			case 'savepoll':
@@ -88,14 +89,13 @@ class acp_k_poll
 
  				if ($action == 'savepoll')
 				{
-					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = "' . $config_poll_post_id . '" WHERE config_name = "poll_post_id"');
-					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = "' . $config_poll_view . '" WHERE config_name = "poll_view"');
+					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = "' . $db->sql_escape($config_poll_post_id) .  '" WHERE config_name = "poll_post_id"');
+					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = "' . $db->sql_escape($config_poll_view) . '" WHERE config_name = "poll_view"');
 					
 					$message = $user->lang['CONFIG_UPDATED'];
 				}
 				$db->sql_query($sql);
 
-				//$cache->destroy('k_config');
 				trigger_error($message . adm_back_link($this->u_action));
 				
 				$template->assign_vars(array(
@@ -105,6 +105,7 @@ class acp_k_poll
 					'POLL_POST_ID'			=> $k_config['poll_post_id'],
 					'POLL_VIEW'				=> $k_config['poll_view']
 					));
+				$cache->destroy('sql', K_BLOCKS_CONFIG_VAR_TABLE);
 			break;			
 
 			default:

@@ -43,7 +43,7 @@ $lang = array_merge($lang, array(
 	'BLOCK_INDEX'			=> '(Index / Sort Order)',
 	'BLOCK_UP' 				=> 'Up',
 	'BLOCK_DOWN' 			=> 'Dn',
-	'BLOCK_DISABLED'		=> 'Dis',
+	'BLOCK_DISABLED'		=> 'Disabled',
 	'BLOCK_DISABLED_BIG'	=> 'Block is Disabled',
 	'BLOCK_ACTIVE'			=> 'Active',
 	'BLOCK_ACTIVE_BIG'		=> 'Block is Active',
@@ -67,14 +67,16 @@ $lang = array_merge($lang, array(
 	'BLOCK_DELETE' 			=> 'Del.',
 	'BLOCK_MOVE'			=> 'Move',
 	'BLOCK_SCROLL'			=> 'S',
+	'BLOCK_ADDED'			=> ' Block Added!',
+	'BLOCK_EDITED'			=> ' Block Edited!',
+	'BLOCK_UPDATED'			=> ' Block Updated',
+	'BLOCK_DELETED'			=> ' Block deleted',
+	'DO_NOT_EDIT'			=> ' (Do not edit this value)',
+
+
 
 	'BLOCK_SCROLL_BIG'		=> 'Allow Scrolling',
 	'BLOCK_SCROLL_BIG_EXPLAIN'		=> 'Yes, block (data) will scroll, No, block is static.',
-
-	'BLOCK_ADDED'			=> 'Block Added!',
-	'BLOCK_EDITED'			=> 'Block Edited!',
-	'BLOCK_UPDATED'			=> 'Block Updated',
-	'DO_NOT_EDIT'			=> '(Do not edit this value)',
 
 	'PROCESS'				=> 'process',
 	'PORTAL_BLOCKS_ENABLED' => 'Portal blocks enabled',
@@ -92,25 +94,22 @@ $lang = array_merge($lang, array(
 
 	'SAVING'	=> 'Saving Data...',
 
-	'MINIMOD_BASED'			=> 'Is this block based on a SGP minimod?',
-	'MINIMOD_BASED_EXPLAIN' => 'Select Yes, if Block is based on a portal minmod? (adjusted elsewhere)',
-
-	'MINIMOD_OPTIONS'		=> 'Which minimod is associated with this block?',
+	'MINIMOD_BASED'				=> 'Is this block based on a SGP minimod?',
+	'MINIMOD_BASED_EXPLAIN'		=> 'Select Yes, if Block is based on a portal minmod? (adjusted elsewhere)',
+	'MINIMOD_OPTIONS'			=> 'Which minimod is associated with this block?',
 	'MINIMOD_OPTIONS_EXPLAIN'	=> 'Ignore if block is not based on a minimod.',
-	'MINIMOD_DETAILS_SHOW'	=> 'This block is based on a minimod, this is a link to it!',
-	'MINIMOD_DETAILS_NO_EDIT' => 'Block is not a minimod', 
+	'MINIMOD_DETAILS_SHOW'		=> 'This block is based on a minimod, this is a link to it!',
+	'MINIMOD_DETAILS_NO_EDIT'	=> 'Block is not a minimod', 
 
-	'HTML'	=> 'HTML',
-	'BBCODE' => 'BBcode',
-
+	'HTML'		=> 'HTML',
+	'BBCODE'	=> 'BBcode',
 	'ALL_GROUPS'	=> 'All Groups',
-
-	'SAVED'	=> 'Data saved... purging cache for this table...!',
+	'SAVED'			=> 'Data saved... purging cache for this table...!',
 	'UNKNOWN_ERROR'	=> 'Error not processing saved data<br />',
 
-	'CONFIRM_OPERATION_BLOCKS'		=> 'Do you wish to delete this block?',
+	'CONFIRM_OPERATION_BLOCKS'			=> 'Do you wish to delete this block?',
 	'CONFIRM_OPERATION_BLOCKS_REINDEX'	=> 'Do you wish to re-index the blocks?',
-	'MUST_SELECT_VALID_BLOCK_DATA'	=> 'Invalid block ID',
+	'MUST_SELECT_VALID_BLOCK_DATA'		=> 'Invalid block ID',
 	'BLOCK_UPDATING'	=> 'Updating block positions, please wait...<br />',
 	'BLOCK_MOVE_ERROR'	=> 'Blocks require reindexing... <br />Press back and try again... If this condition persisters, please try to manually correct the ndx values, then try again. ',
 	'BLOCK_CACHE_TIME'			=> 'Block cache time',
@@ -119,7 +118,7 @@ $lang = array_merge($lang, array(
 	'VIEW_PAGE'					=> 'Add page from available pages:',
 	'VIEW_PAGE2'				=> 'Available pages:',
 	'VIEW_PAGE_EXPLAIN'			=> 'Select from this list (reusable) to add, selecting <strong>None</strong> will empty the list.',
-	'VIEW_PAGE_EXPLAIN2'		=> 'Select the pages where this block will be visible.<br />Blocks will only be visible on pages that support blocks.',
+	'VIEW_PAGE_EXPLAIN2'		=> 'Select the pages where this block will be visible.<br /><br /><strong>Notes:</strong><br />Blocks will only be visible on pages that support blocks.<br />We do not process blocks if the information they contain is already process by the page they are displayed on.',
 
 	'PAGE_ARRAY'				=> 'Array of page',
 	'PAGE_ARRAY_EXPLAIN'		=> 'List of all block where block is visible',
@@ -137,8 +136,9 @@ $lang = array_merge($lang, array(
 	'EDIT_BLOCK'		=> 'Edit block',
 	'DELETE_THIS_BLOCK'	=> 'Delete this block',
 
+
 	'SET_VARIABLES_IN_MINI-MODULES'	=> 'Set variables in Mini-Modules',
-	'MANAGE_PAGES'			=> 'Manage pages',
+	'MANAGE_PAGES'		=> 'Manage pages',
 
 ));
 // Message Settings

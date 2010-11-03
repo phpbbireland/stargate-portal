@@ -21,6 +21,10 @@ if (!defined('IN_PHPBB'))
 * @package acp
 */
 
+/*
+* Note: S_OPTIONS hold options, these are not anguage variables.
+*/
+
 class acp_k_menus
 {
 	var $u_action = '';
@@ -41,9 +45,6 @@ class acp_k_menus
 
 		//$action	= request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;
-
-		$forum_id	= request_var('f', 0);
-		$forum_data = $errors = array();
 
 		if ($submit && !check_form_key($form_key))
 		{
@@ -70,7 +71,7 @@ class acp_k_menus
 		//$action = request_var('action', '');
 
 		$mode		= request_var('mode', '');
-		$menu		= request_var('menu', '');
+		$menu		= request_var('menu', 0);
 		$menuitem	= request_var('menuitem', '');
 
 		$u_action = append_sid("{$phpbb_admin_path}index.$phpEx" , "i=$id&amp;mode=$mode");
@@ -87,49 +88,49 @@ class acp_k_menus
 
 		switch ($mode)
 		{
-			case 'head': 	get_menu(0); 	$template->assign_vars(array('S_OPT' => 'head')); break;
-			case 'nav':		get_menu(1); 	$template->assign_vars(array('S_OPT' => 'nav'));  break;
-			case 'sub':		get_menu(2); 	$template->assign_vars(array('S_OPT' => 'sub'));  break;
-			case 'all':		get_menu(90); 	$template->assign_vars(array('S_OPT' => 'all'));  break;
-			case 'unalloc':	get_menu(99); 	$template->assign_vars(array('S_OPT' => 'unalloc')); break;
+			case 'head': 	get_menu(0); 	$template->assign_var('S_OPTIONS', 'head'); break;
+			case 'nav':		get_menu(1); 	$template->assign_var('S_OPTIONS', 'nav');  break;
+			case 'sub':		get_menu(2); 	$template->assign_var('S_OPTIONS', 'sub');  break;
+			case 'all':		get_menu(90); 	$template->assign_var('S_OPTIONS', 'all');  break;
+			case 'unalloc':	get_menu(99); 	$template->assign_var('S_OPTIONS', 'unalloc'); break;
 
 			case 'edit':
 			{
 				if ($submit)
 				{
-					$m_id			= request_var('m_id', '');
-					$ndx    		= request_var('ndx', '');
+					$m_id			= request_var('m_id', 0);
+					$ndx    		= request_var('ndx', 0);
 					$menu_type 		= request_var('menu_type', '');
 					$menu_icon  	= request_var('menu_icon', '');
 					$name       	= utf8_normalize_nfc(request_var('name', '', true));
 					$link_to  		= request_var('link_to', '');
-					$view_by    	= request_var('view_by', '');
-					$append_sid		= request_var('append_sid', '');
-					$append_uid		= request_var('append_uid', '');
+					$view_by    	= request_var('view_by', 1);
+					$append_sid		= request_var('append_sid', 0);
+					$append_uid		= request_var('append_uid', 0);
 					$extern			= request_var('extern', 0);
-					$soft_hr		= request_var('soft_hr', '');
-					$sub_heading	= request_var('sub_heading', '');
+					$soft_hr		= request_var('soft_hr', 0);
+					$sub_heading	= request_var('sub_heading', 0);
 
-					if (strstr($menu_icon, 'None'))
+					if (strstr($menu_icon, $user->lang['NONE']))
 					{
-						$menu_icon = '';
+						$menu_icon = '_none.gif';
 					}
 
 					//echo $menu_icon;
 					$sql_ary = array(
-						'menu_type' => $menu_type,
-						'ndx' => $ndx,
-						'menu_icon' => $menu_icon,
-						'name' => $name,
-						'link_to' => $link_to,
-						'view_by' => $view_by,
-						'append_sid' => $append_sid,
-						'append_uid' => $append_uid,
-						'extern'	=> $extern,
-						'soft_hr'	=> $soft_hr,
-						'sub_heading' => $sub_heading,
+						'menu_type'		=> $menu_type,
+						'ndx'			=> $ndx,
+						'menu_icon'		=> $menu_icon,
+						'name'			=> $name,
+						'link_to'		=> $link_to,
+						'view_by'		=> $view_by,
+						'append_sid'	=> $append_sid,
+						'append_uid'	=> $append_uid,
+						'extern'		=> $extern,
+						'soft_hr'		=> $soft_hr,
+						'sub_heading'	=> $sub_heading,
 					);
-					$sql = 'UPDATE ' . K_MENUS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE m_id = $m_id";
+					$sql = 'UPDATE ' . K_MENUS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE m_id = " . (int)$m_id;
 
 					if (!$result = $db->sql_query($sql))
 					{
@@ -138,11 +139,6 @@ class acp_k_menus
 
 
 					$cache->destroy('sql', K_MENUS_TABLE);
-
-					$template->assign_vars(array(
-						'L_MENU_REPORT' => 'Data is being saved....</font><br />',
-						'S_OPT' => 'saving',
-					));
 
 					switch($menu_type)
 					{
@@ -153,6 +149,11 @@ class acp_k_menus
 						default: $mode = 'manage';
 						break;
 					}
+
+					$template->assign_vars(array(
+						'L_MENU_REPORT' => $user->lang['DATA_IS_BEING_SAVED'] . '</font><br />',
+						'S_OPTIONS' => 'save',
+					));
 
 					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=' . $mode));
 					break;
@@ -175,8 +176,8 @@ class acp_k_menus
 					get_menu_item($menu);
 				}
 
-				// temp switches //
-				$template->assign_vars(array('S_OPT' => 'edit'));
+
+				$template->assign_var('S_OPTIONS', 'edit');
 				get_menu_icons();
 
 				break;
@@ -193,7 +194,8 @@ class acp_k_menus
 				{
 					$sql = 'SELECT name, m_id
 						FROM ' . K_MENUS_TABLE . '
-						WHERE m_id = ' . $menu;
+						WHERE m_id = ' . (int)$menu;
+
 					$result = $db->sql_query($sql);
 
 					$name = (string) $db->sql_fetchfield('name');
@@ -202,21 +204,15 @@ class acp_k_menus
 					$name .= ' Menu ';
 
 					$sql = 'DELETE FROM ' . K_MENUS_TABLE . "
-						WHERE m_id = $menu";
+						WHERE m_id = " . (int)$menu;
+
 					$db->sql_query($sql);
 
 
-					$template->assign_vars(array(
-						'L_MENU_REPORT' => $name . 'Deleted!</font><br />',
-					));
-
-					$template->assign_vars(array('S_OPT' => 'delete'));
-
+					$template->assign_var('L_MENU_REPORT', $name . $user->lang['DELETED'] . '</font><br />');
 					$cache->destroy('sql', K_MENUS_TABLE);
 
-					//meta_refresh (1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_menus&amp;mode=all");
 					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=all'));
-
 					break;
 				}
 				else
@@ -228,9 +224,8 @@ class acp_k_menus
 					)));
 				}
 
-				$template->assign_vars(array('L_MENU_REPORT' => 'Action Cancelled...'));
+				$template->assign_var('L_MENU_REPORT', $user->lang['ACTION_CANCELLED']);
 
-				//meta_refresh (1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_menus&amp;mode=all");
 				meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=all'));
 
 				break;
@@ -243,7 +238,7 @@ class acp_k_menus
 
 				// get current menu data //
 				$sql = "SELECT m_id, ndx, menu_type FROM " . K_MENUS_TABLE . "
-					WHERE m_id = $menu LIMIT 1";
+					WHERE m_id = " . (int)$menu . " LIMIT 1";
 
 				if (!$result = $db->sql_query($sql))
 				{
@@ -267,7 +262,7 @@ class acp_k_menus
 				// get move_to menu data//
 				$sql = "SELECT m_id, ndx, menu_type FROM " . K_MENUS_TABLE . "
 					WHERE ndx =  $temp 
-						AND menu_type = '$type' LIMIT 1";
+						AND menu_type = '" . $db->sql_escape($type) . "' LIMIT 1";
 
 				if (!$result = $db->sql_query($sql))
 				{
@@ -286,13 +281,13 @@ class acp_k_menus
 				if ($mode == 'up')
 				{
 					// sql is not duplicated
-					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . $to_move['ndx'] . " WHERE m_id = " . $move_to['m_id'];
+					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int)$to_move['ndx'] . " WHERE m_id = " . (int)$move_to['m_id'];
 					if (!$result = $db->sql_query($sql))
 					{
 						trigger_error($user->lang['MENU_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 					}
 
-					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . $move_to['ndx'] . " WHERE m_id = " . $to_move['m_id'];
+					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int)$move_to['ndx'] . " WHERE m_id = " . (int)$to_move['m_id'];
 					if (!$result = $db->sql_query($sql))
 					{
 						trigger_error($user->lang['MENU_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
@@ -301,13 +296,13 @@ class acp_k_menus
 				if ($mode == 'down')
 				{
 					// sql is not duplicated
-					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . $move_to['ndx'] . " WHERE m_id = " . $to_move['m_id'];
+					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int)$move_to['ndx'] . " WHERE m_id = " . (int)$to_move['m_id'];
 					if (!$result = $db->sql_query($sql))
 					{
 						trigger_error($user->lang['MENU_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 					}
 
-					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . $to_move['ndx'] . " WHERE m_id = " . $move_to['m_id'];
+					$sql = "UPDATE " . K_MENUS_TABLE . " SET ndx = " . (int)$to_move['ndx'] . " WHERE m_id = " . (int)$move_to['m_id'];
 					if (!$result = $db->sql_query($sql))
 					{
 						trigger_error($user->lang['MENU_MOVE_ERROR'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
@@ -316,14 +311,13 @@ class acp_k_menus
 
 				$template->assign_vars(array(
 					'L_MENU_REPORT' => $user->lang['SORT_ORDER_UPDATING'],
-					'S_OPT' => 'updown',
+					'S_OPTIONS' => 'updn',
 				));
 
 				$mode ='nav';
 
 				$cache->destroy('sql', K_MENUS_TABLE);
 
-				//meta_refresh (1, append_sid("{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_menus&amp;mode=nav"));
 				meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=nav'));
 
 				break;
@@ -340,26 +334,26 @@ class acp_k_menus
 					$menu_icon  	= request_var('menu_icon', '');
 					$name  			= utf8_normalize_nfc(request_var('name', '', true));
 					$link_to  		= request_var('link_to', '');
-					$view_by		= request_var('view_by', '');
-					$append_sid		= request_var('append_sid', '');
-					$append_uid		= request_var('append_uid', '');
-					$extern			= request_var('extern', '');
-					$soft_hr		= request_var('soft_hr', '');
-					$sub_heading	= request_var('sub_heading', '');
+					$view_by		= request_var('view_by', 0);
+					$append_sid		= request_var('append_sid', 0);
+					$append_uid		= request_var('append_uid', 0);
+					$extern			= request_var('extern', 0);
+					$soft_hr		= request_var('soft_hr', 0);
+					$sub_heading	= request_var('sub_heading', 0);
 
 					if ($menu_type == NULL || $name == NULL || $view_by == NULL)
 					{
 						// catch all we check menu_type, $name, view_by)
 						$template->assign_vars(array(
 							'L_MENU_REPORT' => $user->lang['MISSING_DATA'],
-							'S_OPT' => 'updown',
+							'S_OPTIONS' => 'updn',
 						));
 						return;
 					}
 
-					if (strstr($menu_icon, 'None'))
+					if (strstr($menu_icon, $user->lang['NONE']))
 					{
-						$menu_icon = '';
+						$menu_icon = '_none.gif';
 					}
 
 					$ndx = get_next_ndx($menu_type);
@@ -385,9 +379,7 @@ class acp_k_menus
 					//fix for the different menus...
 					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_menus&amp;mode=' . $store));
 
-					$template->assign_vars(array(
-						'L_MENU_REPORT' => 'Menu Created...',
-					));
+					$template->assign_var('L_MENU_REPORT', $user->lang['MENU_CREATED']);
 
 					break;//return;
 				}
@@ -396,7 +388,7 @@ class acp_k_menus
 					// get all groups and fill array //
 					get_all_groups();
 					get_menu_icons(); 
-					$template->assign_vars(array('S_OPT' => 'create'));
+					$template->assign_var('S_OPTIONS', 'add');
 					break;
 				}
 			}
@@ -405,42 +397,36 @@ class acp_k_menus
 				$dirslist='';
 				$i = get_menu_icons();
 				$template->assign_vars(array(
-					'S_OPT' 				=> 'icons',
+					'S_OPTIONS' 			=> 'icons',
 					'S_HIDE' 				=> 'HIDE',
 					'L_ICONS_REPORT'		=> '',
 					'S_MENU_ICON_COUNT'		=> $i,
 					'S_MENU_ICONS_LIST'		=> $dirslist,
 					)
 				);
-				$template->assign_vars(array('S_OPT' => 'icons'));
 				break;
 			}
 
 			case 'manage':
-				$template->assign_vars(array(
-					'L_MENU_REPORT' => 'This is for future development...</font><br />',
-				));
+				$template->assign_var('L_MENU_REPORT', $user->lang['FUTURE_DEVELOPMENT'] . '</font><br />');
+				$template->assign_var('S_OPTIONS', 'manage');
 
-				$template->assign_vars(array('S_OPT' => 'manage'));
 			break;
 
 			case 'sync':
-				$template->assign_vars(array(
-					'L_MENU_REPORT' => 'Not Assigned...!</font><br />',
-				));
-
-				$template->assign_vars(array('S_OPT' => 'sync'));
+				$template->assign_vars('L_MENU_REPORT', $user->lang['NOT_ASSIGNED'] . '</font><br />');
+				$template->assign_var('S_OPTIONS', 'sync');
 			break;
 
 			case 'tools':
-				$template->assign_vars(array('S_OPT' => 'Tools'));
+				$template->assign_var('S_OPTIONS', 'tools');
 			break;
 
 			case 'default':
 
 		}
 
-		$template->assign_vars(array('U_ACTION'	=> $u_action));
+		$template->assign_var('U_ACTION', $u_action);
 	}
 }
 
@@ -470,10 +456,10 @@ function get_menu($this_one)
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('mdata', array(
-				'S_MENUID' 		=> $row['m_id'],
-				'S_MENU_NDX'	=> $row['ndx'],
-				'S_MENU_TYPE'	=> $row['menu_type'],
-				'S_MENU_ICON'	=> $row['menu_icon'],
+				'S_MENUID' 			=> $row['m_id'],
+				'S_MENU_NDX'		=> $row['ndx'],
+				'S_MENU_TYPE'		=> $row['menu_type'],
+				'S_MENU_ICON'		=> $row['menu_icon'],
 				'S_MENU_ITEM_NAME'	=> $row['name'],
 				'S_MENU_LINK'		=> $row['link_to'],
 				'S_MENU_VIEW'		=> which_group($row['view_by']),
@@ -500,7 +486,7 @@ function get_menu_item($item)
 
 	$m_id = $item;
 
-	$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE m_id=' . $item;
+	$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE m_id=' . (int)$item;
 
 	if ($result = $db->sql_query($sql))
 	{
@@ -508,14 +494,14 @@ function get_menu_item($item)
 	}
 
 	$template->assign_vars(array(
-		'S_MENUID' 	=> $row['m_id'],
-		'S_MENU_NDX'	=> $row['ndx'],
-		'S_MENU_TYPE'	=> $row['menu_type'],
-		'S_MENU_ICON'	=> $row['menu_icon'],
+		'S_MENUID' 			=> $row['m_id'],
+		'S_MENU_NDX'		=> $row['ndx'],
+		'S_MENU_TYPE'		=> $row['menu_type'],
+		'S_MENU_ICON'		=> $row['menu_icon'],
 		'S_MENU_ITEM_NAME'	=> $row['name'],
-		'S_MENU_LINK'	=> $row['link_to'],
-		'S_MENU_VIEW'	=> which_group($row['view_by']),
-		'S_MENU_VIEW'	=> $row['view_by'],
+		'S_MENU_LINK'		=> $row['link_to'],
+		'S_MENU_VIEW'		=> which_group($row['view_by']),
+		'S_MENU_VIEW'		=> $row['view_by'],
 		'S_MENU_APPEND_SID' => $row['append_sid'],
 		'S_MENU_APPEND_UID' => $row['append_uid'],
 		'S_MENU_EXTERN'		=> $row['extern'],
@@ -529,16 +515,16 @@ function get_menu_item($item)
 
 function get_menu_icons()
 {
-	global $phpbb_root_path, $phpEx, $template, $dirslist;
+	global $phpbb_root_path, $phpEx, $template, $dirslist, $user;
 
-	$dirslist='None ';
+	$dirslist = ''; //$user->lang['NONE'] . '.gif';
 
-	//	$dirs = dir('./../styles/portal_admin/theme/images/pips');
-	$dirs = dir('./../images/block_images');
+	$dirs = dir($phpbb_root_path. 'images/block_images/small');
 
 	while ($file = $dirs->read())
 	{
-		if (stripos($file, "enu") || stripos($file, ".gif") || stripos($file, ".png") && stripos($file ,"ogo_"))
+		//if (stripos($file, "enu") || stripos($file, ".gif") || stripos($file, ".png") && stripos($file ,"ogo_"))
+		if (stripos($file, ".gif") || stripos($file, ".png"))
 		{
 			$dirslist .= "$file ";
 		}
@@ -561,8 +547,8 @@ function get_menu_icons()
 
 function get_next_ndx($type)
 {
-	global $db, $ndx;
-	$sql = "SELECT * FROM " . K_MENUS_TABLE . " WHERE menu_type = '$type' ORDER by ndx DESC";
+	global $db, $ndx, $user;
+	$sql = "SELECT * FROM " . K_MENUS_TABLE . " WHERE menu_type = '" . (int)$type . "' ORDER by ndx DESC";
 	if ($result = $db->sql_query($sql))
 	{
 		$row = $db->sql_fetchrow($result);		// just get last block ndx details	//
@@ -574,7 +560,7 @@ function get_next_ndx($type)
 
 function get_all_groups()
 {
-	global $db, $template;
+	global $db, $template, $user;
 	$i = 0;
 
 	// Get us all the groups
@@ -585,7 +571,7 @@ function get_all_groups()
 
 	// backward compatability, set up group zero //
 	$template->assign_block_vars('groups', array(
-		'GROUP_NAME'	=> 'None',
+		'GROUP_NAME'	=> $user->lang['NONE'],
 		'GROUP_ID'		=> 0,
 	));
 
@@ -606,12 +592,12 @@ function get_all_groups()
 // this is very inefficient... I will update later...
 function which_group($id)
 {
-	global $db, $template;
+	global $db, $template, $user;
 
 	// Get us all the groups
 	$sql = 'SELECT group_name
 		FROM ' . GROUPS_TABLE . '
-		WHERE group_id = ' . $id;
+		WHERE group_id = ' . (int)$id;
 
 	$result = $db->sql_query($sql);
 
@@ -623,7 +609,7 @@ function which_group($id)
 
 	if ($name == '')
 	{
-		return('None');
+		return($user->lang['NONE']);
 	}
 	else
 	{

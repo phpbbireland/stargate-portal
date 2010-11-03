@@ -113,12 +113,13 @@ class acp_k_referrals
 		{
 			for ($i = 0; $i < count($id_list); $i++)
 			{
-				$sql = 'UPDATE '.K_REFERRALS_TABLE.
-					" SET enabled = ".( ($filter_flag == 'enabled') ? 0 : 1 ).
-					" WHERE id = ".$id_list[$i];
+				$sql = 'UPDATE ' . K_REFERRALS_TABLE .
+					" SET enabled = " .( ($filter_flag == 'enabled') ? 0 : 1 ) .
+					" WHERE id = " . (int)$id_list[$i];
+
 				if (!$result = $db->sql_query($sql))
 				{
-					trigger_error(GENERAL_ERROR, "Couldn't update HTTP Referrals (id=".$id_list[$i].") from database", '', __LINE__, __FILE__, $sql);
+					trigger_error(GENERAL_ERROR, $user->lang['NO_UPDATE_HTTP_REFERRALS'] . " (id=" . $id_list[$i] . ")", '', __LINE__, __FILE__, $sql);
 				}
 			}
 		}

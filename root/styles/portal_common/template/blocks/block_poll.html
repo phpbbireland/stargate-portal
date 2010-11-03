@@ -1,12 +1,8 @@
 <!-- IDTAG starts block_poll.html 10 November 2008 copyright phpbbireland.com 2008 -->
 <div class="block_data">
 	<div style="width: 98%; margin: 0 auto; text-align: center;">
-		<!-- IF BS_HAS_POLL -->
+	<!-- IF BS_HAS_POLL -->
 		<form method="post" name="posting" id="posting" action="{BS_POLL_ACTION}">
-
-
-
-
 		<!-- IF S_FULL -->
 			<div style="clear:both; margin: 0px; margin-left: auto; margin-right: auto; width:98%;">
 				<div style="text-align:center; padding-bottom:8px;"><strong>{BPOLL_QUESTION}</strong></div>
@@ -19,7 +15,6 @@
 					<span class="11" style="float:left; text-align:left; width:100%; padding-bottom:2px; padding-top:2px;">
 
 						<!-- IF BS_CAN_VOTE -->
-
 							<div style="width:100%;">
 								<label for="vote_{b_poll_option.POLL_OPTION_ID}"><strong>{b_poll_option.POLL_OPTION_CAPTION}</strong></label>
 								<span style="width:auto; float:right;">
@@ -31,7 +26,6 @@
 								</span>
 								<br />
 							</div>
-
 							<!-- IF BS_DISPLAY_RESULTS -->
 							<div style="width:100%;">
 								<span style=" float:left;">{BPOLL_LEFT_CAP_IMG}{b_poll_option.POLL_OPTION_IMG}{BPOLL_RIGHT_CAP_IMG}</span>
@@ -40,21 +34,10 @@
 								<!-- IF b_poll_option.POLL_OPTION_VOTED --><b style="text-align:left;" title="{L_POLL_VOTED_OPTION}">[x]</b><!-- ENDIF -->
 								</span>
 							</div>
-<!--
-							<div style="width:100%;">
-								{b_poll_option.POLL_OPTION_PERCENT}
-							</div>
--->
 							<!-- ENDIF -->
-
 						<!-- ELSE -->
-
 							{b_poll_option.POLL_OPTION_CAPTION}
-
 						<!-- ENDIF -->
-
-
-
 					</span>
 				</div>
 				<!-- END b_poll_option -->
@@ -81,10 +64,12 @@
 				<!-- ENDIF -->
 			</div>
 		<!-- ENDIF -->
-
-
-
-		<!-- ENDIF -->
+	<!-- ELSE -->
+		{L_NO_POLL}
+	<!-- ENDIF -->
+			{S_FORM_TOKEN}
+			{S_HIDDEN_FIELDS}
+		</form>
 	</div>
 </div>
 <!-- IF DEBUG_QUERIES --><div class="block_data">{POLL_DEBUG}</div><!-- ENDIF -->

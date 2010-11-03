@@ -1,9 +1,12 @@
 <?php
-define('IN_PHPBB', true);
+
+
 if (!defined('IN_PHPBB'))
 {
-	exit;
+	//exit;
+	define('IN_PHPBB', true);
 }
+
 
 $filter = ".mp3";
 $directory = "music";

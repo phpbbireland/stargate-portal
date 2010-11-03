@@ -43,14 +43,13 @@ class acp_k_pages
 		//$s_hidden_fields = '';
 
 		$mode = request_var('mode', '');
-		$page_id = request_var('page_id', '');
+		$page_id = request_var('page_id', 0);
 		$action	= request_var('config', '');
-
 		$tag_id = request_var('tag_id', '');
 
 		$submit = (isset($_POST['submit'])) ? true : false;
 
-		if($tag_id != 'None' && $tag_id != '')
+		if($tag_id != '')
 		{
 			$mode = 'add';
 		}
@@ -58,9 +57,7 @@ class acp_k_pages
 		switch($action)
 		{
 			case 'config':
-				$template->assign_vars(array(
-					'MESSAGE' => $user->lang['SWITCHING'],
-				));
+				$template->assign_var('MESSAGE', $user->lang['SWITCHING']);
 
 				meta_refresh (1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;switch=k_pages");
 			break;
@@ -84,18 +81,17 @@ class acp_k_pages
 			'U_EDIT'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_pages&amp;mode=edit" . '&amp;page_id=' . $page_id,
 			'U_DELETE'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_pages&amp;mode=delete" . '&amp;page_id=' . $page_id,
 			'U_MANAGE'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_pages&amp;mode=manage",
-			'S_OPT'		=> 'manage',
+			'S_OPT'		=> 'S_MANAGE',
 		));
 
 		switch ($mode)
 		{
-
 			case 'delete':
 				$page_name = get_page_filename($page_id);
 				if (confirm_box(true))
 				{
 					$sql = 'DELETE FROM ' . K_PAGES_TABLE . '
-						WHERE page_id = ' . $page_id;
+						WHERE page_id = ' . (int)$page_id; 
 
 					if (!$result = $db->sql_query($sql))
 					{
@@ -106,7 +102,7 @@ class acp_k_pages
 
 					$template->assign_vars(array(
 						'S_OPTION'	=> 'processing',
-						'MESSAGE'	=> 'Removing phpBB page...' . $page_name,
+						'MESSAGE'	=> $user->lang['REMOVING_PAGES'] . $page_name,
 					));
 
 					meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_pages&amp;mode=manage");
@@ -121,12 +117,12 @@ class acp_k_pages
 					);
 				}
 
-				$template->assign_vars(array('MESSAGE' => 'Action Cancelled...'));
+				$template->assign_var('MESSAGE', $user->lang['ACTION_CANCELLED']);
+
 				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_pages&amp;mode=manage");
 			break;
 
 			case 'add':
-
 				if ($submit)
 				{
 					// drop extension
@@ -140,8 +136,8 @@ class acp_k_pages
 					meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_pages&amp;mode=manage");
 
 					$template->assign_vars(array(
-						'S_OPTION'	=> 'processing',
-						'MESSAGE'	=> 'Adding phpBB Page...',
+						'S_OPTION'	=> 'processing', // not lang var
+						'MESSAGE'	=> $user->lang['ADDING_PAGES'],
 					));
 
 					$cache->destroy('sql', K_PAGES_TABLE);
@@ -161,10 +157,7 @@ class acp_k_pages
 			break;
 		}
 
-		$template->assign_vars(array(
-			'U_ACTION'			=> $this->u_action
-			)
-		);
+		$template->assign_var('U_ACTION', $this->u_action);
 	}
 }
 
@@ -186,9 +179,7 @@ function get_pages_data()
 	}
 	$db->sql_freeresult($result);
 
-	$template->assign_vars(array(
-			'S_OPTION'	=> 'manage'
-	));
+	$template->assign_var('S_OPTION', 'manage');
 }
 
 /**
@@ -197,7 +188,7 @@ function get_pages_data()
 */
 function get_all_available_files()
 {
-	global $phpbb_root_path, $phpEx, $template, $dirslist, $db;
+	global $phpbb_root_path, $phpEx, $template, $dirslist, $db, $user;
 	$page_name = '';
 	$i = 0;
 
@@ -216,14 +207,14 @@ function get_all_available_files()
 
 	$dirs = dir($phpbb_root_path);
 
-	$dirslist .= 'None ';
+	$dirslist = '';
 
 	while ($file = $dirs->read())
 	{
 		if (stripos($file, ".php") && !stripos($file, ".bak") && !in_array($file, $arr, true))
 		{
 			// skip file we don not allow //
-			if($file != 'common.php' && $file != 'report.php' && $file != 'feed.php' && $file != 'cron.php' && $file != 'cron.php' && $file != 'config.php' && $file != 'style.php' && $file != 'style.php')
+			if($file != 'common.php' && $file != 'report.php' && $file != 'feed.php' && $file != 'cron.php' && $file != 'config.php' && $file != 'style.php' && $file != 'sgp_refresh.php')
 			{
 				$dirslist .= "$file ";
 			}
@@ -234,7 +225,7 @@ function get_all_available_files()
 
 	$dirslist = explode(" ", $dirslist);
 	sort($dirslist);
-	for ($i=0; $i < sizeof($dirslist); $i++)
+	for ($i = 0; $i < sizeof($dirslist); $i++)
 	{
 		if ($dirslist[$i] != '')
 		{
@@ -254,7 +245,7 @@ function get_page_filename($page_id)
 
 	$sql = 'SELECT *
 		FROM ' . K_PAGES_TABLE . '
-		WHERE page_id = ' . $page_id;
+		WHERE page_id = ' . $db->sql_escape($page_id);
 	$result = $db->sql_query($sql);
 
 	if ($result = $db->sql_query($sql))

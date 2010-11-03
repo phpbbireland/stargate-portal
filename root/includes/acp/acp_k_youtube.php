@@ -53,9 +53,7 @@ class acp_k_youtube
 		switch($action)
 		{
 			case 'config':
-				$template->assign_vars(array(
-					'MESSAGE' => $user->lang['SWITCHING'],
-				));
+				$template->assign_var('MESSAGE', $user->lang['SWITCHING']);
 
 				meta_refresh (1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;switch=k_youtube"); 
 			break;
@@ -92,7 +90,7 @@ class acp_k_youtube
 
 				if ($submit)
 				{
-					$video_id		 = request_var('video_id', '');
+					$video_id		 = request_var('video_id', 0);
 					$video_link		 = request_var('video_link', '');
 					$video_rating	 = request_var('video_rating', '');
 					$video_category  = utf8_normalize_nfc(request_var('video_category', '', true));
@@ -112,7 +110,7 @@ class acp_k_youtube
 						//'video_poster_id'	=> $video_poster_id,
 					);
 
-					$sql = 'UPDATE ' . K_YOUTUBE_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE video_id = " . $video_id;
+					$sql = 'UPDATE ' . K_YOUTUBE_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE video_id = " . (int)$video_id;
 
 					if (!$result = $db->sql_query($sql))
 					{
@@ -120,8 +118,8 @@ class acp_k_youtube
 					}
 
 					$template->assign_vars(array(
-						'MESSAGE' => 'Data is being saved....</font><br />',
-						'S_OPT' => 'saving',
+						'MESSAGE'	=> $user->lang['DATA_IS_BEING_SAVED'] . '</font><br />',
+						'S_OPT'		=> 'saving',
 					));
 
 					meta_refresh(0, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=browse");
@@ -129,7 +127,7 @@ class acp_k_youtube
 
 				get_video_item($video_id);
 
-				$template->assign_vars(array('S_OPTION' => 'edit'));
+				$template->assign_var('S_OPTION', 'edit');
 			break;
 
 			case 'delete':
@@ -140,7 +138,7 @@ class acp_k_youtube
 				if (confirm_box(true))
 				{
 					$sql = 'DELETE FROM ' . K_YOUTUBE_TABLE . '
-						WHERE video_id = ' . $video_id;
+						WHERE video_id = ' . (int)$video_id;
 
 					if (!$result = $db->sql_query($sql))
 					{
@@ -148,8 +146,8 @@ class acp_k_youtube
 					}
 
 					$template->assign_vars(array(
-						'MESSAGE' =>  ' Deleting! ' . $video_id . '<br />',
-						'S_OPT' => 'delete',
+						'MESSAGE'	=>  $user->lang['DELETING'] . $video_id . '<br />',
+						'S_OPT'		=> 'delete', //not a language var
 					));
 
 					$cache->destroy('sql', K_YOUTUBE_TABLE);
@@ -166,7 +164,7 @@ class acp_k_youtube
 					);
 				}
 
-				$template->assign_vars(array('MESSAGE' => 'Action Cancelled...'));
+				$template->assign_var('MESSAGE', $user->lang['ACTION_CANCELLED']);
 				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=browse");
 			break;
 
@@ -201,9 +199,7 @@ class acp_k_youtube
 
 					meta_refresh(0, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_youtube&amp;mode=browse");
 
-					$template->assign_vars(array(
-						'L_MENU_REPORT' => 'Video Created...',
-					));
+					$template->assign_var('L_MENU_REPORT', $user->lang['VIDEO_CREATED']);
 
 					$cache->destroy('sql', K_YOUTUBE_TABLE);
 					break;
@@ -213,7 +209,7 @@ class acp_k_youtube
 					get_video_item(0);
 					$template->assign_vars(array(
 						'S_OPTION' => 'add',
-						'MESSAGE' =>  'Sample data has been added...<br />',
+						'MESSAGE' =>  $user->lang['UTUBE_SAMPLE_DATA'] . '<br />',
 					));
 					$mode = 'add';
 				}
@@ -230,10 +226,7 @@ class acp_k_youtube
 			break;
 		}
 
-		$template->assign_vars(array(
-			'U_ACTION'			=> $this->u_action
-			)
-		);
+		$template->assign_var('U_ACTION', $this->u_action);
 	}
 }
 
@@ -242,7 +235,7 @@ function get_youtube_data()
 	global $db, $template;//, $s_hidden_fields;
 
 	$sql = 'SELECT *
-		FROM ' . K_YOUTUBE_TABLE ;
+		FROM ' . K_YOUTUBE_TABLE;
 
 	$result = $db->sql_query($sql);
 
@@ -281,7 +274,7 @@ function get_video_item($video_id)
 	{
 		$sql = 'SELECT *
 			FROM ' . K_YOUTUBE_TABLE . '
-			WHERE video_id = ' . $video_id;
+			WHERE video_id = ' . (int)$video_id;
 	}
 
 	$result = $db->sql_query($sql);

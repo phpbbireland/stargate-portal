@@ -53,6 +53,7 @@ $lang = array_merge($lang, array(
 	'REFERRALS_COUNT_EXPLAIN'		=> 'Specify how many referrals you wish to show in the Top referrals block.',
 	'NO_ITEMS_MARKED'				=> 'No items marked.',
 	'PLEASE_CONFIRM'				=> 'Please confirm.',
+	'NO_UPDATE_HTTP_REFERRALS'		=> 'Could not update referrals',
 ));
 
 ?>

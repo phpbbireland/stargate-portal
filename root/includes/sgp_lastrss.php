@@ -7,11 +7,11 @@
  *			(c) 2003-2004 original lastRSS by Vojtech Semecky http://lastrss.oslab.net/
  *
  *   Ported and rewritten for PhpBB3 and Stargate Portal by: NeXur
- *   begin					: March 2008
+ *   begin					: Mars 2008
  *   copyright				: (C) 2008 Martin Larsson - aka NeXur
  *   website				: http://www.phpbbireland.com
  *   email					: martinl@bredband.net
- *   last update			: 27 May 2010 Mike
+ *   last update			: 27 October 2008 
  *
  *   note: Do not remove this copyright. Just append yours if you have modified it.
  ************************************************************************************/
@@ -45,8 +45,6 @@ class lastRSS
 	var $itemtags = array('title', 'link', 'author', 'category', 'comments', 'enclosure', 'guid', 'pubDate', 'source');
 	var $imagetags = array('title', 'url', 'link', 'width', 'height');
 	var $textinputtags = array('title', 'description', 'name', 'link');	
-	var $cache_dir = '';
-	var $type = '';
 	// -------------------------------------------------------------------
 	// Parse RSS file and returns associative array.
 	// -------------------------------------------------------------------
@@ -56,9 +54,14 @@ class lastRSS
 	function curl_get_rss($url)
 	{
 		global $rss, $user;
+
 		// initiate and set options
-		$ch = isset(curl_init($url)) : curl_init($url) ? 0;
-		isset($ch)
+		if (isset($url))
+		{
+			$ch = curl_init($url);
+		}
+
+		if (isset($ch))
 		{
 			@curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
 			@curl_setopt( $ch, CURLOPT_FAILONERROR, 1);
@@ -72,28 +75,23 @@ class lastRSS
 			// setting this to higher means longer time for loading the page for user!
 			@curl_setopt( $ch, CURLOPT_TIMEOUT, 60);
 			@curl_setopt( $ch, CURLOPT_MAXREDIRS, 0);
-
 			// get content
 			$content = @curl_exec($ch);
 			$err = @curl_errno($ch);
 			$errmsg = @curl_error($ch);
 			$header = @curl_getinfo($ch);
-		}
-		else
-		{
-			$content = $err = $errmsg = $header = '';
-		}
 
-		if(isset(curl_errno($ch))
-		{
-			// error in getting content 
-			return $items = array();
+			if(curl_errno($ch))
+			{
+				// error in getting content 
+				return $items = array();
+			}
+			else
+			{
+				return $content;
+			}
+			@curl_close($ch);
 		}
-		else
-		{
-			return $content;
-		}
-		@curl_close($ch);
 	}
 	
 	function Get ($rss_url) 
@@ -102,6 +100,7 @@ class lastRSS
 		if ($this->cache_dir != '') 
 		{
 			$cache_file = $this->cache_dir . '/rsscache_' . md5($rss_url) . '.dat';
+			//chmod ($cache_file, 0666);
 			$timedif = @(time() - filemtime($cache_file));
 			if ($timedif < $this->cache_time) 
 			{
@@ -149,11 +148,11 @@ class lastRSS
 		// start regullar expression
 		preg_match($pattern, $subject, $out);
 		// if there is some result... process it and return it
-		if(isset($out[1])) 
+		if (isset($out[1])) 
 		{
 			// cdata
 			$out[1] = strtr($out[1], array('<![CDATA['=>'', ']]>'=>''));
-  			if((isset($this->rsscp))&&($this->rsscp != 'UTF-8'))
+  			if ((isset($this->rsscp))&&($this->rsscp != 'UTF-8'))
 			{
 				// recode with phpBB´s functions
 				$out[1] = utf8_recode($out[1],$this->rsscp);
@@ -165,7 +164,7 @@ class lastRSS
 		else 
 		{
 			// if there is NO result, return empty string
-			return '';
+			return('');
 		}
 	}
 	// -------------------------------------------------------------------
@@ -193,14 +192,14 @@ class lastRSS
 		
 		// open and load RSS file
 		// use curl if enabled 
-		if(function_exists('curl_init') && $rss->type == 'curl')
+		if (function_exists('curl_init') && $rss->type == 'curl')
 		{ 
 			$rss_content = $this->curl_get_rss($rss_url);
 		} 
 		else if (ini_get('allow_url_fopen') == '1' && $rss->type == 'fopen')
 		{ 
 			// else use fopen if possible
-			if($f = @fopen($rss_url, 'r')) 
+			if ($f = @fopen($rss_url, 'r')) 
 			{
 				$rss_content = '';
 				while (!feof($f)) 
@@ -212,7 +211,7 @@ class lastRSS
 		}
 
 		//if download was succesfull
-		if(isset($rss_content) && (sizeof($rss_content)>0))
+		if (isset($rss_content) && (sizeof($rss_content)>0))
 		{	
 			// parse document encoding
 			$result['encoding'] = $this->my_preg_match("'encoding=[\'\"](.*?)[\'\"]'si", $rss_content);
@@ -228,7 +227,8 @@ class lastRSS
 			}
 			// parse channel info
 			preg_match("'<channel.*?>(.*?)</channel>'si", $rss_content, $out_channel);
-			foreach($this->channeltags as $channeltag)
+
+			foreach ($this->channeltags as $channeltag)
 			{
 				$temp = @$this->my_preg_match("'<$channeltag.*?>(.*?)</$channeltag>'si", $out_channel[1]);
 				if (isset($temp))
@@ -236,6 +236,7 @@ class lastRSS
 					$result[$channeltag] = $temp; 
 				} 
 			}
+
 			// If date_format is specified and lastBuildDate is valid
 			if ($this->date_format != '' && ($timestamp = strtotime($result['lastBuildDate'])) !==-1)
 			{
@@ -250,7 +251,7 @@ class lastRSS
 			preg_match("'<textinput(|[^>]*[^/])>(.*?)</textinput>'si", $rss_content, $out_textinfo);
 			if (isset($out_textinfo[2])) 
 			{
-				foreach($this->textinputtags as $textinputtag) 
+				foreach ($this->textinputtags as $textinputtag) 
 				{
 					$temp = $this->my_preg_match("'<$textinputtag.*?>(.*?)</$textinputtag>'si", $out_textinfo[2]);
 					if (isset($temp)) 
@@ -263,7 +264,7 @@ class lastRSS
 			preg_match("'<image.*?>(.*?)</image>'si", $rss_content, $out_imageinfo);
 			if (isset($out_imageinfo[1])) 
 			{
-				foreach($this->imagetags as $imagetag) 
+				foreach ($this->imagetags as $imagetag) 
 				{
 					$temp = $this->my_preg_match("'<$imagetag.*?>(.*?)</$imagetag>'si", $out_imageinfo[1]);
 					if ($temp != '') 
@@ -276,7 +277,7 @@ class lastRSS
 			preg_match_all("'<item(| .*?)>(.*?)</item>'si", $rss_content, $items);
 
 			//Added to read entry if format changed Ref: http://www.phpbbireland.com/phpBB3/viewtopic.php?p=16993#p16993
-	         if(empty($items[2]))
+	         if (empty($items[2]))
 		     {
 			    preg_match_all("'<entry(| .*?)>(.*?)</entry>'si", $rss_content, $items);
 	         }
@@ -286,12 +287,12 @@ class lastRSS
 			// init item counter
 			$i = 0;
 			$result['items'] = array(); // create array even if there are no items
-			foreach($rss_items as $rss_item) 
+			foreach ($rss_items as $rss_item) 
 			{  
 				// If number of items is lower then limit: parse one item
 				if ($i < $this->items_limit || $this->items_limit == 0) 
 				{
-					foreach($this->itemtags as $itemtag) 
+					foreach ($this->itemtags as $itemtag) 
 					{
 						$temp = $this->my_preg_match("'<$itemtag.*?>(.*?)</$itemtag>'si", $rss_item);
 						if (isset($temp))
@@ -312,10 +313,10 @@ class lastRSS
 					}
 					
 					// If pubDate exists
-					if ( (isset($result['items'][$i]['pubDate']) && ($result['items'][$i]['pubDate'] != '') )) 
+					if ((isset($result['items'][$i]['pubDate']) && ($result['items'][$i]['pubDate'] != '') ))
           			{
 						// ... and is valid
-						if( (($timestamp = strtotime($result['items'][$i]['pubDate'])) !== -1) && (($timestamp = strtotime($result['items'][$i]['pubDate'])) === false) )
+						if ((($timestamp = strtotime($result['items'][$i]['pubDate'])) !== -1) && (($timestamp = strtotime($result['items'][$i]['pubDate'])) === false))
 						{
 							// convert pubDate to specified date format
 							$result['items'][$i]['pubDate'] = date($this->date_format, $timestamp);
@@ -334,7 +335,7 @@ class lastRSS
 				}
 			}
 			$result['items_count'] = $i;
-			return $result;
+			return ($result);
 		}
 		else 
 		{
@@ -343,7 +344,7 @@ class lastRSS
 			$result['description'] = $user->lang['RSS_ERROR'];
 			$result['title'] = '{L_RSS_ERROR}';
 			$result['items_count'] = '{L_RSS_ERROR}';
-			return $result;
+			return ($result);
 		}
 	}
 }

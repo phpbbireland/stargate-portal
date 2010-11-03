@@ -84,12 +84,12 @@ $versions = array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
 
-	// Version 1.0.5
+	// Version 1.0.6
 	'1.0.6' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
 
-	// Version 2.0.5
+	// Version 2.0.0
 	'2.0.0' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
@@ -97,8 +97,12 @@ $versions = array(
 	'3.0.0' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
-	// New version 3.1.1 MPV 3rd
-	'3.1.1'	=> array(
+	// Version 3.1.1
+	'3.1.1' => array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
+	// New version 3.1.2 (submission 2 fixes)
+	'3.1.2'	=> array(
 
 		'permission_add' => array(
 			array('a_k_portal', 1),

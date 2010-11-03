@@ -101,16 +101,21 @@ function set_ids(data, view)
 }
 </script>
 
+<!--
+	switches to display appropriate code
+	S_OPTIONS = add, edit, delete, manage
+	S_OPTIONS = ADD, EDIT, DELETE, MANAGE
+-->
+
+
 <a name="maincontent"></a>
-
 <h1>{L_TITLE}</h1>
-
 <p>{L_TITLE_EXPLAIN}</p>
 
 <form id="acp_blocks" name="acp_blocks" method="post" action="{U_ACTION}">
 
-<!-- IF S_OPTIONS  == "Manage" -->
-	<table cellspacing="1" cellspacing="0" border="0">
+<!-- IF S_OPTIONS  == 'MANAGE' || S_OPTIONS  == 'L' || S_OPTIONS  == 'R' || S_OPTIONS  == 'C' -->
+<table cellspacing="1" cellspacing="0" border="0">
 	<thead>
 		<tr><th colspan="13">{L_BLOCKS_HEADER_ADMIN}</th></tr>
 		<th>{L_BLOCK_ID}</th>
@@ -128,7 +133,7 @@ function set_ids(data, view)
 		<tr <!-- IF bdata.S_ID == ADM_BLOCK -->style="font-weight:bold;"<!-- ENDIF -->>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><div align="right">{bdata.S_ID}</div></td>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><div align="right">{bdata.S_NDX}</div></td>
-			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><!-- IF bdata.S_ACTIVE} == 1 -->Active<!-- ELSE -->Disabled<!-- ENDIF --></td>
+			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><!-- IF bdata.S_ACTIVE} == 1 -->{L_BLOCK_ACTIVE}<!-- ELSE -->{L_BLOCK_DISABLED}<!-- ENDIF --></td>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width="">{bdata.S_TITLE}</td>
 			<td class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->">
 				<!-- IF bdata.S_POSITION === "L" -->{L_PAGE_LEFT}<!-- ENDIF -->
@@ -142,29 +147,22 @@ function set_ids(data, view)
 			<td align="right" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><div align="center"><!-- IF bdata.S_VIEW_ALL -->{L_ALL_GROUPS}<!-- ELSE -->{bdata.S_VIEW_GROUPS}<!-- ENDIF --></div></td>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width="" colspan="5">
 				<div align="center">
-
 					<!-- IF bdata.S_FIRST_ROW or bdata.S_NDX == '1' -->
 						{ICON_MOVE_UP_DISABLED}
 						<a href="{U_DOWN}{bdata.S_ID}"><img src="images/icon_down.gif" title="{L_MOVE_DOWN}" border="0" alt="{L_BLOCK_DOWN}" /></a>
-
 					<!-- ELSEIF bdata.S_LAST_ROW or bdata.S_NDX == S_LBL and bdata.S_POSITION == 'L' || bdata.S_NDX == S_RBL and bdata.S_POSITION == 'R' || bdata.S_NDX == S_CBL and bdata.S_POSITION == 'C'  -->
 						{ICON_MOVE_DOWN_DISABLED}
 						<a href="{U_UP}{bdata.S_ID}"><img src="images/icon_up.gif" title="{L_MOVE_UP}" border="0" alt="{L_BLOCK_UP}" /></a>
-
 					<!-- ELSE -->
 						<a href="{U_UP}{bdata.S_ID}"><img src="images/icon_up.gif" title="{L_MOVE_UP}" border="0" alt="{L_BLOCK_UP}" /></a>
 						<a href="{U_DOWN}{bdata.S_ID}"><img src="images/icon_down.gif" title="{L_MOVE_DOWN}" border="0" alt="{L_BLOCK_DOWN}" /></a>
 					<!-- ENDIF -->
-
-
 					<a href="{U_EDIT2}{bdata.S_ID}"><img src="images/icon_edit.gif" title="{L_EDIT_BLOCK}" border="0" alt="{L_EDIT}" /></a>
-
 					<!-- IF bdata.S_FNAME_H != 'block_welcome_message.html' -->
 					<a href="{U_DELETE}{bdata.S_ID}"><img src="images/icon_delete.gif" title="{L_DELETE_THIS_BLOCK}" border="0" alt="{L_DELETE}" /></a>
 					<!-- ELSE -->
 					{ICON_DELETE_DISABLED}
 					<!-- ENDIF -->
-
 					<!-- IF bdata.S_HAS_VARS -->
 						<!-- IF bdata.S_FNAME_H == "block_welcome.html" -->
 						<a href="{U_SET_VARS_W}{bdata.S_ID}"><img src="images/vars_edit.gif" title="{L_SET_VARIABLES_IN_MINI-MODULES}" border="0" alt="{L_VARS_HAS_EDIT}" /></a>
@@ -172,15 +170,13 @@ function set_ids(data, view)
 						<a href="{U_SET_VARS}{bdata.S_ID}"><img src="images/vars_edit.gif" title="{L_VARS_HAS_EDIT}" border="0" alt="" /></a>
 						<!-- ENDIF -->
 					<!-- ELSE -->
-					<img src="images/vars_no_edit.gif" title="Block has no variables" title="{L_VARS_NO_EDIT}" border="0" alt="" />
+					<img src="images/vars_no_edit.gif" title="{L_VARS_NO_EDIT}" border="0" alt="" />
 					<!-- ENDIF -->
-
 					<!-- IF bdata.S_MINIMOD_BASED -->
 						<a href="{U_LINK_MINIMOD}{bdata.S_MOD_BLOCK_ID}"><img src="images/minimod_edit.gif" title="{L_MINIMOD_DETAILS_SHOW}" border="0" alt="" /></a>
 					<!-- ELSE -->
 					<img src="images/minimod_no_edit.gif" title="{L_MINIMOD_DETAILS_NO_EDIT}" border="0" alt="" />
 					<!-- ENDIF -->
-
 				</div>
 			</td>
 		</tr>
@@ -190,7 +186,7 @@ function set_ids(data, view)
 <br />
 <!-- ENDIF -->
 
-<!-- IF S_OPTIONS == "Edit" -->
+<!-- IF S_OPTIONS == 'EDIT'-->
 <fieldset>
 	<legend>{L_BLOCKS_HEADER_ADMIN}</legend>
 	<input type="hidden" name="id" value="{S_ID}" />
@@ -384,7 +380,7 @@ function set_ids(data, view)
 <!-- ENDIF -->
 
 
-<!-- IF S_OPTIONS == "Add" -->
+<!-- IF S_OPTIONS == 'ADD' -->
 <fieldset>
 	<legend>{L_BLOCKS_ADD_HEADER}</legend>
 <!--
@@ -574,16 +570,16 @@ function set_ids(data, view)
 </fieldset>
 <!-- ENDIF -->
 
-<!-- IF S_OPTIONS  == "Tools" -->
-	<b><a href="{U_BACK}">Tools moved to independant Porgram. Contact Site Admin for details.<br /></a></b>
-	<b>Tools include: Block Builder, Style and CSS Builder.<br /></a></b>
+<!-- IF S_OPTIONS  == 'TOOLS' -->
+	<b><a href="{U_BACK}">{L_TOOLS_1}.<br /></a></b>
+	<b>{L_TOOLS_2}.<br /></a></b>
 	<tr><td>&nbsp;<br /></td></tr>
 <!-- ENDIF -->
 
-<!-- IF L_BLOCK_REPORT -->
-	<b>{L_BLOCK_REPORT}<br /></b>
+<!-- IF BLOCK_REPORT -->
+	<b>{BLOCK_REPORT}</b><br />
 <!-- ELSE -->
-	<!-- IF S_OPTIONS != "Delete" && S_OPTIONS != 'Manage' && S_OPTIONS != "Save" -->
+	<!-- IF S_OPTIONS != 'MANAGE' -->
 	<fieldset class="submit-buttons">
 		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
 		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
@@ -591,14 +587,13 @@ function set_ids(data, view)
 	<!-- ENDIF -->
 <!-- ENDIF -->
 
-<!-- 05 June 2010 -->
-<!-- IF S_OPTIONS != 'Edit' -->
-	<!-- IF S_OPTIONS == 'Manage' and S_TYPE != ''  -->
+<!-- IF S_OPTIONS != 'EDIT' -->
+	<!-- IF S_OPTIONS == 'MANAGE' and S_TYPE != ''  -->
 	<p class="quick" style="text-align:center;">
 		<input class="button2" name="add_block" type="submit" value="{L_BLOCKS_ADD_HEADER}" />
 		<input type="hidden" name="mode" value="add" />
 	</p>
-	<!-- ELSEIF S_OPTIONS == 'Manage' -->
+	<!-- ELSEIF S_OPTIONS == 'MANAGE' -->
 	<p class="quick" style="text-align:center;">
 		<input class="button2" name="reindex" type="submit" value="{L_BLOCKS_REINDEX}" />
 		<input type="hidden" name="mode" value="reindex" />

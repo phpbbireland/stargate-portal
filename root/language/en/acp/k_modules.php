@@ -28,7 +28,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	
 	'TITLE' => 'Additional Data',
-	'TITLE_EXPLAIN' => '<b>Mini-Mods Manager:</b><br />These are small mods used to display and manage additional information, a good example being the Welcome Message. Default mini-mods include, Block, Mods and Styles...',
+	'TITLE_EXPLAIN' => '<b>Mini-Mods Manager:</b><br />These are small mods used to display and manage additional information, a good example being the Welcome Message minimod. Default mini-mods include, Block, Mods and Styles...',
 
 
 	'AUTHOR'						=> 'Author',
@@ -83,15 +83,15 @@ $lang = array_merge($lang, array(
 	'MOD_HEADER_ADMIN'				=> 'Manage Portal Mini Mods ',
 	'MOD_NAME'						=> 'Mod Name',
 	'MOD_ORIGIN'					=> 'Origin',
-	'MOD_ORIGIN_EXPLAIN'			=> 'The module was designed by our members.',
+	'MOD_ORIGIN_EXPLAIN'			=> 'SGP team/members minimod/style/block?',
 	'MOD_TYPE'						=> 'Mod Type',
 	'MOD_INFO'						=> 'Mod Details',
 	'MUST_SELECT_VALID_MODULE_DATA' => 'Invalid K_Module ID.',	
 	'NAME_EXPLAIN'					=> 'The mini module name.',	
 	'UNIQUE'						=> 'Unique',
 	'SELECT_EDIT_TO_VIEW'			=> '<span style="font-style:italic">Select edit to view this code...</span>',
-	'STATUS'						=>	'Status (% complete)',
-	'STATUS_EXPLAIN'				=>	'Percentage complete... 1 - 100',
+	'STATUS'						=> 'Status (% complete)',
+	'STATUS_EXPLAIN'				=> 'Enter 1 to 100, or 0 to disable processing for this mod.',
 	'TYPE'							=> 'Mini Mod Type',
 	'TYPE_EXPLAIN'					=> 'block/mod/style (you can add you own types too).',
 	'WELCOME_MESSAGE_EDITOR'		=> 'Welcome message editor',
@@ -104,6 +104,13 @@ $lang = array_merge($lang, array(
 	'MOD_VERSION'					=> 'Version',
 	'MOD_VERSION_EXPLAIN'			=> 'The revision number of the mod/mini-mod',
 	'EDIT_WELCOME_MESSAGE'			=> 'Edit Welcome Message',
+	'MODULE_BLOCK_DELETED'			=> 'Module block deleted',
+
+	
+	'MODULES_BLOCK_ADDED'			=> 'Modules block added',
+	'DO_NOT_CHANGE'					=> '<br />Default type, not eidtable',
+	'CANT_DELETE'					=> 'You can\'t delete the welcome message',
+	'WELCOME'						=> 'welcome',
 ));
 
 ?>

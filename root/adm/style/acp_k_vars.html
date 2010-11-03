@@ -3,7 +3,7 @@
 
 <form id="acp_k_vars" method="post" action="{U_ACTION}">
 
-<!-- IF S_OPT  == "Configure" -->
+<!-- IF S_OPT  == config -->
 <h1>{L_VARS_FOUND}: {S_SWITCH}</h1>
 <p>{L_TITLE_EXPLAIN_BLOCK}</p>
 
@@ -142,6 +142,12 @@
 		<dt><label for="block_cache_time">{L_BLOCK_CACHE_TIME}:</label><br /><span>{L_BLOCK_CACHE_TIME_EXPLAIN}</span></dt>
 		<dd>
 			<label><input class="post" size="5" maxlength="10" id="block_cache_time" name="block_cache_time" value="{S_BLOCK_CACHE_TIME}" type="text" /></label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="block_ecent_cache_time">{L_BLOCK_RECENT_CACHE_TIME}:</label><br /><span>{L_BLOCK_RECENT_CACHE_TIME_EXPLAIN}</span></dt>
+		<dd>
+			<label><input class="post" size="5" maxlength="10" id="block_recent_cache_time" name="block_recent_cache_time" value="{S_BLOCK_RECENT_CACHE_TIME}" type="text" /></label>
 		</dd>
 	</dl>
 </fieldset>

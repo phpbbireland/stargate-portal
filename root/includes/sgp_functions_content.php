@@ -5,7 +5,7 @@
 * @version $Id: sgp_functions_content.php 336 2009-01-23 02:06:37Z Michealo $
 * @copyright (c) Michael O'Toole 2005 phpBBireland
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* Last updated: 10 November 2008 by Michaelo
+* Last updated: 28 October 2010 Mike
 * Do not remove copyright from any file.
 */
 
@@ -117,7 +117,7 @@ if (!function_exists('sgp_local_acronyms'))
 	function sgp_local_acronyms($message)
 	{
 		global $user;
-		$message = str_replace("[you!]", '<span title="This means you!" style="font-style:italic; border-bottom:1px #BD5121 dashed ; cursor: help; color:#' . $user->data['user_colour'] . ';">' . $user->data['username'] . '</span>', $message);
+		$message = str_replace("[you!]", '<span title="{L_THIS_MEANS_YOU}" style="font-style:italic; border-bottom:1px #BD5121 dashed ; cursor: help; color:#' . $user->data['user_colour'] . ';">' . $user->data['username'] . '</span>', $message);
 		$message = str_replace("[day-time]", $user->format_date(time()), $message);
 		$message = str_replace("[date-now]", date( "d-m-Y", time() ), $message);
 		return($message);
@@ -139,7 +139,6 @@ if (!function_exists('phpbb_preg_quote'))
 		return $text;
 	}
 }
-
 
 
 /**
@@ -245,6 +244,12 @@ if (!function_exists('correct_truncate_length'))
 					while($txt[$i] != '[')
 					{
 						$i--;
+
+						// belt and braces //
+						if($i == 1)
+						{
+							break;
+						}
 					}
 
 					$tag_start[$ts++] = $i;
@@ -252,20 +257,18 @@ if (!function_exists('correct_truncate_length'))
 
 					while($txt[$i] != ']')
 					{
-								if($txt[$i] == '=')
-								{
-									while($txt[$i] != ':')
-									{
-										$i++;
-									}
-								}
-
+						if($txt[$i] == '=')
+						{
+							while($txt[$i] != ':')
+							{
+								$i++;
+							}
+						}
 						$opening_tag_string .= $txt[$i++];
 					}
 					$opening_tag_string .= $txt[$i++];
 
 					$tag_data[$td] = $opening_tag_string;
-					//echo '<br />OT = ' . $tag_data[$td] . '<br />';
 					$td++;
 
 					while($i < $len)
@@ -289,15 +292,16 @@ if (!function_exists('correct_truncate_length'))
 							// grab closing tag
 							while($txt[$i] != ']')
 							{
-								if($txt[$i] == '/') 
+								if($txt[$i] == '/')
+								{
 									$i++;
+								}
 								$closing_tag_string .= $txt[$i++];
 							}
 							$closing_tag_string .= $txt[$i++];
 
 							if(strpos($tag_data[$ts-1], $closing_tag_string) !== false)
 							{
-								//echo '<br />SAME : Opening Tags =  (' . $tag_data[$td-1] . ') Closing Tags  = (' . $closing_tag_string . ') (' . $td. ')<br />';
 								break;
 							}
 						}

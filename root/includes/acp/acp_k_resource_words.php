@@ -75,28 +75,23 @@ class acp_k_resource_words
 				if (isset($k_config[$new_word]))
 				{
 					$value = (isset($k_config[$new_word])) ? $k_config[$new_word] : '';
-					$table = 'k_config';
+					$table = $user->lang['K_CONFIG'];
 				}
 				else if (isset($config[$new_word]))
 				{
 					$value = (isset($config[$new_word])) ? $config[$new_word] : '';
-					$table = 'config';
+					$table = $user->lang['CONFIG'];
 				}
 				else
 				{
-					$table = 'Unknown';
+					$table = $user->lang['UNKNOWN'];
 					$process = false;
-					$template->assign_vars( array(
-						'L_PROCESS_REPORT'	=> sprintf($user->lang['VAR_NOT_FOUND'], $new_word),
-					));
+					$template->assign_var('L_PROCESS_REPORT', sprintf($user->lang['VAR_NOT_FOUND'], $new_word));
 				}
 
 				if($process)
 				{
-
-					$template->assign_vars( array(
-						'L_PROCESS_REPORT'	=> sprintf($user->lang['VAR_ADDED'], $new_word),
-					));
+					$template->assign_var('L_PROCESS_REPORT', sprintf($user->lang['VAR_ADDED'], $new_word));
 
 					$start .= strtoupper($new_word) . $end;
 
@@ -115,7 +110,7 @@ class acp_k_resource_words
 			case 'delete':
 				for ($i = 0; $i < count($id_list); $i++)
 				{
-					$sql = 'DELETE FROM '. K_RESOURCE_TABLE ." WHERE id = " . $id_list[$i];
+					$sql = 'DELETE FROM '. K_RESOURCE_TABLE ." WHERE id = " . (int)$id_list[$i];
 					if (!$result = $db->sql_query($sql))
 					{
 						trigger_error($user->lang['ERROR_PORTAL_WORDS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
@@ -124,9 +119,7 @@ class acp_k_resource_words
 			break;
 
 			default:
-				$template->assign_vars( array(
-					'L_PROCESS_REPORT'	=> '',
-				));
+				$template->assign_var('L_PROCESS_REPORT', sprintf($user->lang['PROCESS_REPORT'], '...'));
 			break;
 		}
 
@@ -150,16 +143,16 @@ class acp_k_resource_words
 			if (isset($k_config[$name]))
 			{
 				$value = (isset($k_config[$name])) ? $k_config[$name] : '';
-				$table = 'k_config';
+				$table = $user->lang['K_CONFIG'];
 			}
 			else if (isset($config[$name]))
 			{
 				$value = (isset($config[$name])) ? $config[$name] : '';
-				$table = 'config';
+				$table = $user->lang['CONFIG'];
 			}
 			else
 			{
-				$table = 'Unknown';
+				$table = $user->lang['NA'];
 			}
 
 			$template->assign_block_vars('wordrow', array(

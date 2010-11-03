@@ -19,15 +19,10 @@
 * @ignore
 */
 
-//define('IN_PHPBB', true);
-
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
-
-//$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
-
 global $k_config, $phpbb_root_path;
 
 $queries = $cached_queries = 0;

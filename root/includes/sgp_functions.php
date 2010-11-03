@@ -11,7 +11,7 @@
 
 /* 
 * A couple of functions rescued from functions.php
-* Part of the Acronym code @based on the original Acronym © 2005 CodeMonkeyX
+* Part of the Acronym code based on the original Acronym copyright 2005 CodeMonkeyX
 * @copyright (c) 2007 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
@@ -1044,7 +1044,7 @@ if(!function_exists('sgp_get_group_name'))
 
 		if (!$row || ($row['group_type'] == GROUP_SPECIAL && empty($user->lang)))
 		{
-			return '';
+			return('');
 		}
 
 		return ($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name'];

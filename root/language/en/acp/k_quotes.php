@@ -41,7 +41,8 @@ $lang = array_merge($lang, array(
 	'ADD_QUOTE'				=> 'Add Quote',
 	'MEANING'				=> 'Enter the full meaning',
 	'QUOTE_EDIT_EXPLAIN'	=> 'The quotes:',
-	'QUOTE_UPDATED'			=> 'Quotes Updated...',
+	'QUOTE_UPDATED'			=> 'Quotes updated...',
+	'QUOTE_REMOVED'			=> 'Quote removed...',
 	'SWITCHING'				=> 'Switching to SGP var config',
 
 ));

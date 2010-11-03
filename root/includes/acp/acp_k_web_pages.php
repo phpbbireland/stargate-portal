@@ -43,15 +43,11 @@ class acp_k_web_pages
 				
 		$action = request_var('action', '');
 		$mode	= request_var('mode', '');
-
-		$id = request_var('module', '');
+		$id = request_var('module', 0);
 
 		$submit = (isset($_POST['submit'])) ? true : false;
 		$add	= (isset($_POST['add'])) ? true : false;
 		
-		$forum_id	= request_var('f', 0);		
-		$forum_data = $errors = array();
-
 		if ($submit && !check_form_key($form_key))
 		{
 			$submit = false;
@@ -77,33 +73,33 @@ class acp_k_web_pages
 		{
 			case 'H':
 					$template->assign_vars(array(
-						'S_OPTION'		=> 'add',
-						'S_SELECT'		=> 'head',
-						'S_PAGE_TYPE'	=> 'H',
+						'S_OPTION'			=> 'add',
+						'S_SELECT'			=> 'head',
+						'S_PAGE_TYPE'		=> 'H',
 						'S_LAST_UPDATED'	=> $last_updated
 					));
 			break;
 			case 'B':
 					$template->assign_vars(array(
-						'S_OPTION'	=> 'add',
-						'S_SELECT'	=> 'body',
-						'S_PAGE_TYPE'	=> 'B',
+						'S_OPTION'			=> 'add',
+						'S_SELECT'			=> 'body',
+						'S_PAGE_TYPE'		=> 'B',
 						'S_LAST_UPDATED'	=> $last_updated
 				));
 			break;
 			case 'F':
 					$template->assign_vars(array(
-						'S_OPTION'	=> 'add',
-						'S_SELECT'	=> 'foot',
-						'S_PAGE_TYPE'	=> 'F',
+						'S_OPTION'			=> 'add',
+						'S_SELECT'			=> 'foot',
+						'S_PAGE_TYPE'		=> 'F',
 						'S_LAST_UPDATED'	=> $last_updated
 					));
 			break;
 			case 'P':
 					$template->assign_vars(array(
-						'S_OPTION'	=> 'add',
-						'S_SELECT'	=> 'foot',
-						'S_PAGE_TYPE'	=> 'P',
+						'S_OPTION'			=> 'add',
+						'S_SELECT'			=> 'foot',
+						'S_PAGE_TYPE'		=> 'P',
 						'S_LAST_UPDATED'	=> $last_updated
 					));
 			break;
@@ -121,6 +117,7 @@ class acp_k_web_pages
 					(int)$id		= request_var('id', '');
 					$active			= request_var('active', '');
 					$page_name		= utf8_normalize_nfc(request_var('page_name', '', true));
+//					$page_folder	= utf8_normalize_nfc(request_var('page_folder', '', true));
 					$page_title		= utf8_normalize_nfc(request_var('page_title', '', true));
 					$page_desc		= utf8_normalize_nfc(request_var('page_desc', '', true));
 					$page_meta		= utf8_normalize_nfc(request_var('page_meta', '', true));
@@ -147,7 +144,7 @@ class acp_k_web_pages
 
 					//$body = process_for_vars($body, true);
 
-					$message = 'Saving data... Please wait...';
+					$message = $user->lang['SAVING_DATA'];
 				
 					//if ($page_name == '') return;
 
@@ -158,27 +155,28 @@ class acp_k_web_pages
 
 					$sql = "UPDATE " . K_WEB_PAGES_TABLE . " 
 						SET
-							active			= '" . $active . "',
-							page_type		= '" . $page_type . "',
+							active			= '" . (int)$active . "',
+							page_type		= '" . $db->sql_escape($page_type) . "',
 							page_name		= '" . $db->sql_escape($page_name) . "',
 							page_title		= '" . $db->sql_escape($page_title) . "',
 							page_desc		= '" . $db->sql_escape($page_desc) . "',
 							page_meta		= '" . $db->sql_escape($page_meta) . "',
 							page_extn		= '" . $db->sql_escape($page_extn) . "',
 							external_file	= '" . $db->sql_escape($external_file) . "',
-							head			= '" . $head . "',
-							foot			= '" . $foot . "',
+							head			= '" . (int)$head . "',
+							foot			= '" . (int)$foot . "',
 							body			= '" . $db->sql_escape($body) . "',
 							last_updated	= '" . $db->sql_escape($last_updated) . "'
-						WHERE id = $id LIMIT 1";
-					
+						WHERE id = " . (int)$id . " LIMIT 1";
+
+				
 					if (!$result = $db->sql_query($sql))
 					{
 						trigger_error($user->lang['ERROR_PORTAL_WEB_TABLE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 					}
 					
 					$template->assign_vars(array(
-						'S_OPTION'	=> 'saved',
+						'S_OPTION'	=> $user->lang['SAVED'],
 						'MESSAGE'	=> $message,
 						'U_BACK'	=> $this->u_action,
 					));
@@ -190,14 +188,16 @@ class acp_k_web_pages
 				}
 				else
 				{
-					$sql = "SELECT * FROM " . K_WEB_PAGES_TABLE . " WHERE id =  '" . $id . "'";
+					$sql = "SELECT * FROM " . K_WEB_PAGES_TABLE . " WHERE id =  '" . (int)$id . "'";
+
 					if (!$result = $db->sql_query($sql)) 
 					{
 						trigger_error($user->lang['ERROR_PORTAL_WEB_TABLE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 					}
 
 					$row = $db->sql_fetchrow($result);
-					
+
+//					$page_folder	= $row['page_folder'];					
 					$mid			= $row['id'];
 					$active			= $row['active'];
 					$page_name		= $row['page_name'];
@@ -222,6 +222,7 @@ class acp_k_web_pages
 					//$body = process_for_vars($body, false);
 
 					$template->assign_block_vars('edit', array(
+//						'S_PAGE_FOLDER'		=> $page_folder,
 						'S_ID'				=> $mid,
 						'S_ACTIVE'			=> $active,
 						'S_PAGE_NAME'		=> $page_name,
@@ -234,11 +235,12 @@ class acp_k_web_pages
 						'S_HEAD'			=> $head,
 						'S_BODY'			=> $body,
 						'S_FOOT'			=> $foot,
-						'S_LAST_UPDATED'	=> $last_updated
+						'S_LAST_UPDATED'	=> $last_updated,
 					));
 
 					$template->assign_vars(array(
-						'S_OPTION'		=> 'edit',
+						'S_OPTION'	=> 'edit',
+						'L_TITLE_EXPLAIN_MORE'	=> sprintf($user->lang['TITLE_EXPLAIN_MORE'], $user->lang['PAGE_NAME']),
 					));
 
 					get_headers_and_footers($head, $foot);
@@ -251,17 +253,22 @@ class acp_k_web_pages
 
 				if ($submit)
 				{
-					$active			= request_var('active', '');
+					//$page_folder	= utf8_normalize_nfc(request_var('page_folder', '', true));
+
+					$active			= request_var('active', 0);
 					$page_name		= utf8_normalize_nfc(request_var('page_name', '', true));
 					$page_title		= utf8_normalize_nfc(request_var('page_title', '', true));
 					$page_desc		= utf8_normalize_nfc(request_var('page_desc', '', true));
 					$page_meta		= utf8_normalize_nfc(request_var('page_meta', '', true));
 					$page_extn		= utf8_normalize_nfc(request_var('page_extn', '', true));
 					$external_file	= utf8_normalize_nfc(request_var('external_file', '', true));
-					$page_type		= request_var('page_type', '');
-					$head			= utf8_normalize_nfc(request_var('head', '', true));
 					$body			= utf8_normalize_nfc(request_var('body', '', true));
-					$foot			= utf8_normalize_nfc(request_var('foot', '', true));
+
+					$page_type		= request_var('page_type', '');
+
+					$head			= request_var('head', 0);
+					$foot			= request_var('foot', 0);
+
 					$last_updated	= utf8_normalize_nfc(request_var('last_updated', '', true));
 
 					if($page_extn == '')
@@ -280,15 +287,32 @@ class acp_k_web_pages
 
 					if ($page_name == '')
 					{
+						//echo $page_title; echo $page_name;
 						return;
 					}
 
-					$sql = "INSERT INTO " . K_WEB_PAGES_TABLE . " (active, page_name, page_title, page_desc, page_meta, page_extn, page_type, body, head, foot, last_updated, external_file) VALUES ('$active', '$page_name', '$page_title', '$page_desc', '$page_meta', '$page_extn', '$page_type', '$body', '$head', '$foot', '$last_updated', '$external_file')";
+					$sql_ary = array(
+						'active'		=> (int)$active,
+						'page_type'		=> (string)$page_type,
+						'page_name'		=> (string)$page_name,
+						'page_title'	=> (string)$page_title,
+						'page_desc'		=> (string)$page_desc,
+						'page_meta'		=> (string)$page_meta,
+						'page_extn'		=> (int)$page_extn,
+						'external_file'	=> (string)$external_file,
+						'head'			=> (int)$head,
+						'foot'			=> (int)$foot,
+						'body'			=> (int)$body,
+						'last_updated'	=> (string)$last_updated,
+					);
+					$db->sql_query('INSERT INTO ' . K_WEB_PAGES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary));
+
 					$result = $db->sql_query($sql);
 					
 					$template->assign_vars(array(
-						'S_OPTION' => 'new',
-						'MESSAGE' => 'Page added',
+						'S_OPTION' => 'new', // not lang var
+						'MESSAGE' => $user->lang['ADDED'],
+						'L_TITLE_EXPLAIN_MORE'	=> sprintf($user->lang['TITLE_EXPLAIN_MORE'], $user->lang['PAGE_NAME']),
 					));
 
 					unset($submit);
@@ -297,9 +321,7 @@ class acp_k_web_pages
 				}
 				else
 				{
-					$template->assign_vars(array(
-						'S_OPTION'			=> 'add',
-					));
+					$template->assign_var('S_OPTION', 'add');
 				}
 
 			break;
@@ -314,12 +336,14 @@ class acp_k_web_pages
 				if (confirm_box(true))
 				{
 					$sql = 'DELETE FROM ' . K_WEB_PAGES_TABLE . "
-						WHERE id = $id";
+						WHERE id = " . (int)$id;
+
 					$db->sql_query($sql);
 
 					$template->assign_vars(array(
 						'S_OPTION'	=> 'delete',
-						'MESSAGE'	=> 'Module Block Deleted!</font><br />',
+						'MESSAGE'	=> $user->lang['BLOCK_DELETED'] . ' </font><br />',
+						'L_TITLE_EXPLAIN_MORE'	=> sprintf($user->lang['TITLE_EXPLAIN_MORE'], $user->lang['PAGE_NAME']),
 					));
 
 					$cache->destroy('sql', K_WEB_PAGES_TABLE);
@@ -374,6 +398,7 @@ class acp_k_web_pages
 					$mid			= $row['id'];
 					$active			= $row['active'];
 					$page_name		= $row['page_name'];
+//					$page_folder	= $row['page_folder'];
 					$page_title		= $row['page_title'];
 					$page_desc		= $row['page_desc'];
 					$page_meta		= $row['page_meta'];
@@ -395,6 +420,8 @@ class acp_k_web_pages
 					//$body = process_for_vars($body, false);
 
 					$template->assign_block_vars('all', array(
+//						'S_PAGE_FOLDER'		=> $page_folder,
+
 						'S_ID'				=> $mid,
 						'S_ACTIVE'			=> $active,
 						'S_PAGE_NAME'		=> $page_name,
@@ -414,15 +441,14 @@ class acp_k_web_pages
 				}
 
 				$template->assign_vars(array(
-					'S_OPTION' => 'all',
+					'S_OPTION'		=> 'all',
 					'S_PAGE_TYPE'	=> $mode,
+					'L_TITLE_EXPLAIN_MORE'	=> sprintf($user->lang['TITLE_EXPLAIN_MORE'], $user->lang['PAGE_NAME']),
 				));
 
 				$db->sql_freeresult($result);
 
-				$template->assign_vars(array(
-					'SEARCH_MESSAGE' => '<strong>Found:</strong> ' . $found . $user->lang['PAGES'],
-				));
+				$template->assign_var('SEARCH_MESSAGE', $user->lang['FOUND'] . $found . $user->lang['PAGES']);
 
 				break;
 			}
@@ -433,13 +459,13 @@ class acp_k_web_pages
 }
 
 
-include_once($phpbb_root_path . 'includes/sgp_functions.'. $phpEx);
+//include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx);
 
 /***
 * function takes the id of the header and footer for a given portal page (body)... It generated a list of each type with the correct item selected...
 * this method must be used as the resulting code is inside a BEGIN loop... you may be able to nest BEGIN/END loops but I'm not sure...
 */
-function get_headers_and_footers($i, $j)
+function get_headers_and_footers($hd, $ft)
 {
 	global $db, $template;
 
@@ -452,14 +478,14 @@ function get_headers_and_footers($i, $j)
 
 	while ($row = $db->sql_fetchrow($result))
 	{
-		$selectedh = ($row['id'] == $i) ? " selected=\"selected\"" : "";
-		$selectedf = ($row['id'] == $j) ? " selected=\"selected\"" : "";
+		$selectedh = ($row['id'] == $hd) ? " selected=\"selected\"" : "";
+		$selectedf = ($row['id'] == $ft) ? " selected=\"selected\"" : "";
 
 		if ($row['page_type'] == 'H')
 		{
 			$headopt .= "<option value=\"" . $row['id'] . "\"" . $selectedh . "> " . $row['page_desc'] . "</option>";
 		}
-		else
+		else if ($row['page_type'] == 'F')
 		{
 			$footopt .= "<option value=\"" . $row['id'] . "\"" . $selectedf . "> " . $row['page_desc'] . "</option>";
 		}

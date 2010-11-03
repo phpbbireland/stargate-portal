@@ -42,7 +42,7 @@ function ShowDiv (div_id)
 <a name="maincontent"></a>
 
 <h1>{L_TITLE}</h1>
-<p>{L_TITLE_EXPLAIN}</p>
+<p>{L_TITLE_EXPLAIN}{L_TITLE_EXPLAIN_MORE}</p>
 
 <form name="acp_k_modules" id="acp_k_modules" method="post" action="{U_ACTION}"><input type="hidden" name="module" value="{S_ID}" />
 
@@ -61,30 +61,13 @@ function ShowDiv (div_id)
 		<label><input type="radio" class="radio" id="active" name="active" value="0"<!-- IF not edit.S_ACTIVE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 		</dd>
 	</dl>
-
-	<!--  just hide this for now...
 	<dl>
-		<dt><label for="page_type">{L_WEB_PAGE_TYPE}:</label><br /><span>{L_WEB_PAGE_TYPE_EXPLAIN}</span></dt>
-		<dd><br />
-		<label><input type="radio" class="radio" id="page_type" name="page_type" value="H"<!-- IF edit.S_PAGE_TYPE == 'H' --> checked="checked"<!-- ENDIF --><!-- IF not edit.S_PAGE_TYPE == 'H' -->checked="checked="<!-- ENDIF --> /> {L_HEAD}</label>
-		<label><input type="radio" class="radio" id="page_type" name="page_type" value="B"<!-- IF edit.S_PAGE_TYPE == 'B' --> checked="checked"<!-- ENDIF --><!-- IF not edit.S_PAGE_TYPE == 'B' -->checked="checked="<!-- ENDIF --> /> {L_BODY}</label>
-		<label><input type="radio" class="radio" id="page_type" name="page_type" value="F"<!-- IF edit.S_PAGE_TYPE == 'F' --> checked="checked"<!-- ENDIF --><!-- IF not edit.S_PAGE_TYPE == 'F' -->checked="checked="<!-- ENDIF --> /> {L_FOOT}</label>
-		<label><input type="radio" class="radio" id="page_type" name="page_type" value="P"<!-- IF edit.S_PAGE_TYPE == 'P' --> checked="checked"<!-- ENDIF --><!-- IF not edit.S_PAGE_TYPE == 'P' -->checked="checked="<!-- ENDIF --> /> {L_PORTAL_PAGE}</label>
-		</dd>
-	</dl>
-	-->
-
-	<!-- IF edit.S_PAGE_TYPE == 'B' || edit.S_PAGE_TYPE == 'P' -->
-	<dl>
-		<dt><label for="page_name">{L_WEB_PAGE_NAME}:</label><br /><span>{L_WEB_PAGE_NAME_EXPLAIN}</span></dt>
+		<dt><label for="page_name">*{L_WEB_PAGE_NAME}:</label><br /><span><!-- IF S_PAGE_TYPE == 'B' || S_PAGE_TYPE == 'P' -->{L_WEB_PAGE_NAME_EXPLAIN2}<!-- ELSE -->{L_WEB_PAGE_NAME_EXPLAIN1}</span><!-- ENDIF --></dt>
 		<dd><br /><input class="post" size="50" maxlength="99" name="page_name" value="{edit.S_PAGE_NAME}" type="text"></dd>
 	</dl>
-	<!--
-	<dl>
-		<dt><label for="page_folder">{L_WEB_PAGE_FOLDER}:</label><br /><span>{L_WEB_PAGE_FOLDER_EXPLAIN}</span></dt>
-		<dd><br /><input class="post" size="45" maxlength="50" name="page_folder" value="{edit.S_PAGE_FOLDER}" type="text"></dd>
-	</dl>
-	-->
+
+
+	<!-- IF edit.S_PAGE_TYPE == 'B' || edit.S_PAGE_TYPE == 'P' -->
 	<hr />
 	<dl>
 		<dt><label for="head">{L_WEB_PAGE_HEAD}:</label>{L_WEB_PAGE_HEAD_EXPLAIN}</dt>
@@ -176,6 +159,10 @@ function ShowDiv (div_id)
 	</dl>
 	<hr />
 	<dl>
+		<dt><label for="page_name">{L_WEB_PAGE_NAME}:</label><br /><span><!-- IF S_PAGE_TYPE == 'B' || S_PAGE_TYPE == 'P' -->{L_WEB_PAGE_NAME_EXPLAIN2}<!-- ELSE -->{L_WEB_PAGE_NAME_EXPLAIN1}</span><!-- ENDIF --></dt>
+		<dd><br /><input class="post" size="45" maxlength="50" name="page_name" value="{S_PAGE_NAME}" type="text"></dd>
+	</dl>
+	<dl>
 		<dt><label for="page_desc">{L_PAGE_DESC}:</label><br /><span>{L_PAGE_DESC_EXPLAIN}</span></dt>
 		<dd><br /><input class="post" size="50" maxlength="99" name="page_desc" value="{edit.S_PAGE_DESC}" type="text"></dd>
 	</dl>
@@ -186,10 +173,7 @@ function ShowDiv (div_id)
 	<hr />
 
 	<div style="display:<!-- IF not S_PAGE_TYPE == 'B' || not S_PAGE_TYPE == 'P' -->none<!-- ELSE -->block<!-- ENDIF -->" id="B">
-		<dl>
-			<dt><label for="page_name">{L_WEB_PAGE_NAME}:</label><br /><span>{L_WEB_PAGE_NAME_EXPLAIN}</span></dt>
-			<dd><br /><input class="post" size="45" maxlength="50" name="page_name" value="{S_PAGE_NAME}" type="text"></dd>
-		</dl>
+
 		<!--
 		<dl>
 			<dt><label for="page_folder">{L_WEB_PAGE_FOLDER}:</label><br /><span>{L_WEB_PAGE_FOLDER_EXPLAIN}</span></dt>
@@ -284,6 +268,8 @@ function ShowDiv (div_id)
 				<!-- ELSEIF all.S_PAGE_TYPE == 'B' -->{L_BODY}
 				<!-- ELSEIF all.S_PAGE_TYPE == 'F' -->{L_FOOTER}
 				<!-- ELSEIF all.S_PAGE_TYPE == 'P' -->{L_WRAPPER}
+				<!-- ELSE -->
+				{L_PAGE_TYPE_FILE}
 				<!-- ENDIF -->
 				</div>
 			</td>

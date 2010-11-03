@@ -61,7 +61,7 @@ if ($http_referrals)
 		{
 			$http_time = time();
 			
-			$sql = 'SELECT * FROM '.K_REFERRALS_TABLE."  WHERE host = '".$http_host."'";
+			$sql = 'SELECT * FROM '.K_REFERRALS_TABLE."  WHERE host = '" . $db->sql_escape($http_host) ."'";
 			$result = $db->sql_query($sql, $sgp_cache_time);
 
 			$row = $db->sql_fetchrow($result);

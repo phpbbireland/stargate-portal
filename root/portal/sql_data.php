@@ -790,7 +790,7 @@ $k_blocks_array[] = array(
 	'groups'		=> '0',
 	'scroll'		=> '0',
 	'block_height'	=> '0',
-	'has_vars'		=> '1',
+	'has_vars'		=> '0',
 	'minimod_based'	=> '0',
 	'mod_block_id'	=> '0',
 	'is_static'		=> '0',
@@ -850,7 +850,7 @@ $k_blocks_config_array[] = array(
 	'use_external_files'	=> '0',
 	'update_files'			=> '0',
 	'layout_default'		=> '2',
-	'portal_version'		=> '3.1.1',
+	'portal_version'		=> '3.1.2',
 	'portal_config'			=> 'Site',
 );
 
@@ -1211,8 +1211,19 @@ $k_blocks_config_vars_array[] = array(
 	'is_dynamic'	=> '0',
 );
 $k_blocks_config_vars_array[] = array(
+	'config_name'	=> 'sgp_recent_cache_time',
+	'config_value'	=> '60',
+	'is_dynamic'	=> '0',
+);
+$k_blocks_config_vars_array[] = array(
 	'config_name'	=> 'portal_build',
 	'config_value'	=> '307-309',
+	'is_dynamic'	=> '0',
+);
+
+$k_blocks_config_vars_array[] = array(
+	'config_name'	=> 'k_youtube_link',
+	'config_value'	=> 'http://www.youtube.com',
 	'is_dynamic'	=> '0',
 );
 

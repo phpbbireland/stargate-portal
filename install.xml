@@ -531,8 +531,70 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 	return '<img src="' . (str_replace(' ', '%20', $avatar_img)) . '" width="' . $avatar_width . '" height="' . $avatar_height . '" alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
 }
 
-/* Stargate functions ends */
 
+
+// UCF MOD
+function sgp_get_user_country_flag($user_or_poster_id)
+{
+	global $db;
+	
+	$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $user_or_poster_id";
+	
+	if($result = $db->sql_query($sql))
+	{
+		$row = $db->sql_fetchrow($result);
+		return("images/flags/". $row['user_country_flag']);	
+	}
+	// No result! so we return the a blank flag image
+	return("images/flags/--.gif");
+}
+
+function sgp_user_country_flag_select($passed)
+{
+	global $db, $flag_options, $user_id;
+	$flag = '';
+	$imglist = '';
+
+	if($passed != '' && !strpos($passed, '.'))
+	{
+		$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $passed";
+		
+		if( $result = $db->sql_query($sql) )
+		{
+			$flag = $db->sql_fetchrow($result);
+			$passed = $flag['user_country_flag'];
+		}
+	}	
+
+	$imgs = dir('images/flags');
+	
+	while ($file = $imgs->read()) 
+	{
+		if(stripos($file, ".gif") ||  stripos($file, ".png") ||  stripos($file, ".jpg"))
+			$imglist .= "$file ";
+	}
+	
+	closedir($imgs->handle);
+	
+	$imglist = explode(" ", $imglist);
+	sort($imglist);
+	
+	for ( $i=0; $i < sizeof($imglist); $i++ ) 
+	{	
+		if( $imglist[$i]!= "" ) 
+		{
+			$selected = ($imglist[$i] == $passed) ? ' selected="selected"' : '';
+			$flag_options .= '<option value="' . $imglist[$i] . '"' . $selected . '>' . $imglist[$i] . '</option>';
+		}
+	}
+	$flag_options .= '</select>';
+	
+	return $flag_options;
+}
+
+//UCF MOD
+
+/* Stargate functions ends */
 ]]></action>
 </edit>
 </open>
@@ -1367,7 +1429,7 @@ if (!function_exists('bbcode_strip'))
 
 			if (!file_exists($this->template->files[$handle]))
 			{
-				trigger_error ("template->_tpl_load_file() error:<br />File {$store} or <br />File {$missing_file} does not exist or is empty", E_USER_ERROR);
+				trigger_error ("template->_tpl_load_file()" . sprintf($user->lang['MISSING_FILES'], $store, $missing_file), E_USER_ERROR);
 			}
 			// End of mod //
 		}]]></action>
@@ -1439,7 +1501,39 @@ if (!function_exists('bbcode_strip'))
 <inline-find>'pm_unread',</inline-find>
 <inline-action type="after-add"> 'news_read', 'news_read_mine', 'news_read_locked', 'news_read_locked_mine', 'news_unread', 'news_unread_mine', 'news_unread_locked', 'news_unread_locked_mine',</inline-action>
 </inline-edit>
+</edit>
+<edit>
+<find><![CDATA[			$file_tpl = "{$phpbb_root_path}styles/{$template_row['template_path']}/template/$tpl_file.html";
+			$inherited = false;]]></find>
+<action type="after-add"><![CDATA[
+			// SGP MOD Redirect for common files starts //
+			if (STARGATE)
+			{
+				// Check to see if file exists in current template, if not process common files //
+				if (!file_exists($file_tpl))
+				{
+					// temp store //
+					$store = $file_tpl;
 
+					// replace template path with portal_common files path then check again //
+					$file_tpl = str_replace($template_row['template_path'], 'portal_common', $file_tpl);
+
+					if (file_exists($file_tpl))
+					{
+						$path = 'portal_common';
+
+						// we found the common file so alter $file_tpl //
+						$file_tpl = "{$phpbb_root_path}styles/{$path}/template/$tpl_file.html";
+					}
+					else
+					{
+						// no sign of it so put back original path //
+						$file_tpl = $store;
+					}
+				}
+			}
+			// SGP MOD Redirect for common files ends //
+]]></action>
 </edit>
 </open>
 
@@ -1447,7 +1541,8 @@ if (!function_exists('bbcode_strip'))
 <edit>
 <find><![CDATA[	'default_dateformat'	=> 'D M d, Y g:i a', // Mon Jan 01, 2007 1:37 pm
 ]]></find>
-<action type="after-add"><![CDATA[	// Portal Language Variables //
+<action type="after-add"><![CDATA[
+	// Portal Language Variables //
 	'PORTAL'						=> 'Portal',
 	'FORUM_PORTAL'					=> 'Portal',
 	'TO_DAY'						=> 'Date: %s',
@@ -1634,8 +1729,22 @@ if (!function_exists('bbcode_strip'))
 	'NO_BOT_DATA'					=> 'No bot data to display',
 	'BLOCK_CURRENTLY_DISABLED'		=> 'Block disabled!',
 
-	'SOMETHING_WENT_WRONG'			=> 'An error occurred, this should not happen... Please check code at line indicated',]]></action>
+	'SOMETHING_WENT_WRONG'			=> 'An error occurred, this should not happen... Please check code at line indicated',
+	'MISSING_FILES'					=> ' error:<br /><br />File %1$s or <br />File %2$s does not exist or is empty.',
 
+	'LINE'					=> 'line ',
+	'BEGIN'					=> 'BEGIN',
+	'END'					=> 'END',
+	'WEB_PAGE_EXAMPLES_1'	=> 'Web Pages Examples:',
+	'WEB_PAGE_EXAMPLES_2'	=> 'These pages are presented as example only, not all links are valid...<br />',
+	'THIS_MEANS_YOU'		=> 'This means you!',
+	'TIME_BEING'			=> 'Use refresh in ACP for time being...',
+	'MINI_SAMPLE_1'			=> 'This block was written using the MiniMod module... No database entries or sql queries were required. Only installed styles will be displayed here... The block is for stargatestyles only... Anyone wanting to use this code will have to ask Mitch.',
+	'CLICK TO ENLARGE'		=> 'Click to enlarge',
+	'PORTED_STYLES'			=> 'Ported Styles',
+	'UNDER_CONSTRUCTION'	=> 'Under construction...',
+	'NO_POLL'				=> 'No poll results to display',
+]]></action>
 </edit>
 </open>
 
@@ -1676,7 +1785,8 @@ if (!function_exists('bbcode_strip'))
 
 <edit>
 <find><![CDATA[?>]]></find>
-<action type="before-add"><![CDATA[// phpbbportal profile fields
+<action type="before-add"><![CDATA[
+// phpbbportal profile fields
 $lang = array_merge($lang, array(
 
 	'ACP_CAT_PORTAL'				=> 'Portal',
@@ -1782,7 +1892,7 @@ $lang = array_merge($lang, array(
 	'QUOTE_ADDED'				=> 'Quote added to databse',
 	'CONFIG_QUOTES'				=> 'Configure quotes',
 	'QUOTE_AUTHOR'				=> 'Author',
-	'QUOTES_SETTINGS'			=> 'Quote block settings... <b>Under construction!</b> <b>Under construction!</b> <b>Under construction!</b>',
+	'QUOTES_SETTINGS'			=> 'Quote block settings',
 	'LOAD_FROM_FILE'			=> 'Load quotes from the quote file?',
 	'FILE_TO_USE'				=> 'The name of the quote file to load',
 	'FILE_TO_USE_EXPLAIN'		=> 'The quote files should be located in root/store/ folder',
@@ -1875,7 +1985,35 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	'ACP_K_PAGES_MANAGE'	=> 'Manage phpBB pages',
 	'ADD_VARS'				=> 'Manage variables',
-));]]></action>
+));
+
+
+// phpBB common to sgp //
+$lang = array_merge($lang, array(
+	'ACTION_CANCELLED'		=> 'Action Cancelled',
+	'ADDED'					=> 'Data added...',
+	'ADDING_MODULES'		=> 'Adding modules...',
+	'BLOCK_ADDED'			=> 'Block added',
+	'BLOCK_DELETED'			=> 'Block deleted', 
+	'DATA_IS_BEING_SAVED'	=> 'Data is being saved...', 
+	'DELETED'				=> 'Deleted... ',
+	'DELEING'				=> 'Deleting... ', 
+	'FOUND'					=> '<strong>Found:</strong> ',
+	'FUTURE_DEVELOPMENT'	=> 'Planned for future development',
+	'MANAGE'				=> 'Manage',
+	'MENU_CREATED'			=> 'Menu created...',
+	'NONE'					=> 'none',
+	'NOT_ASSIGNED'			=> 'Not assigned',
+	'PROCESSING'			=> 'Processing...',
+	'SAVING_DATA'			=> 'Saving data please wait...',
+	'SAVED'					=> 'Data saved...',
+
+	'TOOLS'				=> 'Tools',
+	'TOOLS_1'			=> 'Tools moved to independant Porgram. Contact Site Admin for details',
+	'TOOLS_2'			=> 'Tools include: Block Builder, Style and CSS Builder',
+ 
+));
+]]></action>
 
 </edit>
 </open>

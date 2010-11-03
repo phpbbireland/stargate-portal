@@ -1,9 +1,30 @@
 <?php
-define('IN_PHPBB', true);
+/**
+*
+* @package Stargate Portal
+* @author  Michael O'Toole - aka Michaelo
+* @begin   Saturday, Jan 22, 2005
+* @copyright (c) 2005-2008 phpbbireland
+* @home    http://www.phpbbireland.com
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Stargate Portal copyright agreement...
+*
+* @version $Id: get_mp3_files.php 297 2009-14-30 20:44:30Z Mike $
+* Updated:
+*
+*/
+
+/**
+* @ignore
+*/
+
+/*
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
+*/
 
 $filter = ".mp3";
 $directory = "music";

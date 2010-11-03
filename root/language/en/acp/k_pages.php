@@ -36,10 +36,10 @@ $lang = array_merge($lang, array(
 	'ACP_K_PAGES_MANAGE'	=> 'Manage phpBB pages',
 
 	'PAGE_NAME'			=> 'phpBB pages already added',
-	'PAGE_NAME_EXPLAIN'	=> 'The name of the files we are allowed to use.',
+	'PAGE_NAME_EXPLAIN'	=> 'The names of files we are allowed to use.',
 
 	'PAGE_NEW_FILENAME'			=> 'Add this file to the list',
-	'PAGE_NEW_FILENAME_EXPLAIN'	=> 'Select a new file from the dropdown and hit Submit<br /><br />This list will only includes valid pages.',
+	'PAGE_NEW_FILENAME_EXPLAIN'	=> 'Select a new file from the dropdown and hit Submit...<br />This list will only includes valid pages.<br />Remember to update if you add new mods.',
 
 	'ADD_PAGE'				=> 'Add page',
 	'CONFIG_PAGES'			=> 'Config pages',
@@ -50,6 +50,8 @@ $lang = array_merge($lang, array(
 
 	'ERROR_PORTAL_PAGES'	=> 'Error! deleting this page from database list',
 	'MANAGE_PAGES'			=> 'Manage pages',
+	'ADDING_PAGES'			=> 'Adding phpBB Page...',
+	'REMOVING_PAGES'		=> 'Removing phpBB page...',
 ));
 
 ?>

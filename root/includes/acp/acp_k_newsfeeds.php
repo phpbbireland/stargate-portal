@@ -83,17 +83,18 @@ class acp_k_newsfeeds
 						
 			case 'savefeeds':
 
-				$config_feeds_cache_time = request_var('rss_feeds_cache_time','', true);
-				$config_feeds_items_limit = request_var('rss_feeds_items_limit','', true);
-				$config_feeds_random_limit = request_var('rss_feeds_random_limit','', true);
-				$config_feeds_type = request_var('rss_feeds_type','', true);
+				$config_feeds_cache_time = request_var('rss_feeds_cache_time', 0);
+				$config_feeds_items_limit = request_var('rss_feeds_items_limit', 0);
+				$config_feeds_random_limit = request_var('rss_feeds_random_limit', 0);
+				$config_feeds_type = request_var('rss_feeds_type','');
 
  				if ($action == 'savefeeds')
 				{
 					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $config_feeds_cache_time . ' WHERE config_name = "rss_feeds_cache_time"');
 					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $config_feeds_items_limit . ' WHERE config_name = "rss_feeds_items_limit"');
 					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $config_feeds_random_limit . ' WHERE config_name = "rss_feeds_random_limit"');
-					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = "' . $config_feeds_type . '" WHERE config_name = "rss_feeds_type"');
+					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = "' . $db->sql_escape($config_feeds_type) . '" WHERE config_name = "rss_feeds_type"');
+					
 					//clear cache - not working
 					@unlink( $phpbb_root_path . 'cache/rsscache_*.dat' );
 				
@@ -210,8 +211,8 @@ class acp_k_newsfeeds
 					'FEED_POSITION_2' 	=> (($feed_position['feed_position'] == '2') ? 'checked' : '' ),
 					'FEED_SHOW_1' 		=> (($feed_show['feed_show'] == '1') ? 'checked' : '' ),
 					'FEED_SHOW_2' 		=> (($feed_show['feed_show'] == '2') ? 'checked' : '' ),
-					'FEED_DESCRIPTION_SHOW_1' 	=> (($feed_description['feed_description'] == '1') ? 'checked' : '' ),
-					'FEED_DESCRIPTION_SHOW_2' 	=> (($feed_description['feed_description'] == '2') ? 'checked' : '' ),
+					'FEED_DESCRIPTION_SHOW_1' => (($feed_description['feed_description'] == '1') ? 'checked' : '' ),
+					'FEED_DESCRIPTION_SHOW_2' => (($feed_description['feed_description'] == '2') ? 'checked' : '' ),
 					));
 				return;
 			break;

@@ -53,6 +53,13 @@
 	$b_topic_id	= request_var('t', '');
 
 	$b_post_id	= request_var('p', $k_config['poll_post_id']);
+
+	if(!$b_post_id)
+	{
+		// we don't have any poll id so skipp //
+		return;
+	}
+
 	$b_poll_view = $k_config['poll_view'];
 
 	$b_voted_id	= request_var('vote_id', array('' => 0));

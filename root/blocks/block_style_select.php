@@ -45,9 +45,9 @@ $style = $new_style = ($config['override_user_style']) ? $config['default_style'
 
 if (!$config['override_user_style'] && $new_style != '' && $new_style != $current_style && $permanent)
 {
-	$sql = 'UPDATE ' . USERS_TABLE . '
-		SET user_style = ' . $new_style . "
-		WHERE user_id = $user_id";
+	$sql = "UPDATE " . USERS_TABLE . " 
+		SET user_style = " . (int)$new_style . "
+		WHERE user_id = " . (int)$user_id;
 	$db->sql_query($sql);
 }
 
@@ -57,14 +57,14 @@ if ($new_style)
 	$sql = 'SELECT s.style_id, s.style_name, s.style_copyright, s.style_active, m.mod_origin, m.mod_author, m.mod_id, m.mod_status, m.mod_link, m.mod_author_co, m.mod_support_link, m.mod_download_count, m.mod_last_update
 		FROM ' . STYLES_TABLE . " s
 		LEFT JOIN " . K_MODULES_TABLE . " m ON (s.style_name = m.mod_name)
-			WHERE s.style_id = '$new_style' AND s.style_active = 1";
+			WHERE s.style_id = '" .(int)$new_style . "' AND s.style_active = 1";
 }
 else
 {
 	$sql = 'SELECT s.style_id, s.style_name, s.style_copyright, u.user_style, s.style_active, m.mod_origin, m.mod_id, m.mod_author, m.mod_status, m.mod_link, m.mod_author_co, m.mod_support_link, m.mod_download_count, m.mod_last_update
 		FROM ' . USERS_TABLE . ' u, ' . STYLES_TABLE . " s
 		LEFT JOIN " . K_MODULES_TABLE . " m ON (s.style_name = m.mod_name)
-			WHERE u.user_id = '$user_id' AND s.style_id = u.user_style AND s.style_active = 1";
+			WHERE u.user_id = '" . (int)$user_id . "' AND s.style_id = u.user_style AND s.style_active = 1";
 }
 $result = $db->sql_query($sql, $sgp_cache_time);
 
@@ -88,7 +88,7 @@ while ($row = $db->sql_fetchrow($result))
 
 $sql = 'SELECT user_style
 	FROM ' . USERS_TABLE . "
-	WHERE user_style = '$style'
+	WHERE user_style = '" . (int)$style . "'
 	ORDER BY user_style";
 $result = $db->sql_query($sql, $sgp_cache_time);
 
