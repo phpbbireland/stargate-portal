@@ -73,7 +73,6 @@ $lang = array_merge($lang, array(
 	'CONFIRM_OPERATION_CLOUD' => 'Delete this tag?',
 	'SWITCHING'				=> 'Switching to k_config',
 
-
 	'DELETE_TAG_CACHE'		=> 'Delete Tag Cache',
 	'DATA_IS_BEING_SAVED'	=> 'Data is being saved',
 	'SAVING'				=> 'Saving',

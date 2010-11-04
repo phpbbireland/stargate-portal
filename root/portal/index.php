@@ -83,12 +83,10 @@ $versions = array(
 	'1.0.5' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
-
 	// Version 1.0.6
 	'1.0.6' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
-
 	// Version 2.0.0
 	'2.0.0' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
