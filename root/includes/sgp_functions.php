@@ -136,7 +136,7 @@ if(!function_exists('get_k_config_var'))
 		{
 			return($item);
 		}
-//sanitise??
+
 		$sql = 'SELECT config_name, config_value
 			FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . '
 			WHERE config_name = ' . (int)$item;

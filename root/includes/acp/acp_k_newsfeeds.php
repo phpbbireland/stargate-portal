@@ -27,7 +27,7 @@ class acp_k_newsfeeds
 	function main($id, $mode)
 	{
 		global $db, $user, $auth, $template, $cache;
-		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+		global $k_config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 		
 		include($phpbb_root_path . 'includes/sgp_functions.'.$phpEx);
 
@@ -42,10 +42,13 @@ class acp_k_newsfeeds
 
 		// Set up general vars
 		$action = request_var('action', '');
+
 		$action = (isset($_POST['edit'])) ? 'edit' : $action;
 		$action = (isset($_POST['add'])) ? 'add' : $action;
 		$action = (isset($_POST['save'])) ? 'save' : $action;
+
 		$feed_id = request_var('id', 0);
+		$rss_feeds_enabled = request_var('rss_feeds_enabled', 0);
 
 		$sql = 'SELECT config_name, config_value
 			FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . '';  
@@ -54,7 +57,7 @@ class acp_k_newsfeeds
 
 		while ($row = $db->sql_fetchrow($result))
 		{
-			$config[$row['config_name']] = $row['config_value'];
+			$k_config[$row['config_name']] = $row['config_value'];
 		}
 
 		switch ($action)
@@ -62,22 +65,26 @@ class acp_k_newsfeeds
 			case 'editfeeds':
 	 			if ($action == 'editfeeds')
 				{
-					$config_feeds_cache_time = request_var('rss_feeds_cache_time','', true);
-					$config_feeds_items_limit = request_var('rss_feeds_items_limit','', true);
-					$config_feeds_random_limit = request_var('rss_feeds_random_limit','', true);
-					$config_feeds_type = request_var('rss_feeds_type','', true);
+					$config_feeds_cache_time = request_var('rss_feeds_cache_time', 0);
+					$config_feeds_items_limit = request_var('rss_feeds_items_limit', 0);
+					$config_feeds_random_limit = request_var('rss_feeds_random_limit', 0);
+					$config_feeds_rss_enabled = request_var('rss_feeds_enabled', 0);
+
+					$config_feeds_type = request_var('rss_feeds_type', '');
 				}
-					$type = $config['rss_feeds_type'];
+					$type = $k_config['rss_feeds_type'];
 				
 				$template->assign_vars(array(
 					'S_EDIT_FEED'			=> true,
 					'U_BACK'				=> $this->u_action,					
 					'U_ACTION_EDIT_COLUMN'	=> $this->u_action . '&amp;action=editfeeds',
-					'FEED_CACHE_TIME'		=> $config['rss_feeds_cache_time'],					
-					'FEED_ITEMS_LIMIT'		=> $config['rss_feeds_items_limit'],
-					'FEED_TYPE'				=> $config['rss_feeds_type'],
 					'S_FOPEN' 				=> ($type=='fopen') ? true : false,
-					'FEED_RANDOM_LIMIT'		=> $config['rss_feeds_random_limit']
+
+					'FEED_CACHE_TIME'		=> $k_config['rss_feeds_cache_time'],					
+					'FEED_ITEMS_LIMIT'		=> $k_config['rss_feeds_items_limit'],
+					'FEED_TYPE'				=> $k_config['rss_feeds_type'],
+					'FEED_RANDOM_LIMIT'		=> $k_config['rss_feeds_random_limit'],
+					'S_RSS_FEEDS_ENABLED'	=> $k_config['rss_feeds_enabled'],
 				));					
             break;				
 						
@@ -86,13 +93,17 @@ class acp_k_newsfeeds
 				$config_feeds_cache_time = request_var('rss_feeds_cache_time', 0);
 				$config_feeds_items_limit = request_var('rss_feeds_items_limit', 0);
 				$config_feeds_random_limit = request_var('rss_feeds_random_limit', 0);
+				$config_feeds_rss_enabled = request_var('rss_feeds_enabled', 0);
+
 				$config_feeds_type = request_var('rss_feeds_type','');
 
  				if ($action == 'savefeeds')
 				{
-					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $config_feeds_cache_time . ' WHERE config_name = "rss_feeds_cache_time"');
-					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $config_feeds_items_limit . ' WHERE config_name = "rss_feeds_items_limit"');
-					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . $config_feeds_random_limit . ' WHERE config_name = "rss_feeds_random_limit"');
+					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . (int)$config_feeds_cache_time . ' WHERE config_name = "rss_feeds_cache_time"');
+					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . (int)$config_feeds_items_limit . ' WHERE config_name = "rss_feeds_items_limit"');
+					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . (int)$config_feeds_random_limit . ' WHERE config_name = "rss_feeds_random_limit"');
+					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = ' . (int)$config_feeds_rss_enabled . ' WHERE config_name = "rss_feeds_enabled"');
+
 					$db->sql_query('UPDATE ' . K_BLOCKS_CONFIG_VAR_TABLE . ' SET config_value = "' . $db->sql_escape($config_feeds_type) . '" WHERE config_name = "rss_feeds_type"');
 					
 					//clear cache - not working
@@ -102,28 +113,29 @@ class acp_k_newsfeeds
 				}
 				$db->sql_query($sql);
 
-				$cache->destroy('config');
+				$cache->destroy('k_config');
 				trigger_error($message . adm_back_link($this->u_action));
 
 				$template->assign_vars(array(
 					'S_SAVE_FEEDS'			=> true,
 					'U_BACK'				=> $this->u_action,					
 					'U_ACTION_SAVE_COLUMN'	=> $this->u_action . '&amp;action=savefeeds',
-					'FEED_CACHE_TIME'		=> $config['rss_feeds_cache_time'],			
-					'FEED_ITEMS_LIMIT'		=> $config['rss_feeds_items_limit'],
-					'FEED_TYPE'				=> $config['rss_feeds_type'],
-					'FEED_RANDOM_LIMIT'		=> $config['rss_feeds_random_limit']
+					'FEED_CACHE_TIME'		=> $k_config['rss_feeds_cache_time'],			
+					'FEED_ITEMS_LIMIT'		=> $k_config['rss_feeds_items_limit'],
+					'FEED_RANDOM_LIMIT'		=> $k_config['rss_feeds_random_limit'],
+					'S_RSS_FEEDS_ENABLED'	=> $k_config['rss_feeds_ensbled'],
+					'FEED_TYPE'				=> $k_config['rss_feeds_type'],
 				));					
 				
 			break;			
 
 			case 'save':
 
-   				$feed_title 	= request_var('feed_title', '', true);
-   				$feed_show 		= request_var('feed_show', '', true);
-   				$feed_url 		= request_var('feed_url', '', true);
-   				$feed_position	= request_var('feed_position', '', true);
-				$feed_description	= request_var('feed_description', '', true);
+   				$feed_title 		= request_var('feed_title', '', true);
+   				$feed_show 			= request_var('feed_show', 0);
+   				$feed_url 			= request_var('feed_url', '', true);
+   				$feed_position		= request_var('feed_position', 0);
+				$feed_description	= request_var('feed_description', 0);
 
 				$sql_ary = array(
 					'feed_title'		=> $feed_title,
@@ -135,7 +147,7 @@ class acp_k_newsfeeds
 
 				if ($feed_id)
 				{
-				    $sql = 'UPDATE ' . K_NEWSFEEDS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE feed_id = $feed_id";
+				    $sql = 'UPDATE ' . K_NEWSFEEDS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE feed_id = " . (int)$feed_id;
 				    $message = $user->lang['FEED_UPDATED'];
 				}
 				else
@@ -146,6 +158,7 @@ class acp_k_newsfeeds
 				$db->sql_query($sql);
 
 				$cache->destroy('feed_title');
+				$cache->destroy('k_config');
 
 				trigger_error($message . adm_back_link($this->u_action));
 
@@ -157,10 +170,11 @@ class acp_k_newsfeeds
 				if ($feed_id)
 				{
 					$sql = 'DELETE FROM ' . K_NEWSFEEDS_TABLE . "
-						WHERE feed_id = $feed_id";
+						WHERE feed_id = " . (int)$feed_id;
 					$db->sql_query($sql);
 
 					$cache->destroy('feed_title');
+					$cache->destroy('k_config');
 
 					trigger_error($user->lang['FEED_REMOVED'] . adm_back_link($this->u_action));
 				}
@@ -213,8 +227,9 @@ class acp_k_newsfeeds
 					'FEED_SHOW_2' 		=> (($feed_show['feed_show'] == '2') ? 'checked' : '' ),
 					'FEED_DESCRIPTION_SHOW_1' => (($feed_description['feed_description'] == '1') ? 'checked' : '' ),
 					'FEED_DESCRIPTION_SHOW_2' => (($feed_description['feed_description'] == '2') ? 'checked' : '' ),
-					));
+				));
 				return;
+
 			break;
 
 			default:
@@ -250,11 +265,12 @@ class acp_k_newsfeeds
 		}
 
 		$template->assign_block_vars('rss_column', array(
-			'FEED_CACHE_TIME'	=> 	$config['rss_feeds_cache_time'],
-			'FEED_ITEMS_LIMIT'	=> 	$config['rss_feeds_items_limit'],				
-			'FEED_RANDOM_LIMIT'	=> 	$config['rss_feeds_random_limit'],
-			'FEED_TYPE'			=> 	$config['rss_feeds_type'],
-			'U_EDIT_FEEDS'		=> 	$this->u_action . '&amp;action=editfeeds'
+			'FEED_CACHE_TIME'		=> 	$k_config['rss_feeds_cache_time'],
+			'FEED_ITEMS_LIMIT'		=> 	$k_config['rss_feeds_items_limit'],				
+			'FEED_RANDOM_LIMIT'		=> 	$k_config['rss_feeds_random_limit'],
+			'S_RSS_FEEDS_ENABLED'	=> 	$k_config['rss_feeds_enabled'],
+			'FEED_TYPE'				=> 	$k_config['rss_feeds_type'],
+			'U_EDIT_FEEDS'			=> 	$this->u_action . '&amp;action=editfeeds'
 		));
 
 		$db->sql_freeresult($result);			

@@ -120,6 +120,12 @@ if (!defined('IN_PHPBB'))
 			if(in_array($page_id, $arr[$active_block['id']]))
 			{
 				include($phpbb_root_path . 'blocks/' . $filename . '.' . $phpEx);
+/*
+				if($filename == 'block_header_menus.php')
+				{
+					$template->assign_var('S_HEADER_TAB_MENU', true);
+				}
+*/
 			}
 		}
 	}

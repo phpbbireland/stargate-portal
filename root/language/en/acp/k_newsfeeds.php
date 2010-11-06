@@ -74,6 +74,11 @@ $lang = array_merge($lang, array(
 	'FEED_TYPE_EXPLAIN' 		=> '(FOPEN or CURL is not enabled on every server)',
 	'FEED_CURL' 				=> 'CURL',
 	'FEED_FOPEN' 				=> 'FOPEN',
+	'RSS_ENABLE'				=> 'Enabled',
+	'RSS_DISABLE'				=> 'Disabled',
+	'RSS_ENABLED'				=> 'RSS',
+	'RSS_ENABLED_EXPLAIN'		=> 'Enable/Disable RSS on your site.',
+	'FEED_ENDIS'				=> 'Status',
 
 ));
 
