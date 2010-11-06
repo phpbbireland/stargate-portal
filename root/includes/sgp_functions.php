@@ -139,7 +139,7 @@ if(!function_exists('get_k_config_var'))
 //sanitise??
 		$sql = 'SELECT config_name, config_value
 			FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . '
-			WHERE config_name = $item';
+			WHERE config_name = ' . (int)$item;
 
 		$row = $db->sql_fetchrow($result);
 		//$k_config[$row['config_name']] = $row['config_value'];

@@ -30,14 +30,20 @@ if (!defined('IN_PHPBB'))
 }
 
 // Disabled while I find a bug... possibly php version related...
-return;
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 // include lastRSS
 include($phpbb_root_path . 'includes/sgp_lastrss.'.$phpEx);
 
-global $_config;
+global $k_config;
+
+if(!$k_config['rss_feeds_enabled'])
+{
+	$template->assign_var('S_RSS_ENABLED', false);
+	return;
+}
+
 $sgp_cache_time = $k_config['sgp_cache_time'];
 $queries = $cached_queries = 0;
 
@@ -211,6 +217,9 @@ for ($i = 0; isset($feeds[$i]['id']); $i++)
 			'FEEDS_TITLE' => '<a href="' . $feeds[$i]['url'] . '" rel="external">' . $feeds[$i]['title'] . "</a>",
 		));
 	}
+
+	$template->assign_var('S_RSS_ENABLED', true);
+
 	$template->assign_vars(array(
 		'RSS_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	));

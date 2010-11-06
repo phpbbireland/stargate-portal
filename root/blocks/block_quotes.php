@@ -24,6 +24,10 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
+global $k_config;
+
+$sgp_cache_time = $k_config['sgp_cache_time'];
+
 $queries = $cached_queries = 0;
 
 	$sql = 'SELECT *
@@ -31,7 +35,7 @@ $queries = $cached_queries = 0;
 		ORDER by rand()
 		LIMIT 1';
 	
-	if ($result = $db->sql_query($sql, 600))
+	if ($result = $db->sql_query($sql, $sgp_cache_time))
 	{
 		$row = $db->sql_fetchrow($result);
 	}
