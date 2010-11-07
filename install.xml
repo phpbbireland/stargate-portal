@@ -1743,7 +1743,11 @@ if (!function_exists('bbcode_strip'))
 	'CLICK TO ENLARGE'		=> 'Click to enlarge',
 	'PORTED_STYLES'			=> 'Ported Styles',
 	'UNDER_CONSTRUCTION'	=> 'Under construction...',
-	'NO_POLL'				=> 'No poll results to display',
+	'NO_POLL'				=> 'No poll selected',
+	'MP3_PLAYER'			=> 'SGP MP3 Player',
+	'RSS_DISABLED'			=> 'Newsfeeds are currently disabled',
+	'RETURN_PORTAL'			=> '%sReturn to the portal page%s',
+	'LOGOUT_REDIRECT_P'		=> 'Yoou have logged out... retirning to portal',
 ]]></action>
 </edit>
 </open>

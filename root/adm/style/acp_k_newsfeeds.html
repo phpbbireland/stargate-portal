@@ -28,11 +28,18 @@
 		<td class="row1" style="font-size:11px;" valign="top"><strong>{L_FEED_RANDOM_LIMIT}:</strong><br /><span>{L_FEED_RANDOM_LIMIT_EXPLAIN}</span></td>
    		<td class="row2" style="font-size:11px;" valign="top" width="50%"><input name="rss_feeds_random_limit" type="text" id="rss_feeds_random_limit" value="{FEED_RANDOM_LIMIT}" size="10" /></td>
 	</tr>
-		<tr>
+	<tr>
 		<td class="row1" style="font-size:11px;" valign="top"><strong>{L_FEED_TYPE}:</strong><br /><span>{L_FEED_TYPE_EXPLAIN}</span></td>
    		<td class="row2" style="font-size:11px;" valign="top" width="50%"><input name="rss_feeds_type" type="radio" id="rss_feeds_type" value="curl" <!-- IF not S_FOPEN -->checked<!-- ENDIF --> />{L_FEED_CURL}
 		<input name="rss_feeds_type" type="radio" id="rss_feeds_type" value="fopen" <!-- IF S_FOPEN -->checked<!-- ENDIF --> />{L_FEED_FOPEN}</td>
-		</tr>
+	</tr>
+	<tr>
+		<td class="row1" style="font-size:11px;" valign="top"><strong>{L_RSS_ENABLED}:</strong><br /><span>{L_RSS_ENABLED_EXPLAIN}</span></td>
+   		<td class="row2" style="font-size:11px;" valign="top" width="50%">
+			<input name="rss_feeds_enabled" type="radio" id="rss_feeds_enabled" value="1" <!-- IF S_RSS_FEEDS_ENABLED --> checked="checked" <!-- ENDIF --> /> {L_RSS_ENABLE}
+   			<input name="rss_feeds_enabled" type="radio" id="rss_feeds_enabled" value="0" <!-- IF not S_RSS_FEEDS_ENABLED --> checked="checked" <!-- ENDIF --> /> {L_RSS_DISABLE}
+		</td>
+	</tr>
 	<tr>
    		<td class="row2" style="font-size:11px;" colspan="2">
 		<input type="hidden" name="action" value="savefeeds" /><center>
@@ -54,6 +61,7 @@
 		<th><center>{L_FEED_ITEMS_LIMIT}</center></th>
 		<th><center>{L_FEED_RANDOM_LIMIT}</center></th>
 		<th><center>{L_FEED_TYPE}</center></th>
+		<th><center>{L_FEED_ENDIS}</center></th>
 		<th><center>{L_ACTION}</center></th>
 	</tr>
 	<!-- BEGIN rss_column -->
@@ -62,6 +70,7 @@
 		<td style="text-align: center;">{rss_column.FEED_ITEMS_LIMIT} {L_ITEMS_LIMIT}</td>
 		<td style="text-align: center;">{rss_column.FEED_RANDOM_LIMIT} {L_RANDOM_LIMIT}</td>
 		<td style="text-align: center;">{rss_column.FEED_TYPE}</td>
+		<td style="text-align: center;"><!-- IF rss_column.S_RSS_FEEDS_ENABLED == '1' -->{L_RSS_ENABLE}<!-- ELSE -->{L_RSS_DISABLE}<!-- ENDIF --></td>
 		<td style="text-align: center;"><a href="{rss_column.U_EDIT_FEEDS}">{ICON_EDIT}</a></td>
 	</tr>
 	<!-- END rss_column -->

@@ -1217,13 +1217,13 @@ $k_blocks_config_vars_array[] = array(
 );
 $k_blocks_config_vars_array[] = array(
 	'config_name'	=> 'portal_build',
-	'config_value'	=> '307-309',
+	'config_value'	=> '307-312',
 	'is_dynamic'	=> '0',
 );
 
 $k_blocks_config_vars_array[] = array(
 	'config_name'	=> 'k_youtube_link',
-	'config_value'	=> 'http://www.youtube.com',
+	'config_value'	=> 'http://www.youtube.com/v/',
 	'is_dynamic'	=> '0',
 );
 

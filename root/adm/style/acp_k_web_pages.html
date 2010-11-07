@@ -62,10 +62,18 @@ function ShowDiv (div_id)
 		</dd>
 	</dl>
 	<dl>
+		<dt><label for="page_type">{L_WEB_PAGE_TYPE}:</label></dt>
+		<dd><input type="hidden" class="post" size="1" maxlength="3" name="page_type" value="{edit.S_PAGE_TYPE}" type="text">
+			<!-- IF edit.S_PAGE_TYPE == 'H' -->L_HEAD1}<!-- ENDIF -->
+			<!-- IF edit.S_PAGE_TYPE == 'B' -->{L_BODY1}<!-- ENDIF -->
+			<!-- IF edit.S_PAGE_TYPE == 'F' -->{L_FOOT1}<!-- ENDIF -->
+			<!-- IF edit.S_PAGE_TYPE == 'P' -->{L_PORTAL_PAGE1}<!-- ENDIF -->
+		</dd>
+	</dl>
+	<dl>
 		<dt><label for="page_name">*{L_WEB_PAGE_NAME}:</label><br /><span><!-- IF S_PAGE_TYPE == 'B' || S_PAGE_TYPE == 'P' -->{L_WEB_PAGE_NAME_EXPLAIN2}<!-- ELSE -->{L_WEB_PAGE_NAME_EXPLAIN1}</span><!-- ENDIF --></dt>
 		<dd><br /><input class="post" size="50" maxlength="99" name="page_name" value="{edit.S_PAGE_NAME}" type="text"></dd>
 	</dl>
-
 
 	<!-- IF edit.S_PAGE_TYPE == 'B' || edit.S_PAGE_TYPE == 'P' -->
 	<hr />
@@ -149,7 +157,7 @@ function ShowDiv (div_id)
 	</dl>
 
 	<dl>
-		<dt><label for="page_type">{L_WEB_PAGE_TYPE}:</label><br /><span>{L_WEB_PAGE_TYPE_EXPLAIN}</span></dt>
+		<dt><label for="page_type">*{L_WEB_PAGE_TYPE}:</label><br /><span>{L_WEB_PAGE_TYPE_EXPLAIN}</span></dt>
 		<dd>
 		<label><input onclick="ShowDiv('H'); ShowDiv('F'); ShowDiv('MD'); HideDiv('B');" type="radio" class="radio" id="page_type" name="page_type" value="H"<!-- IF S_PAGE_TYPE == 'H' --> checked="checked"<!-- ENDIF --> /> {L_HEAD}</label>
 		<label><input onclick="ShowDiv('B'); HideDiv('H'); HideDiv('MD'); ShowDiv('F');" type="radio"  class="radio" id="page_type" name="page_type" value="B"<!-- IF S_PAGE_TYPE == 'B' --> checked="checked"<!-- ENDIF --> /> {L_BODY}</label>
@@ -159,7 +167,7 @@ function ShowDiv (div_id)
 	</dl>
 	<hr />
 	<dl>
-		<dt><label for="page_name">{L_WEB_PAGE_NAME}:</label><br /><span><!-- IF S_PAGE_TYPE == 'B' || S_PAGE_TYPE == 'P' -->{L_WEB_PAGE_NAME_EXPLAIN2}<!-- ELSE -->{L_WEB_PAGE_NAME_EXPLAIN1}</span><!-- ENDIF --></dt>
+		<dt><label for="page_name">*{L_WEB_PAGE_NAME}:</label><br /><span><!-- IF S_PAGE_TYPE == 'B' || S_PAGE_TYPE == 'P' -->{L_WEB_PAGE_NAME_EXPLAIN2}<!-- ELSE -->{L_WEB_PAGE_NAME_EXPLAIN1}</span><!-- ENDIF --></dt>
 		<dd><br /><input class="post" size="45" maxlength="50" name="page_name" value="{S_PAGE_NAME}" type="text"></dd>
 	</dl>
 	<dl>
@@ -300,7 +308,7 @@ function ShowDiv (div_id)
 <!-- ENDIF -->
 
 <!-- IF MESSAGE or SEARCH_MESSAGE -->
-<dl><legend><div style="float:right;"><br />&nbsp;<!-- IF MESSAGE --><b>{MESSAGE}</b><br /><!-- ENDIF --></div><div style="float:left;"><br />&nbsp;{SEARCH_MESSAGE}</div></legend></dl>
+<dl><legend><div style="float:left;"><br />&nbsp;<!-- IF MESSAGE --><b>{MESSAGE}</b><br /><!-- ENDIF --></div><div style="float:left;"><br />&nbsp;{SEARCH_MESSAGE}</div></legend></dl>
 <dl><br /></dl>
 <!-- ENDIF -->
 

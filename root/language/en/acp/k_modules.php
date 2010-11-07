@@ -111,6 +111,7 @@ $lang = array_merge($lang, array(
 	'DO_NOT_CHANGE'					=> '<br />Default type, not eidtable',
 	'CANT_DELETE'					=> 'You can\'t delete the welcome message',
 	'WELCOME'						=> 'welcome',
+	'NO_NAME_NO_TYPE'				=> 'Missing module name or type...',
 ));
 
 ?>
