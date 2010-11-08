@@ -16,7 +16,7 @@
 *        this is part of the Stargate Portal copyright agreement...
 *
 * @version $Id: block_top_referrals.php 307 2009-01-01 16:05:35Z Michealo $
-* Updated: 12 July 2010
+* Updated: 07 November 2010
 *
 */
 
@@ -61,7 +61,7 @@ if ($http_referrals)
 		{
 			$http_time = time();
 			
-			$sql = 'SELECT * FROM '.K_REFERRALS_TABLE."  WHERE host = '" . $db->sql_escape($http_host) ."'";
+			$sql = 'SELECT * FROM '.K_REFERRALS_TABLE."  WHERE host = '" . $db->sql_escape($http_host) . "'";
 			$result = $db->sql_query($sql, $sgp_cache_time);
 
 			$row = $db->sql_fetchrow($result);
@@ -69,23 +69,33 @@ if ($http_referrals)
 
 			if ($row)
 			{
-				$sql2 = 'UPDATE '.K_REFERRALS_TABLE.
-				' SET hits = '.($row['hits']+1).' , '.
-					' lastvisit = '.$http_time.
-				" WHERE host = '".$http_host."'";
+				$sql2 = 'UPDATE ' . K_REFERRALS_TABLE .
+				' SET hits = ' . ($row['hits']+1) . ' , '.
+					' lastvisit = ' . $http_time .
+				" WHERE host = '" . $db->sql_escape($http_host) . "'";
 				$db->sql_query($sql2);
 			}
 			else
 			{
 				$sql2 = 'INSERT INTO '.K_REFERRALS_TABLE.' (host, hits, firstvisit, lastvisit, enabled)' .
-				" VALUES ('".$http_host."' , 1 , ".$http_time.' , '.$http_time.' , 1 )';
+				" VALUES ('" . $db->sql_escape($http_host) . "' , 1 , " . $http_time . ' , ' . $http_time . ' , 1 )';
 				$db->sql_query($sql2);
 			}
 		}
 	}
 }
 
-$sql = 'SELECT *, COUNT(hits) AS total_hits 
+
+// lets see how many referrals in total (include all)//
+$sql = "SELECT hits, SUM(hits) 
+	FROM " . K_REFERRALS_TABLE . "
+	WHERE enabled = 1";
+$result = $db->sql_query($sql, $sgp_cache_time);
+$row = $db->sql_fetchrow($result);
+$total_hits = $row['SUM(hits)'];
+$db->sql_freeresult($result);
+
+$sql = 'SELECT *
 		FROM '. K_REFERRALS_TABLE . ' 
 		WHERE enabled = 1 ORDER BY hits DESC, lastvisit DESC';
 $result = $db->sql_query_limit($sql, $num_refviews, 0, $sgp_cache_time);
@@ -111,32 +121,6 @@ while($row = $db->sql_fetchrow($result))
 	));
 }
 $db->sql_freeresult($result);
-
-$ref_count = count($row);
-
-if ($ref_count < $num_refviews)
-{ 
-	$num_refviews = $ref_count;
-}
-
-
-/*
-for ($i = 0; $i < $num_refviews; $i++)
-{
-	$host_name = $row[$i]['host'];
-	if(strlen($row[$i]['host']) > 17)
-	{
-		$host_name = sgp_checksize ($row[$i]['host'], 15);
-	}
-
-	$template->assign_block_vars('datarow', array(
-		'S_HTTP_HOST'		=> $host_name,
-		'S_HHTP_HOST_FULL'	=> $row[$i]['host'],
-		'U_HTTP_HOST'		=> 'http://'.$row[$i]['host'],
-		'S_HITS'			=> $row[$i]['hits']
-	));
-}
-*/
 
 $template->assign_vars(array(
 	'S_REF_LIMIT'	=> $num_refviews,
