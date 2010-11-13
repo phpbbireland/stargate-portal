@@ -99,9 +99,9 @@ $lang = array_merge($lang, array(
 	'TIME'			=> 'Time',
 	'THE_COLLECTIVE'		=> 'The collective',
 
-	'TO_DAY'		=> 'Date: %s',
-	'TOPIC_MOVED'	=> 'Post Moved',
-	'TIME'			=> 'Time %s',
+	//'TO_DAY'		=> 'Date: %s',
+	//'TOPIC_MOVED'	=> 'Post Moved',
+	//'TIME'			=> 'Time %s',
 
 	'USER_COUNTRY_FLAG'			=> 'Country Flag',
 	'UCF_MOD'					=> 'A valid location is required for this Mod',
