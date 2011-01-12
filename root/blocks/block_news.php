@@ -31,12 +31,12 @@ if (!defined('IN_PHPBB'))
 	//-- News Items are seen by everyone! Reply is restricted...
 
 	global $k_config;
-	$sgp_cache_time = $k_config['sgp_cache_time'];
+	$block_cache_time = $k_config['block_cache_time_default'];
 
 	$sql = 'SELECT config_name, config_value
 		FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . '';  
 		
-	$result = $db->sql_query($sql, $sgp_cache_time);
+	$result = $db->sql_query($sql, $block_cache_time);
 			
 	while($row = $db->sql_fetchrow($result))
 	{

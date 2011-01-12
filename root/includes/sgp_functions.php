@@ -526,11 +526,12 @@ if(!function_exists('get_user_data'))
 {
 	function get_user_data($what = '', $id)
 	{
-		global $db, $template;
+		global $db, $template, $user;
 
 		if(!$id)
 		{
-			return('NO ID GIVEN<br />');
+			//return('NO ID GIVEN<br />');
+			return($user->lang['NO_ID_GIVEN']);
 		}
 
 		// Get user info
@@ -689,13 +690,12 @@ if(!function_exists('sgp_get_user_rank'))
 /**
 * Build all minimods added 307-001 Mike
 */
-if(!function_exists('sgp_build_minimod'))
+if (!function_exists('sgp_build_minimods'))
 {
-	//function sgp_build_minimod($mod_name, $mod_count = 1)
-	function sgp_build_minimod()
+	function sgp_build_minimods()
 	{
 		global $phpbb_root_path, $user, $template, $db, $k_config, $config, $k_config, $phpEx;
-		$sgp_cache_time = $k_config['sgp_cache_time'];
+		$block_cache_time = $k_config['block_cache_time_default'];
 
 		$queries = $cached_queries = $i = $j= 0;
 		$same_mod_count = 1;
@@ -706,10 +706,10 @@ if(!function_exists('sgp_build_minimod'))
 		$select_allow = ($config['override_user_style']) ? false : true;
 
 		$sql = "SELECT * FROM " . K_MODULES_TABLE . " 
-			WHERE mod_status > 0 
+				WHERE mod_status > 0 
 				ORDER BY mod_type, mod_origin DESC "; 
 
-		if (!$result1 = $db->sql_query($sql, $sgp_cache_time))
+		if (!$result1 = $db->sql_query($sql, $block_cache_time))
 		{
 			trigger_error($user->lang['ERROR_PORTAL_MENUS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 		}

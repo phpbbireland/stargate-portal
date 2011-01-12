@@ -129,6 +129,17 @@ $lang = array_merge($lang, array(
 
 	'PORTAL_ERROR_MENU'		=> 'Could not query portal menus information',
 
+
+	'MENU_VIEW_BY_SHORT'		=> 'View By',
+	'MENU_VIEW_GROUPS'			=> 'Menu Group Visibility',
+	'MENU_VIEW_GROUPS_EXPLAIN'	=> 'Enter group ID(s) manually or use the dropdown below.',
+	'MENU_VIEW_BY' 				=> 'Groups',
+	'MENU_VIEW_BY_EXPLAIN'		=> 'Select a group to add to the current list.<br />Selecting <b>(None)</b> will empty the list.',
+	'MENU_VIEW_ALL'			=> 'Optionally',
+	'MENU_VIEW_ALL_EXPLAIN'	=> 'Ignore these setting and set this menu/menu item visibility to <strong>all</strong> groups.',
+	'ALL_GROUPS'	=> 'All Groups',
+
+
 ));
 // Message Settings
 $lang = array_merge($lang, array(

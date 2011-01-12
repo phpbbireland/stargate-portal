@@ -24,5 +24,23 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-/* FAILED MPV Rewrite /check with phpBB Devs*/
+global $config, $user;
+$queries = $cached_queries = 0;
+
+$spath = $config['script_path'] . '/';
+$lang = $config['default_lang'];
+$user_lang = $user->lang['USER_LANG'];
+
+$this_page = explode(".", $user->page['page']);
+$page = $this_page[0] . '.' . $this_page[1] ;
+
+$template->assign_block_vars('translate', array(
+	'LANG'		=> $lang,
+	'USER_LANG'	=> $user_lang,
+	'BASE_URL'	=> $config['server_protocol'] . 'www.' . $config['sitename'] . $spath . $page,
+));
+
+$template->assign_vars(array(
+	'TRANSLATION_PORTAL_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+));
 ?>

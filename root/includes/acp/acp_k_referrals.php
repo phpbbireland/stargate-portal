@@ -114,7 +114,7 @@ class acp_k_referrals
 			for ($i = 0; $i < count($id_list); $i++)
 			{
 				$sql = 'UPDATE ' . K_REFERRALS_TABLE .
-					" SET enabled = " .( ($filter_flag == 'enabled') ? 0 : 1 ) .
+					" SET enabled = " . (($filter_flag == 'enabled') ? 0 : 1 ) .
 					" WHERE id = " . (int)$id_list[$i];
 
 				if (!$result = $db->sql_query($sql))

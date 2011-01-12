@@ -198,7 +198,7 @@ class acp_k_vars
 				$sgp_quick_reply						= request_var('sgp_quick_reply', 1);
 				$k_yourtube_link						= request_var('k_yourtube_link', '');
  
-				$block_cache_time						= request_var('block_cache_time', '');
+				$block_cache_time						= request_var('block_cache_time_default', '');
 				$block_recent_cache_time				= request_var('block_recent_cache_time', '');
 
 				switch($announce_type)
@@ -223,6 +223,8 @@ class acp_k_vars
 					default:	$news_type = 0;
 					break;
 				}
+
+				// all data is escaped in sgp_acp_set_config //
 
 				//sgp_acp_set_config('news_forum_id', $news_forum_id);
 				sgp_acp_set_config('allow_acronyms', $allow_acronyms);
@@ -261,11 +263,9 @@ class acp_k_vars
 				sgp_acp_set_config('age_range_interval', $age_range_interval);
 				sgp_acp_set_config('age_range_start', $age_range_start);
 				sgp_acp_set_config('age_upper_limit', $age_upper_limit);
-
 				sgp_acp_set_config('mini_mod_style_count', $mini_mod_style_count);
 				sgp_acp_set_config('mini_mod_block_count', $mini_mod_block_count);
 				sgp_acp_set_config('mini_mod_mod_count', $mini_mod_mod_count);
-
 				sgp_acp_set_config('cloud_tcolour', $cloud_tcolour);
 				sgp_acp_set_config('cloud_tcolour2', $cloud_tcolour2);
 				sgp_acp_set_config('cloud_hicolour', $cloud_hicolour);
@@ -278,14 +278,11 @@ class acp_k_vars
 				sgp_acp_set_config('cloud_distr', $cloud_distr);
 				sgp_acp_set_config('cloud_search_allow', $cloud_search_allow);
 				sgp_acp_set_config('cloud_search_cache', $cloud_search_cache);
-
 				sgp_acp_set_config('teamspeak_pw', $teamspeak_pw);
 				sgp_acp_set_config('teamspeak_connection', $teamspeak_connection);
-
 				sgp_acp_set_config('sgp_quick_reply', $sgp_quick_reply);
 				sgp_acp_set_config('k_yourtube_link', $k_yourtube_link);
-
-				sgp_acp_set_config('block_cache_time', $block_cache_time);
+				sgp_acp_set_config('block_cache_time_default', $block_cache_time);
 				sgp_acp_set_config('block_recent_cache_time', $block_recent_cache_time);
 
 				$mode='reset';

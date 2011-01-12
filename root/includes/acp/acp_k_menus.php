@@ -104,12 +104,21 @@ class acp_k_menus
 					$menu_icon  	= request_var('menu_icon', '');
 					$name       	= utf8_normalize_nfc(request_var('name', '', true));
 					$link_to  		= request_var('link_to', '');
-					$view_by    	= request_var('view_by', 1);
 					$append_sid		= request_var('append_sid', 0);
 					$append_uid		= request_var('append_uid', 0);
 					$extern			= request_var('extern', 0);
 					$soft_hr		= request_var('soft_hr', 0);
 					$sub_heading	= request_var('sub_heading', 0);
+
+					$view_by		= request_var('view_by', 1);
+					$view_all		= request_var('view_all', 1);
+					$view_groups	= request_var('view_groups', '');
+
+					if($view_all)
+					{
+						$view_by = 1;
+						$view_groups = '';
+					}
 
 					if (strstr($menu_icon, $user->lang['NONE']))
 					{
@@ -123,12 +132,16 @@ class acp_k_menus
 						'menu_icon'		=> $menu_icon,
 						'name'			=> $name,
 						'link_to'		=> $link_to,
-						'view_by'		=> $view_by,
 						'append_sid'	=> $append_sid,
 						'append_uid'	=> $append_uid,
 						'extern'		=> $extern,
 						'soft_hr'		=> $soft_hr,
 						'sub_heading'	=> $sub_heading,
+
+						'view_all'		=> $view_all,
+						'view_by'		=> $view_by,
+						'view_groups'	=> $view_groups,
+
 					);
 					$sql = 'UPDATE ' . K_MENUS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . " WHERE m_id = " . (int)$m_id;
 
@@ -334,14 +347,17 @@ class acp_k_menus
 					$menu_icon  	= request_var('menu_icon', '');
 					$name  			= utf8_normalize_nfc(request_var('name', '', true));
 					$link_to  		= request_var('link_to', '');
-					$view_by		= request_var('view_by', 0);
 					$append_sid		= request_var('append_sid', 0);
 					$append_uid		= request_var('append_uid', 0);
 					$extern			= request_var('extern', 0);
 					$soft_hr		= request_var('soft_hr', 0);
 					$sub_heading	= request_var('sub_heading', 0);
 
-					if ($menu_type == NULL || $name == NULL || $view_by == NULL)
+					$view_by		= request_var('view_by', 1);
+					$view_all		= request_var('view_all', 1);
+					$view_groups	= request_var('view_groups', '');
+
+					if ($menu_type == NULL || $name == NULL)// || $view_by == NULL)
 					{
 						// catch all we check menu_type, $name, view_by)
 						$template->assign_vars(array(
@@ -358,18 +374,28 @@ class acp_k_menus
 
 					$ndx = get_next_ndx($menu_type);
 
+					if($view_all)
+					{
+						$view_by = 1;
+						$view_groups = '';
+					}
+
 					$sql_array = array(
-                       'menu_type'		=> $menu_type,
-                       'ndx'			=> $ndx,
-                       'menu_icon'		=> $menu_icon,
-                       'name'			=> $name,
-                       'link_to'		=> $link_to,
-                       'view_by'		=> $view_by,
-                       'append_sid'		=> $append_sid,
-                       'append_uid'		=> $append_uid,
-                       'extern'			=> $extern,
-                       'soft_hr'		=> $soft_hr,
-                       'sub_heading'	=> $sub_heading,
+						'menu_type'		=> $menu_type,
+						'ndx'			=> $ndx,
+						'menu_icon'		=> $menu_icon,
+						'name'			=> $name,
+						'link_to'		=> $link_to,
+						'append_sid'	=> $append_sid,
+						'append_uid'	=> $append_uid,
+						'extern'		=> $extern,
+						'soft_hr'		=> $soft_hr,
+						'sub_heading'	=> $sub_heading,
+
+						'view_all'		=> $view_all,
+						'view_by'		=> $view_by,
+						'view_groups'	=> $view_groups,
+
 					);
 					
 					$db->sql_query('INSERT INTO ' . K_MENUS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_array));
@@ -462,8 +488,12 @@ function get_menu($this_one)
 				'S_MENU_ICON'		=> $row['menu_icon'],
 				'S_MENU_ITEM_NAME'	=> $row['name'],
 				'S_MENU_LINK'		=> $row['link_to'],
-				'S_MENU_VIEW'		=> which_group($row['view_by']),
 				'S_MENU_APPEND_SID' => $row['append_sid'],
+
+				'S_MENU_VIEW'		=> which_group($row['view_by']),
+				'S_VIEW_ALL'		=> $row['view_all'],
+				'S_VIEW_GROUPS'		=> $row['view_groups'],
+
 				'S_MENU_APPEND_UID' => $row['append_uid'],
 				'S_MENU_EXTERN'		=> $row['extern'],
 				'S_SOFT_HR'			=> $row['soft_hr'],
@@ -501,7 +531,8 @@ function get_menu_item($item)
 		'S_MENU_ITEM_NAME'	=> $row['name'],
 		'S_MENU_LINK'		=> $row['link_to'],
 		'S_MENU_VIEW'		=> which_group($row['view_by']),
-		'S_MENU_VIEW'		=> $row['view_by'],
+		'S_VIEW_ALL'		=> $row['view_all'],
+		'S_VIEW_GROUPS'		=> $row['view_groups'],
 		'S_MENU_APPEND_SID' => $row['append_sid'],
 		'S_MENU_APPEND_UID' => $row['append_uid'],
 		'S_MENU_EXTERN'		=> $row['extern'],

@@ -99,8 +99,20 @@ $versions = array(
 	'3.1.1' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
-	// New version 3.1.2 (submission 2 fixes)
+	// Version 3.1.2
 	'3.1.2'	=> array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
+	// Version 3.1.3
+	'3.1.3' => array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
+	// Version 3.1.4
+	'3.1.4' => array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
+	// New version 3.1.5 (submission 2 fixes)
+	'3.1.5'	=> array(
 
 		'permission_add' => array(
 			array('a_k_portal', 1),
@@ -115,9 +127,11 @@ $versions = array(
 		),
 
 		'config_add' => array(
-			array('portal_enabled', true),
+			array('portal_enabled', 1),
+			array('blocks_enabled', 1),
+			array('blocks_width', '170'),
+			array('force_default_if_style_missing', 1),
 		),
-
 
 		'users_add' => array(
 			array('user_left_blocks', '2'),
@@ -160,6 +174,7 @@ $versions = array(
 						'is_static'			=> array('BOOL', '0'),
 						'minimod_based'		=> array('BOOL', '0'),
 						'mod_block_id'		=> array('UINT', '0'),
+						'block_cache_time'	=> array('UINT', '600'),
 					),
 					'PRIMARY_KEY'	=> 'id',
 				),
@@ -177,6 +192,8 @@ $versions = array(
 						'append_sid'	=> array('BOOL', '1'),
 						'append_uid'	=> array('BOOL', '0'),
 						'view_by'		=> array('UINT', '0'),
+						'view_all'		=> array('BOOL', '1'),
+						'view_groups'	=> array('VCHAR:100', ''),
 						'soft_hr'		=> array('BOOL', '0'),
 						'sub_heading'	=> array('BOOL', '0'),
 					),
@@ -187,12 +204,9 @@ $versions = array(
 			array('phpbb_k_blocks_config', array(
 					'COLUMNS'	=> array(
 						'id'					=> array('USINT', NULL, 'auto_increment'),
-						'blocks_width'			=> array('USINT', '180'),
-						'blocks_enabled'		=> array('BOOL', '1'),
 						'use_external_files'	=> array('BOOL', '0'),
 						'update_files'			=> array('BOOL', '0'),
 						'layout_default'		=> array('BOOL', '2'),
-						'portal_version'		=> array('VCHAR:8', '1.0.0'),
 						'portal_config'			=> array('VCHAR:10', 'Site'),
 					),
 				'PRIMARY_KEY'	=> 'id',

@@ -24,10 +24,17 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
-global $k_config;
-$sgp_cache_time = $k_config['sgp_cache_time'];
-
+global $k_config, $k_blocks;
 $queries = $cached_queries = 0;
+
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_top_posters.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
 
@@ -39,7 +46,7 @@ $sql = 'SELECT user_id, username, user_posts, user_colour, user_type, group_id, 
 		AND user_posts <> 0
 	ORDER BY user_posts DESC';
 
-$result = $db->sql_query_limit($sql, $max_top_posters, 0 ,$sgp_cache_time);
+$result = $db->sql_query_limit($sql, $max_top_posters, 0 ,$block_cache_time);
 
 while($row = $db->sql_fetchrow($result))
 {

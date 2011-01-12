@@ -30,9 +30,18 @@ if (!class_exists('bbcode'))
 	include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 }
 
-global $k_config;
-$sgp_cache_time = $k_config['sgp_cache_time'];
+global $k_config, $k_blocks;
+
 $queries = $cached_queries = 0;
+
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_news_advanced.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 // Get portal cache data
 $number_of_news_items_to_display = $k_config['number_of_news_items_to_display'];
@@ -109,7 +118,7 @@ $sql = 'SELECT
 		t.topic_time DESC';
 
 // query the database
-if(!($result = $db->sql_query_limit($sql, (($number_of_news_items_to_display) ? $number_of_news_items_to_display : 1))))
+if(!($result = $db->sql_query_limit($sql, (($number_of_news_items_to_display) ? $number_of_news_items_to_display : 1), 0, $block_cache_time)))
 {
 	trigger_error('ERROR_PORTAL_NEWS' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }

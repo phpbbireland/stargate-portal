@@ -44,7 +44,7 @@ if(!$k_config['rss_feeds_enabled'])
 	return;
 }
 
-$sgp_cache_time = $k_config['sgp_cache_time'];
+$block_cache_time = $k_config['block_cache_time_default'];
 $queries = $cached_queries = 0;
 
 function ShowRSSdesc($url) 
@@ -149,7 +149,7 @@ $sql = 'SELECT *
    ORDER BY feed_id DESC';
 $result = $db->sql_query_limit($sql, $rss_feeds_random_limit);
 
-if(!($result = $db->sql_query($sql, $sgp_cache_time)))
+if(!($result = $db->sql_query($sql, $block_cache_time)))
 {
 	trigger_error('RSS_LIST_ERROR');
 } 

@@ -112,8 +112,6 @@ $lang = array_merge($lang, array(
 	'MUST_SELECT_VALID_BLOCK_DATA'		=> 'Invalid block ID',
 	'BLOCK_UPDATING'	=> 'Updating block positions, please wait...<br />',
 	'BLOCK_MOVE_ERROR'	=> 'Blocks require reindexing... <br />Press back and try again... If this condition persisters, please try to manually correct the ndx values, then try again. ',
-	'BLOCK_CACHE_TIME'			=> 'Block cache time',
-	'BLOCK_CACHE_TIME_EXPLAIN'	=> '600 = 10 minutes, 0 = not cached.',
 
 	'VIEW_PAGE'					=> 'Add page from available pages:',
 	'VIEW_PAGE2'				=> 'Available pages:',
@@ -136,9 +134,13 @@ $lang = array_merge($lang, array(
 	'EDIT_BLOCK'		=> 'Edit block',
 	'DELETE_THIS_BLOCK'	=> 'Delete this block',
 
+	'BLOCK_CACHE_TIME_HEAD'		=> 'Block Cache Time',
+	'BLOCK_CACHE_TIME'			=> 'Set the block cache time.',
+	'BLOCK_CACHE_TIME_EXPLAIN'	=> 'Currently all blocs use the same cache period.',
 
 	'SET_VARIABLES_IN_MINI-MODULES'	=> 'Set variables in Mini-Modules',
 	'MANAGE_PAGES'		=> 'Manage pages',
+	'NONE'				=> 'None',
 
 ));
 // Message Settings

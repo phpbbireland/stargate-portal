@@ -32,10 +32,18 @@
 
 	include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
 
-	global $db, $user, $_SID, $_EXTRA_URL, $k_config;
+	global $db, $user, $_SID, $_EXTRA_URL, $k_config, $k_blocks;
 	global $k_groups, $k_group_id, $k_group_name_id;
 
-	$sgp_cache_time = $k_config['sgp_cache_time'];
+	foreach ($k_blocks as $blk)
+	{
+		if ($blk['html_file_name'] == 'block_sub_menus.html')
+		{
+			$block_cache_time = $blk['block_cache_time']; 
+		}
+	}
+	$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
+
 	// menu_type 0 = Header Menu,
 	// menu type 1 = Main Nav blocks,
 	// menu type 2 = Sub Nav Block
@@ -53,7 +61,7 @@
 		WHERE menu_type = 2 && view_by != 0
 		ORDER BY ndx ASC";
 
-	if (!$result = $db->sql_query($sql, $sgp_cache_time))
+	if (!$result = $db->sql_query($sql, $block_cache_time))
 	{
 		trigger_error($user->lang['ERROR_PORTAL_SUB_MENU'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}

@@ -35,7 +35,7 @@
 
 	global $k_config, $b_poll, $config, $phpbb_root_path, $db, $user, $template, $phpEx;
 
-	$sgp_cache_time = $k_config['sgp_cache_time'];
+	$block_cache_time = $k_config['block_cache_time_default'];
 
 	$queries = $cached_queries = 0;
 
@@ -91,7 +91,7 @@
 			$sql = 'SELECT forum_id
 				FROM ' . TOPICS_TABLE . "
 				WHERE topic_id = $b_topic_id";
-			$result = $db->sql_query($sql, $sgp_cache_time);
+			$result = $db->sql_query($sql, $block_cache_time);
 
 			$b_forum_id = (int) $db->sql_fetchfield('forum_id');
 			$db->sql_freeresult($result);
@@ -172,7 +172,7 @@
 	}
 	*/
 
-	$result = $db->sql_query($sql, $sgp_cache_time);
+	$result = $db->sql_query($sql, $block_cache_time);
 
 	$topic_data = $db->sql_fetchrow($result);
 	$db->sql_freeresult($result);
@@ -234,7 +234,7 @@
 				AND p.post_id = {$topic_data['topic_first_post_id']}
 				AND p.topic_id = o.topic_id
 			ORDER BY o.poll_option_id";
-		$result = $db->sql_query($sql, $sgp_cache_time);
+		$result = $db->sql_query($sql, $block_cache_time);
 
 		$b_poll_info = array();
 		while ($row = $db->sql_fetchrow($result))
@@ -250,7 +250,7 @@
 				FROM ' . POLL_VOTES_TABLE . '
 				WHERE topic_id = ' . $b_topic_id . '
 				  AND vote_user_id = ' . $user->data['user_id'];
-			$result = $db->sql_query($sql, $sgp_cache_time);
+			$result = $db->sql_query($sql, $block_cache_time);
 
 			while ($row = $db->sql_fetchrow($result))
 			{

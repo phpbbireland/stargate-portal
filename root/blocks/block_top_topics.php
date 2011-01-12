@@ -27,10 +27,17 @@ if (!defined('IN_PHPBB'))
 // for bots test //
 //$page_title = $user->lang['BLOCK_TOP_TOPICS'];
 
-global $k_config;
-$sgp_cache_time = $k_config['sgp_cache_time'];
-
+global $k_config, $k_blocks;
 $queries = $cached_queries = 0;
+
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_top_topics.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 $max_top_topics = $k_config['max_top_topics'];
 $days_top_topics = $k_config['days_top_topics'];
@@ -43,7 +50,7 @@ $sql = 'SELECT topic_id, topic_title, topic_replies, forum_id
 		AND topic_last_post_time > ' . (time() - $days_top_topics * 86400 ) . '
 	ORDER BY topic_replies DESC';
 
-$result = $db->sql_query_limit($sql, $max_top_topics, 0 , $sgp_cache_time);
+$result = $db->sql_query_limit($sql, $max_top_topics, 0 , $block_cache_time);
 
 while($row = $db->sql_fetchrow($result))
 {

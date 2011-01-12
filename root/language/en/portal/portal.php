@@ -96,16 +96,16 @@ $lang = array_merge($lang, array(
 
 	'SUBMIT_LINK'	=> 'Submit Link',
 	'THEME_NEWS_UPDATES'	=> 'Theme News & Updates',
-	'TIME'			=> 'Time',
 	'THE_COLLECTIVE'		=> 'The collective',
 
 	//'TO_DAY'		=> 'Date: %s',
 	//'TOPIC_MOVED'	=> 'Post Moved',
-	//'TIME'			=> 'Time %s',
+	//'TIME'			=> 'Time',
+	'TIMEX'			=> 'Time %s',
 
 	'USER_COUNTRY_FLAG'			=> 'Country Flag',
 	'UCF_MOD'					=> 'A valid location is required for this Mod',
-	'USER_COUNTRY_FLAG_EXPLAIN'	=> 'Full mod requires <b>Location</b> data above (Google Map).',
+	'USER_COUNTRY_FLAG_EXPLAIN'	=> 'Full mod requires <strong>Location</strong> data above (Google Map).',
 
 	'USER_REAL_NAME'			=> 'Real Name',
 	'USER_REAL_NAME_EXPLAIN'	=> 'Users first name',
@@ -117,7 +117,7 @@ $lang = array_merge($lang, array(
 	'VIEW_PREVIOUS_MONTH'	=> 'View previous month',
 	'VIEW_NEXT_MONTH'		=> 'View next month',
 
-	'SITE_LINK_TXT_EXPLAIN'	=> 'The HTML code below contain all the necessary code to link to <b>%s</b> please feel free to add it to your site.<br /><br />',
+	'SITE_LINK_TXT_EXPLAIN'	=> 'The HTML code below contain all the necessary code to link to <strong>%s</strong> please feel free to add it to your site.<br /><br />',
 	'SITE_LINK_TXT_EXPLAIN2' => 'This code produces:',
 	'GOTO_TOP_IMG' => 'Goto Top',
 	'GOTO_BOTTOM_IMG' => 'Goto Bottom',
@@ -129,8 +129,17 @@ $lang = array_merge($lang, array(
 
 	'POLL_BLOCK' => 'Poll Block',
 
-	'SELECT_STYLE_EXPLAINED' => '<span class="green"><b>Green</b></span> = Released<br /><span class="orange"><b>Orange</b></span> = Beta Theme<br /><span class="gray"><b>Gray</b></span> = Pre-beta Theme<br /><span class="red"><b>Red</b></span> = New Pre-beta Team<br />',
+	//'SELECT_STYLE_EXPLAINED' => '<strong>Colour Ledgend</strong><hr /><span class="green"><b>Green</strong></span> = Released<br /><span class="orange"><b>Orange</strong></span> = Beta style<br /><span class="gray"><b>Gray</strong></span> = Pre-beta style<br /><span class="red"><b>Red</strong></span> = Alpha style<hr />',
+	'SELECT_STYLE_EXPLAINED' => '<br /><strong>Dropdown Ledgend</strong><br />
+	<span class="green"><b>Released</strong></span><br />
+	<span class="orange"><strong>RC Style</strong></span><br />
+	<span class="gray"><b>Beta Style</strong></span><br />
+	<span class="red"><b>Alpha Style</strong></span><hr />',
 	'SMILIES' => 'Smilies',
+
+	'OPTION'	=> 'Option',
+	'PERMANENT'	=> 'Save my choice:',
+	'MAKE_PERMANENT'	=> 'If check, the style chosen will be set as your default style!',
 
 	'NO_SEARCHS'			=> 'No words found.',
 	'MESSAGE_BODY_EXPLAIN'	=> 'Type your message here...',
@@ -221,7 +230,7 @@ $lang = array_merge($lang, array(
 	'USERS_STYLE'	=> 'Current Style',
 	'PORTED_BY'		=> 'This style was ported by',
 	'PORTED_BY'		=> 'Ported by',
-	'MAKE_PERMANENT'	=> 'Make permanent?',
+
 	'STYLEREG'			=> 'You must be logged in to use the Styles Changer',
 	'DESIGNED_BY'		=> 'Designed by',
 	'EDITED'			=> 'Edited*',
@@ -240,7 +249,7 @@ $lang = array_merge($lang, array(
 	'BOARD_DEFAULT_STYLE'	=> 'Default Style',
 	'STYLE'					=> 'Style',
 
-	'UNDER_CONSTRUCTION'	=> "<b>The page you requested is currently under construction...</b><br /><br />Please use the 'Back' button to return to previous page.",
+	'UNDER_CONSTRUCTION'	=> "<b>The page you requested is currently under construction...</strong><br /><br />Please use the 'Back' button to return to previous page.",
 	'BASIC_RULES_HEADER'	=> 'Site rules.',
 	'BASIC_RULES'			=>	"While the administrators and moderators of this forum will attempt to remove or edit any generally objectionable material as quickly as possible, it is impossible to review every message. Therefore you acknowledge that all posts made to these forums express the views and opinions of the author and not the administrators, moderators or webmaster (except for posts by these people) and hence will not be held liable.<br /><br />
 	You agree not to post any abusive, obscene, vulgar, slanderous, hateful, threatening, sexually-oriented or any other material that may violate any applicable laws. Doing so may lead to you being immediately and permanently banned (and your service provider being informed). The IP address of all posts is recorded to aid in enforcing these conditions. You agree that the webmaster, administrator and moderators of this forum have the right to remove, edit, move or close any topic at any time should they see fit. As a user you agree to any information you have entered above being stored in a database. While this information will not be disclosed to any third party without your consent, the webmaster, administrator and moderators cannot be held responsible for any hacking attempt that may lead to the data being compromised.<br /><br />
@@ -267,6 +276,10 @@ $lang = array_merge($lang, array(
 	'CURRENTLY_DISABLED'	=> 'Code is currently disable pending updates',
 
 	'TEMPORARILY_HIDE_BLOCKS'	=> 'Temporarily Hide Blocks',
+
+	'SHOWHIDE_GOOGLE'		=> 'Show/Hide Google translations',
+	'SHOWHIDE_BABEL'		=> 'Show/Hide Babel Fish  translations',
+	'SHOWHIDE_LIVE'			=> 'Show/Hide Windows live  translations',
 
 	//Keep bots happy
 	'BLOCK_BOT_TRACKER'		=> 'Stargate Portal Bot Tracker',

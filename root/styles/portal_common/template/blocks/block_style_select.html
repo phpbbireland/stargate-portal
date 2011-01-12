@@ -1,7 +1,6 @@
-<!-- IDTAG starts block_style_select.html 12 November 2008 copyright phpbbireland.com 2007 -->
+<!-- IDTAG starts block_style_select.html 23 December 2010 copyright phpbbireland.com 2007 -->
 <div class="block_data">
-	<div style="text-align:center; font-size:10px; padding-top:5px;"><img src="images/theme_thumbs.gif" style="padding-bottom:6px;" width="120" height="84" alt="" /><br /> {L_SELECT_STYLE_EXPLAINED}</div>
-	<div style="text-align:center; font-size:11px; padding:5px; padding-top:7px;"><!-- IF S_SELECT_ALLOW -->{L_USERS_STYLE}<!-- ELSE -->{L_STYLE_SELECT_DISABLED}<!-- ENDIF --></div>
+	<!--<div style="text-align:center; font-size:11px; padding:5px; padding-top:7px;"><!-- IF S_SELECT_ALLOW -->{L_USERS_STYLE}<!-- ELSE -->{L_STYLE_SELECT_DISABLED}<!-- ENDIF --></div>-->
 	<div style="text-align:center; font-size:10px; padding:2px;">
 	<!-- IF not S_USER_LOGGED_IN -->
 		<!-- IF S_SELECT_ALLOW -->
@@ -19,11 +18,13 @@
 	<!-- IF S_USER_LOGGED_IN and S_SELECT_ALLOW -->
 		<form method="post" id="style_select" action="{S_SELECT_ACTION}">
 			<div style="font-size:10px;">{S_SELECT_STYLE}{S_SELECT_CHANGE}</div>
-			<div><strong>{S_CUR_COPYRIGHT}</strong></div>
-			<!-- IF U_PORTED_BY --><div style="padding:5px;">{L_PORTED_BY} {U_PORTED_BY}</div><!-- ENDIF -->
-			<div style="padding-top:3px;">{L_MAKE_PERMANENT}	<input type="radio" class="radio" id="permanent" name="permanent" value="1"<!-- IF S_PERMANENT --> checked="checked"<!-- ENDIF --> /> {L_YES}</input></div>
-			<div class="hr"><hr /></div>
-			{STYLE_USERS}
+			<div style="padding-top: 4px; text-align:center;">{L_PERMANENT} <input type="checkbox" title="{L_MAKE_PERMANENT}" class="radio" id="permanent" name="permanent" value="1"<!-- IF S_PERMANENT --> checked="checked"<!-- ENDIF --> /></div>
+			<div style="text-align:center; font-size:10px; padding-top:5px;">{L_SELECT_STYLE_EXPLAINED}</div>
+			<!-- IF S_LINK --><div style="padding:5px;"><a href="{S_LINK}"><strong>{S_COPYRIGHT}</strong></a></div><!-- ENDIF -->
+			<!-- IF S_AUTHOR_CO --><div style="padding:5px;">{L_PORTED_BY} <a href="{S_SUPPORT}" >{S_AUTHOR_CO}</a></div><!-- ENDIF -->
+			<div><hr /></div>
+			<!-- IF S_DETAILS -->{S_DETAILS}<!-- ENDIF -->
+			<div style="padding:5px;">{STYLE_USERS}</div>
 			<div style="padding:5px;">{L_TOTAL_STYLES}:&nbsp;<strong>{S_TOTAL_STYLES}</strong></div>
 		</form>
 	<!-- ENDIF -->

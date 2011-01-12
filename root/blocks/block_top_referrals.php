@@ -29,11 +29,19 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $k_config;
-$sgp_cache_time = $k_config['sgp_cache_time'];
-
+global $k_config, $k_blocks;
 $queries = $cached_queries = 0;
 $total_hits = 0;
+
+
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_top_referrals.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 // portal config values //
 $num_refviews = $k_config['num_refviews'];
@@ -62,7 +70,7 @@ if ($http_referrals)
 			$http_time = time();
 			
 			$sql = 'SELECT * FROM '.K_REFERRALS_TABLE."  WHERE host = '" . $db->sql_escape($http_host) . "'";
-			$result = $db->sql_query($sql, $sgp_cache_time);
+			$result = $db->sql_query($sql, $block_cache_time);
 
 			$row = $db->sql_fetchrow($result);
 			$db->sql_freeresult($result);
@@ -90,7 +98,7 @@ if ($http_referrals)
 $sql = "SELECT hits, SUM(hits) 
 	FROM " . K_REFERRALS_TABLE . "
 	WHERE enabled = 1";
-$result = $db->sql_query($sql, $sgp_cache_time);
+$result = $db->sql_query($sql, $block_cache_time);
 $row = $db->sql_fetchrow($result);
 $total_hits = $row['SUM(hits)'];
 $db->sql_freeresult($result);
@@ -98,7 +106,7 @@ $db->sql_freeresult($result);
 $sql = 'SELECT *
 		FROM '. K_REFERRALS_TABLE . ' 
 		WHERE enabled = 1 ORDER BY hits DESC, lastvisit DESC';
-$result = $db->sql_query_limit($sql, $num_refviews, 0, $sgp_cache_time);
+$result = $db->sql_query_limit($sql, $num_refviews, 0, $block_cache_time);
 
 if (!$result)
 {

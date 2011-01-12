@@ -29,19 +29,19 @@ if (!defined('IN_PHPBB'))
 * Avoid reprocessing data if already available... every little helps ;) 
 **/
 
-// Get the currect page //
-$this_page = explode(".", $user->page['page']);
+global $k_config, $phpbb_root_path, $web_path, $k_blocks;
 
-// Is the information is already available? //
-if ($this_page[0] == 'memberlist')
+foreach ($k_blocks as $blk)
 {
-	// The information is available so no need to process //
-	return;
+	if ($blk['html_file_name'] == 'block_the_team.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
 }
 
-global $k_config, $phpbb_root_path, $web_path;
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
-$sgp_cache_time = $k_config['sgp_cache_time'];
+$block_cache_time = $k_config['block_cache_time_default'];
 $queries = $cached_queries = 0;
 $store = '';
 $change = true;
@@ -82,7 +82,7 @@ $global_mod_id_ary = array_unique($global_mod_id_ary);
 $sql = 'SELECT group_id, group_colour, group_name
 	FROM ' . GROUPS_TABLE . "
 	WHERE group_name = 'ADMINISTRATORS' || group_name ='STAFF'";
-$result = $db->sql_query($sql, $sgp_cache_time);
+$result = $db->sql_query($sql, $block_cache_time);
 
 $admin_group_id = (int) $db->sql_fetchfield('group_id');
 $db->sql_freeresult($result);
@@ -99,7 +99,7 @@ $sql = $db->sql_build_query('SELECT', array(
 			AND u.group_id = g.group_id',
 		'ORDER_BY'	=> 'g.group_name ASC, u.username_clean ASC'
 ));
-$result = $db->sql_query($sql, $sgp_cache_time);
+$result = $db->sql_query($sql, $block_cache_time);
 
 while ($row = $db->sql_fetchrow($result))
 {
@@ -164,7 +164,7 @@ while ($row = $db->sql_fetchrow($result))
 		$change = false;
 	}
 
-	$template->assign_block_vars($which_row, array(
+	$template->assign_block_vars('sgp_' . $which_row, array(
 		'S_CHANGE'			=> $change,
 
 		'GROUP_IMG_PATH'	=> $group_image_path,

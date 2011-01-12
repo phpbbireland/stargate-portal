@@ -29,7 +29,7 @@ if (!defined('IN_PHPBB'))
 }
 
 global $k_config;
-$sgp_cache_time = $k_config['sgp_cache_time'];
+$block_cache_time = $k_config['block_cache_time_default'];
 
 $max_last_online = $k_config['max_last_online']; //Numbers of users to show in the lisat configurable via ACP
 
@@ -51,7 +51,7 @@ if ($auth->acl_gets('u_viewprofile'))
 		GROUP BY s.session_user_id, u.user_id
 		ORDER BY session_time DESC, u.user_lastvisit DESC' ;
 
-	$result = $db->sql_query_limit($sql, $max_last_online, 0, $sgp_cache_time);
+	$result = $db->sql_query_limit($sql, $max_last_online, 0, $block_cache_time);
 
 	$session_times = array();
 	while($row = $db->sql_fetchrow($result))

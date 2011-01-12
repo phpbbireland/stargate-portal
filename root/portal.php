@@ -38,7 +38,7 @@ $user->add_lang('viewtopic');
 display_forums('', $config['load_moderators']);
 
 global $k_config;
-$sgp_cache_time = $k_config['sgp_cache_time'];
+$block_cache_time = $k_config['block_cache_time_default'];
 
 // Set some stats, get posts count from forums data if we... hum... retrieve all forums data
 $total_posts	= $config['num_posts'];
@@ -74,7 +74,7 @@ else
 			AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . $user->data['user_id'] . ')
 		ORDER BY g.group_name ASC';
 }
-$result = $db->sql_query($sql, $sgp_cache_time);
+$result = $db->sql_query($sql, $block_cache_time);
 
 $legend = array();
 while ($row = $db->sql_fetchrow($result))
@@ -104,7 +104,7 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 		FROM ' . USERS_TABLE . "
 		WHERE user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%'
 			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
-	$result = $db->sql_query($sql, $sgp_cache_time);
+	$result = $db->sql_query($sql, $block_cache_time);
 
 	while ($row = $db->sql_fetchrow($result))
 	{

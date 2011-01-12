@@ -25,14 +25,14 @@ if (!defined('IN_PHPBB'))
 }
 
 global $db, $user, $k_config;
-$sgp_cache_time = $k_config['sgp_cache_time'];
+$block_cache_time = $k_config['block_cache_time_default'];
 
 $pos = 0;
 
 // types: welcome message,  info, style //
 $sql = "SELECT * FROM ". K_MODULES_TABLE . " WHERE mod_id = 1";
 
-if (!$result = $db->sql_query($sql,$sgp_cache_time))
+if (!$result = $db->sql_query($sql,$block_cache_time))
 {
 	trigger_error($user->lang['ERROR_PORTAL_WELCOME'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }

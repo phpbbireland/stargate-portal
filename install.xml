@@ -703,7 +703,7 @@ function sgp_user_country_flag_select($passed)
 
 <open src="viewforum.php">
 <edit>
-<find><![CDATA[	'FOLDER_NEW_IMG'			=> $user->img('topic_unread', 'NEW_POSTS'),]]></find>
+<find><![CDATA[	'S_VIEWFORUM'			=> true,]]></find>
 <action type="after-add"><![CDATA[	'FOLDER_NEWS_IMG'			=> $user->img('news_read', 'NEW_POST_NEWS'),
 	'FOLDER_NEWS_NEW_IMG'		=> $user->img('news_unread', 'NO_NEW_POST_NEWS'),]]></action>
 
@@ -768,7 +768,7 @@ function sgp_user_country_flag_select($passed)
 </edit>
 
 <edit>
-<find><![CDATA['FORUM_ID'					=> $forum_id,]]></find>
+<find><![CDATA[			'TOPIC_TYPE'		=> $topic_type,]]></find>
 <action type="after-add"><![CDATA[			'TOOLTIP'					=> (STARGATE && isset($row['message_tooltip'])) ? sgp_truncate_message(bbcode_strip(($row['message_tooltip'])), 500) : '',]]></action>
 
 </edit>
@@ -868,7 +868,6 @@ function sgp_user_country_flag_select($passed)
 </edit>
 
 </open>
-
 
 
 <open src="includes/mcp/mcp_main.php">
@@ -2041,7 +2040,7 @@ $lang = array_merge($lang, array(
 
 <open src="language/en/acp/styles.php">
 <edit>
-<find><![CDATA[	'IMG_GLOBAL_UNREAD_LOCKED_MINE'		=> 'Global locked posted to new',]]></find>
+<find><![CDATA[	'IMG_USER_ICON10'		=> 'User defined image 10',]]></find>
 <action type="after-add"><![CDATA[	'IMG_NEWS_READ'					=> 'News',
 	'IMG_NEWS_READ_MINE'			=> 'News posted to',
 	'IMG_NEWS_READ_LOCKED'			=> 'News locked',
@@ -2301,8 +2300,8 @@ $lang = array_merge($lang, array(
 <open src="styles/prosilver/template/viewforum_body.html">
 <edit>
 <comment lang="en">Line ~129</comment>
-<find><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and topicrow.S_TOPIC_TYPE gt 1 -->{L_ANNOUNCEMENTS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></find>
-<action type="replace-with"><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and topicrow.S_TOPIC_TYPE gt 1 -->{L_ANNOUNCEMENTS_AND_NEWS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></action>
+<find><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL) -->{L_ANNOUNCEMENTS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></find>
+<action type="replace-with"><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL) -->{L_ANNOUNCEMENTS_AND_NEWS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></action>
 </edit>
 
 <edit>

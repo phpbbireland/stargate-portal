@@ -249,7 +249,7 @@ class acp_k_modules
 
 					if ($mod_name == '' || $mod_type == '')
 					{
-						echo 'Error.........';
+						$message = $user->lang['NO_NAME_NO_TYPE'];
 						return;
 					}
 

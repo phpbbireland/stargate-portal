@@ -27,9 +27,18 @@ if (!defined('IN_PHPBB'))
 // for bots test //
 //$page_title = $user->lang['BLOCK_CLOUD'];
 
-global $k_config, $user_id, $user, $template, $phpbb_root_path, $phpEx, $db, $config;
+global $k_config, $k_blocks, $user_id, $user, $template, $phpbb_root_path, $phpEx, $db, $config;
 
 $queries = $cached_queries = 0;
+
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_cloud_searches.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 if (isset($phpbb_root_path))
 {
@@ -41,8 +50,6 @@ else
 }
 
 $scumuluscontent = '';
-
-$cloud_search_cache = $k_config['cloud_search_cache'];
 
 $cloud_max_tags		= $k_config['cloud_max_tags'];
 $cloud_movie		= $k_config['cloud_movie'];
@@ -67,7 +74,7 @@ $sql = 'SELECT l.word_text, word_count
 	WHERE m.word_id = l.word_id
 	GROUP BY m.word_id';
 
-$result = $db->sql_query_limit($sql, $cloud_max_tags, 0, $cloud_search_cache);
+$result = $db->sql_query_limit($sql, $cloud_max_tags, 0, $block_cache_time);
 
 while ($row = $db->sql_fetchrow($result))
 {

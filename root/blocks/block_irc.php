@@ -25,7 +25,7 @@ if (!defined('IN_PHPBB'))
 }
 
 global $phpbb_root_path, $phpEx, $config, $k_config, $user;
-$sgp_cache_time = $k_config['sgp_cache_time'];
+$block_cache_time = $k_config['block_cache_time_default'];
 $queries = $cached_queries = 0;
 
 $template->assign_vars( array(

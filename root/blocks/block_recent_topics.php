@@ -41,8 +41,16 @@ $auth->acl($user->data);
 
 $queries = $cached_queries = 0;
 
-	global $user, $forum_id, $phpbb_root_path, $phpEx, $SID, $config , $template, $portal_config, $userdata, $config, $k_config, $db, $phpEx;
-	$block_recent_cache_time = (isset($k_config['block_recent_cache_time']) ? $k_config['block_recent_cache_time'] : '10');
+	global $user, $forum_id, $phpbb_root_path, $phpEx, $SID, $config , $template, $k_config, $k_blocks, $userdata, $config, $k_config, $db, $phpEx;
+
+	foreach ($k_blocks as $blk)
+	{
+		if ($blk['html_file_name'] == 'block_recent_topics.html')
+		{
+			$block_cache_time = $blk['block_cache_time']; 
+		}
+	}
+	$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 	// set up variables used //
  	$display_this_many = $k_config['number_of_recent_topics_to_display'];
@@ -55,7 +63,7 @@ $queries = $cached_queries = 0;
 	// get all forums //
 	$sql = "SELECT * FROM ". FORUMS_TABLE . " ORDER BY forum_id";
 
-	if (!$result = $db->sql_query($sql, $block_recent_cache_time))
+	if (!$result = $db->sql_query($sql, $block_cache_time))
 	{
 		trigger_error($user->lang['ERROR_FORUM_INFO'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}
@@ -92,7 +100,7 @@ $queries = $cached_queries = 0;
 		ORDER BY p.post_id DESC
 		LIMIT " . $display_this_many;
 
-	if (!$result = $db->sql_query($sql, $block_recent_cache_time))
+	if (!$result = $db->sql_query($sql, $block_cache_time))
 	{
 		trigger_error('ERROR_PORTAL_RECENT_TOPICS' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}
@@ -108,7 +116,7 @@ $queries = $cached_queries = 0;
 				FROM " . FORUMS_TABLE . "
 				WHERE forum_id = " . $row['forum_id'] . "
 				LIMIT " . 1;
-			$my_result = $db->sql_query($sql2, $block_recent_cache_time);
+			$my_result = $db->sql_query($sql2, $block_cache_time);
 			$my_row = $db->sql_fetchrow($my_result);
 			$db->sql_freeresult($my_result);
 
@@ -123,7 +131,7 @@ $queries = $cached_queries = 0;
 		FROM " . K_BLOCKS_TABLE . "
 		WHERE title = 'Recent Topics' ";
 
-	if ($result = $db->sql_query($sql, $block_recent_cache_time))
+	if ($result = $db->sql_query($sql, $block_cache_time))
 	{
 		$rowx = $db->sql_fetchrow($result);
 		$scroll = $rowx['scroll'];

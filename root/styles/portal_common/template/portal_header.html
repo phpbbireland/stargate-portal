@@ -34,11 +34,6 @@ onload_functions.push('init_scrollers()');
 // ]]>
 </script>
 
-<!--
-	This file is common to all styles...
-	portal_header.html 29 December 2008 19:01 starts
--->
-
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
@@ -64,6 +59,7 @@ onload_functions.push('init_scrollers()');
 	<script type="text/javascript" src="{ROOT_PATH}js/js/stack-1.js"></script>
 -->
 <!-- ENDIF -->
+
 <script type="text/javascript" src="{ROOT_PATH}js/mytooltip.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}mp3/ufo.js"></script>
 <script type="text/javascript" src="{ROOT_PATH}js/portal.js"></script>
@@ -98,16 +94,9 @@ onload_functions.push('init_scrollers()');
 		}
 	});
 </script>
-<!-- portal_header.html 10 March 2008 08:32 ends -->
 
-<!-- load portal css last -->
-<!--
-<link rel="stylesheet" href="{T_STYLESHEET_PORTAL_COMMON}" type="text/css" />
--->
 <link rel="stylesheet" href="{T_STYLESHEET_PORTAL_OVERLOAD}" type="text/css" />
-<!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED and not (S_SHOW_COPPA or S_REGISTRATION) -->
-<link rel="stylesheet" href="{T_THEME_PATH}/colours/_red.css" type="text/css" />
-<!-- ENDIF -->
+
 <!-- INCLUDE portal_sizer.html -->
 
 <script type="text/javascript">
@@ -167,17 +156,26 @@ if(debug)
 </script>
 <!-- agent script end -->
 
-<!-- this was from old version of prosilver overall_header ?
-<script type="text/JavaScript">
-// match all instances of 'external'
-document.observe("dom:loaded", function() {
-	$$("a[rel~=external]").each(function(el) {
-		el.observe("click", function(event) {
-			window.open(this.href);
-			event.preventDefault();
+<script type="text/javascript" src="{ROOT_PATH}js/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript">
+	jQuery.noConflict();
+	jQuery(document).ready(function(){
+		// hides the quick reply box as soon as the DOM is ready - (a little sooner than page load)
+		jQuery('.fastreply').hide();
+		// toggles the quick reply box on clicking the quick reply button
+		jQuery('a.fast-reply').click(function() {
+		jQuery('.fastreply').toggle(400);
+		return false;
 		});
 	});
-});
+
+	jQuery.noConflict();
+	jQuery(document).ready(function(){
+		// toggles the quick reply button from button_topic_qreply.gif to button_topic_qreply_no.gif
+			jQuery(".qreply-icon").toggle(function () {
+			jQuery(this).css({'background' : 'url("{T_IMAGESET_LANG_PATH}/button_topic_qreply_no.gif") 0 0 no-repeat'});
+			}, function () {var cssObj = {'background' : 'url("{T_IMAGESET_LANG_PATH}/button_topic_qreply.gif") 0 0 no-repeat'}
+			jQuery(this).css(cssObj);
+		});
+	});
 </script>
--->
-<!-- portal_header.html ends -->

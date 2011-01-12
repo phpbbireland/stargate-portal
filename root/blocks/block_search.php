@@ -24,13 +24,13 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-// disable block for bots (else bots will not work). 05 September 2009
-$grp = sgp_get_group_name($user->data['group_id']);
-
-if ($grp == 'Bots' || $grp == 'Guests')
+/*
+$grp = strtoupper(sgp_get_group_name($user->data['group_id']));
+if ($grp == 'BOTS' || $grp == 'GUESTS')
 {
 	return;
 }
+*/
 
 //$user->add_lang('portal/portal');
 $user->add_lang('search');
@@ -41,9 +41,11 @@ $keywords		= request_var('keywords', '', true);
 $queries = $cached_queries = 0;
 
 // Is user able to search or it has been disabled?
-if (!$auth->acl_get('u_search') || !$auth->acl_getf_global('f_search') || !$config['load_search'])
+//if (!$auth->acl_get('u_search') || !$auth->acl_getf_global('f_search') || !$config['load_search'])
+if (!$auth->acl_getf_global('f_search') || !$config['load_search'])
 {
-	trigger_error($user->lang['NO_SEARCH']);
+	$template->assign_var('S_NO_SEARCH', true);
+	trigger_error('NO_SEARCH');
 }
 
 global $lang, $template, $portal_config, $board_config;

@@ -31,8 +31,18 @@ if (!defined('IN_PHPBB'))
 
 	include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
 
-	global $k_config;
-	$sgp_cache_time = $k_config['sgp_cache_time'];
+	global $k_config, $k_blocks;
+
+	foreach ($k_blocks as $blk)
+	{
+		if ($blk['html_file_name'] == 'block_bot_tracker.html')
+		{
+			$block_cache_time = $blk['block_cache_time']; 
+		}
+	}
+	$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
+
+	$block_cache_time = $k_config['block_cache_time_default'];
 
 	$number_of_bots_to_show = $k_config['number_of_bots_to_display'];
 	$show_bot_tracker = $k_config['allow_bot_display'];
@@ -45,7 +55,7 @@ if (!defined('IN_PHPBB'))
 		AND user_lastvisit > ' . $after_date . '
 		ORDER BY user_lastvisit DESC';
 
-	$result = $db->sql_query_limit($sql, $number_of_bots_to_show, 0, $sgp_cache_time);
+	$result = $db->sql_query_limit($sql, $number_of_bots_to_show, 0, $block_cache_time);
 
 	while ($row = $db->sql_fetchrow($result))
 	{

@@ -33,9 +33,16 @@
 	include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
 
 	global $db, $user, $_SID, $_EXTRA_URL;
-	global $k_groups, $k_group_id, $k_group_name_id;
+	global $k_groups, $k_group_id, $k_group_name_id, $k_blocks;
 
-	$sgp_cache_time = $k_config['sgp_cache_time'];
+	foreach ($k_blocks as $blk)
+	{
+		if ($blk['html_file_name'] == 'block_header_menus.html')
+		{
+			$block_cache_time = $blk['block_cache_time']; 
+		}
+	}
+	$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 	// menu_type 0 = Header Menu,
 	// menu type 1 = Main Nav blocks,
@@ -54,14 +61,14 @@
 		WHERE menu_type = " . HEADER_MENUS . " && view_by != 0
 		ORDER BY ndx ASC ";
 
-	if (!$result = $db->sql_query($sql, $sgp_cache_time))
+	if (!$result = $db->sql_query($sql, $block_cache_time))
 	{
 		trigger_error($user->lang['ERROR_PORTAL_MENUS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}
 
 	$portal_menus = array();
 
-	while( $row = $db->sql_fetchrow($result) )
+	while($row = $db->sql_fetchrow($result))
 	{
 		$portal_menus[] = $row;
 	}

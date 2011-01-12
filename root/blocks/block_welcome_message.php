@@ -26,14 +26,22 @@ if (!defined('IN_PHPBB'))
 
 	$queries = $cached_queries = 0;
 
-	global $db, $user, $k_config;
-	$sgp_cache_time = $k_config['sgp_cache_time'];
+	global $db, $user, $k_config, $k_blocks;
+
+	foreach ($k_blocks as $blk)
+	{
+		if ($blk['html_file_name'] == 'block_welcome_message.html')
+		{
+			$block_cache_time = $blk['block_cache_time']; 
+		}
+	}
+	$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 	include($phpbb_root_path . 'includes/sgp_functions.' . $phpEx);
 
 	$sql = "SELECT * FROM ". K_MODULES_TABLE . " WHERE mod_id = 1";
 
-	if (!$result = $db->sql_query($sql, $sgp_cache_time))
+	if (!$result = $db->sql_query($sql, $block_cache_time))
 	{
 		trigger_error('ERROR_PORTAL_WELCOME' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}

@@ -262,9 +262,11 @@ $lang = array_merge($lang, array(
 	'YOUTUBE_LINK_EXPLAIN'		=> 'Just in case youtube ever change we best provide an alternate',
 	'NO_CONFIG_FILE_FOUND'		=> 'No configuration required, or no file available for this module.',
 
-	'BLOCK_CACHE_TIME_HEAD'		=> 'Block Cache Time',
-	'BLOCK_CACHE_TIME'			=> 'Set the block cache time.',
-	'BLOCK_CACHE_TIME_EXPLAIN'	=> 'Currently all blocs use the same cache period.',
+	'BLOCK_CACHE_TIME_RECENT'	=> 'Recent topics cache time',
+	'BLOCK_CACHE_TIME_SHORT'	=> 'Block cache time short',
+	'BLOCK_CACHE_TIME_LONG'		=> 'Block cache time long ',
+	'BLOCK_CACHE_TIME_MEDIUM'	=> 'Block cache time medium',
+
 
 	'BLOCK_RECENT_CACHE_TIME'			=> 'Set recent topics cache time.',
 	'BLOCK_RECENT_CACHE_TIME_EXPLAIN'	=> 'Currently all blocs except recent opics use the same cache period.',
@@ -286,7 +288,7 @@ $lang = array_merge($lang, array(
 // Acronyms
 $lang = array_merge($lang, array(
 	'ACP_ACRONYMS'			=> 'Manage acronyms',
-	'ACP_ACRONYMS_EXPLAIN'	=> 'Add and manage acronyms in posts... <strong>Note:</strong> Acronyms appearing inside another antonyms meaning may cause problems...',
+	'ACP_ACRONYMS_EXPLAIN'	=> 'Add and manage acronyms in posts... <br /><strong>Note:</strong> Where acronyms are comprised or two or more words, they should not contain existing acronyms in their meaning... <br />For example, in the case of the acronym: phpBB3 which appears in the acronym: Stargate Portal, we replace <strong>phpBB3</strong> with <strong>phpBB version 3</strong> to avoid breaking things... In general acronyms should not contain spaces...',
 	'ACRONYM'				=> 'Acronym',
 	'ACRONYM_EXPLAIN'		=> 'From this control panel you can add, edit, and remove acronyms that will be automatically added to posts on your forums.',
 

@@ -25,7 +25,15 @@ if (!defined('IN_PHPBB'))
 $queries = $cached_queries = 0;
 
 global $k_config, $k_blocks;
-$sgp_cache_time = $k_config['sgp_cache_time'];
+
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_the_team.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 $range_interval = $k_config['age_range_interval'];	//this calculates the interval in the age groups ... if 10 => 10-19, 20-29, if 5 => 10-14, 15-19...
 $range_start = $k_config['age_range_start'];
@@ -44,7 +52,7 @@ for ($i = $range_start; $i < $upper_limit; $i += $range_interval)
 $sql = 'SELECT user_birthday FROM ' . USERS_TABLE . "
 		WHERE user_birthday != ''
 			AND user_type <> 2";
-$result = $db->sql_query($sql, $sgp_cache_time);
+$result = $db->sql_query($sql, $block_cache_time);
 
 while ($row = $db->sql_fetchrow($result))
 {

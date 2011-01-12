@@ -111,13 +111,16 @@ if (!class_exists('acronym_cache'))
 
 /***
 * stargate hardcoded acronyms function, replaces acronyms. Started: 14 February 2007
+* Fix: 10 January 2011
 */
 if (!function_exists('sgp_local_acronyms'))
 {
 	function sgp_local_acronyms($message)
 	{
 		global $user;
-		$message = str_replace("[you!]", '<span title="{L_THIS_MEANS_YOU}" style="font-style:italic; border-bottom:1px #BD5121 dashed ; cursor: help; color:#' . $user->data['user_colour'] . ';">' . $user->data['username'] . '</span>', $message);
+		$you = $user->lang['THIS_MEANS_YOU'];
+
+		$message = str_replace("[you!]", '<span title="' . $you . '" style="font-style:italic; border-bottom:1px #BD5121 dashed ; cursor: help; color:#' . $user->data['user_colour'] . ';">' . $user->data['username'] . '</span>', $message);
 		$message = str_replace("[day-time]", $user->format_date(time()), $message);
 		$message = str_replace("[date-now]", date( "d-m-Y", time() ), $message);
 		return($message);

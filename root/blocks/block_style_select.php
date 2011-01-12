@@ -24,31 +24,50 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
+global $user_id, $user, $template, $phpbb_root_path, $phpEx, $db, $config, $k_config, $k_blocks;
+
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_style_select.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
+
 $queries = $cached_queries = 0;
+$style_count = 0;
 
-global $user_id, $user, $template, $phpbb_root_path, $phpEx, $db, $config, $k_config;
-$sgp_cache_time = $k_config['sgp_cache_time'];
-
-$queries = $cached_queries = 0;
-
+// grab all infor //
 $user_id = $user->data['user_id'];					// get user id
 $current_style = $user->data['user_style'];			// the current style
 $new_style = request_var('style', '');				// selected style
-$permanent = request_var('permanent', '');			// make style permanent
-$style_count = 0;
+$make_permanent = request_var('permanent', '');		// make style permanent
 
-// add this to sgp config...
-$select_allow = ($config['override_user_style']) ? false : true;
+$allow_style_change = ($config['override_user_style']) ? false : true;
+$change_db_style = ($allow_style_change && $make_permanent) ? true : false;
 
-// allowed style change and make it permanent? //
-$style = $new_style = ($config['override_user_style']) ? $config['default_style'] : $new_style; 
+$select_style = request_var('style', 1);
 
-if (!$config['override_user_style'] && $new_style != '' && $new_style != $current_style && $permanent)
+// stop url from duplicating style...
+if(!$new_style)
+{
+	$s_select_action = build_url('style') .'?style='. $select_style;
+}
+else
+{
+	$s_select_action = '';
+}
+
+
+if ($new_style != $current_style && $change_db_style)
 {
 	$sql = "UPDATE " . USERS_TABLE . " 
 		SET user_style = " . (int)$new_style . "
 		WHERE user_id = " . (int)$user_id;
-	$db->sql_query($sql);
+	$db->sql_query($sql, $block_cache_time);
+
+	//$s_select_action = build_url('style') .'?style='. $new_style;
 }
 
 // Get current style information
@@ -66,7 +85,8 @@ else
 		LEFT JOIN " . K_MODULES_TABLE . " m ON (s.style_name = m.mod_name)
 			WHERE u.user_id = '" . (int)$user_id . "' AND s.style_id = u.user_style AND s.style_active = 1";
 }
-$result = $db->sql_query($sql, $sgp_cache_time);
+$result = $db->sql_query($sql, $block_cache_time);
+
 
 while ($row = $db->sql_fetchrow($result))
 {
@@ -75,7 +95,6 @@ while ($row = $db->sql_fetchrow($result))
 	$style					= $row['style_id'];
 	$stylename				= sgp_checksize ($row['style_name'], 16);
 	$style_copyright		= ($row['style_copyright']) ? $row['style_copyright'] : $user->lang['WARNINGIMG_COPYRIGHT'];
-
 	$style_details			= '';
 	$style_author			= ($row['mod_author']) ? $row['mod_author'] : 'No author';
 	$style_link				= ($row['mod_link']) ? $row['mod_link'] : 'No Link info';
@@ -90,7 +109,7 @@ $sql = 'SELECT user_style
 	FROM ' . USERS_TABLE . "
 	WHERE user_style = '" . (int)$style . "'
 	ORDER BY user_style";
-$result = $db->sql_query($sql, $sgp_cache_time);
+$result = $db->sql_query($sql, $block_cache_time);
 
 $style_count = sizeof($db->sql_fetchrowset($result));
 
@@ -99,7 +118,7 @@ $sql = 'SELECT style_name, style_id, style_active
 	FROM ' . STYLES_TABLE . '
 	WHERE style_active = 1
 	ORDER BY LOWER(style_name) ASC';
-$result = $db->sql_query($sql, $sgp_cache_time);
+$result = $db->sql_query($sql, $block_cache_time);
 
 $styles_num = sizeof($db->sql_fetchrowset($result));
 		
@@ -127,7 +146,7 @@ while ($row = $db->sql_fetchrow($result))
 }
 $select_theme .= "</select>\n";
 
-$select_theme_ok = $user->lang['WARNING_LOGIN_STYLE_SELECT']; //$user->lang['LOGIN_NOTIFY_FORUM']; //add lang key later...	'STYLE_SELECT_ALLOW'	  => 'Allow style change',
+$select_theme_ok = $user->lang['WARNING_LOGIN_STYLE_SELECT'];
 
 $s_hidden = '<input type="hidden"  id="change" name="change" value="' . $row['style_id'] . '" />';
 
@@ -136,30 +155,6 @@ $s_hidden = '<input type="hidden"  id="change" name="change" value="' . $row['st
 if (!$new_style)
 {
 	$new_style = $current_style;
-}
-
-$s_select_action = append_sid('?style='. $new_style);
-
-
-/* 04 October 2010 MPV update testing 
-
-//check for vars in the current url
-//$check = sizeof($_GET);
-
-if ($check)
-{
-	$order   = array(".php?style=", ".php?");
-	$replace = '.php';
-	$s_select_action = str_replace($order, $replace . '?style=' . $new_style . '&amp;', build_url('style'));
-}
-
-Preliminary test results... it appears to work fine... why the other code? 
-*/
-
-//check if only style or sid is set
-if (isset($_REQUEST['style']) or isset($_REQUEST['sid']))
-{
-	$s_select_action = build_url('style') .'?style='. $new_style;
 }
 
 switch($style_download_count)
@@ -174,10 +169,11 @@ switch($style_download_count)
 }
 
 $template->assign_vars(array(
+	'S_CH'				=> $select_style,
 	'S_MOD_ID'			=> $mod_id,
 	'S_EXTERNAL'		=> ($mod_origin) ? false : true, 
 	'S_COPYRIGHT'		=> $style_copyright,
-	'S_SELECT_ALLOW'	=> $select_allow,
+	'S_SELECT_ALLOW'	=> $allow_style_change,
 	'S_SELECT_STYLE' 	=> $select_theme,
 	'S_SELECT_CHANGE' 	=> $s_hidden,
 	'S_SELECT_ACTION' 	=> $s_select_action,

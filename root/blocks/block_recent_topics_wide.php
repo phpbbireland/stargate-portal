@@ -41,10 +41,18 @@ $queries = $cached_queries = 0;
 @define('POST_POST_URL', 'p');
 @define('POST_GROUPS_URL', 'g');
 
-global $user, $forum_id, $phpbb_root_path, $phpEx, $SID, $config , $template, $portal_config, $db;
+global $user, $forum_id, $phpbb_root_path, $phpEx, $SID, $config, $template, $k_config, $k_blocks, $db;
 //global $web_path;
 
-$block_recent_cache_time = (isset($k_config['block_recent_cache_time']) ? $k_config['block_recent_cache_time'] : '10');
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_recent_topics_wide.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
+
 
 // set up variables used //
 $display_this_many = $k_config['number_of_recent_topics_to_display'];
@@ -64,7 +72,7 @@ $sql = "SELECT html_file_name, scroll, position
 	FROM " . K_BLOCKS_TABLE . "
 	WHERE html_file_name = 'block_recent_topics_wide.html' ";
 
-if ($result = $db->sql_query($sql, $block_recent_cache_time))
+if ($result = $db->sql_query($sql, $block_cache_time))
 {
 	$row = $db->sql_fetchrow($result);
 	$scroll = $row['scroll'];
@@ -80,7 +88,7 @@ $style_row = ($scroll) ? 'scrollwide_' : 'staticwide_';
 
 // get all forums //
 $sql = "SELECT * FROM ". FORUMS_TABLE . " ORDER BY forum_id";
-if (!$result = $db->sql_query($sql, $block_recent_cache_time))
+if (!$result = $db->sql_query($sql, $block_cache_time))
 {
 	trigger_error($user->lang['ERROR_PORTAL_FORUMS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }

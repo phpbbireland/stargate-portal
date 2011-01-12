@@ -27,9 +27,17 @@ if (!defined('IN_PHPBB'))
 // for bots test //
 //$page_title = $user->lang['BLOCK_CLOUD'];
 
-global $config, $k_config, $user_id, $user, $template, $phpbb_root_path, $phpEx, $db;
+global $config, $k_config, $k_blocks, $user_id, $user, $template, $phpbb_root_path, $phpEx, $db;
 
-$sgp_cache_time = $k_config['sgp_cache_time'];
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_cloud.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
+
 $queries = $cached_queries = 0;
 
 $cumuluscontent = '';
@@ -50,7 +58,7 @@ $cloud_wmode		= '"' . $k_config['cloud_wmode'] . '"';
 $sql = 'SELECT *
 	FROM ' . K_CLOUD_TABLE . '
 	WHERE is_active = 1';
-$result = $db->sql_query_limit($sql, $cloud_max_tags, 0, $sgp_cache_time);
+$result = $db->sql_query_limit($sql, $cloud_max_tags, 0, $block_cache_time);
 
 while ($row = $db->sql_fetchrow($result))
 {

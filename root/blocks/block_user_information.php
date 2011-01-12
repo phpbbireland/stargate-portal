@@ -25,12 +25,20 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $user, $ranks, $config, $k_config, $phpbb_root_path;
-$sgp_cache_time = $k_config['sgp_cache_time'];
+global $user, $ranks, $config, $k_config, $k_blocks, $phpbb_root_path;
 
 // initialise local variables //
 $queries = $cached_queries = 0;
 $rank_title = $rank_img = $rank_img_src = '';
+
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_user_information.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 sgp_get_user_rank($user->data['user_rank'], (($user->data['user_id'] == ANONYMOUS) ? false : $user->data['user_posts']), $rank_title, $rank_img, $rank_img_src);
 
@@ -43,7 +51,6 @@ $template->assign_vars(array(
 	'USR_RANK_TITLE'		=> $rank_title,
 	'USR_RANK_IMG'			=> $rank_img,
 
-	//'UI_DEBUG'				=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	'USER_INFORMATION_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
 

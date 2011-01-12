@@ -33,9 +33,16 @@
 	include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
 
 	global $db, $user, $_SID, $_EXTRA_URL;
-	global $k_groups, $k_group_id, $k_group_name_id;
+	global $k_groups, $k_group_id, $k_group_name_id, $k_blocks;
 
-	$sgp_cache_time = $k_config['sgp_cache_time'];
+	foreach ($k_blocks as $blk)
+	{
+		if ($blk['html_file_name'] == 'block_menus.html')
+		{
+			$block_cache_time	= $blk['block_cache_time'];
+		}
+	}
+	$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 	// menu_type 0 = Header Menu,
 	// menu type 1 = Main Nav blocks,
@@ -46,17 +53,19 @@
 	$k_groups = array();
 	$k_group_name_id = array();
 	$k_group_id = array();
-	$loop_count = 0;
 	$portal_menus = array();
 	$my_names = array();
 
 	$sql = "SELECT * FROM ". K_MENUS_TABLE . "
-		WHERE menu_type = " . WELCOME_MESSAGE . " && view_by != 0
+		WHERE menu_type = " . NAV_MENUS . " && view_by != 0
 		ORDER BY ndx ASC ";
 
-	if (!$result = $db->sql_query($sql, $sgp_cache_time))
+	if (!$result = $db->sql_query($sql, $block_cache_time))
 	{
-		trigger_error($user->lang['ERROR_PORTAL_MENUS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+		if (!$result = $db->sql_query($sql))
+		{
+			trigger_error($user->lang['ERROR_PORTAL_MENUS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+		}
 	}
 
 	$portal_menus = array();
@@ -67,111 +76,57 @@
 	}
 	$db->sql_freeresult($result);
 
+	// not needed but keep line for reference //
 	// $group_name = which_group($user->data['group_id']);  // change to get_group_name - do we need this one anymore? see below...
 
 	get_all_groups();
 	$memberships = array();
 	$memberships = sgp_group_memberships(false, $user->data['user_id'], false);
-	//$memberships = group_memberships(false, $user->data['user_id'], false);
 
 	for ($i = 0; $i < count($portal_menus); $i++)
 	{
-		$name = strtoupper($portal_menus[$i]['name']);														// convert to uppercase //
-		$tmp_name = str_replace(' ','_', $name);															// replace spaces with underscore //
-		$name = (!empty($user->lang[$tmp_name])) ? $user->lang[$tmp_name] : $portal_menus[$i]['name'];		// get language equivalent //
-
-		$menu_item_view_by = $portal_menus[$i]['view_by'];
-
 		$s_id = ''; 														// initiate our var session s_id, if we need to pass session id
 		$u_id = ''; 														// initiate our var user u_id, if we need to pass user id
 		$isamp = '';														// initiate our var isamp, if we need to use it
 
+		$menu_item_view_by = $portal_menus[$i]['view_by'];
+		$menu_view_groups = $portal_menus[$i]['view_groups'];
+		$menu_item_view_all = $portal_menus[$i]['view_all'];
+
 		$process_menu_item = false;
 
-		$menu_item_view_by = $portal_menus[$i]['view_by'];
+		// skip process if everyone can view this menus //
+		if ($menu_item_view_all == 0)
+		{
+			$grps = explode(",", $menu_view_groups);
 
-		// Advanced group options...
-		if ($menu_item_view_by == 0)
-		{
-			$process_menu_item = false;
-		}
-		else
-		{
 			if ($memberships)
 			{
 				foreach ($memberships as $member)
 				{
-					$group_name = $k_group_id[$member['group_id']]['group_name'];
-					if ($menu_item_view_by == $member['group_id'] || $member['group_id'] == $k_group_name_id['ADMINISTRATORS'])
+					if ($menu_item_view_by == $member['group_id'])
 					{
 						$process_menu_item = true;
 					}
 					else
 					{
-						$loop_count++;
-						switch($group_name)
+						for ($j = 0; $j < count($grps); $j++)
 						{
-							case 'Guests':
-							case 'GUESTS':
-							case 'Anonymous':
-							case 'ANONYMOUS':
-								if ($menu_item_view_by == 1 || $menu_item_view_by == $k_group_name_id['GUESTS'])
-								{
-									$process_menu_item = true;
-								}
-							break;
-
-							case 'Registered':
-							case 'REGISTERED':
-								if ($menu_item_view_by < 4 || $menu_item_view_by < $k_group_name_id['GLOBAL_MODERATORS'])
-								{
-									$process_menu_item = true;
-								}
-							break;
-
-							case 'Registered Coppa':
-							case 'REGISTERED_COPPA':
-								if ($menu_item_view_by < 4 || $menu_item_view_by < $k_group_name_id['GLOBAL_MODERATORS'])
-								{	
-									$process_menu_item = true;
-								}
-							break;
-
-							case 'Global Moderators':
-							case 'GLOBAL_MODERATORS':
-								
-								if ($menu_item_view_by < 5 || $menu_item_view_by < $k_group_name_id['ADMINISTRATORS'])
-								{
-									$process_menu_item = true;
-								}
-							break;
-
-							case 'Bots':
-							case 'BOTS':
-								if ($menu_item_view_by ==  1 || $menu_item_view_by ==  6 || $menu_item_view_by ==  $k_group_name_id['GUESTS'] || $menu_item_view_by ==  $k_group_name_id['BOTS'])
-								{
-									$process_menu_item = true;
-								}
-							break;
-							
-							default:
-								if ($menu_item_view_by == $loop_count || $menu_item_view_by < 3 || $menu_item_view_by < $k_group_name_id['REGISTERED_COPPA'])
-								{
-									$process_menu_item = true;
-								}
-							break;
+							if ($grps[$j] == $member['group_id'])
+							{
+								$process_menu_item = true;
+							}
 						}
 					}
 				}
-				$loop_count = 0;
-			}
-			else
-			{
-				$process_menu_item = false;
 			}
 		}
-		
-		if ($portal_menus[$i]['append_uid'] == 1)							// do we need to pass user id //
+		else
+		{
+			$process_menu_item = true;
+		}
+
+		if ($portal_menus[$i]['append_uid'] == 1)
 		{
 			$isamp = '&amp';
 			$u_id = $user->data['user_id'];
@@ -182,7 +137,7 @@
 			$isamp = '';
 		}
 
-		if ($portal_menus[$i]['append_sid'] == 1)							// do we need to pass user session id //
+		if ($portal_menus[$i]['append_sid'] == 1)
 		{
 			$s_id = '?sid=';
 			$s_id .= $user->session_id;
@@ -197,8 +152,13 @@
 			$j++;
 		}
 
+
 		if ($process_menu_item)
 		{
+			$name = strtoupper($portal_menus[$i]['name']);														// convert to uppercase //
+			$tmp_name = str_replace(' ','_', $name);															// replace spaces with underscore //
+			$name = (!empty($user->lang[$tmp_name])) ? $user->lang[$tmp_name] : $portal_menus[$i]['name'];		// get language equivalent //
+
 			if (strstr($portal_menus[$i]['link_to'], 'http'))
 			{
 				$link = ($portal_menus[$i]['link_to']) ? $portal_menus[$i]['link_to'] : '';

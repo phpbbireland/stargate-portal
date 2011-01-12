@@ -32,7 +32,7 @@ if (!defined('IN_PHPBB'))
 
 	global $user, $phpbb_root_path, $config, $k_config;
 
-	$sgp_cache_time = $k_config['sgp_cache_time'];
+	$block_cache_time = $k_config['block_cache_time_default'];
 
 	$phpEx = substr(strrchr(__FILE__, '.'), 1);
 
@@ -44,21 +44,8 @@ if (!defined('IN_PHPBB'))
 	$all = '';
 	$old = false;
 
-	$sql = 'SELECT *
-		FROM ' . K_BLOCKS_CONFIG_TABLE;
-
-	if ($result = $db->sql_query($sql))
-	{
-		$row = $db->sql_fetchrow($result);
-
-		$blocks_width 	= (int)$row['blocks_width'];
-		$blocks_enabled = $row['blocks_enabled'];
-		$db->sql_freeresult($result);
-	}
-	else
-	{
-		trigger_error($user->lang['ERROR_PORTAL_CONFIG'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
-	}
+	$blocks_width 	= $config['blocks_width'];
+	$blocks_enabled = $config['blocks_enabled'];
 
 	// if block disabled just return... //
 	if (!$blocks_enabled) 
@@ -90,7 +77,7 @@ if (!defined('IN_PHPBB'))
 		WHERE active = 1 
 			AND (view_by != 0 OR view_all = 1)';
 
-	$result = $db->sql_query($sql, $sgp_cache_time);
+	$result = $db->sql_query($sql, $block_cache_time);
 
 	$active_blocks = array();
 
@@ -134,7 +121,7 @@ if (!defined('IN_PHPBB'))
 		FROM " . USERS_TABLE . "
 		WHERE user_id = $user_id";
 
-	if ($result = $db->sql_query($sql, $sgp_cache_time))
+	if ($result = $db->sql_query($sql, $block_cache_time))
 	{
 		$row = $db->sql_fetchrow($result);
 		$user_avatar = $row['user_avatar'];
@@ -156,83 +143,86 @@ if (!defined('IN_PHPBB'))
 	$memberships = array();
 	$memberships = sgp_group_memberships(false, $user->data['user_id'], false);
 
-	// We use cookies to temporarily hold block positions and here we save positions to user table //
-	if ($use_block_cookies)
+/*
+	$reset = request_var('arrange', 0);
+	if ($reset)
 	{
-		if (isset($_COOKIE[$config['cookie_name'] . '_sgp_left']) || isset($_COOKIE[$config['cookie_name'] . '_sgp_center']) || isset($_COOKIE[$config['cookie_name'] . '_sgp_right']))
+		global $db, $cache;
+		$cache->destroy('sql', K_BLOCKS_TABLE);
+	}
+*/
+
+	// don't process for anonymous/guests  //
+	if ($user->data['username'] != 'ANONYMOUS')
+	{
+		// We use cookies to temporarily hold block positions and here we save positions to user table //
+		if ($use_block_cookies)
 		{
-			$left = request_var($config['cookie_name'] . '_sgp_left', '', false, true);
-			$left = str_replace("left[]=", "", $left);
-			$left = str_replace("&amp;", ',', $left);
-			$LBA = explode(',', $left);
+			if (isset($_COOKIE[$config['cookie_name'] . '_sgp_left']) || isset($_COOKIE[$config['cookie_name'] . '_sgp_center']) || isset($_COOKIE[$config['cookie_name'] . '_sgp_right']))
+			{
+				$left = request_var($config['cookie_name'] . '_sgp_left', '', false, true);
+				$left = str_replace("left[]=", "", $left);
+				$left = str_replace("&amp;", ',', $left);
+				$LBA = explode(',', $left);
 
-			$sql = 'UPDATE ' . USERS_TABLE . '
-				SET user_left_blocks = ' . "'" . $left . "'" . '
-				WHERE user_id = ' . $user->data['user_id'];
-			$db->sql_query($sql);
+				$center = request_var($config['cookie_name'] . '_sgp_center', '', false, true);
+				$center = str_replace("center[]=&amp;", "", $center);
+				$center = str_replace("center[]=", "", $center);
+				$center = str_replace("&amp;", ',', $center);
+				$CBA = explode(',', $center);
 
-			$center = request_var($config['cookie_name'] . '_sgp_center', '', false, true);
-			$center = str_replace("center[]=&amp;", "", $center);
-			$center = str_replace("center[]=", "", $center);
-			$center = str_replace("&amp;", ',', $center);
-			$CBA = explode(',', $center);
+				$right = request_var($config['cookie_name'] . '_sgp_right', '', false, true);
+				$right = str_replace("right[]=", "", $right);
+				$right = str_replace("&amp;", ',', $right);
+				$RBA = explode(',', $right);
 
-			$sql = 'UPDATE ' . USERS_TABLE . '
-				SET user_center_blocks = ' . "'" . $center . "'" . '
-				WHERE user_id = ' . $user->data['user_id'];
-			$db->sql_query($sql);
+				$sql = 'UPDATE ' . USERS_TABLE . '
+					SET user_left_blocks = ' . "'" . $left . "'" . ', user_center_blocks = ' . "'" . $center . "'" . ', user_right_blocks = ' . "'" . $right . "'" . '
+					WHERE user_id = ' . $user->data['user_id'];
+				$db->sql_query($sql);
 
-			$right = request_var($config['cookie_name'] . '_sgp_right', '', false, true);
-			$right = str_replace("right[]=", "", $right);
-			$right = str_replace("&amp;", ',', $right);
-			$RBA = explode(',', $right);
+				// this does not appear to be functioning? //
+				$set_time = time() - 31536000;
+				$user->set_cookie('sgp_left', '', $set_time);
+				$user->set_cookie('sgp_center', '', $set_time);
+				$user->set_cookie('sgp_right', '', $set_time);
 
-			$sql = 'UPDATE ' . USERS_TABLE . '
-				SET user_right_blocks = ' . "'" . $right . "'" . '
-				WHERE user_id = ' . $user->data['user_id'];
-			$db->sql_query($sql);
+				// The drag and drop script sets cache time to 0 if used, else it sets cache time to 300//
+				$block_cache_time = request_var($config['cookie_name'] . '_sgp_block_cache', '', false, true);
+			}
+		}
 
-			// this does not appear to be functioning? //
-			$set_time = time() - 31536000;
-			$user->set_cookie('sgp_left', '', $set_time);
-			$user->set_cookie('sgp_center', '', $set_time);
-			$user->set_cookie('sgp_right', '', $set_time);
+		// get the block positions from user table 08 September 2010 //
+		$sql = 'SELECT user_left_blocks, user_center_blocks, user_right_blocks
+			FROM ' . USERS_TABLE . '
+			WHERE user_id = ' . $user->data['user_id'];
 
-			// The drag and drop script sets cache time to 0 if used, else it sets cache time to 300//
-			$sgp_cache_time = request_var($config['cookie_name'] . '_sgp_block_cache', '', false, true);
+		if ($result = $db->sql_query($sql, $block_cache_time))
+		{
+			$row = $db->sql_fetchrow($result);
+
+			$left = $row['user_left_blocks'];
+			$LB = explode(',', $left);
+			$center = $row['user_center_blocks'];
+			$CB = explode(',', $center);
+			$right = $row['user_right_blocks'];
+			$RB = explode(',', $right);
+
+			$LCR = array_merge((array)$LB, (array)$CB, (array)$RB);
+
+			$left .= ','; 
+			$all .= $left .= $center .= $right;
+
+			$sql = 'SELECT * 
+				FROM ' . K_BLOCKS_TABLE . ' 
+				WHERE active = 1 
+					AND ' . $db->sql_in_set('id', $LCR) . ' 
+				ORDER BY find_in_set(id,' . '\'' . $all . '\')';
 		}
 	}
 
-	// get the block positions from user table 08 September 2010 //
-	$sql = 'SELECT user_left_blocks, user_center_blocks, user_right_blocks
-		FROM ' . USERS_TABLE . '
-		WHERE user_id = ' . $user->data['user_id'];
-
-	if ($result = $db->sql_query($sql, $sgp_cache_time))
-	{
-		$row = $db->sql_fetchrow($result);
-
-		$left = $row['user_left_blocks'];
-		$LB = explode(',', $left);
-		$center = $row['user_center_blocks'];
-		$CB = explode(',', $center);
-		$right = $row['user_right_blocks'];
-		$RB = explode(',', $right);
-
-		$LCR = array_merge((array)$LB, (array)$CB, (array)$RB);
-
-		$left .= ','; 
-		$all .= $left .= $center .= $right;
-
-		$sql = 'SELECT * 
-			FROM ' . K_BLOCKS_TABLE . ' 
-			WHERE active = 1 
-				AND ' . $db->sql_in_set('id', $LCR) . ' 
-			ORDER BY find_in_set(id,' . '\'' . $all . '\')';
-	}
-
-	// If no user block layout are set, we use default positions //
-	if($row['user_left_blocks'] == '' || $row['user_center_blocks'] == '' || $row['user_right_blocks'] == '')
+	// If no user block layouts are set (no need to check left, centre and righ... just check one) or user is ANONYMOUS, we use default positions //
+	if (empty($row['user_left_blocks']) || $user->data['username'] == 'ANONYMOUS')
 	{
 		$sql = 'SELECT * 
 			FROM ' . K_BLOCKS_TABLE . ' 
@@ -240,7 +230,7 @@ if (!defined('IN_PHPBB'))
 			ORDER BY ndx ASC';
 	}
 
-	if ($result = $db->sql_query($sql, $sgp_cache_time))
+	if ($result = $db->sql_query($sql, $block_cache_time))
 	{
 		$L = $R = $C = 0;
 

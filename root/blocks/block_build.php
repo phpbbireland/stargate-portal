@@ -26,7 +26,7 @@ if (!defined('IN_PHPBB'))
 
 global $db, $config, $k_config, $template, $SID, $_SID, $user, $auth, $phpEx, $phpbb_root_path;
 
-$sgp_cache_time = $k_config['sgp_cache_time'];
+$block_cache_time = $k_config['block_cache_time_default'];
 $queries = $cached_queries = $total_queries = 0;
 
 // Process common data as in phpBB header function for pages other than index and portal //
@@ -139,7 +139,7 @@ if ($this_page[0] != 'index' && $this_page[0] != 'portal')
 			FROM ' . FORUMS_TABLE . '
 			WHERE ' . $db->sql_bit_and('forum_options', FORUM_OPTION_FEED_NEWS, '<> 0');
 
-		$result = $db->sql_query_limit($sql, 1, 0, $sgp_cache_time);
+		$result = $db->sql_query_limit($sql, 1, 0, $block_cache_time);
 		$s_feed_news = (int) $db->sql_fetchfield('forum_id');
 		$db->sql_freeresult($result);
 	}
@@ -282,6 +282,6 @@ if ($this_page[0] != 'index' && $this_page[0] != 'portal')
 	));
 }
 
-sgp_build_minimod();
+sgp_build_minimods();
 
 ?>

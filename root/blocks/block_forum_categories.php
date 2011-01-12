@@ -32,9 +32,17 @@ if (!defined('IN_PHPBB'))
 $queries = $cached_queries = 0;
 
 global $db, $auth, $user, $template;
-global $phpbb_root_path, $phpEx, $config, $k_config;
+global $phpbb_root_path, $phpEx, $config, $k_config, $k_blocks;
 
-$sgp_cache_time = $k_config['sgp_cache_time'];
+
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_forum_categories.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 $store = array();
 
@@ -54,7 +62,7 @@ $posts = $topics = array();
 $sql = 'SELECT forum_posts, right_id, left_id, parent_id, forum_id, forum_name, forum_type, forum_desc, forum_image, forum_topics, forum_desc_uid, forum_desc_bitfield, forum_desc_options, forum_flags, forum_link, forum_password
 	FROM ' . FORUMS_TABLE . '
 	ORDER BY forum_type, left_id ASC';
-$result = $db->sql_query($sql, $sgp_cache_time);
+$result = $db->sql_query($sql, $block_cache_time);
 
 while ($row = $db->sql_fetchrow($result))
 {

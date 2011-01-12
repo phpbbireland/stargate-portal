@@ -39,9 +39,9 @@
 	$user->setup('portal/portal');
 
 	global $k_config;
-	$sgp_cache_time = $k_config['sgp_cache_time'];
+	$block_cache_time = $k_config['block_cache_time_default'];
 
-	$sgp_cache_time = 0;
+	$block_cache_time = 0;
 
 	$portal_page = request_var('portal_page', 0);
 
@@ -49,7 +49,7 @@
 		FROM ". K_WEB_PAGES_TABLE . " 
 		WHERE id = '$portal_page' ";
 
-	if (!$result = $db->sql_query($sql, $sgp_cache_time)) 
+	if (!$result = $db->sql_query($sql, $block_cache_time)) 
 	{ 
 		trigger_error($user->lang['COULD_NOT_QUERY_K_MODULES'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
 	}
@@ -103,7 +103,7 @@
 				AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . $user->data['user_id'] . ')
 			ORDER BY g.group_name ASC';
 	}
-	$result = $db->sql_query($sql, $sgp_cache_time);
+	$result = $db->sql_query($sql, $block_cache_time);
 
 	$legend = array();
 
@@ -134,7 +134,7 @@
 			FROM ' . USERS_TABLE . "
 			WHERE user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%'
 				AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
-		$result = $db->sql_query($sql, $sgp_cache_time);
+		$result = $db->sql_query($sql, $block_cache_time);
 
 		while ($row = $db->sql_fetchrow($result))
 		{

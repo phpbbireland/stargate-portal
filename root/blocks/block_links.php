@@ -26,10 +26,17 @@
 
 	$phpEx = substr(strrchr(__FILE__, '.'), 1);
 
-	global $k_config, $phpbb_root_path;
-
-	$sgp_cache_time = $k_config['sgp_cache_time'];
+	global $k_config, $phpbb_root_path, $k_blocks;
 	$queries = $cached_queries = 0;
+
+	foreach ($k_blocks as $blk)
+	{
+		if ($blk['html_file_name'] == 'block_links.html')
+		{
+			$block_cache_time = $blk['block_cache_time']; 
+		}
+	}
+	$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 	$show_all_links = true;
 

@@ -23,15 +23,23 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-$phpEx = substr(strrchr(__FILE__, '.'), 1);
+global $k_config, $k_blocks;
 
+$phpEx = substr(strrchr(__FILE__, '.'), 1);
 if (!class_exists('bbcode'))
 {
 	include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 }
 
-global $k_config;
-$sgp_cache_time = $k_config['sgp_cache_time'];
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_announcements.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
+
 $queries = $cached_queries = 0;
 
 // Get portal cache data
@@ -109,7 +117,7 @@ $sql = 'SELECT
 		t.topic_type DESC, t.topic_time DESC';
 
 // query the database
-if (!($result = $db->sql_query_limit($sql, (($number_of_announce_items_to_display) ? $number_of_announce_items_to_display : 1), 0, $sgp_cache_time)))
+if (!($result = $db->sql_query_limit($sql, (($number_of_announce_items_to_display) ? $number_of_announce_items_to_display : 1), 0, $block_cache_time)))
 {
 	trigger_error($user->lang['ERROR_PORTAL_ANNOUNCE'] 	. ' ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
 }
@@ -195,7 +203,7 @@ if (sizeof($attach_list))
 			WHERE post_msg_id IN (' . $where_attachments . ')
 				AND in_message = 0
 			ORDER BY filetime DESC';
-		$result = $db->sql_query($sql, $sgp_cache_time);
+		$result = $db->sql_query($sql, $block_cache_time);
 				
 		while($row = $db->sql_fetchrow($result))
 		{

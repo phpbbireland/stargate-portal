@@ -24,9 +24,16 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $k_config;
+global $k_config, $k_blocks;
 
-$sgp_cache_time = $k_config['sgp_cache_time'];
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_quotes.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 $queries = $cached_queries = 0;
 
@@ -35,7 +42,7 @@ $queries = $cached_queries = 0;
 		ORDER by rand()
 		LIMIT 1';
 	
-	if ($result = $db->sql_query($sql, $sgp_cache_time))
+	if ($result = $db->sql_query($sql, $block_cache_time))
 	{
 		$row = $db->sql_fetchrow($result);
 	}
