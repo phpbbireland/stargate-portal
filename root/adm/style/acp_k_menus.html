@@ -17,6 +17,30 @@ function display_pip(myForm)
 </script>
 <!-- END: Edit #1 -->
 
+
+<script>
+// Update groups with each selection... not very elegant but it works Mike //
+function set_ids(data, view)
+{
+	var mydata;
+
+	mydata = document.getElementById(view).value;
+
+	if (data == '0')
+	{
+		mydata = '';
+		data = '';
+	}
+	else if(mydata)
+	{
+		mydata = mydata + ',';
+	}
+
+    document.getElementById(view).value = mydata + data;
+}
+</script>
+
+
 <a name="maincontent"></a><h1>{L_TITLE}</h1>
 
 <table border="1">
@@ -67,7 +91,7 @@ function display_pip(myForm)
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="left">{mdata.S_MENU_ITEM_NAME}</div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="left" style="max-width:200px; overflow:auto;"><!-- IF mdata.S_SUB_HEADING == '1' -->{L_SUB_HEADING}<!-- ENDIF -->{mdata.S_MENU_LINK}</div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><!-- IF not mdata.S_SUB_HEADING --><!-- IF mdata.S_MENU_EXTERN == '0' -->{L_NO}<!-- ELSEIF mdata.S_MENU_EXTERN == '1' -->{L_YES}<!-- ELSEIF mdata.S_MENU_EXTERN == '2' -->{L_YES}<!-- ENDIF --><!-- ENDIF --></div></td>
-		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center">{mdata.S_MENU_VIEW}</div></td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><!-- IF mdata.S_VIEW_ALL -->{L_ALL_GROUPS}<!-- ELSE -->{mdata.S_MENU_VIEW}<!-- ENDIF --></div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"  align="center">
 			<div align="center">
 			<!-- IF mdata.S_FIRST_ROW && not mdata.S_LAST_ROW -->
@@ -124,7 +148,7 @@ function display_pip(myForm)
 				<!-- END menuicons -->
 				</select>
 				<span name='pip' id='pip'> <img src='./../images/block_images/small/{S_MENU_ICON}'> </span>
-				<!-- BEGIN menuicons --><span name='pip' id='pip'></span> &nbsp; <!-- END menuicons -->
+				<!--<!-- BEGIN menuicons --><span name='pip' id='pip'></span> &nbsp; <!-- END menuicons -->-->
 			</label>
 		</dd>
 	</dl>
@@ -134,9 +158,7 @@ function display_pip(myForm)
 			<span class="imageline" style="padding:5px; border: solid 1px #D7D7D7;">
 			<!-- BEGIN menuicons -->
 				<!-- IF menuicons.S_MENU_ICONS -->
-					<a href="#" onclick="set_image('{menuicons.S_MENU_ICONS}', true, true); return false;">
-					<img src='./../images/block_images/small/{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}'>
-					</a>
+					<a href="#" onclick="set_image('{menuicons.S_MENU_ICONS}', true, true); return false;"><img src='./../images/block_images/small/{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}'></a>
 				<!-- ENDIF -->
 			<!-- END menuicons -->
 			</span>
@@ -168,17 +190,33 @@ function display_pip(myForm)
 		<dd><label><br /><input type="radio" class="radio" id="soft_hr" name="soft_hr" value="1"<!-- IF S_SOFT_HR --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 		<label><input type="radio" class="radio" name="soft_hr" value="0"<!-- IF not S_SOFT_HR --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
 	</dl>
+
+
+	<hr />
 	<dl>
-		<dt><label for="view_by">{L_MENU_VIEWED_BY}:</label><br />{L_MENU_VIEWED_BY_EXPLAINED}</dt>
+		<dt><label for="view_groups">{L_MENU_VIEW_GROUPS}:</label><br /><span>{L_MENU_VIEW_GROUPS_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="view_by">{L_MENU_VIEW_BY}:</label><br /><span>{L_MENU_VIEW_BY_EXPLAIN}</span></dt>
 		<dd><label><br />
-			<select name="view_by" id="view_by" class="post">
+			<select name="view_by" id="view_by" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'view_groups'); ">{S_MENU_VIEW}
 			<!-- BEGIN groups -->
-			<option value="{groups.GROUP_ID}" <!-- IF groups.GROUP_ID == S_MENU_VIEW -->selected <!-- ENDIF -->>{groups.GROUP_ID}, {groups.GROUP_NAME}</option>
+			<option value="{groups.GROUP_ID}" <!-- IF groups.GROUP_ID == S_MENU_VIEW -->selected <!-- ENDIF -->>{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
 			<!-- END groups -->
 			</select>
 			</label>
 		</dd>
 	</dl>
+	<dl>
+		<dt><label for="view_all">{L_MENU_VIEW_ALL}:</label><br /><span>{L_MENU_VIEW_ALL_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" name="view_all" value="1" <!-- IF S_VIEW_ALL -->checked="checked" <!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" name="view_all" value="0" <!-- IF not S_VIEW_ALL -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+
 </fieldset>
 <!-- ENDIF -->
 
@@ -267,17 +305,40 @@ function display_pip(myForm)
 		<dd><label><br /><input type="radio" class="radio" id="sub_heading" name="sub_heading" value="1"<!-- IF S_SUB_HEADING --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 		<label><input type="radio" class="radio" name="sub_heading" value="0"<!-- IF not S_SUB_HEADING --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
 	</dl>
+
+
+
+
+
+	<hr />
 	<dl>
-		<dt><label for="view_by">{L_MENU_VIEWED_BY}:</label>{L_MENU_VIEWED_BY_EXPLAINED}</dt>
+		<dt><label for="view_groups">{L_MENU_VIEW_GROUPS}:</label><br /><span>{L_MENU_VIEW_GROUPS_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text"></dd>
+	</dl>
+	<dl>
+		<dt><label for="view_by">{L_MENU_VIEW_BY}:</label><br /><span>{L_MENU_VIEW_BY_EXPLAIN}</span></dt>
 		<dd><label><br />
-			<select name="view_by" id="view_by" class="post">
+			<select name="view_by" id="view_by" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'view_groups'); ">{S_MENU_VIEW}
 			<!-- BEGIN groups -->
-			<option value="{groups.GROUP_ID}" <!-- IF groups.GROUP_ID == S_MENU_VIEW -->selected <!-- ENDIF -->>{groups.GROUP_ID}, {groups.GROUP_NAME}</option>
+			<option value="{groups.GROUP_ID}" <!-- IF groups.GROUP_ID == S_MENU_VIEW -->selected <!-- ENDIF -->>{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
 			<!-- END groups -->
 			</select>
 			</label>
 		</dd>
 	</dl>
+	<dl>
+		<dt><label for="view_all">{L_MENU_VIEW_ALL}:</label><br /><span>{L_MENU_VIEW_ALL_EXPLAIN}</span></dt>
+		<dd><br />
+			<label><input type="radio" name="view_all" value="1" <!-- IF S_VIEW_ALL -->checked="checked" <!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" name="view_all" value="0" <!-- IF not S_VIEW_ALL -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<hr />
+
+
+
+
+
 </fieldset>
 <!-- ENDIF -->
 

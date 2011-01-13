@@ -9,7 +9,7 @@
 
 <title lang="en">Stargate Portal (aka Kiss Portal)</title>
 
-	<description lang="en">An advanced, fully integrated, portal for phpBB 3.0.7PL1</description>
+	<description lang="en">An advanced, fully integrated, portal for phpBB 3.0.8</description>
 
 <author-notes lang="en">
 	Stargate Portal (aka Kiss Portal) is an advanced, fully integrated, portal for phpBB3. 
@@ -43,11 +43,11 @@
 		</author>
 	</author-group>
 
-<mod-version>3.1.1</mod-version>
+<mod-version>3.1.5</mod-version>
 	<installation>
 	<level>intermediate</level>
 	<time>2503</time>
-	<target-version>3.0.7-PL1</target-version>
+	<target-version>3.0.8</target-version>
 	</installation>
 	<history>
 		<entry>
@@ -111,8 +111,8 @@
         </changelog>
       </entry>
       <entry>
-        <date>2010-09-30</date>
-		<rev-version>3.1.1</rev-version>
+        <date>2010-11-25</date>
+		<rev-version>3.1.4</rev-version>
         <changelog lang="en">
 			<change>Please note, development release are not identified here.</change>
 			<change>For detailed information see: http://www.stargate-portal.com/forum/viewforum.php?f=10</change>
@@ -166,9 +166,7 @@
 
 <find><![CDATA[		'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
 	));]]></find>
-<action type="after-add"><![CDATA[
-
-	// Stargate Portal
+<action type="after-add"><![CDATA[	// Stargate Portal
 	if (STARGATE)
 	{
 		$template->assign_vars(array(
@@ -531,69 +529,6 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 	return '<img src="' . (str_replace(' ', '%20', $avatar_img)) . '" width="' . $avatar_width . '" height="' . $avatar_height . '" alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
 }
 
-
-
-// UCF MOD
-function sgp_get_user_country_flag($user_or_poster_id)
-{
-	global $db;
-	
-	$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $user_or_poster_id";
-	
-	if($result = $db->sql_query($sql))
-	{
-		$row = $db->sql_fetchrow($result);
-		return("images/flags/". $row['user_country_flag']);	
-	}
-	// No result! so we return the a blank flag image
-	return("images/flags/--.gif");
-}
-
-function sgp_user_country_flag_select($passed)
-{
-	global $db, $flag_options, $user_id;
-	$flag = '';
-	$imglist = '';
-
-	if($passed != '' && !strpos($passed, '.'))
-	{
-		$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $passed";
-		
-		if( $result = $db->sql_query($sql) )
-		{
-			$flag = $db->sql_fetchrow($result);
-			$passed = $flag['user_country_flag'];
-		}
-	}	
-
-	$imgs = dir('images/flags');
-	
-	while ($file = $imgs->read()) 
-	{
-		if(stripos($file, ".gif") ||  stripos($file, ".png") ||  stripos($file, ".jpg"))
-			$imglist .= "$file ";
-	}
-	
-	closedir($imgs->handle);
-	
-	$imglist = explode(" ", $imglist);
-	sort($imglist);
-	
-	for ( $i=0; $i < sizeof($imglist); $i++ ) 
-	{	
-		if( $imglist[$i]!= "" ) 
-		{
-			$selected = ($imglist[$i] == $passed) ? ' selected="selected"' : '';
-			$flag_options .= '<option value="' . $imglist[$i] . '"' . $selected . '>' . $imglist[$i] . '</option>';
-		}
-	}
-	$flag_options .= '</select>';
-	
-	return $flag_options;
-}
-
-//UCF MOD
-
 /* Stargate functions ends */
 ]]></action>
 </edit>
@@ -703,10 +638,9 @@ function sgp_user_country_flag_select($passed)
 
 <open src="viewforum.php">
 <edit>
-<find><![CDATA[	'S_VIEWFORUM'			=> true,]]></find>
-<action type="after-add"><![CDATA[	'FOLDER_NEWS_IMG'			=> $user->img('news_read', 'NEW_POST_NEWS'),
-	'FOLDER_NEWS_NEW_IMG'		=> $user->img('news_unread', 'NO_NEW_POST_NEWS'),]]></action>
-
+<find><![CDATA[	'U_MARK_TOPICS'		=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}viewforum.$phpEx", 'hash=' . generate_link_hash('global') . "&amp;f=$forum_id&amp;mark=topics") : '',]]></find>
+<action type="after-add"><![CDATA[	'FOLDER_NEWS_IMG'		=> $user->img('news_read', 'NEW_POST_NEWS'),
+	'FOLDER_NEWS_NEW_IMG'	=> $user->img('news_unread', 'NO_NEW_POST_NEWS'),]]></action>
 </edit>
 
 <edit>
@@ -744,46 +678,28 @@ function sgp_user_country_flag_select($passed)
 <find><![CDATA[AND t.topic_type IN (' . POST_ANNOUNCE . ', ' . POST_GLOBAL . ')',]]></find>
 <inline-edit>
 <inline-find> ')',</inline-find>
-<inline-action type="before-add"><![CDATA[', ' . POST_NEWS . ', ' . POST_NEWS_GLOBAL .]]></inline-action>
+<inline-action type="before-add"><![CDATA[', ' . POST_NEWS . ', ' . POST_NEWS_GLOBAL . ]]></inline-action>
 </inline-edit>
-</edit>
-
-<edit>
-<comment lang="en">line ~473</comment>
-<find><![CDATA[	$sql = 'SELECT *
-		FROM ' . TOPICS_TABLE . '
-		WHERE ' . $db->sql_in_set('topic_id', array_keys($shadow_topic_list));]]></find>
-        <action type="replace-with"><![CDATA[	$sql = 'SELECT  t. * ' . $sql_select . '
-		FROM ' . TOPICS_TABLE . ' t
-		' . $sql_join . '
-		WHERE ' . $db->sql_in_set(' t.topic_id', array_keys($shadow_topic_list));]]></action>
 </edit>
 
 <edit>
 <find>		$s_type_switch_test = ($row['topic_type'] == POST_ANNOUNCE || $row['topic_type'] == POST_GLOBAL) ? 1 : 0;</find>
 <inline-edit>
 <inline-find>$row['topic_type'] == POST_GLOBAL</inline-find>
-<inline-action type="after-add"> || $row['topic_type'] == POST_NEWS || $row['topic_type'] == POST_NEWS_GLOBAL</inline-action>
+<inline-action type="after-add"> || $row['topic_type'] == POST_NEWS || $row['topic_type'] == POST_NEWS_GLOBAL </inline-action>
 </inline-edit>
 </edit>
 
 <edit>
-<find><![CDATA[			'TOPIC_TYPE'		=> $topic_type,]]></find>
-<action type="after-add"><![CDATA[			'TOOLTIP'					=> (STARGATE && isset($row['message_tooltip'])) ? sgp_truncate_message(bbcode_strip(($row['message_tooltip'])), 500) : '',]]></action>
+<find><![CDATA[			'S_TOPIC_TYPE_SWITCH'	=> ($s_type_switch == $s_type_switch_test) ? -1 : $s_type_switch_test)
+		);]]></find>
+<action type="replace-with"><![CDATA[			'S_TOPIC_TYPE_SWITCH'	=> ($s_type_switch == $s_type_switch_test) ? -1 : $s_type_switch_test,
 
-</edit>
-
-<edit>
-<comment lang="en">Line ~650</comment>
-<find><![CDATA[			'TOPIC_ICON_IMG_HEIGHT'	=> (!empty($icons[$row['icon_id']])) ? $icons[$row['icon_id']]['height'] : '',]]></find>
-<action type="after-add"><![CDATA[			'TOPIC_ICON_IMG_GROUP'	=> (!empty($icons[$row['icon_id']])) ? $icons[$row['icon_id']]['group'] : '',]]></action>
-</edit>
-
-<edit>
-<find><![CDATA[			'S_POST_GLOBAL'			=> ($row['topic_type'] == POST_GLOBAL) ? true : false,]]></find>
-<action type="after-add"><![CDATA[			'S_POST_NEWS'			=> ($row['topic_type'] == POST_NEWS) ? true : false,
-			'S_POST_NEWS_GLOBAL'	=> ($row['topic_type'] == POST_NEWS_GLOBAL) ? true : false,]]></action>
-
+			'TOOLTIP'				=> (STARGATE && isset($row['message_tooltip'])) ? sgp_truncate_message(bbcode_strip(($row['message_tooltip'])), 500) : '',
+			'TOPIC_ICON_IMG_GROUP'	=> (!empty($icons[$row['icon_id']])) ? $icons[$row['icon_id']]['group'] : '',
+			'S_POST_NEWS'			=> ($row['topic_type'] == POST_NEWS) ? true : false,
+			'S_POST_NEWS_GLOBAL'	=> ($row['topic_type'] == POST_NEWS_GLOBAL) ? true : false,
+		));]]></action>
 </edit>
 
 
@@ -866,9 +782,7 @@ function sgp_user_country_flag_select($passed)
 <find><![CDATA[			'S_QUICK_REPLY'			=> true,]]></find>
 <action type="after-add"><![CDATA[			'S_SGP_QUICK_REPLY'		=> (isset($k_config)) ? ($k_config['sgp_quick_reply']) ? true : false : '',]]></action>
 </edit>
-
 </open>
-
 
 <open src="includes/mcp/mcp_main.php">
 <edit>
@@ -1005,6 +919,7 @@ if (STARGATE)
 					$k_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
 					$k_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
 					$k_blocks[$row['id']]['img_file_name']	= $row['img_file_name'];
+					$k_blocks[$row['id']]['block_cache_time']	= $row['block_cache_time'];
 				}
 			}
 			$db->sql_freeresult($result);
@@ -1033,6 +948,7 @@ if (STARGATE)
 					$k_cached_blocks[$row['id']]['block_height']	= $row['block_height'];
 					$k_cached_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
 					$k_cached_blocks[$row['id']]['img_file_name']	= $row['img_file_name'];
+					$k_cached_blocks[$row['id']]['block_cache_time']	= $row['block_cache_time'];
 				}
 				$k_blocks[$row['id']]['id']				= $row['id'];
 				$k_blocks[$row['id']]['ndx']			= $row['ndx'];
@@ -1044,6 +960,7 @@ if (STARGATE)
 				$k_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
 				$k_blocks[$row['id']]['html_file_name']	= $row['html_file_name'];
 				$k_blocks[$row['id']]['img_file_name']	= $row['img_file_name'];
+				$k_blocks[$row['id']]['block_cache_time']	= $row['block_cache_time'];
 			}
 			$db->sql_freeresult($result);
 
@@ -1118,6 +1035,11 @@ define('POST_NEWS_GLOBAL', 5);</action>
 <find>// Additional tables</find>
 <action type="after-add">// Stargate Portal Tables
 define('WELCOME_MESSAGE', 1);
+define('NAV_MENUS', 1);
+define('SUB_MENUS', 2);
+define('HEAD_MENUS', 3);
+define('FOOT_MENUS', 4);
+
 define('K_MENUS_TABLE',				$table_prefix . 'k_menus');
 define('K_BLOCKS_TABLE',			$table_prefix . 'k_blocks');
 define('K_CLOUD_TABLE',				$table_prefix . 'k_cloud');
@@ -1201,7 +1123,7 @@ define('K_PAGES_TABLE',				$table_prefix . 'k_pages');</action>
 			'STARGATE'						=> true,
 			'DEBUG_QUERIES'					=> (defined('DEBUG_QUERIES')) ? DEBUG_QUERIES : '',
 
-			'T_STYLESHEET_PORTAL_OVERLOAD'	=> ($css) ? "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/overload_' . $css . '.css' : "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/overload.css',
+			'T_STYLESHEET_PORTAL_OVERLOAD'	=> ($css) ? "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal_' . $css . '.css' : "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal.css',
 			'T_STYLESHEET_PORTAL_COMMON'	=> "{$phpbb_root_path}styles/portal_common/theme/portal.css",
 
 			'L_PORTAL'			=> $user->lang['FORUM_PORTAL'],
@@ -1437,12 +1359,22 @@ if (!function_exists('bbcode_strip'))
 </open>
 
 <open src="includes/session.php">
-<edit>
-<find><![CDATA[		if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START'))]]></find>
-<action type="replace-with"><![CDATA[		global $user;
-		//if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START'))
-		if (!empty($_GET['style']) && $auth->acl_get('a_styles') && !defined('ADMIN_START') || !empty($_GET['style']) && $user->data['user_id'] != ANONYMOUS && !$config['override_user_style'])]]></action>
 
+<edit>
+<find><![CDATA[		if (!$this->theme)
+		{
+			trigger_error('Could not get style data', E_USER_ERROR);
+		}]]></find>
+<action type="replace-with"><![CDATA[		if (!$this->theme)
+		{
+			// SGP edit: Report missing style and redirect to default style.
+			// This stops bots generating countless errors.
+
+			add_log('critical', 'STYLE_MISSING', request_var('style', 0), $user->data['user_id']);
+			redirect(build_url('style') .'?style='. $config['default_style']);
+
+			//trigger_error('Could not get style data', E_USER_ERROR);
+		}]]></action>
 </edit>
 </open>
 
@@ -1574,7 +1506,9 @@ if (!function_exists('bbcode_strip'))
 	'NO_ANNOUNCEMENTS'	=> 'No current announcements',
 	'VERSION'			=> 'Version',
 
-
+	'BLOCK_CACHE_TIME_HEAD'		=> 'Block Cache Time',
+	'BLOCK_CACHE_TIME'			=> 'Set the block cache time.',
+	'BLOCK_CACHE_TIME_EXPLAIN'	=> 'Currently all blocs use the same cache period.',
 
 	'CLICK_TO_ENLARGE'	=> 'Click to enlarge',
 	'MOVE'				=> 'Move',
@@ -1736,7 +1670,7 @@ if (!function_exists('bbcode_strip'))
 	'END'					=> 'END',
 	'WEB_PAGE_EXAMPLES_1'	=> 'Web Pages Examples:',
 	'WEB_PAGE_EXAMPLES_2'	=> 'These pages are presented as example only, not all links are valid...<br />',
-	'THIS_MEANS_YOU'		=> 'This means you!',
+	'THIS_MEANS_YOU'		=> 'you ;-)',
 	'TIME_BEING'			=> 'Use refresh in ACP for time being...',
 	'MINI_SAMPLE_1'			=> 'This block was written using the MiniMod module... No database entries or sql queries were required. Only installed styles will be displayed here... The block is for stargatestyles only... Anyone wanting to use this code will have to ask Mitch.',
 	'CLICK TO ENLARGE'		=> 'Click to enlarge',
@@ -1747,6 +1681,7 @@ if (!function_exists('bbcode_strip'))
 	'RSS_DISABLED'			=> 'Newsfeeds are currently disabled',
 	'RETURN_PORTAL'			=> '%sReturn to the portal page%s',
 	'LOGOUT_REDIRECT_P'		=> 'Yoou have logged out... retirning to portal',
+	'NO_ID_GIVEN'			=> 'No id supplied<br />',
 ]]></action>
 </edit>
 </open>
@@ -2058,7 +1993,14 @@ $lang = array_merge($lang, array(
 <edit>
 <comment lang="en">line ~15</comment>
 <find><![CDATA[<!-- INCLUDE forumlist_body.html -->]]></find>
-<action type="after-add"><![CDATA[<!-- IF STARGATE -->
+<action type="replace-with"><![CDATA[
+<!-- IF STARGATE -->
+	<!-- INCLUDE portal_center.html -->
+<!-- ENDIF -->
+
+<!-- INCLUDE forumlist_body.html -->
+
+<!-- IF STARGATE -->
 	<!-- IF S_DISPLAY_ONLINE_LIST -->
 		<!-- INCLUDE blocks/block_whos_on_line.html -->
 	<!-- ENDIF -->
@@ -2301,7 +2243,7 @@ $lang = array_merge($lang, array(
 <edit>
 <comment lang="en">Line ~129</comment>
 <find><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL) -->{L_ANNOUNCEMENTS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></find>
-<action type="replace-with"><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL) -->{L_ANNOUNCEMENTS_AND_NEWS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></action>
+<action type="replace-with"><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL or topicrow.S_POST_NEWS or topicrow.S_POST_NEWS_GLOBAL) -->{L_ANNOUNCEMENTS_AND_NEWS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></action>
 </edit>
 
 <edit>
@@ -2315,13 +2257,6 @@ $lang = array_merge($lang, array(
 </open>
 
 <open src="styles/prosilver/template/viewtopic_body.html">
-<edit>
-<comment lang="en">Line ~187</comment>
-<find><![CDATA[		<!-- IF postrow.POSTER_FROM --><dd><strong>{L_LOCATION}:</strong> {postrow.POSTER_FROM}</dd><!-- ENDIF -->]]></find>
-<action type="replace-with"><![CDATA[		<!-- IF postrow.POSTER_FROM --><dd><strong>{L_LOCATION}:</strong> {postrow.POSTER_FROM} <!-- IF postrow.POSTER_FLAG --><a rel="external" href="http://maps.google.com/maps?q={postrow.POSTER_FROM}" target="_blank">{postrow.POSTER_FLAG}</a></dd><!-- ENDIF --><!-- ENDIF -->
-		<!-- IF not postrow.POSTER_FROM and postrow.POSTER_FLAG -->	&nbsp; {postrow.POSTER_FLAG}<!-- ENDIF -->]]></action>
-</edit>
-
 <edit>
 <comment lang="en">Line ~226</comment>
 <find><![CDATA[<!-- IF S_QUICK_REPLY -->
@@ -2342,12 +2277,7 @@ $lang = array_merge($lang, array(
 	<!-- ENDIF -->]]></find>
 <action type="after-add"><![CDATA[	<!-- IF STARGATE and S_QUICK_REPLY and S_SGP_QUICK_REPLY -->
 			<!-- IF not S_IS_BOT and S_DISPLAY_REPLY_INFO and not S_IS_LOCKED -->
-				<span style="display: inline" id="show">
-					<a class="qreply-icon" href="#" onclick="ShowHide('quickreply'); ShowHide('hide'); ShowHide('show'); return(false);" title="{L_QUICK_REPLY}"><span>{L_QUICK_REPLY}</span></a>
-				</span>
-				<span style="display:none" id="hide">
-					<a class="qreply-icon-no" href="#" onclick="ShowHide('quickreply'); ShowHide('show'); ShowHide('hide'); return(false);" title="{L_QUICK_REPLY_NO}"><span>{L_QUICK_REPLY_NO}</span></a>
-				</span>
+				<a class="qreply-icon fast-reply" href="javascript:void(0);" title="{L_QUICK_REPLY}"><span>{L_QUICK_REPLY}</span></a>
 			<!-- ENDIF -->
 	<!-- ENDIF -->]]></action>
 </edit>
