@@ -121,7 +121,7 @@ $lang = array_merge($lang, array(
 	'PAGE_ARRAY'				=> 'Array of page',
 	'PAGE_ARRAY_EXPLAIN'		=> 'List of all block where block is visible',
 
-	'VIEW_PAGES'				=> 'Page IDâ€™s where the block will be displayed',
+	'VIEW_PAGES'				=> 'Page ID’s where the block will be displayed',
 	'VIEW_PAGES_EXPLAIN'		=> 'The list will be updated automatically.',
 
 	'PAGE_LEFT'			=> 'Page Left',

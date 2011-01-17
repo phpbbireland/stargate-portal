@@ -95,7 +95,7 @@ onload_functions.push('init_scrollers()');
 	});
 </script>
 
-<link rel="stylesheet" href="{T_STYLESHEET_PORTAL_OVERLOAD}" type="text/css" />
+<link rel="stylesheet" href="{T_STYLESHEET_PORTAL_COMMON}" type="text/css" />
 <link rel="stylesheet" href="{T_STYLESHEET_PORTAL_OVERLOAD}" type="text/css" />
 
 <!-- INCLUDE portal_sizer.html -->
@@ -176,6 +176,27 @@ if(debug)
 			jQuery(".qreply-icon").toggle(function () {
 			jQuery(this).css({'background' : 'url("{T_IMAGESET_LANG_PATH}/button_topic_qreply_no.gif") 0 0 no-repeat'});
 			}, function () {var cssObj = {'background' : 'url("{T_IMAGESET_LANG_PATH}/button_topic_qreply.gif") 0 0 no-repeat'}
+			jQuery(this).css(cssObj);
+		});
+	});
+
+	jQuery.noConflict();
+	jQuery(document).ready(function(){
+		// hides the quick reply box as soon as the DOM is ready - (a little sooner than page load)
+		jQuery('.fastreply').hide();
+		// toggles the quick reply box on clicking the quick reply button
+		jQuery('a.fast-reply-png').click(function() {
+		jQuery('.fastreply').toggle(400);
+		return false;
+		});
+	});
+
+	jQuery.noConflict();
+	jQuery(document).ready(function(){
+		// toggles the quick reply button from button_topic_qreply.gif to button_topic_qreply_no.gif
+			jQuery(".qreply-icon-png").toggle(function () {
+			jQuery(this).css({'background' : 'url("{T_IMAGESET_LANG_PATH}/button_topic_qreply_no.png") 0 0 no-repeat'});
+			}, function () {var cssObj = {'background' : 'url("{T_IMAGESET_LANG_PATH}/button_topic_qreply.png") 0 0 no-repeat'}
 			jQuery(this).css(cssObj);
 		});
 	});

@@ -100,7 +100,7 @@ $versions = array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
 	// Version 3.1.2
-	'3.1.2'	=> array(
+	'3.1.2' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
 	// Version 3.1.3

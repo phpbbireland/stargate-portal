@@ -1,0 +1,123 @@
+/***
+	This code contains all css classes common to all styles... 17 January 2011
+	The file is loaded automatically, vars set in functions.php, called in 
+	portal_common/portal_header.html. Note, each styles portal.css file can
+	over-ride these tags/classes...
+**/
+
+/* bbcode...
+ ------------------------------------ */ 
+.bbb-bold, .bbb-bold a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-bold.gif"); width:22px; height:22px; }
+.bbb-bold:hover{ background-position: 0px -23px;}.bbb-quote,
+.bbb-italic, .bbb-italic a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-italic.gif");width:22px; height:22px;}
+.bbb-italic:hover{ background-position: 0px -23px;}.bbb-quote, 
+.bbb-quote a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-quote.gif"); width:22px; height:22px;}
+.bbb-quote:hover{ background-position: 0px -23px;}.bbb-code, 
+.bbb-code a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-code.gif");width:22px; height:22px;}
+.bbb-code:hover{ background-position: 0px -23px;}.bbb-list, 
+.bbb-list a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-list.gif");width:22px; height:22px;}
+.bbb-list:hover{ background-position: 0px -23px;}.bbb-flash, 
+.bbb-flash a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-flash.gif"); width:22px; height:22px;}
+.bbb-flash:hover{ background-position: 0px -23px;}.bbb-image, 
+.bbb-image a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-image.gif"); width:22px; height:22px;}
+.bbb-image:hover{ background-position: 0px -23px;}
+.bbb-url, .bbb-url a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-url.gif"); width:22px; height:22px;}
+.bbb-url:hover{ background-position: 0px -23px;}
+.bbb-under_line, .bbb-under_line a { background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-under_line.gif");width:22px; height:22px;}
+.bbb-under_line:hover{ background-position: 0px -23px;}
+.bbb-align_center, .bbb-align_center a { background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-align_center.gif");width:22px; height:22px;}
+.bbb-align_center:hover{ background-position: 0px -23px;}
+.bbb-align_left, .bbb-align_left a { background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-align_left.gif");width:22px; height:22px;}
+.bbb-align_left:hover{ background-position: 0px -23px;}
+.bbb-align_right, .bbb-align_right a { background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-align_right.gif");width:22px; height:22px;}
+.bbb-align_right:hover { background-position: 0px -23px;}
+.bbb-ordered_list, .bbb-ordered_list a { background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-ordered_list.gif");width:22px; height:22px;}
+.bbb-ordered_list:hover{ background-position: 0px -23px;}
+.bbb-add_list_item, .bbb-add_list_item a { background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-add_list_item.gif"); width:22px; height:22px;}
+.bbb-add_list_item:hover { background-position: 0px -23px;}
+.bbb-note, .bbb-note a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-note.gif");width:22px; height:22px;}
+.bbb-note:hover { background-position: 0px -23px;}
+.bbb-spoiler, .bbb-spoiler a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-spoiler.gif"); width:22px; height:22px;}
+.bbb-spoiler:hover{ background-position: 0px -23px;}
+.bbb-tab, .bbb-tab a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-tab.gif"); width:22px; height:22px;}
+.bbb-tab:hover{ background-position: 0px -23px;}
+.bbb-sup, .bbb-sup a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-sup.gif"); width:22px; height:22px;}
+.bbb-sup:hover{ background-position: 0px -23px;}
+.bbb-sub, .bbb-sub a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-sub.gif"); width:22px; height:22px;}
+.bbb-sub:hover{ background-position: 0px -23px;}
+.bbb-strike, .bbb-strike a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-strike.gif");width:22px; height:22px;}
+.bbb-strike:hover { background-position: 0px -23px;}
+.bbb-link, .bbb-link a{ background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-link.gif");width:22px; height:22px;}
+.bbb-link:hover { background-position: 0px -23px;}
+.rollover, .rollover a { display: inline; float:left; } .rollover a:hover { background-position: 0 -23px; }
+.bbb-icon-spacer {background : transparent; border:none; background-image: url("./../../../images/bbcode/bbb-icon-spacer.gif"); width:3px; height:22px;}
+
+
+/***
+	Code of the random video block 13 January 2011
+**/
+
+.video_back {
+margin: 0 auto;
+text-align:center;
+width:430px; height:356px;
+background: url(images/one_video.png) top left repeat;
+/*border:solid 1px #98AAB1;*/
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+-khtml-border-radius: 10px;
+border-radius: 10px;
+}
+.video_info {
+background: #D8D8D8;
+margin: 0 auto;
+padding: 5px;
+text-align:center;
+width:430px; height:70px;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+-khtml-border-radius: 10px;
+border-radius: 10px;
+}
+
+/***
+	Code to restrict image sizes in posts etc...
+	If you need to restrict for other pages add the css tag here...
+***/
+
+.content img {max-width:600px;}
+.postbody img {max-width:600px;}
+
+
+/***
+	acronyms/local_acronym classes common to all styles...
+	Styles can override colours etc in their own portal.css file...
+	If the classes are not defines, we use this default code...
+***/
+
+abbr, acronym, local_acronym {
+font-weight: bold;
+text-decoration: overline;
+cursor: help;
+}
+
+.acronym {
+background:#FFFFCC
+}
+
+acronym, local_acronym{
+font-style:italic;
+font-weight:bold;
+border-bottom:1px #BD5121 dashed ;
+color:#459B37;
+cursor: help;
+}
+
+local_acronym{
+font-style:italic;
+font-weight:bold;
+border-bottom:1px #BD5121 dashed ;
+color:#A20000;
+cursor: help;
+text-decoration: none;
+}
