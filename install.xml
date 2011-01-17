@@ -529,69 +529,6 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 	return '<img src="' . (str_replace(' ', '%20', $avatar_img)) . '" width="' . $avatar_width . '" height="' . $avatar_height . '" alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
 }
 
-
-
-// UCF MOD
-function sgp_get_user_country_flag($user_or_poster_id)
-{
-	global $db;
-	
-	$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $user_or_poster_id";
-	
-	if($result = $db->sql_query($sql))
-	{
-		$row = $db->sql_fetchrow($result);
-		return("images/flags/". $row['user_country_flag']);	
-	}
-	// No result! so we return the a blank flag image
-	return("images/flags/--.gif");
-}
-
-function sgp_user_country_flag_select($passed)
-{
-	global $db, $flag_options, $user_id;
-	$flag = '';
-	$imglist = '';
-
-	if($passed != '' && !strpos($passed, '.'))
-	{
-		$sql = "SELECT user_country_flag FROM " . USERS_TABLE . " WHERE user_id = $passed";
-		
-		if( $result = $db->sql_query($sql) )
-		{
-			$flag = $db->sql_fetchrow($result);
-			$passed = $flag['user_country_flag'];
-		}
-	}	
-
-	$imgs = dir('images/flags');
-	
-	while ($file = $imgs->read()) 
-	{
-		if(stripos($file, ".gif") ||  stripos($file, ".png") ||  stripos($file, ".jpg"))
-			$imglist .= "$file ";
-	}
-	
-	closedir($imgs->handle);
-	
-	$imglist = explode(" ", $imglist);
-	sort($imglist);
-	
-	for ( $i=0; $i < sizeof($imglist); $i++ ) 
-	{	
-		if( $imglist[$i]!= "" ) 
-		{
-			$selected = ($imglist[$i] == $passed) ? ' selected="selected"' : '';
-			$flag_options .= '<option value="' . $imglist[$i] . '"' . $selected . '>' . $imglist[$i] . '</option>';
-		}
-	}
-	$flag_options .= '</select>';
-	
-	return $flag_options;
-}
-
-//UCF MOD
-
 /* Stargate functions ends */
 ]]></action>
 </edit>
@@ -2320,13 +2257,6 @@ $lang = array_merge($lang, array(
 </open>
 
 <open src="styles/prosilver/template/viewtopic_body.html">
-<edit>
-<comment lang="en">Line ~187</comment>
-<find><![CDATA[		<!-- IF postrow.POSTER_FROM --><dd><strong>{L_LOCATION}:</strong> {postrow.POSTER_FROM}</dd><!-- ENDIF -->]]></find>
-<action type="replace-with"><![CDATA[		<!-- IF postrow.POSTER_FROM --><dd><strong>{L_LOCATION}:</strong> {postrow.POSTER_FROM} <!-- IF postrow.POSTER_FLAG --><a rel="external" href="http://maps.google.com/maps?q={postrow.POSTER_FROM}" target="_blank">{postrow.POSTER_FLAG}</a></dd><!-- ENDIF --><!-- ENDIF -->
-		<!-- IF not postrow.POSTER_FROM and postrow.POSTER_FLAG -->	&nbsp; {postrow.POSTER_FLAG}<!-- ENDIF -->]]></action>
-</edit>
-
 <edit>
 <comment lang="en">Line ~226</comment>
 <find><![CDATA[<!-- IF S_QUICK_REPLY -->
