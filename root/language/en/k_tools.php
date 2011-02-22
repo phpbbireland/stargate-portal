@@ -37,13 +37,13 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'LEFT_BLOCKS'	=> 'Left blocks',
-	'LEFT_BLOCKS_EXPLAIN' => 'comma separated sring',
+	'LEFT_BLOCKS_EXPLAIN' => 'comma separated string',
 
-	'CENTER_BLOCKS'	=> 'Center blocks',
-	'CENTER_BLOCKS_EXPLAIN' => 'comma separated sring',
+	'CENTER_BLOCKS'	=> 'Centre blocks',
+	'CENTER_BLOCKS_EXPLAIN' => 'comma separated string',
 
 	'RIGHT_BLOCKS'	=> 'Right blocks',
-	'RIGHT_BLOCKS_EXPLAIN' => 'comma separated sring',
+	'RIGHT_BLOCKS_EXPLAIN' => 'comma separated string',
 
 ));
 ?>

@@ -129,12 +129,12 @@ $lang = array_merge($lang, array(
 
 	'POLL_BLOCK' => 'Poll Block',
 
-	//'SELECT_STYLE_EXPLAINED' => '<strong>Colour Ledgend</strong><hr /><span class="green"><b>Green</strong></span> = Released<br /><span class="orange"><b>Orange</strong></span> = Beta style<br /><span class="gray"><b>Gray</strong></span> = Pre-beta style<br /><span class="red"><b>Red</strong></span> = Alpha style<hr />',
-	'SELECT_STYLE_EXPLAINED' => '<br /><strong>Dropdown Ledgend</strong><br />
-	<span class="green"><b>Released</strong></span><br />
+	//'SELECT_STYLE_EXPLAINED' => '<strong>Colour Legend</strong><hr /><span class="green"><strong>Green</strong></span> = Released<br /><span class="orange"><strong>Orange</strong></span> = Beta style<br /><span class="gray"><strong>Gray</strong></span> = Pre-beta style<br /><span class="red"><strong>Red</strong></span> = Alpha style<hr />',
+	'SELECT_STYLE_EXPLAINED' => '<br /><strong>Dropdown Legend</strong><br />
+	<span class="green"><strong>Released</strong></span><br />
 	<span class="orange"><strong>RC Style</strong></span><br />
-	<span class="gray"><b>Beta Style</strong></span><br />
-	<span class="red"><b>Alpha Style</strong></span><hr />',
+	<span class="gray"><strong>Beta Style</strong></span><br />
+	<span class="red"><strong>Alpha Style</strong></span><hr>',
 	'SMILIES' => 'Smilies',
 
 	'OPTION'	=> 'Option',
@@ -249,7 +249,7 @@ $lang = array_merge($lang, array(
 	'BOARD_DEFAULT_STYLE'	=> 'Default Style',
 	'STYLE'					=> 'Style',
 
-	'UNDER_CONSTRUCTION'	=> "<b>The page you requested is currently under construction...</strong><br /><br />Please use the 'Back' button to return to previous page.",
+	'UNDER_CONSTRUCTION'	=> "<strong>The page you requested is currently under construction...</strong><br /><br />Please use the 'Back' button to return to previous page.",
 	'BASIC_RULES_HEADER'	=> 'Site rules.',
 	'BASIC_RULES'			=>	"While the administrators and moderators of this forum will attempt to remove or edit any generally objectionable material as quickly as possible, it is impossible to review every message. Therefore you acknowledge that all posts made to these forums express the views and opinions of the author and not the administrators, moderators or webmaster (except for posts by these people) and hence will not be held liable.<br /><br />
 	You agree not to post any abusive, obscene, vulgar, slanderous, hateful, threatening, sexually-oriented or any other material that may violate any applicable laws. Doing so may lead to you being immediately and permanently banned (and your service provider being informed). The IP address of all posts is recorded to aid in enforcing these conditions. You agree that the webmaster, administrator and moderators of this forum have the right to remove, edit, move or close any topic at any time should they see fit. As a user you agree to any information you have entered above being stored in a database. While this information will not be disclosed to any third party without your consent, the webmaster, administrator and moderators cannot be held responsible for any hacking attempt that may lead to the data being compromised.<br /><br />
@@ -265,7 +265,7 @@ $lang = array_merge($lang, array(
 	'NO_UNRESOLVED'			=> 'No bugs to report...',
 
 	'DEV_VERSION'			=> 'Version (RC)',
-	
+
 	'VIDEO_COMMENTS'		=> 'Comments',
 	'NO_COMMENTS'			=> 'No comments to display.',
 	'IN_HOUSE_DESIGNS'		=> 'In House Designs',
@@ -298,7 +298,7 @@ $lang = array_merge($lang, array(
 	'BLOCK_TOP_TOPICS'		=> 'Stargate Portal Top Topics',
 	'BLOCK_WEB_PAGES'		=> 'Stargate Portal Web Pages',
 	'BLOCK_WEB_TEAM'		=> 'Stargate Portal Web Team',
-	
+
 	// More BBCodes //
 	'BBCODE_ST_HELP'			=> 'Strike through: [strike]text[/strike]',
 
