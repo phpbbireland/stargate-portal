@@ -65,8 +65,8 @@ class ucp_k_blocks
 			case 'arrange':
 				$template->assign_vars(array(
 					'ARRANGE_ICO'		=> $user->lang['UCP_K_INFO_ARRANGE'],
-					'L_ARRANGE_ICON'	=> sprintf($user->lang['ARRANGE_ICON'], '<img src="' . $phpbb_root_path . '/images/portal_ucp_images/arrange.gif' . 'alt="" />'),
-					//'U_PORTAL_ARRANGE'	=> '<a href="' . append_sid("{$phpbb_root_path}portal.$phpEx", "arrange=1") . '">' . '<img src="' . $phpbb_root_path . '/images/portal_ucp_images/arrange.gif"' . 'alt='' /></a>',
+					//'L_ARRANGE_ICON'	=> sprintf($user->lang['ARRANGE_ICON'], '<img src="' . $phpbb_root_path . '/images/portal_ucp_images/arrange.gif"' . ' alt="" />'),
+					'L_ARRANGE_ICON'	=> $user->lang['ARRANGE_ICON'],
 					'U_PORTAL_ARRANGE'	=> append_sid("{$phpbb_root_path}portal.$phpEx", "arrange=1"),
 					'LINK_IMG'			=> '<img src="' . $phpbb_root_path . '/images/portal_ucp_images/arrange.gif" alt="" />',
 				));
@@ -123,26 +123,27 @@ class ucp_k_blocks
 
 			if ($mode == 'edit')
 			{
-					$user_left_blocks = request_var('left_blocks', '');
-					$user_center_blocks = request_var('center_blocks', '');
-					$user_right_blocks = request_var('right_blocks', '');
+				$user_left_blocks = request_var('left_blocks', '');
+				$user_center_blocks = request_var('center_blocks', '');
+				$user_right_blocks = request_var('right_blocks', '');
 
-					$sql = "UPDATE " . USERS_TABLE . "  
-						SET user_left_blocks = '" . $db->sql_escape($user_left_blocks) . "',
-							user_center_blocks = '" . $db->sql_escape($user_center_blocks) . "',
-							user_right_blocks = '" . $db->sql_escape($user_right_blocks) . "'
-						WHERE user_id = '" . $user->data['user_id'] . "' LIMIT 1";
+				$sql = "UPDATE " . USERS_TABLE . "
+					SET user_left_blocks = '" . $db->sql_escape($user_left_blocks) . "',
+						user_center_blocks = '" . $db->sql_escape($user_center_blocks) . "',
+						user_right_blocks = '" . $db->sql_escape($user_right_blocks) . "'
+					WHERE user_id = '" . $user->data['user_id'] . "' LIMIT 1";
 
-					$result = $db->sql_query($sql);
+				$result = $db->sql_query($sql);
 
-					if (!$result)
-					{
-						$message = $user->lang['UCP_K_NOT_SAVED'];
-					}
-					else
-					{
-						$message = $user->lang['UCP_K_SAVED'];
-					}
+				if (!$result)
+				{
+					$message = $user->lang['UCP_K_NOT_SAVED'];
+				}
+				else
+				{
+					$message = $user->lang['UCP_K_SAVED'];
+				}
+
 				meta_refresh(1, $this->u_action);
 			}
 
@@ -206,15 +207,13 @@ function get_current_block_layout($id)
 function get_default_block_layout($id)
 {
 	global $config, $db, $user, $auth, $template, $phpbb_root_path, $phpEx, $phpbb_root_path;
-	
+
 	global $dataleft, $datacenter, $dataright;
 
 	$existing = get_current_block_layout($id);
 
-//print_r($existing);
-
 	$sql = 'SELECT id, position, html_file_name, view_pages, view_all
-		FROM ' . K_BLOCKS_TABLE . ' 
+		FROM ' . K_BLOCKS_TABLE . '
 		WHERE active = 1
 			AND (view_pages != 0)';
 

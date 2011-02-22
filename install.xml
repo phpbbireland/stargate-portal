@@ -2098,9 +2098,8 @@ $lang = array_merge($lang, array(
 	'UCP_K_BLOCKS_INFO'		=> 'Portal information',
 	'UCP_K_BLOCKS_WIDTH'	=> 'Set page width',
 
-
 	'ARRANGE_ICO'			=> 'Arrange Icon',
-	'ARRANGE_ICON'			=> 'Arrange Blocks, lets you organise blocks from the portal page...<br />You can <strong>move</strong>, <strong>hide</strong> or, <strong>un-hide</strong> them as you wish...<br /><br />Depending on the style, the arrange icon (or text links) are normally located in the header to the left of the phpBB text resize icon...<br /><br />Please note, changes are automatically saved when browse to any othe page... <br /><br />Some arrange icons/text examples: %s ',
+	'ARRANGE_ICON'			=> 'Arrange Blocks, lets you organise blocks from the portal page...<br />You can <strong>move</strong>, <strong>hide</strong> or, <strong>un-hide</strong> them as you wish...<br /><br />Depending on the style, the arrange icon (or text links) are normally located in the header to the left of the phpBB text resize icon...<br /><br />Please note, changes are automatically saved when browse to any othe page... <br /><br />Some arrange icons/text examples: ',
 	'ARRANGE_NOW'			=> ' &bull; Arrange Blocks &bull; Tools.',
 
 	'UCP_K_INFO_ARRANGE'	=> 'NOT SET',
