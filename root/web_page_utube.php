@@ -132,7 +132,9 @@ $foot_id = $row['foot'];
 $body = $row['body'];
 $db->sql_freeresult($result);
 
-$sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = " . $db->sql_escape($head_id);
+//$sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = " . $db->sql_escape($head_id);
+
+$sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = " . (int)$head_id;
 
 if (!$result = $db->sql_query($sql)) 
 { 

@@ -1,0 +1,44 @@
+<!-- INCLUDE overall_header.html -->
+
+
+<a name="maincontent"></a>
+<div><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></div>
+
+<h1>{L_TITLE}</h1>
+<p>{L_TITLE_EXPLAIN}</p>
+
+<form id="acp_k_tools" method="post" action="{U_ACTION_COLUMN}">
+
+<fieldset>
+	<legend>{L_TOOL_OPTIONS}</legend>
+	<!-- IF not MESSAGE -->
+	<dl>
+		<dt><label for="action">{L_ALL_USERS_RESET}:</label><br /></dt>
+		<dd>
+			<label><input type="checkbox" class="radio" id="action" name="action" value="reset_all" /></label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="username">{L_USER_RESET}:</label><br /></dt>
+		<dd>
+			<label><input class="post" size="20" maxlength="50" id="username" name="username" value="" type="text" /></label>
+		</dd>
+	</dl>
+	<!-- ELSE -->
+	<dl><legend><br /><b>{MESSAGE}</b><br /></legend></dl>
+	<!-- ENDIF -->
+</fieldset>
+
+
+<!-- IF MESSAGE -->
+<dl><br /></dl>
+<!-- ELSE -->
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+</fieldset>
+<!-- ENDIF -->
+{S_FORM_TOKEN}
+</form>
+
+<!-- INCLUDE overall_footer.html -->

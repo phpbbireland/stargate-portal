@@ -27,7 +27,7 @@ if (!defined('IN_PHPBB'))
 // for bots test //
 //$page_title = $user->lang['BLOCK_RECENT_TOPICS'];
 
-$phpEx = substr(strrchr(__FILE__, '.'), 1);
+//$phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 $auth->acl($user->data);
 
@@ -41,13 +41,15 @@ $auth->acl($user->data);
 
 $queries = $cached_queries = 0;
 
-	global $user, $forum_id, $phpbb_root_path, $phpEx, $SID, $config , $template, $k_config, $k_blocks, $userdata, $config, $k_config, $db, $phpEx;
+	global $user, $forum_id, $phpbb_root_path, $phpEx, $SID, $config , $template, $k_config, $k_blocks, $userdata, $config, $k_config, $db, $k_blocks;
+
+	$last_forum_name = '';
 
 	foreach ($k_blocks as $blk)
 	{
 		if ($blk['html_file_name'] == 'block_recent_topics.html')
 		{
-			$block_cache_time = $blk['block_cache_time']; 
+			$block_cache_time = $blk['block_cache_time'];
 		}
 	}
 	$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
@@ -91,14 +93,33 @@ $queries = $cached_queries = 0;
 		$except_forum_id = '0';
 	}
 
-	$sql = "SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.forum_id, p.post_id, p.poster_id, p.post_time, u.user_id, u.username, u.user_colour
-		FROM " . TOPICS_TABLE . " AS t, " . POSTS_TABLE . " AS p, " . USERS_TABLE . " AS u
+	
+	$sql = "SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.forum_id, p.post_id, p.poster_id, p.post_time, u.user_id, u.username, u.user_colour, f.forum_name, f.forum_id, f.forum_image
+		FROM " . TOPICS_TABLE . " AS t, " . POSTS_TABLE . " AS p, " . USERS_TABLE . " AS u, " . FORUMS_TABLE . " AS f
 		WHERE t.forum_id NOT IN (" . $except_forum_id . ")
 			AND t.topic_status <> 2
 			AND p.post_id = t.topic_last_post_id
 			AND p.poster_id = u.user_id
-		ORDER BY p.post_id DESC
+			AND f.forum_id = t.forum_id 
+		ORDER BY p.post_time DESC
 		LIMIT " . $display_this_many;
+
+
+
+/*ORDER BY p.forum_id, p.post_time DESC
+	$search_days = $k_config['search_days'];
+
+	$sql = "SELECT t.topic_id, t.topic_title, t.topic_last_post_id, t.forum_id, t.topic_last_post_time, p.post_id, p.poster_id, p.post_time, u.user_id, u.username, u.user_colour, f.forum_name, f.forum_id, f.forum_image
+		FROM " . TOPICS_TABLE . " AS t, " . POSTS_TABLE . " AS p, " . USERS_TABLE . " AS u, " . FORUMS_TABLE . " AS f
+		WHERE t.forum_id NOT IN (" . $except_forum_id . ")
+			AND t.topic_status <> 2
+			AND p.post_id = t.topic_last_post_id
+			AND p.poster_id = u.user_id
+			AND f.forum_id = t.forum_id 
+			AND t.topic_last_post_time >= (unix_timestamp(date_add(now(), interval - ' . $search_days . ' DAY)))
+		ORDER BY p.post_time ASC
+		LIMIT " . $display_this_many;
+*/
 
 	if (!$result = $db->sql_query($sql, $block_cache_time))
 	{
@@ -111,44 +132,24 @@ $queries = $cached_queries = 0;
 
 		if ($row['forum_id'] > 0)
 		{
-			// Get forum name for this postid
-			$sql2 = "SELECT forum_name
-				FROM " . FORUMS_TABLE . "
-				WHERE forum_id = " . $row['forum_id'] . "
-				LIMIT " . 1;
-			$my_result = $db->sql_query($sql2, $block_cache_time);
-			$my_row = $db->sql_fetchrow($my_result);
-			$db->sql_freeresult($my_result);
-
-			$recent_topic_row['forum_name'][$row_count] = $my_row['forum_name'];
 			$row_count++;
 		}
 	}
 
 	$db->sql_freeresult($result);
 
-	$sql = "SELECT scroll, position
-		FROM " . K_BLOCKS_TABLE . "
-		WHERE title = 'Recent Topics' ";
-
-	if ($result = $db->sql_query($sql, $block_cache_time))
+	foreach ($k_blocks as $blk)
 	{
-		$rowx = $db->sql_fetchrow($result);
-		$scroll = $rowx['scroll'];
-		$display_center = $rowx['position'];
+		if ($blk['html_file_name'] == 'block_recent_topics.html')
+		{
+			$scroll = $blk['scroll'];
+			$display_center = $blk['position'];
+			break;
+		}
 	}
-	else
-	{
-		trigger_error('ERROR_PORTAL_RECENT_TOPICS' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
-	}
-
-	$db->sql_freeresult($result);
 
 	$style_row = ($scroll) ? 'scroll' : 'static';
 
-	//$template->assign_block_vars($style_row, array());
-
-	// change topics to display count if there are less topics that set in ACP
 	if ($display_this_many > $row_count)
 	{
 		$display_this_many = $row_count;
@@ -197,40 +198,42 @@ $queries = $cached_queries = 0;
 				sgp_checksize ($my_title, 25);
 			}
 
-			$my_forum = smilies_pass($recent_topic_row['forum_name'][$i]);
+			$my_forum = smilies_pass($recent_topic_row[$i]['forum_name']);
 
 			$length = strlen($my_forum);
 
-			// do same for the forum name
 			if ($length > 25)
 			{
 				sgp_checksize ($my_forum, 25);
 			}
 
+			$forum_image = (isset($recent_topic_row[$i]['forum_image'])) ? $recent_topic_row[$i]['forum_image'] : 'images/forum_icons/default.png';
+
 			$template->assign_block_vars($style_row . '_recent_topic_row', array(
 				'U_FORUM'		=> append_sid("viewforum.$phpEx", POST_FORUM_URL . '=' . $recent_topic_row[$i]['forum_id']),
-				'U_LAST_POST'	=> append_sid($view_topic_url . '&amp;p=' . $recent_topic_row[$i]['topic_last_post_id'] . '#p' . $recent_topic_row[$i]['topic_last_post_id']),
 				'U_TITLE'		=> append_sid("viewtopic.$phpEx", POST_POST_URL  . '=' . $recent_topic_row[$i]['post_id']),
+
+				'U_LAST_POST'	=> append_sid($view_topic_url . '&amp;p=' . $recent_topic_row[$i]['topic_last_post_id'] . '#p' . $recent_topic_row[$i]['topic_last_post_id']),
+
 				'S_POSTER'		=> get_username_string('full', $recent_topic_row[$i]['user_id'], $recent_topic_row[$i]['username'], $recent_topic_row[$i]['user_colour']),
 				'S_POSTTIME'	=> $user->format_date($recent_topic_row[$i]['post_time']),
 				'S_ROW_COUNT'	=> $i,
 
-				'S_FORUM'		=> $my_forum,
+				'S_FORUM'		=> ($last_forum_name == $my_forum) ? '' : $my_forum,
 				'S_TITLE'		=> $my_title,
 				'S_TITLE_LONG'	=> $my_title_long,
 				'LAST_POST_IMG'	=> $user->img('icon_topic_newest', 'VIEW_LATEST_POST'),
+				'FORUM_IMG'		=> '', //$forum_image,
+				'FORUM_LNK'		=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $recent_topic_row[$i]['forum_id'])
 			));
+			$last_forum_name = $my_forum;
 		}
 	}
 
 	$template->assign_vars(array(
-		'S_RECENT_TOPICS_COUNT_ASKED'		=> $display_this_many,
-		'S_RECENT_TOPICS_COUNT_RETURNED'	=> $row_count,
-		'S_ALIGN_IT'						=> 'center',
-		'S_DISPLAY_CENTRE'					=> $display_center,
-		'S_COUNT'							=> $display_this_many,
-
-		'RECENT_TOPICS_DEBUG'				=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
+		'S_DISPLAY_CENTRE'			=> $display_center,
+		'S_COUNT'					=> $display_this_many,
+		'RECENT_TOPICS_DEBUG'		=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 	));
 
 ?>

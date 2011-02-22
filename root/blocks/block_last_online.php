@@ -28,8 +28,16 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $k_config;
-$block_cache_time = $k_config['block_cache_time_default'];
+global $k_config, $k_blocks;
+
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_last_online.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 $max_last_online = $k_config['max_last_online']; //Numbers of users to show in the lisat configurable via ACP
 
@@ -39,7 +47,7 @@ $queries = $cached_queries = 0;
 if ($auth->acl_gets('u_viewprofile'))
 {
 	$template->assign_vars(array(
-	 'VIEWONLINE' => true,
+		'VIEWONLINE' => true,
 	));
 
 	//Fetch all the block data
@@ -83,7 +91,7 @@ if ($user->data['user_type'] <> 2 && !$auth->acl_gets('u_viewprofile'))
 	));
 }
 
-//Is user not logged in and have no auth  to view profiles/memberlist/onlinelist?
+//Is user not logged in and have no auth to view profiles/memberlist/onlinelist?
 if ($user->data['user_id'] == ANONYMOUS && !$auth->acl_gets('u_viewprofile'))
 {
 	$template->assign_vars(array(

@@ -33,7 +33,6 @@ global $k_config, $k_blocks;
 $queries = $cached_queries = 0;
 $total_hits = 0;
 
-
 foreach ($k_blocks as $blk)
 {
 	if ($blk['html_file_name'] == 'block_top_referrals.html')
@@ -92,7 +91,6 @@ if ($http_referrals)
 		}
 	}
 }
-
 
 // lets see how many referrals in total (include all)//
 $sql = "SELECT hits, SUM(hits) 

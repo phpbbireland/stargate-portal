@@ -42,8 +42,6 @@ if (!defined('IN_PHPBB'))
 	}
 	$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
-	$block_cache_time = $k_config['block_cache_time_default'];
-
 	$number_of_bots_to_show = $k_config['number_of_bots_to_display'];
 	$show_bot_tracker = $k_config['allow_bot_display'];
 	$after_date = $config['board_startdate'];

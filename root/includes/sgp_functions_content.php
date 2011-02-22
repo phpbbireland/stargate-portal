@@ -51,11 +51,11 @@ if (!function_exists('acronym_pass'))
 
 		if (sizeof($acronyms))
 		{
-			$text = sgp_local_acronyms($text);
 			$acronyms_match = $acronyms['match'];
 			$acronyms_repl = $acronyms['replace'];
 			// should be modified to include '/' as it will replace 'forum' in www.mysite/forum/index.php when it shouldn't //
 			$text =  substr(preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "preg_replace(\$acronyms_match, \$acronyms_repl, '\\0')", '>' . $text . '<'), 1, -1);
+			$text = sgp_local_acronyms($text);
 			return str_replace('\\"', '"', $text);
 		}
 		return $text;
@@ -120,9 +120,10 @@ if (!function_exists('sgp_local_acronyms'))
 		global $user;
 		$you = $user->lang['THIS_MEANS_YOU'];
 
-		$message = str_replace("[you!]", '<span title="' . $you . '" style="font-style:italic; border-bottom:1px #BD5121 dashed ; cursor: help; color:#' . $user->data['user_colour'] . ';">' . $user->data['username'] . '</span>', $message);
+		$message = str_replace("[you!]", '<span title="' . $you . '" style="font-style:italic; border-bottom:1px #BD5121 dashed; cursor: help; color:#' . $user->data['user_colour'] . ';">' . $user->data['username'] . '</span>', $message);
 		$message = str_replace("[day-time]", $user->format_date(time()), $message);
 		$message = str_replace("[date-now]", date( "d-m-Y", time() ), $message);
+		$message = str_replace("Stargate Portal", '<local_acronym title="The original portal for phpBB3 by the SGP development team" > ' . 'Stargate Portal'       . '</local_acronym>', $message);
 		return($message);
 	}
 }

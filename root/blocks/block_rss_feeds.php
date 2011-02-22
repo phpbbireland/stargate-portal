@@ -44,7 +44,6 @@ if(!$k_config['rss_feeds_enabled'])
 	return;
 }
 
-$block_cache_time = $k_config['block_cache_time_default'];
 $queries = $cached_queries = 0;
 
 function ShowRSSdesc($url) 
@@ -102,6 +101,10 @@ function ShowRSSnodesc($url)
 {
 	global $rss, $phpbb_root_path, $user;
 
+
+	// portal globals/cache
+	global $k_config;
+
 	// Create lastRSS object
 	$rss = new lastRSS;
 
@@ -141,13 +144,23 @@ function ShowRSSnodesc($url)
 // retrieve portal config variables
 $rss_feeds_random_limit = $k_config['rss_feeds_random_limit'];
 
+// portal globals/cache
+global $k_config, $k_blocks;
 
+foreach ($k_blocks as $blk)
+{
+	if ($blk['html_file_name'] == 'block_rss_feeds.html')
+	{
+		$block_cache_time = $blk['block_cache_time']; 
+	}
+}
+$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 $sql = 'SELECT *
    FROM ' . K_NEWSFEEDS_TABLE . '
    WHERE feed_show = 1
    ORDER BY feed_id DESC';
-$result = $db->sql_query_limit($sql, $rss_feeds_random_limit);
+$result = $db->sql_query_limit($sql, $rss_feeds_random_limit, 0, $block_cache_time);
 
 if(!($result = $db->sql_query($sql, $block_cache_time)))
 {

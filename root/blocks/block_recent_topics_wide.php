@@ -146,7 +146,7 @@ $sql = 'SELECT SQL_CACHE p.post_id, t.topic_id, t.topic_time, t.topic_title, t.t
 					AND t.topic_last_post_time >= (unix_timestamp(date_add(now(), interval - ' . $search_days . ' day)))
 		ORDER BY t.forum_id, t.topic_last_post_time DESC';
 
-$result = $db->sql_query_limit($sql, $display_this_many);
+$result = $db->sql_query_limit($sql, $display_this_many, 0, $block_cache_time);
 
 $row = $db->sql_fetchrowset($result);
 

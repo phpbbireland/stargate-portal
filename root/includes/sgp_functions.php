@@ -55,7 +55,9 @@ if(!function_exists('sgp_get_rand_logo'))
 
 		// Random logos are disabled config, so return default logo //
 		if($k_config['allow_rotating_logos'] == 0)
+		{
 			return $user->img('site_logo');
+		}
 
 		mt_srand((double)microtime()*1000001);
 
@@ -80,6 +82,11 @@ if(!function_exists('sgp_get_rand_logo'))
 		closedir($handle);
 
 		$imglist = explode(" ", $imglist);
+
+		if(sizeof($imglist) < 2)
+		{
+			return $user->img('site_logo');
+		}
 
 		$random = mt_rand(0, (mt_rand(0, (sizeof($imglist)-2))));
 
@@ -398,6 +405,7 @@ if(!function_exists('which_group'))
 * (phpbb code reused)
 */
 
+/*
 if(!function_exists('get_all_groups'))
 {
 	function get_all_groups()
@@ -420,12 +428,15 @@ if(!function_exists('get_all_groups'))
 		$db->sql_freeresult($result);
 	}
 }
-
+*/
 
 /*
 * A simple function to replace variables in pages with values if the are present in either config or $k_config tables
 * The format used mimics the standard, for example: {STARGATE_VERSION}
+*
+* This needs to be cached!!!!!
 */
+/*
 if(!function_exists('process_for_vars'))
 {
 	function process_for_vars($data)
@@ -461,6 +472,43 @@ if(!function_exists('process_for_vars'))
 		return($data);
 	}
 }
+*/
+
+if(!function_exists('process_for_vars'))
+{
+	function process_for_vars($data)
+	{
+		global $config, $k_config, $k_resources;
+
+		$a = array('{', '}');
+		$b = array('','');
+
+		$replace = array();
+
+		foreach ($k_resources as $search)
+		{
+			$find = $search;
+
+			// convert to normal text //
+			$search = str_replace($a, $b, $search); 
+			$search = strtolower($search);
+
+			if (isset($k_config[$search]))
+			{
+				$replace = (isset($k_config[$search])) ? $k_config[$search] : '';
+				$data = str_replace($find, $replace, $data);
+			}
+			else if (isset($config[$search]))
+			{
+				$replace = (isset($config[$search])) ? $config[$search] : '';
+				$data = str_replace($find, $replace, $data);
+			}
+		}
+		return($data);
+	}
+}
+
+
 
 // Stargate Random Banner mod //
 global $k_config, $template, $phpbb_root_path, $user;
@@ -530,7 +578,6 @@ if(!function_exists('get_user_data'))
 
 		if(!$id)
 		{
-			//return('NO ID GIVEN<br />');
 			return($user->lang['NO_ID_GIVEN']);
 		}
 
@@ -706,7 +753,7 @@ if (!function_exists('sgp_build_minimods'))
 		$select_allow = ($config['override_user_style']) ? false : true;
 
 		$sql = "SELECT * FROM " . K_MODULES_TABLE . " 
-				WHERE mod_status > 0 
+			WHERE mod_status > 0 
 				ORDER BY mod_type, mod_origin DESC "; 
 
 		if (!$result1 = $db->sql_query($sql, $block_cache_time))
@@ -997,7 +1044,7 @@ if(!function_exists('sgp_group_memberships'))
 			$sql .= $db->sql_in_set('ug.user_id', $user_id_ary);
 		}
 
-		$result = ($return_bool) ? $db->sql_query_limit($sql, 1) : $db->sql_query($sql);
+		$result = ($return_bool) ? $db->sql_query_limit($sql, 1, 0, 600, 'sgp') : $db->sql_query($sql, 600);
 
 		$row = $db->sql_fetchrow($result);
 
@@ -1097,7 +1144,7 @@ if(!function_exists('get_page_id'))
 {
 	function get_page_id($this_page_name)
 	{
-		global $db;
+		global $db, $user, $k_pages;
 
 		// Basic error checking //
 		if($this_page_name == '')
@@ -1105,7 +1152,17 @@ if(!function_exists('get_page_id'))
 			trigger_error($user->lang['SOMETHING_WENT_WRONG'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
 		}
 
+		foreach ($k_pages as $page)
+		{
+			if ($page['page_name'] == $this_page_name)
+			{
+				$page_id = $page['page_id']; 
+				return($page_id);
+			}
+		}
+		return(0);
 
+/*
 		// Get all pages 
 		$sql = 'SELECT page_id, page_name
 			FROM ' . K_PAGES_TABLE . '
@@ -1127,6 +1184,8 @@ if(!function_exists('get_page_id'))
 			}
 		}
 		return(0);
+*/
+
 	}
 }
 

@@ -32,8 +32,7 @@
 
 	include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
 
-	global $db, $user, $_SID, $_EXTRA_URL;
-	global $k_groups, $k_group_id, $k_group_name_id, $k_blocks;
+	global $db, $user, $_SID, $_EXTRA_URL, $k_groups, $k_blocks;
 
 	foreach ($k_blocks as $blk)
 	{
@@ -50,9 +49,6 @@
 
 	$j = 0;
 	$is_sub_heading = false;
-	$k_groups = array();
-	$k_group_name_id = array();
-	$k_group_id = array();
 	$portal_menus = array();
 	$my_names = array();
 
@@ -78,8 +74,8 @@
 
 	// not needed but keep line for reference //
 	// $group_name = which_group($user->data['group_id']);  // change to get_group_name - do we need this one anymore? see below...
+	//get_all_groups();
 
-	get_all_groups();
 	$memberships = array();
 	$memberships = sgp_group_memberships(false, $user->data['user_id'], false);
 

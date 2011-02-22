@@ -67,7 +67,7 @@ if(strpos('.html', $mode) == false)
 }
 
 // Get a lsit of all web page and compare to $mode //
-$dir_list = sgp_get_file_list("{$phpbb_root_path}styles/portal_common/template/web_pages/pages/", '', false);
+$dir_list = sgp_get_file_list("{$phpbb_root_path}styles/_portal_common/template/web_pages/pages/", '', false);
 
 // Check the page is in the list //
 for ($i = 0; $i < count($dir_list); $i++)

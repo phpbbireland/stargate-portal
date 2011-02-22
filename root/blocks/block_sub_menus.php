@@ -32,8 +32,7 @@
 
 	include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );
 
-	global $db, $user, $_SID, $_EXTRA_URL, $k_config, $k_blocks;
-	global $k_groups, $k_group_id, $k_group_name_id;
+	global $db, $user, $_SID, $_EXTRA_URL, $k_config, $k_blocks, $k_groups;
 
 	foreach ($k_blocks as $blk)
 	{
@@ -49,10 +48,8 @@
 	// menu type 2 = Sub Nav Block
 
 	$j = 0;
-	$k_groups = '';
 	$is_sub_heading = false;
-	$k_group_name_id = array();
-	$k_group_id = array();
+
 	$loop_count = array();
 	$portal_sub_menus = array();
 	$my_names = array();
@@ -76,7 +73,8 @@
 
 	// $group_name = which_group($user->data['group_id']);  // change to get_group_name - do we need this one anymore? see below...
 
-	get_all_groups();
+	//get_all_groups();
+
 	$memberships = array();
 	$memberships = sgp_group_memberships(false, $user->data['user_id'], false);
 
@@ -108,8 +106,9 @@
 			{
 				foreach ($memberships as $member)
 				{
-					$group_name = $k_group_id[$member['group_id']]['group_name'];
-					if($menu_item_view_by == $member['group_id'] || $member['group_id'] == $k_group_name_id['ADMINISTRATORS'])
+					$group_name = $k_groups[$member['group_id']]['group_name'];
+
+					if($menu_item_view_by == $member['group_id'])// || $member['group_id'] == $k_group_name_id['ADMINISTRATORS'])
 					{
 						$process_menu_item = true;
 					}

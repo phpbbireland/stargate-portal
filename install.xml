@@ -43,7 +43,7 @@
 		</author>
 	</author-group>
 
-<mod-version>3.1.5</mod-version>
+<mod-version>3.2.0</mod-version>
 	<installation>
 	<level>intermediate</level>
 	<time>2503</time>
@@ -111,10 +111,13 @@
         </changelog>
       </entry>
       <entry>
-        <date>2010-11-25</date>
-		<rev-version>3.1.4</rev-version>
+        <date>2011-02-22</date>
+		<rev-version>3.2.0</rev-version>
         <changelog lang="en">
 			<change>Please note, development release are not identified here.</change>
+			<change>Change the name of the portal common folder (just added a leading underscore).</change>
+			<change>The centre blocks corrected if style is not prosilver standard layout.</change>
+			<change>Updated get group id, data is now cached for speed and reduced sql queries.</change>
 			<change>For detailed information see: http://www.stargate-portal.com/forum/viewforum.php?f=10</change>
         </changelog>
       </entry>
@@ -151,7 +154,7 @@
 
 	  <file from="root/umil/*.*" to="umil/*.*" />
 
-      <file from="root/styles/portal_common/*.*" to="styles/portal_common/*.*" />
+      <file from="root/styles/_portal_common/*.*" to="styles/_portal_common/*.*" />
       <file from="root/styles/prosilver/imageset/*.*" to="styles/prosilver/imageset/*.*" />
       <file from="root/styles/prosilver/imageset/en/*.*" to="styles/prosilver/imageset/en/*.*" />
       <file from="root/styles/prosilver/template/*.*" to="styles/prosilver/template/*.*" />
@@ -358,8 +361,11 @@ $config = $cache->obtain_config();
 if (STARGATE)
 {
 	@define('DEBUG_QUERIES', false);
-	$k_config = $cache->obtain_k_config();		//  1 query
-	$k_blocks = $cache->obtain_block_data();	//	1 query
+	$k_config		= $cache->obtain_k_config();	//  1 query
+	$k_resources	= $cache->obtain_k_resources();	//  1 query
+	$k_groups		= $cache->obtain_k_groups();	//  1 query
+	$k_blocks		= $cache->obtain_block_data();	//	1 query
+	$k_pages		= $cache->obtain_k_pages();		//	1 query
 }
 
 ]]></action>
@@ -912,6 +918,7 @@ if (STARGATE)
 					$k_blocks[$row['id']]['id']				= $row['id'];
 					$k_blocks[$row['id']]['ndx']			= $row['ndx'];
 					$k_blocks[$row['id']]['title']			= $row['title'];
+					$k_blocks[$row['id']]['position']		= $row['position'];
 					$k_blocks[$row['id']]['type']			= $row['type'];
 					$k_blocks[$row['id']]['view_by']		= $row['view_by'];
 					$k_blocks[$row['id']]['scroll']			= $row['scroll'];
@@ -953,6 +960,7 @@ if (STARGATE)
 				$k_blocks[$row['id']]['id']				= $row['id'];
 				$k_blocks[$row['id']]['ndx']			= $row['ndx'];
 				$k_blocks[$row['id']]['title']			= $row['title'];
+				$k_blocks[$row['id']]['position']		= $row['position'];
 				$k_blocks[$row['id']]['type']			= $row['type'];
 				$k_blocks[$row['id']]['view_by']		= $row['view_by'];
 				$k_blocks[$row['id']]['scroll']			= $row['scroll'];
@@ -970,12 +978,53 @@ if (STARGATE)
 		return $k_blocks;
 	}
 
+
+	function obtain_k_pages()
+	{
+		global $db;
+
+		if (($k_pages = $this->get('k_pages')) !== false)
+		{
+			$sql = 'SELECT * 
+				FROM ' . K_PAGES_TABLE;
+
+			$result = $db->sql_query($sql);	
+			
+			while ($row = $db->sql_fetchrow($result))
+			{
+				$k_pages[$row['page_id']]['page_id']	= $row['page_id'];
+				$k_pages[$row['page_id']]['page_name'] = $row['page_name'];
+			}
+			$db->sql_freeresult($result);
+		}
+		else
+		{
+			$k_pages = $k_cached_pages = array();
+
+			$sql = 'SELECT * 
+				FROM ' . K_PAGES_TABLE;
+
+			$result = $db->sql_query($sql);	
+
+			while ($row = $db->sql_fetchrow($result))
+			{
+				$k_pages[$row['id']]['id']	= $row['id'];
+				$k_pages[$row['id']]['page_name'] = $row['page_name'];
+			}
+			$db->sql_freeresult($result);
+
+			$this->put('k_pages', $k_cached_pages);
+		}
+		return $k_pages;
+	}
+
+
 	//
 	// get all group names/id's (used to avoid problems with group ID's changing)
 	//
 	function obtain_k_groups()
 	{
-		global $db, $template, $k_groups, $k_group_id, $k_group_name_id;
+		global $db;
 
 		if (($k_groups = $this->get('k_groups')) !== false)
 		{
@@ -987,8 +1036,8 @@ if (STARGATE)
 
 			while ($row = $db->sql_fetchrow($result))
 			{
-				$k_groups[$row['group_id']] = $row['group_id'];
-				$k_groups[$row['group_name']] = $row['group_name'];
+				$k_groups[$row['group_id']]['group_id'] = $row['group_id'];
+				$k_groups[$row['group_id']]['group_name'] = $row['group_name'];
 			}
 			$db->sql_freeresult($result);
 		}
@@ -1004,15 +1053,64 @@ if (STARGATE)
 
 			while ($row = $db->sql_fetchrow($result))
 			{
-				$k_cahced_groups[$row['group_id']] = $row['group_id'];
-				$k_cached_groups[$row['group_name']] = $row['group_name'];
+				$k_cached_groups[$row['group_id']]['group_id'] = $row['group_id'];
+				$k_cached_groups[$row['group_id']]['group_name'] = $row['group_name'];
 			}
 			$db->sql_freeresult($result);
 
 			$this->put('k_groups', $k_cached_groups);
 		}
 		return $k_groups;
-	}]]></action>
+	}
+
+	function obtain_k_resources()
+	{
+		global $db;
+
+		if (($k_resources = $this->get('k_resources')) !== false)
+		{
+			$sql = 'SELECT * 
+				FROM ' . K_RESOURCE_TABLE  . ' 
+				ORDER BY word ASC';
+			$result = $db->sql_query($sql);	
+			
+			while ($row = $db->sql_fetchrow($result))
+			{
+				/*
+				$k_resources['id'] = $row['id'];
+				$k_resources['word'] = $row['word'];
+				$k_resources['type'] = $row['type'];
+				*/
+				$k_resources[] = $row['word'];
+
+			}
+			$db->sql_freeresult($result);
+		}
+		else
+		{
+			$k_resources = $k_cached_resources = array();
+
+			$sql = 'SELECT * 
+				FROM ' . K_RESOURCE_TABLE  . ' 
+				ORDER BY word ASC';
+			$result = $db->sql_query($sql);	
+
+			while ($row = $db->sql_fetchrow($result))
+			{
+				/*
+				$k_resources['id'] = $row['id'];
+				$k_resources['word'] = $row['word'];
+				$k_resources['type'] = $row['type'];
+				*/
+				$k_resources[] = $row['word'];
+			}
+			$db->sql_freeresult($result);
+
+			$this->put('k_resources', $k_cached_resources);
+		}
+		return $k_resources;
+	}
+]]></action>
 
 </edit>
 
@@ -1124,7 +1222,7 @@ define('K_PAGES_TABLE',				$table_prefix . 'k_pages');</action>
 			'DEBUG_QUERIES'					=> (defined('DEBUG_QUERIES')) ? DEBUG_QUERIES : '',
 
 			'T_STYLESHEET_PORTAL_OVERLOAD'	=> ($css) ? "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal_' . $css . '.css' : "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme/portal.css',
-			'T_STYLESHEET_PORTAL_COMMON'	=> "{$phpbb_root_path}styles/portal_common/theme/portal.css",
+			'T_STYLESHEET_PORTAL_COMMON'	=> "{$phpbb_root_path}styles/_portal_common/theme/portal_common.css",
 
 			'L_PORTAL'			=> $user->lang['FORUM_PORTAL'],
 			'U_PORTAL'			=> append_sid("{$phpbb_root_path}portal.$phpEx"),
@@ -1306,7 +1404,7 @@ if (!function_exists('bbcode_strip'))
 					$missing_filename = basename($missing_file);
 
 					$style_folder = $user->theme['template_path'];
-					$missing_file = str_replace($style_folder, 'portal_common', $missing_file);
+					$missing_file = str_replace($style_folder, '_portal_common', $missing_file);
 
 					$this->files[$handle] = $missing_file;
 					// Stargate Common files Mod
@@ -1344,7 +1442,7 @@ if (!function_exists('bbcode_strip'))
 				$style_folder = $user->theme['template_path'];
 			}
 
-			$missing_file = str_replace($style_folder, 'portal_common', $missing_file);
+			$missing_file = str_replace($style_folder, '_portal_common', $missing_file);
 
 			$this->template->files[$handle] = $missing_file;
 
@@ -1447,11 +1545,11 @@ if (!function_exists('bbcode_strip'))
 					$store = $file_tpl;
 
 					// replace template path with portal_common files path then check again //
-					$file_tpl = str_replace($template_row['template_path'], 'portal_common', $file_tpl);
+					$file_tpl = str_replace($template_row['template_path'], '_portal_common', $file_tpl);
 
 					if (file_exists($file_tpl))
 					{
-						$path = 'portal_common';
+						$path = '_portal_common';
 
 						// we found the common file so alter $file_tpl //
 						$file_tpl = "{$phpbb_root_path}styles/{$path}/template/$tpl_file.html";
@@ -1989,6 +2087,50 @@ $lang = array_merge($lang, array(
 
 
 
+<open src="language/en/ucp.php">
+<edit>
+<find><![CDATA[));]]></find>
+<action type="before-add"><![CDATA[	'UCP_K_BLOCKS'			=> 'Portal Options',
+
+	'UCP_K_BLOCKS_ARRANGE'	=> 'Arrange blocks',
+	'UCP_K_BLOCKS_DELETE'	=> 'Delete layout',
+	'UCP_K_BLOCKS_EDIT'		=> 'Edit blocks layout',
+	'UCP_K_BLOCKS_INFO'		=> 'Portal information',
+	'UCP_K_BLOCKS_WIDTH'	=> 'Set page width',
+
+
+	'ARRANGE_ICO'			=> 'Arrange Icon',
+	'ARRANGE_ICON'			=> 'Arrange Blocks, lets you organise blocks from the portal page...<br />You can <strong>move</strong>, <strong>hide</strong> or, <strong>un-hide</strong> them as you wish...<br /><br />Depending on the style, the arrange icon (or text links) are normally located in the header to the left of the phpBB text resize icon...<br /><br />Please note, changes are automatically saved when browse to any othe page... <br /><br />Some arrange icons/text examples: %s ',
+	'ARRANGE_NOW'			=> ' &bull; Arrange Blocks &bull; Tools.',
+
+	'UCP_K_INFO_ARRANGE'	=> 'NOT SET',
+	'UCP_K_INFO_DELETE'		=> 'Delete your current layout and use the board defaults.<br /><br />',
+	'UCP_K_INFO_EDIT'		=> 'Manually edit your current block layout.<br />Can also be used to add newly installed blocks...<br /><br />',
+	'UCP_K_INFO_INFO'		=> 'Some basic portal information here......',
+
+	'UCP_K_INFO_WIDTH'		=> '<br />If your style support it, you can use these images to set the overall width of the page',
+	'UCP_K_NOT_SAVED'		=> 'Block data could not be saved!',
+
+	'UCP_K_SAVED'			=> 'Your layout has been updated... <img src="images/working.gif" height="15" width="15" alt="" />',
+	'UCP_K_RESET'			=> 'Blocks reset to default positions... refreshing page... <br />',
+
+	'DEFAULT_BLOCKS'		=> 'Default blocks',
+
+	'DELETE_BLOCKS'			=> 'Check to reset blocks',
+	'DELETE_BLOCKS_EXPLAIN'	=> '(to default positions).',
+	'UCP_K_LINK'			=> '<a href="%s>" Arrange Blocks</a>',
+
+	'ARRANGE_BLOCKS'		=> '',
+	'OPTION_WIDTH'			=> 'Wide/Narrow',
+
+	'DEV_SITE'				=> 'Development site: ',
+	'B_VERSION'				=> 'build',
+	'P_VERSION'				=> 'Installed version',]]></action>
+</edit>
+</open>
+
+
+
 <open src="styles/prosilver/template/index_body.html">
 <edit>
 <comment lang="en">line ~15</comment>
@@ -2182,7 +2324,7 @@ $lang = array_merge($lang, array(
 <edit>
 <comment lang="en">Line ~178</comment>
 <find><![CDATA[	<a name="start_here"></a>]]></find>
-<action type="before-add"><![CDATA[		<div class="header_menu" style="margin-left:-7px; margin-bottom:1px;"><!-- INCLUDE blocks/block_header_menus.html --></div>]]></action>
+<action type="before-add"><![CDATA[<!--<div class="header_menu" style="margin-left:-7px; margin-bottom:1px;"><!-- INCLUDE blocks/block_header_menus.html --></div>-->]]></action>
 </edit>
 
 <edit>

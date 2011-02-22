@@ -15,10 +15,7 @@
 *
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
-* @version $Id: remove_portal.php 313 2009-01-02 03:01:04Z Michealo $
-*
-* Please obtain the latest copy form the dev site: www.stargate-portal.com
-*
+* @version $Id: remove_portal.php 315 2011-01-16 23:41:30Z Prosk8er $
 */
 
 define('IN_PHPBB', true);
@@ -43,7 +40,7 @@ $override_style = false;
 /*** EDIT THE NEXT LINE TO CONTINUE, SET $process to true ***/
 
 $process = false;
-$process = true;
+//$process = true;
 
 /************************************************************/
 
@@ -92,8 +89,6 @@ if(!$process)
 
 if( $user->data['is_registered'] && $auth->acl_get('a_') ) 	 
 {
-
-
 	// Read config data from the config file
 	$data = array ('dbhost', 'dbname', 'dbuser', 'dbpasswd', 'table_prefix');
 	$data = get_config_data();
@@ -134,7 +129,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 
 
 	// First remove old tables.
-	$tables_to_drop = array('k_acronyms', 'k_cyber_quotes', 'k_cloud', 'k_quotes', 'k_blocks', 'k_blocks_config', 'k_blocks_config_vars', 'k_menus', 'k_modules', 'k_newsfeeds', 'k_referer' ,'k_styles_status', 'k_web_pages', 'k_youtube');
+	$tables_to_drop = array('k_acronyms', 'k_blocks', 'k_blocks_config', 'k_blocks_config_vars', 'k_cloud', 'k_cyber_quotes', 'k_menus', 'k_modules', 'k_newsfeeds', 'k_pages', 'k_quotes', 'k_referer', 'k_referrals', 'k_resource', 'k_styles_status', 'k_web_pages', 'k_youtube');
 	foreach($tables_to_drop as $table)
 	{
 		$sql = "DROP TABLE IF EXISTS " . $table_prefix . $table;
@@ -161,6 +156,11 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 		),
 		'users'	=> array(
 			'profile_position',
+		),
+		'users'	=> array(
+			'user_left_blocks',
+			'user_center_blocks',
+			'user_right_blocks',
 		),
 
 	);
@@ -200,10 +200,13 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 	// Remove entries from core phpbb tables
 	$delete_from = array(
 		'config'   => array(
-			array('config_name'   => 'portal_active'),
-			array('config_name'   => 'portal_version'),
+			array('config_name'   => 'blocks_enabled'),
+			array('config_name'   => 'blocks_width'),
+			array('config_name'   => 'force_default_if_style_missing'),
 			array('config_name'   => 'mod_show'),
+			array('config_name'   => 'portal_active'),
 			array('config_name'   => 'portal_enabled'),
+			array('config_name'   => 'portal_version'),
 		),
 	);
 
@@ -293,7 +296,6 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 				'a_k_poll',
 				'a_k_newsfeeds',
 				'a_k_web_pages',
-				'a_k_you_tube',
 				'a_k_tools')";
 	$res = mysql_query($sql);
 
