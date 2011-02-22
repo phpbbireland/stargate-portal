@@ -87,7 +87,7 @@ class acp_k_blocks
 
 			$sql = 'SELECT config_name, config_value
 				FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . $wheresql;
-			
+
 			$result = $db->sql_query($sql);
 
 			$row = $db->sql_fetchrow($result);
@@ -137,7 +137,7 @@ class acp_k_blocks
 				if ($mode == 'down')
 				{
 					$temp = $temp + 1;
-				}				
+				}
 
 				// get move_to block data//
 				$sql = "SELECT id, ndx, position FROM " . K_BLOCKS_TABLE . "
@@ -285,7 +285,7 @@ class acp_k_blocks
 						'view_all'			=> $view_all,
 						'view_pages'		=> $view_pages,
 						'scroll'			=> $scroll,
-						'has_vars'			=> $has_vars,	
+						'has_vars'			=> $has_vars,
 						'minimod_based'		=> $minimod_based,
 						'mod_block_id'		=> $mod_block_id,
 						'block_cache_time'	=> $block_cache_time,
@@ -332,7 +332,7 @@ class acp_k_blocks
 
 					$dirslist = $user->lang['NONE'];
 
-					$dirs = dir($phpbb_root_path . 'styles/portal_common/template/blocks');
+					$dirs = dir($phpbb_root_path . 'styles/_portal_common/template/blocks');
 
 					while ($file = $dirs->read())
 					{
@@ -409,7 +409,7 @@ class acp_k_blocks
 					$var_file_name	= request_var('var_file_name', '');
 					$img_file_name	= request_var('img_file_name', '');
 					$block_cache_time	= request_var('block_cache_time', 300);
-		
+
 					$view_page_id = request_var('view_page_id', array(0));
 
 					for ($i = 0; $i < count($view_page_id); $i++)
@@ -472,21 +472,21 @@ class acp_k_blocks
 						$ndx = get_next_ndx($position);
 					}
 
-					// change to build array later 
+					// change to build array later
 					$sql = "UPDATE " . K_BLOCKS_TABLE . "
 					SET
 						ndx					= '" . (int)$ndx. "',
 						active				= '" . (int)$active . "',
-						title				= '" . $db->sql_escape($title) . "', 
+						title				= '" . $db->sql_escape($title) . "',
 						position			= '" . $db->sql_escape($position) . "',
 						type				= '" . $db->sql_escape($type) . "',
-						html_file_name		= '" . $db->sql_escape($html_file_name) . "', 
-						var_file_name		= '" . $db->sql_escape($var_file_name) . "', 
-						img_file_name		= '" . $db->sql_escape($img_file_name) . "', 
-						view_groups			= '" . $db->sql_escape($view_groups) . "', 
-						view_pages			= '" . $db->sql_escape($view_pages) . "', 
+						html_file_name		= '" . $db->sql_escape($html_file_name) . "',
+						var_file_name		= '" . $db->sql_escape($var_file_name) . "',
+						img_file_name		= '" . $db->sql_escape($img_file_name) . "',
+						view_groups			= '" . $db->sql_escape($view_groups) . "',
+						view_pages			= '" . $db->sql_escape($view_pages) . "',
 						view_by				= '" . $db->sql_escape($view_by) . "',
-						view_all			= '" . (int)$view_all . "', 
+						view_all			= '" . (int)$view_all . "',
 						scroll				= '" . (int)$scroll . "',
 						has_vars			= '" . (int)$has_vars . "',
 						minimod_based		= '" . (int)$minimod_based . "',
@@ -522,7 +522,7 @@ class acp_k_blocks
 
 				$dirslist = $user->lang['NONE'];
 
-				$dirs = dir($phpbb_root_path . 'styles/portal_common/template/blocks');
+				$dirs = dir($phpbb_root_path . 'styles/_portal_common/template/blocks');
 
 				while ($file = $dirs->read())
 				{
@@ -609,7 +609,7 @@ class acp_k_blocks
 					'S_MINIMOD_BASED'	=> $row['minimod_based'],
 					'S_MOD_BLOCK_ID'	=> $row['mod_block_id'],
 					'BLOCK_CACHE_TIME'	=> $row['block_cache_time'],
-				)); 
+				));
 
 				// get all groups and fill array //
 				get_all_pages($block);
@@ -754,8 +754,8 @@ class acp_k_blocks
 						$template->assign_var('S_OPTIONS', 'TOOLS'); // not  language var //
 			break;
 
-			case 'L':	
-			case 'C':	
+			case 'L':
+			case 'C':
 			case 'R':
 			case '1':
 			case '2':
@@ -786,15 +786,15 @@ class acp_k_blocks
 						if ($mode == 'manage')
 						{
 							if ($row['position'] == 'L')
-							{	
+							{
 								$l_b_last = $l_b_last + 1;
 							}
 							else if ($row['position'] == 'R')
-							{	
+							{
 								$r_b_last = $r_b_last + 1;
 							}
 							else if ($row['position'] == 'C')
-							{	
+							{
 								$c_b_last = $c_b_last + 1;
 							}
 						}
@@ -823,7 +823,7 @@ class acp_k_blocks
 						'S_BLOCK'			=> ($row['id'] == $block) ? $block : '.....'
 						));
 					}
- 
+
 					$db->sql_freeresult($result);
 				}
 
@@ -867,7 +867,7 @@ function get_current_position($my_id)
 	$sql = "SELECT position FROM " . K_BLOCKS_TABLE . " WHERE id = '" . (int)$my_id . "'";
 	if ($result = $db->sql_query($sql))
 	{
-		$row = $db->sql_fetchrow($result);		
+		$row = $db->sql_fetchrow($result);
 		$position = $row['position'];
 
 		return($position);
@@ -888,7 +888,7 @@ echo '> '; echo $block;
 	$sql = "SELECT mod_id FROM " . K_MODULES_TABLE . " WHERE mod_block_id = '$block' ";
 	if ( $result = $db->sql_query($sql) )
 	{
-		$row = $db->sql_fetchrow($result);		
+		$row = $db->sql_fetchrow($result);
 		return($row['mod_block_id']);
 	}
 	return(-1);
@@ -939,7 +939,7 @@ function get_all_groups()
 *    any pages it is displayed in...
 *
 * (b) creates the pages array
-* 
+*
 * 20 August 2010
 *
 **/
@@ -958,7 +958,7 @@ function get_all_pages($id)
 		$arr = explode(','  , $row['view_pages']);
 	}
 
-	// Get all pages 
+	// Get all pages
 	$sql = 'SELECT page_id, page_name
 		FROM ' . K_PAGES_TABLE . '
 		ORDER BY page_id ASC, page_name';
@@ -1018,7 +1018,7 @@ function get_all_minimods()
 	// Get all minimods for selection
 	$sql = 'SELECT mod_id, mod_name
 		FROM ' . K_MODULES_TABLE . '
-		ORDER BY mod_id ASC'; 
+		ORDER BY mod_id ASC';
 	$result = $db->sql_query($sql);
 
 	while ($row = $db->sql_fetchrow($result))
@@ -1149,7 +1149,7 @@ function get_lowest_ndx($position)
 
 	$index_start = (int) $db->sql_fetchfield('ndx');
 	$db->sql_freeresult($result);
-	
+
 	return ($index_start);
 }
 

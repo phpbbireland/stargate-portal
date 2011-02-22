@@ -121,15 +121,10 @@ class acp_k_acronyms
 					trigger_error($user->lang['ENTER_ACRONYM'] . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 
-				// prevent acronyms with more than one word from breaking things... the most common would be including phpBB3 in an acronym meaning //
-				if (strpos($meaning, ' ' ))
+				// prevent acronyms meaning from breaking things...
+				if (strpos($meaning, 'Stargate', 1))
 				{
-					echo 'a space found ';
-					if (strpos($meaning, 'phpBB3' ))
-					{
-						echo 'phpBB3 found ';
-						$meaning = str_replace('phpBB3', 'phpBB version 3', $meaning);
-					}
+					$meaning = str_replace('Stargate Portal', 'Stargate-Portal', $meaning);
 				}
 
 				$sql_ary = array(

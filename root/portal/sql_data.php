@@ -1254,7 +1254,7 @@ $k_blocks_config_vars_array[] = array(
 
 $k_blocks_config_vars_array[] = array(
 	'config_name'	=> 'portal_build',
-	'config_value'	=> '308-004',
+	'config_value'	=> '308-023',
 	'is_dynamic'	=> '0',
 );
 

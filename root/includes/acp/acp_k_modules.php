@@ -203,7 +203,7 @@ class acp_k_modules
 			$template->assign_var('S_OPTION', 'add_style');
 		}
 
-		if ($mode == 'STYLE' && $submit)
+		if ($mode == 'style' && $submit)
 		{
 			$mode = 'add';
 		}
@@ -437,10 +437,10 @@ class acp_k_modules
 
 					$template->assign_vars(array(
 						'S_MOD_LAST_UPDATED'	=> $mod_last_update,
-						'S_NEW_TYPE'	=> $mod_type,
-						'S_OPTION'		=> ($add_style) ? 'add_style' : 'new',
-						'U_BACK'		=> $this->u_action,
-						'MESSAGE'		=> $user->lang['ADDING_MODULES'],
+						'S_NEW_TYPE'			=> $mod_type,
+						'S_OPTION'				=> ($add_style) ? 'add_style' : 'new',
+						'U_BACK'				=> $this->u_action,
+						'MESSAGE'				=> $user->lang['ADDING_MODULES'],
 					));
 				}
 			break;
@@ -497,6 +497,20 @@ function get_theme_data($info)
 {
 	global $db, $template;
 	$other = '';
+	$store_array = array();
+	$i = 0;
+
+	// Grab styles that have not been added //
+	$sql = "SELECT mod_id, mod_name FROM " . K_MODULES_TABLE . " WHERE mod_type = '" . 'style' . "'";
+	if (!$result = $db->sql_query($sql)) 
+	{
+		trigger_error($user->lang['COULD_NOT_UPDATE_K_MODULES'] .  basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
+	}
+	while ($row = $db->sql_fetchrow($result))
+	{
+		$store_array[$i++] = $row['mod_name'];
+	}
+	$result = $db->sql_query($sql);	
 
 
 	if ($info == 0)
@@ -519,11 +533,14 @@ function get_theme_data($info)
 
 	while ($row = $db->sql_fetchrow($result))
 	{
-		$template->assign_block_vars('active_styles', array(
-			'STYLE_ID'			=> $row['style_id'],
-			'STYLE_NAME'		=> $row['style_name'],
-			'STYLE_COPYRIGHT'	=> $row['style_copyright'],
-		));
+		if(!in_array($row['style_name'], $store_array))
+		{
+			$template->assign_block_vars('active_styles', array(
+				'STYLE_ID'			=> $row['style_id'],
+				'STYLE_NAME'		=> $row['style_name'],
+				'STYLE_COPYRIGHT'	=> $row['style_copyright'],
+			));
+		}
 	}
 	$db->sql_freeresult($result);
 }

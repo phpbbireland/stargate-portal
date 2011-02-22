@@ -40,7 +40,7 @@ $blocks_width 	= $config['blocks_width'];
 $blocks_enabled = $config['blocks_enabled'];
 
 // if block disabled, generate message and return... //
-if (!$blocks_enabled) 
+if (!$blocks_enabled)
 {
 	$template->assign_vars(array(
 		'PORTAL_MESSAGE' => $user->lang('BLOCKS_DISABLED'),
@@ -87,12 +87,12 @@ if ($result = $db->sql_query($sql))
 	$RB = explode(',', $right);
 
 	$LCR = array_merge((array)$LB, (array)$CB, (array)$RB);
-	$left .= ','; 
+	$left .= ',';
 	$all .= $left .= $center .= $right;
 }
 else
 {
-	trigger_error($user->lang['ERROR_USER_TABLE'] . ': ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+	trigger_error($user->lang['ERROR_USER_TABLE'] . ': ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }
 
 // Process block positions for members //
@@ -153,18 +153,18 @@ if($row['username'] != 'Anonymous')
 	{
 		$sql = 'SELECT *
 			FROM ' . K_BLOCKS_TABLE . '
-			WHERE active = 1 
+			WHERE active = 1
 				AND (view_by != 0 OR view_all = 1)
 				AND (view_pages != 0)
 				ORDER BY ndx ASC';
 	}
 	else
 	{
-		$sql = 'SELECT * 
-			FROM ' . K_BLOCKS_TABLE . ' 
+		$sql = 'SELECT *
+			FROM ' . K_BLOCKS_TABLE . '
 			WHERE active = 1
 				AND (view_pages != 0)
-				AND ' . $db->sql_in_set('id', $LCR) . ' 
+				AND ' . $db->sql_in_set('id', $LCR) . '
 			ORDER BY find_in_set(id,' . '\'' . $all . '\')';
 	}
 }
@@ -196,11 +196,11 @@ foreach ($active_blocks as $active_block)
 	{
 		$this_page_name = $this_page[0];
 
-		if (!$k_config['display_blocks_global']) 
+		if (!$k_config['display_blocks_global'])
 		{
 			$this_page_name = '';
 		}
-			
+
 		$page_id = get_page_id($this_page_name);
 
 		if(in_array($page_id, $arr[$active_block['id']]))
@@ -227,13 +227,13 @@ if ($active_blocks)
 		$block_position = $row['position'];
 
 		// override default position with user designated position //
-		if (in_array($row['id'], $LB)) 
+		if (in_array($row['id'], $LB))
 		{
 			$block_position		= 'L';
-		} else if (in_array($row['id'], $CB)) 
+		} else if (in_array($row['id'], $CB))
 		{
 			$block_position		= 'C';
-		} else if (in_array($row['id'], $RB)) 
+		} else if (in_array($row['id'], $RB))
 		{
 			$block_position		= 'R';
 		}
@@ -395,7 +395,7 @@ if (isset($center_block_ary) && $show_center)
 		}
 		else
 		{
-			$my_file_wide = "{$phpbb_root_path}styles/_portal_common_/template/blocks/" . $value;
+			$my_file_wide = "{$phpbb_root_path}styles/_portal_common/template/blocks/" . $value;
 			$my_file_wide = str_replace('.html', '_wide.html', $my_file_wide);
 			if(file_exists($my_file_wide))
 			{
@@ -455,7 +455,7 @@ if ($this_page[0] == 'viewtopic')
 	global $config, $user, $template, $k_quick_posting_mode, $forum_id, $post_data, $topic_id, $topic_data, $k_config;
 
 	// using function_exists() will still result in redeclarations errors //
-	// I confirmed I could use include once under these circumstances over a year ago (official phpBB chat with devs) // 
+	// I confirmed I could use include once under these circumstances over a year ago (official phpBB chat with devs) //
 	// I need to determine the actual functions required and check agains each ? //
 	include_once($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 	include_once($phpbb_root_path . 'includes/functions_display.' . $phpEx);
@@ -463,7 +463,7 @@ if ($this_page[0] == 'viewtopic')
 	if (!isset($smilies_status))
 	{
 		generate_smilies('inline', $forum_id);
-	}	
+	}
 
 	// HTML, BBCode, Smilies, Images and Flash status amended version
 	$bbcode_status		= ($config['allow_bbcode'] && $auth->acl_get('f_bbcode', $forum_id)) ? true : false;
@@ -482,13 +482,13 @@ if ($this_page[0] == 'viewtopic')
 		'MESSAGE'				=> '',
 		'L_QUICK_TITLE'			=> $user->lang['K_QUICK_REPLY'],
 		'S_QUICK_TITLE'			=> 'Re: ' . $topic_data['topic_title'],
-		'S_SMILIES_ALLOWED'		=> $smilies_status, 	
+		'S_SMILIES_ALLOWED'		=> $smilies_status,
 		'S_LINKS_ALLOWED'		=> $url_status,
 		'S_SIG_ALLOWED'			=> ($auth->acl_get('f_sigs', $forum_id) && $config['allow_sig'] && $user->data['is_registered']) ? true : false,
 		'S_SIGNATURE_CHECKED'	=> ($enable_sig) ? ' checked="checked"' : '',
 		'S_SUBSCRIBE' 			=> $subscribe_topic,
-		'S_BBCODE_QUOTE'		=> $quote_status,	
-		'S_BBCODE_IMG'			=> $img_status, 
+		'S_BBCODE_QUOTE'		=> $quote_status,
+		'S_BBCODE_IMG'			=> $img_status,
 		'S_BBCODE_FLASH'		=> $flash_status,
 		'U_MORE_SMILIES' 		=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=smilies&amp;f=' . $forum_id),
 		'S_USER_LOGGED_IN'		=> ($user->data['user_id'] != ANONYMOUS) ? true : false,

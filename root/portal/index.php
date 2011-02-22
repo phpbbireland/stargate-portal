@@ -1,11 +1,11 @@
 <?php
 /**
 *
-* @author michaelo phpbbireland@gmail.com - http://www.phpbbireland.com 
+* @author michaelo phpbbireland@gmail.com - http://www.phpbbireland.com
 *
-* @package umil
-* @version 1.0.0
-* @copyright (c) 2009 phpbbireland
+* @package sgp
+* @version 3.2.0
+* @copyright (c) 2005-2011 Michael O'Toole (phpbbireland.com)
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
@@ -100,7 +100,7 @@ $versions = array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
 	// Version 3.1.2
-	'3.1.2'	=> array(
+	'3.1.2' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
 	// Version 3.1.3
@@ -111,13 +111,18 @@ $versions = array(
 	'3.1.4' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
-	// New version 3.1.5 (submission 2 fixes)
-	'3.1.5'	=> array(
+	// Version 3.1.5
+	'3.1.5' => array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
+	// New version 3.2.0 (submission 2 fixes)
+	'3.2.0'	=> array(
 
 		'permission_add' => array(
 			array('a_k_portal', 1),
 			array('a_k_web_pages', 1),
 			array('a_k_tools', 1),
+			array('u_k_tools', 1),
 		),
 
 		'permission_set' => array(
@@ -377,7 +382,7 @@ $versions = array(
 
 			array('acp', 'ACP_K_CONFIG',	array(
 					'module_basename' => 'k_config',
-				), 
+				),
 			),
 			array('acp', 'ACP_K_BLOCKS',	array(
 					'module_basename' => 'k_blocks',
@@ -385,11 +390,11 @@ $versions = array(
 			),
 			array('acp', 'ACP_K_MENUS',		array(
 					'module_basename' => 'k_menus',
-				), 
+				),
 			),
 			array('acp', 'ACP_K_MODULES',	array(
 					'module_basename' => 'k_modules',
-				), 
+				),
 			),
 			array('acp', 'ACP_K_WEB_PAGES',	array(
 					'module_basename' => 'k_web_pages',
@@ -405,7 +410,7 @@ $versions = array(
 			),
 			array('acp', 'ACP_K_TOOLS',		array(
 					'module_basename' => 'k_acronyms',
-				), 
+				),
 			),
 			array('acp', 'ACP_K_TOOLS',		array(
 					'module_basename' => 'k_newsfeeds',
@@ -435,7 +440,16 @@ $versions = array(
 					'module_basename' => 'k_pages',
 				),
 			),
-		), 
+
+			array('ucp', '0', 'UCP_K_BLOCKS'),
+			array('ucp', 'UCP_K_BLOCKS', array(
+					'module_basename'	=> 'k_blocks',
+					'modes'				=> array('info', 'arrange', 'edit', 'delete', 'width'),
+					'module_auth'		=> 'u_k_tools',
+				),
+			),
+
+		),
 
 		'table_column_add' => array(
 			array('phpbb_icons', 'icons_group', array('BOOL', 0)),
