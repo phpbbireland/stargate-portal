@@ -114,7 +114,7 @@ $lang = array_merge($lang, array(
 	'UNRESOLVED'		=> 'Unresolved',
 	'UCP'				=> 'User CP',
 	'USER_INFO'			=> 'User Information',
-	'WELCOME_SITE'		=> 'Welcome to %s',
+	'WELCOME_SITE'		=> 'Welcome to<br /><strong>%s</strong>',
 	'YOUR_PROFILE'		=> 'User profile',
 	'CLOUD9_LINKS'		=> 'Cloud9 Links',
 	'CLOUD9_SEARCHES'	=> 'Cloud9 Searches',
@@ -145,7 +145,7 @@ $lang = array_merge($lang, array(
 	'IRC_POPUP'			=> 'Popup IRC Channel',
 	'SIGNED_OFF'		=> 'Signed off',
 	'NO_JAVA_SUP'		=> 'No java support',
-	'NO_JAVA_VER'		=> 'Sorry, but you need a Java 1.4.x enabled browser to use PJIRC',	
+	'NO_JAVA_VER'		=> 'Sorry, but you need a Java 1.4.x enabled browser to use PJIRC',
 ));
 
 // Age ranges

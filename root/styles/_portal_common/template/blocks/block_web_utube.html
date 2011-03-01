@@ -1,0 +1,70 @@
+<!--
+Dev notes: 11 August 2010
+Allow adding of video and comments ...
+The video (actually the youtube video ID) will either be added to
+global pool or to a new table referenced by user_id and video_id.
+-->
+
+<!-- IDTAG block_web_utube starts 11 November 2009 -->
+{YT_HEADER}
+<body id="phpBB" class="welcome ltr" >
+<div class="block_data">
+	<div style="text-align:center;">
+		<div class="outside">
+			<div class="top-left"></div><div class="top-center"></div><div class="top-right"></div>
+			<div class="inside">
+				<div id="wrap">
+					<div class="header"><h1><a href="#">{L_SGP_SUPPORTING}</a></h1></div>
+					<a name="start_here"></a>
+					<div id="page-body" style="padding-top:5px;">
+						<ul class="linklist navlinks">
+							<li><a href="portal.php">{L_PORTAL}</a> <strong>&#8249;</strong> <a rel="external" href="http://www.youtube.com/">{L_YOUTUBE}</a></li>
+						</ul>
+						<div id="main2">
+							<object width="425" height="344">
+							<param name="movie" value="{VIDEO}&hl=en&fs=1"></param>
+							<param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
+							<embed src="{MY_VIDEO}" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed>
+							</object>
+							<!-- IF READY -->
+							<div>
+								<div class="mini-panel sections" style="width: 410px; padding-top: 5px;">
+									<div class="inner">
+										<span class="corners-top"><span></span></span>
+											<ul class="menu">
+												<li>{L_POSTERS_COMMENT}</li>
+											</ul>
+										<span class="corners-bottom"><span></span></span>
+									</div>
+								</div>
+							</div>
+							<!-- ENDIF -->
+						<div><br />{L_SGP_IN_DEVELOPMENT}</div>
+						<div style="float: left; margin-top: 5px;"><strong>Categories:</strong> <!-- BEGIN video_loop_row_cats -->{video_loop_row_cats.CATS}, <!-- END video_loop_row_cats --></div>
+					</div>
+					<div id="extras2">
+						<div class="mini-panel sections" style="width: 420px;">
+							<div class="inner">
+								<span class="corners-top"><span></span></span>
+								<h3><a href="web?mode=about">{L_SWPYVL}</a></h3>
+									<ul class="menu">
+									<!-- BEGIN video_loop_row -->
+									<li>
+									<div style="width:100%;">
+									<div>{L_TITLE}: <strong><a href="{VIDEO_PATH}{video_loop_row.VIDEO_LINK}">{video_loop_row.VIDEO_TITLE}</a></strong></div>
+									<div>{L_PERFORMED_BY}: <strong>{video_loop_row.VIDEO_WHO}</strong></div>
+									<div>{L_RATING}: <strong>{video_loop_row.VIDEO_RATING}</strong></div>
+									<div>{L_CATEGORY}: <strong>{video_loop_row.VIDEO_CAT}</strong></div>
+									<div>{L_POSTED_BY}: <strong>{video_loop_row.VIDEO_POSTER}</strong></div>
+									<div><br />{L_COMMENT}: <strong>{video_loop_row.VIDEO_COMMENT}</strong></div>
+									</li>
+									<!-- END video_loop_row -->
+									</ul>
+								<span class="corners-bottom"><span></span></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+{YT_FOOTER}
+<!-- IDTAG block_web_utube ends 11 November 2009 -->

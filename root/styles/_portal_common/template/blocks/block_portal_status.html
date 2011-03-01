@@ -1,0 +1,20 @@
+<!-- IDTAG starts block_portal_status.html 17 March 2008 copyright phpbbireland.com 2007 -->
+<div class="block_data">
+
+	<!-- BEGIN our_mod_portal_status_row -->
+		<div style="text-align:center;"><strong>{our_mod_portal_status_row.MOD_NAME}</strong></div>
+		<div class="hr"><span style="position: relative; float:left; width:99%; padding-bottom:1px;"></span></div>
+		<div style="text-align:center; padding-bottom:6px;">
+			<strong>{L_STATUS}</strong>
+			<br />{our_mod_portal_status_row.MOD_STATUS}
+		</div>
+		<div style="text-align:center; padding-bottom:8px;"><strong>{L_LAST_UPDATED}</strong><br />{our_mod_portal_status_row.MOD_UPDATED}</div>
+		<div style="text-align:center;"><span class="gensmall">{our_mod_portal_status_row.MOD_DETAILS}</span></div>
+		<div style="text-align:center">{our_mod_portal_status_row.MOD_DOWNLOAD_COUNT}</div>
+		<!-- IF our_mod_portal_status_row.U_MOD_SUPPORT -->
+			<div style="text-align:center"><a rel="external" href="{our_mod_portal_status_row.U_MOD_SUPPORT}">{DOWNLOAD_IMG}</a></div>
+		<!-- ENDIF -->
+	<!-- END our_mod_portal_status_row -->
+</div>
+<!-- IF DEBUG_QUERIES --><div class="block_data">{PORTAL_STATUS_DEBUG}</div><!-- ENDIF -->
+<!-- IDTAG ends block_portal_status -->

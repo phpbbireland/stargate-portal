@@ -1,0 +1,27 @@
+<!-- IDTAG start block_dev_status.html 28 January 2009 copyright phpbbireland.com 2009 -->
+
+<!-- IF MOD_COUNT >= 0 -->
+<div class="block_data">
+	<div class="style_status">
+		<!-- IF BLOCK_COUNT -->
+		<!-- BEGIN our_mod_block_row -->
+			<div style="text-align:center; padding-top:5px; padding-bottom:2px;">&bull; <span class="red"> {our_mod_block_row.MOD_NAME}</span> &bull; </div>
+			<div style="text-align:center">{L_STATUS}: {our_mod_block_row.MOD_STATUS}<br /></div>
+			<div style="text-align:center">{our_mod_block_row.MOD_INFO}</div>
+			<div style="text-align:center; padding:3px;">{L_LAST_UPDATED}:<br />{our_mod_block_row.MOD_UPDATED}</div>
+			<div style="text-align:center; padding:3px;">{L_VERSION}: {our_mod_block_row.MOD_VERSION}</div>
+			<div style="text-align:center; padding:3px;">{L_DESIGNED_BY}: <a rel="external" href="{styles_status_row.U_MOD_LINK}"><strong>{our_mod_block_row.MOD_AUTHOR}</strong></a></div>
+			<!-- IF our_mod_block_row.MOD_AUTHOR_CO -->
+				<div style="text-align:center">{L_PORTED_BY}: <a rel="external" href="{our_mod_block_row.U_MOD_SUPPORT}"><strong>{our_mod_block_row.MOD_AUTHOR_CO}</strong></a></div>
+			<!-- ENDIF -->
+			<!-- IF our_mod_block_row.U_MOD_SUPPORT --><div style="text-align:center"><a rel="external" href="{our_mod_block_row.U_MOD_SUPPORT}">{MOD_DOWNLOAD_IMG}</a></div><!-- ENDIF -->
+			<div style="text-align:center">{our_mod_block_row.MOD_DOWNLOAD_COUNT}</div>
+			<!-- IF our_mod_block_row.MOD_THIS + 1 < MOD_COUNT --><div class="hr"><hr /></div><!-- ENDIF -->
+		<!-- END our_mod_block_row -->
+		<!-- ELSE -->
+		<div style="text-align:center">{L_NO_BLOCKD_IN_DEVELOPMENT}</div>
+		<!-- ENDIF -->
+	</div>
+</div>
+<!-- ENDIF -->
+<!-- IF DEBUG_QUERIES --><div class="block_data">{DEV_STATUS_DEBUG}</div><!-- ENDIF -->

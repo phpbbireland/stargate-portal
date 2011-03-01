@@ -129,12 +129,11 @@ $lang = array_merge($lang, array(
 
 	'POLL_BLOCK' => 'Poll Block',
 
-	//'SELECT_STYLE_EXPLAINED' => '<strong>Colour Legend</strong><hr /><span class="green"><strong>Green</strong></span> = Released<br /><span class="orange"><strong>Orange</strong></span> = Beta style<br /><span class="gray"><strong>Gray</strong></span> = Pre-beta style<br /><span class="red"><strong>Red</strong></span> = Alpha style<hr />',
 	'SELECT_STYLE_EXPLAINED' => '<br /><strong>Dropdown Legend</strong><br />
 	<span class="green"><strong>Released</strong></span><br />
 	<span class="orange"><strong>RC Style</strong></span><br />
 	<span class="gray"><strong>Beta Style</strong></span><br />
-	<span class="red"><strong>Alpha Style</strong></span><hr>',
+	<span class="red"><strong>Alpha Style</strong></span><hr />',
 	'SMILIES' => 'Smilies',
 
 	'OPTION'	=> 'Option',
@@ -223,7 +222,7 @@ $lang = array_merge($lang, array(
 	'NAME'		=> 'Name',
 	'AUTHOR'	=> 'Author',
 	'INFO'		=> 'Info',
-	'LINK'		=> '<img scr="./images/bbcode/link.png">',
+	'LINK'		=> '<img scr="./images/bbcode/link.png" />',
 	'TOTAL_STYLES'	=> 'Total available styles',
 	'STYLE_USERS'	=> 'Style used by %d user%s',
 	'USED_BY'		=> '%d user%s, use%s this style',

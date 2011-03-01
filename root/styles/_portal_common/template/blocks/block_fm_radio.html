@@ -1,0 +1,44 @@
+<!-- IF PLAY -->
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; utf-8" />
+<title>Last.fm</title>
+<script type="text/javascript">
+newWidth = 100
+newHeight = 100
+
+function resizeFrame() {
+ window.moveTo(0, 0);
+ if (!window.innerHeight) {
+ offsetX = (document.documentElement.offsetWidth - document.documentElement.clientWidth);
+ offsetY = (document.documentElement.offsetHeight - document.documentElement.clientHeight) + window.screenTop;
+ } else {
+ offsetX = window.outerWidth - window.innerWidth;
+ offsetY = window.outerHeight - window.innerHeight;
+ }
+ newWidth = newWidth + offsetX;
+ newHeight = newHeight + offsetY;
+ window.resizeTo(newWidth, newHeight);
+}
+
+</script>
+<style type="text/css">
+
+body {
+ margin:50px;
+ margin-bottom:none;
+ padding:0;
+ background:#262626;
+}
+
+</style>
+</head>
+<body>
+<style type="text/css">table.lastfmWidget td {margin:0 !important;padding:0 !important;border:0 !important;}tr.lastfmHead a:hover {background-position:0 0 !important;}tr.lastfmEmbed object {float:left;}tr.lastfmFoot td.config a:hover {background-position:0 0 !important;}tr.lastfmFoot td.view a:hover {background-position:-85px 0 !important;}tr.lastfmFoot td.popup a:hover {background-position:-159px 0 !important;}</style>
+<table class="lastfmWidget" cellpadding="0" cellspacing="0" border="0" style="width:184px;"><tr class="lastfmHead"><td><a title="Music like Enigma" href="http://www.last.fm/listen/artist/Enigma/similarartists" target="_blank" style="display:block;overflow:hidden;height:20px;width:184px;background:url(http://panther1.last.fm/widgets/images/header/radio/regular_red.gif) no-repeat 0 -20px;text-decoration:none;"></a></td></tr><tr class="lastfmEmbed"><td><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="184" height="140" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab%23version=7,0,0,0" style="float:left;"><param name="bgcolor" value="d01f3c" /><param name="movie" value="http://panther1.last.fm/widgets/radio/3.swf" /><param name="quality" value="high" /><param name="allowScriptAccess" value="sameDomain" /><param name="allowNetworking" value="internal" /><param name="FlashVars" value="lfmMode=radio&amp;radioURL=artist%2FEnigma%2Fsimilarartists&amp;title=Music+like+Enigma&amp;theme=red&amp;autostart=1" /><embed src="http://panther1.last.fm/widgets/radio/3.swf" type="application/x-shockwave-flash" name="widgetPlayer" bgcolor="d01f3c" width="184" height="140" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" FlashVars="lfmMode=radio&amp;radioURL=artist%2FEnigma%2Fsimilarartists&amp;title=Music+like+Enigma&amp;theme=red&amp;autostart=1" allowScriptAccess="sameDomain" allowNetworking="internal"></embed></object></td></tr><tr class="lastfmFoot"><td style="background:url(http://panther1.last.fm/widgets/images/footer/background/red.gif) repeat-x 0 0;text-align:right;"><table cellspacing="0" cellpadding="0" border="0" style="width:184px;"><tr><td class="config"><a href="http://www.last.fm/tools/widgets/?widget=radio&amp;url=artist%2FEnigma%2Fsimilarartists&amp;colour=red&amp;width=regular&amp;autostart=1&amp;from=popup" title="Get your own" target="_blank" style="display:block;overflow:hidden;width:85px;height:20px;float:right;background:url(http://panther1.last.fm/widgets/images/footer/red_np.gif) no-repeat 0 -20px;text-decoration:none;"></a></td><td class="view" style="width:74px;"><a href="http://www.last.fm/" title="Visit Last.fm" target="_blank" style="display:block;overflow:hidden;width:74px;height:20px;background:url(http://panther1.last.fm/widgets/images/footer/red_np.gif) no-repeat -85px -20px;text-decoration:none;"></a></td><td class="popup"style="width:25px;"><a href="http://www.last.fm/tools/widgets/popup/?widget=radio&amp;url=artist%2FEnigma%2Fsimilarartists&amp;colour=red&amp;width=regular&amp;autostart=1&amp;from=popup" title="Load this radio in a pop up" target="_blank" style="display:block;overflow:hidden;width:25px;height:20px;background:url(http://panther1.last.fm/widgets/images/footer/red_np.gif) no-repeat -159px -20px;text-decoration:none;" onclick="window.open(this.href + '&amp;resize=0','lastfm_popup','height=240,width=234,resizable=yes,scrollbars=yes'); return false;"></a></td></tr></table></td></tr></table>
+</body>
+</html>
+
+
+<!-- ENDIF -->

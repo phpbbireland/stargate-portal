@@ -240,7 +240,7 @@ $lang = array_merge($lang, array(
 	'UNRESOLVED'		=> 'Unresolved',
 	'UCP'				=> 'User CP',
 	'USER_INFO'			=> 'User Information',
-	'WELCOME_SITE'		=> 'Welcome to %s',
+	'WELCOME_SITE'		=> 'Welcome to<br /><strong>%s</strong>',
 	'YOUR_PROFILE'		=> 'User profile',
 	'SWITCHING'			=> 'Switching to SGP config',
 	'LAST_ONLINE'				=> 'List recent online members.',
@@ -337,7 +337,7 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	'ACP_CLOUD'				=> 'Portal cloud tags default settings. (Cloud 9)',
 	'ACP_CLOUD_EXPLAIN'		=> 'Here you can add, edit and delete tags. <strong>Note:</strong> Using a font size greater than 16pt is not recommended, also it might be difficult to see light coloured fonts...',
-	
+
 	'ADD_CLOUD'				=> 'Add a cloud',
 	'EDIT_CLOUD'			=> 'Edit a cloud',
 	'DELETE_CLOUD'			=> 'Delete a cloud',

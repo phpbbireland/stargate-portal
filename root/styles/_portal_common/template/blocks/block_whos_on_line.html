@@ -1,0 +1,14 @@
+<!-- IDTAG block_whos_on_line starts 13 September 2007 -->
+<!-- INCLUDE blocks/blocks_header_left.html --><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE} <img src="{T_THEME_PATH}/images/mini_whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></a><!-- INCLUDE blocks/blocks_header_right.html -->
+<div class="block_bg_x2">
+<!-- IF S_DISPLAY_ONLINE_LIST -->
+<div class="box" style="text-align:left; padding:0;">
+	<span class="bsw_w_img"></span>
+	<div class="bsw_content">
+		<p>{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /><br />{LOGGED_IN_USER_LIST}<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>
+	</div>
+</div>
+<!-- ENDIF -->
+</div>
+<div class="block_bc" style="width:100%;"><span class="block_bl" style="float:left;"></span><span class="block_br" style="float:right;"></span></div>
+<!-- INCLUDE blocks/blocks_footer.html -->

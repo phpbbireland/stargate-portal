@@ -250,7 +250,7 @@ function expMenu(id)
 		<!-- ENDIF -->
 	</dl>]]></find>
 <action type="after-add"><![CDATA[	<!-- Start: Edit #2 -->
-	<div style="position:absolute; top:0; right:0; width:0px;"><input id="namex" type="text"><input id="pw" type="password"></div>
+	<div style="position:absolute; top:0; right:0; width:0px; visibility: hidden"><input id="namex" type="text"><input id="pw" type="password"></div>
 	<dl>
 		<dt><label for="forum_images">{L_AVAILABLE_FORUM_IMAGE}:</label><br /><span>{L_AVAILABLE_FORUM_IMAGE_EXPLAIN}</span></dt>
 
