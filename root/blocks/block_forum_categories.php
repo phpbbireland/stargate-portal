@@ -39,7 +39,7 @@ foreach ($k_blocks as $blk)
 {
 	if ($blk['html_file_name'] == 'block_forum_categories.html')
 	{
-		$block_cache_time = $blk['block_cache_time']; 
+		$block_cache_time = $blk['block_cache_time'];
 	}
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
@@ -67,7 +67,7 @@ $result = $db->sql_query($sql, $block_cache_time);
 while ($row = $db->sql_fetchrow($result))
 {
 	$forum_id = $row['forum_id'];
-	
+
 	$allow_read = $auth->acl_get('f_read', $row['forum_id']);
 
 	if ($allow_read)
@@ -128,7 +128,7 @@ while ($row = $db->sql_fetchrow($result))
 				'forum_topics'			=> isset($kdata[$forum_id]['topics']) ? $kdata[$forum_id]['topics'] : '',
 				'forum_posts'			=> isset($kdata[$forum_id]['posts']) ? @$kdata[$forum_id]['posts'] : '',
 				'clicks'				=> ($row['forum_type'] != FORUM_LINK || $row['forum_flags'] & FORUM_FLAG_LINK_TRACK) ? $row['forum_posts'] : '',
-				'forum_image_src'		=> ($row['forum_image']) ? $phpbb_root_path . $row['forum_image'] : $phpbb_root_path . 'images/forum_icons/default.png ' . '" height="25px" width="25px" alt="' . $user->lang['FORUM_CAT'] . '"',
+				'forum_image_src'		=> ($row['forum_image']) ? $phpbb_root_path . $row['forum_image'] : $phpbb_root_path . 'images/forum_icons/default.png',
 				'u_viewforum'			=> $u_viewforum,
 				's_cat_count'			=> $cat_count,
 				'forum_type'			=> $row['forum_type'],

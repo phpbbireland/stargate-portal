@@ -13,7 +13,7 @@ $k_acronyms_table = 'phpbb_k_acronyms';
 $k_acronyms_array = array();
 $k_acronyms_array[] = array(
 	'acronym'		=> 'SGP',
-	'meaning'		=> 'An advanced portal for phpBB3, © phpbbireland.com 2005-2011',
+	'meaning'		=> 'An advanced portal for phpBB3, (c) phpbbireland.com 2005-2011',
 	'lang'			=> 'en',
 );
 $k_acronyms_array[] = array(
@@ -1739,7 +1739,7 @@ $k_modules_array[] = array(
 	'mod_copyright'		=> '&copy; phpbbireland.com 2005-2010',
 	'mod_thumb'			=> 'logo_portal_red.png',
 	'mod_last_update'	=> 'Mon 25 Aug 2008',
-	'mod_details'		=> 'Welcome back [you]...&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;phpbbireland.com &lt;/strong&gt; is powered by &lt;strong&gt;phpBB&lt;/strong&gt; {VERSION} and &lt;strong&gt; Stargate Portal &lt;/strong&gt;{PORTAL_VERSION}.',
+	'mod_details'		=> 'Welcome back [you]...&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;{SITENAME} &lt;/strong&gt; is powered by &lt;strong&gt;phpBB&lt;/strong&gt; {VERSION} and &lt;strong&gt; Stargate Portal &lt;/strong&gt;{PORTAL_VERSION}.',
 	'mod_download_count'	=> '0',
 	'mod_status'			=> '100',
 	'mod_version'			=> '1.0.0',
@@ -1845,7 +1845,7 @@ $k_modules_array[] = array(
 	'mod_copyright'		=> '&copy; Michael O\'Toole 2005-2010',
 	'mod_thumb'			=> '',
 	'mod_last_update'	=> 'Mon 25 Aug 2008',
-	'mod_details'		=> '&lt;div style=&quot;text-align:center&quot;&gt;&lt;strong&gt;This is a MiniMod!&lt;/strong&gt;&lt;br /&gt;&lt;a href=&quot;http://www.stargate-portal.com&quot; class=&quot;postlink&quot;&gt;&lt;img src=&quot;http://www.stargate-portal.com/forum/images/adds1.png&quot;&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Created with the portalâ€™s built in MiniMod tool... No database changes required... No php code required...&lt;/div&gt; &lt;div style=&quot;text-align:center&quot;&gt; <!-- s:mrgreen: --><img src="{SMILIES_PATH}/icon_mrgreen.gif" alt=":mrgreen:" title="Mr. Green" /><!-- s:mrgreen: --> &lt;/div&gt;',
+	'mod_details'		=> '&lt;div style=&quot;text-align:center&quot;&gt;&lt;strong&gt;This is a MiniMod!&lt;/strong&gt;&lt;br /&gt;&lt;a href=&quot;http://www.stargate-portal.com&quot; class=&quot;postlink&quot;&gt;&lt;img src=&quot;http://www.stargate-portal.com/forum/images/adds1.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Created with the portal’s built in MiniMod tool... No database changes required... No php code required...&lt;/div&gt; &lt;div style=&quot;text-align:center&quot;&gt; <!-- s:mrgreen: --><img src="{SMILIES_PATH}/icon_mrgreen.gif" alt=":mrgreen:" title="Mr. Green" /><!-- s:mrgreen: --> &lt;/div&gt;',
 	'mod_download_count'	=> '0',
 	'mod_status'			=> '99',
 	'mod_version'			=> '1.0.0',

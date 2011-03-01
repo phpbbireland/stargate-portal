@@ -29,7 +29,7 @@ $imglist ="";
 mt_srand((double)microtime()*1000000);
 
 $handle=opendir('images/pictures/thumbs');
-if (!$handle) 
+if (!$handle)
 {
 	// does trigger_error require $user->lang['WARNINGIMG_DIR'] ? //
 	trigger_error('WARNINGIMG_DIR');
@@ -48,9 +48,6 @@ $imglist = explode(" ", $imglist);
 $a = sizeof($imglist)-2;
 $random = mt_rand(0, $a);
 $image = $imglist[$random];
-
-//$asin = explode(".", $image);
-//$picturescontent = "<br /><center><a href=\"http://www." .$pictures . "/exec/obidos/ASIN/$asin[0]/$pictures_id\" target=\"_blank\">";
 
 $picturescontent .= "<img src=\"images/pictures/thumbs/$image\" border=\"0\" alt=\"$image\" /><br/ >$image</center>";
 

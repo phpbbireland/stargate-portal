@@ -9,7 +9,7 @@
 * Do not remove copyright from any file.
 */
 
-/* 
+/*
 * A couple of functions rescued from functions.php
 * Part of the Acronym code based on the original Acronym copyright 2005 CodeMonkeyX
 * @copyright (c) 2007 phpBB Group
@@ -21,9 +21,9 @@
 *
 * Function names are proceeded with 'sgp_' and wrapped in 'function_exists'
 * to prevent re-declaration.
-* 
+*
 * It would have been much easier to wrap the function in the phpBB core
-* file, however this would have led to problems adding mods in addition to
+* file, however this might cause problems later when adding mods in addition to
 * being bad practice...
 */
 
@@ -36,7 +36,7 @@ if ( !defined('IN_PHPBB') )
 global $phpbb_root_path;
 
 /***
-* Stargate functions starts 
+* Stargate functions starts
 */
 
 
@@ -45,7 +45,7 @@ global $phpbb_root_path;
 */
 if(!function_exists('sgp_get_rand_logo'))
 {
-	function sgp_get_rand_logo() 
+	function sgp_get_rand_logo()
 	{
 		// initalise variables //
 		global $user, $phpbb_root_path, $k_config;
@@ -189,17 +189,17 @@ if(!function_exists('k_progress_bar'))
 		$start .= $ss . '</b>';
 
 		if($percent % 10)
-		{ 
-			$start .= $middl . '|' . '</b>' . $endss; 
+		{
+			$start .= $middl . '|' . '</b>' . $endss;
 		}
-		else 
+		else
 		{
 			$start .= '' . $endss;
 		}
 
 		while($i++ < 10)
 		{
-			$start .= '|';	
+			$start .= '|';
 		}
 
 		$start .= '</b>';
@@ -284,7 +284,7 @@ if(!function_exists('smilies_pass'))
 
 		if (!isset($orig))
 		{
-		
+
 			global $db, $images, $portal_config, $var_cache, $phpbb_root_path, $config;
 
 			$orig = $repl = array();
@@ -455,7 +455,7 @@ if(!function_exists('process_for_vars'))
 			$find = $search;
 
 			// convert to normal text //
-			$search = str_replace($a, $b, $search); 
+			$search = str_replace($a, $b, $search);
 			$search = strtolower($search);
 
 			if (isset($k_config[$search]))
@@ -490,7 +490,7 @@ if(!function_exists('process_for_vars'))
 			$find = $search;
 
 			// convert to normal text //
-			$search = str_replace($a, $b, $search); 
+			$search = str_replace($a, $b, $search);
 			$search = strtolower($search);
 
 			if (isset($k_config[$search]))
@@ -527,7 +527,7 @@ if($k_config['rand_header'] == 1)
 {
 	global $user, $template, $config, $k_config;
 
-	// get an image but don't parse it... 
+	// get an image but don't parse it...
 	// we now use the styles own folder...
 
 	// as this file may be called for one or more functions the $user->theme['theme_path'] may not be visible so hide errors //
@@ -537,7 +537,7 @@ if($k_config['rand_header'] == 1)
 
 	$template->assign_vars(array(
 		'RAND_HEADER_IMG' => $image,
-		'RAND_HEADER_OPT' => $k_config['rand_header'], 
+		'RAND_HEADER_OPT' => $k_config['rand_header'],
 	));
 }
 
@@ -673,7 +673,7 @@ if(!function_exists('sgp_get_file_list'))
 		}
 		else
 		{
-			// Can this not be done with pointers... 
+			// Can this not be done with pointers...
 			// Would rather return pounter to list that the actual list?
 			return($dirslist);
 		}
@@ -752,9 +752,9 @@ if (!function_exists('sgp_build_minimods'))
 
 		$select_allow = ($config['override_user_style']) ? false : true;
 
-		$sql = "SELECT * FROM " . K_MODULES_TABLE . " 
-			WHERE mod_status > 0 
-				ORDER BY mod_type, mod_origin DESC "; 
+		$sql = "SELECT * FROM " . K_MODULES_TABLE . "
+			WHERE mod_status > 0
+				ORDER BY mod_type, mod_origin DESC ";
 
 		if (!$result1 = $db->sql_query($sql, $block_cache_time))
 		{
@@ -906,7 +906,7 @@ if(!function_exists('ready_text_from_storage'))
 		*/
 
 		$row['mod_bbcode_options'] = (($row['mod_enable_bbcode']) ? OPTION_FLAG_BBCODE : 0) +
-			(($row['mod_enable_smilies']) ? OPTION_FLAG_SMILIES : 0) + 
+			(($row['mod_enable_smilies']) ? OPTION_FLAG_SMILIES : 0) +
 			(($row['mod_enable_magic_url']) ? OPTION_FLAG_LINKS : 0);
 
 		$text = generate_text_for_display($row['mod_text'], $row['mod_bbcode_uid'], $row['mod_bbcode_bitfield'], $row['mod_bbcode_options']);
@@ -1149,21 +1149,21 @@ if(!function_exists('get_page_id'))
 		// Basic error checking //
 		if($this_page_name == '')
 		{
-			trigger_error($user->lang['SOMETHING_WENT_WRONG'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+			trigger_error($user->lang['SOMETHING_WENT_WRONG'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 		}
 
 		foreach ($k_pages as $page)
 		{
 			if ($page['page_name'] == $this_page_name)
 			{
-				$page_id = $page['page_id']; 
+				$page_id = $page['page_id'];
 				return($page_id);
 			}
 		}
 		return(0);
 
 /*
-		// Get all pages 
+		// Get all pages
 		$sql = 'SELECT page_id, page_name
 			FROM ' . K_PAGES_TABLE . '
 			ORDER BY page_id ASC, page_name';
@@ -1252,8 +1252,8 @@ if(!function_exists('s_get_vars_array'))
 		$resources = array();
 
 		$sql = 'SELECT * FROM ' . K_RESOURCE_TABLE  . ' ORDER BY word ASC';
-		$result = $db->sql_query($sql);	
-		
+		$result = $db->sql_query($sql);
+
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$resources[] = $row['word'];
@@ -1274,7 +1274,7 @@ if(!function_exists('s_get_vars'))
 
 		$sql = 'SELECT * FROM ' . K_RESOURCE_TABLE  . ' WHERE type = ' . $type . ' ORDER BY word ASC';
 
-		$result = $db->sql_query($sql);	
+		$result = $db->sql_query($sql);
 
 		while ($row = $db->sql_fetchrow($result))
 		{

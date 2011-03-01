@@ -66,7 +66,7 @@ $use_block_cookies =  $k_config['use_cookies'];
 
 // Grab data for this user //
 
-$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, user_left_blocks, user_center_blocks, user_right_blocks, username
+$sql = "SELECT group_id, user_type, user_style, user_avatar, user_avatar_type, username, user_left_blocks, user_center_blocks, user_right_blocks
 	FROM " . USERS_TABLE . "
 	WHERE user_id = $user_id";
 
@@ -296,6 +296,7 @@ if ($active_blocks)
 				$process_block = false;
 			}
 		}
+
 		$page_id = get_page_id($this_page_name);
 
 		if($process_block && $block_view_by > 0 && in_array($page_id, $arr))

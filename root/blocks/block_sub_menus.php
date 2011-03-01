@@ -38,7 +38,7 @@
 	{
 		if ($blk['html_file_name'] == 'block_sub_menus.html')
 		{
-			$block_cache_time = $blk['block_cache_time']; 
+			$block_cache_time = $blk['block_cache_time'];
 		}
 	}
 	$block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
@@ -85,68 +85,46 @@
 
 		$name = (!empty($user->lang[$tmp_name])) ? $user->lang[$tmp_name] : $portal_sub_menus[$i]['name'];   // get language equivalent //
 
-		//$menu_item_view_by = $portal_sub_menus[$i]['view_by'];
-
 		$s_id = ''; 														// initiate our var session s_id, if we need to pass session id
 		$u_id = ''; 														// initiate our var user u_id, if we need to pass user id
 		$isamp = '';														// initiate our var isamp, if we need to use it
 
+		$menu_item_view_by = $portal_sub_menus[$i]['view_by'];
+		$menu_view_groups = $portal_sub_menus[$i]['view_groups'];
+		$menu_item_view_all = $portal_sub_menus[$i]['view_all'];
+
 		$process_menu_item = false;
 
-		$menu_item_view_by = $portal_sub_menus[$i]['view_by'];
+		if ($menu_item_view_all != 0)
+		{
+			$grps = explode(",", $menu_view_groups);
 
-		// Advanced group options...
-		if ($menu_item_view_by == 0)
-		{
-			$process_menu_item = false;
-		}
-		else
-		{
 			if ($memberships)
 			{
 				foreach ($memberships as $member)
 				{
-					$group_name = $k_groups[$member['group_id']]['group_name'];
-
-					if($menu_item_view_by == $member['group_id'])// || $member['group_id'] == $k_group_name_id['ADMINISTRATORS'])
+					if ($menu_item_view_by == $member['group_id'] || $menu_item_view_all == 1)
 					{
 						$process_menu_item = true;
 					}
 					else
 					{
-						$loop_count++;
-						switch($group_name)
+						for ($j = 0; $j < count($grps); $j++)
 						{
-							case 'Guests':
-							case 'GUESTS':
-							case 'Anonymous':
-							case 'ANONYMOUS':			if($menu_item_view_by == 1 || $menu_item_view_by == $k_group_name_id['GUESTS']) $process_menu_item = true;
-							break;
-							case 'Registered':
-							case 'REGISTERED':			if($menu_item_view_by < 4 || $menu_item_view_by < $k_group_name_id['GLOBAL_MODERATORS']) $process_menu_item = true;
-							break;
-							case 'Registered Coppa':
-							case 'REGISTERED_COPPA':	if($menu_item_view_by < 4 || $menu_item_view_by < $k_group_name_id['GLOBAL_MODERATORS']) $process_menu_item = true;
-							break;
-							case 'Global Moderators':
-							case 'GLOBAL_MODERATORS':	if($menu_item_view_by < 5 || $menu_item_view_by < $k_group_name_id['ADMINISTRATORS']) $process_menu_item = true;
-							break;
-							case 'Bots':
-							case 'BOTS':				if($menu_item_view_by ==  1 || $menu_item_view_by ==  6 || $menu_item_view_by ==  $k_group_name_id['GUESTS'] || $menu_item_view_by ==  $k_group_name_id['BOTS']) $process_menu_item = true;
-							break;
-							
-							default:					if($menu_item_view_by == $loop_count || $menu_item_view_by < 3 || $menu_item_view_by < $k_group_name_id['REGISTERED_COPPA']) $process_menu_item = true;
+							if ($grps[$j] == $member['group_id'])
+							{
+								$process_menu_item = true;
+							}
 						}
 					}
 				}
-				$loop_count = 0;
-			}
-			else
-			{
-				$process_menu_item = false;
 			}
 		}
-		
+		else
+		{
+			$process_menu_item = false;
+		}
+
 		if ($portal_sub_menus[$i]['append_uid'] == 1)							// do we need to pass user id //
 		{
 			$isamp = '&amp';
