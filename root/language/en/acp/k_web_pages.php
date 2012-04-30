@@ -5,24 +5,41 @@
 *
 * @package language
 * @version $Id: k_web_pages.php 297 2008-12-30 18:40:30Z JohnnyTheOne $
-* @copyright (c) 2006 phpbbireland Group 
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Stargate Portal copyright agreement...
+* @copyright (c) 2005 phpbireland
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
+*/
+
+/**
+* DO NOT CHANGE
 */
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
-/**
-* DO NOT CHANGE
-*/
-
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
 }
 
+// DEVELOPERS PLEASE NOTE
+//
+// All language files should use UTF-8 as their encoding and the files must not contain a BOM.
+//
+// Placeholders can now contain order information, e.g. instead of
+// 'Page %s of %s' you can (and should) write 'Page %1$s of %2$s', this allows
+// translators to re-order the output of data while ensuring it remains correct
+//
+// You do not need this where single placeholders are used, e.g. 'Message %d' is fine
+// equally where a string contains only two placeholders which are used to wrap text
+// in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ » “ ” …
+//
 // phpbbportal profile fields
 $lang = array_merge($lang, array(
 	
@@ -56,18 +73,18 @@ $lang = array_merge($lang, array(
 
 	'WEB_PAGE_TYPE_EXPLAIN'	=> 'Select the type of page to create.',
 
-	'HEAD' => 'Page Header',
-	'BODY' => 'Page Body',
-	'FOOT' => 'Page Footer',
+	'HEAD' 			=> 'Page Header',
+	'BODY' 			=> 'Page Body',
+	'FOOT' 			=> 'Page Footer',
 	'PORTAL_PAGE'	=> 'Portal Page',
 
-	'HEAD1' => 'Header',
-	'BODY1' => 'Body',
-	'FOOT1' => 'Footer',
+	'HEAD1' 		=> 'Header',
+	'BODY1' 		=> 'Body',
+	'FOOT1' 		=> 'Footer',
 	'PORTAL_PAGE1'	=> 'Portal',
 
-	'LINK'				=> 'Link',
-	'IMAGE'				=> 'Image',
+	'LINK'						=> 'Link',
+	'IMAGE'						=> 'Image',
 	'LAST_UPDATED'				=> 'Last Updated',
 	'LAST_UPDATED_EXPLAIN'		=> 'If blank todays date will be assigned.',
 	'WEB_PAGES_HEADER_ADMIN'	=> 'Manage Portal Web Pages',
@@ -100,13 +117,13 @@ $lang = array_merge($lang, array(
 	'NEW_TYPE'					=> 'Add a new type',
 	'NEW_TYPE_EXPLAIN'			=> 'The name of the new module type.',
 	'MOD_HEADER_ADMIN'			=> 'Manage Portal Mini Mods ',
-	'MOD_NAME' => 'Mod Name',
-	'MOD_TYPE' => 'Mod Type',
-	'MOD_INFO' => 'Mod Details',
-	'SELECT_EDIT_TO_VIEW'	=> '<span style="font-style:italic">Edit to view this code</span>',
-	'LAST_UPDATED'	=> 'Last Updated',
-	'EXTERNAL_FILE'					=> 'External file',
-	'EXTERNAL_FILE_EXPLAIN'			=> 'You can use an external file for this body, else enter the html code for the body below (future development).',
+	'MOD_NAME' 					=> 'Mod Name',
+	'MOD_TYPE' 					=> 'Mod Type',
+	'MOD_INFO' 					=> 'Mod Details',
+	'SELECT_EDIT_TO_VIEW'		=> '<span style="font-style:italic">Edit to view this code</span>',
+	'LAST_UPDATED'				=> 'Last Updated',
+	'EXTERNAL_FILE'				=> 'External file',
+	'EXTERNAL_FILE_EXPLAIN'		=> 'You can use an external file for this body, else enter the html code for the body below (future development).',
 
 	'PAGE_EXTN'				=> 'Remove extension',
 	'PAGE_EXTN_EXPLAIN'		=> 'By default pages use the html extension but it is not required.',

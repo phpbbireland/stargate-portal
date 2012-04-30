@@ -10,8 +10,10 @@
 					<!-- IF portal_menus_row.PORTAL_MENU_ICON -->{portal_menus_row.PORTAL_MENU_ICON}<!-- ENDIF -->
 						<a href="{portal_menus_row.U_PORTAL_MENU_LINK}" <!-- IF portal_menus_row.EXTERN == '2' --> target="_blank" onclick="window.open(this.href); return false;"<!-- ENDIF --><!-- IF portal_menus_row.EXTERN == '1' --> target="_blank" <!-- ENDIF -->>{portal_menus_row.PORTAL_MENU_NAME}</a>
 					</span>
-					<!-- IF portal_menus_row.S_SOFT_HR == 1 --></div> <br /><img src="./images/soft_hr.gif" /><!-- ENDIF -->
+					<!-- IF portal_menus_row.S_SOFT_HR == 1 --></div> <br /><img src="{ROOT_PATH}images/soft_hr.gif" /><!-- ENDIF -->
 				<!-- ENDIF -->
+			<!-- BEGINELSE -->
+				<div style="text-align:center">{L_NO_MENU}</div>
 			<!-- END portal_menus_row -->
 		</div>
 	</div>

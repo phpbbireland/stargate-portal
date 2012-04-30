@@ -40,10 +40,10 @@ class acp_k_cloud
 		add_form_key($form_key);
 
 		$s_hidden_fields = '';
- 
+
 		$tag_id = '';
 
-		$mode			= request_var('mode', '');	
+		$mode			= request_var('mode', '');
 		$tag_id			= request_var('tag_id', '');
 		$action			= request_var('config', '');
 		//$cloud_group	= request_var('cloud_group', '');
@@ -57,12 +57,12 @@ class acp_k_cloud
 					'MESSAGE'	=> $user->lang['SWITCHING'],
 				));
 
-				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;switch=k_cloud_vars.html"); 
+				meta_refresh(1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_vars&amp;mode=config&amp;switch=k_cloud_vars.html");
 			break;
 
 			case 'add':
 				$mode = '';
-				meta_refresh(0, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_cloud&amp;mode=add"); 
+				meta_refresh(0, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_cloud&amp;mode=add");
 			break;
 
 			default:

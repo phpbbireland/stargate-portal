@@ -28,6 +28,9 @@ class acp_k_tools_info
 			'version'	=> '1.0.0',
 			'modes'		=> array(
 				'tools' 	=> array('title' => 'ACP_K_PORTAL_TOOLS', 'auth' => 'acl_a_k_portal',	'cat' => array('ACP_K_TOOLS')),
+				'reset_guest'	=> array('title' => 'ACP_K_PORTAL_TOOLS_RESET_GUEST', 'auth' => 'acl_a_k_portal',	'cat' => array('ACP_K_TOOLS')),
+				'reset_user' 	=> array('title' => 'ACP_K_PORTAL_TOOLS_RESET_USER', 'auth' => 'acl_a_k_portal',	'cat' => array('ACP_K_TOOLS')),
+				'reset_users'	=> array('title' => 'ACP_K_PORTAL_TOOLS_RESET_USERS', 'auth' => 'acl_a_k_portal',	'cat' => array('ACP_K_TOOLS')),
 			),
 		);
 	}

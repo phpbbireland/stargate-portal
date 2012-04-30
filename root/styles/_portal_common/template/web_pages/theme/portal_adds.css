@@ -158,3 +158,16 @@ html, body {
 	<![endif]-->
 }
 /* ie works with 1000px */
+
+
+.v_thumb {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #D3D3D3;
+    border-radius: 3px 3px 3px 3px;
+    display: inline-block;
+    overflow: hidden;
+    padding: 3px;
+    vertical-align: bottom;
+    background-color: white;
+    position: relative;
+}

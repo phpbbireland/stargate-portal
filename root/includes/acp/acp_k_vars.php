@@ -41,7 +41,7 @@ class acp_k_vars
 		$form_key = 'acp_k_vars';
 		add_form_key($form_key);
 
-		$choice = request_var('switch', ''); 
+		$choice = request_var('switch', '');
 		$block = request_var('block', '');
 		$mode	= request_var('mode', '');
 		$switch = request_var('switch', '');
@@ -58,8 +58,8 @@ class acp_k_vars
 
 		if (isset($block))
 		{
-			$sql = "SELECT id, title, var_file_name 
-				FROM ". K_BLOCKS_TABLE . " 
+			$sql = "SELECT id, title, var_file_name
+				FROM ". K_BLOCKS_TABLE . "
 				WHERE id = " . (int)$block;
 			$result = $db->sql_query($sql);
 
@@ -72,12 +72,12 @@ class acp_k_vars
 			$var_file_name = $row['var_file_name'];
 
 			$db->sql_freeresult($result);
+			get_all_groups();
 		}
 
 		$block = !empty($block) ? $block : 0;
 		$action = request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;
-
 
 		// swicth to other var setups 11 March 2010
 		if ($switch)
@@ -86,7 +86,7 @@ class acp_k_vars
 			$var_file_name = $switch;
 		}
 
-		$template->assign_vars(array( 'S_SWITCH' => $var_file_name )); 
+		$template->assign_vars(array( 'S_SWITCH' => $var_file_name ));
 
 
 		if ($submit && !check_form_key($form_key))
@@ -101,7 +101,7 @@ class acp_k_vars
 
 		$sql = 'SELECT config_name, config_value
 			FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . $wheresql;
- 
+
 		$result = $db->sql_query($sql);
 
 		while($row = $db->sql_fetchrow($result))
@@ -153,6 +153,9 @@ class acp_k_vars
 				$number_of_team_members_to_display		= request_var('number_of_team_members_to_display', '');
 				$number_of_top_posters_to_display		= request_var('number_of_top_posters_to_display', '');
 				$number_of_top_referrals_to_display		= request_var('number_of_top_referrals_to_display', '');
+
+				$teams_to_display						= request_var('teams_to_display', '');
+
 				$recent_topics_search_exclude			= request_var('recent_topics_search_exclude', '');
 				$mini_mod_style_count					= request_var('mini_mod_style_count', '');
 				$mini_mod_block_count					= request_var('mini_mod_block_count', '');
@@ -175,7 +178,7 @@ class acp_k_vars
 				$age_range_interval						= request_var('age_range_interval', '');
 				$age_range_start						= request_var('age_range_start', '');
 				$age_upper_limit						= request_var('age_upper_limit', '');
-				
+
 				$cloud_max_tags							= request_var('cloud_max_tags', '');
 				$cloud_movie							= request_var('cloud_movie', '');
 				$cloud_tcolour							= request_var('cloud_tcolour', '');
@@ -197,8 +200,8 @@ class acp_k_vars
 
 				$sgp_quick_reply						= request_var('sgp_quick_reply', 1);
 				$k_yourtube_link						= request_var('k_yourtube_link', '');
- 
-				$block_cache_time						= request_var('block_cache_time_default', '');
+
+				$block_cache_time_default				= request_var('block_cache_time_default', '');
 				$block_recent_cache_time				= request_var('block_recent_cache_time', '');
 
 				switch($announce_type)
@@ -250,6 +253,9 @@ class acp_k_vars
 				sgp_acp_set_config('number_of_team_members_to_display', $number_of_team_members_to_display);
 				sgp_acp_set_config('number_of_top_posters_to_display', $number_of_top_posters_to_display);
 				sgp_acp_set_config('number_of_top_referrals_to_display', $number_of_top_referrals_to_display);
+
+				sgp_acp_set_config('teams_to_display', $teams_to_display);
+
 				sgp_acp_set_config('recent_topics_search_exclude', $recent_topics_search_exclude);
 				sgp_acp_set_config('rand_banner', $rand_banner);
 				sgp_acp_set_config('rand_header', $rand_header);
@@ -282,7 +288,7 @@ class acp_k_vars
 				sgp_acp_set_config('teamspeak_connection', $teamspeak_connection);
 				sgp_acp_set_config('sgp_quick_reply', $sgp_quick_reply);
 				sgp_acp_set_config('k_yourtube_link', $k_yourtube_link);
-				sgp_acp_set_config('block_cache_time_default', $block_cache_time);
+				sgp_acp_set_config('block_cache_time_default', $block_cache_time_default);
 				sgp_acp_set_config('block_recent_cache_time', $block_recent_cache_time);
 
 				$mode='reset';

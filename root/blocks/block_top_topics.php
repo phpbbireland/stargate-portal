@@ -34,13 +34,14 @@ foreach ($k_blocks as $blk)
 {
 	if ($blk['html_file_name'] == 'block_top_topics.html')
 	{
-		$block_cache_time = $blk['block_cache_time']; 
+		$block_cache_time = $blk['block_cache_time'];
 	}
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
 
 $max_top_topics = $k_config['max_top_topics'];
 $days_top_topics = $k_config['days_top_topics'];
+
 
 $sql = 'SELECT topic_id, topic_title, topic_replies, forum_id
 	FROM ' . TOPICS_TABLE . '
@@ -59,7 +60,7 @@ while($row = $db->sql_fetchrow($result))
     {
         continue;
     }
-	
+
 	if ($auth->acl_gets('f_list', 'f_read', $row['forum_id']))
 	{
 		// reduce length and pad with ... if too long //
@@ -69,7 +70,7 @@ while($row = $db->sql_fetchrow($result))
 		{
 			$my_title = sgp_checksize ($my_title, 14);
 		}
-		
+
 		$template->assign_block_vars('top_topics', array(
 			'TOPIC_TITLE'		=> $my_title,
 			'FULL_T_TITLE'		=> smilies_pass($row['topic_title']),
@@ -77,7 +78,7 @@ while($row = $db->sql_fetchrow($result))
 			'TOPIC_REPLIES'		=> $row['topic_replies'],
 			)
 		);
-	}       
+	}
 }
 $db->sql_freeresult($result);
 

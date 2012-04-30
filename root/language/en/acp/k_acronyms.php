@@ -1,25 +1,29 @@
 <?php
 /**
 *
-* @version $id: k_acronym.php 320 2009-01-14 05:04:26Z nexur $
-* @copyright (c) 2008 phpbbireland.com
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @author Original Author Michael O'Toole@www.stargate-portal.com
 *
+* @package {k_acronyms.php}
+* @version $Id:$ 3.2.0
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Stargate Portal copyright agreement...
+* @copyright (c) 2005 phpbireland
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+*
+*/
+
+/**
+* DO NOT CHANGE
 */
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
-
-/**
-* DO NOT CHANGE
-*/
 if (empty($lang) || !is_array($lang))
 {
-    $lang = array();
+	$lang = array();
 }
-
 
 // DEVELOPERS PLEASE NOTE
 //
@@ -32,6 +36,10 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ » “ ” …
+//
 
 
 $lang = array_merge($lang, array(
@@ -49,6 +57,7 @@ $lang = array_merge($lang, array(
 	'SWITCHING_TO_ACRONYM_VARS'	=> 'Switching to acronym vars.',
 	'ACRONYM_WARN'				=> 'The acronyms you entered already appears (as text) as part of another acronyms meaning...<br />The current mod configuration does not support this, perhaps later...<br /><br />For the moment try rewording the meaning or changing the case of the offending word, for example... \'MOD\' to \'Mod\'.<br />',
 	'ACRONYM_WARN_2'			=> 'You did not enter an acronym or meaning... please try again...',
+
 ));
 
 ?>

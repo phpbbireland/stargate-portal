@@ -29,25 +29,25 @@ class acp_k_web_pages
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
 		include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx);
-	
+
 		$message ='';
 		$search_message = '';
 		$found = 0;
-			
+
 		$user->add_lang('acp/k_web_pages');
 		$this->tpl_name = 'acp_k_web_pages';
 		$this->page_title = 'ACP_K_WEB_PAGES';
 
 		$form_key = 'acp_k_web_pages';
-		add_form_key($form_key);		
-				
+		add_form_key($form_key);
+
 		$action = request_var('action', '');
 		$mode	= request_var('mode', '');
 		$id = request_var('module', 0);
 
 		$submit = (isset($_POST['submit'])) ? true : false;
 		$add	= (isset($_POST['add'])) ? true : false;
-		
+
 		if ($submit && !check_form_key($form_key))
 		{
 			$submit = false;
@@ -57,7 +57,7 @@ class acp_k_web_pages
 		$template->assign_vars(array(
 			'U_EDIT'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_web_pages&amp;mode=edit&amp;module=",
 			'U_DELETE'	=> "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_web_pages&amp;mode=delete&amp;module=",
-			'U_ADD_VARS' => "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_resource_words&mode=select", 
+			'U_ADD_VARS' => "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_resource_words&mode=select",
 			)
 		);
 
@@ -68,7 +68,7 @@ class acp_k_web_pages
 		{
 			$last_updated = $today = date("D d M Y");
 		}
-		
+
 		switch(request_var('page_type', ''))
 		{
 			case 'H':
@@ -145,7 +145,7 @@ class acp_k_web_pages
 					//$body = process_for_vars($body, true);
 
 					$message = $user->lang['SAVING_DATA'];
-				
+
 					//if ($page_name == '') return;
 
 					if ($last_updated == '' || $last_updated == '0')
@@ -153,7 +153,7 @@ class acp_k_web_pages
 						$last_updated = $today = date("D d M Y");
 					}
 
-					$sql = "UPDATE " . K_WEB_PAGES_TABLE . " 
+					$sql = "UPDATE " . K_WEB_PAGES_TABLE . "
 						SET
 							active			= '" . (int)$active . "',
 							page_type		= '" . $db->sql_escape($page_type) . "',
@@ -169,35 +169,35 @@ class acp_k_web_pages
 							last_updated	= '" . $db->sql_escape($last_updated) . "'
 						WHERE id = " . (int)$id . " LIMIT 1";
 
-				
+
 					if (!$result = $db->sql_query($sql))
 					{
 						trigger_error($user->lang['ERROR_PORTAL_WEB_TABLE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 					}
-					
+
 					$template->assign_vars(array(
 						'S_OPTION'	=> $user->lang['SAVED'],
 						'MESSAGE'	=> $message,
 						'U_BACK'	=> $this->u_action,
 					));
-					
+
 					unset($submit);
-					
+
 					meta_refresh (1, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_web_pages&amp;mode=all");
-					return;	
+					return;
 				}
 				else
 				{
 					$sql = "SELECT * FROM " . K_WEB_PAGES_TABLE . " WHERE id =  '" . (int)$id . "'";
 
-					if (!$result = $db->sql_query($sql)) 
+					if (!$result = $db->sql_query($sql))
 					{
 						trigger_error($user->lang['ERROR_PORTAL_WEB_TABLE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 					}
 
 					$row = $db->sql_fetchrow($result);
 
-//					$page_folder	= $row['page_folder'];					
+//					$page_folder	= $row['page_folder'];
 					$mid			= $row['id'];
 					$active			= $row['active'];
 					$page_name		= $row['page_name'];
@@ -212,7 +212,7 @@ class acp_k_web_pages
 					$foot			= $row['foot'];
 					$last_updated	= $row['last_updated'];
 
-					// if there is no date for last update use todays date // 
+					// if there is no date for last update use todays date //
 					if ($last_updated == '')
 					{
 						$last_updated = $today = date("D d M Y");
@@ -308,7 +308,7 @@ class acp_k_web_pages
 					$db->sql_query('INSERT INTO ' . K_WEB_PAGES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary));
 
 					$result = $db->sql_query($sql);
-					
+
 					$template->assign_vars(array(
 						'S_OPTION' => 'new', // not lang var
 						'MESSAGE' => $user->lang['ADDED'],
@@ -332,7 +332,7 @@ class acp_k_web_pages
 				{
 					trigger_error($user->lang['MUST_SELECT_VALID_MODULE_DATA'] . adm_back_link($this->u_action), E_USER_WARNING);
 				}
-		
+
 				if (confirm_box(true))
 				{
 					$sql = 'DELETE FROM ' . K_WEB_PAGES_TABLE . "
@@ -351,13 +351,13 @@ class acp_k_web_pages
 					return;
 				}
 				else
-				{ 
+				{
 					confirm_box(false, $user->lang['CONFIRM_OPERATION_MODULE'], build_hidden_fields(array(
 						'i'			=> 'k_web_pages',
 						'mode'		=> $mode,
 						'action'	=> 'delete',
 					)));
-				}				
+				}
 				break;
 			}
 			case 'all':
@@ -410,7 +410,7 @@ class acp_k_web_pages
 					$foot			= $row['foot'];
 					$last_updated	= $row['last_updated'];
 
-					// if there is no date for last update use todays date // 
+					// if there is no date for last update use todays date //
 					if ($last_updated == '')
 					{
 						$last_updated = $today = date("D d M Y");
@@ -508,8 +508,8 @@ function s_get_vars()
 
 	global $db, $template;
 
-	$sql = 'SELECT * FROM ' . K_RESOURCE_TABLE . ' ORDER BY word ASC';
-	$result = $db->sql_query($sql);	
+	$sql = 'SELECT * FROM ' . K_RESOURCES_TABLE . ' ORDER BY word ASC';
+	$result = $db->sql_query($sql);
 
 	while ($row = $db->sql_fetchrow($result))
 	{

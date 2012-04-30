@@ -13,7 +13,7 @@
 */
 
 /**
-* 29 October 2010 
+* 29 October 2010
 * Edits re validation (Paul)
 *
 * Replace english with language var...
@@ -39,14 +39,14 @@ class acp_k_modules
 		global $config, $SID, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
 		$found = 0;
-			
+
 		$user->add_lang('acp/k_modules');
 		$this->tpl_name = 'acp_k_modules';
 		$this->page_title = 'ACP_K_MODULES';
 
 		$form_key = 'acp_k_modules';
-		add_form_key($form_key);		
-				
+		add_form_key($form_key);
+
 		$action = request_var('action', '');
 		$mode	= request_var('mode', '');
 		$id		= request_var('module', 0);
@@ -80,7 +80,7 @@ class acp_k_modules
 			$sql = "SELECT * FROM " . K_MODULES_TABLE . " WHERE mod_type LIKE '" . $db->sql_escape($mode) . "'  ORDER BY mod_name ASC";
 		}
 
-		if (!$result = $db->sql_query($sql)) 
+		if (!$result = $db->sql_query($sql))
 		{
 			trigger_error($user->lang['COULD_NOT_UPDATE_K_MODULES'] .  basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 		}
@@ -191,7 +191,7 @@ class acp_k_modules
 			'U_ADD_VARS' => "{$phpbb_admin_path}index.$phpEx{$SID}&amp;i=k_resource_words&mode=select",
 			'SEARCH_MESSAGE' => $user->lang['FOUND'] . $found . $user->lang['OF_TYPE'] . strtoupper($mode),
 			'S_OPTION'	=>$mode,
-		));	
+		));
 
 		if ($add_style)
 		{
@@ -223,22 +223,22 @@ class acp_k_modules
 					$mod_download_count	= request_var('mod_download_count', 0);
 					$mod_origin			= request_var('mod_origin', 0);
 					$mod_status			= request_var('mod_status', 0);
-					$mod_name			= utf8_normalize_nfc(request_var('mod_name', ''));
-					$mod_filename		= utf8_normalize_nfc(request_var('mod_filename', ''));
-					$mod_version		= utf8_normalize_nfc(request_var('mod_version', ''));
-					$mod_author			= utf8_normalize_nfc(request_var('mod_author', ''));
-					$mod_author_co		= utf8_normalize_nfc(request_var('mod_author_co', ''));
-					$mod_link			= utf8_normalize_nfc(request_var('mod_link', ''));
-					$mod_support_link	= utf8_normalize_nfc(request_var('mod_support_link', ''));
-					$mod_copyright		= utf8_normalize_nfc(request_var('mod_copyright', ''));
-					$mod_type			= utf8_normalize_nfc(request_var('mod_type', ''));
-					$mod_image			= utf8_normalize_nfc(request_var('mod_image', ''));
+
 					$mod_last_update	= utf8_normalize_nfc(request_var('mod_last_updated', ''));
-
-					$details = ready_text_for_storage(utf8_normalize_nfc(request_var('mod_details', '')));
-
 					$available			= utf8_normalize_nfc(request_var('available', ''));
-					$new_type			= utf8_normalize_nfc(request_var('new_type', ''));
+
+					$mod_name			= utf8_normalize_nfc(request_var('mod_name', '', true));
+					$mod_filename		= utf8_normalize_nfc(request_var('mod_filename', '', true));
+					$mod_version		= utf8_normalize_nfc(request_var('mod_version', '', true));
+					$mod_author			= utf8_normalize_nfc(request_var('mod_author', '', true));
+					$mod_author_co		= utf8_normalize_nfc(request_var('mod_author_co', '', true));
+					$mod_link			= utf8_normalize_nfc(request_var('mod_link', '', true));
+					$mod_support_link	= utf8_normalize_nfc(request_var('mod_support_link', '', true));
+					$mod_copyright		= utf8_normalize_nfc(request_var('mod_copyright', '', true));
+					$mod_type			= utf8_normalize_nfc(request_var('mod_type', '', true));
+					$mod_image			= utf8_normalize_nfc(request_var('mod_image', '', true));
+					$new_type			= utf8_normalize_nfc(request_var('new_type', '', true));
+					$details			= ready_text_for_storage(utf8_normalize_nfc(request_var('mod_details', '', true)));
 
 					if ($new_type != $available)
 					{
@@ -257,8 +257,8 @@ class acp_k_modules
 					{
 						$mod_last_update = $user->format_date();
 					}
-						
-					$sql = "UPDATE " . K_MODULES_TABLE . " 
+
+					$sql = "UPDATE " . K_MODULES_TABLE . "
 						SET
 							mod_link_id			= '" . (int)$mod_link_id . "',
 							mod_origin			= '" . (int)$mod_origin . "',
@@ -287,13 +287,13 @@ class acp_k_modules
 					{
 						trigger_error($user->lang['COULD_NOT_UPDATE_K_MODULES'] .  basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 					}
-					
+
 					$template->assign_vars(array(
 						'S_OPTION'	=> 'saved',
 						'MESSAGE'	=> $user->lang['SAVING_DATA'],
 						'U_BACK'	=> $this->u_action,
 					));
-					
+
 					unset($submit);
 
 					// switch to go back to correct display (miscellaneous, if not one of the built in tyes)
@@ -314,7 +314,7 @@ class acp_k_modules
 					$cache->destroy('sql', K_MODULES_TABLE);
 
 					meta_refresh (1, append_sid("{$phpbb_admin_path}index.$phpEx", 'i=k_modules&amp;mode='. $mod_type));
-					return;	
+					return;
 				}
 			break;
 
@@ -386,12 +386,12 @@ class acp_k_modules
 
 					$db->sql_query('INSERT INTO ' . K_MODULES_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_array));
 
-					
+
 					$template->assign_vars(array(
 						'S_OPTION' => $mode,
 						'MESSAGE' => $user->lang['MODULES_BLOCK_ADDED'],
 					));
-					
+
 					if ($mod_type == 'STYLE' && $submit)
 					{
 						$mode = 'style';
@@ -403,11 +403,11 @@ class acp_k_modules
 					meta_refresh(1, append_sid("{$phpbb_admin_path}index.$phpEx", "i=k_modules&amp;mode=" . $mode));
 				}
 				else
-				{ 
+				{
 					$list = '';
 
 					$sql = 'SELECT DISTINCT mod_id, mod_name, mod_type FROM ' . K_MODULES_TABLE . ' GROUP BY mod_type';
-					$result = $db->sql_query($sql);	
+					$result = $db->sql_query($sql);
 
 					while ($row = $db->sql_fetchrow($result))
 					{
@@ -450,7 +450,7 @@ class acp_k_modules
 				{
 					trigger_error($user->lang['MUST_SELECT_VALID_MODULE_DATA'] . adm_back_link($this->u_action), E_USER_WARNING);
 				}
-		
+
 				if (confirm_box(true))
 				{
 					$sql = 'DELETE FROM ' . K_MODULES_TABLE . "
@@ -468,7 +468,7 @@ class acp_k_modules
 					return;
 				}
 				else
-				{ 
+				{
 					confirm_box(false, $user->lang['CONFIRM_OPERATION_MODULE'], build_hidden_fields(array(
 						'i'			=> 'k_modules',
 						'mode'		=> $mode,
@@ -478,10 +478,10 @@ class acp_k_modules
 
 			break;
 
-			case 'default': 
+			case 'default':
 			break;
 		}
-	}				
+	}
 }
 
 
@@ -502,7 +502,7 @@ function get_theme_data($info)
 
 	// Grab styles that have not been added //
 	$sql = "SELECT mod_id, mod_name FROM " . K_MODULES_TABLE . " WHERE mod_type = '" . 'style' . "'";
-	if (!$result = $db->sql_query($sql)) 
+	if (!$result = $db->sql_query($sql))
 	{
 		trigger_error($user->lang['COULD_NOT_UPDATE_K_MODULES'] .  basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}
@@ -510,7 +510,7 @@ function get_theme_data($info)
 	{
 		$store_array[$i++] = $row['mod_name'];
 	}
-	$result = $db->sql_query($sql);	
+	$result = $db->sql_query($sql);
 
 
 	if ($info == 0)
@@ -529,7 +529,7 @@ function get_theme_data($info)
 				WHERE style_active' . $db->sql_escape($other);
 	}
 
-	$result = $db->sql_query($sql);	
+	$result = $db->sql_query($sql);
 
 	while ($row = $db->sql_fetchrow($result))
 	{
@@ -555,8 +555,8 @@ function get_mod_types()
 	global $db, $template;
 
 	$sql = 'SELECT DISTINCT mod_id, mod_type FROM ' . K_MODULES_TABLE . ' GROUP BY mod_type';
-	$result = $db->sql_query($sql);	
-				
+	$result = $db->sql_query($sql);
+
 	while ($row = $db->sql_fetchrow($result))
 	{
 		if ($row['mod_id'] != 1) // skip welcome_message
@@ -579,8 +579,8 @@ function s_get_vars()
 
 	global $db, $template;
 
-	$sql = 'SELECT * FROM ' . K_RESOURCE_TABLE . ' ORDER BY word ASC';
-	$result = $db->sql_query($sql);	
+	$sql = 'SELECT * FROM ' . K_RESOURCES_TABLE . ' ORDER BY word ASC';
+	$result = $db->sql_query($sql);
 
 	while ($row = $db->sql_fetchrow($result))
 	{

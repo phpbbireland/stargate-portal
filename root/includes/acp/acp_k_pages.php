@@ -91,7 +91,7 @@ class acp_k_pages
 				if (confirm_box(true))
 				{
 					$sql = 'DELETE FROM ' . K_PAGES_TABLE . '
-						WHERE page_id = ' . (int)$page_id; 
+						WHERE page_id = ' . (int)$page_id;
 
 					if (!$result = $db->sql_query($sql))
 					{
@@ -127,6 +127,18 @@ class acp_k_pages
 				{
 					// drop extension
 					$tag_id = str_replace('.php', '', $tag_id);
+
+					// skip the spacer //
+					if($tag_id == '..')
+					{
+						$template->assign_vars(array(
+							'S_OPTION'	=> 'processing', // not lang var
+							'MESSAGE'	=> sprintf($user->lang['ERROR_PAGE'], $tag_id),
+						));
+						meta_refresh(3, "{$phpbb_root_path}adm/index.$phpEx$SID&amp;i=k_pages&amp;mode=manage");
+						return;
+					}
+
 					$sql_array = array(
 						'page_name'	=> $tag_id,
                     );
@@ -207,14 +219,16 @@ function get_all_available_files()
 
 	$dirs = dir($phpbb_root_path);
 
-	$dirslist = '';
+	$dirslist = ".. ";
 
 	while ($file = $dirs->read())
 	{
 		if (stripos($file, ".php") && !stripos($file, ".bak") && !in_array($file, $arr, true))
 		{
-			// skip file we don not allow //
-			if($file != 'common.php' && $file != 'report.php' && $file != 'feed.php' && $file != 'cron.php' && $file != 'config.php' && $file != 'style.php' && $file != 'sgp_refresh.php')
+			// array of filename we don't process... store in databse and add code to facilitate add/edit/delete later //
+			$illegal_files = array("common.php", "report.php", "feed.php", "cron.php", "config.php", "csv.php", "style.php", "sgp_refresh.php", "sgp_ajax.php", "sgpical.php", "rss.php");
+
+			if(!in_array($file, $illegal_files))
 			{
 				$dirslist .= "$file ";
 			}

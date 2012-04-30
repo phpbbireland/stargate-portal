@@ -1,10 +1,10 @@
 <?php
 /**
-*			Simple yet powerfull PHP class to parse RSS files.
-*			copyright (c) 2007 Jiri Smika (Smix) http://phpbb3.smika.net
-*			(c) 2003-2004 original lastRSS by Vojtech Semecky http://lastrss.oslab.net/
+* Simple yet powerfull PHP class to parse RSS files.
+* copyright (c) 2007 Jiri Smika (Smix) http://phpbb3.smika.net
+* (c) 2003-2004 original lastRSS by Vojtech Semecky http://lastrss.oslab.net/
 *
-*   Ported and rewritten for PhpBB3 and Stargate Portal by: NeXur
+* Ported and rewritten for PhpBB3 and Stargate Portal by: NeXur
 *
 * @package Stargate Portal
 * @author  Martin Larsson - aka NeXur
@@ -15,8 +15,9 @@
 * @note: Do not remove this copyright. Just append yours if you have modified it,
 *        this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: block_rss_feeds.php 297 2008-12-30 18:40:30Z JohnnyTheOne $
-* Updated: 27 October 2008
+* @version $Id$
+*
+* @updated: March 2010 michaelo
 *
 */
 
@@ -46,7 +47,7 @@ if(!$k_config['rss_feeds_enabled'])
 
 $queries = $cached_queries = 0;
 
-function ShowRSSdesc($url) 
+function ShowRSSdesc($url)
 {
     global $rss, $user, $phpbb_root_path;
 	// Create lastRSS object
@@ -58,13 +59,13 @@ function ShowRSSdesc($url)
 
 	// Set cache dir, cache interval and character encoding
 	$rss->cache_dir = './cache';
-	$rss->cache_time = $k_config['rss_feeds_cache_time']; // Maximum age of the cache file for feed before it is updated, in seconds. 
+	$rss->cache_time = $k_config['rss_feeds_cache_time']; // Maximum age of the cache file for feed before it is updated, in seconds.
 	$rss->cp = 'UTF-8';  // character encoding of your page ! phpBB default is UTF8 so you don´t need to edit it
 	$rss->rsscp = 'UTF-8'; // default encoding of RSS if encoding tag is not available
 	$rss->items_limit = $k_config['rss_feeds_items_limit']; //number of news
 	$rss->type = $k_config['rss_feeds_type']; // connection type (fopen / curl)
 
-    if ($rs = $rss->get($url)) 
+    if ($rs = $rss->get($url))
 	{
 		$msg= '<span class="gensmall"><strong>' . $rs['description'] . "</strong></span><br />";
 		$msg.= "";
@@ -88,16 +89,16 @@ function ShowRSSdesc($url)
 			else
 			{
 				foreach ($rs['items'] as $item)
-				{ 
+				{
 					$msg.= '<span class="gensmall"><img src="' . $phpbb_root_path . 'images/rss.png" title="" alt="" /> <a href="' . $item['link'] . '" rel="external">' . $item['title'] . '</a></span><br />';
 				}
-			}	
+			}
 			$msg.= "<br />";
 		}
 		return $msg;
 	}
 }
-function ShowRSSnodesc($url) 
+function ShowRSSnodesc($url)
 {
 	global $rss, $phpbb_root_path, $user;
 
@@ -108,7 +109,7 @@ function ShowRSSnodesc($url)
 	// Create lastRSS object
 	$rss = new lastRSS;
 
-    if ($rs = $rss->get($url)) 
+    if ($rs = $rss->get($url))
 	{
 		$msg= "<br />";
 		// check if fopen or curl is installed
@@ -123,20 +124,20 @@ function ShowRSSnodesc($url)
 		}
 		if (ini_get('allow_url_fopen') == '1' && $rss->type == 'fopen' or function_exists('curl_init') && $rss->type == 'curl')
 		{
-			if ($rs['items_count'] <= 0) 
-			{ 
+			if ($rs['items_count'] <= 0)
+			{
 				$msg.= '<li class="gensmall">' . $user->lang['RSS_CACHE_ERROR'] . '</li>';
 				$msg.= '<li class="gensmall">' . $user->lang['RSS_FEED_ERROR'] . '</li>';
 			}
 			else
 			{
 				foreach ($rs['items'] as $item)
-				{ 
+				{
 					$msg.= '<span class="gensmall"><img src="' . $phpbb_root_path . 'images/rss.png" title="" alt="" /> <a href="' . $item['link'] . '" rel="external">' . $item['title'] . '</a></span><br />';
 				}
 			}
 			$msg.= "<br />";
-		}	
+		}
 		return $msg;
 	}
 }
@@ -151,7 +152,7 @@ foreach ($k_blocks as $blk)
 {
 	if ($blk['html_file_name'] == 'block_rss_feeds.html')
 	{
-		$block_cache_time = $blk['block_cache_time']; 
+		$block_cache_time = $blk['block_cache_time'];
 	}
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
@@ -165,12 +166,12 @@ $result = $db->sql_query_limit($sql, $rss_feeds_random_limit, 0, $block_cache_ti
 if(!($result = $db->sql_query($sql, $block_cache_time)))
 {
 	trigger_error('RSS_LIST_ERROR');
-} 
+}
 else
 {
    	$i = 0;
    	while($row = $db->sql_fetchrow($result))
-   	{ 
+   	{
 		$feeds[$i]['title'] = $row['feed_title'];
 		$feeds[$i]['id'] = $row['feed_id'];
 		$feeds[$i]['url'] = $row['feed_url'];
@@ -178,7 +179,7 @@ else
 		$feeds[$i]['description'] = $row['feed_description'];
    		$i++;
    	}
-} 
+}
 $db->sql_freeresult($result);
 
 // Main feeds
@@ -211,7 +212,7 @@ for ($i = 0; isset($feeds[$i]['id']); $i++)
 			'FEEDS_TITLE' => '<a href="' . $feeds[$i]['url'] . '" rel="external" style="text-align:center;">' . $feeds[$i]['title'] . "</a>",
 		));
 	}
-	
+
 	if ($feeds[$i]['position'] == 2) // right side
 	{
 		// Get right RSS content

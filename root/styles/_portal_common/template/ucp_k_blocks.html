@@ -12,13 +12,9 @@
 
 	<fieldset class="fields2">
 	<!-- IF SWITCH == 'arrange' -->
-		{L_ARRANGE_ICON}
-		<a href="{U_PORTAL_ARRANGE}">{LINK_IMG}{L_ARRANGE_NOW}</a>
-
-		<!--<a href="{U_PORTAL_ARRANGE}" class="arrange_on" style="float:left" title="{L_ARRANGE_ON}">{L_ARRANGE_ON}</a>-->
-
-
+		{L_ARRANGE_ICON} <a href="{U_PORTAL_ARRANGE}">{LINK_IMG}{L_ARRANGE_NOW}</a>
 	<!-- ENDIF -->
+
 	<!-- IF SWITCH == 'delete' -->
 		<legend>{L_UCP_K_INFO_DELETE}</legend>
 		<dl>
@@ -26,6 +22,7 @@
 			<dd><input type="checkbox" class="post" id="reset_blocks" name="reset_blocks" value="{CKECKBOX}" type="text"></dd>
 		</dl>
 	<!-- ENDIF -->
+
 	<!-- IF SWITCH == 'edit' -->
 		<legend>{L_UCP_K_INFO_EDIT}</legend>
 		<dl>

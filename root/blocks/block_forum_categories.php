@@ -10,10 +10,7 @@
 * @note: Do not remove this copyright. Just append yours if you have modified it,
 *        this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: block_forum_categories.php Michaelo $
-*
-* This code may be overkill but will do for now... additional data can now be
-* passed to block_forum_categories.html block...
+* @version $Id$
 */
 
 /**
@@ -25,7 +22,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-// for bots test //
+//for bots test //
 //$page_title = $user->lang['BLOCK_CATEGORIES'];
 
 // SGP debug vars
@@ -104,9 +101,6 @@ while ($row = $db->sql_fetchrow($result))
 			$u_viewforum = $row['forum_link'];
 		}
 	}
-
-	//if($forum_count > 0 && $row['forum_type'] != FORUM_LINK)
-	//if($forum_count > 0)
 
 	if ($forum_count > 0 || $row['forum_type'] == 2 || $row['forum_type'] == 1 && $row['parent_id'] == 0)
 	{
@@ -188,6 +182,5 @@ $template->assign_vars(array(
 	'S_TOTAL_CATS' 	=> $cat_count,
 	'FORUM_CATEGORIES_DEBUG'	=> sprintf($user->lang['PORTAL_DEBUG_QUERIES'], ($queries) ? $queries : '0', ($cached_queries) ? $cached_queries : '0', ($total_queries) ? $total_queries : '0'),
 ));
-
 
 ?>

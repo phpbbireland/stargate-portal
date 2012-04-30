@@ -6,18 +6,21 @@
 * @package language
 * @version $Id: portal_blocks_variables.php 297 2008-12-30 18:40:30Z JohnnyTheOne $
 * @updated 12 November 2008
-* @copyright (c) 2005 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Stargate Portal copyright agreement...
+* @copyright (c) 2005 phpbireland
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
+*/
+
+/**
+* DO NOT CHANGE
 */
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
-/**
-* DO NOT CHANGE
-*/
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -36,10 +39,8 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 //
 // Some characters you may want to copy&paste:
-// ’ » “ ”
+// ’ » “ ” …
 //
-
-
 // Portal Menu Names + add you menu language variables here! //
 $lang = array_merge($lang, array(
 	'ACP'					=> 'Admin CP',
@@ -124,19 +125,19 @@ $lang = array_merge($lang, array(
 
 // Block Names
 $lang = array_merge($lang, array(
-	'ADMIN_OPTIONS'		=> 'Admin Options',
-	'BUG_TRACKER'		=> 'Bug Tracker',
-	'TRANSLATE'			=> 'Translate',
-	'TRANSLATE_SITE'	=> '<strong>Translate site to...</strong>',
-	'TRANSLATE_RESET'	=> '<strong>Reset to original language</strong>',
-	'ANNOUNCEMENTS_AND_NEWS' => 'Announcements and News',
+	'ADMIN_OPTIONS'				=> 'Admin Options',
+	'BUG_TRACKER'				=> 'Bug Tracker',
+	'TRANSLATE'					=> 'Translate',
+	'TRANSLATE_SITE'			=> '<strong>Translate site to...</strong>',
+	'TRANSLATE_RESET'			=> '<strong>Reset to original language</strong>',
+	'ANNOUNCEMENTS_AND_NEWS' 	=> 'Announcements and News',
 ));
 
 // Acronyms
 $lang = array_merge($lang, array(
-	'ACRONYMS'			=> 'Acronyms',
-	'ALLOW_ACRONYMS'	=> 'Process acronyms in posts',
-	'ALLOW_ACRONYMS_EXPLAIN' => 'Allow acronyms in posts',
+	'ACRONYMS'					=> 'Acronyms',
+	'ALLOW_ACRONYMS'			=> 'Process acronyms in posts',
+	'ALLOW_ACRONYMS_EXPLAIN' 	=> 'Allow acronyms in posts',
 ));
 
 // IRC Channel(s)
@@ -181,5 +182,7 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	'VERSION'			=> 'Version',
 	'CHECK_VERSION'		=> 'Check for updates',
+	
 ));
+
 ?>

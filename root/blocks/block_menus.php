@@ -2,15 +2,17 @@
 /**
 *
 * @package Stargate Portal
-* @author  Michael O'Toole - aka Michaelo
+* @author  Michael O'Toole - aka michaelo
 * @begin   Saturday, 14th November, 2005
 * @copyright (c) 2005-2008 phpbbireland
 * @home    http://www.phpbbireland.com
+*
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 * @note: Do not remove this copyright. Just append yours if you have modified it,
 *        this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: block_menus.php 324 2009-01-17 01:23:22Z Michealo $
+* @version $Id$
+*
 * Updated: 15 November 2008 by NeXur
 *
 */
@@ -74,7 +76,7 @@
 
 	// not needed but keep line for reference //
 	// $group_name = which_group($user->data['group_id']);  // change to get_group_name - do we need this one anymore? see below...
-	//get_all_groups();
+	// get_all_groups();
 
 	$memberships = array();
 	$memberships = sgp_group_memberships(false, $user->data['user_id'], false);
@@ -186,7 +188,7 @@
 				'PORTAL_MENU_HEAD_NAME'	=> ($is_sub_heading) ? $name : '',
 				'PORTAL_MENU_NAME' 		=> $name,
 				'U_PORTAL_MENU_LINK' 	=> ($portal_menus[$i]['sub_heading']) ? '' : $link,
-				'PORTAL_MENU_ICON'		=> ($portal_menus[$i]['menu_icon']) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $portal_menus[$i]['menu_icon'] . '" height="16px" width="16px" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/_none.gif" height="15px" width="15px" alt="" />',
+				'PORTAL_MENU_ICON'		=> ($portal_menus[$i]['menu_icon']) ? '<img src="' . $phpbb_root_path . 'images/block_images/menu/' . $portal_menus[$i]['menu_icon'] . '" height="16px" width="16px" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/menu/spacer.gif" height="15px" width="15px" alt="" />',
 				'S_SOFT_HR'				=> $portal_menus[$i]['soft_hr'],
 				'S_SUB_HEADING' 		=> ($portal_menus[$i]['sub_heading']) ? true : false,
 			));

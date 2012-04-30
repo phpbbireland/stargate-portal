@@ -5,18 +5,21 @@
 *
 * @package language
 * @version $Id: k_quick_posting.php 297 2008-12-30 18:40:30Z JohnnyTheOne $
-* @copyright (c) 2005 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Stargate Portal copyright agreement...
+* @copyright (c) 2005 phpbireland
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
+*/
+
+/**
+* DO NOT CHANGE
 */
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
-/**
-* DO NOT CHANGE
-*/
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -33,6 +36,10 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	'FLASH_IS_OFF'	=> '[flash] is <em>OFF</em>',
@@ -47,6 +54,7 @@ $lang = array_merge($lang, array(
 	'FONT_TINY'		=> 'Tiny',
 	'MORE_SMILIES'	=> 'View more smilies',
 	'SMILIES'		=> 'Smilies',
+	
 ));
 
 ?>

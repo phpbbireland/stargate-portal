@@ -38,7 +38,7 @@ foreach ($k_blocks as $blk)
 {
 	if ($blk['html_file_name'] == 'block_news_advanced.html')
 	{
-		$block_cache_time = $blk['block_cache_time']; 
+		$block_cache_time = $blk['block_cache_time'];
 	}
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
@@ -103,7 +103,8 @@ $sql = 'SELECT
 		p.post_attachment,
 		u.username,
 		u.user_colour,
-		f.forum_name
+		f.forum_name,
+		f.forum_id
 	FROM
 		' . TOPICS_TABLE . ' AS t,
 		' . POSTS_TABLE . ' AS p,
@@ -150,15 +151,16 @@ while ($row = $db->sql_fetchrow($result))
 			'post_id'			=> $row['post_id'],
 			'poster_id'			=> $row['poster_id'],
 			'topic_replies'		=> $row['topic_replies'],
-			'topic_time'		=> $user->format_date($row['post_time']),
 			'topic_title'		=> $row['topic_title'],
 			'topic_type'		=> $row['topic_type'],
 			'topic_status'		=> $row['topic_status'],
 			'username'			=> $row['username'],
 			'user_colour'		=> $row['user_colour'],
 			'poll_title'		=> ($row['poll_title']) ? true : false,
-			'post_time'			=> create_date($config['default_dateformat'], $row['post_time'],  $config['board_timezone']),
-			'topic_time'		=> create_date($config['default_dateformat'], $row['topic_time'], $config['board_timezone']),
+
+			'topic_time'		=> $user->format_date($row['topic_time']),
+			'post_time'			=> $user->format_date($row['post_time']),
+
 			'post_approved'		=> $row['post_approved'],
 			'post_attachment'	=> $row['post_attachment'],
 			'bbcode_bitfield'	=> $row['bbcode_bitfield'],
@@ -199,7 +201,7 @@ if (sizeof($attach_list))
 				AND in_message = 0
 			ORDER BY filetime DESC';
 		$result = $db->sql_query($sql, 300);
-				
+
 		while($row = $db->sql_fetchrow($result))
 		{
 			$attachments[$row['post_msg_id']][] = $row;
@@ -277,13 +279,13 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 		'TITLE'			=> $row['topic_title'],
 		'MESSAGE'		=> $message,
 
-		'U_POSTER'		=> get_username_string('full', $row['poster_id'], $row['username'], $row['user_colour']), 
+		'U_POSTER'		=> get_username_string('full', $row['poster_id'], $row['username'], $row['user_colour']),
 		'U_VIEW'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $row['topic_id']),
 		'U_REPLY'		=> append_sid($phpbb_root_path . 'posting.' . $phpEx . '?mode=reply&amp;t=' . $row['topic_id'] . '&amp;f=' . $row['forum_id']),
 		'U_PRINT'		=> ($auth->acl_get('f_print', $row['forum_id'])) ? append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=" . $row['forum_id'] . " &amp;t=" . $row['topic_id'] . "&amp;view=print") : '',
-		'U_REPLY_IMG'	=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/post_comment.png'  . '" title="' . $user->lang['POST_COMMENTS']  . '" alt="' . $user->lang['POST_COMMENTS']  . '" />',
-		'U_PRINT_IMG' 	=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/post_print.png' . '" title="' . $user->lang['PRINT_IT']  . '" alt="' . $user->lang['PRINT_IT']  . '" />',
-		'U_VIEW_IMG'	=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/post_view.png' . '" title="' . $user->lang['VIEW_FULL_ARTICLE']  . '" alt="' . $user->lang['VIEW_FULL_ARTICLE']  . '" />',
+		'U_REPLY_IMG'	=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/portal/post_comment.png'  . '" title="' . $user->lang['POST_COMMENTS']  . '" alt="' . $user->lang['POST_COMMENTS']  . '" />',
+		'U_PRINT_IMG' 	=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/portal/post_print.png' . '" title="' . $user->lang['PRINT_IT']  . '" alt="' . $user->lang['PRINT_IT']  . '" />',
+		'U_VIEW_IMG'	=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/portal/post_view.png' . '" title="' . $user->lang['VIEW_FULL_ARTICLE']  . '" alt="' . $user->lang['VIEW_FULL_ARTICLE']  . '" />',
 
 		'S_TOPIC_TYPE'	=> $row['topic_type'],
 		'S_NOT_LAST'	=> ($i < sizeof($posts) - 1) ? true : false,

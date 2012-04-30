@@ -20,6 +20,8 @@
 <div style="display:<!-- IF S_SWITCH == 'k_recent_topics_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_recent_topics_vars.html --></div>
 <div style="display:<!-- IF S_SWITCH == 'k_team_speak_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_team_speak_vars.html --></div>
 <div style="display:<!-- IF S_SWITCH == 'k_the_team_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_the_team_vars.html --></div>
+<div style="display:<!-- IF S_SWITCH == 'k_the_teams_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_the_teams_vars.html --></div>
+
 <div style="display:<!-- IF S_SWITCH == 'k_top_referrals_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_top_referrals_vars.html --></div>
 <div style="display:<!-- IF S_SWITCH == 'k_top_posters_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_top_posters_vars.html --></div>
 <div style="display:<!-- IF S_SWITCH == 'k_top_topics_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_top_topics_vars.html --></div>
@@ -28,7 +30,6 @@
 <div style="display:<!-- IF S_SWITCH == 'k_quotes_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_quotes_vars.html --></div>
 <div style="display:<!-- IF S_SWITCH == 'k_acronym_vars.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_acronym_vars.html --></div>
 <div style="display:<!-- IF S_SWITCH == 'k_youtube' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_youtube_vars.html --></div>
-
 <div style="display:<!-- IF S_SWITCH == 'k_none.html' -->inline<!-- ELSE -->none<!-- ENDIF -->"><!-- INCLUDE /k_block_vars/k_none.html --></div>
 
 <div style="display:<!-- IF S_SWITCH == '' -->inline<!-- ELSE -->none<!-- ENDIF -->">
@@ -139,9 +140,9 @@
 <fieldset>
 	<legend>{L_BLOCK_CACHE_TIME_HEAD}</legend>
 	<dl>
-		<dt><label for="block_cache_time">{L_BLOCK_CACHE_TIME}:</label><br /><span>{L_BLOCK_CACHE_TIME_EXPLAIN}</span></dt>
+		<dt><label for="block_cache_time_default">{L_BLOCK_CACHE_TIME}:</label><br /><span>{L_BLOCK_CACHE_TIME_EXPLAIN}</span></dt>
 		<dd>
-			<label><input class="post" size="5" maxlength="10" id="block_cache_time" name="block_cache_time" value="{S_BLOCK_CACHE_TIME}" type="text" /></label>
+			<label><input class="post" size="5" maxlength="10" id="block_cache_time_default" name="block_cache_time_default" value="{S_BLOCK_CACHE_TIME_DEFAULT}" type="text" /></label>
 		</dd>
 	</dl>
 	<dl>
@@ -163,8 +164,9 @@
 <fieldset class="submit-buttons">
 	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
 	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
 </fieldset>
 <!-- ENDIF -->
-{S_FORM_TOKEN}
+
 </form>
 <!-- INCLUDE overall_footer.html -->

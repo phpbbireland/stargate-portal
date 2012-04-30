@@ -64,7 +64,6 @@ $cloud_hicolour		= '0x' . $k_config['cloud_hicolour'];
 $cloud_distr		= ($k_config['cloud_distr']) ? '"true"' : '"false"' ;
 $cloud_wmode		= '"' . $k_config['cloud_wmode'] . '"';
 
-
 $cloud_max_tags = 40;
 $cloud_min_word_size = 4;
 $font_size = '12';

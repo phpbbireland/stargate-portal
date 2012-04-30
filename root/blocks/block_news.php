@@ -18,7 +18,6 @@
 /**
 * @ignore
 */
-
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -35,7 +34,7 @@ if (!defined('IN_PHPBB'))
 
 	$sql = 'SELECT config_name, config_value
 		FROM ' . K_BLOCKS_CONFIG_VAR_TABLE . '';  
-		
+
 	$result = $db->sql_query($sql, $block_cache_time);
 			
 	while($row = $db->sql_fetchrow($result))
@@ -60,7 +59,7 @@ if (!defined('IN_PHPBB'))
 	
 	$fetch_news = phpbb_fetch_news($news_forum, $number_of_news_items, $max_news_length, 0, 0 ? 'all' : 'normal');
 	//$fetch_news = phpbb_fetch_news($news_forum, $number_of_news_items, $max_news_length, 0, true);
-	
+
 	if (count($fetch_news) == 0)
 	{
 		$template->assign_block_vars('news_row', array(
@@ -104,9 +103,9 @@ if (!defined('IN_PHPBB'))
 				'U_USER_PROFILE'	=> (($fetch_news[$i]['user_type'] ==  USER_NORMAL || $fetch_news[$i]['user_type'] == USER_FOUNDER) && $fetch_news[$i]['user_id'] != ANONYMOUS) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . $fetch_news[$i]['user_id']) : '',
 				'U_VIEW'			=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($fetch_news[$i]['forum_id']) ? $fetch_news[$i]['forum_id'] : $forum_id) . '&amp;t=' . $fetch_news[$i]['topic_id']),
 
-				'U_COMMENT_IMG'		=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/post_comment.png'  . '" title="' . $user->lang['POST_COMMENTS']  . '" alt="' . $user->lang['POST_COMMENTS']  . '" />',
-				'U_PRINT_IMG' 		=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/post_print.png' . '" title="' . $user->lang['PRINT_IT']  . '" alt="' . $user->lang['PRINT_IT']  . '" />',
-				'U_VIEW_IMG'		=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/post_view.png' . '" title="' . $user->lang['VIEW_FULL_ARTICLE']  . '" alt="' . $user->lang['VIEW_FULL_ARTICLE']  . '" />',
+				'U_COMMENT_IMG'		=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/portal/post_comment.png'  . '" title="' . $user->lang['POST_COMMENTS']  . '" alt="' . $user->lang['POST_COMMENTS']  . '" />',
+				'U_PRINT_IMG' 		=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/portal/post_print.png' . '" title="' . $user->lang['PRINT_IT']  . '" alt="' . $user->lang['PRINT_IT']  . '" />',
+				'U_VIEW_IMG'		=> '<img src="' . $phpbb_root_path . 'styles/' . $user->theme['imageset_path'] . '/imageset/portal/post_view.png' . '" title="' . $user->lang['VIEW_FULL_ARTICLE']  . '" alt="' . $user->lang['VIEW_FULL_ARTICLE']  . '" />',
 
 				'S_NOT_LAST'		=> ($i < count($fetch_news) - 1) ? true : false,
 				'S_POLL_TITLE'		=> $fetch_news[$i]['poll_title'],

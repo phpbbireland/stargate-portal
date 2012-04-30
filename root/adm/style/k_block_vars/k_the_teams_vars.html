@@ -1,0 +1,48 @@
+<script>
+// for SGP: Not very elegant but it works Mike //
+function set_ids(data, view)
+{
+	var mydata;
+
+	mydata = document.getElementById(view).value;
+
+	if (data == '0')
+	{
+		mydata = '';
+		data = '';
+	}
+	else if(mydata)
+	{
+		mydata = mydata + ',';
+	}
+
+    document.getElementById(view).value = mydata + data;
+}
+</script>
+
+<fieldset>
+	<legend>{L_THE_TEAM_SETTINGS}</legend>
+	<dl>
+		<dt><label for="teams_to_display">{L_BLOCK_VIEW_TEAMS}:</label><br /><span>{L_BLOCK_VIEW_TEAMS_EXPLAIN}</span></dt>
+		<dd><br /><input class="post" size="26" maxlength="100" id="teams_to_display" name="teams_to_display" value="{S_TEAMS_TO_DISPLAY}" type="text" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="teams">{L_BLOCK_TEAMS}:</label><br /><span>{L_BLOCK_TEAMS_EXPLAIN}</span></dt>
+		<dd><label><br />
+			<select name="view_by" id="teams" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'teams_to_display');">{S_TEAMS}
+			<!-- BEGIN groups -->
+				<option value="{groups.GROUP_ID}">{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
+			<!-- END groups -->
+			</select>
+			</label>
+		</dd>
+	</dl>
+
+</fieldset>
+<fieldset>
+	<legend>{L_THE_TEAM_SETTINGS_2}</legend>
+	<dl>
+		<dt><label for="number_of_team_members_to_display">{L_NUMBER_OF_TEAM_MEMBERS_TO_DISPLAY}:</label><br /><span>{L_NUMBER_OF_TEAM_MEMBERS_TO_DISPLAY_EXPLAIN}</span></dt>
+		<dd><label><input class="post" size="3" maxlength="2" name="number_of_team_members_to_display" value="{S_NUMBER_OF_TEAM_MEMBERS_TO_DISPLAY}" type="text" /></label></dd>
+	</dl>
+</fieldset>

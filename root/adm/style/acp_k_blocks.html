@@ -5,13 +5,13 @@ function set_image(data)
 {
 	document.getElementById('img_file_name').value=data;
 	document.getElementById('img_alt_text').value=data;
-	document.getElementById("bimage").innerHTML = " <img align='absmiddle' src='./../images/block_images/small/" + data + "' />"
+	document.getElementById("bimage").innerHTML = " <img align='absmiddle' src='./../images/block_images/block/" + data + "' />"
 
 }
 function display_block_image(myForm)
 {
     var bimage = myForm.img_file_name;
-    document.getElementById("bimage").innerHTML = " <img align='absmiddle' src='./../images/block_images/small/" + bimage.value + "' />"
+    document.getElementById("bimage").innerHTML = " <img align='absmiddle' src='./../images/block_images/block/" + bimage.value + "' />"
 }
 </script>
 
@@ -124,9 +124,9 @@ function set_ids(data, view)
 		<th>{L_BLOCK_TITLE}</th>
 		<th>{L_BLOCK_POSITION}</th>
 		<th>{L_BLOCK_FNAME_H}</th>
-		<th><div align="center">{L_BLOCK_FNAME_I}</div></th>
-		<th><div align="center">{L_BLOCK_VIEW_BY_SHORT}</div></th>
-		<th><div align="center">{L_OPTIONS}</div></th>
+		<th><div style="text-align:center">{L_BLOCK_FNAME_I}</div></th>
+		<th><div style="text-align:center">{L_BLOCK_VIEW_BY_SHORT}</div></th>
+		<th><div style="text-align:center">{L_OPTIONS}</div></th>
 	</thead>
 	<tbody>
 		<!-- BEGIN bdata -->
@@ -143,10 +143,10 @@ function set_ids(data, view)
 				<!-- IF bdata.S_POSITION === "r" -->{L_RIGHT_OF_CENTRE}<!-- ENDIF -->
 			</td>
 			<td align="left" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""> {bdata.S_FNAME_H}</td>
-			<td class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->"><div align="center"><img src="./../images/block_images/small/{bdata.S_FNAME_I}" /></div></td>
-			<td align="right" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><div align="center"><!-- IF bdata.S_VIEW_ALL -->{L_ALL_GROUPS}<!-- ELSE -->{bdata.S_VIEW_GROUPS}<!-- ENDIF --></div></td>
+			<td class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->"><div style="text-align:center"><img src="./../images/block_images/block/{bdata.S_FNAME_I}" alt="" /></div></td>
+			<td align="right" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width=""><div style="text-align:center"><!-- IF bdata.S_VIEW_ALL -->{L_ALL_GROUPS}<!-- ELSE -->{bdata.S_VIEW_GROUPS}<!-- ENDIF --></div></td>
 			<td align="center" class="<!-- IF bdata.S_POSITION == 'L' -->row4<!-- ELSEIF bdata.S_POSITION == 'C' -->row5<!-- ELSE -->row6<!-- ENDIF -->" width="" colspan="5">
-				<div align="center">
+				<div style="text-align:center">
 					<!-- IF bdata.S_FIRST_ROW or bdata.S_NDX == '1' -->
 						{ICON_MOVE_UP_DISABLED}
 						<a href="{U_DOWN}{bdata.S_ID}"><img src="images/icon_down.gif" title="{L_MOVE_DOWN}" border="0" alt="{L_BLOCK_DOWN}" /></a>
@@ -247,7 +247,7 @@ function set_ids(data, view)
 			<option value="{img_file_name.S_BLOCK_FILE_I}" <!-- IF img_file_name.S_BLOCK_FILE_I == S_FNAME_I -->selected <!-- ENDIF -->>{img_file_name.S_BLOCK_FILE_I}</option>
 			<!-- END img_file_name -->
 			</select>
-			<span name='bimage' id='bimage'> <img src='{PHPBB_ROOT_PATH}images/block_images/small/{S_FNAME_I}' /> </span>
+			<span name='bimage' id='bimage'> <img src='{PHPBB_ROOT_PATH}images/block_images/block/{S_FNAME_I}' /> </span>
 			</label>
 		</dd>
 	</dl>
@@ -258,7 +258,7 @@ function set_ids(data, view)
 			<!-- BEGIN img_file_name -->
 				<!-- IF img_file_name.S_BLOCK_FILE_I -->
 					<a href="#" onclick="set_image('{img_file_name.S_BLOCK_FILE_I}', true, true); return false;">
-					<img src='./../images/block_images/small/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}' />
+					<img src='./../images/block_images/block/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}' />
 					</a>
 				<!-- ENDIF -->
 			<!-- END img_file_name -->
@@ -298,7 +298,7 @@ function set_ids(data, view)
 		</dd>
 	</dl>
 	<dl>
-		<dt><a href="{U_MANAGE_PAGES}" target="_blank" type="button" name="allpages" value="{L_MANAGE_PAGES}" class="button1" />{L_MANAGE_PAGES}</a><dt>
+		<dt><a href="{U_MANAGE_PAGES}" type="button" name="allpages" value="{L_MANAGE_PAGES}" class="button1">{L_MANAGE_PAGES}</a><dt>
 		<dd style="float:left;">
 			<input type="button" name="mark_all" value="{L_MARK_ALL}" class="button1" onclick="switchMarks(true, '');" />&nbsp;
 			<input type="button" name="unmark_all" value="{L_UNMARK_ALL}" class="button1" onclick="switchMarks(false,'');" />&nbsp;
@@ -307,7 +307,7 @@ function set_ids(data, view)
 	<hr />
 	<dl>
 		<dt><label for="view_groups">{L_BLOCK_VIEW_GROUPS}:</label><br /><span>{L_BLOCK_VIEW_GROUPS_EXPLAIN}</span></dt>
-		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text"></dd>
+		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text" /></dd>
 	</dl>
 	<dl>
 		<dt><label for="view_by">{L_BLOCK_VIEW_BY}:</label><br /><span>{L_BLOCK_VIEW_BY_EXPLAIN}</span></dt>
@@ -348,7 +348,6 @@ function set_ids(data, view)
 		</dd>
 	</dl>
 	</div>
-
 	<hr />
 	<dl>
 		<dt><label for="has_vars">{L_MINIMOD_BASED}:</label><br /><span>{L_MINIMOD_BASED_EXPLAIN}</dt>
@@ -423,23 +422,23 @@ function set_ids(data, view)
 	<dl>
 		<dt><label>{L_BLOCK_FNAME_H_BIG}:</label></dt>
 		<dd><label>
-				<select name="html_file_name" class="post">
+			<select name="html_file_name" class="post">
 				<!-- BEGIN html_file_name -->
-				<option value="{html_file_name.S_BLOCK_FILE_HTML}"> {html_file_name.S_BLOCK_FILE_HTML}
+				<option value="{html_file_name.S_BLOCK_FILE_HTML}"> {html_file_name.S_BLOCK_FILE_HTML}</option>
 				<!-- END html_file_name -->
-				</select>
+			</select>
 			</label>
 		</dd>
 	</dl>
 	<dl>
 		<dt><label for="img_file_name">{L_BLOCK_FNAME_I_BIG}:</label><br /><span>{L_BLOCK_FNAME_I_EXPLAIN}</span></dt>
 		<dd><label>
-			<select name="img_file_name" id="img_file_name" class="post" onchange="display_block_image(this.form); return false;">
+			<select id="img_file_name" name="img_file_name" class="post" onchange="display_block_image(this.form); return false;">
 			<!-- BEGIN img_file_name -->
 			<option value="{img_file_name.S_BLOCK_FILE_I}" <!-- IF img_file_name.S_BLOCK_FILE_I == S_FNAME_I -->selected <!-- ENDIF -->>{img_file_name.S_BLOCK_FILE_I}</option>
 			<!-- END img_file_name -->
 			</select>
-			<span name='bimage' id='bimage'> <img src='./../images/block_images/small/{S_FNAME_I}' /> </span>
+			<span id='bimage'> <img src='./../images/block_images/block/{S_FNAME_I}' alt="" /> </span>
 			</label>
 		</dd>
 	</dl>
@@ -450,23 +449,24 @@ function set_ids(data, view)
 			<!-- BEGIN img_file_name -->
 				<!-- IF img_file_name.S_BLOCK_FILE_I -->
 					<a href="#" onclick="set_image('{img_file_name.S_BLOCK_FILE_I}', true, true); return false;">
-					<img src='./../images/block_images/small/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}' />
+						<img src='./../images/block_images/block/{img_file_name.S_BLOCK_FILE_I}' title='{img_file_name.S_BLOCK_FILE_I}' alt="" />
 					</a>
 				<!-- ENDIF -->
 			<!-- END img_file_name -->
 			</span>
-		<dd/>
+		</dd>
 	</dl>
 
 	<dl>
 		<dt><label for="view_groups">{L_BLOCK_VIEW_GROUPS}:</label><br /><span>{L_BLOCK_VIEW_GROUPS_EXPLAIN}</span></dt>
-		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text"></dd>
+		<dd><br />
+			<input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text" />
+		</dd>
 	</dl>
 
 	<dl>
 		<dt>{L_BLOCK_VIEW_BY_EXPLAIN}</dt>
 		<dd><label>
-
 			<select name="view_by" id="view_by" class="post" onchange="set_ids(this.options[this.selectedIndex].value, 'view_groups'); ">{S_VIEW_BY}
 			<!-- BEGIN groups -->
 			<option value="{groups.GROUP_ID}" <!-- IF groups.GROUP_ID == S_VIEW_BY -->selected <!-- ENDIF -->>{groups.GROUP_ID} ({groups.GROUP_NAME})</option>
@@ -477,8 +477,7 @@ function set_ids(data, view)
 	</dl>
 	<dl>
 		<dt><label for="view_all">{L_BLOCK_VIEW_ALL}:</label><br /><span>{L_BLOCK_VIEW_ALL_EXPLAIN}</span></dt>
-		<dd>
-		<br />
+		<dd><br />
 			<label><input type="radio" name="view_all" value="1" <!-- IF S_VIEW_ALL -->checked="checked" <!-- ENDIF --> /> {L_YES}</label>
 			<label><input type="radio" name="view_all" value="0" <!-- IF not S_VIEW_ALL -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
 		</dd>
@@ -487,8 +486,7 @@ function set_ids(data, view)
 	<hr />
 	<dl>
 		<dt><label>{L_BLOCK_SCROLL_BIG}:</label><span>{L_BLOCK_SCROLL_BIG_EXPLAIN}</span></dt>
-		<dd>
-		<br />
+		<dd><br />
 			<label><input type="radio" name="scroll" value="1" <!-- IF S_SCROLL -->checked="checked" <!-- ENDIF --> /> {L_YES}</label>
 			<label><input type="radio" name="scroll" value="0" <!-- IF not S_SCROLL -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
 		</dd>
@@ -497,13 +495,11 @@ function set_ids(data, view)
 
 	<dl>
 		<dt><label for="view_pages">{L_VIEW_PAGES}:</label><br /><span>{L_VIEW_PAGES_EXPLAIN}</span></dt>
-		<!--<dd><br /><input class="post" size="45" maxlength="100" id="view_pages" name="view_pages" value="{S_VIEW_PAGES}" type="text"></dd>-->
 		<dd><span class="imageline" style="padding:5px; border: solid 1px #D7D7D7;">{S_VIEW_PAGES}</span></dd>
 	</dl>
 	<dl>
 		<dt><label for="view_pages">{L_VIEW_PAGE2}</label><br />{L_VIEW_PAGE_EXPLAIN2}</dt>
 		<dd>
-			<!-- split pages into two sections-->
 			<!-- BEGIN pages -->
 				<!-- IF pages.PAGE_ID <= 10 and pages.PAGE_ID != 0 -->
 				<input type="checkbox" style="cursor:pointer" name="view_page_id[]" value="{pages.PAGE_ID}" <!-- IF pages.IS_CHECKED -->checked="checked" <!-- ENDIF --> /> ({pages.PAGE_ID}) {pages.PAGE_NAME} <br />
@@ -518,18 +514,16 @@ function set_ids(data, view)
 		</dd>
 	</dl>
 	<dl>
-		<dt><dt>
+		<dt></dt>
 		<dd style="float:left;">
 			<input type="button" name="mark_all" value="{L_MARK_ALL}" class="button1" onclick="switchMarks(true, '');" />&nbsp;
 			<input type="button" name="unmark_all" value="{L_UNMARK_ALL}" class="button1" onclick="switchMarks(false,'');" />&nbsp;
 		</dd>
 	</dl>
 	<hr />
-
 	<dl>
 		<dt><label for="has_vars">{L_HAS_VARS}:</label><br /><span>{L_HAS_VARS_EXPLAIN}</dt>
-		<dd>
-		<br />
+		<dd><br />
 			<label><input onclick="ShowHide('vars');" type="radio" name="has_vars" value="1" <!-- IF S_HAS_VARS -->checked="checked" <!-- ENDIF --> /> {L_YES}</label>
 			<label><input onclick="ShowHide('vars');" type="radio" name="has_vars" value="0" <!-- IF not S_HAS_VARS -->checked="checked" <!-- ENDIF --> /> {L_NO}</label>
 		</dd>
@@ -572,7 +566,7 @@ function set_ids(data, view)
 
 <!-- IF S_OPTIONS  == 'TOOLS' -->
 	<b><a href="{U_BACK}">{L_TOOLS_1}.<br /></a></b>
-	<b>{L_TOOLS_2}.<br /></a></b>
+	<b>{L_TOOLS_2}.<br /></b>
 	<tr><td>&nbsp;<br /></td></tr>
 <!-- ENDIF -->
 
@@ -583,6 +577,7 @@ function set_ids(data, view)
 	<fieldset class="submit-buttons">
 		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
 		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{S_FORM_TOKEN}
 	</fieldset>
 	<!-- ENDIF -->
 <!-- ENDIF -->
@@ -592,15 +587,17 @@ function set_ids(data, view)
 	<p class="quick" style="text-align:center;">
 		<input class="button2" name="add_block" type="submit" value="{L_BLOCKS_ADD_HEADER}" />
 		<input type="hidden" name="mode" value="add" />
+		{S_FORM_TOKEN}
 	</p>
 	<!-- ELSEIF S_OPTIONS == 'MANAGE' -->
 	<p class="quick" style="text-align:center;">
 		<input class="button2" name="reindex" type="submit" value="{L_BLOCKS_REINDEX}" />
 		<input type="hidden" name="mode" value="reindex" />
+		{S_FORM_TOKEN}
 	</p>
 	<!-- ENDIF -->
 <!-- ENDIF -->
 
-{S_FORM_TOKEN}
+
 </form>
 <!-- INCLUDE overall_footer.html -->
