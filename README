@@ -21,3 +21,21 @@ Key features:
 
 ... under construction ...
 
+Add debug queries:
+includes/db/dbal.php
+Edit this function to produce:
+
+	function sql_add_num_queries($cached = false)
+	{
+		$this->num_queries['cached'] += ($cached !== false) ? 1 : 0;
+		$this->num_queries['normal'] += ($cached !== false) ? 0 : 1;
+		$this->num_queries['total'] += 1;
+
+		if(defined('DEBUG_QUERIES'))
+		{
+			global $queries, $cached_queries, $total_queries;
+			($cached !== false) ? $cached_queries++ : $cached_queries;
+			($cached !== false) ? $queries : $queries++;
+			$total_queries = $this->num_queries['total'];
+		}
+	}
