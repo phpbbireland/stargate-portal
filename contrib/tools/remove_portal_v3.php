@@ -64,15 +64,13 @@ $process = false;
 	<div id="page-body">
 		<div id="acp">
 			<div class="panel">
-				<center>
-					<p><font color="#FF0000"><strong>(SGP 1.0.0)</strong></font> This is the Stargate Portal Removal Script... <font color="#FF0000"></font><br /></p>
-				</center>
+				<p style="text-align:center"><font color="#FF0000"><strong>(SGP 1.0.0)</strong></font> This is the Stargate Portal Removal Script... <font color="#FF0000"></font><br /></p>
 				<span class="corners-top"><span></span></span>
 				<div id="content">
 					<div id="main" class="install-body">
 						<a name="maincontent"></a>
 
-						
+
 <?php
 if(!$process)
 {
@@ -87,7 +85,7 @@ if(!$process)
 	exit;
 }
 
-if( $user->data['is_registered'] && $auth->acl_get('a_') ) 	 
+if( $user->data['is_registered'] && $auth->acl_get('a_') )
 {
 	// Read config data from the config file
 	$data = array ('dbhost', 'dbname', 'dbuser', 'dbpasswd', 'table_prefix');
@@ -111,7 +109,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 	echo ']<br />Admin name: ['; echo $data['dbuser'];
 	echo ']<br />Password: ['; echo $data['dbpasswd'];
 	echo ']<br />Table Prefix: ['; echo $data['table_prefix'];
-	echo ']<br />'; 
+	echo ']<br />';
 
 	mysql_connect($data['dbhost'], $data['dbuser'], $data['dbpasswd']);
 	$process = mysql_select_db($data['dbname']);
@@ -141,7 +139,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 		else
 		{
 			$no_exeptions = false;
-			echo $table_prefix . $table . " <b>table not found... </b><br />";   
+			echo $table_prefix . $table . " <b>table not found... </b><br />";
 		}
 	}
 	echo ' ...<br />';
@@ -175,7 +173,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 			{
 				$sql .= "
 					DROP COLUMN $entry,";
-				$msg .= $table_prefix . $table_name . " => " . $entry . " <b>dropped... </b><br />";         
+				$msg .= $table_prefix . $table_name . " => " . $entry . " <b>dropped... </b><br />";
 			}
 			$sql = rtrim($sql, ',');
 		}
@@ -183,12 +181,12 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 		{
 			$sql = "ALTER TABLE " . $table_prefix . $table_name . "
 				DROP COLUMN $table";
-			$msg .= $table_prefix . $table_name . " => " . $table . " <b>dropped... </b><br />";                  
+			$msg .= $table_prefix . $table_name . " => " . $table . " <b>dropped... </b><br />";
 		}
 		$res = mysql_query($sql);
 		if($res)
 		{
-			echo $msg;   
+			echo $msg;
 		}
 		else
 		{
@@ -256,20 +254,20 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 
 			if($res2)
 			{
-				echo "<br />Stargate Portal Mod sub-module " . $row['module_langname'] . " <b>removed</b>.";   
+				echo "<br />Stargate Portal Mod sub-module " . $row['module_langname'] . " <b>removed</b>.";
 			}
 			else
 			{
 				$no_exeptions = false;
 				echo "<br /><br /><b>Stargate Portal Mod sub-module " . $row['module_langname'] . " not found</b>";
 			}
-		
+
 			$sql3 = "DELETE FROM " . $table_prefix . "modules
 					WHERE module_id = " . $row['parent_id'];
 			$res3 = mysql_query($sql3);
 			if($res3)
 			{
-				echo "<br />Portal Mod parent module " . $row['parent_id'] . " <b>removed</b>.";   
+				echo "<br />Portal Mod parent module " . $row['parent_id'] . " <b>removed</b>.";
 			}
 			else
 			{
@@ -283,7 +281,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 		$no_exeptions = false;
 		echo "<br /><br /><b>No portal modules found...</b><br />";
 	}
-	
+
 	// Remove all permissions stuff
 	$sql = "SELECT auth_option_id, auth_option FROM " . $table_prefix . "acl_options
 			WHERE auth_option IN (
@@ -319,12 +317,12 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 	$auth_options_list = '';
 	foreach($auth_options_array as $auth)
 	{
-		$auth_options_list .= "'" . $auth['auth_option_id'] . "', ";   
+		$auth_options_list .= "'" . $auth['auth_option_id'] . "', ";
 	}
 	$auth_options_list = rtrim($auth_options_list, ', ');
 
 	$tables = array('acl_options', 'acl_groups', 'acl_roles_data', 'acl_users');
-	
+
 	foreach($tables as $table)
 	{
 		$sql = "SELECT * FROM " . $table_prefix . $table . "
@@ -337,17 +335,17 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 			$title_lengths = array();
 			echo "<b>Auth options matched and removed from $table_prefix$table:</b><br />";
 			echo "<table><tr>";
-		
+
 			while($row = mysql_fetch_assoc($res))
 			{
 				if($first_loop)
 				{
 					foreach($row as $key => $value)
 					{
-					
+
 						echo '<td class="row1"><b>' . $key . ':</b></td>';
 						$title_lengths[] = (strlen($key) +1);
-					}   
+					}
 					echo "</tr>";
 					$first_loop = false;
 				}
@@ -388,7 +386,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 	$res = mysql_query($sql);
 	if($res)
 	{
-		echo "<br />modules table auto_increment values reset.";   
+		echo "<br />modules table auto_increment values reset.";
 	}
 	else
 	{
@@ -400,7 +398,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 	$res = mysql_query($sql);
 	if($res)
 	{
-		echo "<br />acl_options table auto_increment values reset.";   
+		echo "<br />acl_options table auto_increment values reset.";
 	}
 	else
 	{
@@ -412,7 +410,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 	$res = mysql_query($sql);
 	if($res)
 	{
-		echo "<br />acl_roles table auto_increment values reset.";   
+		echo "<br />acl_roles table auto_increment values reset.";
 	}
 	else
 	{
@@ -427,7 +425,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 	$file = $phpbb_root_path . 'config.' .$phpEx;
 	$handle = @fopen($file, "r");
 	if ($handle)
-	{	
+	{
 		$written = true;
 		// Create a lock file to indicate that there is an install in progress
 		$fp = @fopen($phpbb_root_path . 'cache/install_lock', 'wb');
@@ -458,7 +456,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 		{
 			// Something went wrong ... request admin to make chages manually
 			$written = false;
-		}	
+		}
 
 		@fclose($fp);
 
@@ -503,7 +501,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 		$res2 = mysql_query($sql2);
 		if($res2)
 		{
-			echo "<br />Prosilver has been set as default style.";   
+			echo "<br />Prosilver has been set as default style.";
 		}
 		else
 		{
@@ -516,7 +514,7 @@ if( $user->data['is_registered'] && $auth->acl_get('a_') )
 		if($res2)
 		{
 			$override_style = true;
-			echo "<br />Override user style has been set.";   
+			echo "<br />Override user style has been set.";
 		}
 		else
 		{
@@ -591,22 +589,22 @@ function get_config_data()
 function get_config($data)
 {
 	global $phpbb_root_path, $phpEx;
-	
+
 	$file = $phpbb_root_path . 'config.' .$phpEx;
 	$handle = @fopen($file, "r");
-	
+
 	$info_db = ' ';
 
-	if ($handle) 
+	if ($handle)
 	{
-	    while (!feof($handle)) 
+	    while (!feof($handle))
 	   	{
 			$buffer = fgets($handle, 2048);
 
 		    if(strstr($buffer, $data))
        		{
         		$start = $end = $k = 0;
-        		
+
         		for($i = 0; $i <= strlen($buffer)-2; $i++)
         		{
 	        		if($buffer[$i] == "'")
@@ -632,7 +630,7 @@ function get_config($data)
 		}
    		fclose($handle);
 	}
-	
+
 	if(strstr($info_db, ";"))
 	{
 		$info_db = '';
@@ -643,7 +641,7 @@ function get_config($data)
 	{
 		$info_db = '';
 	}
-		
+
 	//echo $info_db; echo '<br />';
 	return $info_db;
 }

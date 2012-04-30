@@ -36,7 +36,7 @@ $auth->acl($user->data);
 $user->setup();
 
 // Stargate Portal
-if(STARGATE)
+if (!STARGATE)
 {
 	$user->add_lang('portal/portal');
 }

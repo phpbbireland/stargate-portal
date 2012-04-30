@@ -2,17 +2,14 @@
 /**
 *
 * @package Stargate Portal
-* @author  Michael O'Toole - aka Michaelo
-* @begin   Sun Feb 13, 2005
-* @copyright (c) 2008 phpbbireland
-* @home    http://www.phpbbireland.com
+* @version $Id$
+* @copyright (c) 2005 phpbbireland
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* @note: Do not remove this copyright. Just append yours if you have modified it,
-*        this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: portal.php 291 2008-12-24 13:28:56Z Mike $
 * Updated: 20 February 2009
 *
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Stargate Portal copyright agreement...
 */
 
 /**
@@ -24,16 +21,16 @@ $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 
-if(!STARGATE)
-{
-	redirect(append_sid("{$phpbb_root_path}index.$phpEx"));
-}
-
 // Start session management
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('portal/portal');
 $user->add_lang('viewtopic');
+
+if (!STARGATE)
+{
+	redirect(append_sid("{$phpbb_root_path}index.$phpEx"));
+}
 
 display_forums('', $config['load_moderators']);
 
@@ -100,13 +97,6 @@ $birthday_list = '';
 if ($config['load_birthdays'] && $config['allow_birthdays'])
 {
 	$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
-/*
-	$sql = 'SELECT user_id, username, user_colour, user_birthday
-		FROM ' . USERS_TABLE . "
-		WHERE user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%'
-			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
-	$result = $db->sql_query($sql, $block_cache_time);
-*/
 	$sql = 'SELECT u.user_id, u.username, u.user_colour, u.user_birthday
 		FROM ' . USERS_TABLE . ' u
 		LEFT JOIN ' . BANLIST_TABLE . " b ON (u.user_id = b.ban_userid)
@@ -130,11 +120,9 @@ if ($config['load_birthdays'] && $config['allow_birthdays'])
 
 // Assign index specific vars
 $template->assign_vars(array(
-	'S_IS_PORTAL'	=> true,
-	'S_ARRANGE' 	=> $arrange,
 	'MOVE_IMG'		=> '<img src="./images/move.png"  alt="move" title="' . $user->lang['MOVE'] . '" height="13px" width="13px" />',
-	'HIDE_IMG'		=> '<img src="./images/hide.png"  alt="hide" title="' . $user->lang['HIDE'] . '" height="13px" width="13px"/>',
-	'SHOW_IMG'		=> '<img src="./images/show.png"  alt="show" title="' . $user->lang['SHOW'] . '" height="13px" width="13px"/>',
+	'HIDE_IMG'		=> '<img src="./images/hide.png"  alt="hide" title="' . $user->lang['HIDE'] . '" height="13px" width="13px" />',
+	'SHOW_IMG'		=> '<img src="./images/show.png"  alt="show" title="' . $user->lang['SHOW'] . '" height="13px" width="13px" />',
 
 	'TOTAL_POSTS'	=> sprintf($user->lang[$l_total_post_s], $total_posts),
 	'TOTAL_TOPICS'	=> sprintf($user->lang[$l_total_topic_s], $total_topics),
@@ -144,26 +132,22 @@ $template->assign_vars(array(
 	'LEGEND'		=> $legend,
 	'BIRTHDAY_LIST'	=> $birthday_list,
 
-	'FORUM_IMG'				=> $user->img('forum_read', 'NO_NEW_POSTS'),
-	'FORUM_NEW_IMG'			=> $user->img('forum_unread', 'NEW_POSTS'),
-	'FORUM_LOCKED_IMG'		=> $user->img('forum_read_locked', 'NO_NEW_POSTS_LOCKED'),
-	'FORUM_NEW_LOCKED_IMG'	=> $user->img('forum_unread_locked', 'NO_NEW_POSTS_LOCKED'),
+	'FORUM_IMG'				=> $user->img('forum_read', 'NO_UNREAD_POSTS'),
+	'FORUM_UNREAD_IMG'			=> $user->img('forum_unread', 'UNREAD_POSTS'),
+	'FORUM_LOCKED_IMG'		=> $user->img('forum_read_locked', 'NO_UNREAD_POSTS_LOCKED'),
+	'FORUM_UNREAD_LOCKED_IMG'	=> $user->img('forum_unread_locked', 'UNREAD_POSTS_LOCKED'),
 
+	'S_IS_PORTAL'				=> true,
+	'S_ARRANGE' 				=> $arrange,
 	'S_LOGIN_ACTION'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login'),
 	'S_DISPLAY_BIRTHDAY_LIST'	=> ($config['load_birthdays']) ? true : false,
-	'U_MARK_FORUMS'		=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'hash=' . generate_link_hash('global') . '&amp;mark=forums') : '',
-	'U_MCP'				=> ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=front', true, $user->session_id) : '')
+
+	'U_MARK_FORUMS'				=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}index.$phpEx", 'hash=' . generate_link_hash('global') . '&amp;mark=forums') : '',
+	'U_MCP'						=> ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=front', true, $user->session_id) : '')
 );
 
 // Output page
 page_header($user->lang['PORTAL']);
-
-/* Not required? 04 October 2010
-if(STARGATE)
-{
-	include($phpbb_root_path . 'includes/sgp_portal_blocks.' . $phpEx);
-}
-*/
 
 $template->set_filenames(array(
 	'body' => 'portal.html')

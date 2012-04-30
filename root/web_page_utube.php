@@ -49,11 +49,11 @@ $loop_count = 0;
 $emp = '?';
 $rating = '';
 
-$sql = "SELECT * FROM ". K_YOUTUBE_TABLE . " ORDER BY video_who ASC";
+$sql = "SELECT * FROM ". K_YOUTUBE_TABLE . " ORDER BY video_category, video_who ASC";
 
-if (!$result = $db->sql_query($sql)) 
+if (!$result = $db->sql_query($sql))
 {
-	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }
 
 $result = $db->sql_query_limit($sql, 300);
@@ -90,6 +90,7 @@ while($row = $db->sql_fetchrow($result))
 		'VIDEO_WHO'			=> $row['video_who'],
 		'VIDEO_TITLE'		=> $row['video_title'],
 		'VIDEO_LINK'		=> append_sid("{$phpbb_root_path}web_page_utube.$phpEx", 'video=' . $ut_link_variable . $row['video_link']),
+		'VIDEO_THUMB'		=> 'http://img.youtube.com/vi/' . $row['video_link'] . '/default.jpg',
 		'VIDEO_COMMENT'		=> htmlspecialchars_decode($row['video_comment']),
 		'VIDEO_POSTER'		=> ($usr_name_full) ? $usr_name_full : '',
 		'VIDEO_RATING'		=> $rating,
@@ -115,9 +116,9 @@ $db->sql_freeresult($result);
 
 $sql = "SELECT id, page_name, page_meta, page_desc, page_extn, body, head, foot FROM ". K_WEB_PAGES_TABLE . " WHERE page_name = '" . $db->sql_escape(utf8_clean_string($mode)) . "'";
 
-if (!$result = $db->sql_query($sql)) 
-{ 
-	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+if (!$result = $db->sql_query($sql))
+{
+	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }
 $row = $db->sql_fetchrow($result);
 
@@ -136,9 +137,9 @@ $db->sql_freeresult($result);
 
 $sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = " . (int)$head_id;
 
-if (!$result = $db->sql_query($sql)) 
-{ 
-	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+if (!$result = $db->sql_query($sql))
+{
+	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }
 
 $row = $db->sql_fetchrow($result);
@@ -147,9 +148,9 @@ $db->sql_freeresult($result);
 
 $sql = "SELECT id, body FROM ". K_WEB_PAGES_TABLE . " WHERE id = " . (int)$foot_id;
 
-if (!$result = $db->sql_query($sql)) 
+if (!$result = $db->sql_query($sql))
 {
-	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+	trigger_error($user->lang['ERROR_PORTAL_MODULE'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }
 
 $row = $db->sql_fetchrow($result);
@@ -172,7 +173,7 @@ $template->assign_vars(array(
 	'YT_FOOTER'	=> htmlspecialchars_decode($foot),
 ));
 
-// Output page 
+// Output page
 page_header($user->lang['YOUTUBE_PAGE']);
 
 $template->set_filenames(array(
