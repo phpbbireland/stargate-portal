@@ -193,10 +193,10 @@ if (!function_exists('sgp_truncate_message'))
 * of special text such as bbcode, smilies, attachments etc...
 *
 * The function is passed the text to truncate and the required lenth of the
-* truncated text... 
+* truncated text...
 *
-* It returns the length of the truncated string altered to avoid splitting 
-* special code... 
+* It returns the length of the truncated string altered to avoid splitting
+* special code...
 *
 * 28 September 2010 Mike.... requires testing as usual...
 */
@@ -237,7 +237,7 @@ if (!function_exists('correct_truncate_length'))
 					$return_val = $smile_end;
 				}
 			}
-			
+
 			// find bbcodes & make sure we have enought characters left to check after tag //
 			if($i + 9 < $len)
 			{
@@ -316,7 +316,6 @@ if (!function_exists('correct_truncate_length'))
 					if($uid_start < $truncate && $uid_end < $truncate)
 					{
 						$return_val = $truncate;
-
 					}
 
 					if($uid_start < $truncate && $uid_end > $truncate)

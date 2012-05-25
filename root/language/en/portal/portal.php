@@ -1,12 +1,14 @@
 <?php
 /**
 *
-* portal [English]
+* @author Original Author Michael O'Toole@www.stargate-portal.com
 *
-* @package language
-* @version $Id: portal.php,v 1.151 29 March 2007
-* @copyright (c) 2005 phpbbireland
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @package {portal.php}
+* @version $Id:$ 3.2.0
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Stargate Portal copyright agreement...
+* @copyright (c) 2005 phpbireland
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
 
@@ -36,72 +38,71 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 //
 // Some characters you may want to copy&paste:
-// ’ » “ ”
+// ’ » “ ” …
 //
-
 //- stargate aka kiss portal lang definitions -//
 $lang = array_merge($lang, array(
-	'ACP_MINI'			=> 'Admin',
-	'ACP_SMALL'			=> 'ACP',
-	'ADVANCED_SEARCH'	=> 'Advanced Search',
-	'AUTO_LOGIN'		=> 'Auto Login',
-	'BOOKMARKS'			=> 'Bookmarks',
-	'CHAT_LINK'			=> 'Online Chat',
-	'COMMENTS'			=> 'Comments',
-	'COPY_RIGHT_BOTTOM' => 'Support Site & Affiliates',
-	'CURRENT_STYLE'		=> 'Current Style Information',
-	'FORUM_PORTAL'		=> 'Portal',
-	'HOME'				=> 'Home',
-	'INDEX_OF_FORUMS'	=> 'Index of forums',
-	'ICON_ANNOUNCEMENT'	=> 'Announcement',
+	'ACP_MINI'				=> 'Admin',
+	'ACP_SMALL'				=> 'ACP',
+	'ADVANCED_SEARCH'		=> 'Advanced Search',
+	'AUTO_LOGIN'			=> 'Auto Login',
+	'BOOKMARKS'				=> 'Bookmarks',
+	'CHAT_LINK'				=> 'Online Chat',
+	'COMMENTS'				=> 'Comments',
+	'COPY_RIGHT_BOTTOM' 	=> 'Support Site & Affiliates',
+	'CURRENT_STYLE'			=> 'Current Style Information',
+	'FORUM_PORTAL'			=> 'Portal',
+	'HOME'					=> 'Home',
+	'INDEX_OF_FORUMS'		=> 'Index of forums',
+	'ICON_ANNOUNCEMENT'		=> 'Announcement',
 	'ICONS_EXPLAIN'         => 'Icons explain',
 	'FORUM_IMAGES_EXPLAIN'  => 'Forum Icons',
 	'POST_IMAGES_EXPLAIN'   => 'Post Icons',
-	'LOG_ME_IN_SHORT'   => 'Remember Login',
+	'LOG_ME_IN_SHORT'   	=> 'Remember Login',
 
 	'MERITS'            => 'Merits',
 	'MEMBER_INFO'		=> 'Members Info',
 	'MEMBERS'			=> 'Members',
 
-	'NO_NEWS'           => 'No News Today',
-	'NO_MODS'			=> 'No mods assigned.',
-	'NO_ADMINS'			=> 'No admins assigned.',
-	'ONLINE_USERS'		=> 'Online Users',
-	'ONLINE_USERS_SHOW' => '[ View Online List ]',
-	'PORTAL'			=> 'Portal',
-	'PICTURES'			=> 'Pictures',
-	'POSTED_BY'			=> 'Posted by',
-	'POST_COMMENTS'		=> 'Post Comments',
-	'PORTAL_DEVELOPMENT'=> 'Portal Development',
-	'PHP_SUPPORT_SITES' => 'php Support Sites',
-	'POSTER'			=> 'Poster',
-	'POST_IMG'			=> 'Post',
-	'POST_NEW_IMG'		=> 'Post New',
-	'POST_NEW_HOT_IMG'	=> 'Post New Hot',
-	'POST_LOCKED_IMG'	=> 'Post Locked',
-	'POST_REPLY' 		=> 'Post a reply',
-	'PRINT_IT'			=> 'Print it',
-	'PROFILE_SMALL'		=> 'UCP',
+	'NO_NEWS'           	=> 'No News Today',
+	'NO_MODS'				=> 'No mods assigned.',
+	'NO_ADMINS'				=> 'No admins assigned.',
+	'ONLINE_USERS'			=> 'Online Users',
+	'ONLINE_USERS_SHOW' 	=> '[ View Online List ]',
+	'PORTAL'				=> 'Portal',
+	'PICTURES'				=> 'Pictures',
+	'POSTED_BY'				=> 'Posted by',
+	'POST_COMMENTS'			=> 'Post Comments',
+	'PORTAL_DEVELOPMENT'	=> 'Portal Development',
+	'PHP_SUPPORT_SITES' 	=> 'php Support Sites',
+	'POSTER'				=> 'Poster',
+	'POST_IMG'				=> 'Post',
+	'POST_NEW_IMG'			=> 'Post New',
+	'POST_NEW_HOT_IMG'		=> 'Post New Hot',
+	'POST_LOCKED_IMG'		=> 'Post Locked',
+	'POST_REPLY' 			=> 'Post a reply',
+	'PRINT_IT'				=> 'Print it',
+	'PROFILE_SMALL'			=> 'UCP',
 	'POST_ANNOUNCEMENT_NEW'	=> 'New Announcement',
 	'POST_ANNOUNCEMENT'		=> 'Announcement',
-	'READ_ARTICLE'	=> 'Read Full Article',
-	'RECENT_TOPICS'	=> 'Recent Topics',
-	'SEARCH_OPTION'	=> 'Search Option',
-	'SITE_SURVEY'	=> 'Site Survey',
-	'SITE_NAME'		=> 'phpbbireland',
-	'SUBMITTED_BY'	=> 'Submitted By',
-	'QUICK_STATISTICS'	=> 'Site Statistics',
+	'READ_ARTICLE'			=> 'Read Full Article',
+	'RECENT_TOPICS'			=> 'Recent Topics',
+	'SEARCH_OPTION'			=> 'Search Option',
+	'SITE_SURVEY'			=> 'Site Survey',
+	'SITE_NAME'				=> 'phpbbireland',
+	'SUBMITTED_BY'			=> 'Submitted By',
+	'QUICK_STATISTICS'		=> 'Site Statistics',
 
 	'STYLE_SELECT_ALLOW' => 'Allow style change',
 
-	'SUBMIT_LINK'	=> 'Submit Link',
+	'SUBMIT_LINK'			=> 'Submit Link',
 	'THEME_NEWS_UPDATES'	=> 'Theme News & Updates',
 	'THE_COLLECTIVE'		=> 'The collective',
 
-	//'TO_DAY'		=> 'Date: %s',
-	//'TOPIC_MOVED'	=> 'Post Moved',
+	//'TO_DAY'			=> 'Date: %s',
+	//'TOPIC_MOVED'		=> 'Post Moved',
 	//'TIME'			=> 'Time',
-	'TIMEX'			=> 'Time %s',
+	'TIMEX'				=> 'Time %s',
 
 	'USER_COUNTRY_FLAG'			=> 'Country Flag',
 	'UCF_MOD'					=> 'A valid location is required for this Mod',
@@ -117,15 +118,15 @@ $lang = array_merge($lang, array(
 	'VIEW_PREVIOUS_MONTH'	=> 'View previous month',
 	'VIEW_NEXT_MONTH'		=> 'View next month',
 
-	'SITE_LINK_TXT_EXPLAIN'	=> 'The HTML code below contain all the necessary code to link to <strong>%s</strong> please feel free to add it to your site.<br /><br />',
-	'SITE_LINK_TXT_EXPLAIN2' => 'This code produces:',
-	'GOTO_TOP_IMG' => 'Goto Top',
-	'GOTO_BOTTOM_IMG' => 'Goto Bottom',
-	'BOOKMARK_ON' => 'Bookmark Post',
-	'BOOKMARK_OFF' => 'Remove Bookmark',
+	'SITE_LINK_TXT_EXPLAIN'		=> 'The HTML code below contain all the necessary code to link to <strong>%s</strong> please feel free to add it to your site.<br /><br />',
+	'SITE_LINK_TXT_EXPLAIN2' 	=> 'This code produces:',
+	'GOTO_TOP_IMG' 				=> 'Goto Top',
+	'GOTO_BOTTOM_IMG' 			=> 'Goto Bottom',
+	'BOOKMARK_ON' 				=> 'Bookmark Post',
+	'BOOKMARK_OFF' 				=> 'Remove Bookmark',
 
-	'L_CLOCK'    => 'Local Time',
-	'BASIC_RULES' => 'Basic Rules',
+	'L_CLOCK'    	=> 'Local Time',
+	'BASIC_RULES' 	=> 'Basic Rules',
 
 	'POLL_BLOCK' => 'Poll Block',
 
@@ -134,10 +135,10 @@ $lang = array_merge($lang, array(
 	<span class="orange"><strong>RC Style</strong></span><br />
 	<span class="gray"><strong>Beta Style</strong></span><br />
 	<span class="red"><strong>Alpha Style</strong></span><hr />',
-	'SMILIES' => 'Smilies',
+	'SMILIES' 				=> 'Smilies',
 
-	'OPTION'	=> 'Option',
-	'PERMANENT'	=> 'Save my choice:',
+	'OPTION'			=> 'Option',
+	'PERMANENT'			=> 'Save my choice:',
 	'MAKE_PERMANENT'	=> 'If check, the style chosen will be set as your default style!',
 
 	'NO_SEARCHS'			=> 'No words found.',
@@ -174,20 +175,20 @@ $lang = array_merge($lang, array(
 	'LOG_ME_IN_SHORT'			=> 'Use Automatic Login ',
 	'HIDE_ME_SHORT'				=> 'Hide me this session.',
 
-	'COLOR_DARK_RED' => 'Dark Red',
-	'COLOR_RED' => 'Red',
-	'COLOR_ORANGE' => 'Orange',
-	'COLOR_BROWN' => 'Brown',
-	'COLOR_YELLOW' => 'Yellow',
-	'COLOR_GREEN' => 'Green',
-	'COLOR_OLIVE' => 'Olive',
-	'COLOR_CYAN' => 'Cyan',
-	'COLOR_BLUE' => 'Blue',
-	'COLOR_DARK_BLUE' => 'Dark Blue',
-	'COLOR_INDIGO' => 'Indigo',
-	'COLOR_VIOLET' => 'Violet',
-	'COLOR_WHITE' => 'White',
-	'COLOR_BLACK' => 'Black',
+	'COLOR_DARK_RED' 	=> 'Dark Red',
+	'COLOR_RED' 		=> 'Red',
+	'COLOR_ORANGE' 		=> 'Orange',
+	'COLOR_BROWN' 		=> 'Brown',
+	'COLOR_YELLOW' 		=> 'Yellow',
+	'COLOR_GREEN' 		=> 'Green',
+	'COLOR_OLIVE' 		=> 'Olive',
+	'COLOR_CYAN' 		=> 'Cyan',
+	'COLOR_BLUE' 		=> 'Blue',
+	'COLOR_DARK_BLUE' 	=> 'Dark Blue',
+	'COLOR_INDIGO' 		=> 'Indigo',
+	'COLOR_VIOLET' 		=> 'Violet',
+	'COLOR_WHITE' 		=> 'White',
+	'COLOR_BLACK' 		=> 'Black',
 
 	'URL' 			=> 'URL',
 	'RETURN_INDEX'	=> '%sReturn to the portal page%s',
@@ -209,8 +210,8 @@ $lang = array_merge($lang, array(
 	'TOOLS_OFF'	=> 'Save Changes',
 
 
-	'UPDATED'		=> 'Updated ',
-	'NO_RECENT_TOPICS' => ' No recent topics to display',
+	'UPDATED'			=> 'Updated ',
+	'NO_RECENT_TOPICS' 	=> ' No recent topics to display',
 
 	// NEW NEWS
 	'NEWS_FLASH_LOCAL'		=> 'Local News Flash... ',
@@ -219,10 +220,10 @@ $lang = array_merge($lang, array(
 
 	'SCROLLING_BLOCKS_DISABLED' => 'Scrolling blocks are disabled when arranging blocks',
 
-	'NAME'		=> 'Name',
-	'AUTHOR'	=> 'Author',
-	'INFO'		=> 'Info',
-	'LINK'		=> '<img scr="./images/bbcode/link.png" />',
+	'NAME'			=> 'Name',
+	'AUTHOR'		=> 'Author',
+	'INFO'			=> 'Info',
+	'LINK'			=> '<img scr="./images/bbcode/link.png" alt="" />',
 	'TOTAL_STYLES'	=> 'Total available styles',
 	'STYLE_USERS'	=> 'Style used by %d user%s',
 	'USED_BY'		=> '%d user%s, use%s this style',
@@ -234,10 +235,10 @@ $lang = array_merge($lang, array(
 	'DESIGNED_BY'		=> 'Designed by',
 	'EDITED'			=> 'Edited*',
 
-	'HTTP_HOST'		=> 'Host',
-	'HITS'			=> 'Hits',
-	'STATUS'		=> 'Progress',
-	'STATUS_2'		=> 'progress bar',
+	'HTTP_HOST'				=> 'Host',
+	'HITS'					=> 'Hits',
+	'STATUS'				=> 'Progress',
+	'STATUS_2'				=> 'progress bar',
 	'STYLE_SELECT_DISABLED' => 'Style Switch is Disabled',
 	'NO_VIEW_USERS_R'		=> 'You are not authorized to view the online users list.',
 	'NO_VIEW_USERS_A'		=> 'In order to view the online list you have to be registered and logged in.',
@@ -271,7 +272,7 @@ $lang = array_merge($lang, array(
 	'IRC_TITLE'				=> 'Stargate Portal IRC Popup',
 	'SGP_IRC_POPUP'			=> 'Stargate Portal IRC Popup',
 
-	'UPLOAD'	=> 'Upload',
+	'UPLOAD'				=> 'Upload',
 	'CURRENTLY_DISABLED'	=> 'Code is currently disable pending updates',
 
 	'TEMPORARILY_HIDE_BLOCKS'	=> 'Temporarily Hide Blocks',

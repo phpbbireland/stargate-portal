@@ -5,18 +5,45 @@
 *
 * @package language
 * @version $Id: k_vars.php 297 2008-12-30 18:40:30Z JohnnyTheOne $
-* @copyright (c) 2006 phpbbireland Group
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Stargate Portal copyright agreement...
+* @copyright (c) 2005 phpbireland
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
+*/
+
+/**
+* DO NOT CHANGE
 */
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
 
-/**
-* DO NOT CHANGE
-*/
+if (empty($lang) || !is_array($lang))
+{
+	$lang = array();
+}
+
+// DEVELOPERS PLEASE NOTE
+//
+// All language files should use UTF-8 as their encoding and the files must not contain a BOM.
+//
+// Placeholders can now contain order information, e.g. instead of
+// 'Page %s of %s' you can (and should) write 'Page %1$s of %2$s', this allows
+// translators to re-order the output of data while ensuring it remains correct
+//
+// You do not need this where single placeholders are used, e.g. 'Message %d' is fine
+// equally where a string contains only two placeholders which are used to wrap text
+// in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ » “ ” …
+//
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 if (empty($lang) || !is_array($lang))
 {
@@ -25,8 +52,8 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 
-	'TITLE_MAIN' => 'General Portal Variable',
-	'TITLE_BLOCK' => 'Portal Block Variable',
+	'TITLE_MAIN' 	=> 'General Portal Variable',
+	'TITLE_BLOCK' 	=> 'Portal Block Variable',
 
 	'TITLE_EXPLAIN_MAIN'	=> 'Setting for variables used by general portal blocks...',
 	'TITLE_EXPLAIN_BLOCK'	=> 'Blocks can contain variables, normally stored in the K_BLOCKS_CONFIG_VAR_TABLE, associated html file (to display the variables) are located in adm/style/k_block_vars folder.<br />
@@ -43,9 +70,9 @@ $lang = array_merge($lang, array(
 	'GLOBAL_NEWS'		=> 'Global News',
 	'BOTH'				=> 'Both types',
 
-	'RECENT_TOPICS_SETTINGS' => 'Recent Topics Settings',
-	'NUMBER_OF_RECENT_TOPICS_TO_DISPLAY' => 'Number of recent topics to display if block data is static',
-	'NUMBER_OF_RECENT_TOPICS_TO_DISPLAY_EXPLAIN' => 'Note: If you allow scrolling, all recent posts will be displayed.',
+	'RECENT_TOPICS_SETTINGS' 						=> 'Recent Topics Settings',
+	'NUMBER_OF_RECENT_TOPICS_TO_DISPLAY' 			=> 'Number of recent topics to display if block data is static',
+	'NUMBER_OF_RECENT_TOPICS_TO_DISPLAY_EXPLAIN' 	=> 'Note: If you allow scrolling, all recent posts will be displayed.',
 
 	'SEARCH_DAYS'				=> 'How many days will we search?',
 	'SEARCH_DAYS_EXPLAIN'		=> 'Limit the number of days we search back to reduce database load.',
@@ -53,66 +80,66 @@ $lang = array_merge($lang, array(
 	'POSTS_TYPES'				=> 'Include all post types',
 	'POSTS_TYPES_EXPLAIN'		=> 'No will display normal post only, Yes will display all post types...',
 
-	'NUMBER_OF_NEWS_ITEMS_TO_DISPLAY' => 'Number of news item to display',
-	'NUMBER_OF_NEWS_ITEMS_TO_DISPLAY_EXPLAIN' => 'The number of news items shown on portal page.',
+	'NUMBER_OF_NEWS_ITEMS_TO_DISPLAY' 			=> 'Number of news item to display',
+	'NUMBER_OF_NEWS_ITEMS_TO_DISPLAY_EXPLAIN' 	=> 'The number of news items shown on portal page.',
 
-	'NUMBER_OF_TOPICS_PER_FORUM' => 'Number of topics per forum',
-	'NUMBER_OF_TOPICS_PER_FORUM_EXPLAIN' => 'The maximum number of topics returned from each forum.',
+	'NUMBER_OF_TOPICS_PER_FORUM' 			=> 'Number of topics per forum',
+	'NUMBER_OF_TOPICS_PER_FORUM_EXPLAIN' 	=> 'The maximum number of topics returned from each forum.',
 
 
-	'MAX_NEWS_ITEM_LENGTH' => 'Length of news item',
-	'MAX_NEWS_ITEM_LENGTH_EXPLAIN' => 'Maximum length to display for each news item, 0 to show full article.',
-	'ALLOW_NEWS' => 'Allow news to be displayed',
-	'ALLOW_NEWS_EXPLAIN' => 'Allow News to be displayed in portal page.',
+	'MAX_NEWS_ITEM_LENGTH' 			=> 'Length of news item',
+	'MAX_NEWS_ITEM_LENGTH_EXPLAIN' 	=> 'Maximum length to display for each news item, 0 to show full article.',
+	'ALLOW_NEWS' 					=> 'Allow news to be displayed',
+	'ALLOW_NEWS_EXPLAIN' 			=> 'Allow News to be displayed in portal page.',
 
-	'ANNOUNCE_SETTINGS'		=> 'Announcement Settings',
-	'ANNOUNCE_FORUM_ID' => 'Announcements Forum ID',
-	'ANNOUNCE_FORUM_ID_EXPLAIN' => 'The ID of the announcement forum.',
-	'NUMBER_OF_ANNOUNCE_ITEMS_TO_DISPLAY' => 'Number of announcements to display',
-	'NUMBER_OF_ANNOUNCE_ITEMS_TO_DISPLAY_EXPLAIN' => 'The number of announcements to show on portal page.',
-	'MAX_ANNOUNCE_ITEM_LENGTH' => 'Length of announcements',
-	'MAX_ANNOUNCE_ITEM_LENGTH_EXPLAIN' => 'Maximum length of each announcement to display, 0 to show full article.',
-	'ALLOW_ANNOUNCE' => 'Allow Announcements',
-	'ALLOW_ANNOUNCE_EXPLAIN' => 'Allow announcements to be displayed on portal.',
+	'ANNOUNCE_SETTINGS'								=> 'Announcement Settings',
+	'ANNOUNCE_FORUM_ID' 							=> 'Announcements Forum ID',
+	'ANNOUNCE_FORUM_ID_EXPLAIN' 					=> 'The ID of the announcement forum.',
+	'NUMBER_OF_ANNOUNCE_ITEMS_TO_DISPLAY' 			=> 'Number of announcements to display',
+	'NUMBER_OF_ANNOUNCE_ITEMS_TO_DISPLAY_EXPLAIN' 	=> 'The number of announcements to show on portal page.',
+	'MAX_ANNOUNCE_ITEM_LENGTH' 						=> 'Length of announcements',
+	'MAX_ANNOUNCE_ITEM_LENGTH_EXPLAIN' 				=> 'Maximum length of each announcement to display, 0 to show full article.',
+	'ALLOW_ANNOUNCE' 								=> 'Allow Announcements',
+	'ALLOW_ANNOUNCE_EXPLAIN' 						=> 'Allow announcements to be displayed on portal.',
 
-	'BOT_SETTINGS'	=> 'Bot Settings',
-	'ALLOW_BOT_DISPLAY' => 'Allow bot report',
-	'ALLOW_BOT_DISPLAY_EXPLAIN' => 'Enable/Disable bot report.',
-	'NUMBER_OF_BOTS_TO_DISPLAY' => 'Number of bots to display',
+	'BOT_SETTINGS'						=> 'Bot Settings',
+	'ALLOW_BOT_DISPLAY' 				=> 'Allow bot report',
+	'ALLOW_BOT_DISPLAY_EXPLAIN' 		=> 'Enable/Disable bot report.',
+	'NUMBER_OF_BOTS_TO_DISPLAY' 		=> 'Number of bots to display',
 	'NUMBER_OF_BOTS_TO_DISPLAY_EXPLAIN' => 'You can determine the number of bots to display.',
 
-	'LINKS_SETTINGS' => 'Link Block Settings',
-	'NUMBER_OF_LINKS_TO_DISPLAY' => 'Number of links to display in Link Block',
-	'NUMBER_OF_LINKS_TO_DISPLAY_EXPLAIN' => '0 (zero) to scroll all links...',
-	'LINKS_SCROLL_AMOUNT' => 'Scroll Amount/Speed',
-	'LINKS_SCROLL_AMOUNT_EXPLAIN' => 'Set to 1 for slow... 5 for fast...',
-	'LINK_TO_US' => 'The link image name',
-	'LINK_TO_US_EXPLAIN' => 'The image must exist in: ./images folder. (size: 88x31px)',
-	'LINK_FORUM_ID' => 'The id of the forum to be used for uploading link images',
-	'LINK_FORUM_ID_EXPLAIN' => 'Places a link at the bottom of the Link Block to direct members to a designated links upload forum, should one exist.',
+	'LINKS_SETTINGS' 						=> 'Link Block Settings',
+	'NUMBER_OF_LINKS_TO_DISPLAY' 			=> 'Number of links to display in Link Block',
+	'NUMBER_OF_LINKS_TO_DISPLAY_EXPLAIN' 	=> '0 (zero) to scroll all links...',
+	'LINKS_SCROLL_AMOUNT' 					=> 'Scroll Amount/Speed',
+	'LINKS_SCROLL_AMOUNT_EXPLAIN' 			=> 'Set to 1 for slow... 5 for fast...',
+	'LINK_TO_US' 							=> 'The link image name',
+	'LINK_TO_US_EXPLAIN' 					=> 'The image must exist in: ./images folder. (size: 88x31px)',
+	'LINK_FORUM_ID' 						=> 'The id of the forum to be used for uploading link images',
+	'LINK_FORUM_ID_EXPLAIN' 				=> 'Places a link at the bottom of the Link Block to direct members to a designated links upload forum, should one exist.',
 
-	'LINKS_SCROLL_DIRECTION' => 'Scroll Direction',
-	'LINKS_SCROLL_DIRECTION_EXPLAIN' => 'Scroll 0 = Up or 1 = Down',
-	'FOOTER_IMAGES' => 'Portal Footer Images',
-	'ALLOW_FOOTER_IMAGES' => 'Display Portal Footer Images',
-	'ALLOW_FOOTER_IMAGES_EXPLAIN' => 'Turn on/off link images in the portal footer...',
+	'LINKS_SCROLL_DIRECTION' 			=> 'Scroll Direction',
+	'LINKS_SCROLL_DIRECTION_EXPLAIN' 	=> 'Scroll 0 = Up or 1 = Down',
+	'FOOTER_IMAGES' 					=> 'Portal Footer Images',
+	'ALLOW_FOOTER_IMAGES' 				=> 'Display Portal Footer Images',
+	'ALLOW_FOOTER_IMAGES_EXPLAIN' 		=> 'Turn on/off link images in the portal footer...',
 
-	'K_SHOW_SMILIES' => 'Show Smilies on Quick Reply',
-	'K_SHOW_SMILIES_EXPLAIN' => 'Some mods may require you don\'t display Smilies on Quick Reply',
+	'K_SHOW_SMILIES' 			=> 'Show Smilies on Quick Reply',
+	'K_SHOW_SMILIES_EXPLAIN' 	=> 'Some mods may require you don\'t display Smilies on Quick Reply',
 
-	'SHOW_BLOCKS_ON_INDEX_PORTAL' => 'Blocks display options.',
-	'SHOW_BLOCKS_ON_INDEX_L' => 'Display the left blocks on the index page',
-	'SHOW_BLOCKS_ON_INDEX_R' => 'Display the right blocks on the index page',
-	'SHOW_BLOCKS_ON_PORTAL_L' => 'Display the left blocks on the portal page',
-	'SHOW_BLOCKS_ON_PORTAL_R' => 'Display the right blocks on the portal page',
-	'SHOW_BLOCKS_ON_SEARCH_L' => 'Display the left blocks on the Search page',
-	'SHOW_BLOCKS_ON_SEARCH_R' => 'Display the right blocks on the Search page',
-	'SHOW_BLOCKS_ON_MCP_L' => 'Display the left blocks on the MCP page',
-	'SHOW_BLOCKS_ON_MCP_R' => 'Display the right blocks on the MCP page',
-	'SHOW_BLOCKS_ON_UCP_L' => 'Display the left blocks on the UCP page',
-	'SHOW_BLOCKS_ON_UCP_R' => 'Display the right blocks on the UCP page',
-	'SHOW_BLOCKS_ON_MEM_L' => 'Display the left blocks on the Members page',
-	'SHOW_BLOCKS_ON_MEM_R' => 'Display the right blocks on the Members page',
+	'SHOW_BLOCKS_ON_INDEX_PORTAL' 	=> 'Blocks display options.',
+	'SHOW_BLOCKS_ON_INDEX_L' 		=> 'Display the left blocks on the index page',
+	'SHOW_BLOCKS_ON_INDEX_R' 		=> 'Display the right blocks on the index page',
+	'SHOW_BLOCKS_ON_PORTAL_L' 		=> 'Display the left blocks on the portal page',
+	'SHOW_BLOCKS_ON_PORTAL_R' 		=> 'Display the right blocks on the portal page',
+	'SHOW_BLOCKS_ON_SEARCH_L' 		=> 'Display the left blocks on the Search page',
+	'SHOW_BLOCKS_ON_SEARCH_R' 		=> 'Display the right blocks on the Search page',
+	'SHOW_BLOCKS_ON_MCP_L' 			=> 'Display the left blocks on the MCP page',
+	'SHOW_BLOCKS_ON_MCP_R' 			=> 'Display the right blocks on the MCP page',
+	'SHOW_BLOCKS_ON_UCP_L' 			=> 'Display the left blocks on the UCP page',
+	'SHOW_BLOCKS_ON_UCP_R' 			=> 'Display the right blocks on the UCP page',
+	'SHOW_BLOCKS_ON_MEM_L' 			=> 'Display the left blocks on the Members page',
+	'SHOW_BLOCKS_ON_MEM_R' 			=> 'Display the right blocks on the Members page',
 
 
 	'SHOW_BLOCKS_ON_VT_L' => 'Display the left blocks on the Viewtopic page',
@@ -125,29 +152,29 @@ $lang = array_merge($lang, array(
 	//'SHOW_BLOCKS_ON_INDEX_L_EXPLAIN' => 'Enable or disable left blocks on index page.',
 	//'SHOW_BLOCKS_ON_INDEX_R_EXPLAIN' => 'Enable or disable right blocks on index page.',
 
-	'BLOCKS_GLOBAL'	=> 'Display blocks options',
-	'DISPLAY_BLOCKS_GLOBAL' => 'Enable blocks for all pages',
+	'BLOCKS_GLOBAL'					=> 'Display blocks options',
+	'DISPLAY_BLOCKS_GLOBAL' 		=> 'Enable blocks for all pages',
 	'DISPLAY_BLOCKS_GLOBAL_EXPLAIN' => 'Setting to NO will disable all blocks on all pages. This will override all other block settings.',
 
-	'ANNOUNCE_TYPE'	=> 'Announcement type',
+	'ANNOUNCE_TYPE'			=> 'Announcement type',
 	'ANNOUNCE_TYPE_EXPLAIN'	=> 'Which type of announcements do you want to display?',
 
-	'HEADER_BANNER'		=> 'Header banner',
-	'FOOTER_BANNER'		=> 'Footer Banner',
-	'BOTH_BANNERS'		=> 'Both Header and Footer',
-	'HEADER_IMAGE'		=> 'Display a random Header image in Portal',
-	'HEADER_IMAGE_SW'	=> 'Display a random Header image in all pages (Site Wide)',
-	'NO_BANNERS'		=> 'No Banner',
-	'NO_HEADER'			=> 'No Header Image',
-	'RAND_BANNER' 		=> 'Portal Random Banner',
-	'RAND_HEADER' 		=> 'Portal Random Header Image',
-	'ALLOW_RAND_BANNER' => 'Displays a banner in the site header and/or footer',
+	'HEADER_BANNER'				=> 'Header banner',
+	'FOOTER_BANNER'				=> 'Footer Banner',
+	'BOTH_BANNERS'				=> 'Both Header and Footer',
+	'HEADER_IMAGE'				=> 'Display a random Header image in Portal',
+	'HEADER_IMAGE_SW'			=> 'Display a random Header image in all pages (Site Wide)',
+	'NO_BANNERS'				=> 'No Banner',
+	'NO_HEADER'					=> 'No Header Image',
+	'RAND_BANNER' 				=> 'Portal Random Banner',
+	'RAND_HEADER' 				=> 'Portal Random Header Image',
+	'ALLOW_RAND_BANNER' 		=> 'Displays a banner in the site header and/or footer',
 	'ALLOW_RAND_BANNER_EXPLAIN' => 'You can add a randomly selected banner image to the header and or footer...<br />Images must be placed in the images/rand_banner folder.<br /><b>Note</b>, for a fixed banner just place one image in folder.',
-	'ALLOW_RAND_HEADER' => 'Displays a random header image at top of portal and index page',
+	'ALLOW_RAND_HEADER' 		=> 'Displays a random header image at top of portal and index page',
 	'ALLOW_RAND_HEADER_EXPLAIN' => 'The images width/height can be set in one of the style css file, the tag being random_header_image.<br />Random header images must be placed in the images/rand_header folder.<br />',
 
-	'BLOCK_COOKIES'		=> 'Block Cookies',
-	'USE_COOKIES'		=> 'Use cookies to store block info',
+	'BLOCK_COOKIES'			=> 'Block Cookies',
+	'USE_COOKIES'			=> 'Use cookies to store block info',
 	'USE_COOKIES_EXPLAIN'	=> 'Use cookies to store block location and visibility',
 	'PORTAL_LOGOS'			=> 'Site Logo',
 	'RAND_LOGOS'			=> 'Random Site Logo',
@@ -200,49 +227,49 @@ $lang = array_merge($lang, array(
 
 // Portal Block Names + add your block name language variables here! //
 $lang = array_merge($lang, array(
-	'ACP_SMALL'			=> 'Admin CP',
-	'ANNOUNCEMENTS'		=> 'Announcements',
-	'BIRTHDAY'			=> 'Birthday',
-	'BLOG'				=> 'SGP Integrated Blog',
-	'BOARD_MINI_NAV'	=> 'Sub Nav',
-	'BOARD_STYLE'		=> 'Board Style',
-	'BOARD_NAV'			=> 'Board Navigation',
-	'BOT_TRACKER'		=> 'Bot Tracker',
-	'BOT_TRACKER_SMALL'	=> 'Bot Tracker',
-	'BOOKS' 			=> 'Books',
-	'CALENDAR'			=> 'Calendar',
-	'CHAT'				=> 'Chat',
-	'CLOCK'				=> 'Clock',
-	'DOWNLOADS'			=> 'Downloads',
-	'FM_RADIO'			=> 'FM Radio',
-	'FORUM_CATEGORIES'	=> 'Forum categories',
-	'GALLERY'			=> 'Gallery',
-	'LINKS'             => 'Links',
-	'MAIN_MENU'			=> 'Board Navigation',
-	'MEMBERS'			=> 'Members',
-	'MP3_PLAYER'		=> 'Mp3 player',
-	'NEWS'				=> 'News',
-	'NEWS_REPORT'		=> 'Site News Report',
-	'PORTAL'			=> 'Portal',
-	'PORTAL_STATUS'		=> 'Portal Status',
-	'RECENT_TOPICS'		=> 'Recent Topics',
-	'SELECT_STYLE'		=> 'Select a new style',
-	'SITE_LINK_TXT'		=> 'Link to us',
-	'STAFF'				=> 'Staff',
-	'STATISTICS'		=> 'Statistics',
-	'STATS'		 		=> 'Statistics',
-	'STYLE_STATUS'		=> 'Styles Status',
-	'SUB_MENU'			=> 'Secondary Menu',
-	'TOP_10_PICS'		=> 'Top 10 Rated Pictures',
-	'TOP_DOWNLOADS'		=> 'Top Downloads',
-	'TOP_POSTERS'		=> 'Top Posters',
-	'TOP_REFERRALS'		=> 'Top Referrals',
-	'UNRESOLVED'		=> 'Unresolved',
-	'UCP'				=> 'User CP',
-	'USER_INFO'			=> 'User Information',
-	'WELCOME_SITE'		=> 'Welcome to<br /><strong>%s</strong>',
-	'YOUR_PROFILE'		=> 'User profile',
-	'SWITCHING'			=> 'Switching to SGP config',
+	'ACP_SMALL'					=> 'Admin CP',
+	'ANNOUNCEMENTS'				=> 'Announcements',
+	'BIRTHDAY'					=> 'Birthday',
+	'BLOG'						=> 'SGP Integrated Blog',
+	'BOARD_MINI_NAV'			=> 'Sub Nav',
+	'BOARD_STYLE'				=> 'Board Style',
+	'BOARD_NAV'					=> 'Board Navigation',
+	'BOT_TRACKER'				=> 'Bot Tracker',
+	'BOT_TRACKER_SMALL'			=> 'Bot Tracker',
+	'BOOKS' 					=> 'Books',
+	'CALENDAR'					=> 'Calendar',
+	'CHAT'						=> 'Chat',
+	'CLOCK'						=> 'Clock',
+	'DOWNLOADS'					=> 'Downloads',
+	'FM_RADIO'					=> 'FM Radio',
+	'FORUM_CATEGORIES'			=> 'Forum categories',
+	'GALLERY'					=> 'Gallery',
+	'LINKS'             		=> 'Links',
+	'MAIN_MENU'					=> 'Board Navigation',
+	'MEMBERS'					=> 'Members',
+	'MP3_PLAYER'				=> 'Mp3 player',
+	'NEWS'						=> 'News',
+	'NEWS_REPORT'				=> 'Site News Report',
+	'PORTAL'					=> 'Portal',
+	'PORTAL_STATUS'				=> 'Portal Status',
+	'RECENT_TOPICS'				=> 'Recent Topics',
+	'SELECT_STYLE'				=> 'Select a new style',
+	'SITE_LINK_TXT'				=> 'Link to us',
+	'STAFF'						=> 'Staff',
+	'STATISTICS'				=> 'Statistics',
+	'STATS'		 				=> 'Statistics',
+	'STYLE_STATUS'				=> 'Styles Status',
+	'SUB_MENU'					=> 'Secondary Menu',
+	'TOP_10_PICS'				=> 'Top 10 Rated Pictures',
+	'TOP_DOWNLOADS'				=> 'Top Downloads',
+	'TOP_POSTERS'				=> 'Top Posters',
+	'TOP_REFERRALS'				=> 'Top Referrals',
+	'UNRESOLVED'				=> 'Unresolved',
+	'UCP'						=> 'User CP',
+	'USER_INFO'					=> 'User Information',
+	'WELCOME_SITE'				=> 'Welcome to<br /><strong>%s</strong>',
+	'YOUR_PROFILE'				=> 'User profile',
+	'SWITCHING'					=> 'Switching to SGP config',
 	'LAST_ONLINE'				=> 'List recent online members.',
 	'MAX_LAST_ONLINE'			=> 'Display this many members in list.',
 	'MAX_LAST_ONLINE_EXPLAIN'	=> 'The maximum members to display in online list.',
@@ -258,8 +285,8 @@ $lang = array_merge($lang, array(
 	'REQUIRED_DATA_MISSING'		=> 'Required data is missing...<br />',
 	'UNKNOWN_ERROR'				=> 'Error not processing saved data<br />',
 	'IRC_CHAT'					=> 'IRC Chat',
-	'YOUTUBE_LINK'				=> 'Actual youtube link (URL)',
-	'YOUTUBE_LINK_EXPLAIN'		=> 'Just in case youtube ever change we best provide an alternate',
+	'YOUTUBE_LINK'				=> 'Actual YouTube link (URL)',
+	'YOUTUBE_LINK_EXPLAIN'		=> 'Just in case YouTube ever change we best provide an alternate',
 	'NO_CONFIG_FILE_FOUND'		=> 'No configuration required, or no file available for this module.',
 
 	'BLOCK_CACHE_TIME_RECENT'	=> 'Recent topics cache time',
@@ -269,20 +296,21 @@ $lang = array_merge($lang, array(
 
 
 	'BLOCK_RECENT_CACHE_TIME'			=> 'Set recent topics cache time.',
-	'BLOCK_RECENT_CACHE_TIME_EXPLAIN'	=> 'Currently all blocs except recent opics use the same cache period.',
+	'BLOCK_RECENT_CACHE_TIME_EXPLAIN'	=> 'Default period for recent topics.',
 ));
 
 // Block Names
 $lang = array_merge($lang, array(
-	'ADMIN_OPTIONS'		=> 'Admin Options',
-	'BABEL_FISH'		=> 'Babel Fish',
-	'BUG_TRACKER'		=> 'Bug Tracker',
-	'TRANSLATE_SITE'	=> '<strong>Translate site to...</strong>',
-	'TRANSLATE_RESET'	=> '<strong>Reset to original language</strong>',
+	'ADMIN_OPTIONS'				=> 'Admin Options',
+	'BABEL_FISH'				=> 'Babel Fish',
+	'BUG_TRACKER'				=> 'Bug Tracker',
+	'TRANSLATE_SITE'			=> '<strong>Translate site to...</strong>',
+	'TRANSLATE_RESET'			=> '<strong>Reset to original language</strong>',
 	'ANNOUNCEMENTS_AND_NEWS'	=> 'Announcements and News',
 	'TOP_POSTERS_SETTINGS'		=> 'Top Posters block settings',
 	'TOP_REFERRALS_SETTINGS'	=> 'Top Referrals block settings',
 	'THE_TEAM_SETTINGS'			=> 'Team Members block settings',
+	'THE_TEAM_SETTINGS_2'			=> 'Limit to members',
 ));
 
 // Acronyms
@@ -393,8 +421,8 @@ $lang = array_merge($lang, array(
 	'TEAMSPEAK_PASS'			=> 'Password',
 	'TEAMSPEAK_CONNECT'			=> 'Connection',
 
-	'CLOUD_SEARCH'				=> 'Cloud Search Block',
-	'CLOUD_SEARCH_ALLOW'		=> 'Show Cloud Search Block',
+	'CLOUD_SEARCH'					=> 'Cloud Search Block',
+	'CLOUD_SEARCH_ALLOW'			=> 'Show Cloud Search Block',
 	'CLOUD_SEARCH_CACHE'			=> 'Cache time for this block',
 	'CLOUD_SEARCH_CACHE_EXPLAIN'	=> ' (cache time in seconds).',
 
@@ -420,5 +448,14 @@ $lang = array_merge($lang, array(
 	'SGP_QR'			=> 'Use SGP quick reply',
 	'SGP_QR_EXPLAIN'	=> 'Replace the default quick reply with the portal version',
 ));
+
+// SGP Teams Block 15 March 2011
+$lang = array_merge($lang, array(
+	'BLOCK_VIEW_TEAMS'			=> 'These teams will be displayed',
+	'BLOCK_VIEW_TEAMS_EXPLAIN'	=> '(ID of teams in comma separated list).',
+	'BLOCK_TEAMS'				=> 'Select teams to display in block',
+	'BLOCK_TEAMS_EXPLAIN'		=> 'This dropdown is reusable, each selection will update the list.<br />Selecting <strong>none</strong> will reset the list.',
+));
+
 
 ?>

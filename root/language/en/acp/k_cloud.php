@@ -1,4 +1,16 @@
 <?php
+/**
+*
+* @author Original Author Michael O'Toole@www.stargate-portal.com
+*
+* @package {k_cloud.php}
+* @version $Id:$ 3.2.0
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Stargate Portal copyright agreement...
+* @copyright (c) 2005 phpbireland
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+*
+*/
 
 /**
 * DO NOT CHANGE
@@ -24,13 +36,17 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	'ACP_CLOUD'				=> 'Portal tags.',
 	'ACP_CLOUD_EXPLAIN'		=> 'Here you can add, edit and delete tags. <strong>Note:</strong> Using a font size greater than 16pt is not recommended, also it might be difficult to see light coloured fonts...',
 	
 	'CLOUD_MAX_TAGS'			=> 'Max tags',
-	'CLOUD_MAX_TAGS_EXPLAIN'	=> 'Set Max tags so you don\'t clutter tha block',
+	'CLOUD_MAX_TAGS_EXPLAIN'	=> 'Set Max tags so you don\'t clutter that block',
 
 	'CLOUD_MOVIE'				=> 'Cloud Movie',
 	'CLOUD_MOVIE_RXPLAIN'		=> 'Eack cloud can have its own movie',
@@ -70,14 +86,15 @@ $lang = array_merge($lang, array(
 	'TAG_TEXT'				=> 'Tag Text',
 	'TAG_TEXT_LONG'			=> 'The tag text to display<br />Actual size and colour',
 
-	'CONFIRM_OPERATION_CLOUD' => 'Delete this tag?',
-	'SWITCHING'				=> 'Switching to k_config',
+	'CONFIRM_OPERATION_CLOUD' 	=> 'Delete this tag?',
+	'SWITCHING'					=> 'Switching to k_config',
 
 	'DELETE_TAG_CACHE'		=> 'Delete Tag Cache',
 	'DATA_IS_BEING_SAVED'	=> 'Data is being saved',
 	'SAVING'				=> 'Saving',
 	'ACTION_CANCELLED'		=> 'Action cancelled',
 	'TAG_CREATED'			=> 'Tag created...',
+
 ));
 
 ?>

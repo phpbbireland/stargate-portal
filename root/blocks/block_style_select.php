@@ -121,7 +121,7 @@ $sql = 'SELECT style_name, style_id, style_active
 $result = $db->sql_query($sql, $block_cache_time);
 
 $styles_num = sizeof($db->sql_fetchrowset($result));
-		
+
 if (!$result = $db->sql_query($sql))
 {
 	trigger_error($user->lang['ERROR_PORTAL_STYLE_SELECT'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
@@ -139,7 +139,7 @@ while ($row = $db->sql_fetchrow($result))
 	{
 		$selected = ($style == $row['style_id']) ? " selected=\"selected\"" : "";
 	}
-		
+
 	$class = "\"list_release\"";
 	$row['style_name'] = sgp_checksize ($row['style_name'],16);
 	$select_theme .= "<option class=" . $class . " value=\"" . $row['style_id'] . "\"" . $selected . ">" . $row['style_name'] . "</option>";

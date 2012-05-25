@@ -120,9 +120,9 @@ class acp_k_menus
 						$view_groups = '';
 					}
 
-					if (strstr($menu_icon, $user->lang['NONE']))
+					if (strstr($menu_icon, '..'))
 					{
-						$menu_icon = '_none.gif';
+						$menu_icon = 'default.png';
 					}
 
 					//echo $menu_icon;
@@ -274,7 +274,7 @@ class acp_k_menus
 
 				// get move_to menu data//
 				$sql = "SELECT m_id, ndx, menu_type FROM " . K_MENUS_TABLE . "
-					WHERE ndx =  $temp 
+					WHERE ndx =  $temp
 						AND menu_type = '" . $db->sql_escape($type) . "' LIMIT 1";
 
 				if (!$result = $db->sql_query($sql))
@@ -367,9 +367,9 @@ class acp_k_menus
 						return;
 					}
 
-					if (strstr($menu_icon, $user->lang['NONE']))
+					if (strstr($menu_icon, '..') && !$sub_heading)
 					{
-						$menu_icon = '_none.gif';
+						$menu_icon = 'default.png';
 					}
 
 					$ndx = get_next_ndx($menu_type);
@@ -397,7 +397,7 @@ class acp_k_menus
 						'view_groups'	=> $view_groups,
 
 					);
-					
+
 					$db->sql_query('INSERT INTO ' . K_MENUS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_array));
 
 					$cache->destroy('sql', K_MENUS_TABLE);
@@ -413,7 +413,7 @@ class acp_k_menus
 				{
 					// get all groups and fill array //
 					get_all_groups();
-					get_menu_icons(); 
+					get_menu_icons();
 					$template->assign_var('S_OPTIONS', 'add');
 					break;
 				}
@@ -421,6 +421,7 @@ class acp_k_menus
 			case 'icons':
 			{
 				$dirslist='';
+
 				$i = get_menu_icons();
 				$template->assign_vars(array(
 					'S_OPTIONS' 			=> 'icons',
@@ -470,9 +471,9 @@ function get_menu($this_one)
 		break;
 		case 3:		$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE menu_type = 1 || menu_type = 2 || menu_type = 3 ORDER BY ndx ASC';	// sub menus
 		break;
-		case 90: 	$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' ORDER BY menu_type, ndx ASC'; 
+		case 90: 	$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' ORDER BY menu_type, ndx ASC';
 		break;
-		case 99:	$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE menu_type > 2 ORDER BY ndx, menu_type ASC'; 
+		case 99:	$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE menu_type > 2 ORDER BY ndx, menu_type ASC';
 		break;
 		default: 	$sql = 'SELECT * FROM ' . K_MENUS_TABLE . ' WHERE menu_type=' . $this_one; break;
 	}
@@ -548,9 +549,9 @@ function get_menu_icons()
 {
 	global $phpbb_root_path, $phpEx, $template, $dirslist, $user;
 
-	$dirslist = ''; //$user->lang['NONE'] . '.gif';
+	$dirslist = '.. ';
 
-	$dirs = dir($phpbb_root_path. 'images/block_images/small');
+	$dirs = dir($phpbb_root_path. 'images/block_images/menu');
 
 	while ($file = $dirs->read())
 	{

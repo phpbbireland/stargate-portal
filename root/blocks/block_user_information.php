@@ -35,7 +35,7 @@ foreach ($k_blocks as $blk)
 {
 	if ($blk['html_file_name'] == 'block_user_information.html')
 	{
-		$block_cache_time = $blk['block_cache_time']; 
+		$block_cache_time = $blk['block_cache_time'];
 	}
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
@@ -47,7 +47,7 @@ $avatar_img = ($user->data['user_avatar']) ? sgp_get_user_avatar($user->data['us
 
 $template->assign_vars(array(
 	'AVATAR'				=> ($avatar_img) ? $avatar_img : sgp_get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type']),
-	'WELCOME_SITE'			=> sprintf($user->lang['WELCOME_SITE'], $config['sitename']),	
+	'WELCOME_SITE'			=> sprintf($user->lang['WELCOME_SITE'], $config['sitename']),
 	'USR_RANK_TITLE'		=> $rank_title,
 	'USR_RANK_IMG'			=> $rank_img,
 

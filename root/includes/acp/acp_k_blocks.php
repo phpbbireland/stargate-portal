@@ -36,6 +36,8 @@ class acp_k_blocks
 		global $db, $user, $auth, $template, $cache;
 		global $config, $k_config, $phpbb_root_path, $phpbb_admin_path, $phpEx, $SID;
 
+		include($phpbb_root_path . 'includes/sgp_functions_admin.'.$phpEx);
+
 		// Define Switches for html file //
 
 		$user->add_lang('acp/k_blocks');
@@ -211,7 +213,7 @@ class acp_k_blocks
 			{
 				if ($submit)
 				{
-					if (request_var('html_file_name','') == "" OR request_var('title','') == "")
+					if (request_var('html_file_name','') == "" OR request_var('title', '') == "")
 					{
 						$message = $user->lang['MISSING_BLOCK_DATA'];
 
@@ -247,7 +249,7 @@ class acp_k_blocks
 					}
 					if ($img_file_name == '')
 					{
-						$img_file_name = '_none.gif';
+						$img_file_name = 'default.gif';
 					}
 					if ($has_vars == 0)
 					{
@@ -330,7 +332,7 @@ class acp_k_blocks
 						}
 					}
 
-					$dirslist = $user->lang['NONE'];
+					$dirslist = '';
 
 					$dirs = dir($phpbb_root_path . 'styles/_portal_common/template/blocks');
 
@@ -355,9 +357,9 @@ class acp_k_blocks
 						}
 					}
 
-					$dirslist = $user->lang['NONE'];
+					$dirslist = '.. ';
 
-					$dirs = dir($phpbb_root_path . 'images/block_images/small');
+					$dirs = dir($phpbb_root_path . 'images/block_images/block');
 
 					while ($file = $dirs->read())
 					{
@@ -452,7 +454,7 @@ class acp_k_blocks
 
 					if ($img_file_name == '')
 					{
-						$img_file_name = '_none.gif';
+						$img_file_name = 'default.gif';
 					}
 					if ($has_vars == 0)
 					{
@@ -474,25 +476,25 @@ class acp_k_blocks
 
 					// change to build array later
 					$sql = "UPDATE " . K_BLOCKS_TABLE . "
-					SET
-						ndx					= '" . (int)$ndx. "',
-						active				= '" . (int)$active . "',
-						title				= '" . $db->sql_escape($title) . "',
-						position			= '" . $db->sql_escape($position) . "',
-						type				= '" . $db->sql_escape($type) . "',
-						html_file_name		= '" . $db->sql_escape($html_file_name) . "',
-						var_file_name		= '" . $db->sql_escape($var_file_name) . "',
-						img_file_name		= '" . $db->sql_escape($img_file_name) . "',
-						view_groups			= '" . $db->sql_escape($view_groups) . "',
-						view_pages			= '" . $db->sql_escape($view_pages) . "',
-						view_by				= '" . $db->sql_escape($view_by) . "',
-						view_all			= '" . (int)$view_all . "',
-						scroll				= '" . (int)$scroll . "',
-						has_vars			= '" . (int)$has_vars . "',
-						minimod_based		= '" . (int)$minimod_based . "',
-						mod_block_id		= '" . (int)$mod_block_id . "',
-						block_cache_time	= '" . (int)$block_cache_time . "'
-				 	WHERE id = '$id'";
+						SET
+							ndx					= '" . (int)$ndx. "',
+							active				= '" . (int)$active . "',
+							title				= '" . $db->sql_escape($title) . "',
+							position			= '" . $db->sql_escape($position) . "',
+							type				= '" . $db->sql_escape($type) . "',
+							html_file_name		= '" . $db->sql_escape($html_file_name) . "',
+							var_file_name		= '" . $db->sql_escape($var_file_name) . "',
+							img_file_name		= '" . $db->sql_escape($img_file_name) . "',
+							view_groups			= '" . $db->sql_escape($view_groups) . "',
+							view_pages			= '" . $db->sql_escape($view_pages) . "',
+							view_by				= '" . $db->sql_escape($view_by) . "',
+							view_all			= '" . (int)$view_all . "',
+							scroll				= '" . (int)$scroll . "',
+							has_vars			= '" . (int)$has_vars . "',
+							minimod_based		= '" . (int)$minimod_based . "',
+							mod_block_id		= '" . (int)$mod_block_id . "',
+							block_cache_time	= '" . (int)$block_cache_time . "'
+							WHERE id = '$id'";
 
 					if (!$result = $db->sql_query($sql))
 					{
@@ -520,7 +522,7 @@ class acp_k_blocks
 
 				// get all available html files, note.. we search the admin styles folder //
 
-				$dirslist = $user->lang['NONE'];
+				$dirslist = '.. ';
 
 				$dirs = dir($phpbb_root_path . 'styles/_portal_common/template/blocks');
 
@@ -546,9 +548,9 @@ class acp_k_blocks
 
 				// get all available block images //
 
-				$dirslist = $user->lang['NONE'];
+				$dirslist = '.. ';
 
-				$dirs = dir($phpbb_root_path . 'images/block_images/small');
+				$dirs = dir($phpbb_root_path . 'images/block_images/block');
 
 				while ($file = $dirs->read())
 				{
@@ -587,7 +589,7 @@ class acp_k_blocks
 
 				if ($row['img_file_name'] == '')
 				{
-					$row['img_file_name'] = '_none.gif';
+					$row['img_file_name'] = 'default.gif';
 				}
 
 				$template->assign_vars(array(
@@ -780,7 +782,7 @@ class acp_k_blocks
 					{
 						if ($row['img_file_name'] == '')
 						{
-							$row['img_file_name'] = '_none.gif';
+							$row['img_file_name'] = 'default.gif';
 						}
 
 						if ($mode == 'manage')
@@ -901,6 +903,7 @@ function resync_ndx_on_delete($id)
 	// should not be required...
 }
 
+/*
 function get_all_groups()
 {
 	global $db, $template, $user;
@@ -931,6 +934,7 @@ function get_all_groups()
 	}
 	$db->sql_freeresult($result);
 }
+*/
 
 /**
 * Takes the $id of a given block
@@ -998,11 +1002,9 @@ function which_group($id)
 
 	$db->sql_freeresult($result);
 
-	//$name = mb_convert_case($name, MB_CASE_TITLE, "UTF-8");
-
 	if ($name == '')
 	{
-		return($user->lang['NONE']);
+		return('.. ');
 	}
 	else
 	{
@@ -1039,7 +1041,7 @@ function get_all_vars_files($block)
 {
 	global $template, $user, $phpbb_admin_path;
 
-	$dirslist = $user->lang['NONE'];
+	$dirslist = '.. ';
 
 	$dirs = dir($phpbb_admin_path . '/style/k_block_vars');
 

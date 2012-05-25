@@ -1,4 +1,16 @@
 <?php
+/**
+*
+* @author Original Author Michael O'Toole@www.stargate-portal.com
+*
+* @package {PACKAGENAME}
+* @version $Id:$ 3.2.0
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Stargate Portal copyright agreement...
+* @copyright (c) 2005 phpbireland
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+*
+*/
 
 /**
 * DO NOT CHANGE
@@ -24,6 +36,10 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	'ACP_PAGES'				=> 'Current phpBB pages.',
@@ -52,6 +68,7 @@ $lang = array_merge($lang, array(
 	'MANAGE_PAGES'			=> 'Manage pages',
 	'ADDING_PAGES'			=> 'Adding phpBB Page...',
 	'REMOVING_PAGES'		=> 'Removing phpBB page...',
+
 ));
 
 ?>

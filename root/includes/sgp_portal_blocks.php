@@ -98,13 +98,7 @@ else
 // Process block positions for members //
 if($row['username'] != 'Anonymous')
 {
-	/*
-		$sql = 'UPDATE ' . USERS_TABLE . '
-			SET user_left_blocks = ' . "''" . ', user_center_blocks = ' . "''" . ', user_right_blocks = ' . "''" . '
-			WHERE user_id = ' . $user->data['user_id'];
-		$db->sql_query($sql);
-	*/
-
+	// Do we naeed to change the layout in user table (only if cookies are set)
 	if (isset($_COOKIE[$config['cookie_name'] . '_sgp_left']) || isset($_COOKIE[$config['cookie_name'] . '_sgp_center']) || isset($_COOKIE[$config['cookie_name'] . '_sgp_right']) && $use_block_cookies)
 	{
 		$left = request_var($config['cookie_name'] . '_sgp_left', '', false, true);
@@ -156,7 +150,7 @@ if($row['username'] != 'Anonymous')
 			WHERE active = 1
 				AND (view_by != 0 OR view_all = 1)
 				AND (view_pages != 0)
-				ORDER BY ndx ASC';
+					ORDER BY ndx ASC';
 	}
 	else
 	{
@@ -173,8 +167,9 @@ else
 	$sql = 'SELECT *
 		FROM ' . K_BLOCKS_TABLE . '
 		WHERE active = 1
+			AND (view_by != 0 OR view_all = 1)
 			AND (view_pages != 0)
-			AND (view_by != 0 OR view_all = 1)';
+				ORDER BY ndx ASC';
 }
 
 $result = $db->sql_query($sql, $block_cache_time);
@@ -188,13 +183,27 @@ while ($row = $db->sql_fetchrow($result))
 // process phpbb common data //
 include($phpbb_root_path . 'blocks/block_build' . '.' . $phpEx);
 
+$this_page_name = $this_page[0];
+
+$troubleshooting = true;
+$osl = array();
+$isl = array();
+
 foreach ($active_blocks as $active_block)
 {
 	$filename = substr($active_block['html_file_name'], 0, strpos($active_block['html_file_name'], '.'));
 
+	if($troubleshooting)
+	{
+		$osl[] = $filename;
+	}
+
 	if (file_exists($phpbb_root_path . 'blocks/' . $filename . '.' . $phpEx))
 	{
-		$this_page_name = $this_page[0];
+		if($troubleshooting)
+		{
+			$isl[] = $filename;
+		}
 
 		if (!$k_config['display_blocks_global'])
 		{
@@ -208,14 +217,18 @@ foreach ($active_blocks as $active_block)
 			include($phpbb_root_path . 'blocks/' . $filename . '.' . $phpEx);
 		}
 	}
+	else
+	{
+		if($troubleshooting)
+		{
+			$isl[] = '<span style="color:#ff0000;">None...</span>';
+		}
+	}
 }
 $db->sql_freeresult($result);
 
-//get_all_groups();
-
 $memberships = array();
 $memberships = sgp_group_memberships(false, $user->data['user_id'], false);
-
 
 // Main processing of block data here //
 
@@ -353,7 +366,7 @@ if (isset($left_block_ary) && $show_left)
 			'LEFT_BLOCK_TITLE'		=> $left_block_title[$block],
 			'LEFT_BLOCK_SCROLL'		=> $left_block_scroll[$block],
 			'LEFT_BLOCK_HEIGHT'		=> $left_block_height[$block],
-			'LEFT_BLOCK_IMG'		=> ($left_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $left_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/none.gif" height="1px" width="1px" alt="" >',
+			'LEFT_BLOCK_IMG'		=> ($left_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/block/' . $left_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/block/none.gif" height="1px" width="1px" alt="" >',
 			'LEFT_BLOCK_IMG_2'		=> (file_exists($big_image_path . $left_block_img[$block])) ? '<img src="' . $big_image_path  . $left_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/large/none.png" alt="" >',
 			'S_CONTENT_FLOW_BEGIN'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
 			'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
@@ -371,7 +384,7 @@ if (isset($right_block_ary) && $show_right)
 			'RIGHT_BLOCK_TITLE'		=> $right_block_title[$block],
 			'RIGHT_BLOCK_SCROLL'	=> $right_block_scroll[$block],
 			'RIGHT_BLOCK_HEIGHT'	=> $right_block_height[$block],
-			'RIGHT_BLOCK_IMG'		=> ($right_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $right_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/none.gif" height="1px" width="1px" alt="" >',
+			'RIGHT_BLOCK_IMG'		=> ($right_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/block/' . $right_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/block/none.gif" height="1px" width="1px" alt="" >',
 			'RIGHT_BLOCK_IMG_2'		=> (file_exists($big_image_path . $right_block_img[$block])) ? '<img src="' . $big_image_path  . $right_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/large/none.png" alt="" >',
 
 			'S_CONTENT_FLOW_BEGIN'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
@@ -410,7 +423,7 @@ if (isset($center_block_ary) && $show_center)
 			'CENTER_BLOCK_TITLE'	=> $center_block_title[$block],
 			'CENTER_BLOCK_SCROLL'	=> $center_block_scroll[$block],
 			'CENTER_BLOCK_HEIGHT'	=> $center_block_height[$block],
-			'CENTER_BLOCK_IMG'		=> ($center_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/small/' . $center_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/small/none.gif" height="1px" width="1px" alt="" >',
+			'CENTER_BLOCK_IMG'		=> ($center_block_img[$block]) ? '<img src="' . $phpbb_root_path . 'images/block_images/block/' . $center_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/block/none.gif" height="1px" width="1px" alt="" >',
 			'CENTER_BLOCK_IMG_2'	=> (file_exists($big_image_path . $center_block_img[$block])) ? '<img src="' . $big_image_path  . $center_block_img[$block] . '" alt="" />' : '<img src="' . $phpbb_root_path . 'images/block_images/large/none.png" alt="" >',
 
 			'S_CONTENT_FLOW_BEGIN'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
@@ -421,7 +434,7 @@ if (isset($center_block_ary) && $show_center)
 
 $template->assign_vars(array(
 	'AVATAR'			=> sgp_get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], $user->data['user_avatar_width'], $user->data['user_avatar_height']),
-	'BLOCK_WIDTH'	   => $blocks_width . 'px',
+	'BLOCK_WIDTH'		=> $blocks_width . 'px',
 
 	'PORTAL_ACTIVE'		=> $config['portal_enabled'],
 	'PORTAL_VERSION'	=> $config['portal_version'],
@@ -495,8 +508,20 @@ if ($this_page[0] == 'viewtopic')
 		'S_USER_LOGGED_IN'		=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
 		'S_K_SHOW_SMILES'		=> $k_config['k_show_smilies'],
 		'QUOTE_IMG' 			=> $user->img('icon_post_quote', 'REPLY_WITH_QUOTE'),
-		)
-	);
+	));
 }
 
+
+foreach ($isl as $file)
+{
+	$template->assign_block_vars('isl', array(
+		'ISLFILE'	=> $file,
+	));
+}
+foreach ($osl as $file)
+{
+	$template->assign_block_vars('osl', array(
+		'OSLFILE'	=> $file,
+	));
+}
 ?>

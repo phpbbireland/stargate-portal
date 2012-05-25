@@ -1,362 +1,160 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
-<!--For security purposes, please check: http
-://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/
-@version $Id: stargate_041.xml 315 2009-01-10 05:43:06Z michaelo $ -->
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
-<header>
-<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+	<header>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[Stargate Portal (aka Kiss Portal)]]></title>
+		<description lang="en"><![CDATA[An advanced, fully integrated, portal for phpBB 3.0.9]]></description>
+		<author-notes lang="en"><![CDATA[Stargate Portal (aka Kiss Portal) is an advanced, fully integrated, portal for phpBB3. 
+		The portal is packed with a host of features all of which are configurable via portal tab in the ACP.
 
-<title lang="en">Stargate Portal (aka Kiss Portal)</title>
+		Editing your site files:
+		The installation is designed for use with AutoMod, it will modify all files automatically saving you a lot of time...
+		After completing the edits, point your browser to your_site/portal and follow instructions to add the database entries...
+		Remember to delete or rename the portal folder after installing the database entries...
 
-	<description lang="en">An advanced, fully integrated, portal for phpBB 3.0.8</description>
+		Features:
+		For a complete list see: http://www.stargate-portal.com/forum/web_pages.php?mode=features (Available end of December 2010)
 
-<author-notes lang="en">
-	Stargate Portal (aka Kiss Portal) is an advanced, fully integrated, portal for phpBB3. 
-	The portal is packed with a host of features all of which are configurable via portal tab in the ACP.
+		Style Support:
+		A substantial number of the more popular styles have already been updated to support the Stargate Portal, should your favorite style require updating please contact stargate-portal.com and request a port...
 
-	Editing your site files:
-	The installation is designed for use with AutoMod, it will modify all files automatically saving you a lot of time...
-	After completing the edits, point your browser to your_site/portal and follow instructions to add the database entries...
-	Remember to delete or rename the portal folder after installing the database entries...
+		Additional copyright information:
+		Please read the license agreement: portal/license.txt
+		The portal copyright must be maintained in all page footers... Should you choose to remove this copyright notice, do not expect support as none will be given...
 
-	Features:
-			For a complete list see: http://www.stargate-portal.com/forum/web_pages.php?mode=features (Available end of December 2010)
+		Many thanks to everyone who supported the portal and a special thanks to the development team: JohnnyTheOne, livewirestu, NeXur, HelterSkelter and Mitch and Tyler...
 
-	Style Support:
-	A substantial number of the more popular styles have already been updated to support the Stargate Portal, should your favorite style require updating please contact stargate-portal.com and request a port...
-
-	Additional copyright information:
-	Please read the license agreement: portal/license.txt
-	The portal copyright must be maintained in all page footers... Should you choose to remove this copyright notice, do not expect support as none will be given...
-
-	Many thanks to everyone who supported the portal and a special thanks to the development team: JohnnyTheOne, livewirestu, NeXur, HelterSkelter and Mitch...
-
-	Please note the change log does not include non public (development) releases... See site for more information.
-</author-notes>
-
-	<author-group>
-		<author>
-			<realname>Michael O'Toole</realname>
-			<homepage>http://www.stargate-portal.com/</homepage>
-			<email>o2l@eircom.net</email>
-		</author>
-	</author-group>
-
-<mod-version>3.2.0</mod-version>
-	<installation>
-	<level>intermediate</level>
-	<time>2503</time>
-	<target-version>3.0.8</target-version>
-	</installation>
-	<history>
-		<entry>
-			<date>2005-06-06</date>
+		Please note the change log does not include non public (development) releases... See site for more information.]]></author-notes>
+		<author-group>
+			<author>
+				<realname><![CDATA[Michael O'Toole]]></realname>
+				<username><![CDATA[michaelo]]></username>
+				<homepage><![CDATA[http://www.stargate-portal.com/]]></homepage>
+				<email><![CDATA[o2l@eircom.net]]></email>
+			</author>
+		</author-group>
+		<mod-version>3.2.1</mod-version>
+		<installation>
+			<level>intermediate</level>
+			<time>2460</time>
+			<target-version>3.0.10</target-version>
+		</installation>
+		<history>
+			<entry>
+				<date>2011-02-22</date>
+				<rev-version>3.2.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Please note, development release are not identified here.]]></change>
+					<change><![CDATA[Change the name of the portal common folder (just added a leading underscore).]]></change>
+					<change><![CDATA[The centre blocks corrected if style is not prosilver standard layout.]]></change>
+					<change><![CDATA[Updated get group id, data is now cached for speed and reduced sql queries.]]></change>
+					<change><![CDATA[For detailed information see: http://www.stargate-portal.com/forum/viewforum.php?f=10]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-09-30</date>
+				<rev-version>3.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Covering 2.0.4 to 3.0.9.]]></change>
+					<change><![CDATA[Mod validation fixes...]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-08-17</date>
+				<rev-version>2.0.4</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Mod validation report (first draft) fixes.]]></change>
+					<change><![CDATA[Lots of corrections as per coding guidelines...]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-03-17</date>
+				<rev-version>2.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Updated to support common file sharing mod...]]></change>
+					<change><![CDATA[Removed pips images.]]></change>
+					<change><![CDATA[Moved bbcode images to images folder.]]></change>
+					<change><![CDATA[Portal html files identical for subsilver and prosilver based styles.]]></change>
+					<change><![CDATA[Arrange blocks and move/hide 100% working all browsers.]]></change>
+					<change><![CDATA[portal.css file now loaded via functions.php.]]></change>
+					<change><![CDATA[Portal Poll and Newsfeeds mods installed automatically.]]></change>
+					<change><![CDATA[New 3.0.6/7 Quick Reply extras.]]></change>
+					<change><![CDATA[Post can be designated as Local News or Global News.]]></change>
+					<change><![CDATA[Standardised for css fix files (Opera/Mac/IE)]]></change>
+					<change><![CDATA[Removed the size css files, all work is carried out in the portal header file]]></change>
+					<change><![CDATA[Left and right layout files loaded via overall_header and overall_footer]]></change>
+					<change><![CDATA[New UMIL based installation]]></change>
+					<change><![CDATA[AutoMod Supported]]></change>
+					<change><![CDATA[Removed Portal definitions form config.php]]></change>
+					<change><![CDATA[Portal can now be enabled/disabled via APC]]></change>
+					<change><![CDATA[Block visibility can be set to one or more groups...]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2008-06-06</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Released for testing only...]]></change>
+					<change><![CDATA[Several additional blocks.]]></change>
+					<change><![CDATA[Introduced additional ACP control.]]></change>
+					<change><![CDATA[Added Mini-modules...]]></change>
+					<change><![CDATA[Added portal youtube mod...]]></change>
+					<change><![CDATA[Added web pages...]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2005-06-06</date>
 				<rev-version>0.0.1</rev-version>
-			<changelog lang="en">
-				<change>Original name: KISS Portal</change>
-				<change>Not released to public (testing only)...</change>
-				<change>Contained a handful of blocks and ACP controls.</change>
-			</changelog>
-		</entry>
-		<entry>
-		<date>2008-06-06</date>
-		<rev-version>1.0.0</rev-version>
-			<changelog lang="en">
-			<change>Released for testing only...</change>
-			<change>Several additional blocks.</change>
-			<change>Introduced additional ACP control.</change>
-			<change>Added Mini-modules...</change>
-			<change>Added portal youtube mod...</change>
-			<change>Added web pages...</change>
-			</changelog>
-		</entry>
-		<entry>
-			<date>2010-03-17</date>
-			<rev-version>2.0.0</rev-version>
-        <changelog lang="en">
-        <change>Updated to support common file sharing mod... </change>
-        <change>Removed pips images.</change>
-		<change>Moved bbcode images to images folder.</change>
-        <change>Portal html files identical for subsilver and prosilver based styles.</change>
-        <change>Arrange blocks and move/hide 100% working all browsers.</change>
-        <change>portal.css file now loaded via functions.php.</change>
-        <change>Portal Poll and Newsfeeds mods installed automatically. </change>
-        <change>New 3.0.6/7 Quick Reply extras.</change>
-        <change>Post can be designated as Local News or Global News.</change>
-		<change>Standardised for css fix files (Opera/Mac/IE)</change>
-		<change>Removed the size css files, all work is carried out in the portal header file</change>
-		<change>Left and right layout files loaded via overall_header and overall_footer</change>
-		<change>New UMIL based installation</change>
-		<change>AutoMod Supported</change>
-		<change>Removed Portal definitions form config.php</change>
-		<change>Portal can now be enabled/disabled via APC</change>
-		<change>Block visibility can be set to one or more groups...</change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2010-08-17</date>
-		<rev-version>2.0.4</rev-version>
-        <changelog lang="en">
-		  <change>Mod validation report (first draft) fixes.</change>
-          <change>Lots of corrections as per coding guidelines...</change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2010-09-30</date>
-		<rev-version>3.0.0</rev-version>
-        <changelog lang="en">
-		  <change>Covering 2.0.4 to 3.0.9.</change>
-		  <change>Mod validation fixes... </change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2011-02-22</date>
-		<rev-version>3.2.0</rev-version>
-        <changelog lang="en">
-			<change>Please note, development release are not identified here.</change>
-			<change>Change the name of the portal common folder (just added a leading underscore).</change>
-			<change>The centre blocks corrected if style is not prosilver standard layout.</change>
-			<change>Updated get group id, data is now cached for speed and reduced sql queries.</change>
-			<change>For detailed information see: http://www.stargate-portal.com/forum/viewforum.php?f=10</change>
-        </changelog>
-      </entry>
-    </history>
-	<link-group>
-		<link type="template" href="subsilver2.xml" lang="en">subsilver2</link>
-	</link-group>
-    <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
-  </header>
-
-<action-group>
-<copy>
-      <file from="root/basic_rules.php" to="basic_rules.php" />
-      <file from="root/inprogress.php" to="inprogress.php" />
-      <file from="root/portal.php" to="portal.php" />
-      <file from="root/portal_page.php" to="portal_page.php" />
-      <file from="root/sgp_refresh.php" to="sgp_refresh.php" />
-      <file from="root/web_page.php" to="web_page.php" />
-      <file from="root/web_page_utube.php" to="web_page_utube.php" />
-      <file from="root/favicon.ico" to="favicon.ico" />
-
-      <file from="root/adm/swatch2.php" to="adm/swatch2.php" />
-      <file from="root/adm/images/vars_edit.gif" to="adm/images/vars_edit.gif" />
-      <file from="root/adm/images/*.*" to="adm/images/*.*" />
-      <file from="root/adm/style/*.*" to="adm/style/*.*" />
-
-      <file from="root/blocks/*.*" to="blocks/*.*" />
-      <file from="root/images/*.*" to="images/*.*" />
-      <file from="root/includes/*.*" to="includes/*.*" />
-      <file from="root/language/*.*" to="language/*.*" />
-      <file from="root/mp3/*.*" to="mp3/*.*" />
-      <file from="root/portal/*.*" to="portal/*.*" />
-      <file from="root/js/*.*" to="js/*.*" />
-
-	  <file from="root/umil/*.*" to="umil/*.*" />
-
-      <file from="root/styles/_portal_common/*.*" to="styles/_portal_common/*.*" />
-      <file from="root/styles/prosilver/imageset/*.*" to="styles/prosilver/imageset/*.*" />
-      <file from="root/styles/prosilver/imageset/en/*.*" to="styles/prosilver/imageset/en/*.*" />
-      <file from="root/styles/prosilver/template/*.*" to="styles/prosilver/template/*.*" />
-      <file from="root/styles/prosilver/template/blocks/*.*" to="styles/prosilver/template/blocks/*.*" />
-      <file from="root/styles/prosilver/theme/*.*" to="styles/prosilver/theme/*.*" />
-      <file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*" />
-
-</copy>
-
-<open src="adm/index.php">
-<edit>
-
-<find><![CDATA[		'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
-	));]]></find>
-<action type="after-add"><![CDATA[	// Stargate Portal
-	if (STARGATE)
-	{
-		$template->assign_vars(array(
-			'STARGATE'		=> true,
-			'U_PORTAL'		=> append_sid("{$phpbb_root_path}portal.$phpEx")
-			));
-	}
-	// Stargate Portal
-]]></action>
-</edit>
-</open>
-
-<open src="adm/style/acp_forums.html">
-<edit>
-
-<find><![CDATA[<!-- INCLUDE overall_header.html -->]]></find>
-<action type="after-add"><![CDATA[<!-- Start: Edit #1 : Small mod to show all available icon images in images/forum_images directory, copyright 2007 phpbbireland.com Mike -->
-<script>
-function set_image(data)
-{
-	var path = 'images/forum_icons/' + data;
-	document.getElementById('forum_image').value=path;
-}
-
-function ShowHide(id1, id2, id3)
-{
-	var onoff = expMenu(id1);
-	if (id2 != '') expMenu(id2);
-	if (id3 != '') SetCookie(id3, onoff, expire);
-}
-
-function expMenu(id)
-{
-	var element = null;
-	if (document.getElementById)
-	{
-		element = document.getElementById(id);
-	}
-	else if (document.all)
-	{
-		element = document.all[id];
-	}
-	else if (document.layers)
-	{
-		element = document.layers[id];
-	}
-
-	if (!element)
-	{
-		// do nothing
-	}
-	else if (element.style)
-	{
-		if (element.style.display == "none")
-		{
-			element.style.display = "";
-			return 1;
-		}
-		else
-		{
-			element.style.display = "none";
-			return 2;
-		}
-	}
-	else
-	{
-		element.visibility = "show";
-		return 1;
-	}
-}
-</script>
-<!-- END: Edit #1 -->]]></action>
-</edit>
-
-<edit>
-<find><![CDATA[		<!-- IF FORUM_IMAGE_SRC -->
-			<dd><img src="{FORUM_IMAGE_SRC}" alt="{L_FORUM_IMAGE}" /></dd>
-		<!-- ENDIF -->
-	</dl>]]></find>
-<action type="after-add"><![CDATA[	<!-- Start: Edit #2 -->
-	<div style="position:absolute; top:0; right:0; width:0px; visibility: hidden"><input id="namex" type="text"><input id="pw" type="password"></div>
-	<dl>
-		<dt><label for="forum_images">{L_AVAILABLE_FORUM_IMAGE}:</label><br /><span>{L_AVAILABLE_FORUM_IMAGE_EXPLAIN}</span></dt>
-
-		<div style="display:" id="show">
-			<div class="k_show_images_yes-icon">
-				&nbsp;<a href="#" onclick="ShowHide('side'); ShowHide('hide'); ShowHide('show'); return(false);"><span>{L_SHOW_FORUM_IMAGES}</span></a>
-			</div>
-		</div>
-		<div style="display:none" id="hide">
-			<div class="k_show_images_no-icon">
-				&nbsp;<a href="#" onclick="ShowHide('side'); ShowHide('show'); ShowHide('hide'); return(false);"><span>{L_SHOW_FORUM_IMAGES}</span></a>
-			</div>
-		</div>
-		<div align="left" style="display: none;" id="side">
-			<span class="imageline"><br /><br /><br />
-			<!-- BEGIN forum_img_file_name -->
-				<!-- IF forum_img_file_name.FORUM_IMAGE_OPT -->
-					<!--<img src='{FORUM_IMAGE_SRC_PATH}{forum_img_file_name.FORUM_IMAGE_OPT}' title="{FORUM_IMAGE_PATH}{forum_img_file_name.FORUM_IMAGE_OPT}">-->
-					<a href="#" onclick="set_image('{forum_img_file_name.FORUM_IMAGE_OPT}', true, true); return false;"><img src='{FORUM_IMAGE_SRC_PATH}{forum_img_file_name.FORUM_IMAGE_OPT}' title="{FORUM_IMAGE_PATH}{forum_img_file_name.FORUM_IMAGE_OPT}"></a>
-				<!-- ENDIF -->
-			<!-- END forum_img_file_name -->
-			<br /><br /><br />
-			</span>
-		</div>
-	</dl>
-	<!-- END: Edit #2 -->]]></action>
-</edit>
-</open>
-
-<open src="adm/style/admin.css">
-<edit>
-<find>.phpinfo td, .phpinfo th, .phpinfo h2, .phpinfo h1 {
-	text-align: left;
-}</find>
-<action type="after-add"><![CDATA[
-/* Added by Stargate Portal
----------------------------------------- */
-.imageline { width:auto; height:auto; border:none; float:left; padding-top: 5px;}
-.row5 { background-color: #F9EDBD; }
-.row6 { background-color: #E8DFC0; }
-
-
-/* Additional reply bbcode for sgp simple editor ...
--------------------------------------------------- */
-.bbb-bold, .bbb-bold a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-bold.gif"); width:22px; height:22px; }
-.bbb-bold:hover{ background-position: 0px -23px;}.bbb-quote,
-.bbb-italic, .bbb-italic a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-italic.gif");width:22px; height:22px;}
-.bbb-italic:hover{ background-position: 0px -23px;}.bbb-quote, 
-.bbb-quote a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-quote.gif"); width:22px; height:22px;}
-.bbb-quote:hover{ background-position: 0px -23px;}.bbb-code, 
-.bbb-code a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-code.gif");width:22px; height:22px;}
-.bbb-code:hover{ background-position: 0px -23px;}.bbb-list, 
-.bbb-list a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-list.gif");width:22px; height:22px;}
-.bbb-list:hover{ background-position: 0px -23px;}.bbb-flash, 
-.bbb-flash a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-flash.gif"); width:22px; height:22px;}
-.bbb-flash:hover{ background-position: 0px -23px;}.bbb-image, 
-.bbb-image a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-image.gif"); width:22px; height:22px;}
-.bbb-image:hover{ background-position: 0px -23px;}
-.bbb-url, .bbb-url a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-url.gif"); width:22px; height:22px;}
-.bbb-url:hover{ background-position: 0px -23px;}
-.bbb-under_line, .bbb-under_line a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-under_line.gif");width:22px; height:22px;}
-.bbb-under_line:hover{ background-position: 0px -23px;}
-.bbb-align_center, .bbb-align_center a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-align_center.gif");width:22px; height:22px;}
-.bbb-align_center:hover{ background-position: 0px -23px;}
-.bbb-align_left, .bbb-align_left a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-align_left.gif");width:22px; height:22px;}
-.bbb-align_left:hover{ background-position: 0px -23px;}
-.bbb-align_right, .bbb-align_right a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-align_right.gif");width:22px; height:22px;}
-.bbb-align_right:hover { background-position: 0px -23px;}
-.bbb-ordered_list, .bbb-ordered_list a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-ordered_list.gif");width:22px; height:22px;}
-.bbb-ordered_list:hover{ background-position: 0px -23px;}
-.bbb-add_list_item, .bbb-add_list_item a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-add_list_item.gif"); width:22px; height:22px;}
-.bbb-add_list_item:hover { background-position: 0px -23px;}
-.bbb-note, .bbb-note a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-note.gif");width:22px; height:22px;}
-.bbb-note:hover { background-position: 0px -23px;}
-.bbb-spoiler, .bbb-spoiler a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-spoiler.gif"); width:22px; height:22px;}
-.bbb-spoiler:hover{ background-position: 0px -23px;}
-.bbb-tab, .bbb-tab a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-tab.gif"); width:22px; height:22px;}
-.bbb-tab:hover{ background-position: 0px -23px;}
-.bbb-sup, .bbb-sup a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-sup.gif"); width:22px; height:22px;}
-.bbb-sup:hover{ background-position: 0px -23px;}
-.bbb-sub, .bbb-sub a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-sub.gif"); width:22px; height:22px;}
-.bbb-sub:hover{ background-position: 0px -23px;}
-.bbb-strike, .bbb-strike a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-strike.gif");width:22px; height:22px;}
-.bbb-strike:hover { background-position: 0px -23px;}
-.bbb-link, .bbb-link a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-link.gif");width:22px; height:22px;}
-.bbb-link:hover { background-position: 0px -23px;}
-.rollover, .rollover a { display: inline; float:left; } .rollover a:hover { background-position: 0 -23px; }
-.bbb-icon-spacer {background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-spacer.gif"); width:3px; height:22px;}
-button {border: solid 3px;}]]></action>
-</edit>
-</open>
-
-<open src="adm/style/overall_header.html">
-<edit>
-<find><![CDATA[		<p><a href="{U_ADM_INDEX}">{L_ADMIN_INDEX}</a> &bull; <a href="{U_INDEX}">{L_FORUM_INDEX}</a></p>]]></find>
-<action type="replace-with"><![CDATA[		<p><a href="{U_ADM_INDEX}">{L_ADMIN_INDEX}</a> &bull; <a href="{U_INDEX}">{L_FORUM_INDEX}</a><!-- IF STARGATE --> &bull; <a href="{U_PORTAL}">{L_PORTAL}</a><!-- ENDIF --></p>]]></action>
-</edit>
-</open>
-
-<open src="common.php">
-<edit>
-<find><![CDATA[// Grab global variables, re-cache if necessary
+				<changelog lang="en">
+					<change><![CDATA[Original name: KISS Portal]]></change>
+					<change><![CDATA[Not released to public (testing only)...]]></change>
+					<change><![CDATA[Contained a handful of blocks and ACP controls.]]></change>
+				</changelog>
+			</entry>
+		</history>
+		<link-group>
+			<link type="template" href="subsilver2.xml" lang="en">subsilver2</link>
+		</link-group>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/basic_rules.php" to="basic_rules.php"/>
+			<file from="root/inprogress.php" to="inprogress.php"/>
+			<file from="root/portal.php" to="portal.php"/>
+			<file from="root/portal_page.php" to="portal_page.php"/>
+			<file from="root/sgp_refresh.php" to="sgp_refresh.php"/>
+			<file from="root/web_page.php" to="web_page.php"/>
+			<file from="root/web_page_utube.php" to="web_page_utube.php"/>
+			<file from="root/favicon.ico" to="favicon.ico"/>
+			<file from="root/adm/swatch2.php" to="adm/swatch2.php"/>
+			<file from="root/adm/images/vars_edit.gif" to="adm/images/vars_edit.gif"/>
+			<file from="root/adm/images/*.*" to="adm/images/*.*"/>
+			<file from="root/adm/style/*.*" to="adm/style/*.*"/>
+			<file from="root/blocks/*.*" to="blocks/*.*"/>
+			<file from="root/images/*.*" to="images/*.*"/>
+			<file from="root/includes/*.*" to="includes/*.*"/>
+			<file from="root/language/*.*" to="language/*.*"/>
+			<file from="root/mp3/*.*" to="mp3/*.*"/>
+			<file from="root/portal/*.*" to="portal/*.*"/>
+			<file from="root/js/*.*" to="js/*.*"/>
+			<file from="root/umil/*.*" to="umil/*.*"/>
+			<file from="root/styles/_portal_common/*.*" to="styles/_portal_common/*.*"/>
+			<file from="root/styles/prosilver/imageset/*.*" to="styles/prosilver/imageset/*.*"/>
+			<file from="root/styles/prosilver/imageset/en/*.*" to="styles/prosilver/imageset/en/*.*"/>
+			<file from="root/styles/prosilver/template/*.*" to="styles/prosilver/template/*.*"/>
+			<file from="root/styles/prosilver/template/blocks/*.*" to="styles/prosilver/template/blocks/*.*"/>
+			<file from="root/styles/prosilver/theme/*.*" to="styles/prosilver/theme/*.*"/>
+			<file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*"/>
+		</copy>
+		<open src="common.php">
+			<edit>
+				<find><![CDATA[// Grab global variables, re-cache if necessary
 $config = $cache->obtain_config();
 ]]></find>
-<action type="after-add"><![CDATA[
-
+				<action type="after-add"><![CDATA[
 @define('STARGATE', ($config['portal_enabled']));
 if (STARGATE)
 {
@@ -369,15 +167,13 @@ if (STARGATE)
 }
 
 ]]></action>
-</edit>
-
-<edit>
-<find><![CDATA[foreach ($cache->obtain_hooks() as $hook)
+			</edit>
+			<edit>
+				<find><![CDATA[foreach ($cache->obtain_hooks() as $hook)
 {
 	@include($phpbb_root_path . 'includes/hooks/' . $hook . '.' . $phpEx);
 }]]></find>
-<action type="after-add"><![CDATA[
-/* Stargate functions start... copyright phpbbireland.com 2005-2010 */
+				<action type="after-add"><![CDATA[/* Stargate functions start... copyright phpbbireland.com 2005-2010 */
 /*
 **	This function returns a random image preprocessed with html tags and an option link...
 **	The link is based on the image name... example www.phpbb.com.png
@@ -537,27 +333,22 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 
 /* Stargate functions ends */
 ]]></action>
-</edit>
-</open>
-
-
-<open src="mcp.php">
-<edit>
-<comment lang="en">Line ~117</comment>
-<find><![CDATA[		'make_global'	=> 'f_announce',]]></find>
-<action type="after-add"><![CDATA[		'make_news'		=> 'f_announce',
+			</edit>
+		</open>
+		<open src="mcp.php">
+			<edit>
+				<comment lang="en"><![CDATA[Line ~117]]></comment>
+				<find><![CDATA[		'make_global'	=> 'f_announce',]]></find>
+				<action type="after-add"><![CDATA[		'make_news'		=> 'f_announce',
 		'make_news_global'	=> 'f_announce',]]></action>
-
-</edit>
-
-<edit>
-<find><![CDATA[		case 'make_global':]]></find>
-<action type="after-add"><![CDATA[		case 'make_news':
+			</edit>
+			<edit>
+				<find><![CDATA[		case 'make_global':]]></find>
+				<action type="after-add"><![CDATA[		case 'make_news':
 	    case 'make_news_global':]]></action>
-</edit>
-
-<edit>
-<find><![CDATA[function mcp_sorting($mode, &$sort_days, &$sort_key, &$sort_dir, &$sort_by_sql, &$sort_order_sql, &$total, $forum_id = 0, $topic_id = 0, $where_sql = 'WHERE')
+			</edit>
+			<edit>
+				<find><![CDATA[function mcp_sorting($mode, &$sort_days, &$sort_key, &$sort_dir, &$sort_by_sql, &$sort_order_sql, &$total, $forum_id = 0, $topic_id = 0, $where_sql = 'WHERE')
 {
 	global $db, $user, $auth, $template;
 
@@ -575,32 +366,27 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 				FROM ' . TOPICS_TABLE . "
 				$where_sql forum_id = $forum_id
 					AND topic_type NOT IN (" . POST_ANNOUNCE . ', ' . POST_GLOBAL . ")]]></find>
-<inline-edit>
-<inline-find>. POST_GLOBAL .</inline-find>
-<inline-action type="after-add"><![CDATA[ ' , ' . POST_NEWS . ' , ' . POST_NEWS_GLOBAL . ]]></inline-action>
-</inline-edit>
-</edit>
-</open>
-
-<open src="posting.php">
-<edit>
-<comment lang="en">News Posts</comment>
-<find>			case POST_ANNOUNCE:</find>
-<action type="after-add">
-
+				<inline-edit>
+					<inline-find><![CDATA[. POST_GLOBAL .]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ ' , ' . POST_NEWS . ' , ' . POST_NEWS_GLOBAL .]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="posting.php">
+			<edit>
+				<comment lang="en"><![CDATA[News Posts]]></comment>
+				<find><![CDATA[			case POST_ANNOUNCE:]]></find>
+				<action type="after-add"><![CDATA[
 			case POST_NEWS:
-			case POST_NEWS_GLOBAL:</action>
-</edit>
-</open>
-
-
-<open src="search.php">
-<edit>
-<find><![CDATA[					$sql_select .= ', tt.mark_time, ft.mark_time as f_mark_time';
+			case POST_NEWS_GLOBAL:]]></action>
+			</edit>
+		</open>
+		<open src="search.php">
+			<edit>
+				<find><![CDATA[					$sql_select .= ', tt.mark_time, ft.mark_time as f_mark_time';
 				}
 			}]]></find>
-<action type="after-add"><![CDATA[
-			if (STARGATE)
+				<action type="after-add"><![CDATA[			if (STARGATE)
 			{
 				global $k_config;
 
@@ -626,36 +412,32 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 			}
 
 ]]></action>
-</edit>
-
-<edit>
-<find><![CDATA[				$u_mcp_queue = ($topic_unapproved || $posts_unapproved) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=queue&amp;mode=' . (($topic_unapproved) ? 'approve_details' : 'unapproved_posts') . "&amp;t=$result_topic_id", true, $user->session_id) : '';]]></find>
-<action type="after-add"><![CDATA[
-				if (STARGATE)
+			</edit>
+			<edit>
+				<find><![CDATA[				$u_mcp_queue = ($topic_unapproved || $posts_unapproved) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=queue&amp;mode=' . (($topic_unapproved) ? 'approve_details' : 'unapproved_posts') . "&amp;t=$result_topic_id", true, $user->session_id) : '';]]></find>
+				<action type="after-add"><![CDATA[				if (STARGATE)
 				{
 					$tool_tips = $row['topic_title'] . ' : ' . sgp_truncate_message(bbcode_strip($row[ ('last_message_tooltip') ? 'last_message_tooltip': 'first_message_tooltip']), 400) . ' ... ';
 				}]]></action>
-</edit>
-<edit>
-<find><![CDATA[				$tpl_ary = array(]]></find>
-<action type="after-add"><![CDATA[					'TOOLTIP'					=> $tool_tips,]]></action>
-</edit>
-</open>
-
-<open src="viewforum.php">
-<edit>
-<find><![CDATA[	'U_MARK_TOPICS'		=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}viewforum.$phpEx", 'hash=' . generate_link_hash('global') . "&amp;f=$forum_id&amp;mark=topics") : '',]]></find>
-<action type="after-add"><![CDATA[	'FOLDER_NEWS_IMG'		=> $user->img('news_read', 'NEW_POST_NEWS'),
+			</edit>
+			<edit>
+				<find><![CDATA[				$tpl_ary = array(]]></find>
+				<action type="after-add"><![CDATA[					'TOOLTIP'					=> $tool_tips,]]></action>
+			</edit>
+		</open>
+		<open src="viewforum.php">
+			<edit>
+				<find><![CDATA[	'U_MARK_TOPICS'		=> ($user->data['is_registered'] || $config['load_anon_lastread']) ? append_sid("{$phpbb_root_path}viewforum.$phpEx", 'hash=' . generate_link_hash('global') . "&amp;f=$forum_id&amp;mark=topics") : '',]]></find>
+				<action type="after-add"><![CDATA[	'FOLDER_NEWS_IMG'		=> $user->img('news_read', 'NEW_POST_NEWS'),
 	'FOLDER_NEWS_NEW_IMG'	=> $user->img('news_unread', 'NO_NEW_POST_NEWS'),]]></action>
-</edit>
-
-<edit>
-<find><![CDATA[			$sql_array['LEFT_JOIN'][] = array('FROM' => array(FORUMS_TRACK_TABLE => 'ft'), 'ON' => 'ft.forum_id = t.forum_id AND ft.user_id = ' . $user->data['user_id']);
+			</edit>
+			<edit>
+				<find><![CDATA[			$sql_array['LEFT_JOIN'][] = array('FROM' => array(FORUMS_TRACK_TABLE => 'ft'), 'ON' => 'ft.forum_id = t.forum_id AND ft.user_id = ' . $user->data['user_id']);
 			$sql_array['SELECT'] .= ', ft.mark_time AS forum_mark_time';
 		}
 	}
 }]]></find>
-<action type="after-add"><![CDATA[if (STARGATE)
+				<action type="after-add"><![CDATA[if (STARGATE)
 {
 	// move to databse in next revision //
 	$k_config['tooltips_active'] = true;
@@ -676,53 +458,47 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 		}
 	}
 }]]></action>
-
-
-</edit>
-<edit>
-<comment lang="en">Line ~362</comment>
-<find><![CDATA[AND t.topic_type IN (' . POST_ANNOUNCE . ', ' . POST_GLOBAL . ')',]]></find>
-<inline-edit>
-<inline-find> ')',</inline-find>
-<inline-action type="before-add"><![CDATA[', ' . POST_NEWS . ', ' . POST_NEWS_GLOBAL . ]]></inline-action>
-</inline-edit>
-</edit>
-
-<edit>
-<find>		$s_type_switch_test = ($row['topic_type'] == POST_ANNOUNCE || $row['topic_type'] == POST_GLOBAL) ? 1 : 0;</find>
-<inline-edit>
-<inline-find>$row['topic_type'] == POST_GLOBAL</inline-find>
-<inline-action type="after-add"> || $row['topic_type'] == POST_NEWS || $row['topic_type'] == POST_NEWS_GLOBAL </inline-action>
-</inline-edit>
-</edit>
-
-<edit>
-<find><![CDATA[			'S_TOPIC_TYPE_SWITCH'	=> ($s_type_switch == $s_type_switch_test) ? -1 : $s_type_switch_test)
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~362]]></comment>
+				<find><![CDATA[AND t.topic_type IN (' . POST_ANNOUNCE . ', ' . POST_GLOBAL . ')',]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[ ')',]]></inline-find>
+					<inline-action type="before-add"><![CDATA[', ' . POST_NEWS . ', ' . POST_NEWS_GLOBAL . ]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[		$s_type_switch_test = ($row['topic_type'] == POST_ANNOUNCE || $row['topic_type'] == POST_GLOBAL) ? 1 : 0;]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['topic_type'] == POST_GLOBAL]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ || $row['topic_type'] == POST_NEWS || $row['topic_type'] == POST_NEWS_GLOBAL ]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[			'S_TOPIC_TYPE_SWITCH'	=> ($s_type_switch == $s_type_switch_test) ? -1 : $s_type_switch_test)
 		);]]></find>
-<action type="replace-with"><![CDATA[			'S_TOPIC_TYPE_SWITCH'	=> ($s_type_switch == $s_type_switch_test) ? -1 : $s_type_switch_test,
+				<action type="replace-with"><![CDATA[			'S_TOPIC_TYPE_SWITCH'	=> ($s_type_switch == $s_type_switch_test) ? -1 : $s_type_switch_test,
 
 			'TOOLTIP'				=> (STARGATE && isset($row['message_tooltip'])) ? sgp_truncate_message(bbcode_strip(($row['message_tooltip'])), 500) : '',
 			'TOPIC_ICON_IMG_GROUP'	=> (!empty($icons[$row['icon_id']])) ? $icons[$row['icon_id']]['group'] : '',
 			'S_POST_NEWS'			=> ($row['topic_type'] == POST_NEWS) ? true : false,
 			'S_POST_NEWS_GLOBAL'	=> ($row['topic_type'] == POST_NEWS_GLOBAL) ? true : false,
 		));]]></action>
-</edit>
-
-
-<edit>
-<find>		$s_type_switch = ($row['topic_type'] == POST_ANNOUNCE || $row['topic_type'] == POST_GLOBAL) ? 1 : 0;</find>
-<inline-edit>
-<inline-find>$row['topic_type'] == POST_GLOBAL</inline-find>
-<inline-action type="after-add"> || $row['topic_type'] == POST_NEWS || $row['topic_type'] == POST_NEWS_GLOBAL</inline-action>
-</inline-edit>
-</edit>
-</open>
-
-<open src="viewonline.php">
-<edit>
-<find><![CDATA[			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
+			</edit>
+			<edit>
+				<find><![CDATA[		$s_type_switch = ($row['topic_type'] == POST_ANNOUNCE || $row['topic_type'] == POST_GLOBAL) ? 1 : 0;]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$row['topic_type'] == POST_GLOBAL]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ || $row['topic_type'] == POST_NEWS || $row['topic_type'] == POST_NEWS_GLOBAL]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="viewonline.php">
+			<edit>
+				<find><![CDATA[			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
 		break;]]></find>
-<action type="after-add"><![CDATA[			case 'portal':
+				<action type="after-add"><![CDATA[
+		case 'portal':
 			if (STARGATE)
 			{
 				$location = $user->lang['PORTAL'];
@@ -730,136 +506,238 @@ function sgp_get_user_avatar($avatar, $avatar_type, $avatar_width = '80', $avata
 				break;
 			}
 ]]></action>
-
-</edit>
-</open>
-
-<open src="viewtopic.php">
-
-<edit>
-<find><![CDATA[if (($topic_data['topic_type'] == POST_STICKY || $topic_data['topic_type'] == POST_ANNOUNCE) && $topic_data['topic_time_limit'] && ($topic_data['topic_time'] + $topic_data['topic_time_limit']) < time())]]></find>
-<inline-edit>
-<inline-find>$topic_data['topic_type'] == POST_ANNOUNCE</inline-find>
-<inline-action type="after-add"> || $topic_data['topic_type'] == POST_NEWS || $topic_data['topic_type'] == POST_NEWS_GLOBAL</inline-action>
-</inline-edit>
-
-</edit>
-
-<edit>
-<find><![CDATA[$topic_mod .= ($allow_change_type && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_GLOBAL) ? '<option value="make_global">' . $user->lang['MAKE_GLOBAL'] . '</option>' : '';]]></find>
-<action type="after-add"><![CDATA[if (STARGATE)
+			</edit>
+		</open>
+		<open src="viewtopic.php">
+			<edit>
+				<find><![CDATA[if (($topic_data['topic_type'] == POST_STICKY || $topic_data['topic_type'] == POST_ANNOUNCE) && $topic_data['topic_time_limit'] && ($topic_data['topic_time'] + $topic_data['topic_time_limit']) < time())]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$topic_data['topic_type'] == POST_ANNOUNCE]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ || $topic_data['topic_type'] == POST_NEWS || $topic_data['topic_type'] == POST_NEWS_GLOBAL]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$topic_mod .= ($allow_change_type && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_GLOBAL) ? '<option value="make_global">' . $user->lang['MAKE_GLOBAL'] . '</option>' : '';]]></find>
+				<action type="after-add"><![CDATA[if (STARGATE)
 {
 	$topic_mod .= ($allow_change_type && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_NEWS) ? '<option value="make_news">' . $user->lang['MAKE_NEWS'] . '</option>' : '';
 	$topic_mod .= ($allow_change_type && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_NEWS_GLOBAL) ? '<option value="make_news_global">' . $user->lang['MAKE_NEWS_GLOBAL'] . '</option>' : '';
 }]]></action>
-
-</edit>
-
-<edit>
-<find><![CDATA[	$message = censor_text($row['post_text']);]]></find>
-<action type="after-add"><![CDATA[
-	if (STARGATE)
+			</edit>
+			<edit>
+				<find><![CDATA[	$message = censor_text($row['post_text']);]]></find>
+				<action type="after-add"><![CDATA[	if (STARGATE)
 	{
 		$message = acronym_pass($message);
 	}
 ]]></action>
-
-</edit>
-
-<edit>
-<comment lang="en">Line ~1496</comment>
-<find><![CDATA[	$s_first_unread = false;
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~1496]]></comment>
+				<find><![CDATA[	$s_first_unread = false;
 	if (!$first_unread && $post_unread)
 	{
 		$s_first_unread = $first_unread = true;
 	}]]></find>
-<action type="after-add"><![CDATA[
-
+				<action type="after-add"><![CDATA[
 	if (STARGATE)
 	{
 		$message = sgp_local_acronyms($message);
 	}
 
 ]]></action>
-</edit>
-
-<edit>
-<comment lang="en">Line ~1751</comment>
-<find><![CDATA[			'S_QUICK_REPLY'			=> true,]]></find>
-<action type="after-add"><![CDATA[			'S_SGP_QUICK_REPLY'		=> (isset($k_config)) ? ($k_config['sgp_quick_reply']) ? true : false : '',]]></action>
-</edit>
-</open>
-
-<open src="includes/mcp/mcp_main.php">
-<edit>
-<find><![CDATA[			case 'make_global':]]></find>
-<action type="after-add"><![CDATA[			case 'make_news':
-			case 'make_news_global':]]></action>
-
-</edit>
-
-<edit>
-<find><![CDATA[		case 'make_global':
-			$new_topic_type = POST_GLOBAL;
-			$check_acl = 'f_announce';
-			$l_new_type = (sizeof($topic_ids) == 1) ? 'MCP_MAKE_GLOBAL' : 'MCP_MAKE_GLOBALS';
-		break;]]></find>
-<action type="after-add"><![CDATA[
-		case 'make_news':
-			$new_topic_type = POST_NEWS;
-			$check_acl = 'f_announce';
-			$l_new_type = (sizeof($topic_ids) == 1) ? 'MCP_MAKE_NEWS' : 'MCP_MAKE_NEWSS';
-		break;
-
-		case 'make_news_global':
-			$new_topic_type = POST_NEWS_GLOBAL;
-			$check_acl = 'f_announce';
-			$l_new_type = (sizeof($topic_ids) == 1) ? 'MCP_MAKE_NEWS_GLOBAL' : 'MCP_MAKE_NEWSS_GLOBAL';
-		break;]]></action>
-
-</edit>
-</open>
-
-<open src="includes/functions_content.php">
-<edit>
-<comment lang="en">Style Based Smiles</comment>
-<find><![CDATA[function smiley_text($text, $force_option = false)
-{
-	global $config, $user, $phpbb_root_path;]]></find>
-<action type="after-add"><![CDATA[	if (STARGATE)
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~1751]]></comment>
+				<find><![CDATA[			'S_QUICK_REPLY'			=> true,]]></find>
+				<action type="after-add"><![CDATA[			'S_SGP_QUICK_REPLY'		=> (isset($k_config)) ? ($k_config['sgp_quick_reply']) ? true : false : '',]]></action>
+			</edit>
+		</open>
+		<open src="adm/index.php">
+			<edit>
+				<find><![CDATA[		'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
+	));]]></find>
+				<action type="after-add"><![CDATA[	// Stargate Portal
+	if (STARGATE)
 	{
-		// SGP replace smile path to style based smilies if they exist //
-		if (file_exists($phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/smilies/index.htm'))
-		{
-			$config['smilies_path'] = 'styles/' . $user->theme['theme_path'] . '/theme/images/smilies';
-		}
+		$template->assign_vars(array(
+			'STARGATE'		=> true,
+			'U_PORTAL'		=> append_sid("{$phpbb_root_path}portal.$phpEx")
+			));
 	}
+	// Stargate Portal
 ]]></action>
-</edit>
-
-<edit>
-<find><![CDATA[?>]]></find>
-<action type="before-add"><![CDATA[
-
-// Call portal contents functions 24 March 2010
-if (STARGATE)
+			</edit>
+		</open>
+		<open src="adm/style/acp_forums.html">
+			<edit>
+				<find><![CDATA[<!-- INCLUDE overall_header.html -->]]></find>
+				<action type="after-add"><![CDATA[<!-- Start: Edit #1 : Small mod to show all available icon images in images/forum_images directory, copyright 2007 phpbbireland.com Mike -->
+<script>
+function set_image(data)
 {
-	include($phpbb_root_path . 'includes/sgp_functions_content.' . $phpEx);
+	var path = 'images/forum_icons/' + data;
+	document.getElementById('forum_image').value=path;
 }
 
-]]></action>
+function ShowHide(id1, id2, id3)
+{
+	var onoff = expMenu(id1);
+	if (id2 != '') expMenu(id2);
+	if (id3 != '') SetCookie(id3, onoff, expire);
+}
 
-</edit>
-</open>
+function expMenu(id)
+{
+	var element = null;
+	if (document.getElementById)
+	{
+		element = document.getElementById(id);
+	}
+	else if (document.all)
+	{
+		element = document.all[id];
+	}
+	else if (document.layers)
+	{
+		element = document.layers[id];
+	}
+
+	if (!element)
+	{
+		// do nothing
+	}
+	else if (element.style)
+	{
+		if (element.style.display == "none")
+		{
+			element.style.display = "";
+			return 1;
+		}
+		else
+		{
+			element.style.display = "none";
+			return 2;
+		}
+	}
+	else
+	{
+		element.visibility = "show";
+		return 1;
+	}
+}
+</script>
+<!-- END: Edit #1 -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		<!-- IF FORUM_IMAGE_SRC -->
+			<dd><img src="{FORUM_IMAGE_SRC}" alt="{L_FORUM_IMAGE}" /></dd>
+		<!-- ENDIF -->
+	</dl>]]></find>
+				<action type="after-add"><![CDATA[	<!-- Start: Edit #2 -->
+	<div style="position:absolute; top:0; right:0; width:0px; visibility: hidden"><input id="namex" type="text"><input id="pw" type="password"></div>
+	<dl>
+		<dt><label for="forum_images">{L_AVAILABLE_FORUM_IMAGE}:</label><br /><span>{L_AVAILABLE_FORUM_IMAGE_EXPLAIN}</span></dt>
+
+		<div style="display:" id="show">
+			<div class="k_show_images_yes-icon">
+				&nbsp;<a href="#" onclick="ShowHide('side'); ShowHide('hide'); ShowHide('show'); return(false);"><span>{L_SHOW_FORUM_IMAGES}</span></a>
+			</div>
+		</div>
+		<div style="display:none" id="hide">
+			<div class="k_show_images_no-icon">
+				&nbsp;<a href="#" onclick="ShowHide('side'); ShowHide('show'); ShowHide('hide'); return(false);"><span>{L_SHOW_FORUM_IMAGES}</span></a>
+			</div>
+		</div>
+		<div align="left" style="display: none;" id="side">
+			<span class="imageline"><br /><br /><br />
+			<!-- BEGIN forum_img_file_name -->
+				<!-- IF forum_img_file_name.FORUM_IMAGE_OPT -->
+					<!--<img src='{FORUM_IMAGE_SRC_PATH}{forum_img_file_name.FORUM_IMAGE_OPT}' title="{FORUM_IMAGE_PATH}{forum_img_file_name.FORUM_IMAGE_OPT}">-->
+					<a href="#" onclick="set_image('{forum_img_file_name.FORUM_IMAGE_OPT}', true, true); return false;"><img src='{FORUM_IMAGE_SRC_PATH}{forum_img_file_name.FORUM_IMAGE_OPT}' title="{FORUM_IMAGE_PATH}{forum_img_file_name.FORUM_IMAGE_OPT}"></a>
+				<!-- ENDIF -->
+			<!-- END forum_img_file_name -->
+			<br /><br /><br />
+			</span>
+		</div>
+	</dl>
+	<!-- END: Edit #2 -->]]></action>
+			</edit>
+		</open>
+		<open src="adm/style/admin.css">
+			<edit>
+				<find><![CDATA[.phpinfo td, .phpinfo th, .phpinfo h2, .phpinfo h1 {
+	text-align: left;
+}]]></find>
+				<action type="after-add"><![CDATA[/* Added by Stargate Portal
+---------------------------------------- */
+.imageline { width:auto; height:auto; border:none; float:left; padding-top: 5px;}
+.row5 { background-color: #F9EDBD; }
+.row6 { background-color: #E8DFC0; }
 
 
-<open src="includes/cache.php">
-<edit>
-<find>	/**
+/* Additional reply bbcode for sgp simple editor ...
+-------------------------------------------------- */
+.bbb-bold, .bbb-bold a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-bold.gif"); width:22px; height:22px; }
+.bbb-bold:hover{ background-position: 0px -23px;}.bbb-quote,
+.bbb-italic, .bbb-italic a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-italic.gif");width:22px; height:22px;}
+.bbb-italic:hover{ background-position: 0px -23px;}.bbb-quote, 
+.bbb-quote a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-quote.gif"); width:22px; height:22px;}
+.bbb-quote:hover{ background-position: 0px -23px;}.bbb-code, 
+.bbb-code a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-code.gif");width:22px; height:22px;}
+.bbb-code:hover{ background-position: 0px -23px;}.bbb-list, 
+.bbb-list a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-list.gif");width:22px; height:22px;}
+.bbb-list:hover{ background-position: 0px -23px;}.bbb-flash, 
+.bbb-flash a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-flash.gif"); width:22px; height:22px;}
+.bbb-flash:hover{ background-position: 0px -23px;}.bbb-image, 
+.bbb-image a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-image.gif"); width:22px; height:22px;}
+.bbb-image:hover{ background-position: 0px -23px;}
+.bbb-url, .bbb-url a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-url.gif"); width:22px; height:22px;}
+.bbb-url:hover{ background-position: 0px -23px;}
+.bbb-under_line, .bbb-under_line a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-under_line.gif");width:22px; height:22px;}
+.bbb-under_line:hover{ background-position: 0px -23px;}
+.bbb-align_center, .bbb-align_center a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-align_center.gif");width:22px; height:22px;}
+.bbb-align_center:hover{ background-position: 0px -23px;}
+.bbb-align_left, .bbb-align_left a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-align_left.gif");width:22px; height:22px;}
+.bbb-align_left:hover{ background-position: 0px -23px;}
+.bbb-align_right, .bbb-align_right a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-align_right.gif");width:22px; height:22px;}
+.bbb-align_right:hover { background-position: 0px -23px;}
+.bbb-ordered_list, .bbb-ordered_list a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-ordered_list.gif");width:22px; height:22px;}
+.bbb-ordered_list:hover{ background-position: 0px -23px;}
+.bbb-add_list_item, .bbb-add_list_item a { background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-add_list_item.gif"); width:22px; height:22px;}
+.bbb-add_list_item:hover { background-position: 0px -23px;}
+.bbb-note, .bbb-note a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-note.gif");width:22px; height:22px;}
+.bbb-note:hover { background-position: 0px -23px;}
+.bbb-spoiler, .bbb-spoiler a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-spoiler.gif"); width:22px; height:22px;}
+.bbb-spoiler:hover{ background-position: 0px -23px;}
+.bbb-tab, .bbb-tab a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-tab.gif"); width:22px; height:22px;}
+.bbb-tab:hover{ background-position: 0px -23px;}
+.bbb-sup, .bbb-sup a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-sup.gif"); width:22px; height:22px;}
+.bbb-sup:hover{ background-position: 0px -23px;}
+.bbb-sub, .bbb-sub a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-sub.gif"); width:22px; height:22px;}
+.bbb-sub:hover{ background-position: 0px -23px;}
+.bbb-strike, .bbb-strike a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-strike.gif");width:22px; height:22px;}
+.bbb-strike:hover { background-position: 0px -23px;}
+.bbb-link, .bbb-link a{ background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-link.gif");width:22px; height:22px;}
+.bbb-link:hover { background-position: 0px -23px;}
+.rollover, .rollover a { display: inline; float:left; } .rollover a:hover { background-position: 0 -23px; }
+.bbb-icon-spacer {background : transparent; border:none; background-image: url("./../../images/bbcode/bbb-icon-spacer.gif"); width:3px; height:22px;}
+button {border: solid 3px;}]]></action>
+			</edit>
+		</open>
+		<open src="adm/style/overall_header.html">
+			<edit>
+				<find><![CDATA[		<p><a href="{U_ADM_INDEX}">{L_ADMIN_INDEX}</a> &bull; <a href="{U_INDEX}">{L_FORUM_INDEX}</a></p>]]></find>
+				<action type="replace-with"><![CDATA[		<p><a href="{U_ADM_INDEX}">{L_ADMIN_INDEX}</a> &bull; <a href="{U_INDEX}">{L_FORUM_INDEX}</a><!-- IF STARGATE --> &bull; <a href="{U_PORTAL}">{L_PORTAL}</a><!-- ENDIF --></p>]]></action>
+			</edit>
+		</open>
+		<open src="includes/cache.php">
+			<edit>
+				<find><![CDATA[	/**
 	* Obtain list of naughty words and build preg style replacement arrays for use by the
 	* calling script
-	*/</find>
-<action type="before-add"><![CDATA[	function obtain_k_config()
+	*/]]></find>
+				<action type="before-add"><![CDATA[	function obtain_k_config()
 	{
 		global $db;
 
@@ -978,42 +856,41 @@ if (STARGATE)
 		return $k_blocks;
 	}
 
-
 	function obtain_k_pages()
 	{
 		global $db;
 
 		if (($k_pages = $this->get('k_pages')) !== false)
 		{
-			$sql = 'SELECT * 
+			$sql = 'SELECT page_id, page_name
 				FROM ' . K_PAGES_TABLE;
 
-			$result = $db->sql_query($sql);	
-			
+			$result = $db->sql_query($sql);
+
 			while ($row = $db->sql_fetchrow($result))
 			{
-				$k_pages[$row['page_id']]['page_id']	= $row['page_id'];
+				$k_pages[$row['page_id']]['page_id'] = $row['page_id'];
 				$k_pages[$row['page_id']]['page_name'] = $row['page_name'];
 			}
 			$db->sql_freeresult($result);
 		}
 		else
 		{
-			$k_pages = $k_cached_pages = array();
+			$k_pages = $k_pages_cache = array();
 
-			$sql = 'SELECT * 
+			$sql = 'SELECT page_id, page_name
 				FROM ' . K_PAGES_TABLE;
 
-			$result = $db->sql_query($sql);	
+			$result = $db->sql_query($sql);
 
 			while ($row = $db->sql_fetchrow($result))
 			{
-				$k_pages[$row['id']]['id']	= $row['id'];
-				$k_pages[$row['id']]['page_name'] = $row['page_name'];
+				$k_pages[$row['page_id']]['page_id'] = $row['page_id'];
+				$k_pages[$row['page_id']]['page_name'] = $row['page_name'];
 			}
 			$db->sql_freeresult($result);
 
-			$this->put('k_pages', $k_cached_pages);
+			$this->put('k_pages', $k_pages_cache);
 		}
 		return $k_pages;
 	}
@@ -1043,7 +920,7 @@ if (STARGATE)
 		}
 		else
 		{
-			$k_groups = $k_groups_cache = array();
+			$k_groups = $k_cached_groups = array();
 
 			// Get us all the groups
 			$sql = 'SELECT group_id, group_name
@@ -1069,11 +946,11 @@ if (STARGATE)
 
 		if (($k_resources = $this->get('k_resources')) !== false)
 		{
-			$sql = 'SELECT * 
-				FROM ' . K_RESOURCE_TABLE  . ' 
+			$sql = 'SELECT *
+				FROM ' . K_RESOURCES_TABLE  . '
 				ORDER BY word ASC';
-			$result = $db->sql_query($sql);	
-			
+			$result = $db->sql_query($sql);
+
 			while ($row = $db->sql_fetchrow($result))
 			{
 				/*
@@ -1090,10 +967,10 @@ if (STARGATE)
 		{
 			$k_resources = $k_cached_resources = array();
 
-			$sql = 'SELECT * 
-				FROM ' . K_RESOURCE_TABLE  . ' 
+			$sql = 'SELECT *
+				FROM ' . K_RESOURCES_TABLE  . '
 				ORDER BY word ASC';
-			$result = $db->sql_query($sql);	
+			$result = $db->sql_query($sql);
 
 			while ($row = $db->sql_fetchrow($result))
 			{
@@ -1111,27 +988,21 @@ if (STARGATE)
 		return $k_resources;
 	}
 ]]></action>
-
-</edit>
-
-<edit>
-<find>				$icons[$row['icons_id']]['display'] = (bool) $row['display_on_posting'];</find>
-<action type="after-add">				$icons[$row['icons_id']]['group'] = (bool) $row['icons_group'];</action>
-
-</edit>
-</open>
-
-<open src="includes/constants.php">
-<edit>
-<find>define('POST_GLOBAL', 3);</find>
-<action type="after-add">define('POST_NEWS', 4);
-define('POST_NEWS_GLOBAL', 5);</action>
-
-</edit>
-
-<edit>
-<find>// Additional tables</find>
-<action type="after-add">// Stargate Portal Tables
+			</edit>
+			<edit>
+				<find><![CDATA[				$icons[$row['icons_id']]['display'] = (bool) $row['display_on_posting'];]]></find>
+				<action type="after-add"><![CDATA[				$icons[$row['icons_id']]['group'] = (bool) $row['icons_group'];]]></action>
+			</edit>
+		</open>
+		<open src="includes/constants.php">
+			<edit>
+				<find><![CDATA[define('POST_GLOBAL', 3);]]></find>
+				<action type="after-add"><![CDATA[define('POST_NEWS', 4);
+define('POST_NEWS_GLOBAL', 5);]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[// Additional tables]]></find>
+				<action type="after-add"><![CDATA[// Stargate Portal Tables
 define('WELCOME_MESSAGE', 1);
 define('NAV_MENUS', 1);
 define('SUB_MENUS', 2);
@@ -1153,23 +1024,19 @@ define('K_USERS_TABLE',				$table_prefix . 'k_users');
 define('K_STYLES_STATUS_TABLE',		$table_prefix . 'k_styles_status');
 define('K_REFERRALS_TABLE',			$table_prefix . 'k_referrals');
 define('K_YOUTUBE_TABLE',			$table_prefix . 'k_youtube');
-define('K_RESOURCE_TABLE',			$table_prefix . 'k_resource');
-define('K_PAGES_TABLE',				$table_prefix . 'k_pages');</action>
-
-</edit>
-</open>
-
-<open src="includes/functions.php">
-<edit>
-<find><![CDATA[		'SITE_DESCRIPTION'				=> $config['site_desc'],]]></find>
-<action type="after-add"><![CDATA[		'STARGATE_VERSION'				=> (isset($config['portal_version'])) ? $config['portal_version'] : '0.0.0',]]></action>
-
-</edit>
-
-<edit>
-<find><![CDATA[		'A_COOKIE_SETTINGS'		=> addslashes('; path=' . $config['cookie_path'] . ((!$config['cookie_domain'] || $config['cookie_domain'] == 'localhost' || $config['cookie_domain'] == '127.0.0.1') ? '' : '; domain=' . $config['cookie_domain']) . ((!$config['cookie_secure']) ? '' : '; secure')),
+define('K_RESOURCES_TABLE',			$table_prefix . 'k_resource');
+define('K_PAGES_TABLE',				$table_prefix . 'k_pages');]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[		'SITE_DESCRIPTION'				=> $config['site_desc'],]]></find>
+				<action type="after-add"><![CDATA[		'STARGATE_VERSION'				=> (isset($config['portal_version'])) ? $config['portal_version'] : '0.0.0',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		'A_COOKIE_SETTINGS'		=> addslashes('; path=' . $config['cookie_path'] . ((!$config['cookie_domain'] || $config['cookie_domain'] == 'localhost' || $config['cookie_domain'] == '127.0.0.1') ? '' : '; domain=' . $config['cookie_domain']) . ((!$config['cookie_secure']) ? '' : '; secure')),
 	));]]></find>
-<action type="after-add"><![CDATA[	// Stargate Portal Start
+				<action type="after-add"><![CDATA[	// Stargate Portal Start
 	if (STARGATE)
 	{
 		global $user, $queries, $cached_queries, $total_queries;
@@ -1183,6 +1050,13 @@ define('K_PAGES_TABLE',				$table_prefix . 'k_pages');</action>
 			'AVATAR_SMALL_IMG'		=> (STARGATE) ? sgp_get_user_avatar($user->data['user_avatar'], $user->data['user_avatar_type'], '35', '35') : '',
 			'P_USERNAME'			=> (STARGATE) ? $user->data['username'] : '',
 			'P_USERNAME_FULL'		=> (STARGATE) ? get_username_string('full', $user->data['user_id'], $user->data['username'], $user->data['user_colour']) : '',
+
+			'T_THEME_PATH'			=> "{$web_path}styles/" . $user->theme['theme_path'] . '/theme',
+			'T_TEMPLATE_PATH'		=> "{$web_path}styles/" . $user->theme['template_path'] . '/template',
+			'T_SUPER_TEMPLATE_PATH'	=> (isset($user->theme['template_inherit_path']) && $user->theme['template_inherit_path']) ? "{$web_path}styles/" . $user->theme['template_inherit_path'] . '/template' : "{$web_path}styles/" . $user->theme['template_path'] . '/template',
+			'T_IMAGESET_PATH'		=> "{$web_path}styles/" . $user->theme['imageset_path'] . '/imageset',
+			'T_IMAGESET_LANG_PATH'	=> "{$web_path}styles/" . $user->theme['imageset_path'] . '/imageset/' . $user->data['user_lang'],
+			'T_IMAGES_PATH'			=> "{$web_path}images/",
 		));
 		
 		$set_time = time() + 31536000;
@@ -1239,12 +1113,10 @@ define('K_PAGES_TABLE',				$table_prefix . 'k_pages');</action>
 	}
 	// Stargate Portal End
 ]]></action>
-
-</edit>
-
-<edit>
-<find><![CDATA[?>]]></find>
-<action type="before-add"><![CDATA[/* From topic_text_hover mod by Rich McGirr copyright 2008 */
+			</edit>
+			<edit>
+				<find><![CDATA[?>]]></find>
+				<action type="before-add"><![CDATA[/* From topic_text_hover mod by Rich McGirr copyright 2008 */
 if (!function_exists('bbcode_strip'))
 {
 	function bbcode_strip($text)
@@ -1271,20 +1143,43 @@ if (!function_exists('bbcode_strip'))
 		return preg_replace($RegEx, ' ', $text );
 	}
 }]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions_content.php">
+			<edit>
+				<comment lang="en"><![CDATA[Style Based Smiles]]></comment>
+				<find><![CDATA[function smiley_text($text, $force_option = false)
+{
+	global $config, $user, $phpbb_root_path;]]></find>
+				<action type="after-add"><![CDATA[	if (STARGATE)
+	{
+		// SGP replace smile path to style based smilies if they exist //
+		if (file_exists($phpbb_root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/smilies/index.htm'))
+		{
+			$config['smilies_path'] = 'styles/' . $user->theme['theme_path'] . '/theme/images/smilies';
+		}
+	}
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[?>]]></find>
+				<action type="before-add"><![CDATA[// Call portal contents functions 24 March 2010
+if (STARGATE)
+{
+	include($phpbb_root_path . 'includes/sgp_functions_content.' . $phpEx);
+}
 
-</edit>
-</open>
-
-
-<open src="includes/functions_display.php">
-<edit>
-<find><![CDATA[			case POST_ANNOUNCE:
+]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions_display.php">
+			<edit>
+				<find><![CDATA[			case POST_ANNOUNCE:
 				$topic_type = $user->lang['VIEW_TOPIC_ANNOUNCEMENT'];
 				$folder = 'announce_read';
 				$folder_new = 'announce_unread';
 			break;]]></find>
-<action type="after-add"><![CDATA[
-
+				<action type="after-add"><![CDATA[
 			case POST_NEWS:
 				if (STARGATE)
 				{
@@ -1302,14 +1197,13 @@ if (!function_exists('bbcode_strip'))
 					$folder_new = 'news_unread';
 				}
 			break;]]></action>
-
-</edit>
-<edit>
-<find><![CDATA[	if (empty($avatar) || !$avatar_type || (!$config['allow_avatar'] && !$ignore_config))
+			</edit>
+			<edit>
+				<find><![CDATA[	if (empty($avatar) || !$avatar_type || (!$config['allow_avatar'] && !$ignore_config))
 	{
 		return '';
 	}]]></find>
-<action type="replace-with"><![CDATA[	if (empty($avatar) || !$avatar_type || (!$config['allow_avatar'] && !$ignore_config))
+				<action type="replace-with"><![CDATA[	if (empty($avatar) || !$avatar_type || (!$config['allow_avatar'] && !$ignore_config))
 	{
 		// if no avatar we generate a random one //
 		if (!STARGATE)
@@ -1321,107 +1215,66 @@ if (!function_exists('bbcode_strip'))
 			return (sgp_get_user_avatar ($avatar, $avatar_type, $avatar_width, $avatar_height, $alt = 'USER_AVATAR', false));
 		}
 	}]]></action>
-</edit>
-</open>
-
-<open src="includes/functions_posting.php">
-
-<edit>
-<comment lang="en">Style Based Smiles</comment>
-<find><![CDATA[	if (sizeof($smilies))
+			</edit>
+		</open>
+		<open src="includes/functions_posting.php">
+			<edit>
+				<comment lang="en"><![CDATA[Style Based Smiles]]></comment>
+				<find><![CDATA[	if (sizeof($smilies))
 	{
 		$root_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? generate_board_url() . '/' : $phpbb_root_path;]]></find>
-<action type="after-add"><![CDATA[		// SGP replace smile path to style based smilies if they exist //
+				<action type="after-add"><![CDATA[		// SGP replace smile path to style based smilies if they exist //
 		if (file_exists($root_path . 'styles/' . $user->theme['theme_path'] . '/theme/images/smilies/index.htm'))
 		{
 			$config['smilies_path'] = 'styles/' . $user->theme['theme_path'] . '/theme/images/smilies';
 		}
 ]]></action>
-</edit>
-<edit>
-<find><![CDATA[		'global'	=> array('const' => POST_GLOBAL, 'lang' => 'POST_GLOBAL')]]></find>
-<action type="replace-with"><![CDATA[		'global'	=> array('const' => POST_GLOBAL, 'lang' => 'POST_GLOBAL'),
+			</edit>
+			<edit>
+				<find><![CDATA[		'global'	=> array('const' => POST_GLOBAL, 'lang' => 'POST_GLOBAL')]]></find>
+				<action type="replace-with"><![CDATA[		'global'	=> array('const' => POST_GLOBAL, 'lang' => 'POST_GLOBAL'),
 		'news'		=> array('const' => POST_NEWS, 'lang' => 'POST_NEWS'),
 		'news_global'	=> array('const' => POST_NEWS_GLOBAL, 'lang' => 'POST_NEWS_GLOBAL')]]></action>
-
-</edit>
-
-<edit>
-<find>		$auth_key = ($auth_key == 'global') ? 'announce' : $auth_key;</find>
-<action type="after-add">		if (STARGATE)
+			</edit>
+			<edit>
+				<find><![CDATA[		$auth_key = ($auth_key == 'global') ? 'announce' : $auth_key;]]></find>
+				<action type="after-add"><![CDATA[		if (STARGATE)
 		{
 			$auth_key = ($auth_key == 'news') ? 'announce' : $auth_key;
 			$auth_key = ($auth_key == 'news_global') ? 'announce' : $auth_key;
-		}</action>
-
-</edit>
-
-<edit>
-<comment lang="en">Replace is used to here to ease the install process, please examine these lines if a previous mods altered this code...</comment>
-<find><![CDATA[			'S_TOPIC_TYPE_ANNOUNCE'	=> ($auth->acl_get('f_announce', $forum_id)))]]></find>
-<action type="replace-with"><![CDATA[			'S_TOPIC_TYPE_ANNOUNCE'	=> ($auth->acl_get('f_announce', $forum_id)),
+		}]]></action>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Replace is used to here to ease the install process, please examine these lines if a previous mods altered this code...]]></comment>
+				<find><![CDATA[			'S_TOPIC_TYPE_ANNOUNCE'	=> ($auth->acl_get('f_announce', $forum_id)))]]></find>
+				<action type="replace-with"><![CDATA[			'S_TOPIC_TYPE_ANNOUNCE'	=> ($auth->acl_get('f_announce', $forum_id)),
 			'S_TOPIC_TYPE_NEWS'		=> ($auth->acl_get('f_announce', $forum_id)),
 			'S_TOPIC_TYPE_NEWS_GLOBAL'	=> ($auth->acl_get('f_announce', $forum_id)))]]></action>
-</edit>
-
-<edit>
-<comment lang="en">(Occurs twice) 1st find</comment>
-<find><![CDATA[				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE) ? ($data['topic_time_limit'] * 86400) : 0,]]></find>
-<inline-edit>
-<inline-find><![CDATA[$topic_type == POST_ANNOUNCE]]></inline-find>
-<inline-action type="after-add"> || $topic_type == POST_NEWS || $topic_type == POST_NEWS_GLOBAL</inline-action>
-</inline-edit>
-</edit>
-
-<edit>
-<comment lang="en">2nd find</comment>
-<find><![CDATA[				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE) ? ($data['topic_time_limit'] * 86400) : 0,]]></find>
-<inline-edit>
-<inline-find><![CDATA[$topic_type == POST_ANNOUNCE]]></inline-find>
-<inline-action type="after-add"> || $topic_type == POST_NEWS || $topic_type == POST_NEWS_GLOBAL</inline-action>
-</inline-edit>
-</edit>
-
-</open>
-
-<open src="includes/template.php">
-<edit>
-<find><![CDATA[		else if ($config['load_tplcompile'])
-		{]]></find>
-<action type="after-add"><![CDATA[
-			if (STARGATE)
-			{
-				// Stargate Common files Mod. http://stargate-portal.com/forum/viewtopic.php?p=3438#p3438
-				// Force this code to look in the common folder when comparing file times.
-				// That is, find the correct file and substitute it...
-
-				if (!file_exists($this->files[$handle]))
-				{
-					// SGP file inheritance Mod. Any file can be inherited Mike //
-					global $user, $phpbb_root_path;
-
-					$missing_file = $this->files[$handle];
-					$missing_filename = basename($missing_file);
-
-					$style_folder = $user->theme['template_path'];
-					$missing_file = str_replace($style_folder, '_portal_common', $missing_file);
-
-					$this->files[$handle] = $missing_file;
-					// Stargate Common files Mod
-				}
-			}
-]]></action>
-
-</edit>
-</open>
-
-<open src="includes/functions_template.php">
-<edit>
-<find><![CDATA[		if (!file_exists($this->template->files[$handle]))
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[(Occurs twice) 1st find]]></comment>
+				<find><![CDATA[				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE) ? ($data['topic_time_limit'] * 86400) : 0,]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$topic_type == POST_ANNOUNCE]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ || $topic_type == POST_NEWS || $topic_type == POST_NEWS_GLOBAL]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[2nd find]]></comment>
+				<find><![CDATA[				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE) ? ($data['topic_time_limit'] * 86400) : 0,]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$topic_type == POST_ANNOUNCE]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ || $topic_type == POST_NEWS || $topic_type == POST_NEWS_GLOBAL]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="includes/functions_template.php">
+			<edit>
+				<find><![CDATA[		if (!file_exists($this->template->files[$handle]))
 		{
 			trigger_error("template->_tpl_load_file(): File {$this->template->files[$handle]} does not exist or is empty", E_USER_ERROR);
 		}]]></find>
-        <action type="replace-with"><![CDATA[		// Try and open template for read
+				<action type="replace-with"><![CDATA[		
 		if (!file_exists($this->template->files[$handle]))
 		{
 			// Stargate Common files Mod. http://stargate-portal.com/forum/viewtopic.php?p=3438#p3438
@@ -1452,18 +1305,15 @@ if (!function_exists('bbcode_strip'))
 			}
 			// End of mod //
 		}]]></action>
-
-</edit>
-</open>
-
-<open src="includes/session.php">
-
-<edit>
-<find><![CDATA[		if (!$this->theme)
+			</edit>
+		</open>
+		<open src="includes/session.php">
+			<edit>
+				<find><![CDATA[		if (!$this->theme)
 		{
 			trigger_error('Could not get style data', E_USER_ERROR);
 		}]]></find>
-<action type="replace-with"><![CDATA[		if (!$this->theme)
+				<action type="replace-with"><![CDATA[		if (!$this->theme)
 		{
 			// SGP edit: Report missing style and redirect to default style.
 			// This stops bots generating countless errors.
@@ -1473,24 +1323,49 @@ if (!function_exists('bbcode_strip'))
 
 			//trigger_error('Could not get style data', E_USER_ERROR);
 		}]]></action>
-</edit>
-</open>
+			</edit>
+		</open>
+		<open src="includes/template.php">
+			<edit>
+				<find><![CDATA[		else if ($config['load_tplcompile'])
+		{]]></find>
+				<action type="after-add"><![CDATA[			if (STARGATE)
+			{
+				// Stargate Common files Mod. http://stargate-portal.com/forum/viewtopic.php?p=3438#p3438
+				// Force this code to look in the common folder when comparing file times.
+				// That is, find the correct file and substitute it...
 
-<open src="includes/acp/acp_board.php">
-<edit>
-<find><![CDATA[						'override_user_style'	=> array('lang' => 'OVERRIDE_STYLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),]]></find>
-<action type="after-add"><![CDATA[						'portal_enabled'		=> array('lang' => 'ENABLE_PORTAL',			'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),]]></action>
+				if (!file_exists($this->files[$handle]))
+				{
+					// SGP file inheritance Mod. Any file can be inherited Mike //
+					global $user, $phpbb_root_path;
 
-</edit>
-</open>
+					$missing_file = $this->files[$handle];
+					$missing_filename = basename($missing_file);
 
-<open src="includes/acp/acp_forums.php">
-<edit>
-<find><![CDATA[				if (strlen($forum_data['forum_password']) == 32)
+					$style_folder = $user->theme['template_path'];
+					$missing_file = str_replace($style_folder, '_portal_common', $missing_file);
+
+					$this->files[$handle] = $missing_file;
+					// Stargate Common files Mod
+				}
+			}
+]]></action>
+			</edit>
+		</open>
+		<open src="includes/acp/acp_board.php">
+			<edit>
+				<find><![CDATA[						'override_user_style'	=> array('lang' => 'OVERRIDE_STYLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),]]></find>
+				<action type="after-add"><![CDATA[						'portal_enabled'		=> array('lang' => 'ENABLE_PORTAL',			'validate' => 'bool',	'type' => 'radio:yes_no', 'explain' => true),]]></action>
+			</edit>
+		</open>
+		<open src="includes/acp/acp_forums.php">
+			<edit>
+				<find><![CDATA[				if (strlen($forum_data['forum_password']) == 32)
 				{
 					$errors[] = $user->lang['FORUM_PASSWORD_OLD'];
 				}]]></find>
-<action type="after-add"><![CDATA[				// Start mod list forum_images Michaelo copyright 2007 phpbbireland.com //
+				<action type="after-add"><![CDATA[				// Start mod list forum_images Michaelo copyright 2007 phpbbireland.com //
 				$dirslist=' ';
 				$dirs = dir('./../images/forum_icons');
 				while ($file = $dirs->read())
@@ -1512,30 +1387,27 @@ if (!function_exists('bbcode_strip'))
 					}
 				}
 				$dirslist='';
-				// End mod list forum_images Michaelo //]]></action>
-
-</edit>
-<edit>
-<find><![CDATA[					'FORUM_IMAGE_SRC'			=> ($forum_data['forum_image']) ? $phpbb_root_path . $forum_data['forum_image'] : '',]]></find>
-<action type="after-add"><![CDATA[					'FORUM_IMAGE_SRC_PATH'		=> $phpbb_root_path . 'images/forum_icons/',
+				// End mod list forum_images Michaelo //
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[					'FORUM_IMAGE_SRC'			=> ($forum_data['forum_image']) ? $phpbb_root_path . $forum_data['forum_image'] : '',]]></find>
+				<action type="after-add"><![CDATA[					'FORUM_IMAGE_SRC_PATH'		=> $phpbb_root_path . 'images/forum_icons/',
 					'FORUM_IMAGE_PATH'			=> 'images/forum_icons/',]]></action>
-
-</edit>
-</open>
-
-<open src="includes/acp/acp_styles.php">
-<edit>
-<find>'topic_moved', 'topic_read', 'topic_read_mine', 'topic_read_hot', 'topic_read_hot_mine', 'topic_read_locked', 'topic_read_locked_mine', 'topic_unread', 'topic_unread_mine', 'topic_unread_hot', 'topic_unread_hot_mine', 'topic_unread_locked', 'topic_unread_locked_mine', 'sticky_read', 'sticky_read_mine', 'sticky_read_locked', 'sticky_read_locked_mine', 'sticky_unread', 'sticky_unread_mine', 'sticky_unread_locked', 'sticky_unread_locked_mine', 'announce_read', 'announce_read_mine', 'announce_read_locked', 'announce_read_locked_mine', 'announce_unread', 'announce_unread_mine', 'announce_unread_locked', 'announce_unread_locked_mine', 'global_read', 'global_read_mine', 'global_read_locked', 'global_read_locked_mine', 'global_unread', 'global_unread_mine', 'global_unread_locked', 'global_unread_locked_mine', 'pm_read', 'pm_unread',</find>
-<inline-edit>
-<inline-find>'pm_unread',</inline-find>
-<inline-action type="after-add"> 'news_read', 'news_read_mine', 'news_read_locked', 'news_read_locked_mine', 'news_unread', 'news_unread_mine', 'news_unread_locked', 'news_unread_locked_mine',</inline-action>
-</inline-edit>
-</edit>
-<edit>
-<find><![CDATA[			$file_tpl = "{$phpbb_root_path}styles/{$template_row['template_path']}/template/$tpl_file.html";
+			</edit>
+		</open>
+		<open src="includes/acp/acp_styles.php">
+			<edit>
+				<find><![CDATA['topic_moved', 'topic_read', 'topic_read_mine', 'topic_read_hot', 'topic_read_hot_mine', 'topic_read_locked', 'topic_read_locked_mine', 'topic_unread', 'topic_unread_mine', 'topic_unread_hot', 'topic_unread_hot_mine', 'topic_unread_locked', 'topic_unread_locked_mine', 'sticky_read', 'sticky_read_mine', 'sticky_read_locked', 'sticky_read_locked_mine', 'sticky_unread', 'sticky_unread_mine', 'sticky_unread_locked', 'sticky_unread_locked_mine', 'announce_read', 'announce_read_mine', 'announce_read_locked', 'announce_read_locked_mine', 'announce_unread', 'announce_unread_mine', 'announce_unread_locked', 'announce_unread_locked_mine', 'global_read', 'global_read_mine', 'global_read_locked', 'global_read_locked_mine', 'global_unread', 'global_unread_mine', 'global_unread_locked', 'global_unread_locked_mine', 'pm_read', 'pm_unread',]]></find>
+				<inline-edit>
+					<inline-find><![CDATA['pm_unread',]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ 'news_read', 'news_read_mine', 'news_read_locked', 'news_read_locked_mine', 'news_unread', 'news_unread_mine', 'news_unread_locked', 'news_unread_locked_mine',]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[			$file_tpl = "{$phpbb_root_path}styles/{$template_row['template_path']}/template/$tpl_file.html";
 			$inherited = false;]]></find>
-<action type="after-add"><![CDATA[
-			// SGP MOD Redirect for common files starts //
+				<action type="after-add"><![CDATA[			// SGP MOD Redirect for common files starts //
 			if (STARGATE)
 			{
 				// Check to see if file exists in current template, if not process common files //
@@ -1563,15 +1435,38 @@ if (!function_exists('bbcode_strip'))
 			}
 			// SGP MOD Redirect for common files ends //
 ]]></action>
-</edit>
-</open>
+			</edit>
+		</open>
+		<open src="includes/mcp/mcp_main.php">
+			<edit>
+				<find><![CDATA[			case 'make_global':]]></find>
+				<action type="after-add"><![CDATA[			case 'make_news':
+			case 'make_news_global':]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		case 'make_global':
+			$new_topic_type = POST_GLOBAL;
+			$check_acl = 'f_announce';
+			$l_new_type = (sizeof($topic_ids) == 1) ? 'MCP_MAKE_GLOBAL' : 'MCP_MAKE_GLOBALS';
+		break;]]></find>
+				<action type="after-add"><![CDATA[		case 'make_news':
+			$new_topic_type = POST_NEWS;
+			$check_acl = 'f_announce';
+			$l_new_type = (sizeof($topic_ids) == 1) ? 'MCP_MAKE_NEWS' : 'MCP_MAKE_NEWSS';
+		break;
 
-<open src="language/en/common.php">
-<edit>
-<find><![CDATA[	'default_dateformat'	=> 'D M d, Y g:i a', // Mon Jan 01, 2007 1:37 pm
+		case 'make_news_global':
+			$new_topic_type = POST_NEWS_GLOBAL;
+			$check_acl = 'f_announce';
+			$l_new_type = (sizeof($topic_ids) == 1) ? 'MCP_MAKE_NEWS_GLOBAL' : 'MCP_MAKE_NEWSS_GLOBAL';
+		break;]]></action>
+			</edit>
+		</open>
+		<open src="language/en/common.php">
+			<edit>
+				<find><![CDATA[	'default_dateformat'	=> 'D M d, Y g:i a', // Mon Jan 01, 2007 1:37 pm
 ]]></find>
-<action type="after-add"><![CDATA[
-	// Portal Language Variables //
+				<action type="after-add"><![CDATA[	// Portal Language Variables //
 	'PORTAL'						=> 'Portal',
 	'FORUM_PORTAL'					=> 'Portal',
 	'TO_DAY'						=> 'Date: %s',
@@ -1605,8 +1500,8 @@ if (!function_exists('bbcode_strip'))
 	'VERSION'			=> 'Version',
 
 	'BLOCK_CACHE_TIME_HEAD'		=> 'Block Cache Time',
-	'BLOCK_CACHE_TIME'			=> 'Set the block cache time.',
-	'BLOCK_CACHE_TIME_EXPLAIN'	=> 'Currently all blocs use the same cache period.',
+	'BLOCK_CACHE_TIME'			=> 'Default block cache time.',
+	'BLOCK_CACHE_TIME_EXPLAIN'	=> 'Used if cache time is not set (normally 600).',
 
 	'CLICK_TO_ENLARGE'	=> 'Click to enlarge',
 	'MOVE'				=> 'Move',
@@ -1760,7 +1655,7 @@ if (!function_exists('bbcode_strip'))
 	'NO_BOT_DATA'					=> 'No bot data to display',
 	'BLOCK_CURRENTLY_DISABLED'		=> 'Block disabled!',
 
-	'SOMETHING_WENT_WRONG'			=> 'An error occurred, this should not happen... Please check code at line indicated',
+	'SOMETHING_WENT_WRONG'			=> 'An error occurred, this should not happen... Please check code at line indicated: ',
 	'MISSING_FILES'					=> ' error:<br /><br />File %1$s or <br />File %2$s does not exist or is empty.',
 
 	'LINE'					=> 'line ',
@@ -1780,15 +1675,15 @@ if (!function_exists('bbcode_strip'))
 	'RETURN_PORTAL'			=> '%sReturn to the portal page%s',
 	'LOGOUT_REDIRECT_P'		=> 'Yoou have logged out... retirning to portal',
 	'NO_ID_GIVEN'			=> 'No id supplied<br />',
+	'TEAM_MAX_COUNT'		=> '(limiting: %s per team)',
+	'GO_TO_DEV_SITE'		=> 'Go to Dev Site',
 ]]></action>
-</edit>
-</open>
-
-
-<open src="language/en/mcp.php">
-<edit>
-<find><![CDATA[	'MCP_MAKE_NORMALS_CONFIRM'		=> 'Are you sure you want to change the selected topics to “Standard Topics”?',]]></find>
-<action type="after-add"><![CDATA[	'MCP_MAKE_NEWS'					=> 'Modify to “News”',
+			</edit>
+		</open>
+		<open src="language/en/mcp.php">
+			<edit>
+				<find><![CDATA[	'MCP_MAKE_NORMALS_CONFIRM'		=> 'Are you sure you want to change the selected topics to “Standard Topics”?',]]></find>
+				<action type="after-add"><![CDATA[	'MCP_MAKE_NEWS'					=> 'Modify to “News”',
 	'MCP_MAKE_NEWS_CONFIRM'			=> 'Are you sure you want to change this topic to a News Item”?',
 	'MCP_MAKE_NEWSS'				=> 'Modify to “News Items”',
 	'MCP_MAKE_NEWSS_CONFIRM'		=> 'Are you sure you want to change these topics to a News Items”?',
@@ -1796,33 +1691,68 @@ if (!function_exists('bbcode_strip'))
 	'MCP_MAKE_NEWS_GLOBAL_CONFIRM'	=> 'Are you sure you want to change this topic to a Global News Item”?',
 	'MCP_MAKE_NEWSS_GLOBAL'			=> 'Modify to “Global News Items”',
 	'MCP_MAKE_NEWSS_GLOBAL_CONFIRM'	=> 'Are you sure you want to change these topics to a Global News Items”?',]]></action>
+			</edit>
+		</open>
+		<open src="language/en/ucp.php">
+			<edit>
+				<find><![CDATA[));]]></find>
+				<action type="before-add"><![CDATA[	'UCP_K_BLOCKS'			=> 'Portal Options',
 
-</edit>
-</open>
+	'UCP_K_BLOCKS_ARRANGE'	=> 'Arrange blocks',
+	'UCP_K_BLOCKS_DELETE'	=> 'Delete layout',
+	'UCP_K_BLOCKS_EDIT'		=> 'Edit blocks layout',
+	'UCP_K_BLOCKS_INFO'		=> 'Portal information',
+	'UCP_K_BLOCKS_WIDTH'	=> 'Set page width',
 
-<open src="language/en/viewtopic.php">
-<edit>
-<comment lang="en">Make sure your editor saves all language files with encoding set to UTF-8 and file format Unix for all language file...</comment>
-<find><![CDATA[	'MAKE_STICKY'				=> 'Change to “Sticky”',]]></find>
-<action type="after-add"><![CDATA[	'MAKE_NEWS'					=> 'Change to “News”',
+	'ARRANGE_ICO'			=> 'Arrange Icon',
+	'ARRANGE_ICON'			=> 'Arrange Blocks, lets you organise blocks from the portal page...<br />You can <strong>move</strong>, <strong>hide</strong> or, <strong>un-hide</strong> them as you wish...<br /><br />Depending on the style, the arrange icon (or text links) are normally located in the header to the left of the phpBB text resize icon...<br /><br />Please note, changes are automatically saved when browse to any othe page... <br /><br />Some arrange icons/text examples: ',
+	'ARRANGE_NOW'			=> ' &bull; Arrange Blocks &bull; Tools.',
+
+	'UCP_K_INFO_ARRANGE'	=> 'NOT SET',
+	'UCP_K_INFO_DELETE'		=> 'Delete your current layout and use the board defaults.<br /><br />',
+	'UCP_K_INFO_EDIT'		=> 'Manually edit your current block layout.<br />Can also be used to add newly installed blocks...<br /><br />',
+	'UCP_K_INFO_INFO'		=> 'Some basic portal information here......',
+
+	'UCP_K_INFO_WIDTH'		=> '<br />If your style support it, you can use these images to set the overall width of the page',
+	'UCP_K_NOT_SAVED'		=> 'Block data could not be saved!',
+
+	'UCP_K_SAVED'			=> 'Your layout has been updated... <img src="images/working.gif" height="15" width="15" alt="" />',
+	'UCP_K_RESET'			=> 'Blocks reset to default positions... refreshing page... <br />',
+
+	'DEFAULT_BLOCKS'		=> 'Default blocks',
+
+	'DELETE_BLOCKS'			=> 'Check to reset blocks',
+	'DELETE_BLOCKS_EXPLAIN'	=> '(to default positions).',
+	'UCP_K_LINK'			=> '<a href="%s>" Arrange Blocks</a>',
+
+	'ARRANGE_BLOCKS'		=> '',
+	'OPTION_WIDTH'			=> 'Wide/Narrow',
+
+	'DEV_SITE'				=> 'Development site: ',
+	'B_VERSION'				=> 'build',
+	'P_VERSION'				=> 'Installed version',]]></action>
+			</edit>
+		</open>
+		<open src="language/en/viewtopic.php">
+			<edit>
+				<comment lang="en"><![CDATA[Make sure your editor saves all language files with encoding set to UTF-8 and file format Unix for all language file...]]></comment>
+				<find><![CDATA[	'MAKE_STICKY'				=> 'Change to “Sticky”',]]></find>
+				<action type="after-add"><![CDATA[	'MAKE_NEWS'					=> 'Change to “News”',
 	'MAKE_NEWS_GLOBAL'			=> 'Change to “Global News”',]]></action>
-</edit>
-</open>
-
-<open src="language/en/acp/common.php">
-<edit>
-<find><![CDATA[	'NO_PASSWORD_SUPPLIED'	=> 'You need to enter your password to access the Administration Control Panel.',]]></find>
-<action type="before-add"><![CDATA[	'NO_EDIT'				=> 'Can’t Edit',
+			</edit>
+		</open>
+		<open src="language/en/acp/common.php">
+			<edit>
+				<find><![CDATA[	'NO_PASSWORD_SUPPLIED'	=> 'You need to enter your password to access the Administration Control Panel.',]]></find>
+				<action type="before-add"><![CDATA[	'NO_EDIT'				=> 'Can’t Edit',
 	'NO_DELETE'				=> 'Can’t Delete',
 	'NO_MOVE_DOWN'			=> 'Can’t move down',
 	'NO_MOVE_UP'			=> 'Can’t move up',
 	'NO_RESYNC'				=> 'Resynchronise Disabled',]]></action>
-</edit>
-
-<edit>
-<find><![CDATA[?>]]></find>
-<action type="before-add"><![CDATA[
-// phpbbportal profile fields
+			</edit>
+			<edit>
+				<find><![CDATA[?>]]></find>
+				<action type="before-add"><![CDATA[// phpbbportal profile fields
 $lang = array_merge($lang, array(
 
 	'ACP_CAT_PORTAL'				=> 'Portal',
@@ -2050,31 +1980,26 @@ $lang = array_merge($lang, array(
  
 ));
 ]]></action>
-
-</edit>
-</open>
-
-<open src="language/en/acp/permissions_phpbb.php">
-<edit>
-<find><![CDATA[		'pm'			=> 'Private messages',]]></find>
-<action type="after-add"><![CDATA[		'portal'		=> 'Portal',]]></action>
-
-</edit>
-
-<edit>
-<find><![CDATA[	'acl_a_search'		=> array('lang' => 'Can manage search backends and settings', 'cat' => 'misc'),]]></find>
-<action type="after-add"><![CDATA[
+			</edit>
+		</open>
+		<open src="language/en/acp/permissions_phpbb.php">
+			<edit>
+				<find><![CDATA[		'pm'			=> 'Private messages',]]></find>
+				<action type="after-add"><![CDATA[		'portal'		=> 'Portal',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	'acl_a_search'		=> array('lang' => 'Can manage search backends and settings', 'cat' => 'misc'),]]></find>
+				<action type="after-add"><![CDATA[	'acl_u_k_tools'		=> array('lang' => 'Can use portal tools', 'cat' => 'portal'),
 	'acl_a_k_portal'	=> array('lang' => 'Can view portal settings', 'cat' => 'portal'),
 	'acl_a_k_web_pages'	=> array('lang' => 'Can manage portal web pages', 'cat' => 'portal'),
-	'acl_a_k_tools'		=> array('lang' => 'Can manage portal tools', 'cat' => 'portal'),]]></action>
-
-</edit>
-</open>
-
-<open src="language/en/acp/styles.php">
-<edit>
-<find><![CDATA[	'IMG_USER_ICON10'		=> 'User defined image 10',]]></find>
-<action type="after-add"><![CDATA[	'IMG_NEWS_READ'					=> 'News',
+	'acl_a_k_tools'		=> array('lang' => 'Can manage portal tools', 'cat' => 'portal'),
+]]></action>
+			</edit>
+		</open>
+		<open src="language/en/acp/styles.php">
+			<edit>
+				<find><![CDATA[	'IMG_USER_ICON10'		=> 'User defined image 10',]]></find>
+				<action type="after-add"><![CDATA[	'IMG_NEWS_READ'					=> 'News',
 	'IMG_NEWS_READ_MINE'			=> 'News posted to',
 	'IMG_NEWS_READ_LOCKED'			=> 'News locked',
 	'IMG_NEWS_READ_LOCKED_MINE'		=> 'News locked posted to',
@@ -2082,157 +2007,39 @@ $lang = array_merge($lang, array(
 	'IMG_NEWS_UNREAD_MINE'			=> 'News posted to new',
 	'IMG_NEWS_UNREAD_LOCKED'		=> 'News locked new post',
 	'IMG_NEWS_UNREAD_LOCKED_MINE'	=> 'News locked posted to new',]]></action>
-</edit>
-</open>
-
-
-
-<open src="language/en/ucp.php">
-<edit>
-<find><![CDATA[));]]></find>
-<action type="before-add"><![CDATA[	'UCP_K_BLOCKS'			=> 'Portal Options',
-
-	'UCP_K_BLOCKS_ARRANGE'	=> 'Arrange blocks',
-	'UCP_K_BLOCKS_DELETE'	=> 'Delete layout',
-	'UCP_K_BLOCKS_EDIT'		=> 'Edit blocks layout',
-	'UCP_K_BLOCKS_INFO'		=> 'Portal information',
-	'UCP_K_BLOCKS_WIDTH'	=> 'Set page width',
-
-	'ARRANGE_ICO'			=> 'Arrange Icon',
-	'ARRANGE_ICON'			=> 'Arrange Blocks, lets you organise blocks from the portal page...<br />You can <strong>move</strong>, <strong>hide</strong> or, <strong>un-hide</strong> them as you wish...<br /><br />Depending on the style, the arrange icon (or text links) are normally located in the header to the left of the phpBB text resize icon...<br /><br />Please note, changes are automatically saved when browse to any othe page... <br /><br />Some arrange icons/text examples: ',
-	'ARRANGE_NOW'			=> ' &bull; Arrange Blocks &bull; Tools.',
-
-	'UCP_K_INFO_ARRANGE'	=> 'NOT SET',
-	'UCP_K_INFO_DELETE'		=> 'Delete your current layout and use the board defaults.<br /><br />',
-	'UCP_K_INFO_EDIT'		=> 'Manually edit your current block layout.<br />Can also be used to add newly installed blocks...<br /><br />',
-	'UCP_K_INFO_INFO'		=> 'Some basic portal information here......',
-
-	'UCP_K_INFO_WIDTH'		=> '<br />If your style support it, you can use these images to set the overall width of the page',
-	'UCP_K_NOT_SAVED'		=> 'Block data could not be saved!',
-
-	'UCP_K_SAVED'			=> 'Your layout has been updated... <img src="images/working.gif" height="15" width="15" alt="" />',
-	'UCP_K_RESET'			=> 'Blocks reset to default positions... refreshing page... <br />',
-
-	'DEFAULT_BLOCKS'		=> 'Default blocks',
-
-	'DELETE_BLOCKS'			=> 'Check to reset blocks',
-	'DELETE_BLOCKS_EXPLAIN'	=> '(to default positions).',
-	'UCP_K_LINK'			=> '<a href="%s>" Arrange Blocks</a>',
-
-	'ARRANGE_BLOCKS'		=> '',
-	'OPTION_WIDTH'			=> 'Wide/Narrow',
-
-	'DEV_SITE'				=> 'Development site: ',
-	'B_VERSION'				=> 'build',
-	'P_VERSION'				=> 'Installed version',]]></action>
-</edit>
-</open>
-
-
-
-<open src="styles/prosilver/template/index_body.html">
-<edit>
-<comment lang="en">line ~15</comment>
-<find><![CDATA[<!-- INCLUDE forumlist_body.html -->]]></find>
-<action type="replace-with"><![CDATA[
-<!-- IF STARGATE -->
-	<!-- INCLUDE portal_center.html -->
-<!-- ENDIF -->
-
-<!-- INCLUDE forumlist_body.html -->
-
-<!-- IF STARGATE -->
-	<!-- IF S_DISPLAY_ONLINE_LIST -->
-		<!-- INCLUDE blocks/block_whos_on_line.html -->
-	<!-- ENDIF -->
-	<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
-		<!-- INCLUDE blocks/block_birthday.html -->
-	<!-- ENDIF -->
-	<!-- IF S_DISPLAY_BIRTHDAY_LIST and BIRTHDAY_LIST -->
-		<!-- INCLUDE blocks/block_stats.html -->
-	<!-- ENDIF -->
-<!-- ENDIF -->]]></action>
-</edit>
-
-<edit>
-<comment lang="en">Line ~32</comment>
-<find><![CDATA[<!-- IF S_DISPLAY_ONLINE_LIST -->
-	<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->]]></find>
-<action type="before-add"><![CDATA[<!-- IF !STARGATE -->]]></action>
-</edit>
-
-<edit>
-<comment lang="en">line ~45</comment>
-<find><![CDATA[	<p>{TOTAL_POSTS} &bull; {TOTAL_TOPICS} &bull; {TOTAL_USERS} &bull; {NEWEST_USER}</p>
-<!-- ENDIF -->]]></find>
-<action type="after-add"><![CDATA[<!-- ENDIF -->]]></action>
-</edit>
-</open>
-
-<open src="styles/prosilver/template/memberlist_search.html">
-<edit>
-<find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/forum_fn.js"></script>]]></find>
-<action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/forum_fn.js"></script>]]></action>
-
-</edit>
-</open>
-
-<open src="styles/prosilver/template/simple_header.html">
-<edit>
-<find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/forum_fn.js"></script>]]></find>
-<action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/forum_fn.js"></script>]]></action>
-
-</edit>
-</open>
-
-
-<open src="styles/prosilver/template/overall_footer.html">
-<edit>
-<find><![CDATA[<div id="page-footer">]]></find>
-<action type="before-add"><![CDATA[<!-- IF STARGATE --><!-- INCLUDE portal_tail.html --><!-- ENDIF -->
-]]></action>
-
-</edit>
-<edit>
-<find><![CDATA[			<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>
-]]></find>
-<action type="replace-with"><![CDATA[			<li class="icon-home"><!-- IF STARGATE --><a href="{U_PORTAL}">{L_PORTAL}</a> &bull; <!-- ENDIF --><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>
-]]></action>
-
-</edit>
-
-<edit>
-<find><![CDATA[	<div class="copyright">Powered by <a href="http://www.phpbb.com/">phpBB</a> &copy; 2000, 2002, 2005, 2007 phpBB Group
-]]></find>
-<action type="after-add"><![CDATA[		<!-- IF STARGATE --><!-- INCLUDE portal_footer_pre.html --><!-- ENDIF -->
-		<!-- IF STARGATE --><!-- INCLUDE portal_footer.html --><!-- ENDIF -->]]></action>
-
-</edit>
-
-<edit>
-<find><![CDATA[<div>
-	<a id="bottom" name="bottom" accesskey="z"></a>
-	<!-- IF not S_IS_BOT -->{RUN_CRON_TASK}<!-- ENDIF -->
-</div>]]></find>
-<action type="after-add"><![CDATA[<!-- IF STARGATE-->
-	<!-- IF RAND_BANNER_POSITION == 2 or RAND_BANNER_POSITION == 3 --><div align="center">{RAND_BANNER}</div><!-- ENDIF -->
-</div>
-<!-- ENDIF -->]]></action>
-
-</edit>
-</open>
-
-
-<open src="styles/prosilver/template/attachment.html">
-<edit>
-<comment lang="en">Line ~7</comment>
-<find><![CDATA[		<!-- IF _file.S_THUMBNAIL -->
+			</edit>
+		</open>
+		<open src="styles/prosilver/imageset/imageset.cfg">
+			<edit>
+				<find><![CDATA[img_poll_left =
+img_poll_center =
+img_poll_right = ]]></find>
+				<action type="replace-with"><![CDATA[img_poll_left = poll_left.gif*12*4
+img_poll_center = poll_center.gif*12*
+img_poll_right = poll_right.gif*12*4]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[img_icon_user_warn = icon_user_warn.gif*20*20]]></find>
+				<action type="after-add"><![CDATA[img_news_read				= news_read.gif*27*27
+img_news_read_mine			= news_read_mine.gif*27*27
+img_news_read_locked		= news_read_locked.gif*27*27
+img_news_read_locked_mine	= news_read_locked_mine.gif*27*27
+img_news_unread				= news_unread.gif*27*27
+img_news_unread_mine		= news_unread_mine.gif*27*27
+img_news_unread_locked		= news_unread_locked.gif*27*27
+img_news_unread_locked_mine	= news_unread_locked_mine.gif*27*27]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/attachment.html">
+			<edit>
+				<comment lang="en"><![CDATA[Line ~7]]></comment>
+				<find><![CDATA[		<!-- IF _file.S_THUMBNAIL -->
 		<dl class="thumbnail">
 			<dt><a href="{_file.U_DOWNLOAD_LINK}"><img src="{_file.THUMB_IMAGE}" alt="{_file.DOWNLOAD_NAME}" title="{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}" /></a></dt>
 			<!-- IF _file.COMMENT --><dd> {_file.COMMENT}</dd><!-- ENDIF -->
 		</dl>
 		<!-- ENDIF -->]]></find>
-<action type="replace-with"><![CDATA[		<!-- IF _file.S_THUMBNAIL -->
+				<action type="replace-with"><![CDATA[		<!-- IF _file.S_THUMBNAIL -->
 		<div class="highslide-gallery">
 		<dl class="thumbnail">
 			<dt>
@@ -2246,63 +2053,123 @@ $lang = array_merge($lang, array(
 			<dd>{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}</dd>
 		</dl>
 		<!-- ENDIF -->]]></action>
-</edit>
-</open>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/index_body.html">
+			<edit>
+				<comment lang="en"><![CDATA[line ~15]]></comment>
+				<find><![CDATA[<!-- INCLUDE forumlist_body.html -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF STARGATE -->
+	<!-- INCLUDE portal_center.html -->
+<!-- ENDIF -->
 
-<open src="styles/prosilver/template/overall_header.html">
-<edit>
-<comment lang="en">Line ~16</comment>
-<find><![CDATA[<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>]]></find>
-<action type="after-add"><![CDATA[<link rel="stylesheet" type="text/css" href="{T_THEME_PATH}/style_wide.css" />
-<link rel="alternate stylesheet" type="text/css" media="screen" title="fixed" href="{T_THEME_PATH}/style_fixed.css" />]]></action>
-</edit>
+<!-- INCLUDE forumlist_body.html -->
 
-<edit>
-<comment lang="en">Line ~88</comment>
-<find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/styleswitcher.js"></script>
-<script type="text/javascript" src="{T_TEMPLATE_PATH}/forum_fn.js"></script>]]></find>
-<action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/styleswitcher.js"></script>
-<script type="text/javascript" src="{ROOT_PATH}js/forum_fn.js"></script>]]></action>
-</edit>
-
-<edit>
-<comment lang="en">Line ~102</comment>
-<find><![CDATA[</head>]]></find>
-<action type="before-add"><![CDATA[<!-- IF STARGATE --><!-- INCLUDE portal_header.html --><!-- ENDIF -->]]></action>
-</edit>
-
-<edit>
-<comment lang="en">Line ~104</comment>
-<find><![CDATA[<body id="phpbb" class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">]]></find>
-<action type="after-add"><![CDATA[<!-- IF STARGATE --><div class="stylewidth"><!-- ENDIF -->]]></action>
-</edit>
-
-<edit>
-<comment lang="en">Line ~113</comment>
-<find><![CDATA[				<a href="{U_INDEX}" title="{L_INDEX}" id="logo">{SITE_LOGO_IMG}</a>
+<!-- IF STARGATE -->
+	<!-- IF S_DISPLAY_ONLINE_LIST -->
+		<!-- INCLUDE blocks/block_whos_on_line.html -->
+	<!-- ENDIF -->
+	<!-- IF S_DISPLAY_BIRTHDAY_LIST -->
+		<!-- INCLUDE blocks/block_birthday.html -->
+	<!-- ENDIF -->
+	<!-- IF NEWEST_USER -->
+		<!-- INCLUDE blocks/block_stats.html -->
+	<!-- ENDIF -->
+<!-- ENDIF -->]]></action>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~32]]></comment>
+				<find><![CDATA[<!-- IF S_DISPLAY_ONLINE_LIST -->
+	<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->]]></find>
+				<action type="before-add"><![CDATA[<!-- IF !STARGATE -->]]></action>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[line ~45]]></comment>
+				<find><![CDATA[	<p>{TOTAL_POSTS} &bull; {TOTAL_TOPICS} &bull; {TOTAL_USERS} &bull; {NEWEST_USER}</p>
+<!-- ENDIF -->]]></find>
+				<action type="after-add"><![CDATA[<!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/memberlist_search.html">
+			<edit>
+				<find><![CDATA[<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/forum_fn.js"></script>]]></find>
+				<action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/forum_fn.js"></script>]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/overall_footer.html">
+			<edit>
+				<find><![CDATA[<div id="page-footer">]]></find>
+				<action type="before-add"><![CDATA[<!-- IF STARGATE --><!-- INCLUDE portal_tail.html --><!-- ENDIF -->
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[			<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>
 ]]></find>
-<action type="replace-with"><![CDATA[				<!-- IF STARGATE -->
+				<action type="replace-with"><![CDATA[			<li class="icon-home"><!-- IF STARGATE --><a href="{U_PORTAL}">{L_PORTAL}</a> &bull; <!-- ENDIF --><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<div class="copyright">Powered by <a href="http://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Group]]></find>
+				<action type="after-add"><![CDATA[		<!-- IF STARGATE --><!-- INCLUDE portal_footer_pre.html --><!-- ENDIF -->
+		<!-- IF STARGATE --><!-- INCLUDE portal_footer.html --><!-- ENDIF -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[</body>
+</html>]]></find>
+				<action type="before-add"><![CDATA[<!-- IF STARGATE-->
+	<!-- IF RAND_BANNER_POSITION == 2 or RAND_BANNER_POSITION == 3 --><div align="center">{RAND_BANNER}</div><!-- ENDIF -->
+</div>
+<!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/overall_header.html">
+			<edit>
+				<comment lang="en"><![CDATA[Line ~16]]></comment>
+				<find><![CDATA[<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>]]></find>
+				<action type="after-add"><![CDATA[<link rel="stylesheet" type="text/css" href="{T_THEME_PATH}/style_wide.css" />
+<link rel="alternate stylesheet" type="text/css" media="screen" title="fixed" href="{T_THEME_PATH}/style_fixed.css" />]]></action>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~88]]></comment>
+				<find><![CDATA[<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/styleswitcher.js"></script>
+<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/forum_fn.js"></script>]]></find>
+				<action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/styleswitcher.js"></script>
+<script type="text/javascript" src="{ROOT_PATH}js/forum_fn.js"></script>]]></action>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~102]]></comment>
+				<find><![CDATA[</head>]]></find>
+				<action type="before-add"><![CDATA[<!-- IF STARGATE --><!-- INCLUDE portal_header.html --><!-- ENDIF -->]]></action>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~104]]></comment>
+				<find><![CDATA[<body id="phpbb" class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">]]></find>
+				<action type="after-add"><![CDATA[<!-- IF STARGATE --><div class="stylewidth"><!-- ENDIF -->]]></action>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~113]]></comment>
+				<find><![CDATA[				<a href="{U_INDEX}" title="{L_INDEX}" id="logo">{SITE_LOGO_IMG}</a>
+]]></find>
+				<action type="replace-with"><![CDATA[				<!-- IF STARGATE -->
 					<a href="{U_PORTAL}" title="{L_PORTAL}" id="logo">{SITE_LOGO_IMG}</a>
 				<!-- ELSE -->
 					<a href="{U_INDEX}" title="{L_INDEX}" id="logo">{SITE_LOGO_IMG}</a>
 				<!-- ENDIF -->]]></action>
-</edit>
-
-<edit>
-<comment lang="en">Line ~138</comment>
-<find><![CDATA[				<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a> <!-- BEGIN navlinks --> <strong>&#8249;</strong> <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a><!-- END navlinks --></li>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~138]]></comment>
+				<find><![CDATA[				<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a> <!-- BEGIN navlinks --> <strong>&#8249;</strong> <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a><!-- END navlinks --></li>
 ]]></find>
-<action type="replace-with"><![CDATA[			<!-- IF STARGATE -->
+				<action type="replace-with"><![CDATA[			<!-- IF STARGATE -->
 				<li class="icon-home"><a href="{U_PORTAL}" accesskey="h">{L_PORTAL}</a> &bull; <a href="{U_INDEX}" accesskey="h">{L_INDEX}</a><!-- BEGIN navlinks --> <strong>&#8249;</strong> <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a><!-- END navlinks --></li>
 			<!-- ELSE -->
 				<li class="icon-home"><a href="{U_INDEX}" accesskey="h">{L_INDEX}</a> <!-- BEGIN navlinks --> <strong>&#8249;</strong> <a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a><!-- END navlinks --></li>
 			<!-- ENDIF -->]]></action>
-</edit>
-
-<edit>
-<comment lang="en">Line ~140</comment>
-<find><![CDATA[				<li class="rightside"><a href="#" onclick="fontsizeup(); return false;" onkeypress="return fontsizeup(event);" class="fontsize" title="{L_CHANGE_FONT_SIZE}">{L_CHANGE_FONT_SIZE}</a></li>]]></find>
-<action type="after-add"><![CDATA[				<!-- IF STARGATE -->
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~140]]></comment>
+				<find><![CDATA[				<li class="rightside"><a href="#" onclick="fontsizeup(); return false;" onkeypress="return fontsizeup(event);" class="fontsize" title="{L_CHANGE_FONT_SIZE}">{L_CHANGE_FONT_SIZE}</a></li>]]></find>
+				<action type="after-add"><![CDATA[				<!-- IF STARGATE -->
 					<li class="rightside">
 						<!-- IF S_ARRANGE -->
 						<span style="display:inline;" id="_OFF">
@@ -2318,165 +2185,119 @@ $lang = array_merge($lang, array(
 					</li>
 				<!-- ENDIF -->
 ]]></action>
-</edit>
-
-<edit>
-<comment lang="en">Line ~178</comment>
-<find><![CDATA[	<a name="start_here"></a>]]></find>
-<action type="before-add"><![CDATA[<!--<div class="header_menu" style="margin-left:-7px; margin-bottom:1px;"><!-- INCLUDE blocks/block_header_menus.html --></div>-->]]></action>
-</edit>
-
-<edit>
-<comment lang="en">Line ~179</comment>
-<find><![CDATA[		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~179]]></comment>
+				<find><![CDATA[		<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
 		<div id="information" class="rules">
 			<div class="inner"><span class="corners-top"><span></span></span>
 				<strong>{L_INFORMATION}:</strong> {L_BOARD_DISABLED}
 			<span class="corners-bottom"><span></span></span></div>
 		</div>
 		<!-- ENDIF -->]]></find>
-<action type="after-add"><![CDATA[
-		<!-- IF STARGATE -->
+				<action type="after-add"><![CDATA[		<!-- IF STARGATE -->
 			<!-- IF RAND_BANNER_POSITION == 1 or RAND_BANNER_POSITION == 3 --><div align="center">{RAND_BANNER}</div><!-- ENDIF -->
 			<!-- INCLUDE portal_head.html -->
 		<!-- ENDIF -->]]></action>
-</edit>
-</open>
-
-<open src="styles/prosilver/template/posting_buttons.html">
-<edit>
-<find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/editor.js"></script>]]></find>
-<action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/editor.js"></script>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/posting_buttons.html">
+			<edit>
+				<find><![CDATA[<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/editor.js"></script>]]></find>
+				<action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/editor.js"></script>
 ]]></action>
-
-</edit>
-</open>
-
-<open src="styles/prosilver/template/posting_smilies.html">
-<edit>
-<find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/editor.js"></script>]]></find>
-<action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/editor.js"></script>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/posting_smilies.html">
+			<edit>
+				<find><![CDATA[<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/editor.js"></script>]]></find>
+				<action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/editor.js"></script>
 ]]></action>
-
-</edit>
-</open>
-
-<open src="styles/prosilver/template/search_results.html">
-<edit>
-<comment lang="en"></comment>
-<find><![CDATA[						<a href="{searchresults.U_VIEW_TOPIC}" class="topictitle">{searchresults.TOPIC_TITLE}</a> {searchresults.ATTACH_ICON_IMG}]]></find>
-<inline-edit>
-<inline-find><![CDATA[{searchresults.U_VIEW_TOPIC}"]]></inline-find>
-<inline-action type="after-add"><![CDATA[ title="{searchresults.TOOLTIP}"]]></inline-action>
-</inline-edit>
-</edit>
-</open>
-
-<open src="styles/prosilver/template/simple_header.html">
-<edit>
-<find><![CDATA[<script type="text/javascript" src="{T_TEMPLATE_PATH}/styleswitcher.js"></script>]]></find>
-<action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/styleswitcher.js"></script>]]></action>
-
-</edit>
-</open>
-
-<open src="styles/prosilver/template/viewforum_body.html">
-<edit>
-<comment lang="en">Line ~129</comment>
-<find><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL) -->{L_ANNOUNCEMENTS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></find>
-<action type="replace-with"><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL or topicrow.S_POST_NEWS or topicrow.S_POST_NEWS_GLOBAL) -->{L_ANNOUNCEMENTS_AND_NEWS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></action>
-</edit>
-
-<edit>
-<comment lang="en">Line ~141</comment>
-<find><![CDATA[				<dt<!-- IF topicrow.TOPIC_ICON_IMG and S_TOPIC_ICONS --> style="background-image: url({T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}); background-repeat: no-repeat;"<!-- ENDIF --> title="{topicrow.TOPIC_FOLDER_IMG_ALT}"><!-- IF topicrow.S_UNREAD_TOPIC --><a href="{topicrow.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF --><a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a>]]></find>
-<inline-edit>
-<inline-find><![CDATA[<a href="{topicrow.U_VIEW_TOPIC}"]]></inline-find>
-<inline-action type="after-add"><![CDATA[ <!-- IF STARGATE -->title="{topicrow.TOOLTIP}"<!-- ENDIF --> ]]></inline-action>
-</inline-edit>
-</edit>
-</open>
-
-<open src="styles/prosilver/template/viewtopic_body.html">
-<edit>
-<comment lang="en">Line ~226</comment>
-<find><![CDATA[<!-- IF S_QUICK_REPLY -->
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/search_results.html">
+			<edit>
+				<comment lang="en"/>
+				<find><![CDATA[						<a href="{searchresults.U_VIEW_TOPIC}" class="topictitle">{searchresults.TOPIC_TITLE}</a> {searchresults.ATTACH_ICON_IMG}]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[{searchresults.U_VIEW_TOPIC}"]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ title="{searchresults.TOOLTIP}"]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/simple_header.html">
+			<edit>
+				<find><![CDATA[<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/styleswitcher.js"></script>
+<script type="text/javascript" src="{T_SUPER_TEMPLATE_PATH}/forum_fn.js"></script>]]></find>
+				<action type="replace-with"><![CDATA[<script type="text/javascript" src="{ROOT_PATH}js/styleswitcher.js"></script>
+<script type="text/javascript" src="{ROOT_PATH}js/forum_fn.js"></script>]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/viewforum_body.html">
+			<edit>
+				<comment lang="en"><![CDATA[Line ~129]]></comment>
+				<find><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL) -->{L_ANNOUNCEMENTS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></find>
+				<action type="replace-with"><![CDATA[					<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and (topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL or topicrow.S_POST_NEWS or topicrow.S_POST_NEWS_GLOBAL) -->{L_ANNOUNCEMENTS_AND_NEWS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>]]></action>
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~141]]></comment>
+				<find><![CDATA[				<dt<!-- IF topicrow.TOPIC_ICON_IMG and S_TOPIC_ICONS --> style="background-image: url({T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}); background-repeat: no-repeat;"<!-- ENDIF --> title="{topicrow.TOPIC_FOLDER_IMG_ALT}"><!-- IF topicrow.S_UNREAD_TOPIC --><a href="{topicrow.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF --><a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a>]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[<a href="{topicrow.U_VIEW_TOPIC}"]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ <!-- IF STARGATE -->title="{topicrow.TOOLTIP}"<!-- ENDIF --> ]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/viewtopic_body.html">
+			<edit>
+				<comment lang="en"><![CDATA[Line ~226]]></comment>
+				<find><![CDATA[<!-- IF S_QUICK_REPLY -->
 	<!-- INCLUDE quickreply_editor.html -->
 <!-- ENDIF -->]]></find>
-<action type="replace-with"><![CDATA[<!-- IF S_QUICK_REPLY and not STARGATE -->
+				<action type="replace-with"><![CDATA[<!-- IF S_QUICK_REPLY and not STARGATE -->
 	<!-- INCLUDE quickreply_editor.html -->
 <!-- ENDIF -->]]></action>
-</edit>
-<edit>
-<comment lang="en">Line ~243</comment>
-<find><![CDATA[<!-- ENDIF -->
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~243]]></comment>
+				<find><![CDATA[<!-- ENDIF -->
 
 <div class="topic-actions">
 	<div class="buttons">
 	<!-- IF not S_IS_BOT and S_DISPLAY_REPLY_INFO -->
 		<div class="<!-- IF S_IS_LOCKED -->locked-icon<!-- ELSE -->reply-icon<!-- ENDIF -->"><a href="{U_POST_REPLY_TOPIC}" title="<!-- IF S_IS_LOCKED -->{L_TOPIC_LOCKED}<!-- ELSE -->{L_POST_REPLY}<!-- ENDIF -->"><span></span><!-- IF S_IS_LOCKED -->{L_TOPIC_LOCKED_SHORT}<!-- ELSE -->{L_POST_REPLY}<!-- ENDIF --></a></div>
 	<!-- ENDIF -->]]></find>
-<action type="after-add"><![CDATA[	<!-- IF STARGATE and S_QUICK_REPLY and S_SGP_QUICK_REPLY -->
+				<action type="after-add"><![CDATA[	<!-- IF STARGATE and S_QUICK_REPLY and S_SGP_QUICK_REPLY -->
 			<!-- IF not S_IS_BOT and S_DISPLAY_REPLY_INFO and not S_IS_LOCKED -->
 				<a class="qreply-icon fast-reply" href="javascript:void(0);" title="{L_QUICK_REPLY}"><span>{L_QUICK_REPLY}</span></a>
 			<!-- ENDIF -->
 	<!-- ENDIF -->]]></action>
-</edit>
-<edit>
-<comment lang="en">Line ~252</comment>
-<find><![CDATA[	<!-- IF PAGINATION or TOTAL_POSTS -->
+			</edit>
+			<edit>
+				<comment lang="en"><![CDATA[Line ~252]]></comment>
+				<find><![CDATA[	<!-- IF PAGINATION or TOTAL_POSTS -->
 		<div class="pagination">
 			{TOTAL_POSTS}
 			<!-- IF PAGE_NUMBER --><!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
 		</div>
 	<!-- ENDIF -->
 </div>]]></find>
-<action type="after-add"><![CDATA[<!-- IF STARGATE and S_QUICK_REPLY -->
+				<action type="after-add"><![CDATA[<!-- IF STARGATE and S_QUICK_REPLY -->
 	<!-- IF S_QUICK_REPLY and S_SGP_QUICK_REPLY -->
 		<!-- INCLUDE sgp_quickreply_editor.html -->
 	<!-- ENDIF -->
 <!-- ENDIF -->]]></action>
-</edit>
-</open>
-
-
-
-<open src="styles/prosilver/theme/stylesheet.css">
-<edit>
-<find>@import url("colours.css");</find>
-<action type="after-add">@import url("profile_on_left.css");
-</action>
-
-</edit>
-</open>
-
-<open src="styles/prosilver/imageset/imageset.cfg">
-<edit>
-<find>img_poll_left =
-img_poll_center =
-img_poll_right = </find>
-<action type="replace-with">img_poll_left = poll_left.gif*12*4
-img_poll_center = poll_center.gif*12*
-img_poll_right = poll_right.gif*12*4</action>
-
-</edit>
-
-<edit>
-<find>img_icon_user_warn = icon_user_warn.gif*20*20</find>
-<action type="after-add">img_news_read				= news_read.gif*27*27
-img_news_read_mine			= news_read_mine.gif*27*27
-img_news_read_locked		= news_read_locked.gif*27*27
-img_news_read_locked_mine	= news_read_locked_mine.gif*27*27
-img_news_unread				= news_unread.gif*27*27
-img_news_unread_mine		= news_unread_mine.gif*27*27
-img_news_unread_locked		= news_unread_locked.gif*27*27
-img_news_unread_locked_mine	= news_unread_locked_mine.gif*27*27</action>
-
-</edit>
-</open>
-
-<diy-instructions lang="en-gb">
-Point your browser to: your_site/portal/ and follow the onscreen instructions...
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/stylesheet.css">
+			<edit>
+				<find><![CDATA[@import url("colours.css");]]></find>
+				<action type="after-add"><![CDATA[@import url("profile_on_left.css");
+]]></action>
+			</edit>
+		</open>
+		<php-installer><![CDATA[portal/index.php]]></php-installer>
+		<diy-instructions lang="en"><![CDATA[Point your browser to: your_site/portal/ and follow the onscreen instructions...
 Note! If you browse to root (index) at this point you will receive a template error... Ignore it and browse to: your_site/portal/
 
 Go to ACP > PERMISSIONS > Admin roles > Full Admin.... 
@@ -2488,7 +2309,6 @@ Refresh subsilver 2 Templates/Themes/Imagesets if you completed the subsilver 2 
 Purge the cache...
 
 Enable 'Create Thumbnail' to take advantage of highslide...
-Delete or rename the portal directory...
-</diy-instructions>
-</action-group>
+Delete or rename the portal directory...]]></diy-instructions>
+	</action-group>
 </mod>

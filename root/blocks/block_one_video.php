@@ -10,7 +10,8 @@
 * @note: Do not remove this copyright. Just append yours if you have modified it,
 *        this is part of the copyright agreement...
 *
-* @version $Id: block_small_adds.php 336 2009-03-03 07:54:37Z Michealo $
+* @version $Id$
+*
 * Updated: 04 March 2010
 *
 */
@@ -32,13 +33,11 @@
 
 
 	if (!$result = $db->sql_query($sql))
-	{ 
+	{
 		trigger_error('Error! Could not query portal modules information: ' . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 	}
 
 	$result = $db->sql_query($sql);
-//	$video_to_use = $db->sql_fetchfield('video');
-
 	$row = $db->sql_fetchrow($result);
 
 
@@ -70,6 +69,10 @@
 	{
 		$height = $height + 20;
 	}
+
+	// If you want a fixed video all the time, uncomment this code and add the video ID//
+	// $row['video_link'] = 'put your video id here!';
+	// Example = $row['video_link'] = 'dtu2h-BROHQ';
 
 	$template->assign_vars(array(
 		'VIDEO_PATH'	=> 'http://www.youtube.com/v/',

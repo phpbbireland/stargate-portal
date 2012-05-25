@@ -1,27 +1,38 @@
+<!-- IDTAG block_announcements.html 24 March 2011 copyright phpbbireland.com 2008 -->
 
-<!-- IDTAG block_announcements.html 27 November 2008 copyright phpbbireland.com 2008 -->
 <div class="news">
-	<div>
-		<a id="bstart" name="top" accesskey="t"></a>
-		<!-- IF S_ANNOUNCEMENTS_COUNT_RETURNED == 0 -->
-		<div style="text-align:center"><span class="genmed"><strong>{L_NO_ANNOUNCEMENTS}</strong></span></div>
-		<!-- ELSE -->
-		<!-- BEGIN announce_row -->
-			<!-- IF announce_row.S_TOPIC_TYPE != 3 -->
-			<div class="myannounce <!-- IF announce_row.S_ROW_COUNT is even -->bg1a<!-- ELSE -->bg2a<!-- ENDIF -->">
+	<a id="bstart" name="top" accesskey="t"></a>
+	<!-- IF S_ANNOUNCEMENTS_COUNT_RETURNED == 0 -->
+		<div class="genmed" style="text-align:center"><strong>{L_NO_ANNOUNCEMENTS}</strong></div>
+	<!-- ELSE -->
+	<!-- BEGIN announce_row -->
+		<!-- IF announce_row.S_TOPIC_TYPE != 3 -->
+			<div class="announce <!-- IF announce_row.S_ROW_COUNT is even -->bg1a<!-- ELSE -->bg2a<!-- ENDIF --> sgp-corners">
 			<!-- ELSE -->
-			<div class="myannounce bg3a">
+			<div class="announce bg3a sgp-corners">
 			<!-- ENDIF -->
-				<div class="inner" style="min-height:90px; width:100%;">
-					<span class="corners-top-news"><span></span></span>
+				<div class="inner" style="min-height:50px; width:100%;">
 					<div class="news_header" style="width:100%;">
-						<span class="news_title"> {announce_row.TITLE}</span>
-						<span class="news_poll">  </span>
+						<span class="news_title">
+							<!-- IF announce_row.S_TOPIC_TYPE == 3 -->
+							<span class="red"> {announce_row.TITLE}</span>
+							<!-- ELSE -->
+							<span class="black"> {announce_row.TITLE}</span>
+							<!-- ENDIF -->
+						</span>
 						<span class="news_time">  {announce_row.TIME}</span>
 					</div>
 					<div class="news_body">
 						<div class="news" style="width:100%;">
-							<div class="announce_box"><img src="{T_IMAGESET_LANG_PATH}/news/announcement.png" alt="" /></div>
+							<div class="announce_box">
+
+						<!-- IF announce_row.S_TOPIC_TYPE == 3 -->
+							<img src="{T_IMAGESET_LANG_PATH}/news/announcement.png" alt="" />
+						<!-- ELSE -->
+							<img src="{T_IMAGESET_LANG_PATH}/news/announcement2.png" alt="" />
+						<!-- ENDIF -->
+
+							</div>
 							<div class="contents">{announce_row.MESSAGE}</div>
 							<!-- IF announce_row.S_HAS_ATTACHMENTS -->
 							<div class="highslide-gallery">
@@ -44,16 +55,15 @@
 							<!-- IF announce_row.ALLOW_POST -->
 								<a href="{announce_row.U_REPLY}"> {announce_row.U_REPLY_IMG}</a>
 							<!-- ENDIF -->
-							<a href="#bstart" title="Top"><img src="{T_IMAGESET_PATH}/icon_back_top.gif" width="14" height="14" alt="Top" /></a>
+							<a href="#bstart" title="Top"><img src="{T_IMAGESET_PATH}/portal/icon_back_top.png" width="14" height="14" alt="Top" /></a>
 						</span>
 					</div>
-					<span class="corners-bottom-news"><span></span></span>
+					<br class="clear" />
 				</div>
 			</div>
-			<!-- IF announce_row.S_NOT_LAST --><br /><!-- ENDIF -->
-		<!-- END announce_row -->
-		<!-- ENDIF -->
-	</div>
+		<!-- IF announce_row.S_NOT_LAST --><br /><!-- ENDIF -->
+	<!-- END announce_row -->
+	<!-- ENDIF -->
 </div>
 <!-- IF DEBUG_QUERIES --><div class="block_data">{ANNOUNCEMENYS_DEBUG}</div><!-- ENDIF -->
 

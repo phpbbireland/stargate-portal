@@ -65,7 +65,6 @@ class ucp_k_blocks
 			case 'arrange':
 				$template->assign_vars(array(
 					'ARRANGE_ICO'		=> $user->lang['UCP_K_INFO_ARRANGE'],
-					//'L_ARRANGE_ICON'	=> sprintf($user->lang['ARRANGE_ICON'], '<img src="' . $phpbb_root_path . '/images/portal_ucp_images/arrange.gif"' . ' alt="" />'),
 					'L_ARRANGE_ICON'	=> $user->lang['ARRANGE_ICON'],
 					'U_PORTAL_ARRANGE'	=> append_sid("{$phpbb_root_path}portal.$phpEx", "arrange=1"),
 					'LINK_IMG'			=> '<img src="' . $phpbb_root_path . '/images/portal_ucp_images/arrange.gif" alt="" />',

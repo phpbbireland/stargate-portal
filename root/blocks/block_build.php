@@ -30,7 +30,7 @@ $block_cache_time = $k_config['block_cache_time_default'];
 $queries = $cached_queries = $total_queries = 0;
 
 // Process common data as in phpBB header function for pages other than index and portal //
-// Needed to fill some block with data... only other option is to code these block 
+// Needed to fill some block with data... only other option is to code these block
 // independently or disable them //
 
 $this_page = explode(".", $user->page['page']);
@@ -41,7 +41,7 @@ if ($this_page[0] != 'index' && $this_page[0] != 'portal')
 	$display_online_list = true;
 	$item_id = 0;
 	$item = 'forum';
-	
+
 	// Generate logged in/logged out status
 	if ($user->data['user_id'] != ANONYMOUS)
 	{

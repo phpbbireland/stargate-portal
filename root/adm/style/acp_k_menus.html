@@ -6,13 +6,13 @@ function set_image(data)
 {
 	document.getElementById('menu_icon').value=data;
 	document.getElementById('alt').value=data;
-	document.getElementById("pip").innerHTML = " <img align='absmiddle' src='./../images/block_images/small/" + data + "' />"
+	document.getElementById("pip").innerHTML = " <img align='absmiddle' src='./../images/block_images/menu/" + data + "' />"
 }
 
 function display_pip(myForm)
 {
     var pip = myForm.menu_icon;
-    document.getElementById("pip").innerHTML = " <img align='absmiddle' src='./../images/block_images/small/" + pip.value + "' />"
+    document.getElementById("pip").innerHTML = " <img align='absmiddle' src='./../images/block_images/menu/" + pip.value + "' />"
 }
 </script>
 <!-- END: Edit #1 -->
@@ -39,7 +39,6 @@ function set_ids(data, view)
     document.getElementById(view).value = mydata + data;
 }
 </script>
-
 
 <a name="maincontent"></a><h1>{L_TITLE}</h1>
 
@@ -87,11 +86,11 @@ function set_ids(data, view)
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><!-- IF mdata.S_MENU_TYPE == '0' --> {L_HEAD}<!-- ELSEIF mdata.S_MENU_TYPE == '1' --> {L_NAV}<!-- ELSEIF mdata.S_MENU_TYPE == '2' --> {L_SUB}<!-- ELSEIF mdata.S_MENU_TYPE == '3' --> {L_FOOT}<!-- ENDIF --> </div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center">{mdata.S_MENU_APPEND_SID}</div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center">{mdata.S_MENU_APPEND_UID}</div></td>
-		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><img src='./../images/block_images/small/{mdata.S_MENU_ICON}'></div></td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><img src='./../images/block_images/menu/{mdata.S_MENU_ICON}'></div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="left">{mdata.S_MENU_ITEM_NAME}</div></td>
-		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="left" style="max-width:200px; overflow:auto;"><!-- IF mdata.S_SUB_HEADING == '1' -->{L_SUB_HEADING}<!-- ENDIF -->{mdata.S_MENU_LINK}</div></td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="left" style="max-width:200px; overflow:auto;"><!-- IF mdata.S_SUB_HEADING == '1' -->{L_SUB_HEADING}<!-- ELSE -->{mdata.S_MENU_LINK}<!-- ENDIF --></div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><!-- IF not mdata.S_SUB_HEADING --><!-- IF mdata.S_MENU_EXTERN == '0' -->{L_NO}<!-- ELSEIF mdata.S_MENU_EXTERN == '1' -->{L_YES}<!-- ELSEIF mdata.S_MENU_EXTERN == '2' -->{L_YES}<!-- ENDIF --><!-- ENDIF --></div></td>
-		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><!-- IF mdata.S_VIEW_ALL -->{L_ALL_GROUPS}<!-- ELSE -->{mdata.S_MENU_VIEW}<!-- ENDIF --></div></td>
+		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"><div align="center"><!-- IF mdata.S_VIEW_ALL -->{L_ALL_GROUPS}<!-- ELSE -->{mdata.S_VIEW_GROUPS}<!-- ENDIF --></div></td>
 		<td class="<!-- IF mdata.S_SUB_HEADING -->row2<!-- ELSE -->row1<!-- ENDIF -->"  align="center">
 			<div align="center">
 			<!-- IF mdata.S_FIRST_ROW && not mdata.S_LAST_ROW -->
@@ -139,6 +138,7 @@ function set_ids(data, view)
 		<dt><label for="link_to">{L_MENU_LINK_BIG}:</label><br /><span>{L_MENU_LINK_EXPLAIN}</span></dt>
 		<dd><label><input type="text" maxlength="255" size="50" name="link_to" value="{S_MENU_LINK}" class="post" /></label></dd>
 	</dl>
+
 	<dl>
 		<dt><label for="menu_icon">{L_MENU_ICON}:</label><br /><span>{L_MENU_ICON_EXPLAIN}</span></dt>
 		<dd><label>
@@ -147,8 +147,7 @@ function set_ids(data, view)
 				<option value="{menuicons.S_MENU_ICONS}" <!-- IF menuicons.S_MENU_ICONS == S_MENU_ICON -->selected <!-- ENDIF -->>{menuicons.S_MENU_ICONS}</option>
 				<!-- END menuicons -->
 				</select>
-				<span name='pip' id='pip'> <img src='./../images/block_images/small/{S_MENU_ICON}'> </span>
-				<!--<!-- BEGIN menuicons --><span name='pip' id='pip'></span> &nbsp; <!-- END menuicons -->-->
+				<span name='pip' id='pip'> <img src='./../images/block_images/menu/{S_MENU_ICON}'> </span>
 			</label>
 		</dd>
 	</dl>
@@ -158,7 +157,7 @@ function set_ids(data, view)
 			<span class="imageline" style="padding:5px; border: solid 1px #D7D7D7;">
 			<!-- BEGIN menuicons -->
 				<!-- IF menuicons.S_MENU_ICONS -->
-					<a href="#" onclick="set_image('{menuicons.S_MENU_ICONS}', true, true); return false;"><img src='./../images/block_images/small/{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}'></a>
+					<a href="#" onclick="set_image('{menuicons.S_MENU_ICONS}', true, true); return false;"><img src='./../images/block_images/menu/{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}'></a>
 				<!-- ENDIF -->
 			<!-- END menuicons -->
 			</span>
@@ -190,12 +189,10 @@ function set_ids(data, view)
 		<dd><label><br /><input type="radio" class="radio" id="soft_hr" name="soft_hr" value="1"<!-- IF S_SOFT_HR --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 		<label><input type="radio" class="radio" name="soft_hr" value="0"<!-- IF not S_SOFT_HR --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
 	</dl>
-
-
 	<hr />
 	<dl>
 		<dt><label for="view_groups">{L_MENU_VIEW_GROUPS}:</label><br /><span>{L_MENU_VIEW_GROUPS_EXPLAIN}</span></dt>
-		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text"></dd>
+		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text" /></dd>
 	</dl>
 	<dl>
 		<dt><label for="view_by">{L_MENU_VIEW_BY}:</label><br /><span>{L_MENU_VIEW_BY_EXPLAIN}</span></dt>
@@ -253,23 +250,23 @@ function set_ids(data, view)
 				<option value="{menuicons.S_MENU_ICONS}" <!-- IF menuicons.S_MENU_ICONS == S_MENU_ICON -->selected <!-- ENDIF -->>{menuicons.S_MENU_ICONS}</option>
 				<!-- END menuicons -->
 				</select>
-				<span name='pip' id='pip'><img src='./../images/block_images/small/{S_MENU_ICON}'></span>
+				<span name='pip' id='pip'><img src='./../images/block_images/menu/{S_MENU_ICON}'></span>
 			</label>
 		</dd>
 	</dl>
 	<dl>
 		<dt>{L_MENU_ICONS}:</dt>
 		<dd>
-		<div class="imageline" style="padding:5px; border: solid 1px #D7D7D7;">
+			<div class="imageline" style="padding:5px; border: solid 1px #D7D7D7;">
 			<!-- BEGIN menuicons -->
 				<!-- IF menuicons.S_MENU_ICONS -->
 					<a href="#" onclick="set_image('{menuicons.S_MENU_ICONS}', true, true); return false;">
-					<img src='./../images/block_images/small/{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}'>
+						<img src='./../images/block_images/menu/{menuicons.S_MENU_ICONS}' title='{menuicons.S_MENU_ICONS}' alt="" />
 					</a>
 				<!-- ENDIF -->
 			<!-- END menuicons -->
-		</div>
-		<dd/>
+			</div>
+		</dd>
 	</dl>
 	<dl>
 		<dt><label for="link_to">{L_MENU_LINK_BIG}:</label><br /><span>{L_MENU_LINK_EXPLAIN}</span></dt>
@@ -305,15 +302,10 @@ function set_ids(data, view)
 		<dd><label><br /><input type="radio" class="radio" id="sub_heading" name="sub_heading" value="1"<!-- IF S_SUB_HEADING --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 		<label><input type="radio" class="radio" name="sub_heading" value="0"<!-- IF not S_SUB_HEADING --> checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
 	</dl>
-
-
-
-
-
 	<hr />
 	<dl>
 		<dt><label for="view_groups">{L_MENU_VIEW_GROUPS}:</label><br /><span>{L_MENU_VIEW_GROUPS_EXPLAIN}</span></dt>
-		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text"></dd>
+		<dd><br /><input class="post" size="26" maxlength="100" id="view_groups" name="view_groups" value="{S_VIEW_GROUPS}" type="text" /></dd>
 	</dl>
 	<dl>
 		<dt><label for="view_by">{L_MENU_VIEW_BY}:</label><br /><span>{L_MENU_VIEW_BY_EXPLAIN}</span></dt>
@@ -335,10 +327,6 @@ function set_ids(data, view)
 	</dl>
 	<hr />
 
-
-
-
-
 </fieldset>
 <!-- ENDIF -->
 
@@ -355,7 +343,7 @@ function set_ids(data, view)
 	<!-- BEGIN menuicons -->
 	<tr>
 		<td align="right" class="row3" width="30px">{L_ICON}</td>
-		<td align="left" class="row4" width="20px"><img src="./../images/block_images/small/{menuicons.S_MENU_ICONS}" border="0" alt="" /></td>
+		<td align="left" class="row4" width="20px"><img src="./../images/block_images/menu/{menuicons.S_MENU_ICONS}" border="0" alt="" /></td>
 		<td align="center" class="row2" width="auto">{menuicons.S_MENU_ICONS}</td>
 		<td align="center" class="row4" width="100px">
 			 &nbsp; <a href="#{mdata.S_MENUID}"><img src="images/icon_delete.gif" border="0"></a>
@@ -369,7 +357,6 @@ function set_ids(data, view)
 	</tbody>
 </fieldset>
 </table>
-
 <fieldset>
 	{L_SOURCE_DIRECTORY}<br />
 	{L_ICONS_REPORT}
@@ -377,13 +364,14 @@ function set_ids(data, view)
 <!-- ENDIF -->
 
 <!-- IF L_MENU_REPORT -->
-<b>{L_MENU_REPORT}<br /></b>
+<strong>{L_MENU_REPORT}<br /></strong>
 <!-- ENDIF -->
 
 <!-- IF S_OPTIONS == 'add' || S_OPTIONS == 'edit' -->
 <fieldset class="submit-buttons">
 	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
 	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
 </fieldset>
 <!-- ENDIF -->
 
@@ -394,8 +382,5 @@ function set_ids(data, view)
 </p>
 <!-- ENDIF -->
 
-</table>
-{S_FORM_TOKEN}
 </form>
-
 <!-- INCLUDE overall_footer.html -->

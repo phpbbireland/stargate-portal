@@ -10,7 +10,8 @@
 * @note: Do not remove this copyright. Just append yours if you have modified it,
 *        this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: block_irc_popup.php 297 2008-12-30 18:40:30Z JohnnyTheOne $
+* @version $Id$
+*
 * Updated: 20 October 2008
 * We need the session bit as we load the page in a popup
 */

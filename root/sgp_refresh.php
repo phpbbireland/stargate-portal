@@ -50,7 +50,7 @@ $template->set_filenames(array(
 if ($user->data['is_registered'] && $auth->acl_get('a_')) 	 
 {
 	$template->assign_var('S_IS_ADMIN', true);
-	
+
 	//Refresh all styles templates
 	$sql = 'SELECT *
 		FROM ' . STYLES_TEMPLATE_TABLE . "
@@ -66,7 +66,7 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 		));
 		$no_exeptions = false;
 	}
-	
+
 	while($template_row = $db->sql_fetchrow($result))
 	{
 		$template_refreshed = '';
@@ -92,15 +92,15 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 			}
 			while ($row = $db->sql_fetchrow($result2))
 			{
-					// get folder info from the filename
-					if (($slash_pos = strrpos($row['template_filename'], '/')) === false)
-					{
-						$filelist[''][] = $row['template_filename'];
-					}
-					else
-					{
-						$filelist[substr($row['template_filename'], 0, $slash_pos + 1)][] = substr($row['template_filename'], $slash_pos + 1, strlen($row['template_filename']) - $slash_pos - 1);
-					}
+				// get folder info from the filename
+				if (($slash_pos = strrpos($row['template_filename'], '/')) === false)
+				{
+					$filelist[''][] = $row['template_filename'];
+				}
+				else
+				{
+					$filelist[substr($row['template_filename'], 0, $slash_pos + 1)][] = substr($row['template_filename'], $slash_pos + 1, strlen($row['template_filename']) - $slash_pos - 1);
+				}
 			}
 			$db->sql_freeresult($result2);
 
@@ -112,14 +112,14 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 		}
 
 		clear_template_cache($template_row);
-		
+
 		$template->assign_block_vars('template_row', array(
 			'S_SGPRA_TEMPLATE' => true,
 			'SGRA_TEMPLATE_REFRESHED' => "<br /> &nbsp;  &#187; &nbsp; " . $template_row['template_name'] . $user->lang['REFRESHED'],
 		));
 	}
 	$db->sql_freeresult($result);
-	
+
 	//Refresh all styles themes
 	$sql = 'SELECT *
 		FROM ' . STYLES_THEME_TABLE . "
@@ -134,6 +134,7 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 		));
 		$no_exeptions = false;
 	}
+
 	while($theme_row = $db->sql_fetchrow($result))
 	{
 		if (!$theme_row['theme_storedb'])
@@ -167,11 +168,11 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 				));
 				$no_exeptions = false;
 			}
-			
+
 			$cache->destroy('sql', STYLES_THEME_TABLE);
 
 			add_log('admin', 'LOG_THEME_REFRESHED', $theme_row['theme_name']);
-			
+
 			$template->assign_block_vars('theme_row', array(
 				'S_SGPRA_THEME' => true,
 				'SGRA_THEME_REFRESHED' => "<br /> &nbsp;  &#187; &nbsp; " . $theme_row['theme_name'] . $user->lang['REFRESHED'],
@@ -197,7 +198,7 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 		));
 		$no_exeptions = false;
 	}
-	
+
 	$imageset_keys = array(
 			'logos' => array(
 				'site_logo',
@@ -239,7 +240,7 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 		$no_exeptions = false;
 	}	
 	$db->sql_freeresult($result2);
-	
+
 	while($imageset_row = $db->sql_fetchrow($result))
 	{
 		$sql_ary = array();
@@ -253,7 +254,7 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 		$cfg_data_imageset = parse_cfg_file("{$phpbb_root_path}styles/{$imageset_row['imageset_path']}/imageset/imageset.cfg");
 
 		$db->sql_transaction('begin');
-		
+
 		foreach ($cfg_data_imageset as $image_name => $value)
 		{
 			if (strpos($value, '*') !== false)
@@ -290,7 +291,7 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 				}
 			}
 		}
-				
+
 		$sql3 = 'SELECT lang_dir
 			FROM ' . LANG_TABLE;
 		$result3 = $db->sql_query($sql3);
@@ -304,7 +305,7 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 			));
 			$no_exeptions = false;
 		}
-		
+
 		while ($row3 = $db->sql_fetchrow($result3))
 		{
 			if (@file_exists("{$phpbb_root_path}styles/{$imageset_row['imageset_path']}/imageset/{$row3['lang_dir']}/imageset.cfg"))
@@ -357,7 +358,7 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 		$cache->destroy('sql', STYLES_IMAGESET_DATA_TABLE);
 
 		add_log('admin', 'LOG_IMAGESET_REFRESHED', $imageset_row['imageset_name']);
-			
+
 		$template->assign_block_vars('imageset_row', array(
 			'S_SGPRA_IMAGESET' => true,
 			'S_SGPRA_IMAGESET_DATA' => true,
@@ -370,19 +371,19 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 
 	// purge cache
 	$cache->purge();
-	
+
 	// Clear permissions
 	$auth->acl_clear_prefetch();
 	cache_moderators();
 
 	add_log('admin', 'LOG_PURGE_CACHE');
 	$template->assign_var('S_PURGE_CACHE', true);
-	
+
 	//RSS Newsfeeds files
 	$desired_extension = 'dat'; //extension we're looking for 
 	$dirname = $phpbb_root_path . 'cache/'; //path to cache directory
 	$dir = opendir($dirname);
-	
+
 	while (false != ($file = readdir($dir))) 
 	{
 		if (($file != ".") and ($file != ".."))
@@ -400,7 +401,7 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 	add_log('admin', 'LOG_RSS_CACHE_CLEANED', $log_file_list);
 
 	$template->assign_var('S_RSS_CACHE', true);
-	
+
 	/**
 	* Result output
 	*/
@@ -415,10 +416,10 @@ if ($user->data['is_registered'] && $auth->acl_get('a_'))
 }
 else
 {
-		$template->assign_vars(array(
-			'S_IS_ADMIN' => false,
-			'S_LOGININFO' => '<br /><a href="' . $phpbb_root_path . 'ucp.php?mode=login">' . $user->lang['SGPRA_LOG_IN'],
-		));
+	$template->assign_vars(array(
+		'S_IS_ADMIN' => false,
+		'S_LOGININFO' => '<br /><a href="' . $phpbb_root_path . 'ucp.php?mode=login">' . $user->lang['SGPRA_LOG_IN'],
+	));
 }
 
 page_footer();

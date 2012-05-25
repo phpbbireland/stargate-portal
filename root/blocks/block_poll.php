@@ -10,7 +10,8 @@
 * @note: Do not remove this copyright. Just append yours if you have modified it,
 *		  this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: block_poll.php 297 2008-12-30 18:40:30Z JohnnyTheOne $
+* @version $Id$
+*
 * Updated:
 *
 */
@@ -29,13 +30,13 @@
 	{
 		return;
 	}
-	// 2 bug fixes
 
 	$phpEx = substr(strrchr(__FILE__, '.'), 1);
 
 	global $k_config, $b_poll, $config, $phpbb_root_path, $db, $user, $template, $phpEx;
 
-	$block_cache_time = $k_config['block_cache_time_default'];
+	//$block_cache_time = $k_config['block_cache_time_default'];
+	$block_cache_time = 10;
 
 	$queries = $cached_queries = 0;
 
@@ -159,18 +160,6 @@
 		// user clicked to view a global topic
 		$sql = $db->sql_build_query('SELECT', $sql_array);
 	}
-	/*
-	else
-	{
-		$sql = 'SELECT t.*, f.*
-			  FROM ' . TOPICS_TABLE . ' t,' . FORUMS_TABLE . ' f
-			  WHERE f.forum_id = ' . $b_forum_id . '
-				AND  t.forum_id = ' . $b_forum_id . '
-				AND t.poll_start <> 0
-			  ORDER BY t.poll_start DESC
-			  LIMIT 1';
-	}
-	*/
 
 	$result = $db->sql_query($sql, $block_cache_time);
 

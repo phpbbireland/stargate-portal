@@ -56,7 +56,10 @@ global pool or to a new table referenced by user_id and video_id.
 									<div>{L_RATING}: <strong>{video_loop_row.VIDEO_RATING}</strong></div>
 									<div>{L_CATEGORY}: <strong>{video_loop_row.VIDEO_CAT}</strong></div>
 									<div>{L_POSTED_BY}: <strong>{video_loop_row.VIDEO_POSTER}</strong></div>
-									<div><br />{L_COMMENT}: <strong>{video_loop_row.VIDEO_COMMENT}</strong></div>
+									<div style="width:72%">{L_COMMENT}:<br /><strong>{video_loop_row.VIDEO_COMMENT}</strong></div>
+									<div class="v_thumb" style="float:right; margin-top:-82px;">
+										<a href="{VIDEO_PATH}{video_loop_row.VIDEO_LINK}"><img title="Load..." src="{video_loop_row.VIDEO_THUMB}" alt="" width="100" height="70" /></a>
+									</div>
 									</li>
 									<!-- END video_loop_row -->
 									</ul>

@@ -1,17 +1,45 @@
 <?php
+/**
+*
+* @author Original Author Michael O'Toole@www.stargate-portal.com
+*
+* @package {k_blocks.php}
+* @version $Id:$ 3.2.0
+* @note: Do not remove this copyright. Just append yours if you have modified it,
+*        this is part of the Stargate Portal copyright agreement...
+* @copyright (c) 2005 phpbireland
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
+
+/**
+* DO NOT CHANGE
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
-
-/* blocks [English] */
-/* DO NOT CHANGE */
 
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
 }
 
+// DEVELOPERS PLEASE NOTE
+//
+// All language files should use UTF-8 as their encoding and the files must not contain a BOM.
+//
+// Placeholders can now contain order information, e.g. instead of
+// 'Page %s of %s' you can (and should) write 'Page %1$s of %2$s', this allows
+// translators to re-order the output of data while ensuring it remains correct
+//
+// You do not need this where single placeholders are used, e.g. 'Message %d' is fine
+// equally where a string contains only two placeholders which are used to wrap text
+// in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ » “ ” …
+//
 // phpbbportal profile fields
 $lang = array_merge($lang, array(
 
@@ -87,8 +115,8 @@ $lang = array_merge($lang, array(
 	'VARS_NO_EDIT'			=> 'Block has no variables',
 	'VARS_HAS_EDIT'			=> 'Set block variables',
 
-	'HAS_VARS'				=> 'Block contains configurable data',
-	'HAS_VARS_EXPLAIN'		=> '(config info is stored in the database).',
+	'HAS_VARS'					=> 'Block contains configurable data',
+	'HAS_VARS_EXPLAIN'			=> '(config info is stored in the database).',
 	'BLOCK_VAR_FILE'			=> 'Select the config file used to display/edit variables',
 	'BLOCK_VAR_FILE_EXPLAIN'	=> '(located in adm/style/k_block_vars folder).',
 
@@ -99,10 +127,10 @@ $lang = array_merge($lang, array(
 	'MINIMOD_OPTIONS'			=> 'Which minimod is associated with this block?',
 	'MINIMOD_OPTIONS_EXPLAIN'	=> 'Ignore if block is not based on a minimod.',
 	'MINIMOD_DETAILS_SHOW'		=> 'This block is based on a minimod, this is a link to it!',
-	'MINIMOD_DETAILS_NO_EDIT'	=> 'Block is not a minimod', 
+	'MINIMOD_DETAILS_NO_EDIT'	=> 'Block is not a minimod',
 
-	'HTML'		=> 'HTML',
-	'BBCODE'	=> 'BBcode',
+	'HTML'			=> 'HTML',
+	'BBCODE'		=> 'BBcode',
 	'ALL_GROUPS'	=> 'All Groups',
 	'SAVED'			=> 'Data saved... purging cache for this table...!',
 	'UNKNOWN_ERROR'	=> 'Error not processing saved data<br />',
@@ -110,8 +138,8 @@ $lang = array_merge($lang, array(
 	'CONFIRM_OPERATION_BLOCKS'			=> 'Do you wish to delete this block?',
 	'CONFIRM_OPERATION_BLOCKS_REINDEX'	=> 'Do you wish to re-index the blocks?',
 	'MUST_SELECT_VALID_BLOCK_DATA'		=> 'Invalid block ID',
-	'BLOCK_UPDATING'	=> 'Updating block positions, please wait...<br />',
-	'BLOCK_MOVE_ERROR'	=> 'Blocks require reindexing... <br />Press back and try again... If this condition persisters, please try to manually correct the ndx values, then try again. ',
+	'BLOCK_UPDATING'					=> 'Updating block positions, please wait...<br />',
+	'BLOCK_MOVE_ERROR'					=> 'Blocks require reindexing... <br />Press back and try again... If this condition persists, please try to manually correct the ndx values, and then try again. ',
 
 	'VIEW_PAGE'					=> 'Add page from available pages:',
 	'VIEW_PAGE2'				=> 'Available pages:',
@@ -136,17 +164,17 @@ $lang = array_merge($lang, array(
 
 	'BLOCK_CACHE_TIME_HEAD'		=> 'Block Cache Time',
 	'BLOCK_CACHE_TIME'			=> 'Set the block cache time.',
-	'BLOCK_CACHE_TIME_EXPLAIN'	=> 'Currently all blocs use the same cache period.',
+	'BLOCK_CACHE_TIME_EXPLAIN'	=> 'Default cache time for blocks (600).',
 
 	'SET_VARIABLES_IN_MINI-MODULES'	=> 'Set variables in Mini-Modules',
-	'MANAGE_PAGES'		=> 'Manage pages',
-	'NONE'				=> 'None',
+	'MANAGE_PAGES'					=> 'Manage pages',
+	'NONE'							=> 'None',
 
 ));
 // Message Settings
 $lang = array_merge($lang, array(
 	'ACP_MESSAGE_SETTINGS_EXPLAIN'	=> 'Here you can set all default settings for private messaging',
-));
 
+));
 
 ?>

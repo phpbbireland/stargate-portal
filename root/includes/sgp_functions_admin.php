@@ -24,7 +24,7 @@ if (!function_exists('get_reserved_words'))
 		$i = 0;
 
 		$sql = 'SELECT *
-			FROM ' . K_RESOURCE_TABLE . "
+			FROM ' . K_RESOURCES_TABLE . "
 			WHERE type = 'R' ";
 
 		$result = $db->sql_query($sql, 300);
@@ -42,6 +42,41 @@ if (!function_exists('get_reserved_words'))
 
 		return($reserved_words);
 
+	}
+}
+
+
+if (!function_exists('get_all_groups'))
+{
+	function get_all_groups()
+	{
+		global $db, $template, $user;
+
+		// Get us all the groups
+		$sql = 'SELECT group_id, group_name
+			FROM ' . GROUPS_TABLE . '
+			ORDER BY group_id ASC, group_name';
+		$result = $db->sql_query($sql);
+
+		// backward compatability, set up group zero //
+		$template->assign_block_vars('groups', array(
+			'GROUP_NAME'	=> $user->lang['NONE'],
+			'GROUP_ID'		=> 0,
+			)
+		);
+
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$group_id = $row['group_id'];
+			$group_name = $row['group_name'];
+
+			$template->assign_block_vars('groups', array(
+				'GROUP_NAME'	=> $group_name,
+				'GROUP_ID'		=> $group_id,
+				)
+			);
+		}
+		$db->sql_freeresult($result);
 	}
 }
 ?>

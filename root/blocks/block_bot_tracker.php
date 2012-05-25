@@ -26,7 +26,6 @@ if (!defined('IN_PHPBB'))
 /**
 */
 
-
 	$queries = $cached_queries = 0;
 
 	include($phpbb_root_path . 'includes/sgp_functions.'. $phpEx );

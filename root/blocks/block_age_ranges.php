@@ -100,7 +100,7 @@ if ($user->data['user_birthday'])
 if ($total_age_counts)
 {
 	$average_age = $total_age / $total_age_counts;
-	
+
 	$template->assign_vars(array(
 		'S_AGE'				=> true,
 		'TOTAL_AGE_COUNTS'		=> $total_age_counts,

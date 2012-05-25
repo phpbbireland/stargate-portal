@@ -10,7 +10,8 @@
 * @note: Do not remove this copyright. Just append yours if you have modified it,
 *        this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: block_messages.php 297 2008-12-30 18:40:30Z JohnnyTheOne $
+* @version $Id$
+*
 * Updated: 25 September 2008
 *
 */

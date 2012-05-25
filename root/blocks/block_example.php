@@ -18,7 +18,7 @@
 /**
 * @ignore
 */
- 
+
 if ( !defined('IN_PHPBB') )
 {
 	exit;

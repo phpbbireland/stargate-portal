@@ -143,7 +143,7 @@
 
 							case 'Global Moderators':
 							case 'GLOBAL_MODERATORS':
-								
+
 								if ($menu_item_view_by < 5 || $menu_item_view_by < $k_group_name_id['ADMINISTRATORS'])
 								{
 									$process_menu_item = true;
@@ -157,7 +157,7 @@
 									$process_menu_item = true;
 								}
 							break;
-							
+
 							default:
 								if ($menu_item_view_by == $loop_count || $menu_item_view_by < 3 || $menu_item_view_by < $k_group_name_id['REGISTERED_COPPA'])
 								{
@@ -174,7 +174,7 @@
 				$process_menu_item = false;
 			}
 		}
-		
+
 		if ($portal_menus[$i]['append_uid'] == 1)							// do we need to pass user id //
 		{
 			$isamp = '&amp';

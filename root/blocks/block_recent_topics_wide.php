@@ -10,7 +10,8 @@
 * @note: Do not remove this copyright. Just append yours if you have modified it,
 *        this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: block_recent_topics_wide.php 307 2009-01-01 16:05:35Z Michealo $
+* @version $Id$
+*
 * Updated: 14th Oct 2008 NeXur / 6th September 2008 michaelo
 * Rem: 23 of the portal's queries take less that 0.00000s each
 * NeXur:
@@ -48,7 +49,7 @@ foreach ($k_blocks as $blk)
 {
 	if ($blk['html_file_name'] == 'block_recent_topics_wide.html')
 	{
-		$block_cache_time = $blk['block_cache_time']; 
+		$block_cache_time = $blk['block_cache_time'];
 	}
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
@@ -62,7 +63,6 @@ $forum_id_ary = '';
 $search_days = $k_config['search_days'];
 $post_types = $k_config['post_types'];
 $number_of_topics_per_forum = $k_config['number_of_topics_per_forum'];
-
 
 static $last_forum = 0;
 
@@ -80,7 +80,7 @@ if ($result = $db->sql_query($sql, $block_cache_time))
 }
 else
 {
-	trigger_error($user->lang['ERROR_PORTAL_RECENT_TOPICS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__); 
+	trigger_error($user->lang['ERROR_PORTAL_RECENT_TOPICS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }
 $db->sql_freeresult($result);
 
@@ -93,7 +93,7 @@ if (!$result = $db->sql_query($sql, $block_cache_time))
 	trigger_error($user->lang['ERROR_PORTAL_FORUMS'] . basename(dirname(__FILE__)) . '/' . basename(__FILE__) . ', line ' . __LINE__);
 }
 
-while( $row = $db->sql_fetchrow($result) )
+while ($row = $db->sql_fetchrow($result))
 {
 	$forum_data[] = $row;
 	$forum_count++;
@@ -160,7 +160,7 @@ if ($row_count < $display_this_many)
 	$display_this_many = $row_count;
 }
 
-/* 
+/*
 We need a way to disable scrolling (of any block) if the information retrieved
 is less that can be properly displayed in the block. The minimum height of all
 blocks that support scrolling is currently set to 160px.
@@ -185,7 +185,6 @@ if ($scroll)
 }
 
 // get the little image if it exists else we will use the default (backward compatibility is a must) ;)
-
 if (file_exists($phpbb_root_path . "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/images/next_line.gif'))
 {
 	$next_img = '<img src="' . $phpbb_root_path . "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/images/next_line.gif" height="9px" width="11px" alt="" />';
@@ -246,8 +245,6 @@ for ($i = 0; $i < $display_this_many; $i++)
 		'S_TYPE_W'			=> $row[$i]['topic_type'],
 		'TOOLTIP_W'			=> bbcode_strip($row[$i]['post_text']),
 		'TOOLTIP2_W'		=> bbcode_strip($row[$i]['forum_desc']),
-		//'TOOLTIP'			=> bbcode_strip(censor_text($row[$i]['post_text'])),
-		//'TOOLTIP2'		=> bbcode_strip(censor_text($row[$i]['forum_desc'])),
 	));
 
 	$last_forum = $row[$i]['forum_id'];

@@ -11,7 +11,8 @@
 * @note: Do not remove this copyright. Just append yours if you have modified it,
 *        this is part of the Stargate Portal copyright agreement...
 *
-* @version $Id: block_last_online.php 297 2008-12-30 18:40:30Z JohnnyTheOne $
+* @version $Id$
+*
 * Updated: 17th October 2008 NeXu
 * UPDATE INFO (these comments can be removed when we reach final draft)
 * fixed problem with multiple sessions by checking code in memberlist.php
@@ -34,7 +35,7 @@ foreach ($k_blocks as $blk)
 {
 	if ($blk['html_file_name'] == 'block_last_online.html')
 	{
-		$block_cache_time = $blk['block_cache_time']; 
+		$block_cache_time = $blk['block_cache_time'];
 	}
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
@@ -78,6 +79,7 @@ if ($auth->acl_gets('u_viewprofile'))
 			'USERNAME_FULL'		=> get_username_string('full', $row['user_id'], sgp_checksize($row['username'],15), $row['user_colour']),
 			'ONLINE_TIME'		=> (empty($last_visit)) ? ' - ' : $user->format_date($last_visit),
 			'USER_AVATAR_IMG'	=> sgp_get_user_avatar($row['user_avatar'], $row['user_avatar_type'], '16', '16'),
+			'U_REGISTER'		=> 'append_sid("{$phpbb_root_path}ucp.$phpEx", mode=register)',
 		));
 	}
 	$db->sql_freeresult($result);

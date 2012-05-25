@@ -1,3 +1,15 @@
+/**
+*
+* @package calendar
+* @version $Id: functions_calendar.php 2008-07-10 21:16:00Z NeXur, livewirestu and Michaelo $
+* @copyright (c) 2008 phpbbireland
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+* Description: main js file for event and topic calendar mod.
+* Notes: This project was started after the calendar project by John Cottage (jcc264) on phpbb.com went stale
+*        It has since been completely overhauled, although still contains some remnants of John's original code
+*/
+
 var now = new Date;
 var current_day = now.getDay();
 var current_month=now.getMonth();
@@ -219,6 +231,7 @@ function setAP(obj)
 function update_time()
 {
     timeTarget.value = current_hour+':'+current_mins+' '+current_ampm;
+    validateForm('postform', 'calendar:get_repeat_dates', 'repeat_dates');
 }
 
 //style Setting
@@ -287,4 +300,5 @@ function mouse_click(obj)
     
     dateTarget.value=month+'-'+day+'-'+current_year;
     date_close();
+    validateForm('postform', 'calendar:get_repeat_dates', 'repeat_dates');
 }

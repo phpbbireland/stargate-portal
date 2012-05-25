@@ -115,8 +115,12 @@ $versions = array(
 	'3.1.5' => array(
 		// Add notice use portal removal tool for version prior to 1.0.0
 	),
-	// New version 3.2.0 (submission 2 fixes)
-	'3.2.0'	=> array(
+	// Version 3.2.0
+	'3.2.0' => array(
+		// Add notice use portal removal tool for version prior to 1.0.0
+	),
+	// New version 3.2.1 (submission 2 fixes)
+	'3.2.1'	=> array(
 
 		'permission_add' => array(
 			array('a_k_portal', 1),

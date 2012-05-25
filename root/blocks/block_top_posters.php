@@ -31,7 +31,7 @@ foreach ($k_blocks as $blk)
 {
 	if ($blk['html_file_name'] == 'block_top_posters.html')
 	{
-		$block_cache_time = $blk['block_cache_time']; 
+		$block_cache_time = $blk['block_cache_time'];
 	}
 }
 $block_cache_time = (isset($block_cache_time) ? $block_cache_time : $k_config['block_cache_time_default']);
